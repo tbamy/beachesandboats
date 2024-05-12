@@ -10,6 +10,18 @@
 		A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6015B0D2BEA223400545164 /* AppDelegate.swift */; };
 		A6015B172BEA223600545164 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6015B162BEA223600545164 /* Assets.xcassets */; };
 		A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6015B182BEA223600545164 /* LaunchScreen.storyboard */; };
+		A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1662BF1003C006D5C95 /* ProfileViewController.swift */; };
+		A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1672BF1003C006D5C95 /* ProfileViewController.xib */; };
+		A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F16B2BF100B7006D5C95 /* SettingTableViewCell.swift */; };
+		A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F16C2BF100B7006D5C95 /* SettingTableViewCell.xib */; };
+		A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F16F2BF10159006D5C95 /* ProfileModel.swift */; };
+		A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1742BF10200006D5C95 /* HelpAndSupportTableViewCell.swift */; };
+		A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1752BF10200006D5C95 /* HelpAndSupportTableViewCell.xib */; };
+		A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1792BF10267006D5C95 /* HostTableViewCell.swift */; };
+		A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F17A2BF10267006D5C95 /* HostTableViewCell.xib */; };
+		A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F17D2BF10286006D5C95 /* HostModel.swift */; };
+		A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F17F2BF1029D006D5C95 /* HelpModel.swift */; };
+		A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1812BF102CB006D5C95 /* SettingModel.swift */; };
 		A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573B2BF0CAAB008AF034 /* Coordinator.swift */; };
 		A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */; };
 		A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */; };
@@ -32,6 +44,18 @@
 		A6015B162BEA223600545164 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6015B192BEA223600545164 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6015B1B2BEA223600545164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A624F1662BF1003C006D5C95 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A624F1672BF1003C006D5C95 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		A624F16B2BF100B7006D5C95 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		A624F16C2BF100B7006D5C95 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
+		A624F16F2BF10159006D5C95 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		A624F1742BF10200006D5C95 /* HelpAndSupportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportTableViewCell.swift; sourceTree = "<group>"; };
+		A624F1752BF10200006D5C95 /* HelpAndSupportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpAndSupportTableViewCell.xib; sourceTree = "<group>"; };
+		A624F1792BF10267006D5C95 /* HostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTableViewCell.swift; sourceTree = "<group>"; };
+		A624F17A2BF10267006D5C95 /* HostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostTableViewCell.xib; sourceTree = "<group>"; };
+		A624F17D2BF10286006D5C95 /* HostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostModel.swift; sourceTree = "<group>"; };
+		A624F17F2BF1029D006D5C95 /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
+		A624F1812BF102CB006D5C95 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		A633573B2BF0CAAB008AF034 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -89,6 +113,49 @@
 			path = BeachesAndBoats;
 			sourceTree = "<group>";
 		};
+		A624F1652BF10007006D5C95 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A624F1782BF10238006D5C95 /* HostTableCell */,
+				A624F1712BF1017B006D5C95 /* HelpAndSupport */,
+				A624F16A2BF10093006D5C95 /* SettingTableCell */,
+				A624F1662BF1003C006D5C95 /* ProfileViewController.swift */,
+				A624F1672BF1003C006D5C95 /* ProfileViewController.xib */,
+				A624F16F2BF10159006D5C95 /* ProfileModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A624F16A2BF10093006D5C95 /* SettingTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				A624F16B2BF100B7006D5C95 /* SettingTableViewCell.swift */,
+				A624F16C2BF100B7006D5C95 /* SettingTableViewCell.xib */,
+				A624F1812BF102CB006D5C95 /* SettingModel.swift */,
+			);
+			path = SettingTableCell;
+			sourceTree = "<group>";
+		};
+		A624F1712BF1017B006D5C95 /* HelpAndSupport */ = {
+			isa = PBXGroup;
+			children = (
+				A624F1742BF10200006D5C95 /* HelpAndSupportTableViewCell.swift */,
+				A624F1752BF10200006D5C95 /* HelpAndSupportTableViewCell.xib */,
+				A624F17F2BF1029D006D5C95 /* HelpModel.swift */,
+			);
+			path = HelpAndSupport;
+			sourceTree = "<group>";
+		};
+		A624F1782BF10238006D5C95 /* HostTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				A624F1792BF10267006D5C95 /* HostTableViewCell.swift */,
+				A624F17A2BF10267006D5C95 /* HostTableViewCell.xib */,
+				A624F17D2BF10286006D5C95 /* HostModel.swift */,
+			);
+			path = HostTableCell;
+			sourceTree = "<group>";
+		};
 		A63357392BF0B874008AF034 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +197,7 @@
 		A633574B2BF0D7D9008AF034 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A624F1652BF10007006D5C95 /* Profile */,
 				A633574D2BF0D7FC008AF034 /* Onboarding */,
 				A633574C2BF0D7F2008AF034 /* Walkthrough */,
 			);
@@ -214,10 +282,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */,
 				A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
+				A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */,
 				A63357512BF0D82F008AF034 /* WelcomeScreen.xib in Resources */,
+				A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */,
 				A6015B172BEA223600545164 /* Assets.xcassets in Resources */,
+				A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */,
 				A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,16 +301,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */,
+				A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
 				A63357452BF0D281008AF034 /* Date.swift in Sources */,
+				A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */,
+				A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */,
+				A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
 				A63357562BF0DA84008AF034 /* WalkthroughView.swift in Sources */,
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
 				A63357472BF0D2B3008AF034 /* UIView.swift in Sources */,
+				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
+				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
 				A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */,
 				A633574A2BF0D30C008AF034 /* Images.swift in Sources */,
 				A633575A2BF0DCFF008AF034 /* WalkthroughCell.swift in Sources */,
 				A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */,
+				A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
 				A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */,
 			);
