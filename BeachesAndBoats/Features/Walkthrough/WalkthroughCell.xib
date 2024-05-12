@@ -4,60 +4,77 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WalkthroughCell" customModule="BeachesAndBoats" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="322" height="524"/>
+            <rect key="frame" x="0.0" y="0.0" width="333" height="785"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="322" height="524"/>
+                <rect key="frame" x="0.0" y="0.0" width="333" height="785"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide1" translatesAutoresizingMaskIntoConstraints="NO" id="YE6-5W-VzG">
-                        <rect key="frame" x="0.0" y="59" width="322" height="431"/>
-                    </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gSy-Ci-NFj">
-                        <rect key="frame" x="20" y="324.33333333333331" width="282" height="115.66666666666669"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bO7-ET-opZ">
+                        <rect key="frame" x="0.0" y="59" width="333" height="692"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unwind by the Waves, Your Vacation Starts Here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnv-aD-SEg">
-                                <rect key="frame" x="0.0" y="0.0" width="282" height="57.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore thousands of beach houses for you to unwind." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jho-Un-DJA">
-                                <rect key="frame" x="0.0" y="77.333333333333371" width="282" height="38.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide1" translatesAutoresizingMaskIntoConstraints="NO" id="YE6-5W-VzG">
+                                <rect key="frame" x="0.0" y="0.0" width="333" height="692"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gSy-Ci-NFj">
+                                <rect key="frame" x="20" y="476.33333333333343" width="293" height="115.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unwind by the Waves, Your Vacation Starts Here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnv-aD-SEg">
+                                        <rect key="frame" x="0.0" y="0.0" width="293" height="57.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore thousands of beach houses for you to unwind." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jho-Un-DJA">
+                                        <rect key="frame" x="0.0" y="77.333333333333258" width="293" height="38.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                    </stackView>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YE6-5W-VzG" secondAttribute="trailing" id="2c5-uy-LmU"/>
+                            <constraint firstItem="YE6-5W-VzG" firstAttribute="leading" secondItem="bO7-ET-opZ" secondAttribute="leading" id="Cu4-nu-M1G"/>
+                            <constraint firstAttribute="bottom" secondItem="gSy-Ci-NFj" secondAttribute="bottom" constant="100" id="P0j-c0-jcq"/>
+                            <constraint firstItem="YE6-5W-VzG" firstAttribute="top" secondItem="bO7-ET-opZ" secondAttribute="top" id="bmh-T9-730"/>
+                            <constraint firstAttribute="trailing" secondItem="gSy-Ci-NFj" secondAttribute="trailing" constant="20" id="g3a-bd-Xjx"/>
+                            <constraint firstItem="gSy-Ci-NFj" firstAttribute="leading" secondItem="bO7-ET-opZ" secondAttribute="leading" constant="20" id="vTH-uL-J0l"/>
+                            <constraint firstAttribute="bottom" secondItem="YE6-5W-VzG" secondAttribute="bottom" id="wHd-Gc-pFo"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="leading" secondItem="YE6-5W-VzG" secondAttribute="leading" id="C89-5l-pjG"/>
-                <constraint firstItem="gSy-Ci-NFj" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="20" id="EJP-Kh-czY"/>
-                <constraint firstItem="gSy-Ci-NFj" firstAttribute="trailing" secondItem="ZTg-uK-7eu" secondAttribute="trailing" constant="-20" id="f5O-d4-gb0"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="gSy-Ci-NFj" secondAttribute="bottom" constant="50" id="jMA-mm-bNZ"/>
-                <constraint firstItem="YE6-5W-VzG" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="mqX-C8-XBu"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="YE6-5W-VzG" secondAttribute="trailing" id="qBU-0k-2P5"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="YE6-5W-VzG" secondAttribute="bottom" id="w0I-ME-7Yd"/>
+                <constraint firstItem="bO7-ET-opZ" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="PUO-53-j5E"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="bO7-ET-opZ" secondAttribute="top" id="eny-BN-EjJ"/>
+                <constraint firstItem="bO7-ET-opZ" firstAttribute="bottom" secondItem="ZTg-uK-7eu" secondAttribute="bottom" id="hLx-RD-xtO"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="bO7-ET-opZ" secondAttribute="trailing" id="xCr-wN-Hz2"/>
             </constraints>
-            <size key="customSize" width="322" height="524"/>
+            <size key="customSize" width="333" height="785"/>
             <connections>
                 <outlet property="contentLabel" destination="Jho-Un-DJA" id="Pke-sn-2P2"/>
                 <outlet property="slideImg" destination="YE6-5W-VzG" id="GoA-Th-aki"/>
                 <outlet property="titleLabel" destination="pnv-aD-SEg" id="YgL-St-mnD"/>
+                <outlet property="view" destination="bO7-ET-opZ" id="zyE-Ro-dtq"/>
             </connections>
-            <point key="canvasLocation" x="254.96183206106869" y="45.070422535211272"/>
+            <point key="canvasLocation" x="263.35877862595419" y="136.97183098591549"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="slide1" width="430" height="932"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

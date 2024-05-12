@@ -17,10 +17,15 @@ class WalkthroughView: UIViewController {
     var coordinator: AppCoordinator?
     var slides: [WalkthroughModel] = []
     
+    var currentPage = 0
+    
+    var timer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addGradient()
+        navigationItem.hidesBackButton = true
+    
         
         slides = [
             .init(image: "slide1", title: "Unwind by the Waves, Your Vacation Starts Here", content: "Explore thousands of beach houses for you to unwind."),
@@ -33,23 +38,56 @@ class WalkthroughView: UIViewController {
         
         collectionView.register(UINib(nibName: "WalkthroughCell", bundle: nil), forCellWithReuseIdentifier: "WalkthroughCell")
         
+        let skipTapGesture = UITapGestureRecognizer(target: self, action: #selector(skipButtonTapped))
+        skipBtn.isUserInteractionEnabled = true
+        skipBtn.addGestureRecognizer(skipTapGesture)
+        
+        let nextTapGesture = UITapGestureRecognizer(target: self, action: #selector(nextButtonTapped))
+        nextBtn.isUserInteractionEnabled = true
+        nextBtn.addGestureRecognizer(nextTapGesture)
+                
         
     }
     
-    func addGradient(){
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
+    @objc func skipButtonTapped() {
+        coordinator?.gotoLogin()
+    }
+    
+    @objc func nextButtonTapped() {
+        scrollToNextCell()
+    }
+    
+    func scrollToNextCell() {
+        currentPage += 1
+        if currentPage >= slides.count {
+            currentPage = slides.count - 1
+        }
+        let index = IndexPath(item: currentPage, section: 0)
+        collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+        updateButtonVisibility()
+    }
+    
+    func updateButtonVisibility() {
+        if currentPage == slides.count - 1 {
+            skipBtn.isHidden = true
+            coordinator?.gotoLogin()
+        } else {
+            skipBtn.isHidden = false
+//            nextBtn.text = "Next"
+        }
+    }
+    
+
+    
+    @objc func autoScrollAction() {
         
-        let bottomColor = UIColor.black.cgColor
-        let topColor = UIColor.white.cgColor
+        currentPage += 1
+        if currentPage > 2 {
+            currentPage = 0
+        }
+        let index = IndexPath(item: currentPage, section: 0)
+        collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
         
-        gradientLayer.colors = [bottomColor, topColor]
-        
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-        
-        view.layer.insertSublayer(gradientLayer, at: 0)
-                
     }
 
 }
@@ -71,6 +109,11 @@ extension WalkthroughView: UICollectionViewDelegate, UICollectionViewDataSource,
         CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / width)
+        pageControl.currentPage = currentPage
+    }
     
 }
 

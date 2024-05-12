@@ -9,6 +9,7 @@ import UIKit
 
 enum Assets: String {
     case logo = "B&BLogo"
+    case logo2 = "B&BLogoColoured"
     case slide1 = "slide1"
     case slide2 = "slide2"
     case slide3 = "slide3"
