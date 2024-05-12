@@ -11,9 +11,12 @@
         <array key="Montserrat.ttf">
             <string>MontserratRoman-SemiBold</string>
         </array>
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Regular</string>
+        </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="Beaches_and_Boats" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="hAndSTableView" destination="Ixn-qt-oTT" id="4qV-Z5-5Nh"/>
                 <outlet property="hostTableView" destination="8ot-Kk-Psl" id="e8B-AO-8Vx"/>
@@ -33,16 +36,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="393" height="680"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NbL-ZB-I6o">
-                                    <rect key="frame" x="0.0" y="15" width="393" height="287"/>
+                                    <rect key="frame" x="0.0" y="15" width="393" height="285"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NX0-wP-Djd">
-                                            <rect key="frame" x="20" y="0.0" width="353" height="22"/>
-                                            <fontDescription key="fontDescription" name="MontserratRoman-SemiBold" family="Montserrat" pointSize="18"/>
+                                            <rect key="frame" x="20" y="0.0" width="353" height="20"/>
+                                            <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rh6-Et-w48">
-                                            <rect key="frame" x="0.0" y="37" width="393" height="250"/>
+                                            <rect key="frame" x="0.0" y="35" width="393" height="250"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="250" id="3hu-1V-a5x"/>
@@ -56,16 +59,16 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="GxM-uQ-ZI7">
-                                    <rect key="frame" x="0.0" y="317" width="393" height="137"/>
+                                    <rect key="frame" x="0.0" y="315" width="393" height="136"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help and Support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILd-73-Tvw">
-                                            <rect key="frame" x="20" y="0.0" width="353" height="22"/>
+                                            <rect key="frame" x="20" y="0.0" width="353" height="21"/>
                                             <fontDescription key="fontDescription" name="MontserratRoman-SemiBold" family="Montserrat" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ixn-qt-oTT">
-                                            <rect key="frame" x="0.0" y="37" width="393" height="100"/>
+                                            <rect key="frame" x="0.0" y="36" width="393" height="100"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="QzL-4z-JMU"/>
@@ -79,16 +82,16 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cA7-rC-eDZ">
-                                    <rect key="frame" x="0.0" y="469" width="393" height="137"/>
+                                    <rect key="frame" x="0.0" y="466" width="393" height="136"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host with Beaches and Boat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pe6-Wc-ttn">
-                                            <rect key="frame" x="20" y="0.0" width="353" height="22"/>
+                                            <rect key="frame" x="20" y="0.0" width="353" height="21"/>
                                             <fontDescription key="fontDescription" name="MontserratRoman-SemiBold" family="Montserrat" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8ot-Kk-Psl">
-                                            <rect key="frame" x="0.0" y="37" width="393" height="100"/>
+                                            <rect key="frame" x="0.0" y="36" width="393" height="100"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <color key="tintColor" red="0.66274511810000003" green="0.031372550870000002" blue="0.2117646933" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
