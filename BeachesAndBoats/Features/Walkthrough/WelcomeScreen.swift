@@ -13,7 +13,7 @@ class WelcomeScreen: UIViewController {
     
     var coordinator: AppCoordinator?
     
-//    var timer = Timer()
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +22,9 @@ class WelcomeScreen: UIViewController {
         
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(autoNavigate), userInfo: nil, repeats: true)
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(autoNavigate), userInfo: nil, repeats: true)
+    }
     
     
     @objc func autoNavigate(){

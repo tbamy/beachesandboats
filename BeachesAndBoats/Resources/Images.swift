@@ -22,6 +22,7 @@ enum Assets: String {
     case profile = "solar_user-linear"
     case support = "streamline_customer-support-1"
     case payment = "uil_money-bill"
+    case backButton = "backButton"
 
     
     

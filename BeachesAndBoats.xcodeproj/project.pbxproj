@@ -36,6 +36,7 @@
 		A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63357552BF0DA84008AF034 /* WalkthroughView.xib */; };
 		A633575A2BF0DCFF008AF034 /* WalkthroughCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357582BF0DCFF008AF034 /* WalkthroughCell.swift */; };
 		A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63357592BF0DCFF008AF034 /* WalkthroughCell.xib */; };
+		A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575C2BF1039B008AF034 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		A63357552BF0DA84008AF034 /* WalkthroughView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkthroughView.xib; sourceTree = "<group>"; };
 		A63357582BF0DCFF008AF034 /* WalkthroughCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCell.swift; sourceTree = "<group>"; };
 		A63357592BF0DCFF008AF034 /* WalkthroughCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkthroughCell.xib; sourceTree = "<group>"; };
+		A633575C2BF1039B008AF034 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			children = (
 				A6015B0D2BEA223400545164 /* AppDelegate.swift */,
 				A63357422BF0D0C9008AF034 /* AppWindow.swift */,
+				A633575C2BF1039B008AF034 /* BaseViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
 				A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */,
 				A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
