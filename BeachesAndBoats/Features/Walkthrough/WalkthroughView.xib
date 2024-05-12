@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalkthroughView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="7vG-I3-pH0" id="AyW-g8-dsa"/>
+                <outlet property="nextBtn" destination="Ut5-bc-5dG" id="j23-jJ-RdO"/>
+                <outlet property="pageControl" destination="qIx-TM-iwi" id="X4L-h5-klF"/>
+                <outlet property="skipBtn" destination="qKa-fs-8xX" id="I3y-fz-nMK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,18 +37,18 @@
                     <rect key="frame" x="20" y="752.33333333333337" width="353" height="25.666666666666629"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKa-fs-8xX">
-                            <rect key="frame" x="0.0" y="0.0" width="33" height="25.666666666666668"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <rect key="frame" x="0.0" y="0.0" width="28" height="25.666666666666668"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="1" green="0.56408900439999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qIx-TM-iwi">
-                            <rect key="frame" x="78.000000000000014" y="0.0" width="194.33333333333337" height="25.666666666666668"/>
+                            <rect key="frame" x="73" y="0.0" width="205" height="25.666666666666668"/>
                         </pageControl>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ut5-bc-5dG">
-                            <rect key="frame" x="317.33333333333331" y="0.0" width="35.666666666666686" height="25.666666666666668"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <rect key="frame" x="323" y="0.0" width="30" height="25.666666666666668"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" name="yellow"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -64,6 +69,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="yellow">
+            <color red="0.80392156862745101" green="0.45098039215686275" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

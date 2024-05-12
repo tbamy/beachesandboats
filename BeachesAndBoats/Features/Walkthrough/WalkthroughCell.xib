@@ -10,26 +10,26 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WalkthroughCell" customModule="BeachesAndBoats" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="355" height="524"/>
+            <rect key="frame" x="0.0" y="0.0" width="322" height="524"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="355" height="524"/>
+                <rect key="frame" x="0.0" y="0.0" width="322" height="524"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YE6-5W-VzG">
-                        <rect key="frame" x="0.0" y="59" width="355" height="431"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide1" translatesAutoresizingMaskIntoConstraints="NO" id="YE6-5W-VzG">
+                        <rect key="frame" x="0.0" y="59" width="322" height="431"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gSy-Ci-NFj">
-                        <rect key="frame" x="20" y="324.33333333333331" width="315" height="115.66666666666669"/>
+                        <rect key="frame" x="20" y="324.33333333333331" width="282" height="115.66666666666669"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unwind by the Waves, Your Vacation Starts Here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnv-aD-SEg">
-                                <rect key="frame" x="0.0" y="0.0" width="315" height="57.333333333333336"/>
+                                <rect key="frame" x="0.0" y="0.0" width="282" height="57.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore thousands of beach houses for you to unwind." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jho-Un-DJA">
-                                <rect key="frame" x="0.0" y="77.333333333333371" width="315" height="38.333333333333343"/>
+                                <rect key="frame" x="0.0" y="77.333333333333371" width="282" height="38.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -48,8 +48,16 @@
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="YE6-5W-VzG" secondAttribute="trailing" id="qBU-0k-2P5"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="YE6-5W-VzG" secondAttribute="bottom" id="w0I-ME-7Yd"/>
             </constraints>
-            <size key="customSize" width="355" height="524"/>
-            <point key="canvasLocation" x="280.15267175572518" y="45.070422535211272"/>
+            <size key="customSize" width="322" height="524"/>
+            <connections>
+                <outlet property="contentLabel" destination="Jho-Un-DJA" id="Pke-sn-2P2"/>
+                <outlet property="slideImg" destination="YE6-5W-VzG" id="GoA-Th-aki"/>
+                <outlet property="titleLabel" destination="pnv-aD-SEg" id="YgL-St-mnD"/>
+            </connections>
+            <point key="canvasLocation" x="254.96183206106869" y="45.070422535211272"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="slide1" width="430" height="932"/>
+    </resources>
 </document>
