@@ -12,6 +12,7 @@ enum Assets: String {
     case slide1 = "slide1"
     case slide2 = "slide2"
     case slide3 = "slide3"
+    case backButton = "backButton"
 
     
     
