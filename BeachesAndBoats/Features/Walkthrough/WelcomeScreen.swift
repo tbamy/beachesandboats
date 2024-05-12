@@ -18,16 +18,17 @@ class WelcomeScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        logo.fadeIn(duration: 0.5, delay: 0.2)
+        logo.fadeIn(duration: 1, delay: 0.4)
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(autoNavigate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(autoNavigate), userInfo: nil, repeats: false)
     }
     
     
     @objc func autoNavigate(){
+        timer.invalidate()
         coordinator?.gotoWalkthrough()
     }
 

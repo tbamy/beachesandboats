@@ -23,7 +23,6 @@
 		A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F17F2BF1029D006D5C95 /* HelpModel.swift */; };
 		A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1812BF102CB006D5C95 /* SettingModel.swift */; };
 		A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A624F1872BF10F7F006D5C95 /* Montserrat.ttf */; };
-		A624F1892BF10FBD006D5C95 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6015B1B2BEA223600545164 /* Info.plist */; };
 		A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573B2BF0CAAB008AF034 /* Coordinator.swift */; };
 		A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */; };
 		A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */; };
@@ -39,6 +38,8 @@
 		A633575A2BF0DCFF008AF034 /* WalkthroughCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357582BF0DCFF008AF034 /* WalkthroughCell.swift */; };
 		A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63357592BF0DCFF008AF034 /* WalkthroughCell.xib */; };
 		A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575C2BF1039B008AF034 /* BaseViewController.swift */; };
+		A63357602BF129A6008AF034 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575E2BF129A6008AF034 /* LoginView.swift */; };
+		A63357612BF129A6008AF034 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A633575F2BF129A6008AF034 /* LoginView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,8 @@
 		A63357582BF0DCFF008AF034 /* WalkthroughCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCell.swift; sourceTree = "<group>"; };
 		A63357592BF0DCFF008AF034 /* WalkthroughCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkthroughCell.xib; sourceTree = "<group>"; };
 		A633575C2BF1039B008AF034 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		A633575E2BF129A6008AF034 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A633575F2BF129A6008AF034 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +238,8 @@
 		A633574D2BF0D7FC008AF034 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				A633575E2BF129A6008AF034 /* LoginView.swift */,
+				A633575F2BF129A6008AF034 /* LoginView.xib */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -300,12 +305,12 @@
 				A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */,
 				A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */,
 				A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */,
+				A63357612BF129A6008AF034 /* LoginView.xib in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
 				A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */,
 				A63357512BF0D82F008AF034 /* WelcomeScreen.xib in Resources */,
 				A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */,
 				A6015B172BEA223600545164 /* Assets.xcassets in Resources */,
-				A624F1892BF10FBD006D5C95 /* Info.plist in Resources */,
 				A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */,
 				A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */,
 			);
@@ -326,6 +331,7 @@
 				A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */,
 				A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */,
 				A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */,
+				A63357602BF129A6008AF034 /* LoginView.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
 				A63357562BF0DA84008AF034 /* WalkthroughView.swift in Sources */,
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
