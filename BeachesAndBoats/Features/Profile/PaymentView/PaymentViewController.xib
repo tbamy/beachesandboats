@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentViewController" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="paymentMethodContainer" destination="ZhB-GQ-6qo" id="BCE-Ud-dPA"/>
+                <outlet property="paymentMethodLabel" destination="rJE-V8-Epv" id="ReN-Zt-3cd"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yourPaymentsContainer" destination="Tau-Wy-8vq" id="Ly7-io-Q0t"/>
+                <outlet property="yourPaymentsLabel" destination="AjJ-Pc-VSn" id="ae8-Ek-Fh2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfd-30-dhq">
+                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhB-GQ-6qo">
+                            <rect key="frame" x="0.0" y="30" width="393" height="40"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uil_money-bill" translatesAutoresizingMaskIntoConstraints="NO" id="61L-Cx-GPj">
+                                    <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="WSY-Gr-WR3"/>
+                                        <constraint firstAttribute="width" constant="20" id="aSU-Ab-wqq"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment methods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJE-V8-Epv">
+                                    <rect key="frame" x="48" y="10" width="138.66666666666666" height="20"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="formkit_right" translatesAutoresizingMaskIntoConstraints="NO" id="pLM-H9-5uo">
+                                    <rect key="frame" x="356" y="10" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="FBj-Nl-3HV"/>
+                                        <constraint firstAttribute="width" constant="20" id="onW-V6-Pnn"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstItem="pLM-H9-5uo" firstAttribute="top" secondItem="ZhB-GQ-6qo" secondAttribute="top" constant="10" id="03W-jx-n8U"/>
+                                <constraint firstItem="61L-Cx-GPj" firstAttribute="leading" secondItem="ZhB-GQ-6qo" secondAttribute="leading" constant="20" id="B6v-bA-C3X"/>
+                                <constraint firstItem="rJE-V8-Epv" firstAttribute="leading" secondItem="61L-Cx-GPj" secondAttribute="trailing" constant="8" id="CSr-1t-vLF"/>
+                                <constraint firstItem="rJE-V8-Epv" firstAttribute="centerY" secondItem="ZhB-GQ-6qo" secondAttribute="centerY" id="Fzo-eL-6ot"/>
+                                <constraint firstAttribute="trailing" secondItem="pLM-H9-5uo" secondAttribute="trailing" constant="17" id="IhH-kS-5hB"/>
+                                <constraint firstItem="61L-Cx-GPj" firstAttribute="top" secondItem="ZhB-GQ-6qo" secondAttribute="top" constant="10" id="Jxv-AF-onN"/>
+                                <constraint firstItem="pLM-H9-5uo" firstAttribute="centerY" secondItem="ZhB-GQ-6qo" secondAttribute="centerY" id="SCS-fR-tnX"/>
+                                <constraint firstAttribute="height" constant="40" id="Usv-QH-SKX"/>
+                                <constraint firstItem="rJE-V8-Epv" firstAttribute="top" secondItem="ZhB-GQ-6qo" secondAttribute="top" constant="10" id="UwT-Gj-4Ds"/>
+                                <constraint firstItem="61L-Cx-GPj" firstAttribute="centerY" secondItem="ZhB-GQ-6qo" secondAttribute="centerY" id="rKm-Na-7Pl"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tau-Wy-8vq">
+                            <rect key="frame" x="0.0" y="80" width="393" height="40"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconoir_book" translatesAutoresizingMaskIntoConstraints="NO" id="v9a-gH-SXB">
+                                    <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="B6b-SV-Sj4"/>
+                                        <constraint firstAttribute="height" constant="20" id="gH4-aY-GhH"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your payments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AjJ-Pc-VSn">
+                                    <rect key="frame" x="48.000000000000007" y="10" width="113.66666666666669" height="20"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="formkit_right" translatesAutoresizingMaskIntoConstraints="NO" id="8W2-ce-r83">
+                                    <rect key="frame" x="356" y="10" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="BeN-J2-aKr"/>
+                                        <constraint firstAttribute="height" constant="20" id="gis-Uo-lCy"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstItem="8W2-ce-r83" firstAttribute="top" secondItem="Tau-Wy-8vq" secondAttribute="top" constant="10" id="76S-Yw-ozp"/>
+                                <constraint firstItem="v9a-gH-SXB" firstAttribute="top" secondItem="Tau-Wy-8vq" secondAttribute="top" constant="10" id="L3g-zH-PBv"/>
+                                <constraint firstItem="v9a-gH-SXB" firstAttribute="centerY" secondItem="Tau-Wy-8vq" secondAttribute="centerY" id="ROa-Ha-jy2"/>
+                                <constraint firstItem="AjJ-Pc-VSn" firstAttribute="leading" secondItem="v9a-gH-SXB" secondAttribute="trailing" constant="8" id="SOI-eC-Pn4"/>
+                                <constraint firstItem="v9a-gH-SXB" firstAttribute="leading" secondItem="Tau-Wy-8vq" secondAttribute="leading" constant="20" id="U2j-Sg-j6J"/>
+                                <constraint firstAttribute="trailing" secondItem="8W2-ce-r83" secondAttribute="trailing" constant="17" id="c4z-gB-g0m"/>
+                                <constraint firstAttribute="height" constant="40" id="ddC-ps-L2O"/>
+                                <constraint firstItem="AjJ-Pc-VSn" firstAttribute="top" secondItem="Tau-Wy-8vq" secondAttribute="top" constant="10" id="dug-Lw-Stk"/>
+                                <constraint firstItem="8W2-ce-r83" firstAttribute="centerY" secondItem="Tau-Wy-8vq" secondAttribute="centerY" id="j8g-ai-vIK"/>
+                                <constraint firstItem="AjJ-Pc-VSn" firstAttribute="centerY" secondItem="Tau-Wy-8vq" secondAttribute="centerY" id="stH-y6-KLD"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ZhB-GQ-6qo" secondAttribute="trailing" id="4qc-xI-pqc"/>
+                        <constraint firstItem="ZhB-GQ-6qo" firstAttribute="leading" secondItem="Vfd-30-dhq" secondAttribute="leading" id="7MA-xF-oVx"/>
+                        <constraint firstItem="Tau-Wy-8vq" firstAttribute="leading" secondItem="Vfd-30-dhq" secondAttribute="leading" id="XUP-Ty-GZf"/>
+                        <constraint firstItem="Tau-Wy-8vq" firstAttribute="top" secondItem="ZhB-GQ-6qo" secondAttribute="bottom" constant="10" id="Zus-GL-bN6"/>
+                        <constraint firstItem="ZhB-GQ-6qo" firstAttribute="top" secondItem="Vfd-30-dhq" secondAttribute="top" constant="30" id="fsP-lG-gtW"/>
+                        <constraint firstAttribute="trailing" secondItem="Tau-Wy-8vq" secondAttribute="trailing" id="iTb-9Y-msB"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Vfd-30-dhq" secondAttribute="bottom" id="0xU-nk-sFe"/>
+                <constraint firstItem="Vfd-30-dhq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="JsW-KE-cmd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Vfd-30-dhq" secondAttribute="trailing" id="M7U-CI-pwK"/>
+                <constraint firstItem="Vfd-30-dhq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="nOB-Rp-rIH"/>
+            </constraints>
+            <point key="canvasLocation" x="61.832061068702288" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="formkit_right" width="8" height="20"/>
+        <image name="iconoir_book" width="24" height="24"/>
+        <image name="uil_money-bill" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

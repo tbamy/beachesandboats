@@ -24,7 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupCoordinator(_ application: UIApplication) {
         let navController = BaseNavigationController()
         coordinator = AppCoordinator(navigationController: navController, completion: nil)
-        coordinator?.start()
+//        coordinator?.start()
+        coordinator?.gotoProfile()
+//        coordinator?.gotoPayments()
+//        coordinator?.gotoLoginSecurityView()
+//        coordinator?.gotoOTP()
+        
         
         window = AppWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navController

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6015B0D2BEA223400545164 /* AppDelegate.swift */; };
-		A6015B172BEA223600545164 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6015B162BEA223600545164 /* Assets.xcassets */; };
 		A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6015B182BEA223600545164 /* LaunchScreen.storyboard */; };
 		A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1662BF1003C006D5C95 /* ProfileViewController.swift */; };
 		A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1672BF1003C006D5C95 /* ProfileViewController.xib */; };
@@ -23,6 +22,15 @@
 		A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F17F2BF1029D006D5C95 /* HelpModel.swift */; };
 		A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1812BF102CB006D5C95 /* SettingModel.swift */; };
 		A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A624F1872BF10F7F006D5C95 /* Montserrat.ttf */; };
+		A624F1912BF1596E006D5C95 /* ManageAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F18F2BF1596E006D5C95 /* ManageAccountViewController.swift */; };
+		A624F1922BF1596E006D5C95 /* ManageAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1902BF1596E006D5C95 /* ManageAccountViewController.xib */; };
+		A624F1982BF16CB7006D5C95 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1962BF16CB7006D5C95 /* PaymentViewController.swift */; };
+		A624F1992BF16CB7006D5C95 /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1972BF16CB7006D5C95 /* PaymentViewController.xib */; };
+		A624F19C2BF17930006D5C95 /* PaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F19A2BF17930006D5C95 /* PaymentOptionsViewController.swift */; };
+		A624F19D2BF17930006D5C95 /* PaymentOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F19B2BF17930006D5C95 /* PaymentOptionsViewController.xib */; };
+		A624F19F2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A624F19E2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets */; };
+		A624F1A22BF1918A006D5C95 /* CreditCardPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1A02BF1918A006D5C95 /* CreditCardPaymentViewController.swift */; };
+		A624F1A32BF1918A006D5C95 /* CreditCardPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1A12BF1918A006D5C95 /* CreditCardPaymentViewController.xib */; };
 		A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573B2BF0CAAB008AF034 /* Coordinator.swift */; };
 		A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */; };
 		A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */; };
@@ -40,12 +48,38 @@
 		A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575C2BF1039B008AF034 /* BaseViewController.swift */; };
 		A63357602BF129A6008AF034 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575E2BF129A6008AF034 /* LoginView.swift */; };
 		A63357612BF129A6008AF034 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A633575F2BF129A6008AF034 /* LoginView.xib */; };
+		A637E2D72BF3893900EAF938 /* PhoneNumberBottomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2D52BF3893900EAF938 /* PhoneNumberBottomModal.swift */; };
+		A637E2D82BF3893900EAF938 /* PhoneNumberBottomModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A637E2D62BF3893900EAF938 /* PhoneNumberBottomModal.xib */; };
+		A637E2DA2BF397A600EAF938 /* ViewlTopCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2D92BF397A600EAF938 /* ViewlTopCornerRadius.swift */; };
+		A637E2DD2BF3F86D00EAF938 /* otpBottomModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2DB2BF3F86D00EAF938 /* otpBottomModalViewController.swift */; };
+		A637E2DE2BF3F86D00EAF938 /* otpBottomModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A637E2DC2BF3F86D00EAF938 /* otpBottomModalViewController.xib */; };
+		A637E2E22BF4B51D00EAF938 /* CloseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2E12BF4B51D00EAF938 /* CloseView.swift */; };
+		A637E2E42BF54D3800EAF938 /* PopUpModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A637E2E32BF54D3800EAF938 /* PopUpModal.xib */; };
+		A637E2E62BF54DDE00EAF938 /* PopUpModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2E52BF54DDE00EAF938 /* PopUpModal.swift */; };
+		A637E2E82BF5552C00EAF938 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2E72BF5552C00EAF938 /* BaseView.swift */; };
+		A682D4982BF2A7C800926A0E /* LoginSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A682D4962BF2A7C800926A0E /* LoginSecurityViewController.swift */; };
+		A682D4992BF2A7C800926A0E /* LoginSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A682D4972BF2A7C800926A0E /* LoginSecurityViewController.xib */; };
+		A682D49C2BF353EE00926A0E /* NavigationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A682D49B2BF353EE00926A0E /* NavigationUtility.swift */; };
+		A682D4E72BF3715300926A0E /* DoubleAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A682D4E52BF3715300926A0E /* DoubleAuthViewController.swift */; };
+		A682D4E82BF3715300926A0E /* DoubleAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A682D4E62BF3715300926A0E /* DoubleAuthViewController.xib */; };
+		A68DF31D2BF6293E00C77268 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF31B2BF6293E00C77268 /* NotificationViewController.swift */; };
+		A68DF31E2BF6293E00C77268 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DF31C2BF6293E00C77268 /* NotificationViewController.xib */; };
+		A68DF3212BF633ED00C77268 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF31F2BF633ED00C77268 /* NotificationTableViewCell.swift */; };
+		A68DF3222BF633ED00C77268 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DF3202BF633ED00C77268 /* NotificationTableViewCell.xib */; };
+		A68DF3242BF63F0E00C77268 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF3232BF63F0E00C77268 /* NotificationModel.swift */; };
+		A68DF3272BF650B800C77268 /* ContactSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF3252BF650B800C77268 /* ContactSupportViewController.swift */; };
+		A68DF3282BF650B800C77268 /* ContactSupportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DF3262BF650B800C77268 /* ContactSupportViewController.xib */; };
+		A68DF32B2BF6561D00C77268 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF3292BF6561D00C77268 /* ChatViewController.swift */; };
+		A68DF32C2BF6561D00C77268 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DF32A2BF6561D00C77268 /* ChatViewController.xib */; };
+		A68DF32F2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF32D2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift */; };
+		A68DF3302BF6A04300C77268 /* SafetyAndGuidelinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DF32E2BF6A04300C77268 /* SafetyAndGuidelinesViewController.xib */; };
+		A68DF3332BF6A14B00C77268 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DF3312BF6A14B00C77268 /* CallViewController.swift */; };
+		A68DF3342BF6A14B00C77268 /* CallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DF3322BF6A14B00C77268 /* CallViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A6015B0A2BEA223400545164 /* BeachesAndBoats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeachesAndBoats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6015B0D2BEA223400545164 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A6015B162BEA223600545164 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6015B192BEA223600545164 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6015B1B2BEA223600545164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A624F1662BF1003C006D5C95 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +95,15 @@
 		A624F17F2BF1029D006D5C95 /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
 		A624F1812BF102CB006D5C95 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		A624F1872BF10F7F006D5C95 /* Montserrat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserrat.ttf; sourceTree = "<group>"; };
+		A624F18F2BF1596E006D5C95 /* ManageAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountViewController.swift; sourceTree = "<group>"; };
+		A624F1902BF1596E006D5C95 /* ManageAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageAccountViewController.xib; sourceTree = "<group>"; };
+		A624F1962BF16CB7006D5C95 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		A624F1972BF16CB7006D5C95 /* PaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
+		A624F19A2BF17930006D5C95 /* PaymentOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionsViewController.swift; sourceTree = "<group>"; };
+		A624F19B2BF17930006D5C95 /* PaymentOptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentOptionsViewController.xib; sourceTree = "<group>"; };
+		A624F19E2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets 12-54-14-910 AM.xcassets"; sourceTree = "<group>"; };
+		A624F1A02BF1918A006D5C95 /* CreditCardPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewController.swift; sourceTree = "<group>"; };
+		A624F1A12BF1918A006D5C95 /* CreditCardPaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardPaymentViewController.xib; sourceTree = "<group>"; };
 		A633573B2BF0CAAB008AF034 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -78,6 +121,33 @@
 		A633575C2BF1039B008AF034 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A633575E2BF129A6008AF034 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A633575F2BF129A6008AF034 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		A637E2D52BF3893900EAF938 /* PhoneNumberBottomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberBottomModal.swift; sourceTree = "<group>"; };
+		A637E2D62BF3893900EAF938 /* PhoneNumberBottomModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneNumberBottomModal.xib; sourceTree = "<group>"; };
+		A637E2D92BF397A600EAF938 /* ViewlTopCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewlTopCornerRadius.swift; sourceTree = "<group>"; };
+		A637E2DB2BF3F86D00EAF938 /* otpBottomModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpBottomModalViewController.swift; sourceTree = "<group>"; };
+		A637E2DC2BF3F86D00EAF938 /* otpBottomModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = otpBottomModalViewController.xib; sourceTree = "<group>"; };
+		A637E2E12BF4B51D00EAF938 /* CloseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseView.swift; sourceTree = "<group>"; };
+		A637E2E32BF54D3800EAF938 /* PopUpModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpModal.xib; sourceTree = "<group>"; };
+		A637E2E52BF54DDE00EAF938 /* PopUpModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpModal.swift; sourceTree = "<group>"; };
+		A637E2E72BF5552C00EAF938 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		A682D4962BF2A7C800926A0E /* LoginSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSecurityViewController.swift; sourceTree = "<group>"; };
+		A682D4972BF2A7C800926A0E /* LoginSecurityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginSecurityViewController.xib; sourceTree = "<group>"; };
+		A682D49B2BF353EE00926A0E /* NavigationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtility.swift; sourceTree = "<group>"; };
+		A682D4E52BF3715300926A0E /* DoubleAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleAuthViewController.swift; sourceTree = "<group>"; };
+		A682D4E62BF3715300926A0E /* DoubleAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleAuthViewController.xib; sourceTree = "<group>"; };
+		A68DF31B2BF6293E00C77268 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A68DF31C2BF6293E00C77268 /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		A68DF31F2BF633ED00C77268 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		A68DF3202BF633ED00C77268 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		A68DF3232BF63F0E00C77268 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		A68DF3252BF650B800C77268 /* ContactSupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSupportViewController.swift; sourceTree = "<group>"; };
+		A68DF3262BF650B800C77268 /* ContactSupportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactSupportViewController.xib; sourceTree = "<group>"; };
+		A68DF3292BF6561D00C77268 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		A68DF32A2BF6561D00C77268 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		A68DF32D2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyAndGuidelinesViewController.swift; sourceTree = "<group>"; };
+		A68DF32E2BF6A04300C77268 /* SafetyAndGuidelinesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SafetyAndGuidelinesViewController.xib; sourceTree = "<group>"; };
+		A68DF3312BF6A14B00C77268 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		A68DF3322BF6A14B00C77268 /* CallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +180,7 @@
 		A6015B0C2BEA223400545164 /* BeachesAndBoats */ = {
 			isa = PBXGroup;
 			children = (
+				A682D49A2BF353D400926A0E /* Utility */,
 				A624F1862BF10F6B006D5C95 /* Fonts */,
 				A633574B2BF0D7D9008AF034 /* Features */,
 				A63357482BF0D2F5008AF034 /* Resources */,
@@ -125,6 +196,9 @@
 		A624F1652BF10007006D5C95 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				A682D4952BF2A7AA00926A0E /* LoginSecurity */,
+				A624F1952BF16CA0006D5C95 /* PaymentView */,
+				A624F18A2BF158B6006D5C95 /* ManageAccount */,
 				A624F1782BF10238006D5C95 /* HostTableCell */,
 				A624F1712BF1017B006D5C95 /* HelpAndSupport */,
 				A624F16A2BF10093006D5C95 /* SettingTableCell */,
@@ -173,12 +247,35 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		A624F18A2BF158B6006D5C95 /* ManageAccount */ = {
+			isa = PBXGroup;
+			children = (
+				A624F18F2BF1596E006D5C95 /* ManageAccountViewController.swift */,
+				A624F1902BF1596E006D5C95 /* ManageAccountViewController.xib */,
+			);
+			path = ManageAccount;
+			sourceTree = "<group>";
+		};
+		A624F1952BF16CA0006D5C95 /* PaymentView */ = {
+			isa = PBXGroup;
+			children = (
+				A624F1962BF16CB7006D5C95 /* PaymentViewController.swift */,
+				A624F1972BF16CB7006D5C95 /* PaymentViewController.xib */,
+				A624F19A2BF17930006D5C95 /* PaymentOptionsViewController.swift */,
+				A624F19B2BF17930006D5C95 /* PaymentOptionsViewController.xib */,
+				A624F1A02BF1918A006D5C95 /* CreditCardPaymentViewController.swift */,
+				A624F1A12BF1918A006D5C95 /* CreditCardPaymentViewController.xib */,
+			);
+			path = PaymentView;
+			sourceTree = "<group>";
+		};
 		A63357392BF0B874008AF034 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				A6015B0D2BEA223400545164 /* AppDelegate.swift */,
 				A63357422BF0D0C9008AF034 /* AppWindow.swift */,
 				A633575C2BF1039B008AF034 /* BaseViewController.swift */,
+				A637E2E72BF5552C00EAF938 /* BaseView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -206,7 +303,7 @@
 		A63357482BF0D2F5008AF034 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A6015B162BEA223600545164 /* Assets.xcassets */,
+				A624F19E2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets */,
 				A63357492BF0D30C008AF034 /* Images.swift */,
 			);
 			path = Resources;
@@ -242,6 +339,46 @@
 				A633575F2BF129A6008AF034 /* LoginView.xib */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A682D4952BF2A7AA00926A0E /* LoginSecurity */ = {
+			isa = PBXGroup;
+			children = (
+				A682D4962BF2A7C800926A0E /* LoginSecurityViewController.swift */,
+				A682D4972BF2A7C800926A0E /* LoginSecurityViewController.xib */,
+				A682D4E52BF3715300926A0E /* DoubleAuthViewController.swift */,
+				A682D4E62BF3715300926A0E /* DoubleAuthViewController.xib */,
+				A637E2D52BF3893900EAF938 /* PhoneNumberBottomModal.swift */,
+				A637E2D62BF3893900EAF938 /* PhoneNumberBottomModal.xib */,
+				A637E2DB2BF3F86D00EAF938 /* otpBottomModalViewController.swift */,
+				A637E2DC2BF3F86D00EAF938 /* otpBottomModalViewController.xib */,
+				A68DF31B2BF6293E00C77268 /* NotificationViewController.swift */,
+				A68DF31C2BF6293E00C77268 /* NotificationViewController.xib */,
+				A68DF31F2BF633ED00C77268 /* NotificationTableViewCell.swift */,
+				A68DF3202BF633ED00C77268 /* NotificationTableViewCell.xib */,
+				A68DF3232BF63F0E00C77268 /* NotificationModel.swift */,
+				A68DF3252BF650B800C77268 /* ContactSupportViewController.swift */,
+				A68DF3262BF650B800C77268 /* ContactSupportViewController.xib */,
+				A68DF3292BF6561D00C77268 /* ChatViewController.swift */,
+				A68DF32A2BF6561D00C77268 /* ChatViewController.xib */,
+				A68DF32D2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift */,
+				A68DF32E2BF6A04300C77268 /* SafetyAndGuidelinesViewController.xib */,
+				A68DF3312BF6A14B00C77268 /* CallViewController.swift */,
+				A68DF3322BF6A14B00C77268 /* CallViewController.xib */,
+			);
+			path = LoginSecurity;
+			sourceTree = "<group>";
+		};
+		A682D49A2BF353D400926A0E /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A682D49B2BF353EE00926A0E /* NavigationUtility.swift */,
+				A637E2D92BF397A600EAF938 /* ViewlTopCornerRadius.swift */,
+				A637E2E12BF4B51D00EAF938 /* CloseView.swift */,
+				A637E2E32BF54D3800EAF938 /* PopUpModal.xib */,
+				A637E2E52BF54DDE00EAF938 /* PopUpModal.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,17 +439,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A637E2D82BF3893900EAF938 /* PhoneNumberBottomModal.xib in Resources */,
+				A682D4992BF2A7C800926A0E /* LoginSecurityViewController.xib in Resources */,
 				A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */,
+				A624F1922BF1596E006D5C95 /* ManageAccountViewController.xib in Resources */,
 				A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */,
 				A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */,
+				A68DF31E2BF6293E00C77268 /* NotificationViewController.xib in Resources */,
+				A624F19D2BF17930006D5C95 /* PaymentOptionsViewController.xib in Resources */,
 				A63357612BF129A6008AF034 /* LoginView.xib in Resources */,
+				A637E2E42BF54D3800EAF938 /* PopUpModal.xib in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
 				A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */,
+				A624F19F2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets in Resources */,
 				A63357512BF0D82F008AF034 /* WelcomeScreen.xib in Resources */,
+				A68DF3302BF6A04300C77268 /* SafetyAndGuidelinesViewController.xib in Resources */,
+				A68DF32C2BF6561D00C77268 /* ChatViewController.xib in Resources */,
+				A68DF3222BF633ED00C77268 /* NotificationTableViewCell.xib in Resources */,
 				A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */,
-				A6015B172BEA223600545164 /* Assets.xcassets in Resources */,
 				A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */,
+				A68DF3282BF650B800C77268 /* ContactSupportViewController.xib in Resources */,
+				A624F1A32BF1918A006D5C95 /* CreditCardPaymentViewController.xib in Resources */,
+				A624F1992BF16CB7006D5C95 /* PaymentViewController.xib in Resources */,
 				A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */,
+				A637E2DE2BF3F86D00EAF938 /* otpBottomModalViewController.xib in Resources */,
+				A68DF3342BF6A14B00C77268 /* CallViewController.xib in Resources */,
+				A682D4E82BF3715300926A0E /* DoubleAuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,21 +481,41 @@
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
 				A63357452BF0D281008AF034 /* Date.swift in Sources */,
 				A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */,
+				A68DF3332BF6A14B00C77268 /* CallViewController.swift in Sources */,
 				A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */,
+				A624F1912BF1596E006D5C95 /* ManageAccountViewController.swift in Sources */,
+				A637E2E62BF54DDE00EAF938 /* PopUpModal.swift in Sources */,
 				A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */,
 				A63357602BF129A6008AF034 /* LoginView.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
+				A637E2DA2BF397A600EAF938 /* ViewlTopCornerRadius.swift in Sources */,
+				A682D4982BF2A7C800926A0E /* LoginSecurityViewController.swift in Sources */,
+				A68DF3272BF650B800C77268 /* ContactSupportViewController.swift in Sources */,
+				A68DF31D2BF6293E00C77268 /* NotificationViewController.swift in Sources */,
+				A682D4E72BF3715300926A0E /* DoubleAuthViewController.swift in Sources */,
+				A637E2E22BF4B51D00EAF938 /* CloseView.swift in Sources */,
+				A68DF32B2BF6561D00C77268 /* ChatViewController.swift in Sources */,
 				A63357562BF0DA84008AF034 /* WalkthroughView.swift in Sources */,
+				A68DF3242BF63F0E00C77268 /* NotificationModel.swift in Sources */,
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
 				A63357472BF0D2B3008AF034 /* UIView.swift in Sources */,
+				A68DF32F2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift in Sources */,
 				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
 				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
+				A624F19C2BF17930006D5C95 /* PaymentOptionsViewController.swift in Sources */,
 				A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */,
+				A637E2DD2BF3F86D00EAF938 /* otpBottomModalViewController.swift in Sources */,
+				A637E2D72BF3893900EAF938 /* PhoneNumberBottomModal.swift in Sources */,
+				A68DF3212BF633ED00C77268 /* NotificationTableViewCell.swift in Sources */,
 				A633574A2BF0D30C008AF034 /* Images.swift in Sources */,
 				A633575A2BF0DCFF008AF034 /* WalkthroughCell.swift in Sources */,
+				A624F1982BF16CB7006D5C95 /* PaymentViewController.swift in Sources */,
+				A682D49C2BF353EE00926A0E /* NavigationUtility.swift in Sources */,
 				A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */,
 				A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
+				A637E2E82BF5552C00EAF938 /* BaseView.swift in Sources */,
+				A624F1A22BF1918A006D5C95 /* CreditCardPaymentViewController.swift in Sources */,
 				A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -514,6 +687,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";

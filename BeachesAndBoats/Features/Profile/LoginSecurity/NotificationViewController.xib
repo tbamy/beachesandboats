@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="notificationSettings" destination="7kP-Bp-DKH" id="XvD-Gc-oSw"/>
+                <outlet property="notificationTable" destination="IUe-Hz-g8S" id="qNp-No-6nX"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-X0-8WG">
+                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IUe-Hz-g8S">
+                            <rect key="frame" x="0.0" y="94" width="393" height="665"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get notifications on the different property information. Make sure to turn on notification on phone settings." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kP-Bp-DKH">
+                            <rect key="frame" x="20" y="20" width="353" height="54"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="backgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="IUe-Hz-g8S" secondAttribute="bottom" id="2qL-Tg-Mbf"/>
+                        <constraint firstAttribute="trailing" secondItem="IUe-Hz-g8S" secondAttribute="trailing" id="3FV-ay-BoY"/>
+                        <constraint firstItem="7kP-Bp-DKH" firstAttribute="leading" secondItem="AZL-X0-8WG" secondAttribute="leading" constant="20" id="3nc-9t-4hc"/>
+                        <constraint firstAttribute="trailing" secondItem="7kP-Bp-DKH" secondAttribute="trailing" constant="20" id="XWd-JU-qkU"/>
+                        <constraint firstItem="IUe-Hz-g8S" firstAttribute="top" secondItem="7kP-Bp-DKH" secondAttribute="bottom" constant="20" id="cDr-pi-M6u"/>
+                        <constraint firstItem="7kP-Bp-DKH" firstAttribute="top" secondItem="AZL-X0-8WG" secondAttribute="top" constant="20" id="psw-kY-09f"/>
+                        <constraint firstItem="IUe-Hz-g8S" firstAttribute="leading" secondItem="AZL-X0-8WG" secondAttribute="leading" id="t3T-GE-ULA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="AZL-X0-8WG" secondAttribute="bottom" id="6dZ-4x-ae9"/>
+                <constraint firstItem="AZL-X0-8WG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="GRR-Jb-pl7"/>
+                <constraint firstItem="AZL-X0-8WG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LpZ-Ll-Tp4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AZL-X0-8WG" secondAttribute="trailing" id="Vnk-ab-dwd"/>
+            </constraints>
+            <point key="canvasLocation" x="29" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="backgroundColor">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

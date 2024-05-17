@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var hAndSTableView: UITableView!
     @IBOutlet weak var hostTableView: UITableView!
     
+    var coordinator: AppCoordinator?
     var settingCoordinator: [ProfileModel] = SettingModelArray().populateData()
     var helpCoordinator: [ProfileModel] = HelpModelArray().populateData()
     var hostCoordinator: [ProfileModel] = HelpModelArray().populateData()
@@ -53,6 +54,8 @@ class ProfileViewController: UIViewController {
     }
     
     
+    
+    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -89,6 +92,34 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.tag == 1 {
+            if indexPath.item == 0 {
+                coordinator?.gotoManageAccount()
+            } else if indexPath.item == 1 {
+                print("go to save view")
+            } else if indexPath.item == 2 {
+                coordinator?.gotoPayments()
+            } else if indexPath.item == 3 {
+                coordinator?.gotoNotification()
+            } else if indexPath.item == 4 {
+                coordinator?.gotoLoginSecurityView()
+            }
+        } else if tableView.tag == 2 {
+            if indexPath.item == 0 {
+                coordinator?.gotoContactSupport()
+            } else if indexPath.item == 1 {
+                coordinator?.gotoSafetyAndGuidelines()
+            }
+        } else if tableView.tag == 3 {
+            if indexPath.item == 0 {
+                print("go to list properties")
+            } else if indexPath.item == 1 {
+                print("go to switch hosting")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

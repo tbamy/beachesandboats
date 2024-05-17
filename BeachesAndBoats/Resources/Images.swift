@@ -24,6 +24,21 @@ enum Assets: String {
     case support = "streamline_customer-support-1"
     case payment = "uil_money-bill"
     case backButton = "backButton"
+    case closeIcon = "cancel"
+    case creditCard = "creditcard"
+    case paypal = "paypal"
+    case plus = "plusIcon"
+    case shield = "shield"
+    case gmail = "gmail"
+    case phone = "phone"
+    case chat = "chat"
+    case call = "call"
+    case email = "email"
+    case textfont = "textfont"
+    case gif = "gif"
+    case uploadPicture = "uploadPicture"
+    case appLogo = "appLogo"
+
 
     
     
