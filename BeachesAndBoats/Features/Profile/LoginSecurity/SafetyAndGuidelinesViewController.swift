@@ -2,7 +2,7 @@
 //  SafetyAndGuidelinesViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 16/05/2024.
+//  Created by Paul Orimogunje on 16/05/2024.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class SafetyAndGuidelinesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Safety and Guidelines")
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Safety and Guidelines", rightIcon: nil)
         setup()
     }
     

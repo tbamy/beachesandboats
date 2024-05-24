@@ -2,7 +2,7 @@
 //  ManageAccountViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 12/05/2024.
+//  Created by Paul Orimogunje on 12/05/2024.
 //
 
 import UIKit

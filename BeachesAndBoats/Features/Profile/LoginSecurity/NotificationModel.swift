@@ -2,7 +2,7 @@
 //  NotificationModel.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 16/05/2024.
+//  Created by Paul Orimogunje on 16/05/2024.
 //
 
 import Foundation

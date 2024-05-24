@@ -89,4 +89,26 @@ final class AppCoordinator: Coordinator{
         vc.coordinator = self
         push(viewController: vc)
     }
+    
+    func gotoBooking() {
+        let vc: BookingViewController = .fromNib()
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoBookingDetails(data: BookingProperties) {
+        let vc: BookingDetailsViewController = .fromNib()
+        vc.coordinator = self
+        vc.getData = data
+        vc.navigationController?.setNavigationBarHidden(true, animated: true)
+        push(viewController: vc)
+    }
+    
+    func gotoPastBookingDetails(data: BookingProperties) {
+        let vc: BookingDetailsViewController = .fromNib()
+        vc.coordinator = self
+        vc.getData = data
+        vc.navigationController?.setNavigationBarHidden(true, animated: true)
+        push(viewController: vc)
+    }
 }

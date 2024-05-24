@@ -2,7 +2,7 @@
 //  CloseView.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 15/05/2024.
+//  Created by Paul Orimogunje on 15/05/2024.
 //
 
 import Foundation

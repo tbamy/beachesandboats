@@ -38,10 +38,28 @@ enum Assets: String {
     case gif = "gif"
     case uploadPicture = "uploadPicture"
     case appLogo = "appLogo"
+    case beach = "beach"
+    case dateIcon = "dateIcon"
+    case locationIcon = "locationIcon"
+    case sort = "sort"
+    case radioOn = "radioOn"
+    case radioOff = "radioOff"
+    case Share = "Share"
+    case Favourite = "Favourite"
+    case wifi = "wifi"
+    case washer = "washer"
+    case parking = "parking"
+    case pets = "pets"
+    case kitchen = "kitchen"
+    case beachfont = "beachfont"
+    case calendar = "calendar"
+    case star = "star"
+    case ratingstar = "ratingstar"
+    case fillratingstar = "fillratingstar"
 
 
-    
-    
+
+
     var image: UIImage {
         UIImage(named: self.rawValue) ?? UIImage()
     }

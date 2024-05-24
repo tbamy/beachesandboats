@@ -2,7 +2,7 @@
 //  ContactSupportViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 16/05/2024.
+//  Created by Paul Orimogunje on 16/05/2024.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class ContactSupportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Contact customer support")
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Contact customer support", rightIcon: nil)
         setup()
     }
     

@@ -2,7 +2,7 @@
 //  PaymentViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 12/05/2024.
+//  Created by Paul Orimogunje on 12/05/2024.
 //
 
 import UIKit
@@ -21,7 +21,7 @@ class PaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Payments")
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Payments", rightIcon: .none)
         setup()
         
     }

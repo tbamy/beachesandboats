@@ -25,10 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navController = BaseNavigationController()
         coordinator = AppCoordinator(navigationController: navController, completion: nil)
 //        coordinator?.start()
-        coordinator?.gotoProfile()
+//        coordinator?.gotoProfile()
 //        coordinator?.gotoPayments()
 //        coordinator?.gotoLoginSecurityView()
 //        coordinator?.gotoOTP()
+        coordinator?.gotoBooking()
+//        coordinator?.gotoBookingDetails()
         
         
         window = AppWindow(frame: UIScreen.main.bounds)
