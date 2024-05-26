@@ -40,6 +40,18 @@
 		A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575C2BF1039B008AF034 /* BaseViewController.swift */; };
 		A63357602BF129A6008AF034 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633575E2BF129A6008AF034 /* LoginView.swift */; };
 		A63357612BF129A6008AF034 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A633575F2BF129A6008AF034 /* LoginView.xib */; };
+		A63357642BF15302008AF034 /* BaseXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357632BF15302008AF034 /* BaseXib.swift */; };
+		A63357662BF153CD008AF034 /* PhoneField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357652BF153CD008AF034 /* PhoneField.swift */; };
+		A63357692BF15406008AF034 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357672BF15406008AF034 /* InputField.swift */; };
+		A633576A2BF15406008AF034 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63357682BF15406008AF034 /* InputField.xib */; };
+		A633576E2BF156F9008AF034 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633576D2BF156F9008AF034 /* Labels.swift */; };
+		A63357702BF15707008AF034 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633576F2BF15707008AF034 /* PaddedLabel.swift */; };
+		A63357722BF157B9008AF034 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357712BF157B9008AF034 /* UILabel.swift */; };
+		A63357742BF160B6008AF034 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357732BF160B6008AF034 /* TextField.swift */; };
+		A63357762BF160E9008AF034 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357752BF160E9008AF034 /* PasswordField.swift */; };
+		A63357782BF1611F008AF034 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357772BF1611F008AF034 /* DatePicker.swift */; };
+		A633577A2BF162A7008AF034 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63357792BF162A7008AF034 /* String.swift */; };
+		A63858272BF8E24B00040677 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63858262BF8E24B00040677 /* TextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +90,18 @@
 		A633575C2BF1039B008AF034 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A633575E2BF129A6008AF034 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A633575F2BF129A6008AF034 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		A63357632BF15302008AF034 /* BaseXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseXib.swift; sourceTree = "<group>"; };
+		A63357652BF153CD008AF034 /* PhoneField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneField.swift; sourceTree = "<group>"; };
+		A63357672BF15406008AF034 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		A63357682BF15406008AF034 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
+		A633576D2BF156F9008AF034 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		A633576F2BF15707008AF034 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
+		A63357712BF157B9008AF034 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		A63357732BF160B6008AF034 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		A63357752BF160E9008AF034 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		A63357772BF1611F008AF034 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
+		A63357792BF162A7008AF034 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		A63858262BF8E24B00040677 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +134,7 @@
 		A6015B0C2BEA223400545164 /* BeachesAndBoats */ = {
 			isa = PBXGroup;
 			children = (
+				A63357622BF15208008AF034 /* Components */,
 				A624F1862BF10F6B006D5C95 /* Fonts */,
 				A633574B2BF0D7D9008AF034 /* Features */,
 				A63357482BF0D2F5008AF034 /* Resources */,
@@ -199,6 +224,8 @@
 			children = (
 				A63357442BF0D281008AF034 /* Date.swift */,
 				A63357462BF0D2B3008AF034 /* UIView.swift */,
+				A63357712BF157B9008AF034 /* UILabel.swift */,
+				A63357792BF162A7008AF034 /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -242,6 +269,47 @@
 				A633575F2BF129A6008AF034 /* LoginView.xib */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A63357622BF15208008AF034 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A63858282BF9215000040677 /* Button */,
+				A633576C2BF156E5008AF034 /* Labels */,
+				A633576B2BF156CB008AF034 /* InputField */,
+				A63357632BF15302008AF034 /* BaseXib.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A633576B2BF156CB008AF034 /* InputField */ = {
+			isa = PBXGroup;
+			children = (
+				A63357652BF153CD008AF034 /* PhoneField.swift */,
+				A63357672BF15406008AF034 /* InputField.swift */,
+				A63357682BF15406008AF034 /* InputField.xib */,
+				A63357732BF160B6008AF034 /* TextField.swift */,
+				A63357752BF160E9008AF034 /* PasswordField.swift */,
+				A63357772BF1611F008AF034 /* DatePicker.swift */,
+				A63858262BF8E24B00040677 /* TextView.swift */,
+			);
+			path = InputField;
+			sourceTree = "<group>";
+		};
+		A633576C2BF156E5008AF034 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				A633576D2BF156F9008AF034 /* Labels.swift */,
+				A633576F2BF15707008AF034 /* PaddedLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		A63858282BF9215000040677 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +377,7 @@
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
 				A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */,
 				A63357512BF0D82F008AF034 /* WelcomeScreen.xib in Resources */,
+				A633576A2BF15406008AF034 /* InputField.xib in Resources */,
 				A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */,
 				A6015B172BEA223600545164 /* Assets.xcassets in Resources */,
 				A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */,
@@ -325,13 +394,19 @@
 			files = (
 				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
 				A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */,
+				A63357722BF157B9008AF034 /* UILabel.swift in Sources */,
 				A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
 				A63357452BF0D281008AF034 /* Date.swift in Sources */,
+				A63357642BF15302008AF034 /* BaseXib.swift in Sources */,
+				A63357702BF15707008AF034 /* PaddedLabel.swift in Sources */,
+				A63357662BF153CD008AF034 /* PhoneField.swift in Sources */,
 				A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */,
 				A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */,
 				A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */,
+				A63858272BF8E24B00040677 /* TextView.swift in Sources */,
 				A63357602BF129A6008AF034 /* LoginView.swift in Sources */,
+				A63357762BF160E9008AF034 /* PasswordField.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
 				A63357562BF0DA84008AF034 /* WalkthroughView.swift in Sources */,
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
@@ -339,11 +414,16 @@
 				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
 				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
 				A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */,
+				A633576E2BF156F9008AF034 /* Labels.swift in Sources */,
 				A633574A2BF0D30C008AF034 /* Images.swift in Sources */,
+				A63357742BF160B6008AF034 /* TextField.swift in Sources */,
 				A633575A2BF0DCFF008AF034 /* WalkthroughCell.swift in Sources */,
 				A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */,
 				A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */,
+				A63357782BF1611F008AF034 /* DatePicker.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
+				A63357692BF15406008AF034 /* InputField.swift in Sources */,
+				A633577A2BF162A7008AF034 /* String.swift in Sources */,
 				A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
