@@ -24,6 +24,7 @@ enum Assets: String {
     case support = "streamline_customer-support-1"
     case payment = "uil_money-bill"
     case backButton = "backButton"
+    case error_icon = "error_icon"
 
     
     
