@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroundRulesViewController" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelIcon" destination="Vdl-mW-gf3" id="ZLE-PE-Za7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="490" height="544"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSB-JW-GeO">
+                    <rect key="frame" x="0.0" y="294" width="490" height="250"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="House and ground rules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVn-Jl-j7H">
+                            <rect key="frame" x="20" y="20" width="180.66666666666666" height="19.333333333333329"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your host will like you to agree to the following house rules:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlf-fp-aEE">
+                            <rect key="frame" x="20" y="54.333333333333314" width="450" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f7-AK-wMI">
+                            <rect key="frame" x="20" y="82.333333333333314" width="450" height="65.333333333333314"/>
+                            <attributedString key="attributedText">
+                                <fragment>
+                                    <string key="content">	•	Check-in time flexible
+	•	Check out time is before 11am
+	•	Parties are allowed with a maximum of 15 people
+	•	Pets are not allowed</string>
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="9" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops>
+                                                <textTab alignment="left" location="1">
+                                                    <options/>
+                                                </textTab>
+                                                <textTab alignment="natural" location="9">
+                                                    <options/>
+                                                </textTab>
+                                            </tabStops>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEw-qW-VPo">
+                            <rect key="frame" x="20" y="167.66666666666669" width="450" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="wbC-yo-Tgw"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Proceed"/>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="Vdl-mW-gf3">
+                            <rect key="frame" x="440" y="15" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="fwI-cx-qPH"/>
+                                <constraint firstAttribute="width" constant="30" id="lVD-JN-Lpj"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" name="backgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="jlf-fp-aEE" firstAttribute="top" secondItem="eVn-Jl-j7H" secondAttribute="bottom" constant="15" id="1fh-gx-Idm"/>
+                        <constraint firstItem="jlf-fp-aEE" firstAttribute="leading" secondItem="BSB-JW-GeO" secondAttribute="leading" constant="20" symbolic="YES" id="5nc-JA-vJA"/>
+                        <constraint firstItem="eVn-Jl-j7H" firstAttribute="top" secondItem="BSB-JW-GeO" secondAttribute="top" constant="20" id="7eY-KH-K56"/>
+                        <constraint firstItem="hEw-qW-VPo" firstAttribute="leading" secondItem="BSB-JW-GeO" secondAttribute="leading" constant="20" id="FcY-9f-taK"/>
+                        <constraint firstAttribute="trailing" secondItem="jlf-fp-aEE" secondAttribute="trailing" constant="20" id="LfK-xO-KTe"/>
+                        <constraint firstAttribute="trailing" secondItem="hEw-qW-VPo" secondAttribute="trailing" constant="20" id="Phd-QT-Efy"/>
+                        <constraint firstItem="eVn-Jl-j7H" firstAttribute="leading" secondItem="BSB-JW-GeO" secondAttribute="leading" constant="20" id="UN7-ew-alC"/>
+                        <constraint firstItem="8f7-AK-wMI" firstAttribute="top" secondItem="jlf-fp-aEE" secondAttribute="bottom" constant="10" id="VRE-lw-4g8"/>
+                        <constraint firstAttribute="trailing" secondItem="8f7-AK-wMI" secondAttribute="trailing" constant="20" id="cys-Bu-HNg"/>
+                        <constraint firstItem="Vdl-mW-gf3" firstAttribute="top" secondItem="BSB-JW-GeO" secondAttribute="top" constant="15" id="gdm-Vb-7tW"/>
+                        <constraint firstItem="8f7-AK-wMI" firstAttribute="leading" secondItem="BSB-JW-GeO" secondAttribute="leading" constant="20" id="nxm-Da-4Ec"/>
+                        <constraint firstAttribute="height" constant="250" id="oPF-k4-tCc"/>
+                        <constraint firstItem="hEw-qW-VPo" firstAttribute="top" secondItem="8f7-AK-wMI" secondAttribute="bottom" constant="20" id="r9e-m7-b4f"/>
+                        <constraint firstAttribute="trailing" secondItem="Vdl-mW-gf3" secondAttribute="trailing" constant="20" symbolic="YES" id="vg2-VL-ZpE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BSB-JW-GeO" secondAttribute="trailing" id="i5w-Rk-Hwa"/>
+                <constraint firstAttribute="bottom" secondItem="BSB-JW-GeO" secondAttribute="bottom" id="z5z-s0-Lum"/>
+                <constraint firstItem="BSB-JW-GeO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zgG-DX-O9c"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="146.56488549618319" y="128.16901408450704"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cancel" width="17" height="17"/>
+        <namedColor name="backgroundColor">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

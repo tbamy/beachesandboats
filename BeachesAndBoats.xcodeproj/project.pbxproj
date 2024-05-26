@@ -38,7 +38,10 @@
 		A624F19F2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A624F19E2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets */; };
 		A624F1A22BF1918A006D5C95 /* CreditCardPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1A02BF1918A006D5C95 /* CreditCardPaymentViewController.swift */; };
 		A624F1A32BF1918A006D5C95 /* CreditCardPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1A12BF1918A006D5C95 /* CreditCardPaymentViewController.xib */; };
-		A630A1E92C011C720028E262 /* CancelBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A630A1E82C011C720028E262 /* CancelBookingViewController.swift */; };
+		A630A1F02C011D6F0028E262 /* BookingCancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A630A1EE2C011D6F0028E262 /* BookingCancelViewController.swift */; };
+		A630A1F12C011D6F0028E262 /* BookingCancelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A630A1EF2C011D6F0028E262 /* BookingCancelViewController.xib */; };
+		A630A1F42C0122D50028E262 /* GroundRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A630A1F22C0122D50028E262 /* GroundRulesViewController.swift */; };
+		A630A1F52C0122D50028E262 /* GroundRulesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A630A1F32C0122D50028E262 /* GroundRulesViewController.xib */; };
 		A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573B2BF0CAAB008AF034 /* Coordinator.swift */; };
 		A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */; };
 		A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */; };
@@ -130,7 +133,10 @@
 		A624F19E2BF18F4B006D5C95 /* Assets.xcassets 12-54-14-910 AM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets 12-54-14-910 AM.xcassets"; sourceTree = "<group>"; };
 		A624F1A02BF1918A006D5C95 /* CreditCardPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewController.swift; sourceTree = "<group>"; };
 		A624F1A12BF1918A006D5C95 /* CreditCardPaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardPaymentViewController.xib; sourceTree = "<group>"; };
-		A630A1E82C011C720028E262 /* CancelBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBookingViewController.swift; sourceTree = "<group>"; };
+		A630A1EE2C011D6F0028E262 /* BookingCancelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingCancelViewController.swift; sourceTree = "<group>"; };
+		A630A1EF2C011D6F0028E262 /* BookingCancelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingCancelViewController.xib; sourceTree = "<group>"; };
+		A630A1F22C0122D50028E262 /* GroundRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundRulesViewController.swift; sourceTree = "<group>"; };
+		A630A1F32C0122D50028E262 /* GroundRulesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroundRulesViewController.xib; sourceTree = "<group>"; };
 		A633573B2BF0CAAB008AF034 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		A633573F2BF0CAF1008AF034 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -438,7 +444,10 @@
 				A6B4B09B2BFE3A62005B5F2E /* BookingDetailsGroup */,
 				A6EAE56F2BFF4ACB00B68733 /* ReviewViewController.swift */,
 				A6EAE5702BFF4ACB00B68733 /* ReviewViewController.xib */,
-				A630A1E82C011C720028E262 /* CancelBookingViewController.swift */,
+				A630A1EE2C011D6F0028E262 /* BookingCancelViewController.swift */,
+				A630A1EF2C011D6F0028E262 /* BookingCancelViewController.xib */,
+				A630A1F22C0122D50028E262 /* GroundRulesViewController.swift */,
+				A630A1F32C0122D50028E262 /* GroundRulesViewController.xib */,
 			);
 			path = Booking;
 			sourceTree = "<group>";
@@ -539,10 +548,12 @@
 				A68DF3282BF650B800C77268 /* ContactSupportViewController.xib in Resources */,
 				A624F1A32BF1918A006D5C95 /* CreditCardPaymentViewController.xib in Resources */,
 				A624F1992BF16CB7006D5C95 /* PaymentViewController.xib in Resources */,
+				A630A1F52C0122D50028E262 /* GroundRulesViewController.xib in Resources */,
 				A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */,
 				A637E2DE2BF3F86D00EAF938 /* otpBottomModalViewController.xib in Resources */,
 				A6B4B09F2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.xib in Resources */,
 				A68DF3392BF75C5A00C77268 /* BookingViewController.xib in Resources */,
+				A630A1F12C011D6F0028E262 /* BookingCancelViewController.xib in Resources */,
 				A68DF3342BF6A14B00C77268 /* CallViewController.xib in Resources */,
 				A636303A2BFB496200372E77 /* BookingDetailsViewController.xib in Resources */,
 				A682D4E82BF3715300926A0E /* DoubleAuthViewController.xib in Resources */,
@@ -559,7 +570,6 @@
 				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
 				A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */,
 				A6EAE5712BFF4ACB00B68733 /* ReviewViewController.swift in Sources */,
-				A630A1E92C011C720028E262 /* CancelBookingViewController.swift in Sources */,
 				A61C235E2BF8FD10007F25CB /* ButtonBottomBorder.swift in Sources */,
 				A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
@@ -586,9 +596,11 @@
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
 				A63357472BF0D2B3008AF034 /* UIView.swift in Sources */,
 				A68DF33C2BF75F3C00C77268 /* BookingTableViewCell.swift in Sources */,
+				A630A1F02C011D6F0028E262 /* BookingCancelViewController.swift in Sources */,
 				A68DF32F2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift in Sources */,
 				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
 				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
+				A630A1F42C0122D50028E262 /* GroundRulesViewController.swift in Sources */,
 				A624F19C2BF17930006D5C95 /* PaymentOptionsViewController.swift in Sources */,
 				A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */,
 				A61C23612BF91BC3007F25CB /* SortViewController.swift in Sources */,

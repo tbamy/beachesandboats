@@ -26,26 +26,42 @@ class BookingDetailsViewController: UIViewController {
     @IBOutlet weak var perLabel: UILabel!
     @IBOutlet weak var bookAgainBtn: UIButton!
     @IBOutlet weak var backButton: UIImageView!
-
-    
+    @IBOutlet weak var pastBookingStack: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pastBookingView: UIView!
+    @IBOutlet weak var selectedRoomStack: UIStackView!
+    @IBOutlet weak var tripCostStack: UIStackView!
+    @IBOutlet weak var upcomingBtnStacks: UIStackView!
+    @IBOutlet weak var upcomingBookingStack: UIStackView!
+    @IBOutlet weak var viewScrollContainer: UIView!
+    @IBOutlet weak var viewScrollHeightConstraint: NSLayoutConstraint!
+ 
     var getData: BookingProperties?
     var utilitiesCoordinator: [UtilitiesProperties] = UtilitiesModel().populateData()
     var coordinator: AppCoordinator?
+    var pastBooking: Bool?
+    var upcomingBooking: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         viewSetup()
-//        navigationController?.navigationBar.isHidden = true
+        whatToShow()
         navigationController?.isNavigationBarHidden = true
-
     }
     
+    func whatToShow() {
+        pastBookingStack.isHidden = pastBooking ?? false
+        if pastBookingStack.isHidden == true {
+            pastBookingView.isHidden = true
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
+        upcomingBookingStack.isHidden = upcomingBooking ?? false
+        if upcomingBookingStack.isHidden == true {
+            viewScrollHeightConstraint.constant = 1350
+        }
+    }
     
-    
-    
-        
-   
     func viewSetup() {
         image.image = UIImage(named: getData?.image ?? "empty")
         villaName.text = getData?.name
@@ -69,21 +85,26 @@ class BookingDetailsViewController: UIViewController {
         
     }
     
-    
-    
-    
     @IBAction func writeReviewTapped(_ sender: Any) {
         let reviewView = ReviewViewController()
         reviewView.modalPresentationStyle = .overCurrentContext
         reviewView.modalTransitionStyle = .coverVertical
         present(reviewView, animated: true)
     }
-    
 
-    
     @IBAction func bookAgainTapped(_ sender: Any) {
+        let groundRulesView = GroundRulesViewController()
+        groundRulesView.modalPresentationStyle = .overCurrentContext
+        groundRulesView.modalTransitionStyle = .coverVertical
+        present(groundRulesView, animated: true)
     }
     
+    @IBAction func cancelBookingTapped(_ sender: Any) {
+        let cancelView = BookingCancelViewController()
+        cancelView.modalPresentationStyle = .overCurrentContext
+        cancelView.modalTransitionStyle = .coverVertical
+        present(cancelView, animated: true)
+    }
 }
 
 extension BookingDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -126,3 +147,5 @@ extension BookingDetailsViewController: UICollectionViewDelegateFlowLayout {
         )
     }
 }
+
+

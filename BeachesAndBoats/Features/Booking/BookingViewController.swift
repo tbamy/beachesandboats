@@ -110,7 +110,9 @@ extension BookingViewController: PastBookingItemDelegate {
 extension BookingViewController: ItemTappedDelegate {
     func cellTapped(inCell: UpcomingBookingCollectionViewCell, data: BookingProperties) {
         debugPrint("Working?")
+        let bookDetailsView = BookingDetailsViewController()
         coordinator?.gotoBookingDetails(data: data)
+        
 //        let bookingDetails = BookingDetailsViewController()
 //        bookingDetails.getData = data
 //        print("book is \(bookingDetails.getData)")

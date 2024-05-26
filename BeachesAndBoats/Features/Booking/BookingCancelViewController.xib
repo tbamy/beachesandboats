@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookingCancelViewController" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="closeIcon" destination="mIz-Al-iTj" id="ueY-5j-3UM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="516" height="794"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AqZ-Jx-yEc">
+                    <rect key="frame" x="0.0" y="174" width="516" height="620"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booking Cancellation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJr-5b-qFp">
+                            <rect key="frame" x="140" y="27" width="164" height="19.333333333333329"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="mIz-Al-iTj">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="mno-Ps-r8Y"/>
+                                <constraint firstAttribute="width" constant="40" id="zfT-Uu-6Kd"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel this booking?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDX-63-vtN">
+                            <rect key="frame" x="20" y="90" width="295.66666666666669" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please note that cancelling may result in penalties or fees. You will only recieve a refund of 80% of the amount paid." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Lc-1X-zgd">
+                            <rect key="frame" x="20" y="176.33333333333331" width="476" height="33.666666666666657"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any reason for cancellation?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NS0-Kr-DU7">
+                            <rect key="frame" x="20" y="240" width="190.66666666666666" height="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccj-EF-iNG">
+                            <rect key="frame" x="20" y="267" width="476" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="7Pf-gp-XY0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqB-ou-WuU">
+                            <rect key="frame" x="20" y="507" width="476" height="50"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="xNT-q8-NLW"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Proceed">
+                                <color key="baseForegroundColor" systemColor="tintColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="proceedButtonTapped:" destination="-1" eventType="touchUpInside" id="44E-nt-ayy"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzZ-XA-xwV">
+                            <rect key="frame" x="19.999999999999996" y="147" width="42.666666666666657" height="19.333333333333343"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="backgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="5Lc-1X-zgd" secondAttribute="trailing" constant="20" id="019-Yp-rgb"/>
+                        <constraint firstAttribute="height" constant="620" id="3Fd-je-kVG"/>
+                        <constraint firstItem="ccj-EF-iNG" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" id="7JF-MR-Weg"/>
+                        <constraint firstItem="5Lc-1X-zgd" firstAttribute="top" secondItem="rzZ-XA-xwV" secondAttribute="bottom" constant="10" id="7Zd-j5-sJB"/>
+                        <constraint firstItem="ccj-EF-iNG" firstAttribute="top" secondItem="NS0-Kr-DU7" secondAttribute="bottom" constant="10" id="88k-kb-SOG"/>
+                        <constraint firstAttribute="trailing" secondItem="pqB-ou-WuU" secondAttribute="trailing" constant="20" id="9wv-y4-QsD"/>
+                        <constraint firstItem="mIz-Al-iTj" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" id="AjU-6y-nzt"/>
+                        <constraint firstItem="pqB-ou-WuU" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" id="Bfa-gn-Bl9"/>
+                        <constraint firstItem="NS0-Kr-DU7" firstAttribute="top" secondItem="5Lc-1X-zgd" secondAttribute="bottom" constant="30" id="KHi-XV-Sk3"/>
+                        <constraint firstItem="rzZ-XA-xwV" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" symbolic="YES" id="Kai-bC-6rV"/>
+                        <constraint firstItem="jJr-5b-qFp" firstAttribute="leading" secondItem="mIz-Al-iTj" secondAttribute="trailing" constant="80" id="LXZ-pI-stL"/>
+                        <constraint firstItem="mIz-Al-iTj" firstAttribute="top" secondItem="AqZ-Jx-yEc" secondAttribute="top" constant="20" id="UpT-mV-38d"/>
+                        <constraint firstItem="NS0-Kr-DU7" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" symbolic="YES" id="V08-RQ-3au"/>
+                        <constraint firstItem="pqB-ou-WuU" firstAttribute="top" secondItem="ccj-EF-iNG" secondAttribute="bottom" constant="40" id="ccg-6I-EEt"/>
+                        <constraint firstItem="zDX-63-vtN" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" id="cv6-OW-VRb"/>
+                        <constraint firstAttribute="trailing" secondItem="ccj-EF-iNG" secondAttribute="trailing" constant="20" id="eLW-0J-26O"/>
+                        <constraint firstItem="zDX-63-vtN" firstAttribute="top" secondItem="mIz-Al-iTj" secondAttribute="bottom" constant="30" id="gCg-kn-DOP"/>
+                        <constraint firstItem="rzZ-XA-xwV" firstAttribute="top" secondItem="zDX-63-vtN" secondAttribute="bottom" constant="40" id="gvp-gs-LEN"/>
+                        <constraint firstItem="5Lc-1X-zgd" firstAttribute="leading" secondItem="AqZ-Jx-yEc" secondAttribute="leading" constant="20" id="k0e-zB-bgg"/>
+                        <constraint firstItem="jJr-5b-qFp" firstAttribute="top" secondItem="AqZ-Jx-yEc" secondAttribute="top" constant="27" id="zB9-vz-bV6"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AqZ-Jx-yEc" secondAttribute="trailing" id="4MZ-mO-ltR"/>
+                <constraint firstAttribute="bottom" secondItem="AqZ-Jx-yEc" secondAttribute="bottom" id="fE9-eg-bkT"/>
+                <constraint firstItem="AqZ-Jx-yEc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iC5-wY-B6V"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="140.45801526717557" y="-0.70422535211267612"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cancel" width="17" height="17"/>
+        <namedColor name="backgroundColor">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

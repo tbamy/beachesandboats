@@ -100,6 +100,7 @@ final class AppCoordinator: Coordinator{
         let vc: BookingDetailsViewController = .fromNib()
         vc.coordinator = self
         vc.getData = data
+        vc.pastBooking = true
         vc.navigationController?.setNavigationBarHidden(true, animated: true)
         push(viewController: vc)
     }
@@ -108,6 +109,7 @@ final class AppCoordinator: Coordinator{
         let vc: BookingDetailsViewController = .fromNib()
         vc.coordinator = self
         vc.getData = data
+        vc.upcomingBooking = true
         vc.navigationController?.setNavigationBarHidden(true, animated: true)
         push(viewController: vc)
     }

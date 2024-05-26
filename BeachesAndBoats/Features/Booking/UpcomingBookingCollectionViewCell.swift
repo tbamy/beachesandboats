@@ -48,7 +48,6 @@ extension UpcomingBookingCollectionViewCell: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("pressed")
         let selectedBookingData = upcomingCoordinator[indexPath.item]
         print("selecteBooking is \(selectedBookingData)")
         cellTappedDelegate?.cellTapped(inCell: self, data: selectedBookingData)

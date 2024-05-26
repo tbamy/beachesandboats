@@ -29,7 +29,6 @@ class ProfileViewController: UIViewController {
         tableViewSetup()
     }
     
-    
     func tableViewSetup() {
         settingTableView.dataSource = self
         settingTableView.delegate = self
@@ -52,9 +51,6 @@ class ProfileViewController: UIViewController {
         hAndSTableView.register(UINib(nibName: "HelpAndSupportTableViewCell", bundle: nil), forCellReuseIdentifier: "HelpAndSupportTableViewCell")
         hostTableView.register(UINib(nibName: "HostTableViewCell", bundle: nil), forCellReuseIdentifier: "HostTableViewCell")
     }
-    
-    
-    
     
 }
 

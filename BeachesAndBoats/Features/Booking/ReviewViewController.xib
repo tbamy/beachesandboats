@@ -12,7 +12,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReviewViewController" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="closeIcon" destination="mIz-Al-iTj" id="cfi-gf-qCM"/>
+                <outlet property="fiveStars" destination="GwO-Sa-Cbr" id="od6-e4-NoK"/>
+                <outlet property="fourStars" destination="YpN-M0-9Qc" id="MYF-jz-Sax"/>
+                <outlet property="oneStar" destination="r4F-b2-cgL" id="vix-hk-BDl"/>
+                <outlet property="threeStars" destination="KYn-nR-9xZ" id="Sx7-Vm-lF2"/>
+                <outlet property="twoStars" destination="l3m-Z6-Rbw" id="Eer-WG-CjV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="starCollections" destination="r4F-b2-cgL" collectionClass="NSMutableArray" id="2bn-pO-Itt"/>
+                <outletCollection property="starCollections" destination="l3m-Z6-Rbw" collectionClass="NSMutableArray" id="ob4-US-lW7"/>
+                <outletCollection property="starCollections" destination="KYn-nR-9xZ" collectionClass="NSMutableArray" id="Luh-vx-wL3"/>
+                <outletCollection property="starCollections" destination="YpN-M0-9Qc" collectionClass="NSMutableArray" id="Kpb-wV-eAf"/>
+                <outletCollection property="starCollections" destination="GwO-Sa-Cbr" collectionClass="NSMutableArray" id="eWQ-ox-MDc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -53,8 +63,11 @@
                                     <color key="tintColor" red="0.043137259779999999" green="0.11372549830000001" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled" image="ratingstar" imagePlacement="trailing" title="1" imagePadding="5">
-                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="baseForegroundColor" systemColor="systemMintColor"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="oneStarTapped:" destination="-1" eventType="touchUpInside" id="AVg-ll-aoB"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3m-Z6-Rbw">
                                     <rect key="frame" x="97.333333333333314" y="0.0" width="87" height="50"/>
@@ -66,6 +79,9 @@
                                     <buttonConfiguration key="configuration" style="filled" image="ratingstar" imagePlacement="trailing" title="2" imagePadding="5">
                                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="twoStarTapped:" destination="-1" eventType="touchUpInside" id="Iag-Pm-37f"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYn-nR-9xZ">
                                     <rect key="frame" x="194.33333333333334" y="0.0" width="87.333333333333343" height="50"/>
@@ -77,6 +93,9 @@
                                     <buttonConfiguration key="configuration" style="filled" image="ratingstar" imagePlacement="trailing" title="3" imagePadding="5">
                                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="threeStarTapped:" destination="-1" eventType="touchUpInside" id="FHa-oP-YEd"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpN-M0-9Qc">
                                     <rect key="frame" x="291.66666666666669" y="0.0" width="87" height="50"/>
@@ -88,6 +107,9 @@
                                     <buttonConfiguration key="configuration" style="filled" image="ratingstar" imagePlacement="trailing" title="4" imagePadding="5">
                                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="fourStarTapped:" destination="-1" eventType="touchUpInside" id="34Y-5y-W88"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GwO-Sa-Cbr">
                                     <rect key="frame" x="388.66666666666669" y="0.0" width="87.333333333333314" height="50"/>
@@ -99,6 +121,9 @@
                                     <buttonConfiguration key="configuration" style="filled" image="ratingstar" imagePlacement="trailing" title="5" imagePadding="5">
                                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="fiveStarTapped:" destination="-1" eventType="touchUpInside" id="5Of-jw-zy3"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>
@@ -180,8 +205,11 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemMintColor">
+            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
