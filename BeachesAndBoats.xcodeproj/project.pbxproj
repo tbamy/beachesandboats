@@ -70,6 +70,8 @@
 		A637E2E42BF54D3800EAF938 /* PopUpModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A637E2E32BF54D3800EAF938 /* PopUpModal.xib */; };
 		A637E2E62BF54DDE00EAF938 /* PopUpModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2E52BF54DDE00EAF938 /* PopUpModal.swift */; };
 		A637E2E82BF5552C00EAF938 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2E72BF5552C00EAF938 /* BaseView.swift */; };
+		A6451E722C047893006E985E /* subCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6451E712C047893006E985E /* subCategoryCollectionViewCell.xib */; };
+		A6451E732C047893006E985E /* subCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6451E702C047893006E985E /* subCategoryCollectionViewCell.swift */; };
 		A682D4982BF2A7C800926A0E /* LoginSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A682D4962BF2A7C800926A0E /* LoginSecurityViewController.swift */; };
 		A682D4992BF2A7C800926A0E /* LoginSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A682D4972BF2A7C800926A0E /* LoginSecurityViewController.xib */; };
 		A682D49C2BF353EE00926A0E /* NavigationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A682D49B2BF353EE00926A0E /* NavigationUtility.swift */; };
@@ -97,6 +99,8 @@
 		A6B4B09F2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B4B09D2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.xib */; };
 		A6EAE5712BFF4ACB00B68733 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EAE56F2BFF4ACB00B68733 /* ReviewViewController.swift */; };
 		A6EAE5722BFF4ACB00B68733 /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EAE5702BFF4ACB00B68733 /* ReviewViewController.xib */; };
+		A6FDFB372C03D85D0040B3F4 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDFB352C03D85D0040B3F4 /* HomePageViewController.swift */; };
+		A6FDFB382C03D85D0040B3F4 /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6FDFB362C03D85D0040B3F4 /* HomePageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +169,8 @@
 		A637E2E32BF54D3800EAF938 /* PopUpModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpModal.xib; sourceTree = "<group>"; };
 		A637E2E52BF54DDE00EAF938 /* PopUpModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpModal.swift; sourceTree = "<group>"; };
 		A637E2E72BF5552C00EAF938 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		A6451E702C047893006E985E /* subCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = subCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		A6451E712C047893006E985E /* subCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = subCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		A682D4962BF2A7C800926A0E /* LoginSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSecurityViewController.swift; sourceTree = "<group>"; };
 		A682D4972BF2A7C800926A0E /* LoginSecurityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginSecurityViewController.xib; sourceTree = "<group>"; };
 		A682D49B2BF353EE00926A0E /* NavigationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtility.swift; sourceTree = "<group>"; };
@@ -192,6 +198,8 @@
 		A6B4B09D2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UtilitiesCollectionViewCell.xib; sourceTree = "<group>"; };
 		A6EAE56F2BFF4ACB00B68733 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		A6EAE5702BFF4ACB00B68733 /* ReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewViewController.xib; sourceTree = "<group>"; };
+		A6FDFB352C03D85D0040B3F4 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		A6FDFB362C03D85D0040B3F4 /* HomePageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +364,7 @@
 		A633574B2BF0D7D9008AF034 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A6FDFB302C03C49A0040B3F4 /* HomeBeachHouses */,
 				A68DF3352BF75AEB00C77268 /* Booking */,
 				A624F1652BF10007006D5C95 /* Profile */,
 				A633574D2BF0D7FC008AF034 /* Onboarding */,
@@ -463,6 +472,17 @@
 			path = BookingDetailsGroup;
 			sourceTree = "<group>";
 		};
+		A6FDFB302C03C49A0040B3F4 /* HomeBeachHouses */ = {
+			isa = PBXGroup;
+			children = (
+				A6FDFB352C03D85D0040B3F4 /* HomePageViewController.swift */,
+				A6FDFB362C03D85D0040B3F4 /* HomePageViewController.xib */,
+				A6451E702C047893006E985E /* subCategoryCollectionViewCell.swift */,
+				A6451E712C047893006E985E /* subCategoryCollectionViewCell.xib */,
+			);
+			path = HomeBeachHouses;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -524,6 +544,7 @@
 				A61C23582BF8B704007F25CB /* UpcomingBookingCollectionViewCell.xib in Resources */,
 				A637E2D82BF3893900EAF938 /* PhoneNumberBottomModal.xib in Resources */,
 				A682D4992BF2A7C800926A0E /* LoginSecurityViewController.xib in Resources */,
+				A6451E722C047893006E985E /* subCategoryCollectionViewCell.xib in Resources */,
 				A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */,
 				A624F1922BF1596E006D5C95 /* ManageAccountViewController.xib in Resources */,
 				A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */,
@@ -551,6 +572,7 @@
 				A630A1F52C0122D50028E262 /* GroundRulesViewController.xib in Resources */,
 				A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */,
 				A637E2DE2BF3F86D00EAF938 /* otpBottomModalViewController.xib in Resources */,
+				A6FDFB382C03D85D0040B3F4 /* HomePageViewController.xib in Resources */,
 				A6B4B09F2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.xib in Resources */,
 				A68DF3392BF75C5A00C77268 /* BookingViewController.xib in Resources */,
 				A630A1F12C011D6F0028E262 /* BookingCancelViewController.xib in Resources */,
@@ -585,6 +607,7 @@
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
 				A6B4B09E2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.swift in Sources */,
 				A637E2DA2BF397A600EAF938 /* ViewlTopCornerRadius.swift in Sources */,
+				A6FDFB372C03D85D0040B3F4 /* HomePageViewController.swift in Sources */,
 				A682D4982BF2A7C800926A0E /* LoginSecurityViewController.swift in Sources */,
 				A68DF3272BF650B800C77268 /* ContactSupportViewController.swift in Sources */,
 				A68DF31D2BF6293E00C77268 /* NotificationViewController.swift in Sources */,
@@ -595,6 +618,7 @@
 				A68DF3242BF63F0E00C77268 /* NotificationModel.swift in Sources */,
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
 				A63357472BF0D2B3008AF034 /* UIView.swift in Sources */,
+				A6451E732C047893006E985E /* subCategoryCollectionViewCell.swift in Sources */,
 				A68DF33C2BF75F3C00C77268 /* BookingTableViewCell.swift in Sources */,
 				A630A1F02C011D6F0028E262 /* BookingCancelViewController.swift in Sources */,
 				A68DF32F2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift in Sources */,

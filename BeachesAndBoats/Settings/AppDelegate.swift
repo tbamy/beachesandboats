@@ -29,8 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        coordinator?.gotoPayments()
 //        coordinator?.gotoLoginSecurityView()
 //        coordinator?.gotoOTP()
-        coordinator?.gotoBooking()
+//        coordinator?.gotoBooking()
 //        coordinator?.gotoBookingDetails()
+        coordinator?.gotoHomePage()
         
         
         window = AppWindow(frame: UIScreen.main.bounds)

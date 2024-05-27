@@ -113,4 +113,10 @@ final class AppCoordinator: Coordinator{
         vc.navigationController?.setNavigationBarHidden(true, animated: true)
         push(viewController: vc)
     }
+    
+    func gotoHomePage() {
+        let vc: HomePageViewController = .fromNib()
+        vc.coordinator = self
+        push(viewController: vc)
+    }
 }
