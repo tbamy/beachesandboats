@@ -12,7 +12,7 @@ class subCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var title: UILabel!
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -23,7 +23,6 @@ class subCategoryCollectionViewCell: UICollectionViewCell {
         image.image = UIImage(named: data.img ?? "empty")
         title.text = data.title
     }
-
 }
 
 struct SubCateogryModel {
@@ -32,7 +31,7 @@ struct SubCateogryModel {
             SubCategoryPropeties(img: "luxury", title: "Luxury"),
             SubCategoryPropeties(img: "hotel", title: "Hotels"),
             SubCategoryPropeties(img: "mansion", title: "Mansions"),
-            SubCategoryPropeties(img: "room", title: "Rooms"),
+            SubCategoryPropeties(img: "rooms", title: "Rooms"),
             SubCategoryPropeties(img: "pool", title: "Amazing pools"),
             SubCategoryPropeties(img: "pool", title: "Design"),
             SubCategoryPropeties(img: "pool", title: "Adapted")

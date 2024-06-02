@@ -64,9 +64,13 @@ enum Assets: String {
     case luxury = "luxury"
     case hotel = "hotel"
     case mansion = "mansion"
-    case room = "room"
+    case rooms = "rooms"
     case pool = "pool"
-    
+    case beaches = "beaches"
+    case like = "like"
+    case ship = "ship"
+    case unselectedServices = "unselectedServices"
+    case unselectedBoat = "unselectedBoat"
 
 
     var image: UIImage {

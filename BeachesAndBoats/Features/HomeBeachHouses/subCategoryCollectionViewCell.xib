@@ -10,22 +10,22 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="subCategoryCollectionViewCell" customModule="BeachesAndBoats" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="109" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="102" height="99"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="109" height="80"/>
+                <rect key="frame" x="0.0" y="0.0" width="102" height="99"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zVk-6k-vnV">
-                        <rect key="frame" x="35" y="20" width="20" height="20"/>
+                        <rect key="frame" x="38.666666666666664" y="27" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="mVO-n1-awb"/>
-                            <constraint firstAttribute="height" constant="20" id="zTW-rx-bJc"/>
+                            <constraint firstAttribute="width" constant="25" id="mVO-n1-awb"/>
+                            <constraint firstAttribute="height" constant="25" id="zTW-rx-bJc"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejP-G8-Y1R">
-                        <rect key="frame" x="0.0" y="45" width="41.333333333333336" height="35"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejP-G8-Y1R">
+                        <rect key="frame" x="0.0" y="56" width="102" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -33,18 +33,19 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="zVk-6k-vnV" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="35" id="99K-ID-UfJ"/>
-                <constraint firstAttribute="bottom" secondItem="ejP-G8-Y1R" secondAttribute="bottom" id="CL2-Xx-oPH"/>
-                <constraint firstItem="zVk-6k-vnV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="Fed-14-i5b"/>
-                <constraint firstItem="ejP-G8-Y1R" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="eMw-ew-hhP"/>
-                <constraint firstItem="ejP-G8-Y1R" firstAttribute="top" secondItem="zVk-6k-vnV" secondAttribute="bottom" constant="5" id="naw-Kz-MPs"/>
+                <constraint firstItem="ejP-G8-Y1R" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="9ez-T7-MKc"/>
+                <constraint firstItem="ejP-G8-Y1R" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ArP-Uo-MqL"/>
+                <constraint firstItem="zVk-6k-vnV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DOD-RT-xhi"/>
+                <constraint firstItem="ejP-G8-Y1R" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="15" id="Kpx-cl-QFs"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="ejP-G8-Y1R" secondAttribute="trailing" id="LwE-ZI-oZe"/>
+                <constraint firstItem="zVk-6k-vnV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-10" id="pDq-H7-9kf"/>
             </constraints>
-            <size key="customSize" width="109" height="80"/>
+            <size key="customSize" width="102" height="99"/>
             <connections>
                 <outlet property="image" destination="zVk-6k-vnV" id="IFR-qa-9tH"/>
                 <outlet property="title" destination="ejP-G8-Y1R" id="MHo-Tx-Wv8"/>
             </connections>
-            <point key="canvasLocation" x="167.17557251908397" y="30.281690140845072"/>
+            <point key="canvasLocation" x="160.30534351145039" y="36.971830985915496"/>
         </collectionViewCell>
     </objects>
 </document>
