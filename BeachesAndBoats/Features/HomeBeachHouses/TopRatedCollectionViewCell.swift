@@ -57,6 +57,19 @@ struct BoatsTopRatedModel {
     }
 }
 
+struct BoatBookNowModel {
+    func populateData() -> [TopRatedProperties] {
+        [
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+        ]
+    }
+}
+
+
 struct TopRatedProperties {
     let name:  String?
     let location:  String?

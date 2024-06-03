@@ -23,6 +23,10 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var boatLabel: UILabel!
     @IBOutlet weak var beachHouseLabel: UILabel!
     @IBOutlet weak var serviceLabel: UILabel!
+    @IBOutlet weak var currentBookingTable: UITableView!
+    @IBOutlet weak var bookNowCollection: UICollectionView!
+    @IBOutlet weak var bookNowStack: UIStackView!
+    
     
     var coordinator: AppCoordinator?
     var subCategoryCoordinator: [SubCategoryPropeties] = SubCateogryModel().populateData()
@@ -30,8 +34,10 @@ class HomePageViewController: UIViewController {
     var boatTopRatedCoordinator: [TopRatedProperties] = BoatsTopRatedModel().populateData()
     var otherCoordinator: [TopRatedProperties] = OthersModel().populateData()
     var boatOtherCoordinator: [TopRatedProperties] = BoatsOthersModel().populateData()
+    var boatBookNowCoordinator: [TopRatedProperties] = BoatBookNowModel().populateData()
 
     var selectedView: UIView?
+    var serviceViewController: ServiceViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +45,12 @@ class HomePageViewController: UIViewController {
         collectionViewSetup()
         gestureRecongnizers()
         
-//        addFadeOverlay(to: boatsViewContainer)
         beachHouseImg.layer.borderWidth = 4
         beachHouseImg.layer.borderColor = UIColor.orange.cgColor
         selectedView = beachViewContainer
-//        boatImg.image = UIImage(named: "unselectedBoat")
-//        boatLabel.isHidden = true
-//        serviceImg.image = UIImage(named: "unselectedServices")
-//        serviceLabel.isHidden = true
+        bookNowStack.isHidden = true
+        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,6 +97,7 @@ class HomePageViewController: UIViewController {
     @objc func beachViewTapped() {
         print("beach view")
         selectedView = beachViewContainer
+//        bookNowCollection.isHidden = true
         beachHouseImg.layer.borderWidth = 4
         beachHouseImg.layer.borderColor = UIColor.orange.cgColor
         
@@ -100,6 +105,7 @@ class HomePageViewController: UIViewController {
         boatImg.layer.borderColor = .none
         serviceImg.layer.borderWidth = .nan
         serviceImg.layer.borderColor = .none
+        bookNowStack.isHidden = true
         
 //        boatImg.image = UIImage(named: "unselectedBoat")
 //        boatLabel.isHidden = true
@@ -107,6 +113,8 @@ class HomePageViewController: UIViewController {
 //        serviceLabel.isHidden = true
         otherTableView.reloadData()
         topRatedCollectionView.reloadData()
+//        bookNowCollection.reloadData()
+//        updateSelectedView()
     }
     
     @objc func boatViewTapped() {
@@ -115,6 +123,7 @@ class HomePageViewController: UIViewController {
         selectedView = boatsViewContainer
         boatImg.layer.borderWidth = 4
         boatImg.layer.borderColor = UIColor.orange.cgColor
+        bookNowStack.isHidden = false
         
         beachHouseImg.layer.borderWidth = .nan
         beachHouseImg.layer.borderColor = .none
@@ -123,9 +132,12 @@ class HomePageViewController: UIViewController {
         
         otherTableView.reloadData()
         topRatedCollectionView.reloadData()
+        bookNowCollection.reloadData()
+
     }
     
     @objc func serviceViewTapped() {
+        bookNowStack.isHidden = true
         serviceImg.layer.borderWidth = 4
         serviceImg.layer.borderColor = UIColor.orange.cgColor
         
@@ -133,10 +145,32 @@ class HomePageViewController: UIViewController {
         beachHouseImg.layer.borderColor = .none
         boatImg.layer.borderWidth = .nan
         boatImg.layer.borderColor = .none
-        
-//        otherTableView.reloadData()
-//        topRatedCollectionView.reloadData()
     }
+    
+    func updateSelectedView() {
+            // Update borders
+            beachHouseImg.layer.borderWidth = selectedView == beachViewContainer ? 4 : 0
+            beachHouseImg.layer.borderColor = selectedView == beachViewContainer ? UIColor.orange.cgColor : nil
+            boatImg.layer.borderWidth = selectedView == boatsViewContainer ? 4 : 0
+            boatImg.layer.borderColor = selectedView == boatsViewContainer ? UIColor.orange.cgColor : nil
+            serviceImg.layer.borderWidth = selectedView == servicesViewContainer ? 4 : 0
+            serviceImg.layer.borderColor = selectedView == servicesViewContainer ? UIColor.orange.cgColor : nil
+
+            // Toggle visibility of views
+            subCategoryCollectionView.isHidden = selectedView == servicesViewContainer
+            topRatedCollectionView.isHidden = selectedView == servicesViewContainer
+            otherTableView.isHidden = selectedView == servicesViewContainer
+            
+            if selectedView == servicesViewContainer {
+                // Show custom service view content
+                serviceViewController?.view.isHidden = false
+            } else {
+                // Hide custom service view content
+                serviceViewController?.view.isHidden = true
+                otherTableView.reloadData()
+                topRatedCollectionView.reloadData()
+            }
+        }
     
     @objc func searchTapped() {
         let searchView = DestinationSearchViewController()
@@ -155,14 +189,26 @@ class HomePageViewController: UIViewController {
         topRatedCollectionView.tag = 2
         topRatedCollectionView.register(UINib(nibName: "TopRatedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TopRatedCollectionViewCell")
         
+        bookNowCollection.delegate = self
+        bookNowCollection.dataSource = self
+        bookNowCollection.tag = 3
+        bookNowCollection.register(UINib(nibName: "TopRatedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TopRatedCollectionViewCell")
+        
         otherTableView.delegate = self
         otherTableView.dataSource = self
+        otherTableView.tag = 1
         otherTableView.register(UINib(nibName: "OthersTableViewCell", bundle: nil), forCellReuseIdentifier: "OthersTableViewCell" )
         otherTableView.separatorStyle = .none
+        
+        currentBookingTable.delegate = self
+        currentBookingTable.dataSource = self
+        currentBookingTable.tag = 2
+        currentBookingTable.register(UINib(nibName: "OthersTableViewCell", bundle: nil), forCellReuseIdentifier: "OthersTableViewCell" )
+        currentBookingTable.separatorStyle = .none
     }
     
     func updateTableViewHeight() {
-            otherTableView.layoutIfNeeded()
+            otherTableView?.layoutIfNeeded()
             let height = otherTableView.contentSize.height
             NSLayoutConstraint.deactivate(otherTableView.constraints.filter { $0.firstAttribute == .height })
             NSLayoutConstraint.activate([
@@ -252,8 +298,6 @@ extension HomePageViewController: UICollectionViewDelegate, UICollectionViewData
                 return subCategoryCoordinator.count
             } else if collectionView.tag == 2 {
                 return topRatedCoordinator.count
-            } else if collectionView.tag == 3 {
-                return otherCoordinator.count
             }
         } else if selectedView == boatsViewContainer {
             if collectionView.tag == 1 {
@@ -261,10 +305,9 @@ extension HomePageViewController: UICollectionViewDelegate, UICollectionViewData
             } else if collectionView.tag == 2 {
                 return boatTopRatedCoordinator.count
             } else if collectionView.tag == 3 {
-                return boatOtherCoordinator.count
+                return boatBookNowCoordinator.count
             }
         }
-        
         return 0
     }
     
@@ -292,6 +335,11 @@ extension HomePageViewController: UICollectionViewDelegate, UICollectionViewData
                 let cellAt = boatTopRatedCoordinator[indexPath.item]
                 cell.setup(with: cellAt)
                 return cell
+            } else if collectionView.tag == 3 {
+                let cell = bookNowCollection.dequeueReusableCell(withReuseIdentifier: "TopRatedCollectionViewCell", for: indexPath) as! TopRatedCollectionViewCell
+                let cellAt = boatBookNowCoordinator[indexPath.item]
+                cell.setup(with: cellAt)
+                return cell
             }
         }
        
@@ -310,7 +358,7 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
             let heightOfScreen = collectionView.bounds.height
             return CGSize(width: widthOfScreen, height: heightOfScreen)
         } else if collectionView.tag == 3 {
-            let widthOfScreen = collectionView.bounds.width
+            let widthOfScreen: CGFloat = 365
             let heightOfScreen = collectionView.bounds.height
             return CGSize(width: widthOfScreen, height: heightOfScreen)
         }

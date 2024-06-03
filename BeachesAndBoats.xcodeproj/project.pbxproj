@@ -74,6 +74,8 @@
 		A637E2E82BF5552C00EAF938 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637E2E72BF5552C00EAF938 /* BaseView.swift */; };
 		A6451E722C047893006E985E /* subCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6451E712C047893006E985E /* subCategoryCollectionViewCell.xib */; };
 		A6451E732C047893006E985E /* subCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6451E702C047893006E985E /* subCategoryCollectionViewCell.swift */; };
+		A662E8A82C0DEEEF00E841BE /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A662E8A62C0DEEEF00E841BE /* ServiceViewController.swift */; };
+		A662E8A92C0DEEEF00E841BE /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A662E8A72C0DEEEF00E841BE /* ServiceViewController.xib */; };
 		A67120AB2C07426200A41B9B /* TopRatedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67120A92C07426200A41B9B /* TopRatedCollectionViewCell.swift */; };
 		A67120AC2C07426200A41B9B /* TopRatedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A67120AA2C07426200A41B9B /* TopRatedCollectionViewCell.xib */; };
 		A67120B32C08B5DB00A41B9B /* OthersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67120B12C08B5DB00A41B9B /* OthersTableViewCell.swift */; };
@@ -179,6 +181,8 @@
 		A637E2E72BF5552C00EAF938 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A6451E702C047893006E985E /* subCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = subCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A6451E712C047893006E985E /* subCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = subCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		A662E8A62C0DEEEF00E841BE /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		A662E8A72C0DEEEF00E841BE /* ServiceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
 		A67120A92C07426200A41B9B /* TopRatedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedCollectionViewCell.swift; sourceTree = "<group>"; };
 		A67120AA2C07426200A41B9B /* TopRatedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopRatedCollectionViewCell.xib; sourceTree = "<group>"; };
 		A67120B12C08B5DB00A41B9B /* OthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersTableViewCell.swift; sourceTree = "<group>"; };
@@ -497,6 +501,8 @@
 				A67120B22C08B5DB00A41B9B /* OthersTableViewCell.xib */,
 				A603B5852C0BCAA0003BD6AC /* DestinationSearchViewController.swift */,
 				A603B5862C0BCAA0003BD6AC /* DestinationSearchViewController.xib */,
+				A662E8A62C0DEEEF00E841BE /* ServiceViewController.swift */,
+				A662E8A72C0DEEEF00E841BE /* ServiceViewController.xib */,
 			);
 			path = HomeBeachHouses;
 			sourceTree = "<group>";
@@ -567,6 +573,7 @@
 				A624F1922BF1596E006D5C95 /* ManageAccountViewController.xib in Resources */,
 				A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */,
 				A68DF33D2BF75F3C00C77268 /* BookingTableViewCell.xib in Resources */,
+				A662E8A92C0DEEEF00E841BE /* ServiceViewController.xib in Resources */,
 				A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */,
 				A68DF31E2BF6293E00C77268 /* NotificationViewController.xib in Resources */,
 				A624F19D2BF17930006D5C95 /* PaymentOptionsViewController.xib in Resources */,
@@ -648,6 +655,7 @@
 				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
 				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
 				A630A1F42C0122D50028E262 /* GroundRulesViewController.swift in Sources */,
+				A662E8A82C0DEEEF00E841BE /* ServiceViewController.swift in Sources */,
 				A624F19C2BF17930006D5C95 /* PaymentOptionsViewController.swift in Sources */,
 				A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */,
 				A61C23612BF91BC3007F25CB /* SortViewController.swift in Sources */,
