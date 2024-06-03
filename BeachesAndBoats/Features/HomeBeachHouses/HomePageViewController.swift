@@ -26,6 +26,13 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var currentBookingTable: UITableView!
     @IBOutlet weak var bookNowCollection: UICollectionView!
     @IBOutlet weak var bookNowStack: UIStackView!
+    @IBOutlet weak var currentBookingStack: UIStackView!
+    @IBOutlet weak var topRatedStack: UIStackView!
+    @IBOutlet weak var otherStack: UIStackView!
+    @IBOutlet weak var viewScrollConstraintHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     
     
     var coordinator: AppCoordinator?
@@ -49,6 +56,7 @@ class HomePageViewController: UIViewController {
         beachHouseImg.layer.borderColor = UIColor.orange.cgColor
         selectedView = beachViewContainer
         bookNowStack.isHidden = true
+        currentBookingStack.isHidden = true
         
 
     }
@@ -97,7 +105,7 @@ class HomePageViewController: UIViewController {
     @objc func beachViewTapped() {
         print("beach view")
         selectedView = beachViewContainer
-//        bookNowCollection.isHidden = true
+        
         beachHouseImg.layer.borderWidth = 4
         beachHouseImg.layer.borderColor = UIColor.orange.cgColor
         
@@ -105,16 +113,19 @@ class HomePageViewController: UIViewController {
         boatImg.layer.borderColor = .none
         serviceImg.layer.borderWidth = .nan
         serviceImg.layer.borderColor = .none
-        bookNowStack.isHidden = true
         
-//        boatImg.image = UIImage(named: "unselectedBoat")
-//        boatLabel.isHidden = true
-//        serviceImg.image = UIImage(named: "unselectedServices")
-//        serviceLabel.isHidden = true
+        bookNowStack.isHidden = true
+        currentBookingStack.isHidden = true
+        topRatedStack.isHidden = false
+        otherStack.isHidden = false
+        subCategoryCollectionView.isHidden = false
+        scrollView.isScrollEnabled = true
+
+        
+        viewScrollConstraintHeight.constant = 1900
+
         otherTableView.reloadData()
         topRatedCollectionView.reloadData()
-//        bookNowCollection.reloadData()
-//        updateSelectedView()
     }
     
     @objc func boatViewTapped() {
@@ -123,17 +134,27 @@ class HomePageViewController: UIViewController {
         selectedView = boatsViewContainer
         boatImg.layer.borderWidth = 4
         boatImg.layer.borderColor = UIColor.orange.cgColor
-        bookNowStack.isHidden = false
         
         beachHouseImg.layer.borderWidth = .nan
         beachHouseImg.layer.borderColor = .none
         serviceImg.layer.borderWidth = .nan
         serviceImg.layer.borderColor = .none
         
+        bookNowStack.isHidden = false
+        currentBookingStack.isHidden = true
+        topRatedStack.isHidden = false
+        otherStack.isHidden = false
+        subCategoryCollectionView.isHidden = false
+
+//        scrollView.isScrollEnabled = true
+
+        
+        viewScrollConstraintHeight.constant = 2250
+
+        
         otherTableView.reloadData()
         topRatedCollectionView.reloadData()
         bookNowCollection.reloadData()
-
     }
     
     @objc func serviceViewTapped() {
@@ -145,6 +166,20 @@ class HomePageViewController: UIViewController {
         beachHouseImg.layer.borderColor = .none
         boatImg.layer.borderWidth = .nan
         boatImg.layer.borderColor = .none
+        
+        bookNowStack.isHidden = true
+        topRatedStack.isHidden = true
+        otherStack.isHidden = true
+        currentBookingStack.isHidden = false
+        subCategoryCollectionView.isHidden = true
+        scrollView.isScrollEnabled = false
+        
+//        viewScrollConstraintHeight.constant = 1800
+        
+        otherTableView.reloadData()
+        topRatedCollectionView.reloadData()
+        bookNowCollection.reloadData()
+        currentBookingTable.reloadData()
     }
     
     func updateSelectedView() {
@@ -263,6 +298,8 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
             return otherCoordinator.count
         } else if selectedView == boatsViewContainer {
             return boatOtherCoordinator.count
+        } else if selectedView == servicesViewContainer {
+            return otherCoordinator.count
         }
         return 0
     }
@@ -280,6 +317,12 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setup(with: cellAt)
             cell.selectionStyle = .none
             return cell
+            //        } else if selectedView == servicesViewContainer {
+            //            let cell = otherTableView.dequeueReusableCell(withIdentifier: "OthersTableViewCell", for: indexPath) as! OthersTableViewCell
+            //            let cellAt = boatOtherCoordinator[indexPath.item]
+            //            cell.setup(with: cellAt)
+            //            cell.selectionStyle = .none
+            //            return cell
         }
         return UITableViewCell()
     }
