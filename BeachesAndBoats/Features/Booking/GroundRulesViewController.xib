@@ -30,13 +30,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your host will like you to agree to the following house rules:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlf-fp-aEE">
-                            <rect key="frame" x="20" y="54.333333333333314" width="450" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="20" y="54.333333333333314" width="450" height="15.666666666666671"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f7-AK-wMI">
-                            <rect key="frame" x="20" y="82.333333333333314" width="450" height="65.333333333333314"/>
+                            <rect key="frame" x="20" y="80" width="450" height="56"/>
                             <attributedString key="attributedText">
                                 <fragment>
                                     <string key="content">	•	Check-in time flexible
@@ -45,7 +45,7 @@
 	•	Pets are not allowed</string>
                                     <attributes>
                                         <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="9" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                             <tabStops>
                                                 <textTab alignment="left" location="1">
@@ -62,12 +62,15 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEw-qW-VPo">
-                            <rect key="frame" x="20" y="167.66666666666669" width="450" height="50"/>
+                            <rect key="frame" x="20" y="156" width="450" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="wbC-yo-Tgw"/>
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="filled" title="Proceed"/>
+                            <connections>
+                                <action selector="groundRulesProceedTapped:" destination="-1" eventType="touchUpInside" id="IZl-im-SAz"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="Vdl-mW-gf3">
                             <rect key="frame" x="440" y="15" width="30" height="30"/>

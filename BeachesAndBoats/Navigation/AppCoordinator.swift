@@ -114,9 +114,34 @@ final class AppCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoTopRatedDetails(data: TopRatedProperties) {
+        let vc: BookingDetailsViewController = .fromNib()
+        vc.coordinator = self
+        vc.getTopRatedData = data
+        vc.continueBooking = "Continue Booking"
+        vc.upcomingBooking = true
+        vc.navigationController?.setNavigationBarHidden(true, animated: true)
+        push(viewController: vc)
+    }
+    
     func gotoHomePage() {
         let vc: HomePageViewController = .fromNib()
         vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoBoatDetails(data: TopRatedProperties) {
+        let vc: BoatDetailsViewController = .fromNib()
+        vc.coordinator = self
+        vc.getBoatTopRatedData = data
+//        vc.navigationController?.setNavigationBarHidden(true, animated: true)
+        push(viewController: vc)
+    }
+
+    func gotoConfirmBooking() {
+        let vc: ConfirmBookingViewController = .fromNib()
+        vc.coordinator = self
+        vc.navigationController?.setNavigationBarHidden(false, animated: false)
         push(viewController: vc)
     }
 }

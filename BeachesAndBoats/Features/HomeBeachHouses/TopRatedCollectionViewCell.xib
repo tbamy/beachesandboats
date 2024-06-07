@@ -98,7 +98,7 @@
                                     <constraint firstItem="ndO-yG-MSA" firstAttribute="top" secondItem="IsW-GS-DiO" secondAttribute="top" constant="10" id="sl9-wR-X7x"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="Ukj-Zk-0Ws">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="Ukj-Zk-0Ws">
                                 <rect key="frame" x="245" y="35" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HsZ-tZ-A8C"/>
@@ -145,9 +145,9 @@
     </objects>
     <resources>
         <image name="dateIcon" width="4" height="3.6666667461395264"/>
-        <image name="like" width="28" height="28"/>
         <image name="locationIcon" width="3.3333332538604736" height="5"/>
         <image name="star" width="20" height="20"/>
+        <image name="unlike" width="28" height="28"/>
         <namedColor name="backgroundcolor">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

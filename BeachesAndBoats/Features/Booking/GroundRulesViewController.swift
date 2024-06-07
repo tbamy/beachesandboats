@@ -2,13 +2,20 @@
 //  GroundRulesViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 24/05/2024.
+//  Created by Paul Orimogunje on 24/05/2024.
 //
 
 import UIKit
 
+protocol GroundRulesDelegate: AnyObject {
+    func groundRulesButtonPressed()
+}
+
 class GroundRulesViewController: UIViewController {
     @IBOutlet weak var cancelIcon: UIImageView!
+    
+    var coordinator: AppCoordinator?
+    weak var delegate: GroundRulesDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,5 +32,12 @@ class GroundRulesViewController: UIViewController {
     @objc func closeClicked() {
         dismiss(animated: true, completion: nil)
     }
-
+    
+    
+    @IBAction func groundRulesProceedTapped(_ sender: Any) {
+        print("I am pressed")
+        delegate?.groundRulesButtonPressed()
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

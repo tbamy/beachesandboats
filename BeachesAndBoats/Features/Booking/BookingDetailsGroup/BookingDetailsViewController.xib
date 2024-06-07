@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookingDetailsViewController" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="backButton" destination="SYy-UR-NFk" id="kdH-DF-zaV"/>
+                <outlet property="bookAgainBtn" destination="fMj-N1-fkf" id="fSP-bA-NhB"/>
                 <outlet property="checkInDate" destination="yXp-RF-Mgr" id="7bb-3v-n9e"/>
                 <outlet property="checkOutDate" destination="svl-am-02V" id="mUZ-Pz-JRq"/>
                 <outlet property="descriptionLabel" destination="mlo-CY-ZcK" id="T1n-gg-Ygc"/>
@@ -662,6 +663,9 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled" title="Book again"/>
+                                    <connections>
+                                        <action selector="bookAgainTapped:" destination="-1" eventType="touchUpInside" id="YU2-1W-a8P"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" name="backgroundColor"/>

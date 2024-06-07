@@ -21,7 +21,9 @@ class PaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Payments", rightIcon: .none)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Payments", navigationSubtitle: nil, rightIcon: .none, secondRightIcon: nil)
+        
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Payments", rightIcon: .none)
         setup()
         
     }

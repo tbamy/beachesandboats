@@ -22,7 +22,8 @@ class CreditCardPaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Pay with credit card", rightIcon: nil)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Pay with credit card", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Pay with credit card", rightIcon: nil)
         creditCardStack.isHidden = hideCreditCardStack
         payPalStack.isHidden = hidepayPalStack
 

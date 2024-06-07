@@ -17,7 +17,9 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Notifications", rightIcon: nil)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Notifications", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+        
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Notifications", rightIcon: nil)
         tableViewSetup()
     }
     

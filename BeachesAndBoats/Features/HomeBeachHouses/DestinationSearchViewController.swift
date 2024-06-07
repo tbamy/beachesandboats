@@ -2,7 +2,7 @@
 //  DestinationSearchViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 01/06/2024.
+//  Created by Paul Orimogunje on 01/06/2024.
 //
 
 import UIKit

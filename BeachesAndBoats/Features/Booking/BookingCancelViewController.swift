@@ -2,7 +2,7 @@
 //  BookingCancelViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 24/05/2024.
+//  Created by Paul Orimogunje on 24/05/2024.
 //
 
 import UIKit

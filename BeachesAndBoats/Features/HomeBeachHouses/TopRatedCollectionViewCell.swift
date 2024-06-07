@@ -2,10 +2,14 @@
 //  TopRatedCollectionViewCell.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 29/05/2024.
+//  Created by Paul Orimogunje on 29/05/2024.
 //
 
 import UIKit
+
+protocol TopRatedCollectionViewCellDelegate: AnyObject {
+    func didTapImage(in cell: TopRatedCollectionViewCell)
+}
 
 class TopRatedCollectionViewCell: UICollectionViewCell {
     
@@ -18,9 +22,18 @@ class TopRatedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var likeImg: UIImageView!
     
+    weak var delegate: TopRatedCollectionViewCellDelegate?
+    
+    var isLiked = false {
+        didSet {
+            likeImg.image = isLiked ? UIImage(named: "like") : UIImage(named: "unlike")
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         bottomView.layer.cornerRadius = 10
+        gestureReconizers()
     }
     
     func setup(with data: TopRatedProperties) {
@@ -29,6 +42,17 @@ class TopRatedCollectionViewCell: UICollectionViewCell {
         location.text = data.location
         date.text = data.date
         rating.text = data.rating
+        likeImg.image = UIImage(named: data.likeImg)
+    }
+    
+    func gestureReconizers() {
+        let saved = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
+        likeImg.isUserInteractionEnabled = true
+        likeImg.addGestureRecognizer(saved)
+    }
+    
+    @objc func likeTapped() {
+        delegate?.didTapImage(in: self)
     }
 
 }
@@ -36,11 +60,11 @@ class TopRatedCollectionViewCell: UICollectionViewCell {
 struct TopRatedModel {
     func populateData() -> [TopRatedProperties] {
         [
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches", likeImg: "unlike"),
+            TopRatedProperties(name: "Abule-Egba Luxury Villa", location: "Egba, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches", likeImg: "unlike"),
+            TopRatedProperties(name: "Oshodi Luxury Villa", location: "Oshodi, Ibadan Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches", likeImg: "unlike"),
+            TopRatedProperties(name: "UnderBridge Luxury Hostel", location: "Abe brigde, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "beaches", likeImg: "unlike"),
         ]
     }
 }
@@ -48,11 +72,11 @@ struct TopRatedModel {
 struct BoatsTopRatedModel {
     func populateData() -> [TopRatedProperties] {
         [
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Orile Luxury Villa", location: "Orile, Ibadan Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Ikorodu Luxury Hostel", location: "Ikorodu, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
         ]
     }
 }
@@ -60,11 +84,11 @@ struct BoatsTopRatedModel {
 struct BoatBookNowModel {
     func populateData() -> [TopRatedProperties] {
         [
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
-            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
+            TopRatedProperties(name: "Marina Luxury Villa", location: "Ikoyi, Lagos Nigeria", date: "Mar 19-24", price: "240,000/ night", rating: "5.0", img: "ship", likeImg: "unlike"),
         ]
     }
 }
@@ -77,6 +101,7 @@ struct TopRatedProperties {
     let price: String?
     let rating: String?
     let img: String?
+    let likeImg: String
 }
 
 

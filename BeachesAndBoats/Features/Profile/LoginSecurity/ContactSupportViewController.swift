@@ -17,7 +17,8 @@ class ContactSupportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Contact customer support", rightIcon: nil)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Contact customer support", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Contact customer support", rightIcon: nil)
         setup()
     }
     

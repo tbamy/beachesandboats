@@ -21,7 +21,9 @@ class LoginSecurityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Login and Security", rightIcon: nil)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Login and Security", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+        
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Login and Security", rightIcon: nil)
         setup()
         
     }

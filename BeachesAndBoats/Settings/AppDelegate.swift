@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        coordinator?.gotoBooking()
 //        coordinator?.gotoBookingDetails()
         coordinator?.gotoHomePage()
+//        coordinator?.gotoBoatDetails()
+//        coordinator?.gotoConfirmBooking()
         
         
         window = AppWindow(frame: UIScreen.main.bounds)

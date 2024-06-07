@@ -37,22 +37,29 @@ class BookingDetailsViewController: UIViewController {
     @IBOutlet weak var viewScrollHeightConstraint: NSLayoutConstraint!
  
     var getData: BookingProperties?
+    var getTopRatedData: TopRatedProperties?
     var utilitiesCoordinator: [UtilitiesProperties] = UtilitiesModel().populateData()
     var coordinator: AppCoordinator?
     var pastBooking: Bool?
     var upcomingBooking: Bool?
+    var continueBooking: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         viewSetup()
         whatToShow()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
     
     func whatToShow() {
         pastBookingStack.isHidden = pastBooking ?? false
         if pastBookingStack.isHidden == true {
+//            bookAgainBtn.setTitle(continueBooking, for: .normal)
             pastBookingView.isHidden = true
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
@@ -63,9 +70,10 @@ class BookingDetailsViewController: UIViewController {
     }
     
     func viewSetup() {
-        image.image = UIImage(named: getData?.image ?? "empty")
-        villaName.text = getData?.name
-        locationLabel.text = getData?.address
+        //Getting details for past booking selected
+        image.image = UIImage(named: (getData?.image ?? getTopRatedData?.img) ?? "empty")
+        villaName.text = getData?.name ?? getTopRatedData?.name
+        locationLabel.text = getData?.address ?? getTopRatedData?.location
         
         let back = UITapGestureRecognizer(target: self, action: #selector(backClicked))
         backButton.isUserInteractionEnabled = true
@@ -97,6 +105,8 @@ class BookingDetailsViewController: UIViewController {
         groundRulesView.modalPresentationStyle = .overCurrentContext
         groundRulesView.modalTransitionStyle = .coverVertical
         present(groundRulesView, animated: true)
+        groundRulesView.delegate = self
+
     }
     
     @IBAction func cancelBookingTapped(_ sender: Any) {
@@ -146,6 +156,14 @@ extension BookingDetailsViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0
         )
     }
+}
+
+extension BookingDetailsViewController: GroundRulesDelegate {
+    func groundRulesButtonPressed() {
+        coordinator?.gotoConfirmBooking()
+    }
+    
+    
 }
 
 

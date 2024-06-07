@@ -2,7 +2,7 @@
 //  ReviewViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 23/05/2024.
+//  Created by Paul Orimogunje on 23/05/2024.
 //
 
 import UIKit

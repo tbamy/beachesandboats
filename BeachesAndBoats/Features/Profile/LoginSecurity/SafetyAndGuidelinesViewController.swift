@@ -15,7 +15,9 @@ class SafetyAndGuidelinesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Safety and Guidelines", rightIcon: nil)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Safety and Guidelines", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+        
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Safety and Guidelines", rightIcon: nil)
         setup()
     }
     

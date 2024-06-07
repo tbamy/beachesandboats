@@ -2,7 +2,7 @@
 //  subCategoryCollectionViewCell.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 27/05/2024.
+//  Created by Paul Orimogunje on 27/05/2024.
 //
 
 import UIKit

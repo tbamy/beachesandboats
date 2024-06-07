@@ -2,7 +2,7 @@
 //  UtilitiesCollectionViewCell.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 22/05/2024.
+//  Created by Paul Orimogunje on 22/05/2024.
 //
 
 import UIKit

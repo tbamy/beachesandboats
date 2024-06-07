@@ -21,7 +21,10 @@ class BookingViewController: UIViewController {
         ButtonBottomBorder.shared.addBottomBorder(to: upcomingBookingBtn)
         upcomingBookingBtn.tintColor = .black
         pastBookingBtn.tintColor = .lightGray
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking", rightIcon: nil)
+        
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+        
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking", rightIcon: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +47,9 @@ class BookingViewController: UIViewController {
         pastBookingBtn.tintColor = .lightGray
         let indexPath = IndexPath(item: 0, section: 0)
         bookingCategories.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking", rightIcon: nil)
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
+        
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking", rightIcon: nil)
     }
     
     
@@ -56,10 +61,21 @@ class BookingViewController: UIViewController {
         let indexPath = IndexPath(item: 1, section: 0)
         bookingCategories.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
-        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking") { button in
-            button.setImage(UIImage(named: "sort")?.withRenderingMode(.alwaysOriginal), for: .normal)
-            button.addTarget(self, action: #selector(self.sortTapped), for: .touchUpInside)
-        }
+        NavigationUtility.shared.setupNavigation(
+            for: self,
+            backIcon: nil,
+            navigationTitle: "Booking",
+            navigationSubtitle: nil,
+            rightIcon: { button in
+                button.setImage(UIImage(named: "sort")?.withRenderingMode(.alwaysOriginal), for: .normal)
+                button.addTarget(self, action: #selector(self.sortTapped), for: .touchUpInside)
+            },
+            secondRightIcon: nil
+        )
+//        NavigationUtility.shared.setupNavigation(for: self, backIcon: nil, navigationTitle: "Booking") { button in
+//            button.setImage(UIImage(named: "sort")?.withRenderingMode(.alwaysOriginal), for: .normal)
+//            button.addTarget(self, action: #selector(self.sortTapped), for: .touchUpInside)
+//        }
     }
     
     @objc func sortTapped() {
@@ -110,7 +126,7 @@ extension BookingViewController: PastBookingItemDelegate {
 extension BookingViewController: ItemTappedDelegate {
     func cellTapped(inCell: UpcomingBookingCollectionViewCell, data: BookingProperties) {
         debugPrint("Working?")
-        let bookDetailsView = BookingDetailsViewController()
+//        let bookDetailsView = BookingDetailsViewController()
         coordinator?.gotoBookingDetails(data: data)
         
 //        let bookingDetails = BookingDetailsViewController()
