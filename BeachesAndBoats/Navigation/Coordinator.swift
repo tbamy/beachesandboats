@@ -16,7 +16,7 @@ class Coordinator {
     // MARK: - Properties
     
     weak var delegate: CoordinatorDelegate?
-    private var childCoordinator: Coordinator?
+//    private var modalCoordinator: ModalCoordinator?
     private let navigationController: UINavigationController?
     private let completion: (() -> Void)?
     
@@ -33,9 +33,10 @@ class Coordinator {
         // Abstract method to be overridden by subclasses
     }
     
-    func start(childCoordinator: Coordinator) {
-        self.childCoordinator = childCoordinator
-        childCoordinator.start()
+    let modalCoordinator = ModalCoordinator()
+    
+    func startModalCoordinator() {
+        modalCoordinator.start()
     }
     
     func finishWorkflow() {
