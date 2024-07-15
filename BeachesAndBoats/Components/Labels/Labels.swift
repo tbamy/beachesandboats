@@ -8,11 +8,11 @@
 import UIKit
 
 public enum Fonts: String {
-    case Bold = "Inter-Bold"
-    case Light = "Inter-Light"
-    case Medium = "Inter-Medium"
-    case Regular = "Inter-Regular"
-    case SemiBold = "Inter-SemiBold"
+    case Bold = "Montserrat-Bold"
+    case Light = "Montserrat-Light"
+    case Medium = "Montserrat-Medium"
+    case Regular = "Montserrat-Regular"
+    case SemiBold = "Montserrat-SemiBold"
     
     public static func getFont(name: Fonts, _ size: CGFloat ) -> UIFont {
         UIFont(name: name.rawValue, size: size) ?? UIFont()
@@ -196,7 +196,7 @@ public enum Fonts: String {
     }
 
     func setup(_ size: CGFloat = 13) {
-        font = Fonts.getFont(name: .Regular, size)
+//        font = Fonts.getFont(name: .Regular, size)
     }
 }
 

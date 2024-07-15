@@ -29,4 +29,10 @@ final class AppCoordinator: Coordinator{
         vc.coordinator = self
         push(viewController: vc)
     }
+    
+    func gotoSignup(){
+        let vc: SignupView = .fromNib()
+        vc.coordinator = self
+        push(viewController: vc)
+    }
 }

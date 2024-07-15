@@ -25,6 +25,10 @@ enum Assets: String {
     case payment = "uil_money-bill"
     case backButton = "backButton"
     case error_icon = "error_icon"
+    case dropdownIcon = "dropdown_icon"
+    case NGnum = "234"
+    case uncheckIcon = "uncheck_icon"
+    case checkIcon = "check_icon"
 
     
     

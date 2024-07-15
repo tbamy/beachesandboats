@@ -23,22 +23,22 @@ import UIKit
     }
     
     func setPasswordImage(for state: Bool) {
-        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 12))
-//        let imageView = UIImageView(frame: CGRect(x: -10, y: -5, width: 24, height: 24))
-//        imageView.tintColor = .alatRed
-//        imageView.image = state ? AlatAssets.eyeOn.image : AlatAssets.eyeOff.image
-//        imageView.tintColor = .background
-//        imageView.contentMode = .scaleAspectFit
-//        iconContainer.addSubview(imageView)
-        let visibility = UILabel(frame: CGRect(x: -10, y: -5, width: 24, height: 24))
+        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 12))
+        
+        let visibility = UILabel(frame: CGRect(x: -10, y: -5, width: 35, height: 24))
         visibility.text = state ? "Show" : "Hide"
         visibility.tintColor = .background
+        visibility.font = UIFont.systemFont(ofSize: 10)
+
         iconContainer.addSubview(visibility)
-        textField.rightViewMode = UITextField.ViewMode.always
+        
+        textField.rightViewMode = .always
         textField.rightView = iconContainer
         textField.isSecureTextEntry = state
+        
         textField.rightView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleEyeTap(_:))))
     }
+
     
     @objc func handleEyeTap(_ sender: UITapGestureRecognizer) {
         setPasswordImage(for: textField.isSecureTextEntry ? false : true)

@@ -23,10 +23,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7vG-I3-pH0">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7vG-I3-pH0">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="agz-C1-s6r">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lit-b6-Qr4">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -34,7 +34,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="c1D-c7-YMs">
-                    <rect key="frame" x="20" y="786.33333333333337" width="353" height="25.666666666666629"/>
+                    <rect key="frame" x="20" y="766.33333333333337" width="353" height="25.666666666666629"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKa-fs-8xX">
                             <rect key="frame" x="0.0" y="0.0" width="28" height="25.666666666666668"/>
@@ -59,7 +59,7 @@
             <constraints>
                 <constraint firstItem="c1D-c7-YMs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3l7-j5-XIj"/>
                 <constraint firstAttribute="bottom" secondItem="7vG-I3-pH0" secondAttribute="bottom" id="9XW-Ah-paI"/>
-                <constraint firstAttribute="bottom" secondItem="c1D-c7-YMs" secondAttribute="bottom" constant="40" id="FWy-uA-Znv"/>
+                <constraint firstAttribute="bottom" secondItem="c1D-c7-YMs" secondAttribute="bottom" constant="60" id="FWy-uA-Znv"/>
                 <constraint firstItem="7vG-I3-pH0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="R5i-69-KV2"/>
                 <constraint firstItem="7vG-I3-pH0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fEe-nR-YMw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7vG-I3-pH0" secondAttribute="trailing" id="pJo-ze-6fb"/>

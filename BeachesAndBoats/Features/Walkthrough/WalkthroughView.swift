@@ -8,7 +8,7 @@
 import UIKit
 
 class WalkthroughView: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var skipBtn: UILabel!
@@ -18,15 +18,14 @@ class WalkthroughView: UIViewController {
     var slides: [WalkthroughModel] = []
     
     var currentPage = 0
-    
     var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
-    
         
+        // Setup slides
         slides = [
             .init(image: "slide1", title: "Unwind by the Waves, Your Vacation Starts Here", content: "Explore thousands of beach houses for you to unwind."),
             .init(image: "slide2", title: "Boats On-Demand, Dreams Onboard.", content: "Rent different types of boats at affordable prices and go on boat cruise with friends and family."),
@@ -36,8 +35,10 @@ class WalkthroughView: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        // Register cell
         collectionView.register(UINib(nibName: "WalkthroughCell", bundle: nil), forCellWithReuseIdentifier: "WalkthroughCell")
         
+        // Setup tap gestures
         let skipTapGesture = UITapGestureRecognizer(target: self, action: #selector(skipButtonTapped))
         skipBtn.isUserInteractionEnabled = true
         skipBtn.addGestureRecognizer(skipTapGesture)
@@ -45,12 +46,21 @@ class WalkthroughView: UIViewController {
         let nextTapGesture = UITapGestureRecognizer(target: self, action: #selector(nextButtonTapped))
         nextBtn.isUserInteractionEnabled = true
         nextBtn.addGestureRecognizer(nextTapGesture)
-                
         
+        // Setup page control
+        pageControl.numberOfPages = slides.count
+        pageControl.currentPage = 0
+        updateButtonVisibility()
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(nextButtonTapped), userInfo: nil, repeats: true)
+//    }
+    
     @objc func skipButtonTapped() {
-        coordinator?.gotoLogin()
+        coordinator?.gotoSignup()
     }
     
     @objc func nextButtonTapped() {
@@ -58,67 +68,64 @@ class WalkthroughView: UIViewController {
     }
     
     func scrollToNextCell() {
-        currentPage += 1
-        if currentPage >= slides.count {
-            currentPage = slides.count - 1
+            if currentPage < slides.count - 1 {
+                currentPage += 1
+                let indexPath = IndexPath(item: currentPage, section: 0)
+                print("Scrolling to page: \(currentPage), IndexPath: \(indexPath)")
+                self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                self.pageControl.currentPage = self.currentPage
+                self.updateButtonVisibility()
+                
+            } else {
+                coordinator?.gotoSignup()
+            }
         }
-        let index = IndexPath(item: currentPage, section: 0)
-        collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-        updateButtonVisibility()
-    }
     
     func updateButtonVisibility() {
         if currentPage == slides.count - 1 {
-            skipBtn.isHidden = true
-            coordinator?.gotoLogin()
+            nextBtn.text = "Finish"
         } else {
-            skipBtn.isHidden = false
-//            nextBtn.text = "Next"
+            nextBtn.text = "Next"
         }
     }
-    
-
-    
-    @objc func autoScrollAction() {
-        
-        currentPage += 1
-        if currentPage > 2 {
-            currentPage = 0
-        }
-        let index = IndexPath(item: currentPage, section: 0)
-        collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-        
-    }
-
 }
 
-extension WalkthroughView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension WalkthroughView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        slides.count
+        return slides.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalkthroughCell", for: indexPath) as! WalkthroughCell
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalkthroughCell", for: indexPath) as? WalkthroughCell else {
+            return UICollectionViewCell()
+        }
         cell.setUp(data: slides[indexPath.item])
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        // Return size matching the collection view’s bounds to ensure full-screen cells
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let width = scrollView.frame.width
-        currentPage = Int(scrollView.contentOffset.x / width)
+        let pageWidth = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / pageWidth)
         pageControl.currentPage = currentPage
+        updateButtonVisibility()
     }
-    
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / pageWidth)
+        pageControl.currentPage = currentPage
+        updateButtonVisibility()
+    }
+
 }
 
-
-struct WalkthroughModel{
+// Struct for walkthrough data
+struct WalkthroughModel {
     let image: String
     let title: String
     let content: String

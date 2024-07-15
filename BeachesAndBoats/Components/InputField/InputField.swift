@@ -139,7 +139,7 @@ public struct PickerItem {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 8
         textField.textColor = enabled ? .titleGrey : .background
-        textField.font = Fonts.getFont(name: .Regular, 14)
+//        textField.font = Fonts.getFont(name: .Regular, 14)
         textField.attributedPlaceholder = NSAttributedString(
             string: placeHolder,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.background]
