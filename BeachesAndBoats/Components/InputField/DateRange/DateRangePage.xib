@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DateRangePage" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="calendarViewContainer" destination="ZTT-lo-zsP" id="PbJ-ag-Hip"/>
+                <outlet property="clearDateBtn" destination="49g-x0-H6e" id="s9m-1l-S6G"/>
+                <outlet property="doneBtn" destination="b7x-xp-iZw" id="qEJ-C0-G19"/>
+                <outlet property="selectedDate" destination="8ic-dc-WJb" id="hoe-f8-2l9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When are you traveling?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THh-hf-gZl">
+                    <rect key="frame" x="20" y="126" width="353" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTT-lo-zsP">
+                    <rect key="frame" x="20" y="172" width="353" height="498"/>
+                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7x-xp-iZw" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="732" width="353" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="Yud-gx-qBE"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue, Mar 19 - Sun, Mar 24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ic-dc-WJb">
+                    <rect key="frame" x="20" y="710" width="353" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear dates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49g-x0-H6e">
+                    <rect key="frame" x="299" y="79" width="74" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" name="B&amp;B"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Qpd-Mr-Pb8">
+                    <rect key="frame" x="20" y="51" width="20" height="20"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="7EK-PI-0A9"/>
+                        <constraint firstAttribute="width" constant="20" id="BrN-fw-8dx"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="THh-hf-gZl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="2LX-LW-o44"/>
+                <constraint firstItem="ZTT-lo-zsP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="4Jp-Rg-wVb"/>
+                <constraint firstItem="ZTT-lo-zsP" firstAttribute="top" secondItem="THh-hf-gZl" secondAttribute="bottom" constant="25" id="4Ng-p7-QjG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8ic-dc-WJb" secondAttribute="trailing" constant="20" id="7vf-vS-stN"/>
+                <constraint firstItem="b7x-xp-iZw" firstAttribute="top" secondItem="8ic-dc-WJb" secondAttribute="bottom" constant="5" id="E68-K3-Hie"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZTT-lo-zsP" secondAttribute="trailing" constant="20" id="PSn-XZ-5Nx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="Qpd-Mr-Pb8" secondAttribute="top" constant="8" id="SP3-J5-JHC"/>
+                <constraint firstItem="8ic-dc-WJb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="VDo-f7-b2V"/>
+                <constraint firstItem="8ic-dc-WJb" firstAttribute="top" secondItem="ZTT-lo-zsP" secondAttribute="bottom" constant="40" id="WPh-f5-yGI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="49g-x0-H6e" secondAttribute="trailing" constant="20" id="bK8-dI-XyJ"/>
+                <constraint firstItem="49g-x0-H6e" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="cSz-cv-hQg"/>
+                <constraint firstItem="Qpd-Mr-Pb8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="f9Z-SN-2Ej"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="THh-hf-gZl" secondAttribute="trailing" constant="20" id="jBw-pQ-CPL"/>
+                <constraint firstItem="THh-hf-gZl" firstAttribute="top" secondItem="49g-x0-H6e" secondAttribute="bottom" constant="30" id="rYo-ZB-JA6"/>
+                <constraint firstItem="b7x-xp-iZw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="sgk-eG-lTY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="b7x-xp-iZw" secondAttribute="bottom" constant="30" id="tpO-hb-d51"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="b7x-xp-iZw" secondAttribute="trailing" constant="20" id="yW3-9b-bKe"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="136.64122137404578" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="b7x-xp-iZw">
+            <size key="intrinsicContentSize" width="64.333333333333329" height="34.333333333333336"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="close_icon" width="24" height="24"/>
+        <namedColor name="B&amp;B">
+            <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

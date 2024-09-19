@@ -60,7 +60,7 @@ import UIKit
     
     func setupPad() {
         layer.cornerRadius = 4
-        font = Fonts.getFont(name: .Medium, 12)
+//        font = Fonts.getFont(name: .Medium, 12)
         textColor = color
         backgroundColor = background
         clipsToBounds = true
@@ -70,7 +70,7 @@ import UIKit
             switch colorType {
             case .blue:
                 textColor = .beachBlue
-                backgroundColor = .alatRedLight
+                backgroundColor = .background
             case .grey:
                 textColor = .textGrey
                 backgroundColor = .textGrey.lighter(by: 55)

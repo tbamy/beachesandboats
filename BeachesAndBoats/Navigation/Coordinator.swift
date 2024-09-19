@@ -33,12 +33,16 @@ class Coordinator {
         // Abstract method to be overridden by subclasses
     }
     
-    let modalCoordinator = ModalCoordinator()
-    
-    func startModalCoordinator() {
-        modalCoordinator.start()
-    }
-    
+//    let modalCoordinator = ModalCoordinator()
+//    
+//    func showConfirmAccountModal() {
+//        modalCoordinator.start()
+//    }
+//    
+//    func showUserInfoModal(email: String, phone: String){
+//        modalCoordinator.presentUserInformationModal(email: email, phone: phone)
+//    }
+//    
     func finishWorkflow() {
         if let parentDelegate = delegate {
             parentDelegate.didFinishWorkflow()

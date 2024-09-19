@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class LoginView: BaseViewControllerPlain {
 
@@ -13,14 +14,62 @@ class LoginView: BaseViewControllerPlain {
     var coordinator: AppCoordinator?
     @IBOutlet weak var password: PasswordField!
     @IBOutlet weak var emailAddress: InputField!
+    @IBOutlet weak var signUpBtn: UILabel!
+    
+    var vm = LoginViewModel()
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        
+        let signUpGesture = UITapGestureRecognizer(target: self, action: #selector(gotoSignUp))
+        signUpBtn.isUserInteractionEnabled = true
+        signUpBtn.addGestureRecognizer(signUpGesture)
+        
+        bindNetwork()
+    }
+    
+    @objc func gotoSignUp(){
+        coordinator?.gotoSignup()
     }
 
     @IBAction func continueTapped(_ sender: Any) {
-//        coordinator.goto
+        if validateFields(){
+            LoadingModal.show()
+            let request = LoginRequest(email: emailAddress.text, password: password.text)
+            vm.login(request: request)
+        }
+        
+    }
+    
+    func bindNetwork(){
+        vm.output.subscribe(onNext: { [weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .loginSuccess(let response):
+                UserSession.shared.userDetails = response.user
+                self?.coordinator?.gotoHomePage()
+            case .loginError(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+            
+        }).disposed(by: disposeBag)
+    }
+    
+    func validateFields() -> Bool{
+        if emailAddress.text.isEmpty {
+            emailAddress.error = "Please enter Email Address"
+            return false
+        }
+        else if password.text.isEmpty {
+            password.error = "Please enter your Password"
+            return false
+        }
+        
+        return true
     }
     
 }

@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmAccountModal" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="checkboxBtn" destination="smq-0D-hwl" id="Bqk-wL-Rjd"/>
                 <outlet property="close" destination="Pch-rd-su1" id="yec-0B-K6K"/>
                 <outlet property="otpField" destination="RmN-UX-Wpb" id="1BP-yo-KhF"/>
             </connections>
@@ -45,6 +46,9 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="6-digit code"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="numberOfCharacters">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uhr-GR-ECH">
@@ -131,7 +135,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

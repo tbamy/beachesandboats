@@ -24,7 +24,7 @@ import UIKit
     
     func setPhoneImage(for state: Bool) {
         let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 110, height: 30))
-        let imageView = UIImageView(frame: CGRect(x: 10, y: 5, width: 107, height: 27))
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 5, width: 90, height: 25))
         imageView.image = Assets.NGnum.image
         imageView.tintColor = .background
         imageView.contentMode = .scaleAspectFit

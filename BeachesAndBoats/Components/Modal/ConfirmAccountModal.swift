@@ -11,12 +11,19 @@ public protocol OTPDelegate {
     func userOTP(otp: String?)
 }
 
+public protocol ModalTransitionDelegate: AnyObject {
+    func presentUserInformationModal(userInfo: SignUpRequest)
+    func presentCreatePasswordModal()
+    func presentConfirmAccountModal()
+}
+
 public class ConfirmAccountModal: BaseXib {
     
     let nibName = "ConfirmAccountModal"
     
     @IBOutlet weak var otpField: InputField!
     @IBOutlet weak var close: UIImageView!
+    @IBOutlet weak var checkboxBtn: CheckboxButton!
     
     var otpDelegate: OTPDelegate?
     weak var transitionDelegate: ModalTransitionDelegate?
@@ -36,43 +43,67 @@ public class ConfirmAccountModal: BaseXib {
     }
     
     @IBAction func proceedTapped(_ sender: Any) {
-        dismissAndPresentNextModal()
+        if validateOtpField(){
+            otpDelegate?.userOTP(otp: otpField.text)
+        }
+        
     }
     
     @objc func closeTapped(_ sender: Any) {
-        dismiss()
+        ConfirmAccountModal.dismiss()
     }
     
-    private func dismissAndPresentNextModal() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-            self?.frame.origin.y = Helpers.screenHeight
-            self?.layoutIfNeeded()
-        }, completion: { [weak self] _ in
-            self?.superview?.removeFromSuperview()
-            self?.transitionDelegate?.presentUserInformationModal()
-        })
+    func validateOtpField() -> Bool {
+        if otpField.text.isEmpty {
+            otpField.error = "Please enter PIN"
+            return false
+        }
+        else if otpField.text.count < otpField.numberOfCharacters {
+            otpField.error = "Please enter a valid PIN"
+            return false
+        }
+        
+        return true
     }
+
     
-    func dismiss() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-            self?.frame.origin.y = Helpers.screenHeight
-            self?.layoutIfNeeded()
-        }, completion: { [weak self] _ in
-            self?.superview?.removeFromSuperview()
-        })
+//    func dismiss() {
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+//            self?.frame.origin.y = Helpers.screenHeight
+//            self?.layoutIfNeeded()
+//        }, completion: { [weak self] _ in
+//            self?.superview?.removeFromSuperview()
+//        })
+//        
+//    }
+    
+    public static func dismiss() {
+        if let subviews = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.subviews {
+            for view in subviews {
+                for v in view.subviews {
+                    if v is ConfirmAccountModal {
+                        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                            v.frame.origin.y = Helpers.screenHeight
+                            view.layoutIfNeeded()
+                        }, completion: { _ in
+                            view.removeFromSuperview()
+                        })
+                    }
+                }
+            }
+        }
     }
+        
+
             
     
     func setup() {
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleDismissal))
-        swipeDown.direction = .down
-        addGestureRecognizer(swipeDown)
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
     }
     
     @objc func handleDismissal() {
-        dismiss()
-    }
+        ConfirmAccountModal.dismiss()
+    } 
     
     public static func startConfirmModal(on view: UIView, delegate otpDel: OTPDelegate, transitionDelegate transDel: ModalTransitionDelegate) {
         let backDrop = UIView(frame: Helpers.screen)
@@ -91,7 +122,7 @@ public class ConfirmAccountModal: BaseXib {
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
             modal.frame.origin.y = Helpers.screenHeight - height
             backDrop.layoutIfNeeded()
         }, completion: nil)
