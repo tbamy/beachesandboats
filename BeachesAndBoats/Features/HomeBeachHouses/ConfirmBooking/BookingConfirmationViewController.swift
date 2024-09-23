@@ -8,22 +8,19 @@
 import UIKit
 
 class BookingConfirmationViewController: UIViewController {
+    
+    var coordinator: AppCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        NavigationUtility.shared.setupNavigation(for: self, backIcon: UIImage(named: "backButton"), navigationTitle: "Confirm Booking", navigationSubtitle: nil, rightIcon: nil, secondRightIcon: nil)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func makePaymentTapped(_ sender: Any) {
+        coordinator?.gotoPayments()
     }
-    */
+    
+
+  
 
 }

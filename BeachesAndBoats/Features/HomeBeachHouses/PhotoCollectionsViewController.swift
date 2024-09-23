@@ -8,22 +8,26 @@
 import UIKit
 
 class PhotoCollectionsViewController: UIViewController {
+    
+    var coordinator: AppCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        NavigationUtility.shared.setupNavigation(
+            for: self,
+            backIcon: UIImage(named: "backButton"),
+            navigationTitle: "Photos",
+            navigationSubtitle: nil,
+            rightIcon: { button in
+                button.setImage(UIImage(named: "sort")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            },
+            secondRightIcon: { button in
+                button.setImage(UIImage(named: "sort")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            })
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

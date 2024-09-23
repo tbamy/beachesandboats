@@ -23,6 +23,12 @@
 		A611C6862C132DC400B431FF /* ConfirmBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C6842C132DC400B431FF /* ConfirmBookingTableViewCell.swift */; };
 		A611C6872C132DC400B431FF /* ConfirmBookingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A611C6852C132DC400B431FF /* ConfirmBookingTableViewCell.xib */; };
 		A611C6892C1346EC00B431FF /* ConfirmBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C6882C1346EC00B431FF /* ConfirmBookingModel.swift */; };
+		A611C6902C1619DA00B431FF /* SelectQuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C68E2C1619DA00B431FF /* SelectQuantityViewController.swift */; };
+		A611C6912C1619DA00B431FF /* SelectQuantityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A611C68F2C1619DA00B431FF /* SelectQuantityViewController.xib */; };
+		A611C6952C16354E00B431FF /* BookingConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C6932C16354E00B431FF /* BookingConfirmationViewController.swift */; };
+		A611C6962C16354E00B431FF /* BookingConfirmationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A611C6942C16354E00B431FF /* BookingConfirmationViewController.xib */; };
+		A611C6992C1718B400B431FF /* PhotoCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C6972C1718B400B431FF /* PhotoCollectionsViewController.swift */; };
+		A611C69A2C1718B400B431FF /* PhotoCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A611C6982C1718B400B431FF /* PhotoCollectionsViewController.xib */; };
 		A61C23572BF8B704007F25CB /* UpcomingBookingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C23552BF8B704007F25CB /* UpcomingBookingCollectionViewCell.swift */; };
 		A61C23582BF8B704007F25CB /* UpcomingBookingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61C23562BF8B704007F25CB /* UpcomingBookingCollectionViewCell.xib */; };
 		A61C235B2BF8B716007F25CB /* PastBookingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C23592BF8B716007F25CB /* PastBookingCollectionViewCell.swift */; };
@@ -142,6 +148,12 @@
 		A611C6842C132DC400B431FF /* ConfirmBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookingTableViewCell.swift; sourceTree = "<group>"; };
 		A611C6852C132DC400B431FF /* ConfirmBookingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmBookingTableViewCell.xib; sourceTree = "<group>"; };
 		A611C6882C1346EC00B431FF /* ConfirmBookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookingModel.swift; sourceTree = "<group>"; };
+		A611C68E2C1619DA00B431FF /* SelectQuantityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectQuantityViewController.swift; sourceTree = "<group>"; };
+		A611C68F2C1619DA00B431FF /* SelectQuantityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectQuantityViewController.xib; sourceTree = "<group>"; };
+		A611C6932C16354E00B431FF /* BookingConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmationViewController.swift; sourceTree = "<group>"; };
+		A611C6942C16354E00B431FF /* BookingConfirmationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingConfirmationViewController.xib; sourceTree = "<group>"; };
+		A611C6972C1718B400B431FF /* PhotoCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionsViewController.swift; sourceTree = "<group>"; };
+		A611C6982C1718B400B431FF /* PhotoCollectionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionsViewController.xib; sourceTree = "<group>"; };
 		A61C23552BF8B704007F25CB /* UpcomingBookingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBookingCollectionViewCell.swift; sourceTree = "<group>"; };
 		A61C23562BF8B704007F25CB /* UpcomingBookingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingBookingCollectionViewCell.xib; sourceTree = "<group>"; };
 		A61C23592BF8B716007F25CB /* PastBookingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastBookingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -305,6 +317,10 @@
 				A611C6842C132DC400B431FF /* ConfirmBookingTableViewCell.swift */,
 				A611C6852C132DC400B431FF /* ConfirmBookingTableViewCell.xib */,
 				A611C6882C1346EC00B431FF /* ConfirmBookingModel.swift */,
+				A611C68E2C1619DA00B431FF /* SelectQuantityViewController.swift */,
+				A611C68F2C1619DA00B431FF /* SelectQuantityViewController.xib */,
+				A611C6932C16354E00B431FF /* BookingConfirmationViewController.swift */,
+				A611C6942C16354E00B431FF /* BookingConfirmationViewController.xib */,
 			);
 			path = ConfirmBooking;
 			sourceTree = "<group>";
@@ -555,6 +571,8 @@
 				A6EDE44B2C0F2C26000DA3C7 /* FilterViewController.xib */,
 				A611C67B2C123A9600B431FF /* BoatDetailsViewController.swift */,
 				A611C67C2C123A9600B431FF /* BoatDetailsViewController.xib */,
+				A611C6972C1718B400B431FF /* PhotoCollectionsViewController.swift */,
+				A611C6982C1718B400B431FF /* PhotoCollectionsViewController.xib */,
 			);
 			path = HomeBeachHouses;
 			sourceTree = "<group>";
@@ -619,6 +637,7 @@
 			files = (
 				A61C23582BF8B704007F25CB /* UpcomingBookingCollectionViewCell.xib in Resources */,
 				A637E2D82BF3893900EAF938 /* PhoneNumberBottomModal.xib in Resources */,
+				A611C6912C1619DA00B431FF /* SelectQuantityViewController.xib in Resources */,
 				A682D4992BF2A7C800926A0E /* LoginSecurityViewController.xib in Resources */,
 				A6451E722C047893006E985E /* subCategoryCollectionViewCell.xib in Resources */,
 				A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */,
@@ -635,6 +654,7 @@
 				A637E2E42BF54D3800EAF938 /* PopUpModal.xib in Resources */,
 				A61C235C2BF8B716007F25CB /* PastBookingCollectionViewCell.xib in Resources */,
 				A611C67E2C123A9600B431FF /* BoatDetailsViewController.xib in Resources */,
+				A611C69A2C1718B400B431FF /* PhotoCollectionsViewController.xib in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
 				A61C23622BF91BC3007F25CB /* SortViewController.xib in Resources */,
 				A67120AC2C07426200A41B9B /* TopRatedCollectionViewCell.xib in Resources */,
@@ -664,6 +684,7 @@
 				A68DF3342BF6A14B00C77268 /* CallViewController.xib in Resources */,
 				A636303A2BFB496200372E77 /* BookingDetailsViewController.xib in Resources */,
 				A682D4E82BF3715300926A0E /* DoubleAuthViewController.xib in Resources */,
+				A611C6962C16354E00B431FF /* BookingConfirmationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +701,7 @@
 				A61C235E2BF8FD10007F25CB /* ButtonBottomBorder.swift in Sources */,
 				A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */,
 				A611C67D2C123A9600B431FF /* BoatDetailsViewController.swift in Sources */,
+				A611C6952C16354E00B431FF /* BookingConfirmationViewController.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
 				A67120AB2C07426200A41B9B /* TopRatedCollectionViewCell.swift in Sources */,
 				A63357452BF0D281008AF034 /* Date.swift in Sources */,
@@ -692,6 +714,7 @@
 				A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */,
 				A603B5872C0BCAA0003BD6AC /* DestinationSearchViewController.swift in Sources */,
 				A68DF3382BF75C5A00C77268 /* BookingViewController.swift in Sources */,
+				A611C6992C1718B400B431FF /* PhotoCollectionsViewController.swift in Sources */,
 				A63357602BF129A6008AF034 /* LoginView.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
 				A6B4B09E2BFE3AA0005B5F2E /* UtilitiesCollectionViewCell.swift in Sources */,
@@ -713,6 +736,7 @@
 				A68DF33C2BF75F3C00C77268 /* BookingTableViewCell.swift in Sources */,
 				A630A1F02C011D6F0028E262 /* BookingCancelViewController.swift in Sources */,
 				A68DF32F2BF6A04300C77268 /* SafetyAndGuidelinesViewController.swift in Sources */,
+				A611C6902C1619DA00B431FF /* SelectQuantityViewController.swift in Sources */,
 				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
 				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
 				A630A1F42C0122D50028E262 /* GroundRulesViewController.swift in Sources */,

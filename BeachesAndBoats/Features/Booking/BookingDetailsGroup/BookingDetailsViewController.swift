@@ -43,12 +43,15 @@ class BookingDetailsViewController: UIViewController {
     var pastBooking: Bool?
     var upcomingBooking: Bool?
     var continueBooking: String?
+    var getLuxuryDetails: String?
+    var confirmBooking: Bool? = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         viewSetup()
         whatToShow()
+        //gestureRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,9 +83,20 @@ class BookingDetailsViewController: UIViewController {
         backButton.addGestureRecognizer(back)
     }
     
+//    func gestureRecognizer() {
+//        let imageTapped = UITapGestureRecognizer(target: self, action: #selector(confirmImageTapped))
+//        image.isUserInteractionEnabled = confirmBooking ?? false
+//        image.addGestureRecognizer(imageTapped)
+//    }
+    
     @objc func backClicked() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func confirmImageTapped() {
+        coordinator?.gotoPhotos()
+    }
+
     
     
     func setupCollectionView() {
@@ -104,9 +118,8 @@ class BookingDetailsViewController: UIViewController {
         let groundRulesView = GroundRulesViewController()
         groundRulesView.modalPresentationStyle = .overCurrentContext
         groundRulesView.modalTransitionStyle = .coverVertical
-        present(groundRulesView, animated: true)
         groundRulesView.delegate = self
-
+        present(groundRulesView, animated: true)
     }
     
     @IBAction func cancelBookingTapped(_ sender: Any) {
@@ -160,10 +173,17 @@ extension BookingDetailsViewController: UICollectionViewDelegateFlowLayout {
 
 extension BookingDetailsViewController: GroundRulesDelegate {
     func groundRulesButtonPressed() {
-        coordinator?.gotoConfirmBooking()
+        let Groundrules = GroundRulesViewController()
+        Groundrules.luxuryName = getLuxuryDetails
+        print("ground rules \(Groundrules.luxuryName)")
+        if let getLuxuryDetails = getLuxuryDetails{
+            coordinator?.gotoConfirmBooking(luxuryName: getLuxuryDetails)
+        } else {
+            coordinator?.gotoConfirmBooking(luxuryName: "")
+        }
     }
-    
-    
 }
+
+
 
 

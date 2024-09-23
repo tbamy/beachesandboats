@@ -2,28 +2,21 @@
 //  SelectQuantityViewController.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 09/06/2024.
+//  Created by Paul Orimogunje on 09/06/2024.
 //
 
 import UIKit
 
 class SelectQuantityViewController: UIViewController {
+    @IBOutlet weak var closeIcon: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = UIColor(red: 0.102, green: 0.102, blue: 0.102, alpha: 0.2).withAlphaComponent(0.2)
+        closeView(for: closeIcon)
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

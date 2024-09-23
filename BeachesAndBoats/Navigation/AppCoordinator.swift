@@ -120,6 +120,9 @@ final class AppCoordinator: Coordinator{
         vc.getTopRatedData = data
         vc.continueBooking = "Continue Booking"
         vc.upcomingBooking = true
+        vc.getLuxuryDetails = data.name
+        vc.confirmBooking = true
+        
         vc.navigationController?.setNavigationBarHidden(true, animated: true)
         push(viewController: vc)
     }
@@ -138,10 +141,23 @@ final class AppCoordinator: Coordinator{
         push(viewController: vc)
     }
 
-    func gotoConfirmBooking() {
+    func gotoConfirmBooking(luxuryName: String) {
         let vc: ConfirmBookingViewController = .fromNib()
         vc.coordinator = self
+        vc.getLuxuryName = luxuryName
         vc.navigationController?.setNavigationBarHidden(false, animated: false)
+        push(viewController: vc)
+    }
+    
+    func gotoBookingConfirmation() {
+        let vc: BookingConfirmationViewController = .fromNib()
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoPhotos() {
+        let vc: PhotoCollectionsViewController = .fromNib()
+        vc.coordinator = self
         push(viewController: vc)
     }
 }

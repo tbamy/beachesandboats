@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SelectButtonDelegate: AnyObject {
+    func onSelect()
+}
+
 class ConfirmBookingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var luxuryImage: UIImageView!
@@ -17,7 +21,9 @@ class ConfirmBookingTableViewCell: UITableViewCell {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var selectButton: UIButton!
-
+    
+    weak var delegate: SelectButtonDelegate?
+    var countOnSelect = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,5 +48,18 @@ class ConfirmBookingTableViewCell: UITableViewCell {
     }
 
   
+    @IBAction func selectButtonTapped(_ sender: Any) {
+        countOnSelect += 1
+        if countOnSelect == 1 {
+            selectButton?.setTitle("1 unit", for: .normal)
+            selectButton.titleLabel?.textAlignment = .center
+            selectButton?.tintColor = .systemBlue
+            selectButton?.backgroundColor = .systemTeal
+//            selectButton?.setImage(UIImage(systemName: "drop"), for: .normal)
+//            selectButton?.configuration?.imagePlacement = .
+//            selectButton?.configuration?.imagePadding = 100
+        }
+        delegate?.onSelect()
+    }
     
 }

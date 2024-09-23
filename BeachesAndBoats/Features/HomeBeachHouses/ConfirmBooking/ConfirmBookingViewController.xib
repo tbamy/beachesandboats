@@ -5,12 +5,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmBookingViewController" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="luxuryTable" destination="hUE-r6-ql3" id="Qo0-n2-w9n"/>
+                <outlet property="reserveView" destination="6Sm-r7-zZv" id="QqO-EJ-LAS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,21 +25,55 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" name="backgroundcolor"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Sm-r7-zZv">
+                    <rect key="frame" x="0.0" y="752" width="393" height="100"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5g-ec-OUv">
+                            <rect key="frame" x="20" y="30" width="353" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="2SD-Px-rid"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Button">
+                                <color key="baseBackgroundColor" name="B&amp;B"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="reserveButtonTapped:" destination="-1" eventType="touchUpInside" id="zHQ-YT-cgO"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="f5g-ec-OUv" firstAttribute="leading" secondItem="6Sm-r7-zZv" secondAttribute="leading" constant="20" id="16o-RH-VyF"/>
+                        <constraint firstAttribute="trailing" secondItem="f5g-ec-OUv" secondAttribute="trailing" constant="20" id="5HY-cK-FGR"/>
+                        <constraint firstAttribute="height" constant="100" id="a61-cL-tIB"/>
+                        <constraint firstItem="f5g-ec-OUv" firstAttribute="top" secondItem="6Sm-r7-zZv" secondAttribute="top" constant="30" id="rVV-nO-3tI"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="backgroundcolor"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="6Sm-r7-zZv" secondAttribute="bottom" id="24v-jn-CKn"/>
                 <constraint firstItem="hUE-r6-ql3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E4M-gG-XWW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6Sm-r7-zZv" secondAttribute="trailing" id="ZZe-Py-nJF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="hUE-r6-ql3" secondAttribute="bottom" id="fjt-5i-Mf8"/>
                 <constraint firstItem="hUE-r6-ql3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="nZi-OA-dma"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hUE-r6-ql3" secondAttribute="trailing" id="pQD-TJ-9AP"/>
+                <constraint firstItem="6Sm-r7-zZv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yDe-nv-8Jo"/>
             </constraints>
             <point key="canvasLocation" x="138" y="20"/>
         </view>
     </objects>
     <resources>
+        <namedColor name="B&amp;B">
+            <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="backgroundcolor">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

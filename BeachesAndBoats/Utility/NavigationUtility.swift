@@ -36,12 +36,57 @@ class NavigationUtility {
         
         
         viewController.navigationItem.rightBarButtonItems = [rightButtonItem, secondRightButtonItem]
-        //title navigation
-        let customFont = UIFont(name: "MontserratRoman-SemiBold", size: 16)
-        if let customFont = customFont {
-            viewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: customFont]
+        
+        //Title Navigation
+        let titleView = createTitleView(title: navigationTitle, subtitle: navigationSubtitle)
+        viewController.navigationItem.titleView = titleView
+        
+//        //title navigation
+//        let customFont = UIFont(name: "MontserratRoman-SemiBold", size: 16)
+//        if let customFont = customFont {
+//            viewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: customFont]
+//        }
+//        viewController.navigationItem.title = navigationTitle
+    }
+    
+    private func createTitleView(title: String, subtitle: String?) -> UIView {
+        let titleView = UIView()
+        
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont(name: "MontserratRoman-SemiBold", size: 16)
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleView.addSubview(titleLabel)
+        
+        if let subtitle = subtitle {
+            let subtitleLabel = UILabel()
+            subtitleLabel.text = subtitle
+            subtitleLabel.font = UIFont(name: "MontserratRoman-Regular", size: 12)
+            subtitleLabel.textColor = .gray
+            subtitleLabel.textAlignment = .center
+            subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleView.addSubview(subtitleLabel)
+            
+            NSLayoutConstraint.activate([
+                titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor),
+                titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor),
+                subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
+                subtitleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor),
+                subtitleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor),
+                subtitleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor),
+                titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor),
+                titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor)
+            ])
         }
-        viewController.navigationItem.title = navigationTitle
+        return titleView
     }
 }
 

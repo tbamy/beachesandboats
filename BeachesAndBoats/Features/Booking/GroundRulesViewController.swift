@@ -16,6 +16,7 @@ class GroundRulesViewController: UIViewController {
     
     var coordinator: AppCoordinator?
     weak var delegate: GroundRulesDelegate?
+    var luxuryName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
