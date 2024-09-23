@@ -29,6 +29,10 @@ enum Assets: String {
     case NGnum = "234"
     case uncheckIcon = "uncheck_icon"
     case checkIcon = "check_icon"
+    case modal_success = "modal_success"
+    case modal_error = "modal_error"
+    case modal_pending = "modal_pending"
+    case modal_caution = "model_caution"
 
     
     

@@ -10,8 +10,8 @@ private class LocalColor {}
 
 extension UIColor {
     public static let beachBlue = UIColor(named: "B&B", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
-    public static let alatRedLight = UIColor(named: "AlatRedLight", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
-    public static let alatPurple = UIColor(named: "AlatPurple", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
+//    public static let alatRedLight = UIColor(named: "AlatRedLight", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
+//    public static let alatPurple = UIColor(named: "AlatPurple", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
 //    public static let background = UIColor(named: "Background", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
 //    public static let error = UIColor(named: "Error", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()
 //    public static let pending = UIColor(named: "Pending", in: Bundle(for: LocalColor.self), compatibleWith: nil) ?? UIColor()

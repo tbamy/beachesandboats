@@ -102,7 +102,7 @@ public enum Fonts: String {
     }
 
     func setup(_ size: CGFloat = 24) {
-        font = Fonts.getFont(name: .Bold, size)
+//        font = Fonts.getFont(name: .Bold, size)
     }
     
 }
@@ -142,7 +142,7 @@ public enum Fonts: String {
     }
 
     func setup(_ size: CGFloat = 22) {
-        font = Fonts.getFont(name: .Medium, size)
+//        font = Fonts.getFont(name: .Medium, size)
     }
 }
 

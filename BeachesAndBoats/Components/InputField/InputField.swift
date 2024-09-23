@@ -148,7 +148,7 @@ public struct PickerItem {
         textField.rightViewMode = .always
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: textField.frame.height))
         textField.leftViewMode = .always
-        textField.backgroundColor = .greyLight
+        textField.backgroundColor = .clear
         //textView.heightAnchor.constraint(equalToConstant: 48).isActive = true
         textField.isEnabled = enabled
         textArea.isEditable = enabled

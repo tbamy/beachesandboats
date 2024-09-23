@@ -24,6 +24,8 @@ public enum ValidatorRule {
     case isGreaterThanOrEqualTo
     case isLessThanOrEqualTo
     case isLettersOnly
+    case doesNotContainSpace
+    case containsSubstring
     
     public func execute(_ text: String) -> Bool {
         switch self {
@@ -47,6 +49,8 @@ public enum ValidatorRule {
             return containsLowercaseLetters(text)
         case .isLettersOnly:
             return containsLettersOnly(text)
+        case .doesNotContainSpace:
+            return doesNotContainSpace(text)
         default:
             return false
         }
@@ -64,6 +68,8 @@ public enum ValidatorRule {
             return isLessThan(value1: value1, value2: value2)
         case .isLessThanOrEqualTo:
             return isLessThanOrEqualTo(value1: value1, value2: value2)
+        case .containsSubstring:
+            return containsSubstring(value1 as! String, value2 as! String)
         default:
             return false
         }
@@ -147,6 +153,15 @@ public enum ValidatorRule {
         let lowercaseLettersPred = NSPredicate(format: "SELF MATCHES %@", lowercaseLettersRegEx)
         return lowercaseLettersPred.evaluate(with: string)
     }
+    
+    public func doesNotContainSpace(_ string: String) -> Bool {
+        return !string.contains(" ")
+    }
+    
+    public func containsSubstring(_ text: String, _ substring: String) -> Bool {
+        return text.contains(substring)
+    }
+            
 }
 
 public class Validator {
@@ -182,32 +197,6 @@ public class Validator {
     }
 }
 
-//public class RelationalValidator<T: Comparable> {
-//    var checks: [RelationalFieldChecker<T>]
-//    var isValid: Bool = true
-//
-//    public init(checks: [RelationalFieldChecker<T>]) {
-//        self.checks = checks
-//    }
-//
-//    public func validate() -> Bool {
-//        var errorFields: [InputField] = []
-//        checks.forEach { check in
-//            check.fields.forEach { field in
-//                check.rule.forEach {
-//                    if !$0.rule.execute($0.value1, $0.value2), !errorFields.contains(field) {
-//                        field.error = $0.message
-//                        isValid = false
-//                        errorFields.append(field)
-//                    } else if !errorFields.contains(field) {
-//                        field.error = ""
-//                    }
-//                }
-//            }
-//        }
-//        return isValid
-//     }
-//}
 
 public class SingleValidator {
     var field: InputField
@@ -267,20 +256,6 @@ public struct FieldChecker {
     }
 }
 
-//public struct RelationalFieldChecker<T: Comparable> {
-//    var fields: [InputField]
-//    var rule: [CompareRule<T>]
-//
-//    public init(fields: [InputField], rule: [CompareRule<T>]) {
-//        self.fields = fields
-//        self.rule = rule
-//    }
-//}
-
-//public protocol IRule {
-//    var rule: ValidatorRule { get set }
-//    var message: String { get set }
-//}
 
 
 public struct Rule {
@@ -292,17 +267,4 @@ public struct Rule {
         self.message = message
     }
 }
-
-//public struct CompareRule<T: Comparable>: IRule {
-//    public var rule: ValidatorRule
-//    public var value1, value2: T
-//    public var message: String
-//
-//    public init(_ rule: ValidatorRule, value1: T, value2: T, _ message: String) {
-//        self.rule = rule
-//        self.message = message
-//        self.value1 = value1
-//        self.value2 = value2
-//    }
-//}
 

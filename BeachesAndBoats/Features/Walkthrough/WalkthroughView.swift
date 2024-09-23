@@ -17,7 +17,7 @@ class WalkthroughView: UIViewController {
     var coordinator: AppCoordinator?
     var slides: [WalkthroughModel] = []
     
-    var currentPage = 0
+    var currentPage: Int = 0
     var timer = Timer()
     
     override func viewDidLoad() {
@@ -60,7 +60,9 @@ class WalkthroughView: UIViewController {
 //    }
     
     @objc func skipButtonTapped() {
-        coordinator?.gotoSignup()
+//        coordinator?.gotoSignup()
+//        coordinator?.gotoLogin()
+        coordinator?.gotoHomePage()
     }
     
     @objc func nextButtonTapped() {
@@ -68,18 +70,19 @@ class WalkthroughView: UIViewController {
     }
     
     func scrollToNextCell() {
-            if currentPage < slides.count - 1 {
-                currentPage += 1
-                let indexPath = IndexPath(item: currentPage, section: 0)
-                print("Scrolling to page: \(currentPage), IndexPath: \(indexPath)")
-                self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                self.pageControl.currentPage = self.currentPage
-                self.updateButtonVisibility()
-                
-            } else {
-                coordinator?.gotoSignup()
-            }
+        if currentPage < slides.count - 1 {
+            currentPage += 1
+            let indexPath = IndexPath(item: currentPage, section: 0)
+//            print("Scrolling to page: \(currentPage), IndexPath: \(indexPath)")
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            self.pageControl.currentPage = self.currentPage
+            self.updateButtonVisibility()
+            
+        } else {
+            coordinator?.gotoSignup()
         }
+    }
+            
     
     func updateButtonVisibility() {
         if currentPage == slides.count - 1 {
