@@ -9,6 +9,7 @@ import UIKit
 
 public protocol OTPDelegate {
     func userOTP(otp: String?)
+    func resendOTP()
 }
 
 public protocol ModalTransitionDelegate: AnyObject {
@@ -24,9 +25,13 @@ public class ConfirmAccountModal: BaseXib {
     @IBOutlet weak var otpField: InputField!
     @IBOutlet weak var close: UIImageView!
     @IBOutlet weak var checkboxBtn: CheckboxButton!
+    @IBOutlet weak var resendCodeBtn: UILabel!
+    @IBOutlet weak var timeCountdown: UILabel!
+    @IBOutlet weak var timeStack: UIStackView!
     
     var otpDelegate: OTPDelegate?
     weak var transitionDelegate: ModalTransitionDelegate?
+    private var countdownTimer: CountdownTimer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +56,21 @@ public class ConfirmAccountModal: BaseXib {
     
     @objc func closeTapped(_ sender: Any) {
         ConfirmAccountModal.dismiss()
+    }
+    
+    func setupCountdown(){
+        countdownTimer = CountdownTimer(minutes: 1)
+    
+        countdownTimer.start(
+            updateHandler: { [weak self] timeString in
+                self?.timeCountdown.text = timeString
+            },
+            completion: { [weak self] in
+                self?.timeStack.isHidden = true
+                self?.resendCodeBtn.isHidden = false
+            }
+        )
+                
     }
     
     func validateOtpField() -> Bool {
@@ -98,8 +118,23 @@ public class ConfirmAccountModal: BaseXib {
             
     
     func setup() {
+        resendCodeBtn.isHidden = true
+        resendCodeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resendOtpTapped)))
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
     }
+    
+    @objc func resendOtpTapped(){
+        otpDelegate?.resendOTP()
+        timeStack.isHidden = false
+        resendCodeBtn.isHidden = true
+    }
+    
+//    func sendOtp(){
+//        LoadingModal.show()
+//        let request = OTPandPasscodeRequest(phoneNumber: phoneNumber, adminPhoneNumber: adminPhoneNumber, emailAddress: email, name: name, customerId: customerId, purpose: .MultipleSignatoryApproverSoftTokenRequestOtp, deliveryType: .PhoneNumber, purposeReference: purpose)
+//        
+//        input.onNext(.oTPandPasscodeRequest(request))
+//    }
     
     @objc func handleDismissal() {
         ConfirmAccountModal.dismiss()
