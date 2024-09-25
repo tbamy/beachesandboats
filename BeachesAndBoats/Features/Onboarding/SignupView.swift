@@ -21,6 +21,7 @@ class SignupView: BaseViewControllerPlain{
     var email: String?
     var phone: String?
     var userInfo: SignUpRequest?
+    var resendOtp: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +43,15 @@ class SignupView: BaseViewControllerPlain{
         if validateFields(){
             email = emailAddress.text
             phone = phoneNumber.text
-            LoadingModal.show()
-            let request = ConfirmAccountRequest(phone_code: "234", phone_number: phoneNumber.text, email: emailAddress.text)
-            print(request)
-            vm.confirmAccount(request: request)
+            requestOTP()
         }
+    }
+    
+    func requestOTP(){
+        LoadingModal.show()
+        let request = ConfirmAccountRequest(phone_code: "234", phone_number: phoneNumber.text, email: emailAddress.text)
+        print(request)
+        vm.confirmAccount(request: request)
     }
     
     
@@ -61,8 +66,12 @@ class SignupView: BaseViewControllerPlain{
             LoadingModal.dismiss()
             switch response {
                 //MARK: Request Otp
-            case .confirmAccountSuccess(_):
-                presentConfirmAccountModal()
+            case .confirmAccountSuccess(let response):
+                if resendOtp == false{
+                    presentConfirmAccountModal()
+                }else{
+                    Toast.show(message: response.message ?? "OTP sent successfully")
+                }
             case .confirmAccountError(let error):
                 print(error)
                 MiddleModal.show(title: error.message ?? "", type: .error)
@@ -86,7 +95,7 @@ class SignupView: BaseViewControllerPlain{
     }
     
     func navigateToLogin(){
-        
+
         coordinator?.gotoLogin()
     }
     
@@ -109,6 +118,12 @@ class SignupView: BaseViewControllerPlain{
 }
 
 extension SignupView: OTPDelegate{
+    func resendOTP() {
+        resendOtp = true
+        requestOTP()
+        
+    }
+    
     func userOTP(otp: String?) {
         print(otp ?? "No otp")
         let request = VerifyCodeRequest(code: otp)

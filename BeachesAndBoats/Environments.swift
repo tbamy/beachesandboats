@@ -54,11 +54,11 @@ enum Configuration {
     static let baseURLString: String = {
         switch environment {
         case .Dev:
-            return "https://benbsbackend.etogetherness.com/"
+            return "http://benb.wqcdesigns.com/"
         case .Mock:
-            return "https://benbsbackend.etogetherness.com/"
+            return "http://benb.wqcdesigns.com/"
         case .Release:
-            return "https://benbsbackend.etogetherness.com/"
+            return "http://benb.wqcdesigns.com/"
         }
     }()
     
