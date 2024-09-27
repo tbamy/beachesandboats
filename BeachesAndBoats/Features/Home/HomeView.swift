@@ -14,10 +14,33 @@ class HomeView: BaseViewControllerPlain {
     
     @IBOutlet weak var filterBtn: UIImageView!
     @IBOutlet weak var searchField: SearchField!
-    @IBOutlet weak var mainCategoryCollectionView: UICollectionView!
     @IBOutlet weak var subcategoryCollectionView: UICollectionView!
     @IBOutlet weak var topRatedTableView: UITableView!
     
+    
+    @IBOutlet weak var beachViewContainer: UIStackView!
+    @IBOutlet weak var boatsViewContainer: UIStackView!
+    @IBOutlet weak var servicesViewContainer: UIStackView!
+    @IBOutlet weak var beachHouseImg: UIImageView!
+    @IBOutlet weak var boatImg: UIImageView!
+    @IBOutlet weak var serviceImg: UIImageView!
+    @IBOutlet weak var subCategoryCollectionView: UICollectionView!
+    @IBOutlet weak var topRatedCollectionView: UICollectionView!
+    @IBOutlet weak var otherTableView: UITableView!
+    @IBOutlet weak var boatLabel: UILabel!
+    @IBOutlet weak var beachHouseLabel: UILabel!
+    @IBOutlet weak var serviceLabel: UILabel!
+    @IBOutlet weak var currentBookingTable: UITableView!
+    @IBOutlet weak var bookNowCollection: UICollectionView!
+    @IBOutlet weak var bookNowStack: UIStackView!
+    @IBOutlet weak var currentBookingStack: UIStackView!
+    @IBOutlet weak var topRatedStack: UIStackView!
+    @IBOutlet weak var otherStack: UIStackView!
+    @IBOutlet weak var viewScrollConstraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var categoryStack: UIStackView!
+    
+    var selectedView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +51,55 @@ class HomeView: BaseViewControllerPlain {
         
         
         slides = [
-            .init(image: "", title: "Beach Houses"),
-            .init(image: "", title: "Boats"),
-            .init(image: "", title: "Services")
+            .init(image: "", title: "Luxury"),
+            .init(image: "", title: "Hotels"),
+            .init(image: "", title: "Mansion"),
+            .init(image: "", title: "Rooms"),
+            .init(image: "", title: "Amazing pools"),
+            .init(image: "", title: "Design"),
+            .init(image: "", title: "Adapted")
         ]
         
-        mainCategoryCollectionView.delegate = self
-        mainCategoryCollectionView.dataSource = self
+//        mainCategoryCollectionView.delegate = self
+//        mainCategoryCollectionView.dataSource = self
         
         
-        mainCategoryCollectionView.register(UINib(nibName: "CategoriesViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesViewCell")
+        subcategoryCollectionView.register(UINib(nibName: "CategoriesViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesViewCell")
+    }
+    
+    func gestureRecognizers() {
+        
+        let beachView = UITapGestureRecognizer(target: self, action: #selector(beachViewTapped))
+        beachViewContainer.isUserInteractionEnabled = true
+        beachViewContainer.addGestureRecognizer(beachView)
+        
+        let boatView = UITapGestureRecognizer(target: self, action: #selector(boatViewTapped))
+        boatsViewContainer.isUserInteractionEnabled = true
+        boatsViewContainer.addGestureRecognizer(boatView)
+        
+        let serviceView = UITapGestureRecognizer(target: self, action: #selector(serviceViewTapped))
+        servicesViewContainer.isUserInteractionEnabled = true
+        servicesViewContainer.addGestureRecognizer(serviceView)
+        
+        let filter = UITapGestureRecognizer(target: self, action: #selector(filterTapped))
+        filterBtn.isUserInteractionEnabled = true
+        filterBtn.addGestureRecognizer(filter)
+    }
+    
+    @objc func beachViewTapped(){
+        
+    }
+    
+    @objc func boatViewTapped(){
+        
+    }
+    
+    @objc func serviceViewTapped(){
+        
+    }
+    
+    @objc func filterTapped(){
+        
     }
 
     func addShadow(to view: UIView) {
@@ -52,19 +114,106 @@ class HomeView: BaseViewControllerPlain {
 
 extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return slides.count
+        if selectedView == beachViewContainer {
+            if collectionView.tag == 1 {
+                return subCategoryCoordinator.count
+            } else if collectionView.tag == 2 {
+                return topRatedCoordinator.count
+            }
+        } else if selectedView == boatsViewContainer {
+            if collectionView.tag == 1 {
+                return subCategoryCoordinator.count
+            } else if collectionView.tag == 2 {
+                return boatTopRatedCoordinator.count
+            } else if collectionView.tag == 3 {
+                return boatBookNowCoordinator.count
+            }
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesViewCell", for: indexPath) as! CategoriesViewCell
-        
+        if selectedView == beachViewContainer {
+            if collectionView.tag == 1 {
+                let cell = subCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "subCategoryCollectionViewCell", for: indexPath) as! subCategoryCollectionViewCell
+                let cellAt = subCategoryCoordinator[indexPath.item]
+                cell.setup(with: cellAt)
+                return cell
+            } else if collectionView.tag == 2 {
+                let cell = topRatedCollectionView.dequeueReusableCell(withReuseIdentifier: "TopRatedCollectionViewCell", for: indexPath) as! TopRatedCollectionViewCell
+                let cellAt = topRatedCoordinator[indexPath.item]
+                cell.setup(with: cellAt)
+//                cell.delegate = self
+//                cell.isLiked = likedItems.contains { $0.likeImg == cellAt.likeImg }
+                return cell
+            }
+        } else if selectedView == boatsViewContainer {
+            if collectionView.tag == 1 {
+                let cell = subCategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "subCategoryCollectionViewCell", for: indexPath) as! subCategoryCollectionViewCell
+                let cellAt = subCategoryCoordinator[indexPath.item]
+                cell.setup(with: cellAt)
+                return cell
+            } else if collectionView.tag == 2 {
+                let cell = topRatedCollectionView.dequeueReusableCell(withReuseIdentifier: "TopRatedCollectionViewCell", for: indexPath) as! TopRatedCollectionViewCell
+                let cellAt = boatTopRatedCoordinator[indexPath.item]
+                cell.setup(with: cellAt)
+                return cell
+            } else if collectionView.tag == 3 {
+                let cell = bookNowCollection.dequeueReusableCell(withReuseIdentifier: "TopRatedCollectionViewCell", for: indexPath) as! TopRatedCollectionViewCell
+                let cellAt = boatBookNowCoordinator[indexPath.item]
+                cell.setup(with: cellAt)
+                return cell
+            }
+        }
+       
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        if selectedView == beachViewContainer {
+            if collectionView.tag == 2{
+                let bookDetails = BookingDetailsViewController()
+                bookDetails.continueBooking = "Continue Booking"
+                let getDetails = topRatedCoordinator[indexPath.item]
+                coordinator?.gotoTopRatedDetails(data: getDetails)
+            }
+        } else if selectedView == boatsViewContainer {
+            if collectionView.tag == 2 {
+                let bookDetails = BookingDetailsViewController()
+                bookDetails.continueBooking = "Continue Booking"
+                let getDetails = boatTopRatedCoordinator[indexPath.item]
+                coordinator?.gotoBoatDetails(data: getDetails)
+            } else if collectionView.tag == 3 {
+                let bookDetails = BookingDetailsViewController()
+                bookDetails.continueBooking = "Continue Booking"
+                let getDetails = boatBookNowCoordinator[indexPath.item]
+                coordinator?.gotoBoatDetails(data: getDetails)
+            }
+        }
+       
     }
     
     
+}
+
+extension HomeView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.tag == 1 {
+            let widthOfScreen: CGFloat = 93/*collectionView.bounds.width*/
+            let heightOfScreen = collectionView.bounds.height
+            return CGSize(width: widthOfScreen, height: heightOfScreen)
+        } else if collectionView.tag == 2 {
+            let widthOfScreen: CGFloat = 365
+            let heightOfScreen = collectionView.bounds.height
+            return CGSize(width: widthOfScreen, height: heightOfScreen)
+        } else if collectionView.tag == 3 {
+            let widthOfScreen: CGFloat = 365
+            let heightOfScreen = collectionView.bounds.height
+            return CGSize(width: widthOfScreen, height: heightOfScreen)
+        }
+        return CGSize()
+       
+    }
 }
 
 struct CategoriesModel{

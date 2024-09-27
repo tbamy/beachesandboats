@@ -62,6 +62,8 @@ public class UserInformationModal: BaseXib {
         let validateEmail = email.validate(rules: [Rule(.isEmpty, "Email cannot be empty")])
         let validateBirthday = birthday.validate(rules: [Rule(.isEmpty, "Birthday cannot be empty")])
         
+        
+        
         return validateFname && validateLname && validateEmail && validateBirthday
     }
     
