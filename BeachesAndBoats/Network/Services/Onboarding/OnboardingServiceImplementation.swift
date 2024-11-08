@@ -21,7 +21,7 @@ class OnboardingServiceImplementation: Provider<OnboardingTarget>, OnboardingSer
         provider.request(.VerifyCode(request)){ completion( self.handleResult(result: $0)) }
     }
     
-    func signUp(request: SignUpRequest, completion: @escaping (Result<SignUpResponse, ErrorResponse>) -> Void) {
+    func signUp(request: SignUpRequest, completion: @escaping (Result<LoginResponse, ErrorResponse>) -> Void) {
         provider.request(.SignUp(request)){ completion( self.handleResult(result: $0)) }
     }
     

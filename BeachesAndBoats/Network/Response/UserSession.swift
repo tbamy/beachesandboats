@@ -22,9 +22,10 @@ class UserSession {
         didSet {
             token = loginRes?.access_token
             userDetails = loginRes?.user
+            print("User token is : \(token ?? "")")
         }
     }
-//    var banks: [Bank]?
+    
     var token: String?
     var startSession: Bool = false {
         didSet {
@@ -41,7 +42,11 @@ class UserSession {
         let navigationController = BaseNavigationController()
         let coordinator = AppCoordinator(navigationController: navigationController, completion: nil)
         coordinator.start()
-        UIApplication.shared.windows.first?.rootViewController = navigationController
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.rootViewController = navigationController
+        }
+
     }
 }
 

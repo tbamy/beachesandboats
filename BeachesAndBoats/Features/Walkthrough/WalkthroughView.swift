@@ -62,7 +62,7 @@ class WalkthroughView: UIViewController {
     @objc func skipButtonTapped() {
 //        coordinator?.gotoSignup()
 //        coordinator?.gotoLogin()
-        coordinator?.gotoHomePage()
+        coordinator?.goToDashboard()
     }
     
     @objc func nextButtonTapped() {

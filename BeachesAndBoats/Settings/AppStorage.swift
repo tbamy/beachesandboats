@@ -16,4 +16,19 @@ final class AppStorage {
     
     @UserDefault("firebaseToken")
     static var firebaseToken: String?
+    
+    @UserDefault("hasSignedUp")
+    static var hasSignedUp: Bool?
+    
+    @UserDefault("username")
+    static var username: String?
+    
+    @UserDefault("beachListing")
+    static var beachListing: CreateBeachListingRequest?
+    
+    @UserDefault("boatListing")
+    static var boatListing: CreateBoatListingRequest?
+    
+    @UserDefault("serviceListing")
+    static var serviceListing: CreateServiceListingRequest?
 }

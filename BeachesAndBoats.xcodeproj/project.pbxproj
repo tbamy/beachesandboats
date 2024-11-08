@@ -10,6 +10,24 @@
 		A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6015B0D2BEA223400545164 /* AppDelegate.swift */; };
 		A6015B172BEA223600545164 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6015B162BEA223600545164 /* Assets.xcassets */; };
 		A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6015B182BEA223600545164 /* LaunchScreen.storyboard */; };
+		A605809F2CD8B71C00B17505 /* ChefDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A605809E2CD8B71C00B17505 /* ChefDishesViewModel.swift */; };
+		A60580A12CD8C60600B17505 /* BoatDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A02CD8C60600B17505 /* BoatDataResponse.swift */; };
+		A60580A32CD8E80F00B17505 /* CreateBoatListingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */; };
+		A60580A52CD8ECCC00B17505 /* HostingDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A42CD8ECCC00B17505 /* HostingDashboard.swift */; };
+		A60580A72CD8EE3A00B17505 /* HostingHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A62CD8EE3A00B17505 /* HostingHomeCoordinator.swift */; };
+		A60580A92CD8EE5400B17505 /* HostingEarningsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A82CD8EE5400B17505 /* HostingEarningsCoordinator.swift */; };
+		A60580AB2CD8EE6500B17505 /* HostingMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580AA2CD8EE6500B17505 /* HostingMenuCoordinator.swift */; };
+		A60580AD2CDAA27D00B17505 /* Helper+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */; };
+		A60580AF2CDAA86500B17505 /* ListServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580AE2CDAA86500B17505 /* ListServiceViewModel.swift */; };
+		A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580B02CDAA93D00B17505 /* CreateServiceListingResponse.swift */; };
+		A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580B22CDAAD0300B17505 /* ServiceListingSuccessView.swift */; };
+		A60580B52CDAAD0300B17505 /* ServiceListingSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A60580B32CDAAD0300B17505 /* ServiceListingSuccessView.xib */; };
+		A60580B82CDBA9C900B17505 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A60580B72CDBA9C900B17505 /* Kingfisher */; };
+		A60580BB2CDBADE000B17505 /* BoatAvailableDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580B92CDBADE000B17505 /* BoatAvailableDatesView.swift */; };
+		A60580BC2CDBADE000B17505 /* BoatAvailableDatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A60580BA2CDBADE000B17505 /* BoatAvailableDatesView.xib */; };
+		A60580F42CDD3AC500B17505 /* BoatPropertyNameVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = A60580F32CDD3AC500B17505 /* BoatPropertyNameVIew.xib */; };
+		A60580F72CDD43E900B17505 /* BoatNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580F52CDD43E900B17505 /* BoatNameView.swift */; };
+		A60580F82CDD43E900B17505 /* BoatNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A60580F62CDD43E900B17505 /* BoatNameView.xib */; };
 		A61499292C5E97DB00E0CDFC /* FullModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61499272C5E97DB00E0CDFC /* FullModal.swift */; };
 		A614992A2C5E97DB00E0CDFC /* FullModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61499282C5E97DB00E0CDFC /* FullModal.xib */; };
 		A614992D2C5E98A100E0CDFC /* LoadingModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614992B2C5E98A100E0CDFC /* LoadingModal.swift */; };
@@ -27,18 +45,13 @@
 		A61627742C7DBC2700F6B452 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = A61627732C7DBC2700F6B452 /* RxMoya */; };
 		A61627762C7DBCF400F6B452 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61627752C7DBCF400F6B452 /* AppStorage.swift */; };
 		A61627782C7DBD3700F6B452 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61627772C7DBD3700F6B452 /* UserDefault.swift */; };
-		A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1662BF1003C006D5C95 /* ProfileViewController.swift */; };
-		A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1672BF1003C006D5C95 /* ProfileViewController.xib */; };
-		A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F16B2BF100B7006D5C95 /* SettingTableViewCell.swift */; };
-		A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F16C2BF100B7006D5C95 /* SettingTableViewCell.xib */; };
-		A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F16F2BF10159006D5C95 /* ProfileModel.swift */; };
-		A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1742BF10200006D5C95 /* HelpAndSupportTableViewCell.swift */; };
-		A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F1752BF10200006D5C95 /* HelpAndSupportTableViewCell.xib */; };
-		A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1792BF10267006D5C95 /* HostTableViewCell.swift */; };
-		A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A624F17A2BF10267006D5C95 /* HostTableViewCell.xib */; };
-		A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F17D2BF10286006D5C95 /* HostModel.swift */; };
-		A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F17F2BF1029D006D5C95 /* HelpModel.swift */; };
-		A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A624F1812BF102CB006D5C95 /* SettingModel.swift */; };
+		A61B3C202CB682FB00C89C14 /* NumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61B3C1F2CB682FB00C89C14 /* NumberField.swift */; };
+		A61B3C232CB6E2C500C89C14 /* RoomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61B3C212CB6E2C500C89C14 /* RoomCard.swift */; };
+		A61B3C242CB6E2C500C89C14 /* RoomCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61B3C222CB6E2C500C89C14 /* RoomCard.xib */; };
+		A61B3C282CB6EF6600C89C14 /* RoomsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61B3C262CB6EF6600C89C14 /* RoomsListView.swift */; };
+		A61B3C292CB6EF6600C89C14 /* RoomsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61B3C272CB6EF6600C89C14 /* RoomsListView.xib */; };
+		A61B3C2C2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61B3C2A2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift */; };
+		A61B3C2D2CB6F3FC00C89C14 /* EntireApartmentPriceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61B3C2B2CB6F3FC00C89C14 /* EntireApartmentPriceView.xib */; };
 		A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A624F1872BF10F7F006D5C95 /* Montserrat.ttf */; };
 		A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573B2BF0CAAB008AF034 /* Coordinator.swift */; };
 		A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */; };
@@ -73,8 +86,125 @@
 		A63CE7AC2C8E8217008D91C5 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63CE7AB2C8E8217008D91C5 /* LoginResponse.swift */; };
 		A63CE7B22C8ED236008D91C5 /* DateRangePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63CE7B12C8ED236008D91C5 /* DateRangePicker.swift */; };
 		A63CE7B42C8EDECC008D91C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63CE7B32C8EDECC008D91C5 /* LoginViewModel.swift */; };
-		A63CE7BC2C8F3645008D91C5 /* ViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63CE7BA2C8F3645008D91C5 /* ViewCell.swift */; };
-		A63CE7BD2C8F3645008D91C5 /* ViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63CE7BB2C8F3645008D91C5 /* ViewCell.xib */; };
+		A63CE7BC2C8F3645008D91C5 /* GeneralViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63CE7BA2C8F3645008D91C5 /* GeneralViewCell.swift */; };
+		A63CE7BD2C8F3645008D91C5 /* GeneralViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63CE7BB2C8F3645008D91C5 /* GeneralViewCell.xib */; };
+		A63F31212CAF7D7F00D402F4 /* ListingNotif.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F311F2CAF7D7F00D402F4 /* ListingNotif.swift */; };
+		A63F31222CAF7D7F00D402F4 /* ListingNotif.xib in Resources */ = {isa = PBXBuildFile; fileRef = A63F31202CAF7D7F00D402F4 /* ListingNotif.xib */; };
+		A63F31252CB07A5100D402F4 /* BeachDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F31242CB07A5000D402F4 /* BeachDataResponse.swift */; };
+		A63F31282CB07D4100D402F4 /* ListingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F31272CB07D4100D402F4 /* ListingService.swift */; };
+		A63F312A2CB07D5600D402F4 /* ListingServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F31292CB07D5600D402F4 /* ListingServiceImplementation.swift */; };
+		A63F312C2CB07D6400D402F4 /* ListingServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F312B2CB07D6400D402F4 /* ListingServiceMock.swift */; };
+		A63F312E2CB08C8A00D402F4 /* ListingTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F312D2CB08C8A00D402F4 /* ListingTarget.swift */; };
+		A63F31312CB09ABE00D402F4 /* BeachDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F31302CB09ABE00D402F4 /* BeachDataViewModel.swift */; };
+		A63F31342CB0A9EF00D402F4 /* CreateBeachListingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63F31332CB0A9EF00D402F4 /* CreateBeachListingRequest.swift */; };
+		A650AAD52CB7ED9200A70CF4 /* SelectHouseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650AAD32CB7ED9200A70CF4 /* SelectHouseTypeView.swift */; };
+		A650AAD62CB7ED9200A70CF4 /* SelectHouseTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A650AAD42CB7ED9200A70CF4 /* SelectHouseTypeView.xib */; };
+		A650AAD92CB866B600A70CF4 /* ListBeachSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650AAD72CB866B600A70CF4 /* ListBeachSuccessView.swift */; };
+		A650AADA2CB866B600A70CF4 /* ListBeachSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A650AAD82CB866B600A70CF4 /* ListBeachSuccessView.xib */; };
+		A650AADD2CB867CD00A70CF4 /* VerifyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650AADB2CB867CD00A70CF4 /* VerifyAccountView.swift */; };
+		A650AADE2CB867CD00A70CF4 /* VerifyAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A650AADC2CB867CD00A70CF4 /* VerifyAccountView.xib */; };
+		A650AAE12CB867E600A70CF4 /* VerificationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650AADF2CB867E600A70CF4 /* VerificationFormView.swift */; };
+		A650AAE22CB867E600A70CF4 /* VerificationFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A650AAE02CB867E600A70CF4 /* VerificationFormView.xib */; };
+		A65125662CBC0AF100AFA0F9 /* CreditCardPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125642CBC0AF100AFA0F9 /* CreditCardPaymentView.swift */; };
+		A65125672CBC0AF100AFA0F9 /* CreditCardPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125652CBC0AF100AFA0F9 /* CreditCardPaymentView.xib */; };
+		A651256A2CBC0EF400AFA0F9 /* PaypalPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125682CBC0EF400AFA0F9 /* PaypalPaymentView.swift */; };
+		A651256B2CBC0EF400AFA0F9 /* PaypalPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125692CBC0EF400AFA0F9 /* PaypalPaymentView.xib */; };
+		A651256E2CBC1FEB00AFA0F9 /* LoginAndSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651256C2CBC1FEA00AFA0F9 /* LoginAndSecurityView.swift */; };
+		A651256F2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A651256D2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib */; };
+		A65125722CBC240200AFA0F9 /* 2FASecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125702CBC240200AFA0F9 /* 2FASecurityView.swift */; };
+		A65125732CBC240200AFA0F9 /* 2FASecurityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125712CBC240200AFA0F9 /* 2FASecurityView.xib */; };
+		A65125772CBC290C00AFA0F9 /* AddPhoneNumberModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125752CBC290C00AFA0F9 /* AddPhoneNumberModal.swift */; };
+		A65125782CBC290C00AFA0F9 /* AddPhoneNumberModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125762CBC290C00AFA0F9 /* AddPhoneNumberModal.xib */; };
+		A651257B2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125792CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift */; };
+		A651257C2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A651257A2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.xib */; };
+		A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651257D2CBC293700AFA0F9 /* AddEmailAddressModal.swift */; };
+		A65125802CBC293700AFA0F9 /* AddEmailAddressModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A651257E2CBC293700AFA0F9 /* AddEmailAddressModal.xib */; };
+		A65125832CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */; };
+		A65125842CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */; };
+		A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125852CBC3C9400AFA0F9 /* PinField.swift */; };
+		A65628072CB1B60B00947BA5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628052CB1B60B00947BA5 /* ProfileView.swift */; };
+		A65628082CB1B60B00947BA5 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628062CB1B60B00947BA5 /* ProfileView.xib */; };
+		A656280A2CB2B4EC00947BA5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628092CB2B4EC00947BA5 /* NetworkManager.swift */; };
+		A656280D2CB3C47800947BA5 /* SelectableCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656280B2CB3C47800947BA5 /* SelectableCheckbox.swift */; };
+		A656280E2CB3C47900947BA5 /* SelectableCheckbox.xib in Resources */ = {isa = PBXBuildFile; fileRef = A656280C2CB3C47800947BA5 /* SelectableCheckbox.xib */; };
+		A65628152CB3C62300947BA5 /* ToggleSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628132CB3C62300947BA5 /* ToggleSwitch.swift */; };
+		A65628162CB3C62300947BA5 /* ToggleSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628142CB3C62300947BA5 /* ToggleSwitch.xib */; };
+		A65628182CB4744D00947BA5 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628172CB4744D00947BA5 /* TimePicker.swift */; };
+		A656281B2CB48F5400947BA5 /* IncreaseDecreaseField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628192CB48F5400947BA5 /* IncreaseDecreaseField.swift */; };
+		A656281C2CB48F5400947BA5 /* IncreaseDecreaseField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A656281A2CB48F5400947BA5 /* IncreaseDecreaseField.xib */; };
+		A656281F2CB518B400947BA5 /* RoomAmenitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656281D2CB518B400947BA5 /* RoomAmenitiesView.swift */; };
+		A65628202CB518B400947BA5 /* RoomAmenitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A656281E2CB518B400947BA5 /* RoomAmenitiesView.xib */; };
+		A65628232CB5230000947BA5 /* RoomPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628212CB5230000947BA5 /* RoomPriceView.swift */; };
+		A65628242CB5230000947BA5 /* RoomPriceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628222CB5230000947BA5 /* RoomPriceView.xib */; };
+		A65628302CB55C2900947BA5 /* BigMoneyInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656282F2CB55C2900947BA5 /* BigMoneyInputField.swift */; };
+		A65628332CB569CA00947BA5 /* UploadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628312CB569CA00947BA5 /* UploadImageView.swift */; };
+		A65628342CB569CA00947BA5 /* UploadImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628322CB569CA00947BA5 /* UploadImageView.xib */; };
+		A65628382CB5769A00947BA5 /* UploadImageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628362CB5769A00947BA5 /* UploadImageField.swift */; };
+		A65628392CB5769A00947BA5 /* UploadImageField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628372CB5769A00947BA5 /* UploadImageField.xib */; };
+		A656283C2CB57C8300947BA5 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656283A2CB57C8300947BA5 /* ImageView.swift */; };
+		A656283D2CB57C8300947BA5 /* ImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A656283B2CB57C8300947BA5 /* ImageView.xib */; };
+		A65C50E82CA663E60027E5F1 /* InitialListingPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50E62CA663E60027E5F1 /* InitialListingPromptView.swift */; };
+		A65C50E92CA663E60027E5F1 /* InitialListingPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50E72CA663E60027E5F1 /* InitialListingPromptView.xib */; };
+		A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50EA2CA6640E0027E5F1 /* WhatAreYouView.swift */; };
+		A65C50ED2CA6640E0027E5F1 /* WhatAreYouView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50EB2CA6640E0027E5F1 /* WhatAreYouView.xib */; };
+		A65C50F02CA664720027E5F1 /* SelectPropertyTypePrimaryHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50EE2CA664720027E5F1 /* SelectPropertyTypePrimaryHost.swift */; };
+		A65C50F12CA664720027E5F1 /* SelectPropertyTypePrimaryHost.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50EF2CA664720027E5F1 /* SelectPropertyTypePrimaryHost.xib */; };
+		A65C50F42CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50F22CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift */; };
+		A65C50F52CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50F32CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.xib */; };
+		A65C50F82CA665110027E5F1 /* SelectServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50F62CA665110027E5F1 /* SelectServiceType.swift */; };
+		A65C50F92CA665110027E5F1 /* SelectServiceType.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50F72CA665110027E5F1 /* SelectServiceType.xib */; };
+		A65C50FC2CA93CE30027E5F1 /* BookingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50FA2CA93CE20027E5F1 /* BookingViewCell.swift */; };
+		A65C50FD2CA93CE30027E5F1 /* BookingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50FB2CA93CE30027E5F1 /* BookingViewCell.xib */; };
+		A65C50FF2CA9506C0027E5F1 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50FE2CA9506C0027E5F1 /* Toast.swift */; };
+		A65C51012CA9510F0027E5F1 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51002CA9510F0027E5F1 /* CountdownTimer.swift */; };
+		A65C51052CAA82A40027E5F1 /* SelectorModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51032CAA82A40027E5F1 /* SelectorModal.swift */; };
+		A65C51062CAA82A40027E5F1 /* SelectorModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51042CAA82A40027E5F1 /* SelectorModal.xib */; };
+		A65C51082CAA86660027E5F1 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51072CAA86660027E5F1 /* Dropdown.swift */; };
+		A65C510B2CAACB620027E5F1 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51092CAACB620027E5F1 /* SelectableView.swift */; };
+		A65C510C2CAACB620027E5F1 /* SelectableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C510A2CAACB620027E5F1 /* SelectableView.xib */; };
+		A65C51102CAACC030027E5F1 /* AutoSizingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C510F2CAACC030027E5F1 /* AutoSizingTableViewCell.swift */; };
+		A65C51122CAB214A0027E5F1 /* DynamicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51112CAB214A0027E5F1 /* DynamicCollectionViewCell.swift */; };
+		A65C51142CAB215D0027E5F1 /* DynamicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51132CAB215D0027E5F1 /* DynamicTableViewCell.swift */; };
+		A65C51172CAB226B0027E5F1 /* PropertyListField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51162CAB226B0027E5F1 /* PropertyListField.swift */; };
+		A65C511A2CAB22820027E5F1 /* PropertyListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51182CAB22820027E5F1 /* PropertyListModal.swift */; };
+		A65C511B2CAB22820027E5F1 /* PropertyListModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51192CAB22820027E5F1 /* PropertyListModal.xib */; };
+		A65C51252CAC300E0027E5F1 /* TextViewField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51242CAC300E0027E5F1 /* TextViewField.swift */; };
+		A65C51282CAC30F60027E5F1 /* HouseTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51262CAC30F60027E5F1 /* HouseTypeListView.swift */; };
+		A65C51292CAC30F60027E5F1 /* HouseTypeListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51272CAC30F60027E5F1 /* HouseTypeListView.xib */; };
+		A65C512C2CAC319A0027E5F1 /* HouseSizeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C512A2CAC319A0027E5F1 /* HouseSizeListView.swift */; };
+		A65C512D2CAC319A0027E5F1 /* HouseSizeListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C512B2CAC319A0027E5F1 /* HouseSizeListView.xib */; };
+		A65C51302CAC32A50027E5F1 /* PropertyNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C512E2CAC32A50027E5F1 /* PropertyNameView.swift */; };
+		A65C51312CAC32A50027E5F1 /* PropertyNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C512F2CAC32A50027E5F1 /* PropertyNameView.xib */; };
+		A65C51342CAC32C90027E5F1 /* PropertyAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51322CAC32C90027E5F1 /* PropertyAddressView.swift */; };
+		A65C51352CAC32C90027E5F1 /* PropertyAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51332CAC32C90027E5F1 /* PropertyAddressView.xib */; };
+		A65C51382CAC32FA0027E5F1 /* PropertyAvailableDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51362CAC32FA0027E5F1 /* PropertyAvailableDatesView.swift */; };
+		A65C51392CAC32FA0027E5F1 /* PropertyAvailableDatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51372CAC32FA0027E5F1 /* PropertyAvailableDatesView.xib */; };
+		A65C513C2CAC33170027E5F1 /* PropertyAmenitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C513A2CAC33170027E5F1 /* PropertyAmenitiesView.swift */; };
+		A65C513D2CAC33170027E5F1 /* PropertyAmenitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C513B2CAC33170027E5F1 /* PropertyAmenitiesView.xib */; };
+		A65C51402CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C513E2CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift */; };
+		A65C51412CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C513F2CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.xib */; };
+		A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51422CAC34930027E5F1 /* AboutYouLanguageView.swift */; };
+		A65C51452CAC34930027E5F1 /* AboutYouLanguageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51432CAC34930027E5F1 /* AboutYouLanguageView.xib */; };
+		A65C51482CAC34B10027E5F1 /* AboutYouDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51462CAC34B10027E5F1 /* AboutYouDescriptionView.swift */; };
+		A65C51492CAC34B10027E5F1 /* AboutYouDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51472CAC34B10027E5F1 /* AboutYouDescriptionView.xib */; };
+		A65C514C2CAC35260027E5F1 /* HouseRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C514A2CAC35260027E5F1 /* HouseRulesView.swift */; };
+		A65C514D2CAC35260027E5F1 /* HouseRulesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C514B2CAC35260027E5F1 /* HouseRulesView.xib */; };
+		A65C51502CAC35470027E5F1 /* CheckInAndOutRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C514E2CAC35470027E5F1 /* CheckInAndOutRulesView.swift */; };
+		A65C51512CAC35470027E5F1 /* CheckInAndOutRulesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C514F2CAC35470027E5F1 /* CheckInAndOutRulesView.xib */; };
+		A65C51542CAD6CC40027E5F1 /* HouseTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51522CAD6CC40027E5F1 /* HouseTypeViewCell.swift */; };
+		A65C51552CAD6CC40027E5F1 /* HouseTypeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51532CAD6CC40027E5F1 /* HouseTypeViewCell.xib */; };
+		A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A392CAD8BB000514576 /* MapViewModal.swift */; };
+		A6617A3C2CAD8BB000514576 /* MapViewModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A3A2CAD8BB000514576 /* MapViewModal.xib */; };
+		A6617A3F2CAD8F5300514576 /* ConfirmAddressModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A3D2CAD8F5300514576 /* ConfirmAddressModal.swift */; };
+		A6617A402CAD8F5300514576 /* ConfirmAddressModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A3E2CAD8F5300514576 /* ConfirmAddressModal.xib */; };
+		A6617A432CAD95EA00514576 /* ListRoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A412CAD95EA00514576 /* ListRoomsView.swift */; };
+		A6617A442CAD95EA00514576 /* ListRoomsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A422CAD95EA00514576 /* ListRoomsView.xib */; };
+		A6617A4B2CAF555700514576 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A492CAF555700514576 /* MessagesView.swift */; };
+		A6617A4C2CAF555700514576 /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A4A2CAF555700514576 /* MessagesView.xib */; };
+		A6617A4F2CAF557900514576 /* BookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A4D2CAF557900514576 /* BookingsView.swift */; };
+		A6617A502CAF557900514576 /* BookingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A4E2CAF557900514576 /* BookingsView.xib */; };
+		A6617A532CAF559600514576 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A512CAF559600514576 /* SavedView.swift */; };
+		A6617A542CAF559600514576 /* SavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A522CAF559600514576 /* SavedView.xib */; };
 		A6757D802C9746E8000D6302 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D7F2C9746E8000D6302 /* Dashboard.swift */; };
 		A6757D822C987A0F000D6302 /* ExploreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D812C987A0F000D6302 /* ExploreCoordinator.swift */; };
 		A6757D842C987A2A000D6302 /* SavedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D832C987A2A000D6302 /* SavedCoordinator.swift */; };
@@ -83,6 +213,36 @@
 		A6757D8A2C987A81000D6302 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D892C987A81000D6302 /* AccountCoordinator.swift */; };
 		A6757D912C9C0F01000D6302 /* CategoriesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D8F2C9C0F01000D6302 /* CategoriesViewCell.swift */; };
 		A6757D922C9C0F01000D6302 /* CategoriesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6757D902C9C0F01000D6302 /* CategoriesViewCell.xib */; };
+		A67C426C2CB70250004CF98F /* DiscountField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67C426B2CB70250004CF98F /* DiscountField.swift */; };
+		A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */; };
+		A6A2E8282CBCA3B6004E58EB /* BookingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */; };
+		A6A2E8442CBE8B8D004E58EB /* ProfileTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */; };
+		A6A2E8482CBFB63D004E58EB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8472CBFB63D004E58EB /* ProfileService.swift */; };
+		A6A2E84A2CBFB650004E58EB /* ProfileServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8492CBFB650004E58EB /* ProfileServiceImplementation.swift */; };
+		A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E84B2CBFB65E004E58EB /* ProfileServiceMock.swift */; };
+		A6A2E84F2CBFE286004E58EB /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E84D2CBFE286004E58EB /* NotificationSettingsView.swift */; };
+		A6A2E8502CBFE286004E58EB /* NotificationSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E84E2CBFE286004E58EB /* NotificationSettingsView.xib */; };
+		A6A2E8532CC0ECAD004E58EB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8512CC0ECAC004E58EB /* TableViewCell.swift */; };
+		A6A2E8542CC0ECAD004E58EB /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E8522CC0ECAC004E58EB /* TableViewCell.xib */; };
+		A6A2E8642CD4BBE8004E58EB /* CreateServiceListingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8632CD4BBE8004E58EB /* CreateServiceListingRequest.swift */; };
+		A6A2E8662CD4BFAC004E58EB /* BoatDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8652CD4BFAC004E58EB /* BoatDataViewModel.swift */; };
+		A6A2E8692CD4C800004E58EB /* BouncerAvailableDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8672CD4C800004E58EB /* BouncerAvailableDatesView.swift */; };
+		A6A2E86A2CD4C800004E58EB /* BouncerAvailableDatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E8682CD4C800004E58EB /* BouncerAvailableDatesView.xib */; };
+		A6A2E86D2CD4C923004E58EB /* ChefAvailableDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E86B2CD4C923004E58EB /* ChefAvailableDatesView.swift */; };
+		A6A2E86E2CD4C923004E58EB /* ChefAvailableDatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E86C2CD4C923004E58EB /* ChefAvailableDatesView.xib */; };
+		A6A2E8712CD4C93A004E58EB /* DJAvailableDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E86F2CD4C93A004E58EB /* DJAvailableDatesView.swift */; };
+		A6A2E8722CD4C93A004E58EB /* DJAvailableDatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E8702CD4C93A004E58EB /* DJAvailableDatesView.xib */; };
+		A6A2E8742CD4E955004E58EB /* ChefDishesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8732CD4E955004E58EB /* ChefDishesResponse.swift */; };
+		A6C1C4162CBA6E6C001CD27D /* DateRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */; };
+		A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */; };
+		A6C1C41A2CBBC4F1001CD27D /* HorizonCalendar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */; };
+		A6C1C41C2CBBC9ED001CD27D /* HorizonDateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C41B2CBBC9ED001CD27D /* HorizonDateField.swift */; };
+		A6C1C41F2CBBF5BC001CD27D /* ManageAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C41D2CBBF5BC001CD27D /* ManageAccountView.swift */; };
+		A6C1C4202CBBF5BC001CD27D /* ManageAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C1C41E2CBBF5BC001CD27D /* ManageAccountView.xib */; };
+		A6C1C4232CBBFCAB001CD27D /* ProfilePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4212CBBFCAB001CD27D /* ProfilePaymentView.swift */; };
+		A6C1C4242CBBFCAB001CD27D /* ProfilePaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C1C4222CBBFCAB001CD27D /* ProfilePaymentView.xib */; };
+		A6C1C4282CBBFEB5001CD27D /* PaymentMethodModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4262CBBFEB5001CD27D /* PaymentMethodModal.swift */; };
+		A6C1C4292CBBFEB5001CD27D /* PaymentMethodModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C1C4272CBBFEB5001CD27D /* PaymentMethodModal.xib */; };
 		A6C20FC22C84FA950045C670 /* BaseTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FC12C84FA950045C670 /* BaseTarget.swift */; };
 		A6C20FC42C84FCFB0045C670 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FC32C84FCFB0045C670 /* UserSession.swift */; };
 		A6C20FC82C85045F0045C670 /* MiddleModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FC62C85045F0045C670 /* MiddleModal.swift */; };
@@ -111,6 +271,65 @@
 		A6C210012C874D980045C670 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = A6C210002C874D980045C670 /* HorizonCalendar */; };
 		A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C210022C8B49650045C670 /* DateRangePage.swift */; };
 		A6C210052C8B49650045C670 /* DateRangePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C210032C8B49650045C670 /* DateRangePage.xib */; };
+		A6CA3CFE2CB919AE009307B2 /* ListingDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3CFC2CB919AE009307B2 /* ListingDashboard.swift */; };
+		A6CA3CFF2CB919AE009307B2 /* ListingDashboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3CFD2CB919AE009307B2 /* ListingDashboard.xib */; };
+		A6CA3D032CB96A21009307B2 /* SegmentOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D012CB96A21009307B2 /* SegmentOptionView.swift */; };
+		A6CA3D042CB96A21009307B2 /* SegmentOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D022CB96A21009307B2 /* SegmentOptionView.xib */; };
+		A6CA3D072CB9B0C7009307B2 /* BoatHouseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D052CB9B0C7009307B2 /* BoatHouseTypeView.swift */; };
+		A6CA3D082CB9B0C7009307B2 /* BoatHouseTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D062CB9B0C7009307B2 /* BoatHouseTypeView.xib */; };
+		A6CA3D0B2CB9B342009307B2 /* BoatPropertyNameVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D092CB9B342009307B2 /* BoatPropertyNameVIew.swift */; };
+		A6CA3D0F2CB9B4E2009307B2 /* BoatFacilitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D0D2CB9B4E2009307B2 /* BoatFacilitiesView.swift */; };
+		A6CA3D102CB9B4E2009307B2 /* BoatFacilitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D0E2CB9B4E2009307B2 /* BoatFacilitiesView.xib */; };
+		A6CA3D132CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D112CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift */; };
+		A6CA3D142CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D122CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.xib */; };
+		A6CA3D172CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D152CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift */; };
+		A6CA3D182CB9B6F9009307B2 /* BoatAboutYouLanguageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D162CB9B6F9009307B2 /* BoatAboutYouLanguageView.xib */; };
+		A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D192CB9B780009307B2 /* BoatAboutYouDescriptionView.swift */; };
+		A6CA3D1C2CB9B780009307B2 /* BoatAboutYouDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D1A2CB9B780009307B2 /* BoatAboutYouDescriptionView.xib */; };
+		A6CA3D1F2CB9B89B009307B2 /* BoatRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D1D2CB9B89B009307B2 /* BoatRulesView.swift */; };
+		A6CA3D202CB9B89B009307B2 /* BoatRulesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D1E2CB9B89B009307B2 /* BoatRulesView.xib */; };
+		A6CA3D232CB9BA7D009307B2 /* BoatPeopleRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D212CB9BA7D009307B2 /* BoatPeopleRules.swift */; };
+		A6CA3D242CB9BA7D009307B2 /* BoatPeopleRules.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D222CB9BA7D009307B2 /* BoatPeopleRules.xib */; };
+		A6CA3D272CB9BBE5009307B2 /* BoatAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D252CB9BBE5009307B2 /* BoatAddressView.swift */; };
+		A6CA3D282CB9BBE5009307B2 /* BoatAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D262CB9BBE5009307B2 /* BoatAddressView.xib */; };
+		A6CA3D2B2CB9BDE2009307B2 /* DestinationCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D292CB9BDE2009307B2 /* DestinationCheckboxView.swift */; };
+		A6CA3D2C2CB9BDE2009307B2 /* DestinationCheckboxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D2A2CB9BDE2009307B2 /* DestinationCheckboxView.xib */; };
+		A6CA3D302CB9C64C009307B2 /* TravelLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D2E2CB9C64C009307B2 /* TravelLocationView.swift */; };
+		A6CA3D312CB9C64C009307B2 /* TravelLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D2F2CB9C64C009307B2 /* TravelLocationView.xib */; };
+		A6CA3D342CB9C8DD009307B2 /* BoatUploadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D322CB9C8DD009307B2 /* BoatUploadImageView.swift */; };
+		A6CA3D352CB9C8DD009307B2 /* BoatUploadImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D332CB9C8DD009307B2 /* BoatUploadImageView.xib */; };
+		A6CA3D382CB9C990009307B2 /* ListingSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D362CB9C990009307B2 /* ListingSuccessView.swift */; };
+		A6CA3D392CB9C990009307B2 /* ListingSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D372CB9C990009307B2 /* ListingSuccessView.xib */; };
+		A6CA3D402CB9CCB3009307B2 /* ChefInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D3E2CB9CCB3009307B2 /* ChefInformationView.swift */; };
+		A6CA3D412CB9CCB3009307B2 /* ChefInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D3F2CB9CCB3009307B2 /* ChefInformationView.xib */; };
+		A6CA3D442CB9CCD1009307B2 /* ChefUploadProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D422CB9CCD1009307B2 /* ChefUploadProfileImageView.swift */; };
+		A6CA3D452CB9CCD1009307B2 /* ChefUploadProfileImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D432CB9CCD1009307B2 /* ChefUploadProfileImageView.xib */; };
+		A6CA3D482CB9CD10009307B2 /* ChefDIshesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D462CB9CD10009307B2 /* ChefDIshesListView.swift */; };
+		A6CA3D492CB9CD10009307B2 /* ChefDIshesListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D472CB9CD10009307B2 /* ChefDIshesListView.xib */; };
+		A6CA3D4C2CB9CD31009307B2 /* ChefPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D4A2CB9CD31009307B2 /* ChefPriceView.swift */; };
+		A6CA3D4D2CB9CD31009307B2 /* ChefPriceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D4B2CB9CD31009307B2 /* ChefPriceView.xib */; };
+		A6CA3D502CB9CD56009307B2 /* ChefUploadFoodImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D4E2CB9CD56009307B2 /* ChefUploadFoodImagesView.swift */; };
+		A6CA3D512CB9CD56009307B2 /* ChefUploadFoodImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D4F2CB9CD56009307B2 /* ChefUploadFoodImagesView.xib */; };
+		A6CA3D542CB9CD8E009307B2 /* DJInformationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D522CB9CD8E009307B2 /* DJInformationVIew.swift */; };
+		A6CA3D552CB9CD8E009307B2 /* DJInformationVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D532CB9CD8E009307B2 /* DJInformationVIew.xib */; };
+		A6CA3D582CB9CDAE009307B2 /* DJUploadProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D562CB9CDAE009307B2 /* DJUploadProfileImageView.swift */; };
+		A6CA3D592CB9CDAE009307B2 /* DJUploadProfileImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D572CB9CDAE009307B2 /* DJUploadProfileImageView.xib */; };
+		A6CA3D5C2CB9CDD0009307B2 /* DJPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D5A2CB9CDD0009307B2 /* DJPriceView.swift */; };
+		A6CA3D5D2CB9CDD0009307B2 /* DJPriceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D5B2CB9CDD0009307B2 /* DJPriceView.xib */; };
+		A6CA3D602CB9CDF4009307B2 /* DJUploadInstrumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D5E2CB9CDF4009307B2 /* DJUploadInstrumentsView.swift */; };
+		A6CA3D612CB9CDF4009307B2 /* DJUploadInstrumentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D5F2CB9CDF4009307B2 /* DJUploadInstrumentsView.xib */; };
+		A6CA3D642CB9CE24009307B2 /* BouncerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D622CB9CE24009307B2 /* BouncerInformationView.swift */; };
+		A6CA3D652CB9CE24009307B2 /* BouncerInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D632CB9CE24009307B2 /* BouncerInformationView.xib */; };
+		A6CA3D682CB9CEB5009307B2 /* BouncerGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D662CB9CEB4009307B2 /* BouncerGenderView.swift */; };
+		A6CA3D692CB9CEB5009307B2 /* BouncerGenderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D672CB9CEB4009307B2 /* BouncerGenderView.xib */; };
+		A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D6A2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift */; };
+		A6CA3D6D2CB9CF4E009307B2 /* BouncerUploadProfileImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D6B2CB9CF4E009307B2 /* BouncerUploadProfileImageView.xib */; };
+		A6CA3D702CB9CF7B009307B2 /* BouncerPriceVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D6E2CB9CF7B009307B2 /* BouncerPriceVIew.swift */; };
+		A6CA3D712CB9CF7B009307B2 /* BouncerPriceVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D6F2CB9CF7B009307B2 /* BouncerPriceVIew.xib */; };
+		A6CA3D742CB9CFB8009307B2 /* BouncerUploadImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D722CB9CFB8009307B2 /* BouncerUploadImagesView.swift */; };
+		A6CA3D752CB9CFB8009307B2 /* BouncerUploadImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D732CB9CFB8009307B2 /* BouncerUploadImagesView.xib */; };
+		A6CA3D782CBA4F88009307B2 /* CalendarTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D762CBA4F88009307B2 /* CalendarTestView.swift */; };
+		A6CA3D792CBA4F88009307B2 /* CalendarTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D772CBA4F88009307B2 /* CalendarTestView.xib */; };
 		A6E7FACF2C21844800B01E6C /* ModalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */; };
 		A6F406822C02D18A00973BD7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406812C02D18A00973BD7 /* Helpers.swift */; };
 		A6F406842C02D19500973BD7 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406832C02D19500973BD7 /* Validator.swift */; };
@@ -155,6 +374,23 @@
 		A6015B162BEA223600545164 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6015B192BEA223600545164 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6015B1B2BEA223600545164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A605809E2CD8B71C00B17505 /* ChefDishesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefDishesViewModel.swift; sourceTree = "<group>"; };
+		A60580A02CD8C60600B17505 /* BoatDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatDataResponse.swift; sourceTree = "<group>"; };
+		A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoatListingRequest.swift; sourceTree = "<group>"; };
+		A60580A42CD8ECCC00B17505 /* HostingDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingDashboard.swift; sourceTree = "<group>"; };
+		A60580A62CD8EE3A00B17505 /* HostingHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingHomeCoordinator.swift; sourceTree = "<group>"; };
+		A60580A82CD8EE5400B17505 /* HostingEarningsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingEarningsCoordinator.swift; sourceTree = "<group>"; };
+		A60580AA2CD8EE6500B17505 /* HostingMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingMenuCoordinator.swift; sourceTree = "<group>"; };
+		A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+Extensions.swift"; sourceTree = "<group>"; };
+		A60580AE2CDAA86500B17505 /* ListServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListServiceViewModel.swift; sourceTree = "<group>"; };
+		A60580B02CDAA93D00B17505 /* CreateServiceListingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceListingResponse.swift; sourceTree = "<group>"; };
+		A60580B22CDAAD0300B17505 /* ServiceListingSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListingSuccessView.swift; sourceTree = "<group>"; };
+		A60580B32CDAAD0300B17505 /* ServiceListingSuccessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceListingSuccessView.xib; sourceTree = "<group>"; };
+		A60580B92CDBADE000B17505 /* BoatAvailableDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatAvailableDatesView.swift; sourceTree = "<group>"; };
+		A60580BA2CDBADE000B17505 /* BoatAvailableDatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatAvailableDatesView.xib; sourceTree = "<group>"; };
+		A60580F32CDD3AC500B17505 /* BoatPropertyNameVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoatPropertyNameVIew.xib; sourceTree = "<group>"; };
+		A60580F52CDD43E900B17505 /* BoatNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatNameView.swift; sourceTree = "<group>"; };
+		A60580F62CDD43E900B17505 /* BoatNameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatNameView.xib; sourceTree = "<group>"; };
 		A61499272C5E97DB00E0CDFC /* FullModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullModal.swift; sourceTree = "<group>"; };
 		A61499282C5E97DB00E0CDFC /* FullModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FullModal.xib; sourceTree = "<group>"; };
 		A614992B2C5E98A100E0CDFC /* LoadingModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModal.swift; sourceTree = "<group>"; };
@@ -168,18 +404,13 @@
 		A616276A2C7DB0BB00F6B452 /* Environments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		A61627752C7DBCF400F6B452 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		A61627772C7DBD3700F6B452 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
-		A624F1662BF1003C006D5C95 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		A624F1672BF1003C006D5C95 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
-		A624F16B2BF100B7006D5C95 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		A624F16C2BF100B7006D5C95 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
-		A624F16F2BF10159006D5C95 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		A624F1742BF10200006D5C95 /* HelpAndSupportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportTableViewCell.swift; sourceTree = "<group>"; };
-		A624F1752BF10200006D5C95 /* HelpAndSupportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpAndSupportTableViewCell.xib; sourceTree = "<group>"; };
-		A624F1792BF10267006D5C95 /* HostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTableViewCell.swift; sourceTree = "<group>"; };
-		A624F17A2BF10267006D5C95 /* HostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostTableViewCell.xib; sourceTree = "<group>"; };
-		A624F17D2BF10286006D5C95 /* HostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostModel.swift; sourceTree = "<group>"; };
-		A624F17F2BF1029D006D5C95 /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
-		A624F1812BF102CB006D5C95 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		A61B3C1F2CB682FB00C89C14 /* NumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberField.swift; sourceTree = "<group>"; };
+		A61B3C212CB6E2C500C89C14 /* RoomCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCard.swift; sourceTree = "<group>"; };
+		A61B3C222CB6E2C500C89C14 /* RoomCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomCard.xib; sourceTree = "<group>"; };
+		A61B3C262CB6EF6600C89C14 /* RoomsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsListView.swift; sourceTree = "<group>"; };
+		A61B3C272CB6EF6600C89C14 /* RoomsListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomsListView.xib; sourceTree = "<group>"; };
+		A61B3C2A2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntireApartmentPriceView.swift; sourceTree = "<group>"; };
+		A61B3C2B2CB6F3FC00C89C14 /* EntireApartmentPriceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntireApartmentPriceView.xib; sourceTree = "<group>"; };
 		A624F1872BF10F7F006D5C95 /* Montserrat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserrat.ttf; sourceTree = "<group>"; };
 		A633573B2BF0CAAB008AF034 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A633573D2BF0CAB7008AF034 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -214,8 +445,125 @@
 		A63CE7AB2C8E8217008D91C5 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		A63CE7B12C8ED236008D91C5 /* DateRangePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangePicker.swift; sourceTree = "<group>"; };
 		A63CE7B32C8EDECC008D91C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		A63CE7BA2C8F3645008D91C5 /* ViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCell.swift; sourceTree = "<group>"; };
-		A63CE7BB2C8F3645008D91C5 /* ViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewCell.xib; sourceTree = "<group>"; };
+		A63CE7BA2C8F3645008D91C5 /* GeneralViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewCell.swift; sourceTree = "<group>"; };
+		A63CE7BB2C8F3645008D91C5 /* GeneralViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralViewCell.xib; sourceTree = "<group>"; };
+		A63F311F2CAF7D7F00D402F4 /* ListingNotif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingNotif.swift; sourceTree = "<group>"; };
+		A63F31202CAF7D7F00D402F4 /* ListingNotif.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingNotif.xib; sourceTree = "<group>"; };
+		A63F31242CB07A5000D402F4 /* BeachDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachDataResponse.swift; sourceTree = "<group>"; };
+		A63F31272CB07D4100D402F4 /* ListingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingService.swift; sourceTree = "<group>"; };
+		A63F31292CB07D5600D402F4 /* ListingServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingServiceImplementation.swift; sourceTree = "<group>"; };
+		A63F312B2CB07D6400D402F4 /* ListingServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingServiceMock.swift; sourceTree = "<group>"; };
+		A63F312D2CB08C8A00D402F4 /* ListingTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTarget.swift; sourceTree = "<group>"; };
+		A63F31302CB09ABE00D402F4 /* BeachDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachDataViewModel.swift; sourceTree = "<group>"; };
+		A63F31332CB0A9EF00D402F4 /* CreateBeachListingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBeachListingRequest.swift; sourceTree = "<group>"; };
+		A650AAD32CB7ED9200A70CF4 /* SelectHouseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHouseTypeView.swift; sourceTree = "<group>"; };
+		A650AAD42CB7ED9200A70CF4 /* SelectHouseTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectHouseTypeView.xib; sourceTree = "<group>"; };
+		A650AAD72CB866B600A70CF4 /* ListBeachSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBeachSuccessView.swift; sourceTree = "<group>"; };
+		A650AAD82CB866B600A70CF4 /* ListBeachSuccessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListBeachSuccessView.xib; sourceTree = "<group>"; };
+		A650AADB2CB867CD00A70CF4 /* VerifyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAccountView.swift; sourceTree = "<group>"; };
+		A650AADC2CB867CD00A70CF4 /* VerifyAccountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyAccountView.xib; sourceTree = "<group>"; };
+		A650AADF2CB867E600A70CF4 /* VerificationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationFormView.swift; sourceTree = "<group>"; };
+		A650AAE02CB867E600A70CF4 /* VerificationFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerificationFormView.xib; sourceTree = "<group>"; };
+		A65125642CBC0AF100AFA0F9 /* CreditCardPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentView.swift; sourceTree = "<group>"; };
+		A65125652CBC0AF100AFA0F9 /* CreditCardPaymentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardPaymentView.xib; sourceTree = "<group>"; };
+		A65125682CBC0EF400AFA0F9 /* PaypalPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaypalPaymentView.swift; sourceTree = "<group>"; };
+		A65125692CBC0EF400AFA0F9 /* PaypalPaymentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaypalPaymentView.xib; sourceTree = "<group>"; };
+		A651256C2CBC1FEA00AFA0F9 /* LoginAndSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndSecurityView.swift; sourceTree = "<group>"; };
+		A651256D2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginAndSecurityView.xib; sourceTree = "<group>"; };
+		A65125702CBC240200AFA0F9 /* 2FASecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2FASecurityView.swift; sourceTree = "<group>"; };
+		A65125712CBC240200AFA0F9 /* 2FASecurityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = 2FASecurityView.xib; sourceTree = "<group>"; };
+		A65125752CBC290C00AFA0F9 /* AddPhoneNumberModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhoneNumberModal.swift; sourceTree = "<group>"; };
+		A65125762CBC290C00AFA0F9 /* AddPhoneNumberModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPhoneNumberModal.xib; sourceTree = "<group>"; };
+		A65125792CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPhoneNumberModal.swift; sourceTree = "<group>"; };
+		A651257A2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmPhoneNumberModal.xib; sourceTree = "<group>"; };
+		A651257D2CBC293700AFA0F9 /* AddEmailAddressModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmailAddressModal.swift; sourceTree = "<group>"; };
+		A651257E2CBC293700AFA0F9 /* AddEmailAddressModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEmailAddressModal.xib; sourceTree = "<group>"; };
+		A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailAddressModal.swift; sourceTree = "<group>"; };
+		A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmEmailAddressModal.xib; sourceTree = "<group>"; };
+		A65125852CBC3C9400AFA0F9 /* PinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinField.swift; sourceTree = "<group>"; };
+		A65628052CB1B60B00947BA5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A65628062CB1B60B00947BA5 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		A65628092CB2B4EC00947BA5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A656280B2CB3C47800947BA5 /* SelectableCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableCheckbox.swift; sourceTree = "<group>"; };
+		A656280C2CB3C47800947BA5 /* SelectableCheckbox.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableCheckbox.xib; sourceTree = "<group>"; };
+		A65628132CB3C62300947BA5 /* ToggleSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSwitch.swift; sourceTree = "<group>"; };
+		A65628142CB3C62300947BA5 /* ToggleSwitch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleSwitch.xib; sourceTree = "<group>"; };
+		A65628172CB4744D00947BA5 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		A65628192CB48F5400947BA5 /* IncreaseDecreaseField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncreaseDecreaseField.swift; sourceTree = "<group>"; };
+		A656281A2CB48F5400947BA5 /* IncreaseDecreaseField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncreaseDecreaseField.xib; sourceTree = "<group>"; };
+		A656281D2CB518B400947BA5 /* RoomAmenitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomAmenitiesView.swift; sourceTree = "<group>"; };
+		A656281E2CB518B400947BA5 /* RoomAmenitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomAmenitiesView.xib; sourceTree = "<group>"; };
+		A65628212CB5230000947BA5 /* RoomPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPriceView.swift; sourceTree = "<group>"; };
+		A65628222CB5230000947BA5 /* RoomPriceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomPriceView.xib; sourceTree = "<group>"; };
+		A656282F2CB55C2900947BA5 /* BigMoneyInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigMoneyInputField.swift; sourceTree = "<group>"; };
+		A65628312CB569CA00947BA5 /* UploadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageView.swift; sourceTree = "<group>"; };
+		A65628322CB569CA00947BA5 /* UploadImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadImageView.xib; sourceTree = "<group>"; };
+		A65628362CB5769A00947BA5 /* UploadImageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageField.swift; sourceTree = "<group>"; };
+		A65628372CB5769A00947BA5 /* UploadImageField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadImageField.xib; sourceTree = "<group>"; };
+		A656283A2CB57C8300947BA5 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		A656283B2CB57C8300947BA5 /* ImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageView.xib; sourceTree = "<group>"; };
+		A65C50E62CA663E60027E5F1 /* InitialListingPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialListingPromptView.swift; sourceTree = "<group>"; };
+		A65C50E72CA663E60027E5F1 /* InitialListingPromptView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialListingPromptView.xib; sourceTree = "<group>"; };
+		A65C50EA2CA6640E0027E5F1 /* WhatAreYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatAreYouView.swift; sourceTree = "<group>"; };
+		A65C50EB2CA6640E0027E5F1 /* WhatAreYouView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WhatAreYouView.xib; sourceTree = "<group>"; };
+		A65C50EE2CA664720027E5F1 /* SelectPropertyTypePrimaryHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPropertyTypePrimaryHost.swift; sourceTree = "<group>"; };
+		A65C50EF2CA664720027E5F1 /* SelectPropertyTypePrimaryHost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPropertyTypePrimaryHost.xib; sourceTree = "<group>"; };
+		A65C50F22CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPropertyTypeSecondaryHost.swift; sourceTree = "<group>"; };
+		A65C50F32CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPropertyTypeSecondaryHost.xib; sourceTree = "<group>"; };
+		A65C50F62CA665110027E5F1 /* SelectServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectServiceType.swift; sourceTree = "<group>"; };
+		A65C50F72CA665110027E5F1 /* SelectServiceType.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectServiceType.xib; sourceTree = "<group>"; };
+		A65C50FA2CA93CE20027E5F1 /* BookingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewCell.swift; sourceTree = "<group>"; };
+		A65C50FB2CA93CE30027E5F1 /* BookingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingViewCell.xib; sourceTree = "<group>"; };
+		A65C50FE2CA9506C0027E5F1 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		A65C51002CA9510F0027E5F1 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		A65C51032CAA82A40027E5F1 /* SelectorModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorModal.swift; sourceTree = "<group>"; };
+		A65C51042CAA82A40027E5F1 /* SelectorModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectorModal.xib; sourceTree = "<group>"; };
+		A65C51072CAA86660027E5F1 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
+		A65C51092CAACB620027E5F1 /* SelectableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
+		A65C510A2CAACB620027E5F1 /* SelectableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableView.xib; sourceTree = "<group>"; };
+		A65C510F2CAACC030027E5F1 /* AutoSizingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizingTableViewCell.swift; sourceTree = "<group>"; };
+		A65C51112CAB214A0027E5F1 /* DynamicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCollectionViewCell.swift; sourceTree = "<group>"; };
+		A65C51132CAB215D0027E5F1 /* DynamicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTableViewCell.swift; sourceTree = "<group>"; };
+		A65C51162CAB226B0027E5F1 /* PropertyListField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListField.swift; sourceTree = "<group>"; };
+		A65C51182CAB22820027E5F1 /* PropertyListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListModal.swift; sourceTree = "<group>"; };
+		A65C51192CAB22820027E5F1 /* PropertyListModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyListModal.xib; sourceTree = "<group>"; };
+		A65C51242CAC300E0027E5F1 /* TextViewField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewField.swift; sourceTree = "<group>"; };
+		A65C51262CAC30F60027E5F1 /* HouseTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseTypeListView.swift; sourceTree = "<group>"; };
+		A65C51272CAC30F60027E5F1 /* HouseTypeListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseTypeListView.xib; sourceTree = "<group>"; };
+		A65C512A2CAC319A0027E5F1 /* HouseSizeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSizeListView.swift; sourceTree = "<group>"; };
+		A65C512B2CAC319A0027E5F1 /* HouseSizeListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseSizeListView.xib; sourceTree = "<group>"; };
+		A65C512E2CAC32A50027E5F1 /* PropertyNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyNameView.swift; sourceTree = "<group>"; };
+		A65C512F2CAC32A50027E5F1 /* PropertyNameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyNameView.xib; sourceTree = "<group>"; };
+		A65C51322CAC32C90027E5F1 /* PropertyAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAddressView.swift; sourceTree = "<group>"; };
+		A65C51332CAC32C90027E5F1 /* PropertyAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyAddressView.xib; sourceTree = "<group>"; };
+		A65C51362CAC32FA0027E5F1 /* PropertyAvailableDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAvailableDatesView.swift; sourceTree = "<group>"; };
+		A65C51372CAC32FA0027E5F1 /* PropertyAvailableDatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyAvailableDatesView.xib; sourceTree = "<group>"; };
+		A65C513A2CAC33170027E5F1 /* PropertyAmenitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAmenitiesView.swift; sourceTree = "<group>"; };
+		A65C513B2CAC33170027E5F1 /* PropertyAmenitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyAmenitiesView.xib; sourceTree = "<group>"; };
+		A65C513E2CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAdditionalAmenitiesView.swift; sourceTree = "<group>"; };
+		A65C513F2CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyAdditionalAmenitiesView.xib; sourceTree = "<group>"; };
+		A65C51422CAC34930027E5F1 /* AboutYouLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutYouLanguageView.swift; sourceTree = "<group>"; };
+		A65C51432CAC34930027E5F1 /* AboutYouLanguageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutYouLanguageView.xib; sourceTree = "<group>"; };
+		A65C51462CAC34B10027E5F1 /* AboutYouDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutYouDescriptionView.swift; sourceTree = "<group>"; };
+		A65C51472CAC34B10027E5F1 /* AboutYouDescriptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutYouDescriptionView.xib; sourceTree = "<group>"; };
+		A65C514A2CAC35260027E5F1 /* HouseRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRulesView.swift; sourceTree = "<group>"; };
+		A65C514B2CAC35260027E5F1 /* HouseRulesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseRulesView.xib; sourceTree = "<group>"; };
+		A65C514E2CAC35470027E5F1 /* CheckInAndOutRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInAndOutRulesView.swift; sourceTree = "<group>"; };
+		A65C514F2CAC35470027E5F1 /* CheckInAndOutRulesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckInAndOutRulesView.xib; sourceTree = "<group>"; };
+		A65C51522CAD6CC40027E5F1 /* HouseTypeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseTypeViewCell.swift; sourceTree = "<group>"; };
+		A65C51532CAD6CC40027E5F1 /* HouseTypeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseTypeViewCell.xib; sourceTree = "<group>"; };
+		A6617A392CAD8BB000514576 /* MapViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModal.swift; sourceTree = "<group>"; };
+		A6617A3A2CAD8BB000514576 /* MapViewModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewModal.xib; sourceTree = "<group>"; };
+		A6617A3D2CAD8F5300514576 /* ConfirmAddressModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAddressModal.swift; sourceTree = "<group>"; };
+		A6617A3E2CAD8F5300514576 /* ConfirmAddressModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmAddressModal.xib; sourceTree = "<group>"; };
+		A6617A412CAD95EA00514576 /* ListRoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRoomsView.swift; sourceTree = "<group>"; };
+		A6617A422CAD95EA00514576 /* ListRoomsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListRoomsView.xib; sourceTree = "<group>"; };
+		A6617A492CAF555700514576 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		A6617A4A2CAF555700514576 /* MessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesView.xib; sourceTree = "<group>"; };
+		A6617A4D2CAF557900514576 /* BookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsView.swift; sourceTree = "<group>"; };
+		A6617A4E2CAF557900514576 /* BookingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingsView.xib; sourceTree = "<group>"; };
+		A6617A512CAF559600514576 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
+		A6617A522CAF559600514576 /* SavedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedView.xib; sourceTree = "<group>"; };
 		A6757D7F2C9746E8000D6302 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		A6757D812C987A0F000D6302 /* ExploreCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCoordinator.swift; sourceTree = "<group>"; };
 		A6757D832C987A2A000D6302 /* SavedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCoordinator.swift; sourceTree = "<group>"; };
@@ -224,6 +572,36 @@
 		A6757D892C987A81000D6302 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 		A6757D8F2C9C0F01000D6302 /* CategoriesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewCell.swift; sourceTree = "<group>"; };
 		A6757D902C9C0F01000D6302 /* CategoriesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesViewCell.xib; sourceTree = "<group>"; };
+		A67C426B2CB70250004CF98F /* DiscountField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountField.swift; sourceTree = "<group>"; };
+		A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsCell.swift; sourceTree = "<group>"; };
+		A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingsCell.xib; sourceTree = "<group>"; };
+		A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTarget.swift; sourceTree = "<group>"; };
+		A6A2E8472CBFB63D004E58EB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		A6A2E8492CBFB650004E58EB /* ProfileServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceImplementation.swift; sourceTree = "<group>"; };
+		A6A2E84B2CBFB65E004E58EB /* ProfileServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceMock.swift; sourceTree = "<group>"; };
+		A6A2E84D2CBFE286004E58EB /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
+		A6A2E84E2CBFE286004E58EB /* NotificationSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationSettingsView.xib; sourceTree = "<group>"; };
+		A6A2E8512CC0ECAC004E58EB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		A6A2E8522CC0ECAC004E58EB /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		A6A2E8632CD4BBE8004E58EB /* CreateServiceListingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceListingRequest.swift; sourceTree = "<group>"; };
+		A6A2E8652CD4BFAC004E58EB /* BoatDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatDataViewModel.swift; sourceTree = "<group>"; };
+		A6A2E8672CD4C800004E58EB /* BouncerAvailableDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerAvailableDatesView.swift; sourceTree = "<group>"; };
+		A6A2E8682CD4C800004E58EB /* BouncerAvailableDatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BouncerAvailableDatesView.xib; sourceTree = "<group>"; };
+		A6A2E86B2CD4C923004E58EB /* ChefAvailableDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefAvailableDatesView.swift; sourceTree = "<group>"; };
+		A6A2E86C2CD4C923004E58EB /* ChefAvailableDatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefAvailableDatesView.xib; sourceTree = "<group>"; };
+		A6A2E86F2CD4C93A004E58EB /* DJAvailableDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJAvailableDatesView.swift; sourceTree = "<group>"; };
+		A6A2E8702CD4C93A004E58EB /* DJAvailableDatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJAvailableDatesView.xib; sourceTree = "<group>"; };
+		A6A2E8732CD4E955004E58EB /* ChefDishesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefDishesResponse.swift; sourceTree = "<group>"; };
+		A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeIndicatorView.swift; sourceTree = "<group>"; };
+		A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendar.swift; sourceTree = "<group>"; };
+		A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizonCalendar.xib; sourceTree = "<group>"; };
+		A6C1C41B2CBBC9ED001CD27D /* HorizonDateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonDateField.swift; sourceTree = "<group>"; };
+		A6C1C41D2CBBF5BC001CD27D /* ManageAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountView.swift; sourceTree = "<group>"; };
+		A6C1C41E2CBBF5BC001CD27D /* ManageAccountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageAccountView.xib; sourceTree = "<group>"; };
+		A6C1C4212CBBFCAB001CD27D /* ProfilePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePaymentView.swift; sourceTree = "<group>"; };
+		A6C1C4222CBBFCAB001CD27D /* ProfilePaymentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePaymentView.xib; sourceTree = "<group>"; };
+		A6C1C4262CBBFEB5001CD27D /* PaymentMethodModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodModal.swift; sourceTree = "<group>"; };
+		A6C1C4272CBBFEB5001CD27D /* PaymentMethodModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentMethodModal.xib; sourceTree = "<group>"; };
 		A6C20FC12C84FA950045C670 /* BaseTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTarget.swift; sourceTree = "<group>"; };
 		A6C20FC32C84FCFB0045C670 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		A6C20FC62C85045F0045C670 /* MiddleModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleModal.swift; sourceTree = "<group>"; };
@@ -251,6 +629,65 @@
 		A6C20FFC2C8715F30045C670 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		A6C210022C8B49650045C670 /* DateRangePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangePage.swift; sourceTree = "<group>"; };
 		A6C210032C8B49650045C670 /* DateRangePage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateRangePage.xib; sourceTree = "<group>"; };
+		A6CA3CFC2CB919AE009307B2 /* ListingDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDashboard.swift; sourceTree = "<group>"; };
+		A6CA3CFD2CB919AE009307B2 /* ListingDashboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingDashboard.xib; sourceTree = "<group>"; };
+		A6CA3D012CB96A21009307B2 /* SegmentOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentOptionView.swift; sourceTree = "<group>"; };
+		A6CA3D022CB96A21009307B2 /* SegmentOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentOptionView.xib; sourceTree = "<group>"; };
+		A6CA3D052CB9B0C7009307B2 /* BoatHouseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatHouseTypeView.swift; sourceTree = "<group>"; };
+		A6CA3D062CB9B0C7009307B2 /* BoatHouseTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatHouseTypeView.xib; sourceTree = "<group>"; };
+		A6CA3D092CB9B342009307B2 /* BoatPropertyNameVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatPropertyNameVIew.swift; sourceTree = "<group>"; };
+		A6CA3D0D2CB9B4E2009307B2 /* BoatFacilitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatFacilitiesView.swift; sourceTree = "<group>"; };
+		A6CA3D0E2CB9B4E2009307B2 /* BoatFacilitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatFacilitiesView.xib; sourceTree = "<group>"; };
+		A6CA3D112CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatAdditionalAmenitiesView.swift; sourceTree = "<group>"; };
+		A6CA3D122CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatAdditionalAmenitiesView.xib; sourceTree = "<group>"; };
+		A6CA3D152CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatAboutYouLanguageView.swift; sourceTree = "<group>"; };
+		A6CA3D162CB9B6F9009307B2 /* BoatAboutYouLanguageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatAboutYouLanguageView.xib; sourceTree = "<group>"; };
+		A6CA3D192CB9B780009307B2 /* BoatAboutYouDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatAboutYouDescriptionView.swift; sourceTree = "<group>"; };
+		A6CA3D1A2CB9B780009307B2 /* BoatAboutYouDescriptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatAboutYouDescriptionView.xib; sourceTree = "<group>"; };
+		A6CA3D1D2CB9B89B009307B2 /* BoatRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatRulesView.swift; sourceTree = "<group>"; };
+		A6CA3D1E2CB9B89B009307B2 /* BoatRulesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatRulesView.xib; sourceTree = "<group>"; };
+		A6CA3D212CB9BA7D009307B2 /* BoatPeopleRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatPeopleRules.swift; sourceTree = "<group>"; };
+		A6CA3D222CB9BA7D009307B2 /* BoatPeopleRules.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatPeopleRules.xib; sourceTree = "<group>"; };
+		A6CA3D252CB9BBE5009307B2 /* BoatAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatAddressView.swift; sourceTree = "<group>"; };
+		A6CA3D262CB9BBE5009307B2 /* BoatAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatAddressView.xib; sourceTree = "<group>"; };
+		A6CA3D292CB9BDE2009307B2 /* DestinationCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCheckboxView.swift; sourceTree = "<group>"; };
+		A6CA3D2A2CB9BDE2009307B2 /* DestinationCheckboxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DestinationCheckboxView.xib; sourceTree = "<group>"; };
+		A6CA3D2E2CB9C64C009307B2 /* TravelLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelLocationView.swift; sourceTree = "<group>"; };
+		A6CA3D2F2CB9C64C009307B2 /* TravelLocationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelLocationView.xib; sourceTree = "<group>"; };
+		A6CA3D322CB9C8DD009307B2 /* BoatUploadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatUploadImageView.swift; sourceTree = "<group>"; };
+		A6CA3D332CB9C8DD009307B2 /* BoatUploadImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatUploadImageView.xib; sourceTree = "<group>"; };
+		A6CA3D362CB9C990009307B2 /* ListingSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingSuccessView.swift; sourceTree = "<group>"; };
+		A6CA3D372CB9C990009307B2 /* ListingSuccessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingSuccessView.xib; sourceTree = "<group>"; };
+		A6CA3D3E2CB9CCB3009307B2 /* ChefInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefInformationView.swift; sourceTree = "<group>"; };
+		A6CA3D3F2CB9CCB3009307B2 /* ChefInformationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefInformationView.xib; sourceTree = "<group>"; };
+		A6CA3D422CB9CCD1009307B2 /* ChefUploadProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefUploadProfileImageView.swift; sourceTree = "<group>"; };
+		A6CA3D432CB9CCD1009307B2 /* ChefUploadProfileImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefUploadProfileImageView.xib; sourceTree = "<group>"; };
+		A6CA3D462CB9CD10009307B2 /* ChefDIshesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefDIshesListView.swift; sourceTree = "<group>"; };
+		A6CA3D472CB9CD10009307B2 /* ChefDIshesListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefDIshesListView.xib; sourceTree = "<group>"; };
+		A6CA3D4A2CB9CD31009307B2 /* ChefPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefPriceView.swift; sourceTree = "<group>"; };
+		A6CA3D4B2CB9CD31009307B2 /* ChefPriceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefPriceView.xib; sourceTree = "<group>"; };
+		A6CA3D4E2CB9CD56009307B2 /* ChefUploadFoodImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefUploadFoodImagesView.swift; sourceTree = "<group>"; };
+		A6CA3D4F2CB9CD56009307B2 /* ChefUploadFoodImagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefUploadFoodImagesView.xib; sourceTree = "<group>"; };
+		A6CA3D522CB9CD8E009307B2 /* DJInformationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJInformationVIew.swift; sourceTree = "<group>"; };
+		A6CA3D532CB9CD8E009307B2 /* DJInformationVIew.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJInformationVIew.xib; sourceTree = "<group>"; };
+		A6CA3D562CB9CDAE009307B2 /* DJUploadProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUploadProfileImageView.swift; sourceTree = "<group>"; };
+		A6CA3D572CB9CDAE009307B2 /* DJUploadProfileImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJUploadProfileImageView.xib; sourceTree = "<group>"; };
+		A6CA3D5A2CB9CDD0009307B2 /* DJPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJPriceView.swift; sourceTree = "<group>"; };
+		A6CA3D5B2CB9CDD0009307B2 /* DJPriceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJPriceView.xib; sourceTree = "<group>"; };
+		A6CA3D5E2CB9CDF4009307B2 /* DJUploadInstrumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUploadInstrumentsView.swift; sourceTree = "<group>"; };
+		A6CA3D5F2CB9CDF4009307B2 /* DJUploadInstrumentsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJUploadInstrumentsView.xib; sourceTree = "<group>"; };
+		A6CA3D622CB9CE24009307B2 /* BouncerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerInformationView.swift; sourceTree = "<group>"; };
+		A6CA3D632CB9CE24009307B2 /* BouncerInformationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BouncerInformationView.xib; sourceTree = "<group>"; };
+		A6CA3D662CB9CEB4009307B2 /* BouncerGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerGenderView.swift; sourceTree = "<group>"; };
+		A6CA3D672CB9CEB4009307B2 /* BouncerGenderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BouncerGenderView.xib; sourceTree = "<group>"; };
+		A6CA3D6A2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerUploadProfileImageView.swift; sourceTree = "<group>"; };
+		A6CA3D6B2CB9CF4E009307B2 /* BouncerUploadProfileImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BouncerUploadProfileImageView.xib; sourceTree = "<group>"; };
+		A6CA3D6E2CB9CF7B009307B2 /* BouncerPriceVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerPriceVIew.swift; sourceTree = "<group>"; };
+		A6CA3D6F2CB9CF7B009307B2 /* BouncerPriceVIew.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BouncerPriceVIew.xib; sourceTree = "<group>"; };
+		A6CA3D722CB9CFB8009307B2 /* BouncerUploadImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerUploadImagesView.swift; sourceTree = "<group>"; };
+		A6CA3D732CB9CFB8009307B2 /* BouncerUploadImagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BouncerUploadImagesView.xib; sourceTree = "<group>"; };
+		A6CA3D762CBA4F88009307B2 /* CalendarTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestView.swift; sourceTree = "<group>"; };
+		A6CA3D772CBA4F88009307B2 /* CalendarTestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTestView.xib; sourceTree = "<group>"; };
 		A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCoordinator.swift; sourceTree = "<group>"; };
 		A6F406812C02D18A00973BD7 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A6F406832C02D19500973BD7 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
@@ -294,6 +731,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A60580B82CDBA9C900B17505 /* Kingfisher in Frameworks */,
 				A61627702C7DBC2700F6B452 /* Moya in Frameworks */,
 				A616276E2C7DBC2700F6B452 /* CombineMoya in Frameworks */,
 				A6C210012C874D980045C670 /* HorizonCalendar in Frameworks */,
@@ -336,6 +774,7 @@
 				A6015B1B2BEA223600545164 /* Info.plist */,
 				A61627682C7DB05900F6B452 /* Urls.swift */,
 				A616276A2C7DB0BB00F6B452 /* Environments.swift */,
+				A65628092CB2B4EC00947BA5 /* NetworkManager.swift */,
 			);
 			path = BeachesAndBoats;
 			sourceTree = "<group>";
@@ -391,6 +830,7 @@
 			isa = PBXGroup;
 			children = (
 				A6757D7F2C9746E8000D6302 /* Dashboard.swift */,
+				A60580A42CD8ECCC00B17505 /* HostingDashboard.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -408,53 +848,44 @@
 		A61627672C7DB04600F6B452 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A6A2E8422CBE8561004E58EB /* Profile */,
+				A63F31262CB07D2D00D402F4 /* Listing */,
 				A6C20FD22C859BAB0045C670 /* Onboarding */,
 				A6C20FE12C85A5560045C670 /* Provider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
+		A61B3C252CB6E2D600C89C14 /* RoomCard */ = {
+			isa = PBXGroup;
+			children = (
+				A61B3C212CB6E2C500C89C14 /* RoomCard.swift */,
+				A61B3C222CB6E2C500C89C14 /* RoomCard.xib */,
+			);
+			path = RoomCard;
+			sourceTree = "<group>";
+		};
 		A624F1652BF10007006D5C95 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				A624F1782BF10238006D5C95 /* HostTableCell */,
-				A624F1712BF1017B006D5C95 /* HelpAndSupport */,
-				A624F16A2BF10093006D5C95 /* SettingTableCell */,
-				A624F1662BF1003C006D5C95 /* ProfileViewController.swift */,
-				A624F1672BF1003C006D5C95 /* ProfileViewController.xib */,
-				A624F16F2BF10159006D5C95 /* ProfileModel.swift */,
+				A65628052CB1B60B00947BA5 /* ProfileView.swift */,
+				A65628062CB1B60B00947BA5 /* ProfileView.xib */,
+				A6C1C41D2CBBF5BC001CD27D /* ManageAccountView.swift */,
+				A6C1C41E2CBBF5BC001CD27D /* ManageAccountView.xib */,
+				A6C1C4212CBBFCAB001CD27D /* ProfilePaymentView.swift */,
+				A6C1C4222CBBFCAB001CD27D /* ProfilePaymentView.xib */,
+				A65125642CBC0AF100AFA0F9 /* CreditCardPaymentView.swift */,
+				A65125652CBC0AF100AFA0F9 /* CreditCardPaymentView.xib */,
+				A65125682CBC0EF400AFA0F9 /* PaypalPaymentView.swift */,
+				A65125692CBC0EF400AFA0F9 /* PaypalPaymentView.xib */,
+				A651256C2CBC1FEA00AFA0F9 /* LoginAndSecurityView.swift */,
+				A651256D2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib */,
+				A65125702CBC240200AFA0F9 /* 2FASecurityView.swift */,
+				A65125712CBC240200AFA0F9 /* 2FASecurityView.xib */,
+				A6A2E84D2CBFE286004E58EB /* NotificationSettingsView.swift */,
+				A6A2E84E2CBFE286004E58EB /* NotificationSettingsView.xib */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		A624F16A2BF10093006D5C95 /* SettingTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				A624F16B2BF100B7006D5C95 /* SettingTableViewCell.swift */,
-				A624F16C2BF100B7006D5C95 /* SettingTableViewCell.xib */,
-				A624F1812BF102CB006D5C95 /* SettingModel.swift */,
-			);
-			path = SettingTableCell;
-			sourceTree = "<group>";
-		};
-		A624F1712BF1017B006D5C95 /* HelpAndSupport */ = {
-			isa = PBXGroup;
-			children = (
-				A624F1742BF10200006D5C95 /* HelpAndSupportTableViewCell.swift */,
-				A624F1752BF10200006D5C95 /* HelpAndSupportTableViewCell.xib */,
-				A624F17F2BF1029D006D5C95 /* HelpModel.swift */,
-			);
-			path = HelpAndSupport;
-			sourceTree = "<group>";
-		};
-		A624F1782BF10238006D5C95 /* HostTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				A624F1792BF10267006D5C95 /* HostTableViewCell.swift */,
-				A624F17A2BF10267006D5C95 /* HostTableViewCell.xib */,
-				A624F17D2BF10286006D5C95 /* HostModel.swift */,
-			);
-			path = HostTableCell;
 			sourceTree = "<group>";
 		};
 		A624F1862BF10F6B006D5C95 /* Fonts */ = {
@@ -508,6 +939,9 @@
 				A6757D852C987A49000D6302 /* BookingsCoordinator.swift */,
 				A6757D872C987A5E000D6302 /* MessagesCoordinator.swift */,
 				A6757D892C987A81000D6302 /* AccountCoordinator.swift */,
+				A60580A62CD8EE3A00B17505 /* HostingHomeCoordinator.swift */,
+				A60580A82CD8EE5400B17505 /* HostingEarningsCoordinator.swift */,
+				A60580AA2CD8EE6500B17505 /* HostingMenuCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -538,6 +972,10 @@
 		A633574B2BF0D7D9008AF034 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A6617A482CAF54A200514576 /* Saved */,
+				A6617A472CAF549A00514576 /* Bookings */,
+				A6617A462CAF549400514576 /* Messages */,
+				A65C50E52CA663450027E5F1 /* Listing */,
 				A61627622C7BA13C00F6B452 /* Home */,
 				A61627612C7BA13000F6B452 /* Dashboard */,
 				A624F1652BF10007006D5C95 /* Profile */,
@@ -556,6 +994,8 @@
 				A63357552BF0DA84008AF034 /* WalkthroughView.xib */,
 				A63357582BF0DCFF008AF034 /* WalkthroughCell.swift */,
 				A63357592BF0DCFF008AF034 /* WalkthroughCell.xib */,
+				A6CA3D762CBA4F88009307B2 /* CalendarTestView.swift */,
+				A6CA3D772CBA4F88009307B2 /* CalendarTestView.xib */,
 			);
 			path = Walkthrough;
 			sourceTree = "<group>";
@@ -575,12 +1015,22 @@
 		A63357622BF15208008AF034 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A6C1C4142CBA6DBD001CD27D /* HorizonDate */,
+				A6CA3D2D2CB9BE0D009307B2 /* DestinationCheckbox */,
+				A6CA3D002CB96A0C009307B2 /* SegmentView */,
+				A61B3C252CB6E2D600C89C14 /* RoomCard */,
+				A65628352CB5767E00947BA5 /* UploadField */,
+				A65628112CB3C60200947BA5 /* Switch */,
+				A65C510E2CAACBEA0027E5F1 /* DynamicCell */,
+				A65C510D2CAACB790027E5F1 /* SelectableCard */,
 				A6C20FFA2C8715CC0045C670 /* Search */,
 				A67A579B2C0F07E200BC3201 /* Modal */,
 				A63858282BF9215000040677 /* Button */,
 				A633576C2BF156E5008AF034 /* Labels */,
 				A633576B2BF156CB008AF034 /* InputField */,
 				A63357632BF15302008AF034 /* BaseXib.swift */,
+				A65C50FE2CA9506C0027E5F1 /* Toast.swift */,
+				A65C51002CA9510F0027E5F1 /* CountdownTimer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -596,6 +1046,12 @@
 				A63357752BF160E9008AF034 /* PasswordField.swift */,
 				A63357772BF1611F008AF034 /* DatePicker.swift */,
 				A63858262BF8E24B00040677 /* TextView.swift */,
+				A65C51242CAC300E0027E5F1 /* TextViewField.swift */,
+				A65628172CB4744D00947BA5 /* TimePicker.swift */,
+				A656282F2CB55C2900947BA5 /* BigMoneyInputField.swift */,
+				A61B3C1F2CB682FB00C89C14 /* NumberField.swift */,
+				A67C426B2CB70250004CF98F /* DiscountField.swift */,
+				A65125852CBC3C9400AFA0F9 /* PinField.swift */,
 			);
 			path = InputField;
 			sourceTree = "<group>";
@@ -622,31 +1078,349 @@
 		A63CE7B52C8F21FE008D91C5 /* ViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				A63CE7BA2C8F3645008D91C5 /* ViewCell.swift */,
-				A63CE7BB2C8F3645008D91C5 /* ViewCell.xib */,
+				A63CE7BA2C8F3645008D91C5 /* GeneralViewCell.swift */,
+				A63CE7BB2C8F3645008D91C5 /* GeneralViewCell.xib */,
 				A6757D8F2C9C0F01000D6302 /* CategoriesViewCell.swift */,
 				A6757D902C9C0F01000D6302 /* CategoriesViewCell.xib */,
+				A65C50FA2CA93CE20027E5F1 /* BookingViewCell.swift */,
+				A65C50FB2CA93CE30027E5F1 /* BookingViewCell.xib */,
+				A6A2E8512CC0ECAC004E58EB /* TableViewCell.swift */,
+				A6A2E8522CC0ECAC004E58EB /* TableViewCell.xib */,
 			);
 			path = ViewCell;
 			sourceTree = "<group>";
 		};
-		A67A579B2C0F07E200BC3201 /* Modal */ = {
+		A63F31232CB07A3800D402F4 /* Listing */ = {
 			isa = PBXGroup;
 			children = (
-				A6C20FC52C8504490045C670 /* MiddleModal */,
-				A61499322C5E9A1400E0CDFC /* FilterModal */,
-				A61499312C5E9A0B00E0CDFC /* SearchModal */,
-				A61499262C5E97BF00E0CDFC /* LoadingModal */,
-				A61499252C5E979F00E0CDFC /* FullModal */,
+				A63F31242CB07A5000D402F4 /* BeachDataResponse.swift */,
+				A6A2E8732CD4E955004E58EB /* ChefDishesResponse.swift */,
+				A60580A02CD8C60600B17505 /* BoatDataResponse.swift */,
+				A60580B02CDAA93D00B17505 /* CreateServiceListingResponse.swift */,
+			);
+			path = Listing;
+			sourceTree = "<group>";
+		};
+		A63F31262CB07D2D00D402F4 /* Listing */ = {
+			isa = PBXGroup;
+			children = (
+				A63F31272CB07D4100D402F4 /* ListingService.swift */,
+				A63F31292CB07D5600D402F4 /* ListingServiceImplementation.swift */,
+				A63F312B2CB07D6400D402F4 /* ListingServiceMock.swift */,
+			);
+			path = Listing;
+			sourceTree = "<group>";
+		};
+		A63F312F2CB09AA800D402F4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A63F31302CB09ABE00D402F4 /* BeachDataViewModel.swift */,
+				A6A2E8652CD4BFAC004E58EB /* BoatDataViewModel.swift */,
+				A605809E2CD8B71C00B17505 /* ChefDishesViewModel.swift */,
+				A60580AE2CDAA86500B17505 /* ListServiceViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A63F31322CB0A9CC00D402F4 /* Listing */ = {
+			isa = PBXGroup;
+			children = (
+				A63F31332CB0A9EF00D402F4 /* CreateBeachListingRequest.swift */,
+				A6A2E8632CD4BBE8004E58EB /* CreateServiceListingRequest.swift */,
+				A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */,
+			);
+			path = Listing;
+			sourceTree = "<group>";
+		};
+		A65125742CBC28DE00AFA0F9 /* 2FA */ = {
+			isa = PBXGroup;
+			children = (
+				A65125752CBC290C00AFA0F9 /* AddPhoneNumberModal.swift */,
+				A65125762CBC290C00AFA0F9 /* AddPhoneNumberModal.xib */,
+				A65125792CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift */,
+				A651257A2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.xib */,
+				A651257D2CBC293700AFA0F9 /* AddEmailAddressModal.swift */,
+				A651257E2CBC293700AFA0F9 /* AddEmailAddressModal.xib */,
+				A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */,
+				A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */,
+			);
+			path = 2FA;
+			sourceTree = "<group>";
+		};
+		A65628112CB3C60200947BA5 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				A65628132CB3C62300947BA5 /* ToggleSwitch.swift */,
+				A65628142CB3C62300947BA5 /* ToggleSwitch.xib */,
+				A65628192CB48F5400947BA5 /* IncreaseDecreaseField.swift */,
+				A656281A2CB48F5400947BA5 /* IncreaseDecreaseField.xib */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
+		A65628352CB5767E00947BA5 /* UploadField */ = {
+			isa = PBXGroup;
+			children = (
+				A65628362CB5769A00947BA5 /* UploadImageField.swift */,
+				A65628372CB5769A00947BA5 /* UploadImageField.xib */,
+				A656283A2CB57C8300947BA5 /* ImageView.swift */,
+				A656283B2CB57C8300947BA5 /* ImageView.xib */,
+			);
+			path = UploadField;
+			sourceTree = "<group>";
+		};
+		A65C50E52CA663450027E5F1 /* Listing */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D3A2CB9CC25009307B2 /* ListService */,
+				A63F312F2CB09AA800D402F4 /* ViewModels */,
+				A65C511C2CAB2F210027E5F1 /* SetupListing */,
+				A65C511F2CAB30F80027E5F1 /* ListBoat */,
+				A65C511D2CAB30A70027E5F1 /* ListBeachHouse */,
+				A650AAD32CB7ED9200A70CF4 /* SelectHouseTypeView.swift */,
+				A650AAD42CB7ED9200A70CF4 /* SelectHouseTypeView.xib */,
+				A65C51522CAD6CC40027E5F1 /* HouseTypeViewCell.swift */,
+				A65C51532CAD6CC40027E5F1 /* HouseTypeViewCell.xib */,
+				A650AADB2CB867CD00A70CF4 /* VerifyAccountView.swift */,
+				A650AADC2CB867CD00A70CF4 /* VerifyAccountView.xib */,
+				A650AADF2CB867E600A70CF4 /* VerificationFormView.swift */,
+				A650AAE02CB867E600A70CF4 /* VerificationFormView.xib */,
+				A6CA3CFC2CB919AE009307B2 /* ListingDashboard.swift */,
+				A6CA3CFD2CB919AE009307B2 /* ListingDashboard.xib */,
+				A6CA3D362CB9C990009307B2 /* ListingSuccessView.swift */,
+				A6CA3D372CB9C990009307B2 /* ListingSuccessView.xib */,
+			);
+			path = Listing;
+			sourceTree = "<group>";
+		};
+		A65C51022CAA826E0027E5F1 /* OnboardingModals */ = {
+			isa = PBXGroup;
+			children = (
 				A6FB744A2C13558000A26806 /* ConfirmAccountModal.swift */,
 				A6FB744B2C13558000A26806 /* ConfirmAccountModal.xib */,
 				A6FB744E2C1355B100A26806 /* CreatePasswordModal.swift */,
 				A6FB744F2C1355B100A26806 /* CreatePasswordModal.xib */,
 				A6FB74522C1355D900A26806 /* UserInformationModal.swift */,
 				A6FB74532C1355D900A26806 /* UserInformationModal.xib */,
+			);
+			path = OnboardingModals;
+			sourceTree = "<group>";
+		};
+		A65C510D2CAACB790027E5F1 /* SelectableCard */ = {
+			isa = PBXGroup;
+			children = (
+				A65C51092CAACB620027E5F1 /* SelectableView.swift */,
+				A65C510A2CAACB620027E5F1 /* SelectableView.xib */,
+				A656280B2CB3C47800947BA5 /* SelectableCheckbox.swift */,
+				A656280C2CB3C47800947BA5 /* SelectableCheckbox.xib */,
+			);
+			path = SelectableCard;
+			sourceTree = "<group>";
+		};
+		A65C510E2CAACBEA0027E5F1 /* DynamicCell */ = {
+			isa = PBXGroup;
+			children = (
+				A65C510F2CAACC030027E5F1 /* AutoSizingTableViewCell.swift */,
+				A65C51112CAB214A0027E5F1 /* DynamicCollectionViewCell.swift */,
+				A65C51132CAB215D0027E5F1 /* DynamicTableViewCell.swift */,
+			);
+			path = DynamicCell;
+			sourceTree = "<group>";
+		};
+		A65C51152CAB22410027E5F1 /* PropertyList */ = {
+			isa = PBXGroup;
+			children = (
+				A65C51162CAB226B0027E5F1 /* PropertyListField.swift */,
+				A65C51182CAB22820027E5F1 /* PropertyListModal.swift */,
+				A65C51192CAB22820027E5F1 /* PropertyListModal.xib */,
+			);
+			path = PropertyList;
+			sourceTree = "<group>";
+		};
+		A65C511C2CAB2F210027E5F1 /* SetupListing */ = {
+			isa = PBXGroup;
+			children = (
+				A65C50E62CA663E60027E5F1 /* InitialListingPromptView.swift */,
+				A65C50E72CA663E60027E5F1 /* InitialListingPromptView.xib */,
+				A65C50EA2CA6640E0027E5F1 /* WhatAreYouView.swift */,
+				A65C50EB2CA6640E0027E5F1 /* WhatAreYouView.xib */,
+				A65C50EE2CA664720027E5F1 /* SelectPropertyTypePrimaryHost.swift */,
+				A65C50EF2CA664720027E5F1 /* SelectPropertyTypePrimaryHost.xib */,
+				A65C50F22CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift */,
+				A65C50F32CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.xib */,
+				A65C50F62CA665110027E5F1 /* SelectServiceType.swift */,
+				A65C50F72CA665110027E5F1 /* SelectServiceType.xib */,
+			);
+			path = SetupListing;
+			sourceTree = "<group>";
+		};
+		A65C511D2CAB30A70027E5F1 /* ListBeachHouse */ = {
+			isa = PBXGroup;
+			children = (
+				A65C51262CAC30F60027E5F1 /* HouseTypeListView.swift */,
+				A65C51272CAC30F60027E5F1 /* HouseTypeListView.xib */,
+				A65C512A2CAC319A0027E5F1 /* HouseSizeListView.swift */,
+				A65C512B2CAC319A0027E5F1 /* HouseSizeListView.xib */,
+				A65C512E2CAC32A50027E5F1 /* PropertyNameView.swift */,
+				A65C512F2CAC32A50027E5F1 /* PropertyNameView.xib */,
+				A65C51322CAC32C90027E5F1 /* PropertyAddressView.swift */,
+				A65C51332CAC32C90027E5F1 /* PropertyAddressView.xib */,
+				A65C51362CAC32FA0027E5F1 /* PropertyAvailableDatesView.swift */,
+				A65C51372CAC32FA0027E5F1 /* PropertyAvailableDatesView.xib */,
+				A65C513A2CAC33170027E5F1 /* PropertyAmenitiesView.swift */,
+				A65C513B2CAC33170027E5F1 /* PropertyAmenitiesView.xib */,
+				A65C513E2CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift */,
+				A65C513F2CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.xib */,
+				A65C51422CAC34930027E5F1 /* AboutYouLanguageView.swift */,
+				A65C51432CAC34930027E5F1 /* AboutYouLanguageView.xib */,
+				A65C51462CAC34B10027E5F1 /* AboutYouDescriptionView.swift */,
+				A65C51472CAC34B10027E5F1 /* AboutYouDescriptionView.xib */,
+				A65C514A2CAC35260027E5F1 /* HouseRulesView.swift */,
+				A65C514B2CAC35260027E5F1 /* HouseRulesView.xib */,
+				A65C514E2CAC35470027E5F1 /* CheckInAndOutRulesView.swift */,
+				A65C514F2CAC35470027E5F1 /* CheckInAndOutRulesView.xib */,
+				A6617A412CAD95EA00514576 /* ListRoomsView.swift */,
+				A6617A422CAD95EA00514576 /* ListRoomsView.xib */,
+				A656281D2CB518B400947BA5 /* RoomAmenitiesView.swift */,
+				A656281E2CB518B400947BA5 /* RoomAmenitiesView.xib */,
+				A65628212CB5230000947BA5 /* RoomPriceView.swift */,
+				A65628222CB5230000947BA5 /* RoomPriceView.xib */,
+				A65628312CB569CA00947BA5 /* UploadImageView.swift */,
+				A65628322CB569CA00947BA5 /* UploadImageView.xib */,
+				A61B3C262CB6EF6600C89C14 /* RoomsListView.swift */,
+				A61B3C272CB6EF6600C89C14 /* RoomsListView.xib */,
+				A61B3C2A2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift */,
+				A61B3C2B2CB6F3FC00C89C14 /* EntireApartmentPriceView.xib */,
+				A650AAD72CB866B600A70CF4 /* ListBeachSuccessView.swift */,
+				A650AAD82CB866B600A70CF4 /* ListBeachSuccessView.xib */,
+			);
+			path = ListBeachHouse;
+			sourceTree = "<group>";
+		};
+		A65C511F2CAB30F80027E5F1 /* ListBoat */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D052CB9B0C7009307B2 /* BoatHouseTypeView.swift */,
+				A6CA3D062CB9B0C7009307B2 /* BoatHouseTypeView.xib */,
+				A60580F52CDD43E900B17505 /* BoatNameView.swift */,
+				A60580F62CDD43E900B17505 /* BoatNameView.xib */,
+				A6CA3D092CB9B342009307B2 /* BoatPropertyNameVIew.swift */,
+				A60580F32CDD3AC500B17505 /* BoatPropertyNameVIew.xib */,
+				A60580B92CDBADE000B17505 /* BoatAvailableDatesView.swift */,
+				A60580BA2CDBADE000B17505 /* BoatAvailableDatesView.xib */,
+				A6CA3D0D2CB9B4E2009307B2 /* BoatFacilitiesView.swift */,
+				A6CA3D0E2CB9B4E2009307B2 /* BoatFacilitiesView.xib */,
+				A6CA3D112CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift */,
+				A6CA3D122CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.xib */,
+				A6CA3D152CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift */,
+				A6CA3D162CB9B6F9009307B2 /* BoatAboutYouLanguageView.xib */,
+				A6CA3D192CB9B780009307B2 /* BoatAboutYouDescriptionView.swift */,
+				A6CA3D1A2CB9B780009307B2 /* BoatAboutYouDescriptionView.xib */,
+				A6CA3D1D2CB9B89B009307B2 /* BoatRulesView.swift */,
+				A6CA3D1E2CB9B89B009307B2 /* BoatRulesView.xib */,
+				A6CA3D212CB9BA7D009307B2 /* BoatPeopleRules.swift */,
+				A6CA3D222CB9BA7D009307B2 /* BoatPeopleRules.xib */,
+				A6CA3D252CB9BBE5009307B2 /* BoatAddressView.swift */,
+				A6CA3D262CB9BBE5009307B2 /* BoatAddressView.xib */,
+				A6CA3D2E2CB9C64C009307B2 /* TravelLocationView.swift */,
+				A6CA3D2F2CB9C64C009307B2 /* TravelLocationView.xib */,
+				A6CA3D322CB9C8DD009307B2 /* BoatUploadImageView.swift */,
+				A6CA3D332CB9C8DD009307B2 /* BoatUploadImageView.xib */,
+			);
+			path = ListBoat;
+			sourceTree = "<group>";
+		};
+		A6617A382CAD8B8C00514576 /* MapModal */ = {
+			isa = PBXGroup;
+			children = (
+				A6617A392CAD8BB000514576 /* MapViewModal.swift */,
+				A6617A3A2CAD8BB000514576 /* MapViewModal.xib */,
+				A6617A3D2CAD8F5300514576 /* ConfirmAddressModal.swift */,
+				A6617A3E2CAD8F5300514576 /* ConfirmAddressModal.xib */,
+			);
+			path = MapModal;
+			sourceTree = "<group>";
+		};
+		A6617A462CAF549400514576 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				A6617A492CAF555700514576 /* MessagesView.swift */,
+				A6617A4A2CAF555700514576 /* MessagesView.xib */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		A6617A472CAF549A00514576 /* Bookings */ = {
+			isa = PBXGroup;
+			children = (
+				A6617A4D2CAF557900514576 /* BookingsView.swift */,
+				A6617A4E2CAF557900514576 /* BookingsView.xib */,
+				A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */,
+				A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */,
+			);
+			path = Bookings;
+			sourceTree = "<group>";
+		};
+		A6617A482CAF54A200514576 /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+				A6617A512CAF559600514576 /* SavedView.swift */,
+				A6617A522CAF559600514576 /* SavedView.xib */,
+			);
+			path = Saved;
+			sourceTree = "<group>";
+		};
+		A67A579B2C0F07E200BC3201 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				A65125742CBC28DE00AFA0F9 /* 2FA */,
+				A6C1C4252CBBFE9F001CD27D /* PaymentMethod */,
+				A6617A382CAD8B8C00514576 /* MapModal */,
+				A65C51152CAB22410027E5F1 /* PropertyList */,
+				A65C51022CAA826E0027E5F1 /* OnboardingModals */,
+				A6C20FC52C8504490045C670 /* MiddleModal */,
+				A61499322C5E9A1400E0CDFC /* FilterModal */,
+				A61499312C5E9A0B00E0CDFC /* SearchModal */,
+				A61499262C5E97BF00E0CDFC /* LoadingModal */,
+				A61499252C5E979F00E0CDFC /* FullModal */,
 				A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */,
+				A65C51032CAA82A40027E5F1 /* SelectorModal.swift */,
+				A65C51042CAA82A40027E5F1 /* SelectorModal.xib */,
+				A65C51072CAA86660027E5F1 /* Dropdown.swift */,
+				A63F311F2CAF7D7F00D402F4 /* ListingNotif.swift */,
+				A63F31202CAF7D7F00D402F4 /* ListingNotif.xib */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		A6A2E8422CBE8561004E58EB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A6A2E8472CBFB63D004E58EB /* ProfileService.swift */,
+				A6A2E8492CBFB650004E58EB /* ProfileServiceImplementation.swift */,
+				A6A2E84B2CBFB65E004E58EB /* ProfileServiceMock.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A6C1C4142CBA6DBD001CD27D /* HorizonDate */ = {
+			isa = PBXGroup;
+			children = (
+				A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */,
+				A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */,
+				A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */,
+				A6C1C41B2CBBC9ED001CD27D /* HorizonDateField.swift */,
+			);
+			path = HorizonDate;
+			sourceTree = "<group>";
+		};
+		A6C1C4252CBBFE9F001CD27D /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				A6C1C4262CBBFEB5001CD27D /* PaymentMethodModal.swift */,
+				A6C1C4272CBBFEB5001CD27D /* PaymentMethodModal.xib */,
+			);
+			path = PaymentMethod;
 			sourceTree = "<group>";
 		};
 		A6C20FBC2C84F9620045C670 /* Network */ = {
@@ -666,6 +1440,9 @@
 			children = (
 				A6C20FC12C84FA950045C670 /* BaseTarget.swift */,
 				A6C20FDF2C85A10A0045C670 /* OnboardingTarget.swift */,
+				A63F312D2CB08C8A00D402F4 /* ListingTarget.swift */,
+				A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */,
+				A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -673,6 +1450,7 @@
 		A6C20FBE2C84F9A90045C670 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				A63F31232CB07A3800D402F4 /* Listing */,
 				A6C20FD82C859D650045C670 /* Onboarding */,
 				A6C20FC32C84FCFB0045C670 /* UserSession.swift */,
 				A6C20FDD2C859E520045C670 /* ErrorResponse.swift */,
@@ -684,6 +1462,7 @@
 		A6C20FBF2C84F9B50045C670 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				A63F31322CB0A9CC00D402F4 /* Listing */,
 				A6C20FD32C859C480045C670 /* Onboarding */,
 			);
 			path = Requests;
@@ -758,6 +1537,91 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		A6CA3D002CB96A0C009307B2 /* SegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D012CB96A21009307B2 /* SegmentOptionView.swift */,
+				A6CA3D022CB96A21009307B2 /* SegmentOptionView.xib */,
+			);
+			path = SegmentView;
+			sourceTree = "<group>";
+		};
+		A6CA3D2D2CB9BE0D009307B2 /* DestinationCheckbox */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D292CB9BDE2009307B2 /* DestinationCheckboxView.swift */,
+				A6CA3D2A2CB9BDE2009307B2 /* DestinationCheckboxView.xib */,
+			);
+			path = DestinationCheckbox;
+			sourceTree = "<group>";
+		};
+		A6CA3D3A2CB9CC25009307B2 /* ListService */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D3D2CB9CC43009307B2 /* ListBouncer */,
+				A6CA3D3C2CB9CC38009307B2 /* ListChef */,
+				A6CA3D3B2CB9CC30009307B2 /* ListDJ */,
+				A60580B22CDAAD0300B17505 /* ServiceListingSuccessView.swift */,
+				A60580B32CDAAD0300B17505 /* ServiceListingSuccessView.xib */,
+			);
+			path = ListService;
+			sourceTree = "<group>";
+		};
+		A6CA3D3B2CB9CC30009307B2 /* ListDJ */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D522CB9CD8E009307B2 /* DJInformationVIew.swift */,
+				A6CA3D532CB9CD8E009307B2 /* DJInformationVIew.xib */,
+				A6CA3D562CB9CDAE009307B2 /* DJUploadProfileImageView.swift */,
+				A6CA3D572CB9CDAE009307B2 /* DJUploadProfileImageView.xib */,
+				A6A2E86F2CD4C93A004E58EB /* DJAvailableDatesView.swift */,
+				A6A2E8702CD4C93A004E58EB /* DJAvailableDatesView.xib */,
+				A6CA3D5A2CB9CDD0009307B2 /* DJPriceView.swift */,
+				A6CA3D5B2CB9CDD0009307B2 /* DJPriceView.xib */,
+				A6CA3D5E2CB9CDF4009307B2 /* DJUploadInstrumentsView.swift */,
+				A6CA3D5F2CB9CDF4009307B2 /* DJUploadInstrumentsView.xib */,
+			);
+			path = ListDJ;
+			sourceTree = "<group>";
+		};
+		A6CA3D3C2CB9CC38009307B2 /* ListChef */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D3E2CB9CCB3009307B2 /* ChefInformationView.swift */,
+				A6CA3D3F2CB9CCB3009307B2 /* ChefInformationView.xib */,
+				A6CA3D422CB9CCD1009307B2 /* ChefUploadProfileImageView.swift */,
+				A6CA3D432CB9CCD1009307B2 /* ChefUploadProfileImageView.xib */,
+				A6A2E86B2CD4C923004E58EB /* ChefAvailableDatesView.swift */,
+				A6A2E86C2CD4C923004E58EB /* ChefAvailableDatesView.xib */,
+				A6CA3D462CB9CD10009307B2 /* ChefDIshesListView.swift */,
+				A6CA3D472CB9CD10009307B2 /* ChefDIshesListView.xib */,
+				A6CA3D4A2CB9CD31009307B2 /* ChefPriceView.swift */,
+				A6CA3D4B2CB9CD31009307B2 /* ChefPriceView.xib */,
+				A6CA3D4E2CB9CD56009307B2 /* ChefUploadFoodImagesView.swift */,
+				A6CA3D4F2CB9CD56009307B2 /* ChefUploadFoodImagesView.xib */,
+			);
+			path = ListChef;
+			sourceTree = "<group>";
+		};
+		A6CA3D3D2CB9CC43009307B2 /* ListBouncer */ = {
+			isa = PBXGroup;
+			children = (
+				A6CA3D622CB9CE24009307B2 /* BouncerInformationView.swift */,
+				A6CA3D632CB9CE24009307B2 /* BouncerInformationView.xib */,
+				A6CA3D662CB9CEB4009307B2 /* BouncerGenderView.swift */,
+				A6CA3D672CB9CEB4009307B2 /* BouncerGenderView.xib */,
+				A6CA3D6A2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift */,
+				A6CA3D6B2CB9CF4E009307B2 /* BouncerUploadProfileImageView.xib */,
+				A6A2E8672CD4C800004E58EB /* BouncerAvailableDatesView.swift */,
+				A6A2E8682CD4C800004E58EB /* BouncerAvailableDatesView.xib */,
+				A6CA3D6E2CB9CF7B009307B2 /* BouncerPriceVIew.swift */,
+				A6CA3D6F2CB9CF7B009307B2 /* BouncerPriceVIew.xib */,
+				A6CA3D722CB9CFB8009307B2 /* BouncerUploadImagesView.swift */,
+				A6CA3D732CB9CFB8009307B2 /* BouncerUploadImagesView.xib */,
+			);
+			path = ListBouncer;
+			sourceTree = "<group>";
+		};
 		A6F406802C02D17400973BD7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +1654,7 @@
 				A61627712C7DBC2700F6B452 /* ReactiveMoya */,
 				A61627732C7DBC2700F6B452 /* RxMoya */,
 				A6C210002C874D980045C670 /* HorizonCalendar */,
+				A60580B72CDBA9C900B17505 /* Kingfisher */,
 			);
 			productName = BeachesAndBoats;
 			productReference = A6015B0A2BEA223400545164 /* BeachesAndBoats.app */;
@@ -822,6 +1687,7 @@
 			packageReferences = (
 				A616276C2C7DBC2700F6B452 /* XCRemoteSwiftPackageReference "Moya" */,
 				A6C20FFF2C874D980045C670 /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
+				A60580B62CDBA9C900B17505 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = A6015B0B2BEA223400545164 /* Products */;
 			projectDirPath = "";
@@ -837,51 +1703,142 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A650AAD62CB7ED9200A70CF4 /* SelectHouseTypeView.xib in Resources */,
 				A6C20FF52C8713A20045C670 /* HomeView.xib in Resources */,
+				A65628392CB5769A00947BA5 /* UploadImageField.xib in Resources */,
 				A6F406A92C02D3A800973BD7 /* Montserrat-Italic.ttf in Resources */,
-				A624F1692BF1003C006D5C95 /* ProfileViewController.xib in Resources */,
+				A65C51552CAD6CC40027E5F1 /* HouseTypeViewCell.xib in Resources */,
+				A6C1C4242CBBFCAB001CD27D /* ProfilePaymentView.xib in Resources */,
+				A6CA3D312CB9C64C009307B2 /* TravelLocationView.xib in Resources */,
+				A65C51292CAC30F60027E5F1 /* HouseTypeListView.xib in Resources */,
 				A61499362C5E9A2A00E0CDFC /* SearchModal.xib in Resources */,
 				A6F4069F2C02D3A800973BD7 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
+				A65C50F52CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.xib in Resources */,
+				A60580F82CDD43E900B17505 /* BoatNameView.xib in Resources */,
+				A6CA3D4D2CB9CD31009307B2 /* ChefPriceView.xib in Resources */,
+				A65C51062CAA82A40027E5F1 /* SelectorModal.xib in Resources */,
+				A65C50FD2CA93CE30027E5F1 /* BookingViewCell.xib in Resources */,
 				A624F1882BF10F7F006D5C95 /* Montserrat.ttf in Resources */,
 				A6F4069D2C02D3A800973BD7 /* Montserrat-Light.ttf in Resources */,
+				A6617A542CAF559600514576 /* SavedView.xib in Resources */,
+				A6CA3D1C2CB9B780009307B2 /* BoatAboutYouDescriptionView.xib in Resources */,
+				A6A2E86E2CD4C923004E58EB /* ChefAvailableDatesView.xib in Resources */,
+				A65C512D2CAC319A0027E5F1 /* HouseSizeListView.xib in Resources */,
+				A60580F42CDD3AC500B17505 /* BoatPropertyNameVIew.xib in Resources */,
 				A6015B1A2BEA223600545164 /* LaunchScreen.storyboard in Resources */,
 				A6F4069E2C02D3A800973BD7 /* Montserrat-MediumItalic.ttf in Resources */,
+				A6A2E86A2CD4C800004E58EB /* BouncerAvailableDatesView.xib in Resources */,
+				A6CA3D492CB9CD10009307B2 /* ChefDIshesListView.xib in Resources */,
+				A61B3C242CB6E2C500C89C14 /* RoomCard.xib in Resources */,
+				A6A2E8502CBFE286004E58EB /* NotificationSettingsView.xib in Resources */,
+				A6CA3D712CB9CF7B009307B2 /* BouncerPriceVIew.xib in Resources */,
+				A6CA3D652CB9CE24009307B2 /* BouncerInformationView.xib in Resources */,
 				A6F4069B2C02D3A800973BD7 /* Montserrat-SemiBoldItalic.ttf in Resources */,
+				A6CA3D752CB9CFB8009307B2 /* BouncerUploadImagesView.xib in Resources */,
+				A6CA3D5D2CB9CDD0009307B2 /* DJPriceView.xib in Resources */,
+				A65C51352CAC32C90027E5F1 /* PropertyAddressView.xib in Resources */,
 				A614992E2C5E98A100E0CDFC /* LoadingModal.xib in Resources */,
+				A6CA3D082CB9B0C7009307B2 /* BoatHouseTypeView.xib in Resources */,
 				A63357612BF129A6008AF034 /* LoginView.xib in Resources */,
+				A6CA3D182CB9B6F9009307B2 /* BoatAboutYouLanguageView.xib in Resources */,
+				A6617A442CAD95EA00514576 /* ListRoomsView.xib in Resources */,
 				A6F406A02C02D3A800973BD7 /* Montserrat-Regular.ttf in Resources */,
+				A65C514D2CAC35260027E5F1 /* HouseRulesView.xib in Resources */,
+				A65C511B2CAB22820027E5F1 /* PropertyListModal.xib in Resources */,
+				A65C51452CAC34930027E5F1 /* AboutYouLanguageView.xib in Resources */,
+				A6CA3D352CB9C8DD009307B2 /* BoatUploadImageView.xib in Resources */,
+				A65628162CB3C62300947BA5 /* ToggleSwitch.xib in Resources */,
+				A6C1C4202CBBF5BC001CD27D /* ManageAccountView.xib in Resources */,
 				A6C20FC92C85045F0045C670 /* MiddleModal.xib in Resources */,
+				A6617A4C2CAF555700514576 /* MessagesView.xib in Resources */,
 				A6C210052C8B49650045C670 /* DateRangePage.xib in Resources */,
 				A6757D922C9C0F01000D6302 /* CategoriesViewCell.xib in Resources */,
 				A6F406AA2C02D3A800973BD7 /* Montserrat-Thin.ttf in Resources */,
+				A6CA3D2C2CB9BDE2009307B2 /* DestinationCheckboxView.xib in Resources */,
+				A65C50F12CA664720027E5F1 /* SelectPropertyTypePrimaryHost.xib in Resources */,
+				A65C513D2CAC33170027E5F1 /* PropertyAmenitiesView.xib in Resources */,
+				A6A2E8722CD4C93A004E58EB /* DJAvailableDatesView.xib in Resources */,
+				A6CA3D512CB9CD56009307B2 /* ChefUploadFoodImagesView.xib in Resources */,
 				A6F406A52C02D3A800973BD7 /* Montserrat-SemiBold.ttf in Resources */,
+				A65125782CBC290C00AFA0F9 /* AddPhoneNumberModal.xib in Resources */,
+				A6CA3D102CB9B4E2009307B2 /* BoatFacilitiesView.xib in Resources */,
+				A6CA3D042CB96A21009307B2 /* SegmentOptionView.xib in Resources */,
+				A6617A502CAF557900514576 /* BookingsView.xib in Resources */,
+				A65125732CBC240200AFA0F9 /* 2FASecurityView.xib in Resources */,
 				A6F406A62C02D3A800973BD7 /* Montserrat-ThinItalic.ttf in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
 				A6C20FFE2C8715F30045C670 /* SearchView.xib in Resources */,
 				A6FB74492C134EC700A26806 /* SignupView.xib in Resources */,
+				A656281C2CB48F5400947BA5 /* IncreaseDecreaseField.xib in Resources */,
 				A6F406A32C02D3A800973BD7 /* Montserrat-Black.ttf in Resources */,
+				A6CA3D412CB9CCB3009307B2 /* ChefInformationView.xib in Resources */,
 				A614992A2C5E97DB00E0CDFC /* FullModal.xib in Resources */,
 				A6FB744D2C13558000A26806 /* ConfirmAccountModal.xib in Resources */,
+				A65C51492CAC34B10027E5F1 /* AboutYouDescriptionView.xib in Resources */,
+				A65125672CBC0AF100AFA0F9 /* CreditCardPaymentView.xib in Resources */,
 				A6F4069A2C02D3A800973BD7 /* Montserrat-ExtraBold.ttf in Resources */,
-				A624F17C2BF10267006D5C95 /* HostTableViewCell.xib in Resources */,
+				A6C1C4292CBBFEB5001CD27D /* PaymentMethodModal.xib in Resources */,
 				A6C20FF92C8715130045C670 /* SearchField.xib in Resources */,
 				A6F4069C2C02D3A800973BD7 /* Montserrat-BoldItalic.ttf in Resources */,
-				A63CE7BD2C8F3645008D91C5 /* ViewCell.xib in Resources */,
+				A6CA3D612CB9CDF4009307B2 /* DJUploadInstrumentsView.xib in Resources */,
+				A63CE7BD2C8F3645008D91C5 /* GeneralViewCell.xib in Resources */,
 				A6F406A22C02D3A800973BD7 /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				A6F406A82C02D3A800973BD7 /* Montserrat-ExtraLight.ttf in Resources */,
+				A65C510C2CAACB620027E5F1 /* SelectableView.xib in Resources */,
+				A65628342CB569CA00947BA5 /* UploadImageView.xib in Resources */,
+				A65C51412CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.xib in Resources */,
+				A6CA3D792CBA4F88009307B2 /* CalendarTestView.xib in Resources */,
+				A651256F2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib in Resources */,
+				A6CA3D392CB9C990009307B2 /* ListingSuccessView.xib in Resources */,
+				A65C50ED2CA6640E0027E5F1 /* WhatAreYouView.xib in Resources */,
+				A60580BC2CDBADE000B17505 /* BoatAvailableDatesView.xib in Resources */,
+				A650AAE22CB867E600A70CF4 /* VerificationFormView.xib in Resources */,
+				A6CA3D552CB9CD8E009307B2 /* DJInformationVIew.xib in Resources */,
+				A65628242CB5230000947BA5 /* RoomPriceView.xib in Resources */,
+				A65C51512CAC35470027E5F1 /* CheckInAndOutRulesView.xib in Resources */,
+				A6A2E8282CBCA3B6004E58EB /* BookingsCell.xib in Resources */,
 				A63357512BF0D82F008AF034 /* WelcomeScreen.xib in Resources */,
+				A656283D2CB57C8300947BA5 /* ImageView.xib in Resources */,
 				A633576A2BF15406008AF034 /* InputField.xib in Resources */,
-				A624F1772BF10200006D5C95 /* HelpAndSupportTableViewCell.xib in Resources */,
+				A651256B2CBC0EF400AFA0F9 /* PaypalPaymentView.xib in Resources */,
+				A656280E2CB3C47900947BA5 /* SelectableCheckbox.xib in Resources */,
+				A65C50F92CA665110027E5F1 /* SelectServiceType.xib in Resources */,
+				A650AADA2CB866B600A70CF4 /* ListBeachSuccessView.xib in Resources */,
+				A6CA3D692CB9CEB5009307B2 /* BouncerGenderView.xib in Resources */,
+				A65C51312CAC32A50027E5F1 /* PropertyNameView.xib in Resources */,
 				A6F406992C02D3A800973BD7 /* Montserrat-BlackItalic.ttf in Resources */,
+				A6617A3C2CAD8BB000514576 /* MapViewModal.xib in Resources */,
 				A6FB74512C1355B100A26806 /* CreatePasswordModal.xib in Resources */,
+				A651257C2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.xib in Resources */,
+				A63F31222CAF7D7F00D402F4 /* ListingNotif.xib in Resources */,
+				A61B3C2D2CB6F3FC00C89C14 /* EntireApartmentPriceView.xib in Resources */,
+				A6617A402CAD8F5300514576 /* ConfirmAddressModal.xib in Resources */,
 				A6FB74552C1355D900A26806 /* UserInformationModal.xib in Resources */,
 				A6015B172BEA223600545164 /* Assets.xcassets in Resources */,
-				A624F16E2BF100B7006D5C95 /* SettingTableViewCell.xib in Resources */,
+				A6CA3D282CB9BBE5009307B2 /* BoatAddressView.xib in Resources */,
+				A6C1C41A2CBBC4F1001CD27D /* HorizonCalendar.xib in Resources */,
+				A65C50E92CA663E60027E5F1 /* InitialListingPromptView.xib in Resources */,
+				A6CA3CFF2CB919AE009307B2 /* ListingDashboard.xib in Resources */,
 				A63357572BF0DA84008AF034 /* WalkthroughView.xib in Resources */,
+				A650AADE2CB867CD00A70CF4 /* VerifyAccountView.xib in Resources */,
+				A6CA3D6D2CB9CF4E009307B2 /* BouncerUploadProfileImageView.xib in Resources */,
+				A60580B52CDAAD0300B17505 /* ServiceListingSuccessView.xib in Resources */,
+				A65125802CBC293700AFA0F9 /* AddEmailAddressModal.xib in Resources */,
+				A6CA3D592CB9CDAE009307B2 /* DJUploadProfileImageView.xib in Resources */,
+				A65628202CB518B400947BA5 /* RoomAmenitiesView.xib in Resources */,
 				A6F406A42C02D3A800973BD7 /* Montserrat-Medium.ttf in Resources */,
 				A6F406A12C02D3A800973BD7 /* Montserrat-Bold.ttf in Resources */,
+				A65125842CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib in Resources */,
+				A65628082CB1B60B00947BA5 /* ProfileView.xib in Resources */,
+				A6A2E8542CC0ECAD004E58EB /* TableViewCell.xib in Resources */,
+				A6CA3D452CB9CCD1009307B2 /* ChefUploadProfileImageView.xib in Resources */,
+				A65C51392CAC32FA0027E5F1 /* PropertyAvailableDatesView.xib in Resources */,
+				A6CA3D242CB9BA7D009307B2 /* BoatPeopleRules.xib in Resources */,
+				A6CA3D202CB9B89B009307B2 /* BoatRulesView.xib in Resources */,
 				A6F406A72C02D3A800973BD7 /* Montserrat-LightItalic.ttf in Resources */,
+				A6CA3D142CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.xib in Resources */,
 				A614993A2C5E9A3C00E0CDFC /* FilterModal.xib in Resources */,
+				A61B3C292CB6EF6600C89C14 /* RoomsListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,94 +1850,221 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FB74482C134EC700A26806 /* SignupView.swift in Sources */,
+				A6CA3D542CB9CD8E009307B2 /* DJInformationVIew.swift in Sources */,
+				A6A2E8642CD4BBE8004E58EB /* CreateServiceListingRequest.swift in Sources */,
+				A60580A32CD8E80F00B17505 /* CreateBoatListingRequest.swift in Sources */,
 				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
-				A63CE7BC2C8F3645008D91C5 /* ViewCell.swift in Sources */,
+				A63CE7BC2C8F3645008D91C5 /* GeneralViewCell.swift in Sources */,
 				A616276B2C7DB0BB00F6B452 /* Environments.swift in Sources */,
-				A624F1822BF102CB006D5C95 /* SettingModel.swift in Sources */,
+				A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */,
+				A63F312A2CB07D5600D402F4 /* ListingServiceImplementation.swift in Sources */,
+				A63F31282CB07D4100D402F4 /* ListingService.swift in Sources */,
+				A65C51052CAA82A40027E5F1 /* SelectorModal.swift in Sources */,
+				A6CA3D2B2CB9BDE2009307B2 /* DestinationCheckboxView.swift in Sources */,
+				A650AAE12CB867E600A70CF4 /* VerificationFormView.swift in Sources */,
+				A61B3C2C2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift in Sources */,
+				A6CA3D272CB9BBE5009307B2 /* BoatAddressView.swift in Sources */,
 				A6C20FCB2C85053C0045C670 /* MiddleModalModel.swift in Sources */,
+				A650AADD2CB867CD00A70CF4 /* VerifyAccountView.swift in Sources */,
+				A6A2E8442CBE8B8D004E58EB /* ProfileTarget.swift in Sources */,
+				A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */,
 				A63357722BF157B9008AF034 /* UILabel.swift in Sources */,
-				A624F1702BF10159006D5C95 /* ProfileModel.swift in Sources */,
+				A6CA3D582CB9CDAE009307B2 /* DJUploadProfileImageView.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
 				A63357452BF0D281008AF034 /* Date.swift in Sources */,
 				A6757D912C9C0F01000D6302 /* CategoriesViewCell.swift in Sources */,
 				A63CE7AA2C8E81BB008D91C5 /* LoginRequest.swift in Sources */,
+				A63F31252CB07A5100D402F4 /* BeachDataResponse.swift in Sources */,
 				A63357642BF15302008AF034 /* BaseXib.swift in Sources */,
 				A63357702BF15707008AF034 /* PaddedLabel.swift in Sources */,
 				A6C20FE22C85A5560045C670 /* Provider.swift in Sources */,
+				A65C510B2CAACB620027E5F1 /* SelectableView.swift in Sources */,
+				A6CA3D402CB9CCB3009307B2 /* ChefInformationView.swift in Sources */,
 				A6757D822C987A0F000D6302 /* ExploreCoordinator.swift in Sources */,
+				A605809F2CD8B71C00B17505 /* ChefDishesViewModel.swift in Sources */,
 				A63357662BF153CD008AF034 /* PhoneField.swift in Sources */,
-				A624F17E2BF10286006D5C95 /* HostModel.swift in Sources */,
+				A65C51402CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift in Sources */,
+				A60580A92CD8EE5400B17505 /* HostingEarningsCoordinator.swift in Sources */,
+				A65C51012CA9510F0027E5F1 /* CountdownTimer.swift in Sources */,
 				A6C20FF42C8713A20045C670 /* HomeView.swift in Sources */,
+				A6CA3D5C2CB9CDD0009307B2 /* DJPriceView.swift in Sources */,
 				A6C20FCD2C859B680045C670 /* OnboardingService.swift in Sources */,
-				A624F16D2BF100B7006D5C95 /* SettingTableViewCell.swift in Sources */,
-				A624F17B2BF10267006D5C95 /* HostTableViewCell.swift in Sources */,
+				A656281B2CB48F5400947BA5 /* IncreaseDecreaseField.swift in Sources */,
+				A65C51382CAC32FA0027E5F1 /* PropertyAvailableDatesView.swift in Sources */,
+				A65628382CB5769A00947BA5 /* UploadImageField.swift in Sources */,
+				A6CA3D4C2CB9CD31009307B2 /* ChefPriceView.swift in Sources */,
+				A6A2E8532CC0ECAD004E58EB /* TableViewCell.swift in Sources */,
 				A63858272BF8E24B00040677 /* TextView.swift in Sources */,
+				A6C1C4282CBBFEB5001CD27D /* PaymentMethodModal.swift in Sources */,
+				A65628152CB3C62300947BA5 /* ToggleSwitch.swift in Sources */,
+				A6A2E84F2CBFE286004E58EB /* NotificationSettingsView.swift in Sources */,
 				A63357602BF129A6008AF034 /* LoginView.swift in Sources */,
+				A650AAD92CB866B600A70CF4 /* ListBeachSuccessView.swift in Sources */,
+				A6A2E8482CBFB63D004E58EB /* ProfileService.swift in Sources */,
+				A6A2E86D2CD4C923004E58EB /* ChefAvailableDatesView.swift in Sources */,
 				A6C20FD52C859C5D0045C670 /* RefreshTokenRequest.swift in Sources */,
 				A61627762C7DBCF400F6B452 /* AppStorage.swift in Sources */,
 				A6C20FD12C859BA30045C670 /* OnboardingServiceMock.swift in Sources */,
 				A63357762BF160E9008AF034 /* PasswordField.swift in Sources */,
+				A65125722CBC240200AFA0F9 /* 2FASecurityView.swift in Sources */,
+				A6CA3D0B2CB9B342009307B2 /* BoatPropertyNameVIew.swift in Sources */,
 				A6C20FE02C85A10A0045C670 /* OnboardingTarget.swift in Sources */,
+				A6CA3D132CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
 				A63357562BF0DA84008AF034 /* WalkthroughView.swift in Sources */,
+				A6C1C4232CBBFCAB001CD27D /* ProfilePaymentView.swift in Sources */,
 				A6F406AE2C02D57E00973BD7 /* FontLoader.swift in Sources */,
+				A656283C2CB57C8300947BA5 /* ImageView.swift in Sources */,
 				A61499302C5E98C200E0CDFC /* Spinner.swift in Sources */,
+				A65C51122CAB214A0027E5F1 /* DynamicCollectionViewCell.swift in Sources */,
 				A6F406B02C02DB3800973BD7 /* PrimaryButton.swift in Sources */,
+				A6CA3CFE2CB919AE009307B2 /* ListingDashboard.swift in Sources */,
+				A6CA3D1F2CB9B89B009307B2 /* BoatRulesView.swift in Sources */,
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
+				A65C51502CAC35470027E5F1 /* CheckInAndOutRulesView.swift in Sources */,
+				A63F312E2CB08C8A00D402F4 /* ListingTarget.swift in Sources */,
 				A63357472BF0D2B3008AF034 /* UIView.swift in Sources */,
+				A6CA3D502CB9CD56009307B2 /* ChefUploadFoodImagesView.swift in Sources */,
+				A6CA3D602CB9CDF4009307B2 /* DJUploadInstrumentsView.swift in Sources */,
 				A6C20FCF2C859B940045C670 /* OnboardingServiceImplementation.swift in Sources */,
+				A65C51342CAC32C90027E5F1 /* PropertyAddressView.swift in Sources */,
+				A60580A12CD8C60600B17505 /* BoatDataResponse.swift in Sources */,
+				A65125832CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift in Sources */,
+				A6CA3D682CB9CEB5009307B2 /* BouncerGenderView.swift in Sources */,
+				A60580BB2CDBADE000B17505 /* BoatAvailableDatesView.swift in Sources */,
+				A65C512C2CAC319A0027E5F1 /* HouseSizeListView.swift in Sources */,
 				A6FB74572C13573500A26806 /* CheckboxButton.swift in Sources */,
 				A6C20FEA2C85BD610045C670 /* GeneralResponse.swift in Sources */,
+				A65C50F02CA664720027E5F1 /* SelectPropertyTypePrimaryHost.swift in Sources */,
+				A60580AD2CDAA27D00B17505 /* Helper+Extensions.swift in Sources */,
 				A6C20FF82C8715130045C670 /* SearchField.swift in Sources */,
-				A624F1802BF1029D006D5C95 /* HelpModel.swift in Sources */,
-				A624F1762BF10200006D5C95 /* HelpAndSupportTableViewCell.swift in Sources */,
+				A6C1C41C2CBBC9ED001CD27D /* HorizonDateField.swift in Sources */,
+				A65C51252CAC300E0027E5F1 /* TextViewField.swift in Sources */,
+				A63F31312CB09ABE00D402F4 /* BeachDataViewModel.swift in Sources */,
+				A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */,
+				A6A2E84A2CBFB650004E58EB /* ProfileServiceImplementation.swift in Sources */,
 				A6C20FDA2C859D8D0045C670 /* RefreshTokenResponse.swift in Sources */,
 				A6C20FE62C85B7D60045C670 /* ConfirmAccountRequest.swift in Sources */,
+				A6CA3D742CB9CFB8009307B2 /* BouncerUploadImagesView.swift in Sources */,
+				A6CA3D782CBA4F88009307B2 /* CalendarTestView.swift in Sources */,
 				A61627692C7DB05900F6B452 /* Urls.swift in Sources */,
+				A60580F72CDD43E900B17505 /* BoatNameView.swift in Sources */,
 				A63CE7B22C8ED236008D91C5 /* DateRangePicker.swift in Sources */,
 				A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */,
+				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A6C20FDC2C859D9C0045C670 /* SignUpResponse.swift in Sources */,
 				A6FB74542C1355D900A26806 /* UserInformationModal.swift in Sources */,
+				A65C514C2CAC35260027E5F1 /* HouseRulesView.swift in Sources */,
+				A60580A52CD8ECCC00B17505 /* HostingDashboard.swift in Sources */,
+				A65C50F82CA665110027E5F1 /* SelectServiceType.swift in Sources */,
+				A6C1C4162CBA6E6C001CD27D /* DateRangeIndicatorView.swift in Sources */,
+				A65C511A2CAB22820027E5F1 /* PropertyListModal.swift in Sources */,
+				A65C51282CAC30F60027E5F1 /* HouseTypeListView.swift in Sources */,
+				A65C50FC2CA93CE30027E5F1 /* BookingViewCell.swift in Sources */,
 				A63CE7B42C8EDECC008D91C5 /* LoginViewModel.swift in Sources */,
 				A63357402BF0CAF1008AF034 /* BaseNavigationController.swift in Sources */,
 				A6F406AC2C02D4DC00973BD7 /* UIColor.swift in Sources */,
+				A6CA3D702CB9CF7B009307B2 /* BouncerPriceVIew.swift in Sources */,
 				A633576E2BF156F9008AF034 /* Labels.swift in Sources */,
+				A67C426C2CB70250004CF98F /* DiscountField.swift in Sources */,
+				A6617A4B2CAF555700514576 /* MessagesView.swift in Sources */,
 				A6F406862C02D1A300973BD7 /* GeneralFormatter.swift in Sources */,
 				A61627782C7DBD3700F6B452 /* UserDefault.swift in Sources */,
+				A6CA3D642CB9CE24009307B2 /* BouncerInformationView.swift in Sources */,
+				A651257B2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift in Sources */,
 				A6C20FD72C859C780045C670 /* SignUpRequest.swift in Sources */,
+				A651256A2CBC0EF400AFA0F9 /* PaypalPaymentView.swift in Sources */,
+				A65C50FF2CA9506C0027E5F1 /* Toast.swift in Sources */,
+				A65C51102CAACC030027E5F1 /* AutoSizingTableViewCell.swift in Sources */,
 				A6FB74502C1355B100A26806 /* CreatePasswordModal.swift in Sources */,
+				A6617A4F2CAF557900514576 /* BookingsView.swift in Sources */,
+				A6CA3D482CB9CD10009307B2 /* ChefDIshesListView.swift in Sources */,
 				A63CE7AC2C8E8217008D91C5 /* LoginResponse.swift in Sources */,
+				A6C1C41F2CBBF5BC001CD27D /* ManageAccountView.swift in Sources */,
+				A65C50E82CA663E60027E5F1 /* InitialListingPromptView.swift in Sources */,
+				A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */,
+				A65C51142CAB215D0027E5F1 /* DynamicTableViewCell.swift in Sources */,
+				A65C50F42CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift in Sources */,
+				A6A2E8712CD4C93A004E58EB /* DJAvailableDatesView.swift in Sources */,
 				A6FB744C2C13558000A26806 /* ConfirmAccountModal.swift in Sources */,
 				A6C20FE82C85B86E0045C670 /* VerifyCodeRequest.swift in Sources */,
+				A656280A2CB2B4EC00947BA5 /* NetworkManager.swift in Sources */,
+				A651256E2CBC1FEB00AFA0F9 /* LoginAndSecurityView.swift in Sources */,
+				A65C51542CAD6CC40027E5F1 /* HouseTypeViewCell.swift in Sources */,
 				A6C20FC42C84FCFB0045C670 /* UserSession.swift in Sources */,
+				A6617A432CAD95EA00514576 /* ListRoomsView.swift in Sources */,
 				A633574A2BF0D30C008AF034 /* Images.swift in Sources */,
+				A6A2E8662CD4BFAC004E58EB /* BoatDataViewModel.swift in Sources */,
+				A65628072CB1B60B00947BA5 /* ProfileView.swift in Sources */,
+				A61B3C232CB6E2C500C89C14 /* RoomCard.swift in Sources */,
+				A60580AF2CDAA86500B17505 /* ListServiceViewModel.swift in Sources */,
 				A63357742BF160B6008AF034 /* TextField.swift in Sources */,
 				A633575A2BF0DCFF008AF034 /* WalkthroughCell.swift in Sources */,
+				A65628332CB569CA00947BA5 /* UploadImageView.swift in Sources */,
+				A65125772CBC290C00AFA0F9 /* AddPhoneNumberModal.swift in Sources */,
+				A60580A72CD8EE3A00B17505 /* HostingHomeCoordinator.swift in Sources */,
 				A633573E2BF0CAB7008AF034 /* AppCoordinator.swift in Sources */,
 				A6757D882C987A5E000D6302 /* MessagesCoordinator.swift in Sources */,
+				A6617A3F2CAD8F5300514576 /* ConfirmAddressModal.swift in Sources */,
+				A63F31342CB0A9EF00D402F4 /* CreateBeachListingRequest.swift in Sources */,
 				A614992D2C5E98A100E0CDFC /* LoadingModal.swift in Sources */,
 				A6757D8A2C987A81000D6302 /* AccountCoordinator.swift in Sources */,
 				A6C20FFD2C8715F30045C670 /* SearchView.swift in Sources */,
 				A6F406822C02D18A00973BD7 /* Helpers.swift in Sources */,
 				A6C20FF12C85BEA40045C670 /* ConfirmAccountViewModel.swift in Sources */,
-				A624F1682BF1003C006D5C95 /* ProfileViewController.swift in Sources */,
+				A6CA3D0F2CB9B4E2009307B2 /* BoatFacilitiesView.swift in Sources */,
 				A63357782BF1611F008AF034 /* DatePicker.swift in Sources */,
+				A6CA3D232CB9BA7D009307B2 /* BoatPeopleRules.swift in Sources */,
+				A65C513C2CAC33170027E5F1 /* PropertyAmenitiesView.swift in Sources */,
 				A6E7FACF2C21844800B01E6C /* ModalCoordinator.swift in Sources */,
+				A656281F2CB518B400947BA5 /* RoomAmenitiesView.swift in Sources */,
 				A6C20FC82C85045F0045C670 /* MiddleModal.swift in Sources */,
+				A6CA3D032CB96A21009307B2 /* SegmentOptionView.swift in Sources */,
+				A656280D2CB3C47800947BA5 /* SelectableCheckbox.swift in Sources */,
+				A65628182CB4744D00947BA5 /* TimePicker.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
 				A61499392C5E9A3C00E0CDFC /* FilterModal.swift in Sources */,
+				A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */,
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
+				A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */,
+				A6CA3D172CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift in Sources */,
+				A61B3C282CB6EF6600C89C14 /* RoomsListView.swift in Sources */,
+				A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */,
 				A61499292C5E97DB00E0CDFC /* FullModal.swift in Sources */,
+				A6CA3D072CB9B0C7009307B2 /* BoatHouseTypeView.swift in Sources */,
+				A6A2E8742CD4E955004E58EB /* ChefDishesResponse.swift in Sources */,
+				A65C51302CAC32A50027E5F1 /* PropertyNameView.swift in Sources */,
 				A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */,
 				A63357692BF15406008AF034 /* InputField.swift in Sources */,
+				A63F31212CAF7D7F00D402F4 /* ListingNotif.swift in Sources */,
 				A6757D862C987A49000D6302 /* BookingsCoordinator.swift in Sources */,
+				A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */,
+				A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */,
 				A6C20FDE2C859E520045C670 /* ErrorResponse.swift in Sources */,
+				A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */,
+				A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */,
+				A6CA3D382CB9C990009307B2 /* ListingSuccessView.swift in Sources */,
+				A65125662CBC0AF100AFA0F9 /* CreditCardPaymentView.swift in Sources */,
+				A65C51482CAC34B10027E5F1 /* AboutYouDescriptionView.swift in Sources */,
 				A6C20FC22C84FA950045C670 /* BaseTarget.swift in Sources */,
 				A61499352C5E9A2A00E0CDFC /* SearchModal.swift in Sources */,
+				A65C51172CAB226B0027E5F1 /* PropertyListField.swift in Sources */,
 				A6F406842C02D19500973BD7 /* Validator.swift in Sources */,
+				A61B3C202CB682FB00C89C14 /* NumberField.swift in Sources */,
+				A6CA3D302CB9C64C009307B2 /* TravelLocationView.swift in Sources */,
+				A60580AB2CD8EE6500B17505 /* HostingMenuCoordinator.swift in Sources */,
 				A6757D842C987A2A000D6302 /* SavedCoordinator.swift in Sources */,
+				A650AAD52CB7ED9200A70CF4 /* SelectHouseTypeView.swift in Sources */,
+				A6CA3D342CB9C8DD009307B2 /* BoatUploadImageView.swift in Sources */,
 				A633577A2BF162A7008AF034 /* String.swift in Sources */,
+				A65628232CB5230000947BA5 /* RoomPriceView.swift in Sources */,
+				A6617A532CAF559600514576 /* SavedView.swift in Sources */,
 				A6757D802C9746E8000D6302 /* Dashboard.swift in Sources */,
+				A6A2E8692CD4C800004E58EB /* BouncerAvailableDatesView.swift in Sources */,
+				A63F312C2CB07D6400D402F4 /* ListingServiceMock.swift in Sources */,
+				A65C51082CAA86660027E5F1 /* Dropdown.swift in Sources */,
+				A6CA3D442CB9CCD1009307B2 /* ChefUploadProfileImageView.swift in Sources */,
+				A65628302CB55C2900947BA5 /* BigMoneyInputField.swift in Sources */,
 				A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1198,6 +2282,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A60580B62CDBA9C900B17505 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
 		A616276C2C7DBC2700F6B452 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -1217,6 +2309,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A60580B72CDBA9C900B17505 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A60580B62CDBA9C900B17505 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		A616276D2C7DBC2700F6B452 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A616276C2C7DBC2700F6B452 /* XCRemoteSwiftPackageReference "Moya" */;

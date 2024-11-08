@@ -8,5 +8,19 @@
 	</array>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>benb.wqcdesigns.com</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+
 </dict>
 </plist>

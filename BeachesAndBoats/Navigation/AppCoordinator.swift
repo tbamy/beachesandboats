@@ -10,6 +10,7 @@ import UIKit
 final class AppCoordinator: Coordinator{
     override func start(){
         gotoWelcome()
+//        gotoCalendarTest()
     }
     
     func gotoWelcome(){
@@ -36,9 +37,26 @@ final class AppCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoHomePage(){
-        let vc: HomeView = .fromNib()
+    func gotoCalendarTest(){
+        let vc: CalendarTestView = .fromNib()
         vc.coordinator = self
         push(viewController: vc)
+    }
+    
+    func goToDashboard() {
+        navigationController = BaseNavigationController(rootViewController: Dashboard())
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.rootViewController = Dashboard()
+        }
+
+    }
+    
+    func gotoHostingDashboard(){
+        navigationController = BaseNavigationController(rootViewController: HostingDashboard())
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.rootViewController = HostingDashboard()
+        }
     }
 }

@@ -2,7 +2,7 @@
 //  Toast.swift
 //  BeachesAndBoats
 //
-//  Created by Tolu Akintayo on 25/09/2024.
+//  Created by Tolu Akintayo on 29/09/2024.
 //
 
 import UIKit
@@ -29,9 +29,14 @@ public class Toast: UILabel {
         let label = Toast()
         label.text = message
         
-        label.sizeToFit()
         let padding: CGFloat = 20
-        let width = label.frame.width + padding
+        let maxWidth = UIScreen.main.bounds.width - 2 * padding // Subtract padding from both sides
+        label.frame = CGRect(x: 0, y: 0, width: maxWidth, height: .greatestFiniteMagnitude)
+        
+        // Calculate the size that fits the message within the maxWidth
+        label.sizeToFit()
+        
+        let width = min(label.frame.width + padding, maxWidth)
         let height = label.frame.height + padding
         label.layer.cornerRadius = 8
         
@@ -39,8 +44,12 @@ public class Toast: UILabel {
         let y = UIScreen.main.bounds.height - height - 50
         label.frame = CGRect(x: x, y: y, width: width, height: height)
         
-        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.addSubview(label)
+        // Add the toast to the key window
+        if let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.addSubview(label)
+        }
         
+        // Show the toast with animation
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
             label.alpha = 1.0
         }, completion: { _ in
@@ -52,4 +61,3 @@ public class Toast: UILabel {
         })
     }
 }
-

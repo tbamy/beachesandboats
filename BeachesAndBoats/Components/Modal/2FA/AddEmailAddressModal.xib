@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEmailAddressModal" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="close" destination="Co6-8s-WtL" id="oeo-S3-n2K"/>
+                <outlet property="phoneNumberField" destination="deZ-uv-Ynk" id="A88-j9-HuQ"/>
+                <outlet property="sendBtn" destination="ON2-ey-jNO" id="hik-1M-xg5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="402"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Co6-8s-WtL">
+                    <rect key="frame" x="20" y="74" width="20" height="20"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="6Wk-Zh-sRj"/>
+                        <constraint firstAttribute="height" constant="20" id="mH5-8T-JeB"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add email address " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwN-Sd-WtH">
+                    <rect key="frame" x="124.66666666666667" y="74" width="143.66666666666663" height="19.333333333333329"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="LFC-xZ-iS6">
+                    <rect key="frame" x="20" y="133.33333333333334" width="353" height="140.00000000000003"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deZ-uv-Ynk" customClass="PhoneField" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="b75-GC-0PD"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ON2-ey-jNO" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="90" width="353" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="01w-a5-2fo"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Send OTP"/>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ON2-ey-jNO" secondAttribute="trailing" id="6tC-I8-GLq"/>
+                        <constraint firstItem="deZ-uv-Ynk" firstAttribute="leading" secondItem="LFC-xZ-iS6" secondAttribute="leading" id="Bh1-oL-5i9"/>
+                        <constraint firstItem="ON2-ey-jNO" firstAttribute="leading" secondItem="LFC-xZ-iS6" secondAttribute="leading" id="Zmp-1e-nRI"/>
+                        <constraint firstAttribute="trailing" secondItem="deZ-uv-Ynk" secondAttribute="trailing" id="wnx-Z3-BT2"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LFC-xZ-iS6" secondAttribute="trailing" constant="20" id="9L8-1y-6k8"/>
+                <constraint firstItem="LFC-xZ-iS6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="CG4-lp-raB"/>
+                <constraint firstItem="Co6-8s-WtL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="CT8-nE-RHW"/>
+                <constraint firstItem="dwN-Sd-WtH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="Pnn-ui-rDb"/>
+                <constraint firstItem="LFC-xZ-iS6" firstAttribute="top" secondItem="dwN-Sd-WtH" secondAttribute="bottom" constant="40" id="bQr-zO-62B"/>
+                <constraint firstItem="Co6-8s-WtL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hSY-w2-2hc"/>
+                <constraint firstItem="dwN-Sd-WtH" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="jq7-bJ-MZj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="300" y="-61.267605633802823"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="ON2-ey-jNO">
+            <size key="intrinsicContentSize" width="100.66666666666667" height="34.333333333333336"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="close_icon" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

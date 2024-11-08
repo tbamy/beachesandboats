@@ -93,7 +93,10 @@ public class FullModal: BaseXib {
         modal.layer.cornerRadius = fullScreen ? 0 : 12
         modal.clipsToBounds = true
         backDrop.addSubview(modal)
-        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.addSubview(backDrop)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.addSubview(backDrop)
+        }
         let height = fullScreen ? Helpers.screenHeight : Helpers.screenHeight * 0.8
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
@@ -105,7 +108,10 @@ public class FullModal: BaseXib {
     }
     
     public static func dismiss() {
-        if let subviews = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.subviews {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            
+            let subviews = keyWindow.subviews
             for view in subviews {
                 if view is FullModalView {
                     for v in view.subviews {

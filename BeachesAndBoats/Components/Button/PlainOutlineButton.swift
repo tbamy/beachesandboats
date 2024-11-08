@@ -30,10 +30,11 @@ import UIKit
     func setUp() {
         backgroundColor = .clear
         layer.cornerRadius = 8.0
-        setTitleColor(.beachBlue, for: .normal)
-        layer.borderColor = UIColor.beachBlue.cgColor
+        setTitleColor(.background, for: .normal)
+        tintColor = .background.darker(by: 30)
+        layer.borderColor = UIColor.background.cgColor
         layer.borderWidth = 1.0
         clipsToBounds = true
-        titleLabel?.font = Fonts.getFont(name: .SemiBold, 14)
+//        titleLabel?.font = Fonts.getFont(name: .SemiBold, 14)
     }
 }

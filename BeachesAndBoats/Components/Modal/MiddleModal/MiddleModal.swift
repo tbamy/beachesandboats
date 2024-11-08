@@ -171,7 +171,10 @@ import MessageUI
         modal.clipsToBounds = true
         
         backDrop.addSubview(modal)
-        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.addSubview(backDrop)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.addSubview(backDrop)
+        }
         
         // Calculate the modal's position to center it vertically
         let modalHeight = modal.getHeight()
@@ -205,7 +208,10 @@ import MessageUI
     }
     
     public static func dismiss() {
-        if let subviews = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.subviews {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            
+            let subviews = keyWindow.subviews
             for view in subviews {
                 if view is MiddleModalView {
                     for v in view.subviews {
@@ -221,6 +227,7 @@ import MessageUI
                }
             }
         }
+
     }
     
 

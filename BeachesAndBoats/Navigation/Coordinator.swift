@@ -17,7 +17,7 @@ class Coordinator {
     
     weak var delegate: CoordinatorDelegate?
 //    private var modalCoordinator: ModalCoordinator?
-    private let navigationController: UINavigationController?
+    var navigationController: UINavigationController?
     private let completion: (() -> Void)?
     
     // MARK: - Initialization

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadImageField" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="xgD-Pk-O8y" id="rTM-c1-SQH"/>
+                <outlet property="uploadBtn" destination="3Rf-2Q-eOz" id="1c3-6B-6XL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="508" height="329"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgD-Pk-O8y">
+                    <rect key="frame" x="0.0" y="59" width="508" height="236"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ba4-9B-n6c">
+                            <rect key="frame" x="166.33333333333331" y="62.666666666666664" width="175.33333333333331" height="110.66666666666671"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag and drop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBn-aD-udF">
+                                    <rect key="frame" x="35.66666666666665" y="0.0" width="104.33333333333331" height="19.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G91-dT-eRu">
+                                    <rect key="frame" x="78.666666666666657" y="35.333333333333329" width="18" height="19.333333333333329"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rf-2Q-eOz">
+                                    <rect key="frame" x="0.0" y="70.666666666666671" width="175.33333333333334" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="IQA-0W-flG"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system" title="  Upload Images ">
+                                        <color key="baseForegroundColor" name="B&amp;B"/>
+                                    </buttonConfiguration>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" name="B&amp;B"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <integer key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="ba4-9B-n6c" firstAttribute="centerY" secondItem="xgD-Pk-O8y" secondAttribute="centerY" id="Erj-Fq-Ns2"/>
+                        <constraint firstItem="ba4-9B-n6c" firstAttribute="centerX" secondItem="xgD-Pk-O8y" secondAttribute="centerX" id="i2e-zd-1o8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="xgD-Pk-O8y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4iB-fb-w6e"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xgD-Pk-O8y" secondAttribute="bottom" id="CJ5-bT-so5"/>
+                <constraint firstItem="xgD-Pk-O8y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="eO4-bp-pVU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xgD-Pk-O8y" secondAttribute="trailing" id="l03-Xa-xyf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="227.48091603053433" y="-118.66197183098592"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
+        <namedColor name="B&amp;B">
+            <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
