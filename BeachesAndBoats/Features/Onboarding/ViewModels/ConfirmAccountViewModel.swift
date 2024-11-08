@@ -21,7 +21,7 @@ class ConfirmAccountViewModel{
         case verifyCodeSuccess(GeneralResponse)
         case verifyCodeError(ErrorResponse)
         
-        case signUpSuccess(SignUpResponse)
+        case signUpSuccess(LoginResponse)
         case signUpError(ErrorResponse)
     }
     

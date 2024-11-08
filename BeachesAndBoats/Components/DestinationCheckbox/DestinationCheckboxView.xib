@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DestinationCheckboxView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="checkBox" destination="Nm0-vP-Wkb" id="NKF-Ph-d4i"/>
+                <outlet property="moneyInput" destination="RBx-NR-L1h" id="VTc-ay-qdZ"/>
+                <outlet property="moneyStack" destination="UA4-2h-QWW" id="9os-S1-BWf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="316"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="v9p-8w-3zc">
+                    <rect key="frame" x="0.0" y="59" width="393" height="223"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nm0-vP-Wkb" customClass="SelectableCheckbox" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UA4-2h-QWW">
+                            <rect key="frame" x="0.0" y="150" width="393" height="73"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add price per hour" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad7-Y2-Fb0">
+                                    <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBx-NR-L1h" customClass="BigMoneyInputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="25" width="393" height="48"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="RBx-NR-L1h" firstAttribute="leading" secondItem="UA4-2h-QWW" secondAttribute="leading" id="Eie-wb-tcS"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Nm0-vP-Wkb" firstAttribute="leading" secondItem="v9p-8w-3zc" secondAttribute="leading" id="Idk-So-sc4"/>
+                        <constraint firstItem="UA4-2h-QWW" firstAttribute="leading" secondItem="v9p-8w-3zc" secondAttribute="leading" id="M7J-Ye-uYe"/>
+                        <constraint firstAttribute="trailing" secondItem="Nm0-vP-Wkb" secondAttribute="trailing" id="O6V-e5-zco"/>
+                        <constraint firstAttribute="trailing" secondItem="UA4-2h-QWW" secondAttribute="trailing" id="WAH-zP-iiC"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="v9p-8w-3zc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Abt-Ep-lwO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v9p-8w-3zc" secondAttribute="trailing" id="O9Q-ve-6ue"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="v9p-8w-3zc" secondAttribute="bottom" id="ZZn-uO-bCy"/>
+                <constraint firstItem="v9p-8w-3zc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="peP-ph-qHA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="54.198473282442748" y="-128.16901408450704"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

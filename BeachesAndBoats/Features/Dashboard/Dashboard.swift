@@ -12,10 +12,10 @@ class Dashboard: UITabBarController {
     
 //    var userConstent: Bool
 //    
-//    init(userConstents: Bool) {
+    init() {
 //        self.userConstent = userConstents
-//        super.init(nibName: nil, bundle: nil)
-//    }
+        super.init(nibName: nil, bundle: nil)
+    }
     
     
     required init?(coder: NSCoder) {
@@ -45,7 +45,11 @@ class Dashboard: UITabBarController {
         let selectorWidth = self.tabBar.frame.width / CGFloat(self.tabBar.items?.count ?? 1)
         selectorView = UIView(frame: CGRect(x: 0, y: 0, width: selectorWidth, height: 1))
         selectorView.backgroundColor = UIColor.white
+        tabBar.backgroundColor = .white
         tabBar.barTintColor = .white
+        tabBar.tintColor = .beachBlue
+        tabBar.unselectedItemTintColor = .gray
+//        tabBar.isTranslucent = false
         self.tabBar.addSubview(pathView)
         self.tabBar.addSubview(selectorView)
     }

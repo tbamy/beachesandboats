@@ -86,17 +86,18 @@ class SignupView: BaseViewControllerPlain{
                 
                 //MARK: SignUp
             case .signUpSuccess(let response):
-//                UserSession.shared.userDetails = response.user
-                MiddleModal.show(title: response.message ?? "Registration Successful", type: .success, onConfirm: navigateToLogin)
+                AppStorage.hasSignedUp = true
+                AppStorage.username = email
+                UserSession.shared.loginRes = response
+                MiddleModal.show(title: response.message ?? "Registration Successful", type: .success, onConfirm: navigateToHome)
             case .signUpError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
     }
     
-    func navigateToLogin(){
-
-        coordinator?.gotoLogin()
+    func navigateToHome(){
+        coordinator?.goToDashboard()
     }
     
     func validateFields() -> Bool{

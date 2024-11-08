@@ -29,7 +29,17 @@ class WelcomeScreen: UIViewController {
     
     @objc func autoNavigate(){
         timer.invalidate()
-        coordinator?.gotoWalkthrough()
+        if let hasSignedUp = AppStorage.hasSignedUp{
+            if hasSignedUp{
+                coordinator?.gotoLogin()
+            }else{
+                coordinator?.gotoWalkthrough()
+            }
+        }else{
+            coordinator?.gotoWalkthrough()
+        }
+
+        
     }
 
 }

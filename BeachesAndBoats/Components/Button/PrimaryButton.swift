@@ -9,11 +9,14 @@ import UIKit
 
 @IBDesignable public class PrimaryButton: UIButton {
     
-    @IBInspectable public var identifier: String = "" { didSet {
-        self.accessibilityIdentifier = identifier
-    } }
+    @IBInspectable public var identifier: String = "" {
+        didSet {
+            self.accessibilityIdentifier = identifier
+        }
+    }
     
     public override func awakeFromNib() {
+        super.awakeFromNib()
         setUp()
     }
     
@@ -27,16 +30,35 @@ import UIKit
         setUp()
     }
     
-    func setUp() {
-        backgroundColor = .beachBlue
+    private func setUp() {
         layer.cornerRadius = 8.0
-        setTitleColor(.white, for: .normal)
-        layer.borderColor = UIColor.beachBlue.cgColor
-        layer.borderWidth = 1.0
-        setBackgroundColor(.grey, for: .disabled)
-        tintColor = .white
         clipsToBounds = true
-//        titleLabel?.font = Fonts.getFont(name: .SemiBold, 14)
+        tintColor = .white
+        
+        // Set title color for normal state
+//        setTitleColor(.white, for: .normal)
+        setTitleColor(.white, for: .disabled)
+        
+        // Update appearance based on initial enabled state
+        updateAppearance()
+    }
+    
+    // Override the isEnabled property to update the appearance
+    public override var isEnabled: Bool {
+        didSet {
+            updateAppearance()
+        }
+    }
+    
+    // Update background color and title color based on the button's state
+    private func updateAppearance() {
+        if isEnabled {
+            backgroundColor = UIColor.beachBlue
+            setTitleColor(.white, for: .normal)
+        } else {
+            tintColor = .white
+            backgroundColor = UIColor.background.lighter(by: 7)
+            setTitleColor(.white, for: .disabled)
+        }
     }
 }
-

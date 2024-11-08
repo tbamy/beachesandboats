@@ -11,4 +11,7 @@ struct SignUpResponse: Codable{
     var message: String?
     var status: Bool?
     var user: UserData?
+    var access_token: String?
+    var token_type: String?
+    var expires_at: String?
 }

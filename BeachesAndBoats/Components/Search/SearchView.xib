@@ -28,13 +28,24 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yd5-XG-jAY">
+                    <rect key="frame" x="20" y="738" width="353" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Z1K-eK-ThB"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yd5-XG-jAY" secondAttribute="trailing" constant="20" id="2X9-1M-2SE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yhE-h5-l55" secondAttribute="trailing" constant="20" id="DXb-u6-I2K"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="yd5-XG-jAY" secondAttribute="bottom" constant="30" id="P5G-hQ-Zxh"/>
                 <constraint firstItem="6bG-O2-Ypb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="XT9-Tm-Jy8"/>
                 <constraint firstItem="6bG-O2-Ypb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="k32-ou-XFh"/>
+                <constraint firstItem="yd5-XG-jAY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="liX-1k-l3X"/>
                 <constraint firstItem="yhE-h5-l55" firstAttribute="top" secondItem="6bG-O2-Ypb" secondAttribute="bottom" constant="30" id="mGJ-04-Wzn"/>
                 <constraint firstItem="yhE-h5-l55" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="vmE-7X-4AC"/>
             </constraints>

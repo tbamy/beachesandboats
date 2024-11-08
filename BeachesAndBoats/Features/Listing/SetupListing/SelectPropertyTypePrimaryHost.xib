@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectPropertyTypePrimaryHost" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="beachHouseStack" destination="d5B-br-NTA" id="2hH-Gr-nMM"/>
+                <outlet property="boatStack" destination="Ck0-Lq-A0R" id="ct5-FX-wsG"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLX-Y2-AOM" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="268" y="59" width="109" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="yzD-Zo-30G"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the type of Property" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmF-A6-sJl">
+                    <rect key="frame" x="20" y="139" width="353" height="21.666666666666657"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YPW-6H-15h">
+                    <rect key="frame" x="20" y="180.66666666666663" width="353" height="151"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-40" translatesAutoresizingMaskIntoConstraints="NO" id="d5B-br-NTA">
+                            <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="151"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beach_house" translatesAutoresizingMaskIntoConstraints="NO" id="Zbg-aM-4mI">
+                                    <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="151"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="151" id="WCq-bx-WlH"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Zbg-aM-4mI" firstAttribute="leading" secondItem="d5B-br-NTA" secondAttribute="leading" id="61x-3r-KSf"/>
+                                <constraint firstAttribute="trailing" secondItem="Zbg-aM-4mI" secondAttribute="trailing" id="eJL-Os-Sod"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-40" translatesAutoresizingMaskIntoConstraints="NO" id="Ck0-Lq-A0R">
+                            <rect key="frame" x="181.66666666666663" y="0.0" width="171.33333333333337" height="151"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boat" translatesAutoresizingMaskIntoConstraints="NO" id="aV3-CO-lQd">
+                                    <rect key="frame" x="0.0" y="0.0" width="171.33333333333334" height="151"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="151" id="Hmw-pf-G8g"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="aV3-CO-lQd" secondAttribute="trailing" id="QVr-vA-Kkn"/>
+                                <constraint firstItem="aV3-CO-lQd" firstAttribute="leading" secondItem="Ck0-Lq-A0R" secondAttribute="leading" id="hLh-1y-Rfh"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="YPW-6H-15h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="8ev-xg-suj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SLX-Y2-AOM" secondAttribute="trailing" constant="16" id="L7X-NX-aTa"/>
+                <constraint firstItem="gmF-A6-sJl" firstAttribute="top" secondItem="SLX-Y2-AOM" secondAttribute="bottom" constant="30" id="SaU-GV-eCG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gmF-A6-sJl" secondAttribute="trailing" constant="20" id="jQU-KY-6St"/>
+                <constraint firstItem="gmF-A6-sJl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="pEi-Qm-Anu"/>
+                <constraint firstItem="YPW-6H-15h" firstAttribute="top" secondItem="gmF-A6-sJl" secondAttribute="bottom" constant="20" id="wA5-MG-Ua1"/>
+                <constraint firstItem="SLX-Y2-AOM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="z1y-8F-tpt"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YPW-6H-15h" secondAttribute="trailing" constant="20" id="zSW-wk-Ebp"/>
+            </constraints>
+            <point key="canvasLocation" x="26.717557251908396" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="SLX-Y2-AOM">
+            <size key="intrinsicContentSize" width="109" height="34.333333333333336"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="beach_house" width="187" height="151"/>
+        <image name="boat" width="187" height="151"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

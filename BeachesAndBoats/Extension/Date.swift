@@ -30,6 +30,13 @@ extension Date {
         return readableDateFormatter.string(from: self)
     }
     
+    public func toFormattedDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, MMM d, yyyy"
+        return dateFormatter.string(from: self)
+    }
+
+    
     public static func toReadableDate(date: Date) -> String {
         let readableDateFormatter = DateFormatter()
         readableDateFormatter.dateFormat = "dd/MM/yyyy"

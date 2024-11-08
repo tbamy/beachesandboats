@@ -211,11 +211,11 @@ import UIKit
     }
     
     @objc func donButtonTapped(_ sender: UIBarButtonItem) {
-        if picker.date != nil {
+//        if picker.date {
             textField.resignFirstResponder()
             selectedDate = picker.date
             textField.text = String.toReadableDate(date: picker.date)
-        }
+//        }
     }
 
     @objc func pickerTapped(_ sender: UITapGestureRecognizer) {

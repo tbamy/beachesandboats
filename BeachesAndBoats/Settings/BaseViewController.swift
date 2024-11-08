@@ -41,16 +41,19 @@ class BaseViewController: UIViewController {
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = .clear
         navigationBarAppearance.backgroundImage = nil
-        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: Fonts.getFont(name: .Medium, 18), .foregroundColor: UIColor.black]
+//        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: Fonts.getFont(name: .Medium, 18), .foregroundColor: UIColor.black]
         navigationController?.navigationBar.overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.barStyle = .default
         setupNavigation(backButton: Assets.backButton.image)
     }
     
     func setupNavigation(backButton: UIImage) {
-        navigationBarAppearance.setBackIndicatorImage(Assets.backButton.image, transitionMaskImage: Assets.backButton.image)
-        navigationController?.navigationBar.backIndicatorImage = backButton
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButton
+        let originalBackButton = backButton.withRenderingMode(.alwaysOriginal)
+        navigationBarAppearance.setBackIndicatorImage(originalBackButton, transitionMaskImage: originalBackButton)
+        navigationController?.navigationBar.backIndicatorImage = originalBackButton
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = originalBackButton
+
+        navigationController?.navigationBar.tintColor = .background
         navigationBarAppearance.shadowImage = UIImage()
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.setTitleVerticalPositionAdjustment(-4.5, for: .default)
@@ -84,10 +87,12 @@ class BaseViewControllerPlain: BaseViewController {
     
     override func viewDidLoad() {
         setNavigationPlain()
+        view.backgroundColor = .background.lighter(by: 17)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setNavigationPlain()
+        view.backgroundColor = .background.lighter(by: 17)
     }
 }
 

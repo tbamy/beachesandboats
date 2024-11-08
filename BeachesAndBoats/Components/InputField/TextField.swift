@@ -50,14 +50,7 @@ class TextField: UITextField {
         mainStack.spacing = 5
         
         addSubview(error)
-        //        mainStack.translatesAutoresizingMaskIntoConstraints = false
-        //
-        //        NSLayoutConstraint.activate([
-        //            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-        //            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-        //            mainStack.topAnchor.constraint(equalTo: bottomAnchor, constant: 5),
-//            mainStack.heightAnchor.constraint(equalToConstant: mainStack.bounds.height)
-//        ])
+
         
     }
 }

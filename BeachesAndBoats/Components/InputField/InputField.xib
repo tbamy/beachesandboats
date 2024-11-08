@@ -23,6 +23,7 @@
                 <outlet property="textBlocker" destination="sPL-zm-AwV" id="78c-Wo-uWf"/>
                 <outlet property="textField" destination="aeV-4z-olL" id="wmS-PV-7l5"/>
                 <outlet property="textView" destination="Rwz-Rs-Raz" id="sSK-WL-KFV"/>
+                <outlet property="textViewHeightConstraint" destination="wQR-bU-0Mz" id="r5f-vB-iqy"/>
                 <outlet property="title" destination="3eA-Lu-J85" id="uD8-cl-i87"/>
                 <outlet property="topRightIcon" destination="q4g-Wg-BUD" id="FKe-PI-vEe"/>
                 <outlet property="topRightLabel" destination="aWo-xn-B9y" id="u6K-sV-B4w"/>
@@ -32,17 +33,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="347" height="204"/>
+            <rect key="frame" x="0.0" y="0.0" width="399" height="224"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Woc-4B-p3b">
-                    <rect key="frame" x="0.0" y="0.0" width="347" height="204"/>
+                    <rect key="frame" x="0.0" y="0.0" width="399" height="224"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="x3B-rg-7fN">
-                            <rect key="frame" x="0.0" y="0.0" width="347" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="399" height="17"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eA-Lu-J85" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="347" height="17"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="399" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" name="TitleGrey"/>
                                     <nil key="highlightedColor"/>
@@ -94,23 +95,23 @@
                             </constraints>
                         </stackView>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MgH-Vm-HrL" customClass="TextView" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="27.000000000000004" width="347" height="53.333333333333343"/>
+                            <rect key="frame" x="0.0" y="27" width="399" height="64.333333333333329"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <color key="textColor" systemColor="systemGray6Color"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rwz-Rs-Raz">
-                            <rect key="frame" x="0.0" y="90.333333333333329" width="347" height="47.999999999999986"/>
+                            <rect key="frame" x="0.0" y="101.33333333333333" width="399" height="47.999999999999986"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeV-4z-olL">
-                                    <rect key="frame" x="0.0" y="0.0" width="347" height="48"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="399" height="48"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-zm-AwV">
-                                    <rect key="frame" x="0.0" y="0.0" width="347" height="48"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="399" height="48"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhz-7f-Mnc" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="23.000000000000004" y="15.666666666666671" width="51.333333333333343" height="17"/>
@@ -141,19 +142,19 @@
                                 <constraint firstItem="sPL-zm-AwV" firstAttribute="leading" secondItem="Rwz-Rs-Raz" secondAttribute="leading" id="Kvl-K3-efi"/>
                                 <constraint firstItem="aeV-4z-olL" firstAttribute="leading" secondItem="Rwz-Rs-Raz" secondAttribute="leading" id="MOI-3B-NNo"/>
                                 <constraint firstItem="aeV-4z-olL" firstAttribute="top" secondItem="Rwz-Rs-Raz" secondAttribute="top" id="WMr-wM-LnF"/>
-                                <constraint firstAttribute="height" constant="48" id="dQe-wJ-Kll"/>
                                 <constraint firstAttribute="trailing" secondItem="sPL-zm-AwV" secondAttribute="trailing" id="lYE-z5-1Nb"/>
                                 <constraint firstAttribute="bottom" secondItem="sPL-zm-AwV" secondAttribute="bottom" id="ril-fU-KJl"/>
                                 <constraint firstItem="sPL-zm-AwV" firstAttribute="top" secondItem="Rwz-Rs-Raz" secondAttribute="top" id="vke-l7-mnU"/>
+                                <constraint firstAttribute="height" constant="48" id="wQR-bU-0Mz"/>
                                 <constraint firstAttribute="trailing" secondItem="aeV-4z-olL" secondAttribute="trailing" id="x6P-fw-Zxw"/>
                                 <constraint firstAttribute="bottom" secondItem="aeV-4z-olL" secondAttribute="bottom" id="xUE-be-1AW"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eqH-0a-Q9U">
-                            <rect key="frame" x="0.0" y="148.33333333333334" width="347" height="31.666666666666657"/>
+                            <rect key="frame" x="0.0" y="159.33333333333334" width="399" height="40.666666666666657"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe dfjasfV gfj SFUYgdf DUydgjaD Glffq fqw feqwfe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHY-MB-DN2" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="276.33333333333331" height="31.666666666666668"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="317.66666666666669" height="40.666666666666664"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" name="Background"/>
                                     <nil key="highlightedColor"/>
@@ -164,7 +165,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I94-KE-6VI" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                    <rect key="frame" x="297" y="0.0" width="50" height="20.333333333333332"/>
+                                    <rect key="frame" x="349" y="0.0" width="50" height="20.333333333333332"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="nst-dJ-YQs"/>
                                     </constraints>
@@ -184,7 +185,7 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GL6-SR-d4i">
-                            <rect key="frame" x="0.0" y="190" width="347" height="14"/>
+                            <rect key="frame" x="0.0" y="210" width="399" height="14"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="wSD-Be-YPw">
                                     <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
@@ -195,7 +196,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ouy-4d-LuR" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                    <rect key="frame" x="19" y="0.0" width="328" height="14"/>
+                                    <rect key="frame" x="19" y="0.0" width="380" height="14"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" name="Error"/>
                                     <nil key="highlightedColor"/>
@@ -219,7 +220,7 @@
                 <constraint firstItem="Woc-4B-p3b" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="TYn-de-pKk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="55.725190839694655" y="-152.11267605633805"/>
+            <point key="canvasLocation" x="158" y="-145"/>
         </view>
     </objects>
     <designables>

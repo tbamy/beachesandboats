@@ -32,6 +32,8 @@ public struct PickerItem {
     @IBOutlet weak var topRightPrompt: UILabel!
     @IBOutlet weak var coverLabel: RegularLabel!
     @IBOutlet weak var styledLabel: RegularLabel!
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+
     
     @IBInspectable public var numberOfCharacters: Int = 1000
     @IBInspectable public var identifier: String = "" { didSet {
@@ -44,6 +46,7 @@ public struct PickerItem {
     
     public var textChanged: (UITextField, NSRange, String) -> Void = { _, _, _ in }
     public var editingEnded: () -> Void = {}
+    public var onTextChanged: ((String) -> Void)?
     
     public var text: String {
         get { textField.text ?? "" }
@@ -77,6 +80,10 @@ public struct PickerItem {
     @IBInspectable public var titleText: String = "" {
         didSet { setup() }
     }
+    
+//    @IBInspectable public var height: CGFloat = 50 {
+//        didSet { updateHeight(to: height ) }
+//    }
     
     @IBInspectable public var error: String = "" {
         didSet { updateError() }
@@ -157,20 +164,17 @@ public struct PickerItem {
         updateHeight()
     }
     
+    public func updateHeight(to height: CGFloat) {
+        textViewHeightConstraint.constant = height
+        textView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        self.layoutIfNeeded()
+    }
+
+    
     public override func prepareForInterfaceBuilder() {
         textView.widthAnchor.constraint(equalToConstant: superview?.bounds.width ?? 100).isActive = true
         setNeedsLayout()
     }
-    
-//    func updateHeight() {
-//        constraints.filter({$0.firstAnchor == heightAnchor }).forEach{ $0.isActive = false }
-////        heightAnchor.constraint(equalToConstant: bounds.height).isActive = true
-////        constraints.filter({$0.firstAnchor == leadingAnchor }).forEach{ $0.isActive = false }
-////        constraints.filter({$0.firstAnchor == trailingAnchor }).forEach{ $0.isActive = false }
-////        textView.widthAnchor.constraint(equalToConstant: superview?.bounds.width ?? 150).isActive = true
-//        //superview?.removeAllConstraints()
-//        setNeedsDisplay()
-//    }
     
     func updateError() {
         if error != "" {
@@ -249,6 +253,7 @@ extension InputField: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         textChanged(textField, range, string)
+        onTextChanged?(updatedText)
         return updatedText.count <= numberOfCharacters
     }
 }

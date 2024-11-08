@@ -160,7 +160,7 @@ public enum Fonts: String {
     }
 
     func setup(_ size: CGFloat = 20) {
-        font = Fonts.getFont(name: .SemiBold, size)
+//        font = Fonts.getFont(name: .SemiBold, size)
     }
 }
 
@@ -178,7 +178,7 @@ public enum Fonts: String {
     }
     
     func setup(_ size: CGFloat = 16) {
-        font = Fonts.getFont(name: .Light, size)
+//        font = Fonts.getFont(name: .Light, size)
     }
 }
 
@@ -218,7 +218,7 @@ public class BulletLabel: UILabel {
 
     func setup(_ size: CGFloat = 13, style: Fonts = .Regular, text: String = "") {
         self.text = text
-        font = Fonts.getFont(name: style, size)
+//        font = Fonts.getFont(name: style, size)
         sizeToFit()
         numberOfLines = 0
         textColor = .titleGrey

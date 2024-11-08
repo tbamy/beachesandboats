@@ -13,6 +13,13 @@ import CommonCrypto
 public class Provider<T: TargetType> {
     private var moyaError: MoyaError?
     
+    private let authPlugin = AccessTokenPlugin { _ in UserSession.shared.token ?? "" }
+    private let loggerConfig = NetworkLoggerPlugin.Configuration(logOptions: .verbose)
+    
+//    var plainProvider: MoyaProvider<T> {
+//         return MoyaProvider<T>(stubClosure: { (_: T) -> Moya.StubBehavior in Configuration.stubBehavior }, plugins: [authPlugin, NetworkLoggerPlugin(configuration: loggerConfig)])
+//     }
+    
    var provider: MoyaProvider<T> {
        let authPlugin = AccessTokenPlugin { _ in UserSession.shared.token ?? "" }
         let loggerConfig = NetworkLoggerPlugin.Configuration(logOptions: .verbose)
@@ -25,7 +32,7 @@ public class Provider<T: TargetType> {
     private func getSession() -> Session {
         let serverTrustPolicies: [String: ServerTrustEvaluating] = [
 //            "benbsbackend.etogetherness.com": PinnedCertificatesTrustEvaluator()
-            "benbsbackend.etogetherness.com": DisabledTrustEvaluator()
+            "benb.wqcdesigns.com": DisabledTrustEvaluator()
         ]
         let manager = ServerTrustManager(evaluators: serverTrustPolicies)
         return Session.init(serverTrustManager: manager)

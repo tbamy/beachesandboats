@@ -37,11 +37,17 @@ public class LoadingModal: BaseXib {
     public static func show(title: String = "Loading...") {
         let modal = LoadingModal(frame: Helpers.screen)
         modal.title = title
-        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.addSubview(modal)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.addSubview(modal)
+        }
     }
     
     public static func dismiss() {
-        if let subviews = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.subviews {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            
+            let subviews = keyWindow.subviews
             for view in subviews {
                 if view is LoadingModal {
                     view.removeFromSuperview()

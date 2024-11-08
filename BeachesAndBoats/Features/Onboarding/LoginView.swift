@@ -26,6 +26,7 @@ class LoginView: BaseViewControllerPlain {
         let signUpGesture = UITapGestureRecognizer(target: self, action: #selector(gotoSignUp))
         signUpBtn.isUserInteractionEnabled = true
         signUpBtn.addGestureRecognizer(signUpGesture)
+        emailAddress.text = AppStorage.username ?? ""
         
         bindNetwork()
     }
@@ -49,8 +50,10 @@ class LoginView: BaseViewControllerPlain {
             
             switch response {
             case .loginSuccess(let response):
-                UserSession.shared.userDetails = response.user
-                self?.coordinator?.gotoHomePage()
+//                UserSession.shared.userDetails = response.user
+                AppStorage.username = response.user?.email
+                UserSession.shared.loginRes = response
+                self?.coordinator?.goToDashboard()
             case .loginError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
