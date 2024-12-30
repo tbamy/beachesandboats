@@ -13,6 +13,7 @@ class BookingRoomCell: BaseXib {
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var guestsLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bedTypeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -64,6 +65,7 @@ class BookingRoomCell: BaseXib {
         dateLabel.text = model.date
         priceLabel.text = model.price
         amenities = model.amenities
+        titleLabel.text = model.title
         
         amenitiesCollectionView.delegate = self
         amenitiesCollectionView.dataSource = self

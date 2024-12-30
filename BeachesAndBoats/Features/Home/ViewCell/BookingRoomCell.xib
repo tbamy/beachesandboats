@@ -18,11 +18,12 @@
                 <outlet property="priceLabel" destination="9UQ-Yb-xII" id="RmD-nZ-h7j"/>
                 <outlet property="selectBtn" destination="xTG-4R-sD7" id="V1j-Cm-Ct0"/>
                 <outlet property="selectedBtn" destination="css-Sc-uTV" id="lFQ-cT-e5w"/>
+                <outlet property="titleLabel" destination="f2v-05-Eix" id="wcP-vn-guI"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="363" height="653"/>
+            <rect key="frame" x="0.0" y="0.0" width="363" height="697"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v0w-CU-eO4">
@@ -31,6 +32,27 @@
                         <constraint firstAttribute="height" constant="173" id="mpv-fF-Yj0"/>
                     </constraints>
                 </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xuB-80-7IN">
+                    <rect key="frame" x="0.0" y="555" width="363" height="108"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTG-4R-sD7" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="363" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="mDQ-JA-gvB"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Select"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="css-Sc-uTV" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="58" width="363" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="LwF-lu-QFS"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Select"/>
+                        </button>
+                    </subviews>
+                </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8eX-RZ-N6h">
                     <rect key="frame" x="0.0" y="252" width="363" height="18"/>
                     <subviews>
@@ -75,7 +97,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7gk-VQ-4W4">
-                    <rect key="frame" x="0.0" y="473" width="363" height="18"/>
+                    <rect key="frame" x="0.0" y="517" width="363" height="18"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="D9O-qi-dMm">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="18"/>
@@ -103,60 +125,48 @@
                         </label>
                     </subviews>
                 </stackView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="U3z-65-cfW">
-                    <rect key="frame" x="0.0" y="290" width="363" height="163"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="U3z-65-cfW">
+                    <rect key="frame" x="0.0" y="290" width="363" height="177.66666666666663"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7dW-Uc-HLm">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7dW-Uc-HLm">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xuB-80-7IN">
-                    <rect key="frame" x="0.0" y="511" width="363" height="108"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTG-4R-sD7" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="363" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="mDQ-JA-gvB"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Select"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="css-Sc-uTV" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="58" width="363" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="LwF-lu-QFS"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Select"/>
-                        </button>
-                    </subviews>
-                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2v-05-Eix">
+                    <rect key="frame" x="0.0" y="482.66666666666669" width="363" height="19.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="7gk-VQ-4W4" firstAttribute="top" secondItem="f2v-05-Eix" secondAttribute="bottom" constant="15" id="1DK-hS-S7R"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xuB-80-7IN" secondAttribute="bottom" id="7Wc-XI-ifI"/>
                 <constraint firstItem="xuB-80-7IN" firstAttribute="top" secondItem="7gk-VQ-4W4" secondAttribute="bottom" constant="20" id="A6s-jK-j8A"/>
                 <constraint firstItem="v0w-CU-eO4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ihy-pS-YMN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuB-80-7IN" secondAttribute="trailing" id="Mqj-dS-9z5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="U3z-65-cfW" secondAttribute="trailing" id="NRH-kV-khV"/>
                 <constraint firstItem="U3z-65-cfW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OTJ-HS-P0Q"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f2v-05-Eix" secondAttribute="trailing" id="UzL-Gj-aaD"/>
                 <constraint firstItem="7gk-VQ-4W4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VmU-ol-mWT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8eX-RZ-N6h" secondAttribute="trailing" id="Xrw-0Y-Pov"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7gk-VQ-4W4" secondAttribute="trailing" id="fVS-tt-n9Y"/>
+                <constraint firstItem="f2v-05-Eix" firstAttribute="top" secondItem="U3z-65-cfW" secondAttribute="bottom" constant="15" id="npb-ox-Ohx"/>
                 <constraint firstItem="v0w-CU-eO4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="q0R-MT-G0v"/>
                 <constraint firstItem="8eX-RZ-N6h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="qJH-Qz-lNR"/>
                 <constraint firstItem="U3z-65-cfW" firstAttribute="top" secondItem="8eX-RZ-N6h" secondAttribute="bottom" constant="20" id="sXv-S5-OBj"/>
                 <constraint firstItem="8eX-RZ-N6h" firstAttribute="top" secondItem="v0w-CU-eO4" secondAttribute="bottom" constant="20" id="tpu-B6-5a8"/>
-                <constraint firstItem="7gk-VQ-4W4" firstAttribute="top" secondItem="U3z-65-cfW" secondAttribute="bottom" constant="20" id="vKd-ux-g4i"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v0w-CU-eO4" secondAttribute="trailing" id="vam-Xy-99V"/>
                 <constraint firstItem="xuB-80-7IN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="x3A-qo-38C"/>
+                <constraint firstItem="f2v-05-Eix" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zyS-VN-GBk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="113.74045801526717" y="-50.352112676056343"/>
+            <point key="canvasLocation" x="113.74045801526717" y="-34.859154929577464"/>
         </view>
     </objects>
     <designables>

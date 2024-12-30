@@ -266,7 +266,6 @@
 		A6B415B32D0B794E00717CE9 /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B415B22D0B794E00717CE9 /* UserDevice.swift */; };
 		A6B415B52D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */; };
 		A6B415B82D0E98E900717CE9 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = A6B415B72D0E98E900717CE9 /* DeviceKit */; };
-		A6B415BA2D116BE300717CE9 /* HouseBookingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B415B92D116BE200717CE9 /* HouseBookingType.swift */; };
 		A6C1C4162CBA6E6C001CD27D /* DateRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */; };
 		A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */; };
 		A6C1C41A2CBBC4F1001CD27D /* HorizonCalendar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */; };
@@ -642,6 +641,7 @@
 		A675D9DA2D202849003E297B /* BookingRoomsListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingRoomsListView.xib; sourceTree = "<group>"; };
 		A675D9DD2D202B98003E297B /* BookingRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRoomCell.swift; sourceTree = "<group>"; };
 		A675D9DE2D202B98003E297B /* BookingRoomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingRoomCell.xib; sourceTree = "<group>"; };
+		A675D9E22D22B349003E297B /* HouseBookingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseBookingType.swift; sourceTree = "<group>"; };
 		A67C426B2CB70250004CF98F /* DiscountField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountField.swift; sourceTree = "<group>"; };
 		A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsCell.swift; sourceTree = "<group>"; };
 		A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingsCell.xib; sourceTree = "<group>"; };
@@ -664,7 +664,6 @@
 		A6A2E8732CD4E955004E58EB /* ChefDishesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefDishesResponse.swift; sourceTree = "<group>"; };
 		A6B415B22D0B794E00717CE9 /* UserDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDevice.swift; sourceTree = "<group>"; };
 		A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyLoginOtpRequest.swift; sourceTree = "<group>"; };
-		A6B415B92D116BE200717CE9 /* HouseBookingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HouseBookingType.swift; path = ../../../../../../Users/wema/Desktop/HouseBookingType.swift; sourceTree = "<group>"; };
 		A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeIndicatorView.swift; sourceTree = "<group>"; };
 		A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendar.swift; sourceTree = "<group>"; };
 		A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizonCalendar.xib; sourceTree = "<group>"; };
@@ -1512,6 +1511,14 @@
 			path = Booking;
 			sourceTree = "<group>";
 		};
+		A675D9E12D22B342003E297B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				A675D9E22D22B349003E297B /* HouseBookingType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		A67A579B2C0F07E200BC3201 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1570,7 +1577,7 @@
 		A6C20FBC2C84F9620045C670 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A6C20FC02C84F9C40045C670 /* Enums */,
+				A675D9E12D22B342003E297B /* Enums */,
 				A6C20FBF2C84F9B50045C670 /* Requests */,
 				A6C20FBE2C84F9A90045C670 /* Response */,
 				A6C20FBD2C84F9A20045C670 /* Targets */,
@@ -1615,14 +1622,6 @@
 				A6C20FD32C859C480045C670 /* Onboarding */,
 			);
 			path = Requests;
-			sourceTree = "<group>";
-		};
-		A6C20FC02C84F9C40045C670 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				A6B415B92D116BE200717CE9 /* HouseBookingType.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		A6C20FC52C8504490045C670 /* MiddleModal */ = {
@@ -2192,7 +2191,6 @@
 				A65C50FF2CA9506C0027E5F1 /* Toast.swift in Sources */,
 				A65C51102CAACC030027E5F1 /* AutoSizingTableViewCell.swift in Sources */,
 				A6FB74502C1355B100A26806 /* CreatePasswordModal.swift in Sources */,
-				A6B415BA2D116BE300717CE9 /* HouseBookingType.swift in Sources */,
 				A6617A4F2CAF557900514576 /* BookingsView.swift in Sources */,
 				A6CA3D482CB9CD10009307B2 /* ChefDIshesListView.swift in Sources */,
 				A63CE7AC2C8E8217008D91C5 /* LoginResponse.swift in Sources */,
