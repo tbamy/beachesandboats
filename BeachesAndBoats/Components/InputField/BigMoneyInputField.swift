@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import UIKit
 
 class BigMoneyInputField: InputField {
@@ -41,13 +40,15 @@ override func setup() {
     textField.backgroundColor = .white
 }
 
-@objc func editingChanged() {
-    // Format the number when the editingChanged event is triggered
-    if let text = textField.text {
-        textField.text = formatNumber(text)
+    @objc func editingChanged() {
+        if let text = textField.text {
+            textField.text = formatNumber(text)
+            if let amount = getIntValue() {
+                amountChanged()
+            }
+        }
     }
-    amountChanged()
-}
+
 
 public override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     error = ""

@@ -50,13 +50,25 @@ class ChefInformationView: BaseViewControllerPlain {
     func validate(){
         
     }
+    
+    
 
 
     @IBAction func nextTapped(_ sender: Any) {
 
-        let request = CreateServiceListingRequest(name: nameLabel.text, description: descriptionLabel.text, profile_image: Data(), from_when: "", to_when: "", dishes: [], price: 0, sample_images: [], type: "", gender: "")
+        let request = CreateServiceListingRequest(roleType: HostType.chef.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: "", availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
+        
+        print(request)
+        
         coordinator?.gotoChefUploadProfileImageView(createServiceListingData: request)
         
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let request = CreateServiceListingRequest(roleType: HostType.chef.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: "", availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
+        
+        AppStorage.serviceListing = request
+        coordinator?.backToDashboard()
     }
     
 }

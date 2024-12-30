@@ -29,7 +29,7 @@ class DJUploadProfileImageView: BaseViewControllerPlain {
         }
     }
     
-//    var roomImages: [Data] = []
+    var images: [Data] = []
     
     var profileImage: Data?
     
@@ -78,12 +78,35 @@ class DJUploadProfileImageView: BaseViewControllerPlain {
         if let imageData = image?.pngData() {
             profileImage = imageData
             
-            let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: profileImage ?? Data(), from_when: "", to_when: "", dishes: [], price: 0, sample_images: [], type: "", gender: "")
+            images.append(imageData)
             
-            coordinator?.gotoDJAvailableDatesView(createServiceListingData: request)
+            if var createServiceListing = createServiceListing{
+                createServiceListing.images = images
+                
+                print(createServiceListing)
+                
+                coordinator?.gotoChefAvailableDatesView(createServiceListingData: createServiceListing)
+            }
+        
         }
         
 
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if let imageData = image?.pngData() {
+//            profileImage = imageData
+            images.append(imageData)
+            
+            if var createServiceListing = createServiceListing{
+                createServiceListing.images = images
+                
+                AppStorage.serviceListing = createServiceListing
+                coordinator?.backToDashboard()
+            }
+        }
+        
+        
     }
             
     func deleteImage() {

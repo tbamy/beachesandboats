@@ -31,7 +31,7 @@ class BoatPeopleRules: BaseViewControllerPlain {
     }
     
     func setup(){
-        stepOneProgress.setProgress(0.90, animated: true)
+        stepOneProgress.setProgress(1, animated: true)
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         subtitleLabel.text = "Select the maximum number people that can be in your \(boatType ?? "") at once"
@@ -46,9 +46,26 @@ class BoatPeopleRules: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: createBoatListing?.preferred_languages ?? [], brief_introduction: createBoatListing?.brief_introduction ?? "", rules: createBoatListing?.rules ?? [], no_of_adults: numberOfAdults.count, no_of_children: numberOfChildren.count, no_of_pets: numberOfPets.count, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.noOfAdults = numberOfAdults.count
+                createBoatListing.noOfChildren = numberOfChildren.count
+                createBoatListing.noOfPets = numberOfPets.count
+                print(createBoatListing)
+                
+                
+                coordinator?.gotoBoatAddressView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
+        }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.noOfAdults = numberOfAdults.count
+            createBoatListing.noOfChildren = numberOfChildren.count
+            createBoatListing.noOfPets = numberOfPets.count
             
-            coordinator?.gotoBoatAddressView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
         }
     }
 

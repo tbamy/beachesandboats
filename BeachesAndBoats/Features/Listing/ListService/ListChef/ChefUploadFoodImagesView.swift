@@ -45,7 +45,7 @@ class ChefUploadFoodImagesView: BaseViewControllerPlain {
     func setupCollectionView() {
         stepOneProgress.setProgress(1, animated: false)
         stepOneProgress.tintColor = .success
-        stepTwoProgress.setProgress(0.55, animated: true)
+        stepTwoProgress.setProgress(1, animated: true)
         stepTwoProgress.tintColor = .B_B
         
         collectionView.dataSource = self
@@ -88,15 +88,36 @@ class ChefUploadFoodImagesView: BaseViewControllerPlain {
                 chefImages.append(imageData)
             }
         }
-    
-    let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: createServiceListing?.from_when ?? "", to_when: createServiceListing?.to_when ?? "", dishes: [], price: createServiceListing?.price ?? 0, sample_images: chefImages, type: "", gender: createServiceListing?.gender ?? "")
-    
-    print(request)
-    //make request
         
-        LoadingModal.show(title: "Hold on while we list your service")
-        vm.createService(request)
+        let images = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing{
+            createServiceListing.images = images + chefImages
+            
+            print(createServiceListing)
+            
+            LoadingModal.show(title: "Hold on while we list your service")
+            vm.createService(createServiceListing)
+        }
+    
 
+
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        chefImages.removeAll()
+        for image in images {
+            if let imageData = image.pngData() {
+                chefImages.append(imageData)
+            }
+        }
+        
+        let images = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing{
+            createServiceListing.images = images + chefImages
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
             
     func deleteImage(image: UIImage) {

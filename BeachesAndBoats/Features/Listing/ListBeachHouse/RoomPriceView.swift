@@ -74,39 +74,30 @@ class RoomPriceView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             
-            var roomIndex = createBeachListing?.roominfo.last?.id ?? 10000
+            let roomIndex = createBeachListing?.rooms.indices.last ?? -1 
             print("Current room index is \(roomIndex)")
 //            guard let beachData = beachData, let roomIndex = currentRoomIndex else { return }
             
-            var updatedRoomInfo = createBeachListing?.roominfo ?? []
+            var updatedRoomInfo = createBeachListing?.rooms ?? []
             if roomIndex < updatedRoomInfo.count {
                     // Append selected items to the amenities of the room at the specified index
                 var existingRoom = updatedRoomInfo[roomIndex]
-                let updatedRoom = RoomData(
-                    id: existingRoom.id,
-                    name: existingRoom.name,
-                    description: existingRoom.description,
-                    amenities: existingRoom.amenities,
-                    price_per_night: Double(moneyField.text) ?? 0,
-                    discount: existingRoom.discount,
-                    amount_to_earn: Double(discountedAmount),
-                    room_images: existingRoom.room_images,
-                    number_of_guests: existingRoom.number_of_guests,
-                    number_of_rooms: existingRoom.number_of_rooms,
-                    number_of_beds: existingRoom.number_of_beds
-                    
-                )
-                updatedRoomInfo[roomIndex] = updatedRoom
+                
+                existingRoom.pricePerNight = Double(moneyField.text) ?? 0
+                existingRoom.discountPercent = Double(discount)
                         
                 } else {
                     print("Error: Room at index \(roomIndex) does not exist in roominfo.")
                     return
                 }
             
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: createBeachListing?.amenities ?? [], preferred_languages: createBeachListing?.preferred_languages ?? [], brief_introduction: createBeachListing?.brief_introduction ?? "", house_rules: createBeachListing?.house_rules ?? [], check_in_start: createBeachListing?.check_in_start ?? "", check_in_end: createBeachListing?.check_in_end ?? "", check_out_start: createBeachListing?.check_out_start ?? "", check_out_end: createBeachListing?.check_out_end ?? "", roominfo: updatedRoomInfo, full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.rooms = updatedRoomInfo
+                print(createBeachListing)
+                
+                coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
             
-            
-            coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: request)
         }
     }
 

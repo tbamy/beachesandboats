@@ -54,11 +54,11 @@ enum Configuration {
     static let baseURLString: String = {
         switch environment {
         case .Dev:
-            return "http://benb.wqcdesigns.com/"
+            return "https://preview.beachesandboat.com/"
         case .Mock:
-            return "http://benb.wqcdesigns.com/"
+            return "https://preview.beachesandboat.com"
         case .Release:
-            return "http://benb.wqcdesigns.com/"
+            return "https://preview.beachesandboat.com"
         }
     }()
     
@@ -70,7 +70,11 @@ enum Configuration {
     }()
     
     static var headers: [String:String] {
-        return ["Content-Type": "application/json"]
+//        return ["Content-Type": "application/json"]
+        return [
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                ]
     }
     
     static let stubBehavior: StubBehavior = {

@@ -22,7 +22,6 @@ class ChefAvailableDatesView: BaseViewControllerPlain {
     
     var currentDate = Date()
     
-    var amenitiesList: [Amenity]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chefs"
@@ -52,9 +51,27 @@ class ChefAvailableDatesView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-        let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: from_when?.toBackendDateAlone() ?? "", to_when: to_when?.toBackendDateAlone() ?? "", dishes: [], price: 0, sample_images: [], type: "", gender: "")
         
-        coordinator?.gotoChefDishesListViewView(createServiceListingData: request)
+        if var createServiceListing = createServiceListing{
+            createServiceListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createServiceListing.availableTo = to_when?.toBackendDate() ?? ""
+            
+            print(createServiceListing)
+            
+            coordinator?.gotoChefDishesListViewView(createServiceListingData: createServiceListing)
+        }
+        
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createServiceListing.availableTo = to_when?.toBackendDate() ?? ""
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
+        
     }
     
 

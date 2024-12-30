@@ -21,9 +21,11 @@ class BoatHouseTypeView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
-    var selectedItems: [String] = []
+    var cat: String = ""
+    var selectedBoatType: String?
     var boatType: String?
-    
+//    private var selectedIndex: IndexPath?
+    private var selectedIndex: Int? = nil
     var boatTypes: [BoatTypes]?
     
     override func viewDidLoad() {
@@ -55,7 +57,8 @@ class BoatHouseTypeView: BaseViewControllerPlain {
             
             switch response {
             case .getBoatDataSuccess(let response):
-                self?.boatTypes = response.data.types
+                self?.boatTypes = response.data?.categories?.first?.subCategories
+                self?.cat = response.data?.categories?.first?.id ?? ""
                 self?.boatData = response.data
 //                print(self?.boatTypes)
                 LoadingModal.dismiss()
@@ -68,10 +71,17 @@ class BoatHouseTypeView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: selectedItems, name: "", description: "", from_when: "", to_when: "", amenities: [], preferred_languages: [], brief_introduction: "", rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            let request = CreateBoatListingRequest(name: "", description: "", aboutOwner: "", noOfAdults: 0, noOfChildren: 0, noOfPets: 0, categoryId: cat, subCategoryId: selectedBoatType ?? "", country: "", state: "", streetName: "", city: "", availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], destinations: [], images: [])
             
             coordinator?.gotoBoatNameView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let request = CreateBoatListingRequest(name: "", description: "", aboutOwner: "", noOfAdults: 0, noOfChildren: 0, noOfPets: 0, categoryId: cat, subCategoryId: selectedBoatType ?? "", country: "", state: "", streetName: "", city: "", availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], destinations: [], images: [])
+        
+        AppStorage.boatListing = request
+        coordinator?.backToDashboard()
     }
     
 
@@ -91,16 +101,12 @@ extension BoatHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSourc
         view.identifier = "Amenities Cell " + indexPath.description
         let item = boatTypes?[indexPath.row]
         
-        let itemId = item?.type_id ?? ""
-        if selectedItems.contains(itemId) {
-            view.model.state = true
-        } else {
-            view.model.state = false
-        }
-        
         view.model.subtitle = item?.name ?? ""
+            
         view.isUserInteractionEnabled = false
         cell.applyView(view: view)
+        
+        
         return cell
     }
     
@@ -112,27 +118,31 @@ extension BoatHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSourc
        
     }
     
+    
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! DynamicCollectionViewCell
-        let view = SelectableCheckbox(frame: cell.bounds)
-        guard let item = boatTypes?[indexPath.row] else { return }
-        boatType = item.name
-        let itemId = item.type_id
-        
-        if selectedItems.contains(itemId) {
-            selectedItems.removeAll { $0 == itemId }
-            view.model.state = true
-//            view.model.image = UIImage.uncheckIcon
+        guard let previousIndex = selectedIndex else {
+            selectedIndex = indexPath.item
+            collectionView.reloadItems(at: [indexPath])
+            return
+        }
+
+        if previousIndex == indexPath.item {
+            selectedIndex = nil
+            collectionView.reloadItems(at: [indexPath])
         } else {
-            selectedItems.append(itemId)
-            view.model.state = false
-//            view.model.image = UIImage.checkIcon
+            selectedIndex = indexPath.item
+            collectionView.reloadItems(at: [IndexPath(item: previousIndex, section: 0), indexPath])
         }
         
-        collectionView.reloadItems(at: [indexPath])
-            
+        print("selected Index \(selectedIndex)")
+
+        let selectedItem = boatTypes?[indexPath.row]
+        selectedBoatType = selectedItem?.id
+        boatType = selectedItem?.name
+
         nextBtn.isEnabled = true
     }
+
 
     
 }

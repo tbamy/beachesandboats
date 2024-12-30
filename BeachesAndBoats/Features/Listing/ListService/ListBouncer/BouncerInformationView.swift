@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BouncerInformationView: BaseViewControllerPlain {
 
@@ -19,10 +20,17 @@ class BouncerInformationView: BaseViewControllerPlain {
     
     var createServiceListing: CreateServiceListingRequest?
     
+    var vm = ChefDishesViewModel()
+    var disposeBag = DisposeBag()
+    var cat = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bouncers"
         setUp()
+        LoadingModal.show()
+        vm.getChefDishes()
+        bindNetwork()
     }
     
     func setUp(){
@@ -51,12 +59,37 @@ class BouncerInformationView: BaseViewControllerPlain {
     func validate(){
         
     }
+    
+    func bindNetwork(){
+        vm.output.subscribe(onNext: { [weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .getChefDishesSuccess(let response):
+                self?.cat = response.data?.categories?.first?.id ?? ""
+            case .getChefDishesError(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+            
+        }).disposed(by: disposeBag)
+    }
 
 
     @IBAction func nextTapped(_ sender: Any) {
     
-        let request = CreateServiceListingRequest(name: nameLabel.text, description: descriptionLabel.text, profile_image: Data(), from_when: "", to_when: "", dishes: [], price: 0, sample_images: [], type: "", gender: "")
+        let request = CreateServiceListingRequest(roleType: HostType.bouncer.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: cat, availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
+        
+        print(request)
+        
         coordinator?.gotoBouncerGenderView(createServiceListingData: request)
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let request = CreateServiceListingRequest(roleType: HostType.bouncer.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: "", availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
+        
+        AppStorage.serviceListing = request
+        coordinator?.backToDashboard()
     }
     
 }

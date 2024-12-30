@@ -35,35 +35,53 @@ class BoatNameView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0, animated: false)
         titleLabel.text = "What is the name and description of your \(boatType ?? "")?"
         
+//        checkTextFields()
+//
 //        nameLabel.onTextChanged = { [weak self] text in
 //            self?.checkTextFields()
 //        }
-//
-//        descriptionLabel.onTextChanged = { [weak self] text in
+
+//        descriptionLabel.onTextChanged = { [weak self] _ in
 //            self?.checkTextFields()
 //        }
-//
-//        checkTextFields()
     }
     
     func checkTextFields() {
-        let isNameFilled = !nameLabel.text.isEmpty
-        let isDescriptionFilled = !descriptionLabel.text.isEmpty
+        print("Checking text fields...")
+        let isNameFilled = !(nameLabel.text.isEmpty)
+        let isDescriptionFilled = !(descriptionLabel.text.isEmpty)
+        
+        print("Description: \(descriptionLabel.text)")
         
         nextBtn.isEnabled = isNameFilled && isDescriptionFilled
+        print("Name filled: \(isNameFilled), Description filled: \(isDescriptionFilled), Button enabled: \(nextBtn.isEnabled)")
     }
-    
-    func validate(){
-        
-    }
+
 
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: nameLabel.text, description: descriptionLabel.text, from_when: "", to_when: "", amenities: [], preferred_languages: [], brief_introduction: "", rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.name = nameLabel.text
+                createBoatListing.description = descriptionLabel.text
+                
+                print(createBoatListing)
+                
+                coordinator?.gotoBoatAvailableDatesView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
             
-            coordinator?.gotoBoatAvailableDatesView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.name = nameLabel.text
+            createBoatListing.description = descriptionLabel.text
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
+
     }
     
 }

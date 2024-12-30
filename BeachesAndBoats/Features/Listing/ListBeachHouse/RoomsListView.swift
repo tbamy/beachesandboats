@@ -20,7 +20,7 @@ class RoomsListView: BaseViewControllerPlain {
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     
-    var roomsList: [RoomData] = []
+    var roomsList: [Room] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class RoomsListView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0.25, animated: true)
         stepTwoProgress.tintColor = .B_B
         
-        roomsList = createBeachListing?.roominfo ?? []
+        roomsList = createBeachListing?.rooms ?? []
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -47,11 +47,12 @@ class RoomsListView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: createBeachListing?.amenities ?? [], preferred_languages: createBeachListing?.preferred_languages ?? [], brief_introduction: createBeachListing?.brief_introduction ?? "", house_rules: createBeachListing?.house_rules ?? [], check_in_start: createBeachListing?.check_in_start ?? "", check_in_end: createBeachListing?.check_in_end ?? "", check_out_start: createBeachListing?.check_out_start ?? "", check_out_end: createBeachListing?.check_out_end ?? "", roominfo: createBeachListing?.roominfo ?? [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            if var createBeachListing = createBeachListing{
+                print(createBeachListing)
+                
+                coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
             
-//            let request = CreateBeachListingRequest(categoryId: createBeachListing?.categoryId ?? "", subCatId: createBeachListing?.subCatId ?? "", guestBookingId: createBeachListing?.guestBookingId ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", streetAddress: createBeachListing?.streetAddress ?? "", fromWhen: "", toWhen: "", amenities: createBeachListing?.amenities ?? [], preferredLanguages: createBeachListing?.preferredLanguages ?? [], briefIntroduction: createBeachListing?.briefIntroduction ?? "", houseRules: createBeachListing?.houseRules ?? [], checkInStart: createBeachListing?.checkInStart ?? "", checkInEnd: createBeachListing?.checkInEnd ?? "", checkOutStart: createBeachListing?.checkOutStart ?? "", checkOutEnd: createBeachListing?.checkOutEnd ?? "", roomName: createBeachListing?.roomName ?? "", roomDescription: createBeachListing?.roomDescription ?? "", roomAmenities: selectedItems, pricePerNight: 0, roomDiscount: 0, amountToEarn: 0, roomImages: [], fullApartmentCost: 0, fullApartmentDiscount: 0, fullApartmentAmountToEarn: 0)
-//            
-            coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: request)
         }
     }
     
@@ -87,15 +88,15 @@ extension RoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, U
         
 //        let itemId = item?. ?? ""
 //        view.model = item
-        if let mainImage = item.room_images.first{
+        if let mainImage = item.images?.first{
             view.model.image = UIImage(data: mainImage)
         }
         
-        view.model.numberOfBeds = item.number_of_beds
-        view.model.numberOfGuests = item.number_of_guests
-        view.model.numberOfRooms = item.number_of_rooms
+        view.model.numberOfBeds = item.quantity
+        view.model.numberOfGuests = item.noOfOccupant
+        view.model.numberOfRooms = item.quantity
         view.model.roomName = item.name
-        view.model.roomPrice = String(item.price_per_night)
+        view.model.roomPrice = String(item.pricePerNight)
         view.model.deleteTapped = { [weak self] in
             self?.deleteItem(roomName: item.name)
         }

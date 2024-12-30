@@ -106,6 +106,20 @@ extension String {
         }
         return nil // Return nil if conversion fails
     }
+    
+    public func convertToShortDateFormat(from inputFormat: String = "MM/dd/yy") -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = inputFormat
+        
+        if let date = inputDateFormatter.date(from: self) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "E, MMM dd"
+            return outputDateFormatter.string(from: date)
+        }
+        return nil
+    }
+
+
 
 
 }

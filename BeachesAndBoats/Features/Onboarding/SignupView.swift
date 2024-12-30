@@ -22,6 +22,7 @@ class SignupView: BaseViewControllerPlain{
     var phone: String?
     var userInfo: SignUpRequest?
     var resendOtp: Bool = false
+    var keepSignedIn: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +43,14 @@ class SignupView: BaseViewControllerPlain{
 //        }
         if validateFields(){
             email = emailAddress.text
-            phone = phoneNumber.text
+            phone = "+234\(phoneNumber.text)"
             requestOTP()
         }
     }
     
     func requestOTP(){
         LoadingModal.show()
-        let request = ConfirmAccountRequest(phone_code: "234", phone_number: phoneNumber.text, email: emailAddress.text)
+        let request = ConfirmAccountRequest(phone_number: phone, email: email)
         print(request)
         vm.confirmAccount(request: request)
     }
@@ -78,9 +79,9 @@ class SignupView: BaseViewControllerPlain{
                 
                 //MARK: Otp Verification
             case .verifyCodeSuccess(_):
-                let inf = SignUpRequest(first_name: "", last_name: "", dob: "", phone_code: "234", phone: phoneNumber.text, email: emailAddress.text, password: "", password_confirmation: "")
+                let info = SignUpRequest(first_name: "", last_name: "", email: email, birthday: "", password: "", password_confirmation: "", keep_signed_in: keepSignedIn, phone_number: phone, device_id: UserDevice().imei)
                 ConfirmAccountModal.dismiss()
-                presentUserInformationModal(userInfo: inf)
+                presentUserInformationModal(userInfo: info)
             case .verifyCodeError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
                 
@@ -125,9 +126,10 @@ extension SignupView: OTPDelegate{
         
     }
     
-    func userOTP(otp: String?) {
+    func userOTP(otp: String?, keepSignIn: Bool) {
         print(otp ?? "No otp")
-        let request = VerifyCodeRequest(code: otp)
+        self.keepSignedIn = keepSignIn
+        let request = VerifyCodeRequest(otp_code: otp, email: email)
         LoadingModal.show()
         vm.verifyCode(request: request)
     }
@@ -160,7 +162,7 @@ extension SignupView: ModalTransitionDelegate{
     }
 
     func presentConfirmAccountModal() {
-        ConfirmAccountModal.startConfirmModal(on: view, delegate: self, transitionDelegate: self)
+        ConfirmAccountModal.startConfirmModal(on: view, delegate: self, transitionDelegate: self, purpose: .createAccount)
     }
 
     func presentUserInformationModal(userInfo: SignUpRequest) {

@@ -25,7 +25,6 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
     
     var currentDate = Date()
     
-    var amenitiesList: [Amenity]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
@@ -43,23 +42,44 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
             if let endDate = endDate {
                 self.to_when = endDate
             }
+            
+            self.nextBtn.isEnabled = true
         }
         
-        if (from_when ?? Date() < currentDate) || (to_when ?? Date() < currentDate){
-            nextBtn.isEnabled = false
-        }else{
-            nextBtn.isEnabled = true
-        }
+//        if (from_when ?? Date() < currentDate) || (to_when ?? Date() < currentDate){
+//            nextBtn.isEnabled = false
+//        }else{
+//            nextBtn.isEnabled = true
+//        }
             
         
     }
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: from_when?.toBackendDateAlone() ?? "", to_when: to_when?.toBackendDateAlone() ?? "", amenities: [], preferred_languages: [], brief_introduction: "", rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.availableFrom = from_when?.toBackendDateAlone() ?? ""
+                createBoatListing.availableTo = to_when?.toBackendDateAlone() ?? ""
+                
+                print(createBoatListing)
+                
+                coordinator?.gotoBoatFacilitiesView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
             
-            coordinator?.gotoBoatFacilitiesView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.availableFrom = from_when?.toBackendDateAlone() ?? ""
+            createBoatListing.availableTo = to_when?.toBackendDateAlone() ?? ""
+            
+            print(createBoatListing)
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
+        
     }
     
 

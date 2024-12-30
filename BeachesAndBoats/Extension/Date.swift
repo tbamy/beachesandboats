@@ -24,6 +24,13 @@ extension Date {
         return dateString
     }
     
+    func toBackendDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let dateString = dateFormatter.string(from: self)
+        return dateString
+    }
+    
     public func toReadableDate() -> String {
         let readableDateFormatter = DateFormatter()
         readableDateFormatter.dateFormat = "dd/MM/yyyy"

@@ -30,10 +30,10 @@ class HostingDashboard: UITabBarController {
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
         let messagesVC = UIViewController()
-        messagesVC.tabBarItem = UITabBarItem(title: "Messages", image: UIImage(systemName: "message"), tag: 1)
+        messagesVC.tabBarItem = UITabBarItem(title: "Listings", image: UIImage(systemName: "message"), tag: 1)
         
         let earningsVC = UIViewController()
-        earningsVC.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(systemName: "wallet.pass"), tag: 2)
+        earningsVC.tabBarItem = UITabBarItem(title: "Messages", image: UIImage(systemName: "wallet.pass"), tag: 2)
         
         let menuVC = UIViewController()
         menuVC.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.horizontal.3"), tag: 3)
@@ -42,8 +42,8 @@ class HostingDashboard: UITabBarController {
     }
 
     private func setupMiddleButton() {
-        middleButton.frame.size = CGSize(width: 64, height: 64)
-        middleButton.layer.cornerRadius = 32
+        middleButton.frame.size = CGSize(width: 71, height: 71)
+        middleButton.layer.cornerRadius = 50
         middleButton.backgroundColor = .systemBlue
         middleButton.setImage(UIImage(systemName: "pencil"), for: .normal)
         middleButton.tintColor = .white

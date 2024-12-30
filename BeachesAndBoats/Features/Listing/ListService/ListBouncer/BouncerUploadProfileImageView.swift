@@ -28,7 +28,7 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
         }
     }
     
-//    var roomImages: [Data] = []
+    var images: [Data] = []
     
     var profileImage: Data?
     
@@ -75,14 +75,31 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let imageData = image?.pngData() {
-            profileImage = imageData
+//            profileImage = imageData
+            images.append(imageData)
             
-            let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: profileImage ?? Data(), from_when: "", to_when: "", dishes: [], price: 0, sample_images: [], type: "", gender: createServiceListing?.gender ?? "")
+            if var createServiceListing = createServiceListing{
+                createServiceListing.images = images
+                
+                print(createServiceListing)
+                
+                coordinator?.gotoBouncerAvailableDatesView(createServiceListingData: createServiceListing)
+            }
             
-            coordinator?.gotoBouncerAvailableDatesView(createServiceListingData: request)
         }
         
 
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.images = images
+            
+            print(createServiceListing)
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
             
     func deleteImage() {

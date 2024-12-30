@@ -8,7 +8,7 @@
 import Foundation
 
 struct ConfirmAccountRequest: Codable{
-    let phone_code: String?
-    let phone_number: String?
-    let email: String?
+//    let phone_code: String?
+    var phone_number: String?
+    var email: String?
 }

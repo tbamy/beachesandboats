@@ -7,15 +7,30 @@
 
 import Foundation
 
-struct CreateServiceListingRequest: Codable{
-    let name : String
-    let description : String
-    let profile_image : Data
-    let from_when : String
-    let to_when : String
-    let dishes : [String]
-    let price : Int
-    let sample_images : [Data]
-    let type : String
-    let gender : String
+struct CreateServiceListingRequest: Codable {
+    var roleType: String
+    var name: String
+    var description: String
+    var categoryId: String
+    var availableFrom: String
+    var availableTo: String
+    var images: [Data]
+    var startingPrice: Double
+    var dishes: [String]?
+    var gender: String?
+    var profilePic: Data?
+
+    enum CodingKeys: String, CodingKey {
+        case roleType = "role_type"
+        case name
+        case description
+        case categoryId = "category_id"
+        case availableFrom = "available_from"
+        case availableTo = "available_to"
+        case images
+        case startingPrice = "starting_price"
+        case dishes
+        case gender
+        case profilePic = "profile_pic"
+    }
 }

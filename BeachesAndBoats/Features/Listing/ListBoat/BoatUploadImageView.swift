@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import RxSwift
 
 class BoatUploadImageView: BaseViewControllerPlain {
     
@@ -19,6 +20,9 @@ class BoatUploadImageView: BaseViewControllerPlain {
     @IBOutlet weak var nextBtn: PrimaryButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    
+    var disposeBag = DisposeBag()
+    var vm = ListBoatViewModel()
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
@@ -37,13 +41,15 @@ class BoatUploadImageView: BaseViewControllerPlain {
         title = "Boats"
         setupCollectionView()
         setupDragAndDrop()
+        
+        bindNetwork()
     }
 
 
     func setupCollectionView() {
         stepOneProgress.setProgress(1, animated: false)
         stepOneProgress.tintColor = .success
-        stepTwoProgress.setProgress(0.55, animated: true)
+        stepTwoProgress.setProgress(1, animated: true)
         stepTwoProgress.tintColor = .B_B
         
         titleLabel.text = "What does your \(boatType ?? "") look like?"
@@ -65,6 +71,20 @@ class BoatUploadImageView: BaseViewControllerPlain {
         }
     }
 
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .listBoatSuccessful(let response):
+                print(response)
+                self?.coordinator?.gotoListingSuccessView(type: 1)
+            case .listBoatFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
+    }
     
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
@@ -74,10 +94,34 @@ class BoatUploadImageView: BaseViewControllerPlain {
                 }
             }
             
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: createBoatListing?.preferred_languages ?? [], brief_introduction: createBoatListing?.brief_introduction ?? "", rules: createBoatListing?.rules ?? [], no_of_adults: createBoatListing?.no_of_adults ?? 0, no_of_children: createBoatListing?.no_of_children ?? 0, no_of_pets: createBoatListing?.no_of_pets ?? 0, country: createBoatListing?.country ?? "", state: createBoatListing?.state ?? "", city: createBoatListing?.city ?? "", street_address: "", destinations_prices: createBoatListing?.destinations_prices ?? [], images: boatImages)
+            if var createBoatListing = createBoatListing{
+                createBoatListing.images = boatImages
+                print(createBoatListing)
+                
+                
+            }
             
-            coordinator?.gotoBoatUploadImageView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
+    }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        for image in images {
+            if let imageData = image.pngData() {
+                boatImages.append(imageData)
+            }
+        }
+        
+        if var createBoatListing = createBoatListing{
+            createBoatListing.images = boatImages
+            print(createBoatListing)
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+            
+        }
+        
+        
     }
             
     func deleteImage(image: UIImage) {

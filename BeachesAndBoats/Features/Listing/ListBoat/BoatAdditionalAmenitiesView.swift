@@ -21,9 +21,9 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
     
-    var selectedItems: [String] = []
+    var selectedAmenities: [String] = []
     
-    var amenitiesList: [Amenity]?
+    var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
@@ -35,7 +35,7 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        amenitiesList = boatData?.amenities.first{ $0.name == "Safety Amenities"}?.amenities
+        amenitiesList = boatData?.amenities?.filter{ $0.amenityType == "Safety"}
         
 //        titleLabel.text = "What are the features in your \(boatType ?? "")?"
         subtitleLabel.text = "Select the amenities available to guests in your \(boatType ?? "")."
@@ -49,11 +49,31 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            let additionalAmenities = createBoatListing?.amenities ?? [] + selectedItems
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: additionalAmenities, preferred_languages: [], brief_introduction: "", rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
             
-            coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
+            
+            if var createBoatListing = createBoatListing{
+                let additionalAmenities = createBoatListing.amenities + selectedAmenities
+                createBoatListing.amenities = additionalAmenities
+                
+                print("current amenities: \(createBoatListing.amenities)")
+                print("additional amenities: \(selectedAmenities)")
+                print(createBoatListing)
+                
+                coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
+            
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            let additionalAmenities = createBoatListing.amenities + selectedAmenities
+            createBoatListing.amenities = additionalAmenities
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
+        
     }
     
 
@@ -69,11 +89,11 @@ extension BoatAdditionalAmenitiesView: UICollectionViewDelegate, UICollectionVie
 
         cell.isUserInteractionEnabled = true
         let view = SelectableCheckbox(frame: cell.bounds)
-        view.identifier = "Amenities Cell " + indexPath.description
+        view.identifier = "Additional Amenities Cell " + indexPath.description
         let item = amenitiesList?[indexPath.row]
         
-        let itemId = item?.amenityID ?? ""
-        if selectedItems.contains(itemId) {
+        let itemId = item?.id ?? ""
+        if selectedAmenities.contains(itemId) {
             view.model.state = true
         } else {
             view.model.state = false
@@ -98,14 +118,14 @@ extension BoatAdditionalAmenitiesView: UICollectionViewDelegate, UICollectionVie
         let view = SelectableCheckbox(frame: cell.bounds)
         guard let item = amenitiesList?[indexPath.row] else { return }
         
-        let itemId = item.amenityID
+        let itemId = item.id ?? ""
         
-        if selectedItems.contains(itemId) {
-            selectedItems.removeAll { $0 == itemId }
+        if selectedAmenities.contains(itemId) {
+            selectedAmenities.removeAll { $0 == itemId }
             view.model.state = true
 //            view.model.image = UIImage.uncheckIcon
         } else {
-            selectedItems.append(itemId)
+            selectedAmenities.append(itemId)
             view.model.state = false
 //            view.model.image = UIImage.checkIcon
         }

@@ -3,4 +3,1380 @@
    uuid = "896A6358-AFA5-4240-AAE2-FD1C9B4DCCD3"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1455784C-ABF6-42F5-944E-062673388F44"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "resendOtpTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1455784C-ABF6-42F5-944E-062673388F44 - 7b6915a422275b75"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ConfirmAccountModal.resendOtpTapped() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "216">
+               </Location>
+               <Location
+                  uuid = "1455784C-ABF6-42F5-944E-062673388F44 - 7b6915a422275b75"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ConfirmAccountModal.resendOtpTapped() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "69641B75-B1BE-4EEF-9A76-BEF33B9D9EE7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "proceedTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "69641B75-B1BE-4EEF-9A76-BEF33B9D9EE7 - 8f88da1f3f0657c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ConfirmAccountModal.proceedTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "69641B75-B1BE-4EEF-9A76-BEF33B9D9EE7 - 8f88da1f3f0651d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ConfirmAccountModal.proceedTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "124">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E4E0812-8B2B-4D6B-9CAD-08D9E011DF27"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/HouseSizeListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6B9DB6D1-3E30-41B3-B9FE-32EAE85FDB07"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/PropertyNameView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8895446E-2569-4780-9FC7-A7D56D803C84"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/PropertyAddressView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "04A70B4F-3A9B-416A-BE3C-FFE4919868EC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/PropertyAvailableDatesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03CC3490-8B58-41F1-B86C-BDCB18E0F667"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/PropertyAmenitiesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C17FF11-3506-4681-991B-985DD3BC8C38"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/PropertyAdditionalAmenitiesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C5E78EF-142E-4AAA-99D0-18F5DE7D519D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/AboutYouLanguageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C73963C9-B447-4CEA-9D70-AA31A6FAB74B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/AboutYouDescriptionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D17818E6-0BA2-48DB-984F-E0D4F5925921"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/HouseRulesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6BEDAF49-FEED-47EF-B8B7-E6356658ADDE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/CheckInAndOutRulesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "64118537-7D82-4E48-AE2E-4D40534DAC9E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/ListRoomsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2499EF72-E1B0-4332-82F8-E9516DFCB15D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/RoomAmenitiesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DBFE4C95-7CDE-4B05-A554-C8961605DA80"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/RoomPriceView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6FC0A539-74EA-4E43-94DE-7883F298496E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/UploadImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7DFBB61C-3983-4347-B94C-767C0E064038"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/RoomsListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99EACB82-9E59-44BD-96C8-45671FFF8AD7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBeachHouse/EntireApartmentPriceView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "78C63590-8C0F-490C-949A-CA25A371560F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatNameView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A35A49D-3F48-493F-AEB5-848B2C7F157F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatAvailableDatesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4878A330-4E69-4375-81FA-F84607B1FBC8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatFacilitiesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5650BE37-40F1-4104-A5F7-47FFF986BDEE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatAboutYouLanguageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5ABBB06C-350A-4B94-84DC-3BE7E4DDDF6B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatAboutYouDescriptionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "754F8A1E-8F9D-4733-9446-DDF7BD264323"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatRulesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40E8BDDE-EA34-421A-92EF-853AEF118638"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatPeopleRules.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE585C4A-1B4E-48DA-91F1-84D53CB8120D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatAddressView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE585C4A-1B4E-48DA-91F1-84D53CB8120D - 21efdc0a3459be94"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BoatAddressView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListBoat/BoatAddressView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "3676">
+               </Location>
+               <Location
+                  uuid = "CE585C4A-1B4E-48DA-91F1-84D53CB8120D - 21efdc0a3459beb3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BoatAddressView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListBoat/BoatAddressView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "3676">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96B169B4-79F3-439E-AE1E-42A9D4452349"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/TravelLocationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8A5DDB8D-0B8C-404D-AEF1-A687DA211633"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatUploadImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1703718-3AE3-458F-8682-371F49323757"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerUploadProfileImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D1703718-3AE3-458F-8682-371F49323757 - bafed7a8a5438519"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerUploadProfileImageView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerUploadProfileImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "2368">
+               </Location>
+               <Location
+                  uuid = "D1703718-3AE3-458F-8682-371F49323757 - bafed7a8a5438519"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerUploadProfileImageView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerUploadProfileImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "2460">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "294112E6-BF45-4808-9E12-4D77ED0C248C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerAvailableDatesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "294112E6-BF45-4808-9E12-4D77ED0C248C - 24c73b3f958d3764"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerAvailableDatesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerAvailableDatesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "2548">
+               </Location>
+               <Location
+                  uuid = "294112E6-BF45-4808-9E12-4D77ED0C248C - 24c73b3f958d3764"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerAvailableDatesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerAvailableDatesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "2652">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DBAEAFB7-CC2A-46ED-A391-83C6789AC759"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerUploadImagesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DBAEAFB7-CC2A-46ED-A391-83C6789AC759 - 8e2307f150d73b2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerUploadImagesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerUploadImagesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "2808">
+               </Location>
+               <Location
+                  uuid = "DBAEAFB7-CC2A-46ED-A391-83C6789AC759 - 8e2307f150d73b2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerUploadImagesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerUploadImagesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "2904">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "55CF061B-7284-4D5E-B2D5-EF4FADF4B01C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListChef/ChefInformationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "55CF061B-7284-4D5E-B2D5-EF4FADF4B01C - 8e0457329ba9598f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefInformationView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefInformationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1124">
+               </Location>
+               <Location
+                  uuid = "55CF061B-7284-4D5E-B2D5-EF4FADF4B01C - 8e0457329ba9598f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefInformationView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefInformationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1012">
+               </Location>
+               <Location
+                  uuid = "55CF061B-7284-4D5E-B2D5-EF4FADF4B01C - 8e0457329ba9598f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefInformationView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefInformationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1024">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4B679BBC-008A-4061-858A-CD99E97C6499"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListChef/ChefUploadProfileImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4B679BBC-008A-4061-858A-CD99E97C6499 - 5a923d38fba6bc57"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefUploadProfileImageView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefUploadProfileImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "2368">
+               </Location>
+               <Location
+                  uuid = "4B679BBC-008A-4061-858A-CD99E97C6499 - 5a923d38fba6bc57"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefUploadProfileImageView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefUploadProfileImageView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "2428">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A69FC8A2-92BA-4389-9FD3-3D12CA6A679C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListChef/ChefDIshesListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A69FC8A2-92BA-4389-9FD3-3D12CA6A679C - 8fb99190b0b006e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefDIshesListView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefDIshesListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "2828">
+               </Location>
+               <Location
+                  uuid = "A69FC8A2-92BA-4389-9FD3-3D12CA6A679C - 8fb99190b0b00705"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefDIshesListView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefDIshesListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "2120">
+               </Location>
+               <Location
+                  uuid = "A69FC8A2-92BA-4389-9FD3-3D12CA6A679C - 8fb99190b0b00705"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefDIshesListView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefDIshesListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "2212">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "10E96BC8-5CAC-411E-8D21-51B6064B75DE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListChef/ChefPriceView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "10E96BC8-5CAC-411E-8D21-51B6064B75DE - a5fa23b654fec9df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefPriceView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefPriceView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "2200">
+               </Location>
+               <Location
+                  uuid = "10E96BC8-5CAC-411E-8D21-51B6064B75DE - a5fa23b654fec9df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefPriceView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefPriceView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "2304">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9436EA31-E97A-4208-A3CD-FDAFF6F3125B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListChef/ChefUploadFoodImagesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9436EA31-E97A-4208-A3CD-FDAFF6F3125B - d42aeb43ce96353b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefUploadFoodImagesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefUploadFoodImagesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "2808">
+               </Location>
+               <Location
+                  uuid = "9436EA31-E97A-4208-A3CD-FDAFF6F3125B - d42aeb43ce96353b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ChefUploadFoodImagesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListChef/ChefUploadFoodImagesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "2904">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4B73AC8-326A-4A02-9F0D-F7E9968836F6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListDJ/DJAvailableDatesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D4B73AC8-326A-4A02-9F0D-F7E9968836F6 - 821d150b4afa25"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.DJAvailableDatesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListDJ/DJAvailableDatesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "2548">
+               </Location>
+               <Location
+                  uuid = "D4B73AC8-326A-4A02-9F0D-F7E9968836F6 - 821d150b4afa25"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.DJAvailableDatesView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListDJ/DJAvailableDatesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "2652">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "15E3AAC8-6257-4CB4-BAD2-E1B53975AB81"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListDJ/DJPriceView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "15E3AAC8-6257-4CB4-BAD2-E1B53975AB81 - de54a474c45a6f9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.DJPriceView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListDJ/DJPriceView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "2200">
+               </Location>
+               <Location
+                  uuid = "15E3AAC8-6257-4CB4-BAD2-E1B53975AB81 - de54a474c45a6f9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.DJPriceView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListDJ/DJPriceView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "2304">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0ADC907D-748D-4CA2-AF4B-BB353CBA7F53"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerInformationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0ADC907D-748D-4CA2-AF4B-BB353CBA7F53 - c414fbe760a0909b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerInformationView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerInformationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1012">
+               </Location>
+               <Location
+                  uuid = "0ADC907D-748D-4CA2-AF4B-BB353CBA7F53 - c414fbe760a0909b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BouncerInformationView.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListBouncer/BouncerInformationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1024">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A484A2B-7A41-4CAC-963D-F60364207831"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListService/ListDJ/DJInformationVIew.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "nextTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4A484A2B-7A41-4CAC-963D-F60364207831 - 6b2a398ac9306185"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.DJInformationVIew.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListDJ/DJInformationVIew.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1012">
+               </Location>
+               <Location
+                  uuid = "4A484A2B-7A41-4CAC-963D-F60364207831 - 6b2a398ac9306185"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.DJInformationVIew.nextTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Listing/ListService/ListDJ/DJInformationVIew.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1024">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A097BE3D-DBE0-4EFD-AC63-E01DD7B41C6B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "startConfirmModal(on:delegate:transitionDelegate:purpose:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A097BE3D-DBE0-4EFD-AC63-E01DD7B41C6B - 4c20d4094181dda9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static BeachesAndBoats.ConfirmAccountModal.startConfirmModal(on: __C.UIView, delegate: BeachesAndBoats.OTPDelegate, transitionDelegate: BeachesAndBoats.ModalTransitionDelegate, purpose: BeachesAndBoats.ConfirmOtpPurpose) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "868">
+               </Location>
+               <Location
+                  uuid = "A097BE3D-DBE0-4EFD-AC63-E01DD7B41C6B - 4c20d4094181dd48"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static BeachesAndBoats.ConfirmAccountModal.startConfirmModal(on: __C.UIView, delegate: BeachesAndBoats.OTPDelegate, transitionDelegate: BeachesAndBoats.ModalTransitionDelegate, purpose: BeachesAndBoats.ConfirmOtpPurpose) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Components/Modal/OnboardingModals/ConfirmAccountModal.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "1000">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4336447-AFEB-4706-9AB5-A0AFE23468E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Dashboard/ServiceDashboard.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "middleButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6DB21B95-536B-46A7-8DEE-82B99EE9D0BB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Listing/ListBoat/BoatHouseTypeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "609A68EC-80B9-4F03-A891-CA8A54E0386C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "continueBookingTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "609A68EC-80B9-4F03-A891-CA8A54E0386C - f7bfa08b8970c666"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.continueBookingTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "1012">
+               </Location>
+               <Location
+                  uuid = "609A68EC-80B9-4F03-A891-CA8A54E0386C - f7bfa08b8970c601"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.continueBookingTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "1188">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "308D3C9D-DFB5-49AC-8D31-85DC4964D237"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "setup()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "308D3C9D-DFB5-49AC-8D31-85DC4964D237 - fda618201bd4bd8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.setup() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1948">
+               </Location>
+               <Location
+                  uuid = "308D3C9D-DFB5-49AC-8D31-85DC4964D237 - fda618201bd4bd8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.setup() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "2228">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92484D2D-7F6F-4346-ADDD-A4FAE98A70C6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "setup()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "92484D2D-7F6F-4346-ADDD-A4FAE98A70C6 - fda618201bd4bdec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.setup() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "2320">
+               </Location>
+               <Location
+                  uuid = "92484D2D-7F6F-4346-ADDD-A4FAE98A70C6 - fda618201bd4bdec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.setup() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "2572">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

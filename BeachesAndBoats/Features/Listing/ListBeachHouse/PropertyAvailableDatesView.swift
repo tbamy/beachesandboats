@@ -24,7 +24,6 @@ class PropertyAvailableDatesView: BaseViewControllerPlain {
     
     var currentDate = Date()
     
-    var amenitiesList: [Amenity]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beaches Houses"
@@ -55,9 +54,14 @@ class PropertyAvailableDatesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: from_when?.toFormattedDate() ?? "", to_when: to_when?.toFormattedDate() ?? "", amenities: selectedItems, preferred_languages: [""], brief_introduction: "", house_rules: [], check_in_start: "", check_in_end: "", check_out_start: "", check_out_end: "", roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.availableFrom = from_when?.toFormattedDate() ?? ""
+                createBeachListing.availableTo = to_when?.toFormattedDate() ?? ""
+                print(createBeachListing)
+                
+                coordinator?.gotoPropertyAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
             
-            coordinator?.gotoPropertyAmenitiesView(beachData: beachData, createBeachListingData: request)
         }
     }
     

@@ -38,9 +38,16 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: createBeachListing?.amenities ?? [], preferred_languages: createBeachListing?.preferred_languages ?? [], brief_introduction: createBeachListing?.brief_introduction ?? "", house_rules: createBeachListing?.house_rules ?? [], check_in_start: checkInFrom.text, check_in_end: checkInUntil.text, check_out_start: checkOutFrom.text, check_out_end: checkOutUntil.text, roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.checkInFrom = checkInFrom.text
+                createBeachListing.checkInTo = checkInUntil.text
+                createBeachListing.checkOutFrom = checkOutFrom.text
+                createBeachListing.checkOutTo = checkOutUntil.text
+                print(createBeachListing)
+                
+                coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
             
-            coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: request)
         }
     }
 

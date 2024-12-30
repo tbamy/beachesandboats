@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CategoriesViewCell: UICollectionViewCell {
 
@@ -18,9 +19,20 @@ class CategoriesViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func updateCell(with data: CategoriesModel){
-        title.text = data.title
-//        image.image = UIImage(data: "")
+    func updateCell(with data: PropertyCategory){
+        title.text = data.name
+        print(data.image)
+        if let url = URL(string: data.image ?? "") {
+            image.kf.setImage(with: url)
+        }
+    }
+    
+    func updateCell(with data: SubCategory){
+        title.text = data.name
+        print(data.image)
+        if let url = URL(string: data.image ?? "") {
+            image.kf.setImage(with: url)
+        }
     }
 
 }

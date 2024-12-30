@@ -84,11 +84,10 @@ class EntireApartmentPriceView: UIViewController {
         
         if let beachData = beachData{
             
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: createBeachListing?.amenities ?? [], preferred_languages: createBeachListing?.preferred_languages ?? [], brief_introduction: createBeachListing?.brief_introduction ?? "", house_rules: createBeachListing?.house_rules ?? [], check_in_start: createBeachListing?.check_in_start ?? "", check_in_end: createBeachListing?.check_in_end ?? "", check_out_start: createBeachListing?.check_out_start ?? "", check_out_end: createBeachListing?.check_out_end ?? "", roominfo: createBeachListing?.roominfo ?? [], full_apartment_cost: Double(moneyField.text) ?? 0, full_apartment_discount: discount, full_apartment_amount_to_earn: Double(discountedAmount) )
-            
-            print("Final Request is: \(request)")
-            
-            coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: request)
+            if var createBeachListing = createBeachListing{
+                print("Final Request is: \(createBeachListing)")
+                
+            }
         }
     }
 

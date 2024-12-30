@@ -13,4 +13,5 @@ protocol OnboardingService{
     func confirmAccount(request: ConfirmAccountRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     func verifyCode(request: VerifyCodeRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     func login(request: LoginRequest, completion: @escaping(Result<LoginResponse, ErrorResponse>) -> Void)
+    func verifyLoginOtp(request: VerifyLoginOtpRequest, completion: @escaping(Result<LoginResponse, ErrorResponse>) -> Void)
 }

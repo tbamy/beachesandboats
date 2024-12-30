@@ -8,41 +8,78 @@
 import Foundation
 
 struct CreateBeachListingRequest: Codable {
-    let category_id: String
-    let sub_cat_id: String
-    let guest_booking_id: String
-    let name: String
-    let description: String
-    let country: String
-    let state: String
-    let city: String
-    let street_address: String
-    let from_when: String
-    let to_when: String
-    let amenities: [String]
-    let preferred_languages: [String]
-    let brief_introduction: String
-    let house_rules: [String]
-    let check_in_start: String
-    let check_in_end: String
-    let check_out_start: String
-    let check_out_end: String
-    let roominfo: [RoomData]
-    let full_apartment_cost: Double
-    let full_apartment_discount: Double
-    let full_apartment_amount_to_earn: Double
+    var name: String
+    var description: String
+    var aboutOwner: String
+    var checkInFrom: String
+    var checkInTo: String
+    var checkOutFrom: String
+    var checkOutTo: String
+    var categoryId: String
+    var subCategoryId: String
+    var bookingType: String?
+    var country: String
+    var state: String
+    var streetName: String
+    var city: String
+    var latitude: Double?
+    var longitude: Double?
+    var availableFrom: String
+    var availableTo: String
+    var amenities: [String]
+    var languages: [String]
+    var houseRules: [String]
+    var rooms: [Room]
+    var roleType: String
+
+    
+    enum CodingKeys: String, CodingKey {
+        case name, description
+        case aboutOwner = "about_owner"
+        case checkInFrom = "check_in_from"
+        case checkInTo = "check_in_to"
+        case checkOutFrom = "check_out_from"
+        case checkOutTo = "check_out_to"
+        case categoryId = "category_id"
+        case subCategoryId = "sub_category_id"
+        case bookingType = "booking_type"
+        case country, state, streetName, city, latitude, longitude
+        case availableFrom = "available_from"
+        case availableTo = "available_to"
+        case amenities, languages
+        case houseRules = "houserules"
+        case rooms
+        case roleType = "role_type"
+    }
 }
 
-struct RoomData: Codable{
-    let id: Int
-    let name: String
-    let description: String
-    let amenities: [String]
-    let price_per_night: Double
-    let discount: Double
-    let amount_to_earn: Double
-    let room_images: [Data]
-    let number_of_guests: String
-    let number_of_rooms: String
-    let number_of_beds: String
+struct Room: Codable {
+    var name: String
+    var description: String
+    var quantity: Int
+    var roomAmenities: [String]
+    var pricePerNight: Double
+    var discountPercent: Double
+    var bedTypes: [BedType]
+    var hasPrivateBathroom: Bool
+    var noOfOccupant: Int
+    var images: [Data]?
+    
+    enum CodingKeys: String, CodingKey {
+        case name, description, quantity
+        case roomAmenities = "room_amenities"
+        case pricePerNight = "price_per_night"
+        case discountPercent = "discount_percent"
+        case bedTypes = "bedTypes"
+        case hasPrivateBathroom = "has_private_bathroom"
+        case noOfOccupant = "no_of_occupant"
+        case images
+    }
+    
+    
+}
+
+struct BedType: Codable {
+    var id: String
+    var quantity: Int
 }

@@ -15,6 +15,7 @@ class SelectPropertyTypePrimaryHost: BaseViewControllerPlain {
     @IBOutlet weak var boatStack: UIStackView!
     
     var tag: Int?
+    var hostType: HostType?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -43,7 +44,7 @@ class SelectPropertyTypePrimaryHost: BaseViewControllerPlain {
     }
     
     @objc func gotoBeach(){
-        coordinator?.gotoSelectHouseTypeView()
+        coordinator?.gotoSelectHouseTypeView(type: hostType ?? .primaryHost)
     }
 
     @objc func gotoBoat(){

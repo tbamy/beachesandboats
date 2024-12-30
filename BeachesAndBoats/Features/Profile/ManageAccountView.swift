@@ -15,7 +15,7 @@ class ManageAccountView: BaseViewControllerPlain {
     @IBOutlet weak var phoneNumberField: InputField!
     @IBOutlet weak var saveBtn: PrimaryButton!
     
-    let userData = UserSession.shared.loginRes?.user
+    let userData = UserSession.shared.loginRes?.data?.user
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class ManageAccountView: BaseViewControllerPlain {
             firstNameField.text = userInfo.first_name ?? ""
             lastNameField.text = userInfo.last_name ?? ""
             emailAddressField.text = userInfo.email ?? ""
-            phoneNumberField.text = userInfo.phone ?? ""
+            phoneNumberField.text = userInfo.phone_number ?? ""
         }
     }
 

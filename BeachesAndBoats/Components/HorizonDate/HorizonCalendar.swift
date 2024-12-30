@@ -22,6 +22,12 @@ class HorizonCalendar: BaseXib {
     
     var onDateSelected: ((Date, Date?) -> Void)?
     
+    public var model: HorizonCalendarModel = HorizonCalendarModel() {
+        didSet {
+            setupCalendar()
+        }
+    }
+    
     @IBInspectable var calendarOnlyMode: Bool = false {
         didSet { setupCalendar() }
     }
@@ -45,9 +51,11 @@ class HorizonCalendar: BaseXib {
         
         let currentDate = Date()
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        let startDate = calendar.date(from: components)!
-        let endDate = calendar.date(byAdding: .month, value: 6, to: startDate)!
+//        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+//        let startDate = calendar.date(from: components)!
+//        let endDate = calendar.date(byAdding: .month, value: 6, to: startDate)!
+        let startDate = model.startDate
+        let endDate = model.endDate
 
         calendarContent = CalendarViewContent(
             calendar: calendar,
@@ -119,6 +127,14 @@ class HorizonCalendar: BaseXib {
                 month: day.month.month,
                 day: day.day
             ))!
+            
+            let availableDateRange = model.availableDateRange
+            
+            guard availableDateRange.contains(selectedDate) else {
+                MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
+                return
+            }
+                            
             
             if self.selectedEndDate == nil {
                 if selectedDate > self.selectedStartDate {
@@ -214,3 +230,8 @@ struct DayLabel: CalendarItemViewRepresentable {
     
 }
 
+struct HorizonCalendarModel{
+    var startDate: Date = Date()
+    var endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+    var availableDateRange: ClosedRange<Date> = Date()...Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+}

@@ -34,16 +34,30 @@ class BoatAboutYouDescriptionView: BaseViewControllerPlain {
 //            descriptionLabel.error = "Enter a description"
 //            nextBtn.isEnabled = false
 //        }else{
-//            nextBtn.isEnabled = true
+            nextBtn.isEnabled = true
 //        }
     }
 
     @IBAction func nextTapped(_ sender: Any) {
         
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: createBoatListing?.preferred_languages ?? [], brief_introduction: descriptionLabel.text, rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.aboutOwner = descriptionLabel.text
+                
+                print(createBoatListing)
+                
+                coordinator?.gotoBoatRulesView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
             
-            coordinator?.gotoBoatRulesView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
+        }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.aboutOwner = descriptionLabel.text
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
         }
     }
 

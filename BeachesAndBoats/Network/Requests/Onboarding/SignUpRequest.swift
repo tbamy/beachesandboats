@@ -8,12 +8,13 @@
 import Foundation
 
 public struct SignUpRequest: Codable{
-    let first_name: String?
-    let last_name: String?
-    let dob: String?
-    let phone_code: String?
-    let phone: String?
-    let email: String?
-    let password: String?
-    let password_confirmation: String?
+    var first_name: String?
+    var last_name: String?
+    var email: String?
+    var birthday: String?
+    var password: String?
+    var password_confirmation: String?
+    var keep_signed_in: Bool?
+    var phone_number: String?
+    var device_id: String?
 }

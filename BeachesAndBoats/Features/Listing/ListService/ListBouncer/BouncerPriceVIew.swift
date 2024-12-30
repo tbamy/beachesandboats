@@ -74,9 +74,24 @@ class BouncerPriceVIew: BaseViewControllerPlain {
 
     
     @IBAction func nextTapped(_ sender: Any) {
-        let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: createServiceListing?.from_when ?? "", to_when: createServiceListing?.to_when ?? "", dishes: [], price: moneyField.getIntValue() ?? 0, sample_images: [], type: "", gender: createServiceListing?.gender ?? "")
-        
-        coordinator?.gotoBouncerUploadImagesView(createServiceListingData: request)
+        if var createServiceListing = createServiceListing{
+            createServiceListing.startingPrice = moneyField.getDoubleValue() ?? 0
+            
+            print(createServiceListing)
+            
+            coordinator?.gotoBouncerUploadImagesView(createServiceListingData: createServiceListing)
+        }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.startingPrice = moneyField.getDoubleValue() ?? 0
+            
+            print(createServiceListing)
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
 
 }

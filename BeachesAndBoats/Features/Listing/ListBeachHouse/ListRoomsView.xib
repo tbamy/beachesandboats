@@ -10,18 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListRoomsView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
-                <outlet property="bunkBedView" destination="ed9-y0-oO5" id="3s8-6O-rpg"/>
-                <outlet property="kingsBedView" destination="Jkf-T4-MnI" id="lvS-Fn-5g9"/>
+                <outlet property="collectionView" destination="BTC-bG-SM9" id="jVo-4L-072"/>
+                <outlet property="collectionViewHeight" destination="Zw8-ck-b2N" id="oCI-uc-qIR"/>
                 <outlet property="nextBtn" destination="lWh-4v-bHX" id="XtN-E5-OYQ"/>
                 <outlet property="peopleCount" destination="074-8K-Owe" id="ZP1-jv-V5U"/>
                 <outlet property="privateRoomNo" destination="Hak-5W-yuY" id="AXQ-gh-whI"/>
                 <outlet property="privateRoomYes" destination="Vs0-N5-7M5" id="VQ4-7B-kll"/>
-                <outlet property="queensBendView" destination="yiZ-At-Q3R" id="tSz-oc-llB"/>
                 <outlet property="roomCount" destination="6Na-Oc-xmZ" id="PWy-hm-HRh"/>
                 <outlet property="roomDescription" destination="M99-Uk-5G6" id="SGF-ij-Irs"/>
                 <outlet property="roomName" destination="Ubl-oh-bV3" id="g9x-X4-s2i"/>
-                <outlet property="singleBedView" destination="GYU-ds-37w" id="FTv-2i-cCJ"/>
-                <outlet property="sofaBedView" destination="60l-Eg-tAU" id="InJ-Zn-JL5"/>
                 <outlet property="stepOneProgress" destination="6Ww-rQ-8Sn" id="Pt6-cK-jyg"/>
                 <outlet property="stepTwoProgress" destination="JQH-FA-2f2" id="Tbn-QW-d01"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -104,7 +101,7 @@
                     <rect key="frame" x="0.0" y="142" width="472" height="1294"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3QW-MT-Lo5">
-                            <rect key="frame" x="0.0" y="8" width="472" height="1229.6666666666667"/>
+                            <rect key="frame" x="0.0" y="8" width="472" height="1089.6666666666667"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
                                     <rect key="frame" x="20" y="19.999999999999996" width="432" height="48.666666666666657"/>
@@ -200,7 +197,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7C1-Mu-J76">
-                                    <rect key="frame" x="20" y="1011.3333333333334" width="432" height="77.333333333333371"/>
+                                    <rect key="frame" x="20" y="871.33333333333337" width="432" height="77.333333333333371"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many people can stay in this room?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ha-xu-lT8">
                                             <rect key="frame" x="0.0" y="0.0" width="303" height="19.333333333333332"/>
@@ -209,7 +206,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="074-8K-Owe" customClass="NumberField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="27.333333333333485" width="200" height="50"/>
+                                            <rect key="frame" x="0.0" y="27.333333333333371" width="200" height="50"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="V92-05-wWa"/>
@@ -219,7 +216,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vZo-E4-77B">
-                                    <rect key="frame" x="20" y="1120.3333333333333" width="432" height="59.333333333333258"/>
+                                    <rect key="frame" x="20" y="980.33333333333326" width="432" height="59.333333333333258"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you have a private bathroom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awL-UA-2ms">
                                             <rect key="frame" x="0.0" y="0.0" width="239.33333333333334" height="19.333333333333332"/>
@@ -279,7 +276,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="L5B-03-zfG">
-                                    <rect key="frame" x="20" y="572" width="432" height="419.33333333333326"/>
+                                    <rect key="frame" x="20" y="572" width="432" height="279.33333333333326"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What type of bed do you have?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wg-F3-OeS">
                                             <rect key="frame" x="0.0" y="0.0" width="432" height="19.333333333333332"/>
@@ -287,41 +284,19 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60l-Eg-tAU" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="29.333333333333371" width="432" height="70"/>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BTC-bG-SM9">
+                                            <rect key="frame" x="0.0" y="29.333333333333371" width="432" height="250"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="hCm-ob-THP"/>
+                                                <constraint firstAttribute="height" constant="250" id="Zw8-ck-b2N"/>
                                             </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ed9-y0-oO5" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="109.33333333333337" width="432" height="70"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="Bx0-bC-aRX"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYU-ds-37w" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="189.33333333333337" width="432" height="70"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="jhv-uM-uPF"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiZ-At-Q3R" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="269.33333333333337" width="432" height="70"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="cMl-fP-j8l"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-T4-MnI" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="349.33333333333326" width="432" height="70"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="05G-XB-iqd"/>
-                                            </constraints>
-                                        </view>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UzM-uv-cKd">
+                                                <size key="itemSize" width="128" height="128"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                        </collectionView>
                                     </subviews>
                                 </stackView>
                             </subviews>

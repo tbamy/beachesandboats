@@ -82,6 +82,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
+                            <connections>
+                                <action selector="saveAndExit:" destination="-1" eventType="touchUpInside" id="K15-48-UJ5"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKh-zW-Idt" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="201.66666666666663" y="0.0" width="151.33333333333337" height="50"/>

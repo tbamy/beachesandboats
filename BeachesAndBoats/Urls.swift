@@ -11,13 +11,15 @@ enum Urls: String {
     
     //MARK: Onboarding
     
-    case register = "api/v1/register"
-    case confirmAccount = "api/v1/confirm-account"
-    case verifyCode = "api/v1/verify-code"
-    case refreshToken = "api/v1/refresh-tokens"
+    case register = "api/v1/create-profile"
+    case confirmAccount = "api/v1/send-otp"
+    case verifyCode = "api/v1/verify-otp"
+    case refreshToken = "api/v1/refresh-token"
+    case verifyLoginOtp = "api/v1/verify-login-otp"
 
     case login = "api/v1/login"
     case logout = "api/v1/logout"
+    case getPhoneCodes = "api/v1/phonecodes"
     
     //MARK: Profile Management
     case resetPassword = "api/v1/reset-password"
@@ -27,23 +29,39 @@ enum Urls: String {
     case enable2FAPhone = "api/v1/accounts/settings/2fa/enable/sms"
     case verify2FA = "api/v1/accounts/settings/2fa/verify"
     case requestCode2FA = "api/v1/accounts/settings/2fa/request/email"
+    case getDashboardUser = "api/v1/hosting/dashboard/user"
+    case sendKYC = "api/v1/kyc-request"
+    
+    
+    //MARK: Booking
+    
+    case getBookingCategories = "api/v1/booking"
+    case addOrUpdateReview = "api/v1/booking/add-review"
+    case addOrUpdateFavourite = "api/v1/booking/add-favourite"
+    case createBeachHouseBooking = "api/v1/booking/book-beach-house"
+    case createBoatBooking = "api/v1/booking/book-boat"
+    case bookingConfiguration = "api/v1/booking/booking-configuration"
+    case allDishes = "api/v1/booking/dishes"
+    case findChefByDishes = "api/v1/booking/find-chef"
+    case bookServiceProvider = "api/v1/booking/book-service"
+    case updateProviderBookingDate = "api/v1/booking/update-service-booking"
+    case findBouncers = "api/v1/booking/find-bouncer"
+    case findDj = "api/v1/booking/find-dj"
     
     
     
     //MARK: Boat
     
-    case createBoat = "api/v1/accounts/client/property/listings/boats/create"
-    case boatData = "api/v1/accounts/client/property/datas/boat"
+    case createBoat = "api/v1/boat/create"
+    case propertiesData = "api/v1/property/data"
     
     //MARK: Beach
     
-    case createBeach = "api/v1/accounts/client/property/listings/beach/create"
-    case beachData = "api/v1/accounts/client/property/datas/beach"
+    case createBeach = "api/v1/beachhouse/create"
     
     
     //MARK: Services
     
-    case createService = "api/v1/accounts/client/services/listings/create"
-    case chefDishes = "api/v1/accounts/client/services/datas/chef"
+    case createService = "api/v1/provider/create"
     
 }

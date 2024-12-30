@@ -10,34 +10,14 @@ import Foundation
 struct LoginResponse: Codable{
     var message: String?
     var status: Bool?
-    var user: UserData?
-    var access_token: String?
-    var token_type: String?
-    var expires_at: String?
+    var data: LoginUser?
+    var errors: [String]?
 }
 
-struct UserData: Codable{
-    var id: Int?
-    var account_id: String?
-    var first_name: String?
-    var last_name: String?
-    var email: String?
-    var phone_code: String?
-    var phone: String?
-    var dob: String?
-    var street_address: String?
-    var receive_mails: String?
-    var status: String?
-    var is_login: String?
-    var role_id: Int?
-    var last_login: String?
-    var city: String?
-    var country: String?
-    var state: String?
-    var postcode: String?
-    var rememberMe: String?
-    var email_verified_at: String?
-    var created_at: String?
-    var updated_at: String?
-    
+struct LoginUser: Codable{
+    var user: UserData?
+    var switch_device: Bool?
+    var access_token: String?
+    var refreshToken: String?
 }
+

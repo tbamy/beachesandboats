@@ -96,6 +96,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
+                            <connections>
+                                <action selector="saveAndExit:" destination="-1" eventType="touchUpInside" id="cxC-So-dxl"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWh-4v-bHX" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="201.66666666666663" y="0.0" width="151.33333333333337" height="50"/>
@@ -109,7 +112,7 @@
                     </subviews>
                 </stackView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SQH-kc-wr3">
-                    <rect key="frame" x="20" y="255.33333333333334" width="353" height="462.66666666666663"/>
+                    <rect key="frame" x="20" y="255.33333333333334" width="353" height="462.66666666666652"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LT1-3l-FNk">
                         <size key="itemSize" width="128" height="128"/>
