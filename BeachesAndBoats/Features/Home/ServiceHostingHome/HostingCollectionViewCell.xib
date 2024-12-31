@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="HostingCollectionViewCell" customModule="BeachesAndBoats" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="403" height="403"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="403" height="403"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gq6-6b-Rfu">
+                        <rect key="frame" x="0.0" y="59" width="403" height="310"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mW3-bm-ayw" customClass="LightLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="30" y="145.33333333333334" width="343" height="19.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hSG-1B-4Fl">
+                                <rect key="frame" x="0.0" y="0.0" width="403" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="Q2Q-ha-fWK"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U39-zW-udc">
+                                <rect key="frame" x="22" y="17" width="135" height="43"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72N-L1-UCm" customClass="CustomLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="13" width="115" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="72N-L1-UCm" firstAttribute="leading" secondItem="U39-zW-udc" secondAttribute="leading" constant="10" id="9RX-h3-l1C"/>
+                                    <constraint firstItem="72N-L1-UCm" firstAttribute="top" secondItem="U39-zW-udc" secondAttribute="top" constant="13" id="MQT-Pw-mX8"/>
+                                    <constraint firstAttribute="width" constant="135" id="S4g-vg-Mse"/>
+                                    <constraint firstAttribute="trailing" secondItem="72N-L1-UCm" secondAttribute="trailing" constant="10" id="TFG-Dy-88Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="72N-L1-UCm" secondAttribute="bottom" constant="13" id="Ybg-Dx-52b"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mh-qp-1jM" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="10" y="240" width="39.666666666666664" height="19.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="eBp-Tb-hgu">
+                                <rect key="frame" x="10" y="264.33333333333331" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="IOV-gP-MbR"/>
+                                    <constraint firstAttribute="width" constant="12" id="jAC-dX-qj4"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvO-eI-Gv2" customClass="LightLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="27.000000000000004" y="262.33333333333331" width="35.333333333333343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="Hip-yc-ZfG">
+                                <rect key="frame" x="340.66666666666669" y="245" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="9v3-fn-HqD"/>
+                                    <constraint firstAttribute="height" constant="12" id="JPE-2k-82U"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nx-3N-RoN" customClass="LightLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="357.66666666666669" y="240" width="35.333333333333314" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mW3-bm-ayw" firstAttribute="centerX" secondItem="gq6-6b-Rfu" secondAttribute="centerX" id="2Iv-kQ-qzF"/>
+                            <constraint firstItem="eBp-Tb-hgu" firstAttribute="top" secondItem="5mh-qp-1jM" secondAttribute="bottom" constant="5" id="3fk-7Y-Zqy"/>
+                            <constraint firstAttribute="trailing" secondItem="0nx-3N-RoN" secondAttribute="trailing" constant="10" id="5z3-Qu-lsA"/>
+                            <constraint firstItem="hSG-1B-4Fl" firstAttribute="top" secondItem="gq6-6b-Rfu" secondAttribute="top" id="9L8-t1-Lqj"/>
+                            <constraint firstItem="mW3-bm-ayw" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="30" id="9Yt-q8-ZOW"/>
+                            <constraint firstItem="hSG-1B-4Fl" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" id="C2N-Em-Y6L"/>
+                            <constraint firstItem="5mh-qp-1jM" firstAttribute="top" secondItem="hSG-1B-4Fl" secondAttribute="bottom" constant="10" id="ElY-Y4-aAW"/>
+                            <constraint firstAttribute="trailing" secondItem="mW3-bm-ayw" secondAttribute="trailing" constant="30" id="Jeu-OG-pzC"/>
+                            <constraint firstItem="0nx-3N-RoN" firstAttribute="top" secondItem="hSG-1B-4Fl" secondAttribute="bottom" constant="10" id="T8x-KK-D3V"/>
+                            <constraint firstItem="0nx-3N-RoN" firstAttribute="leading" secondItem="Hip-yc-ZfG" secondAttribute="trailing" constant="5" id="XkF-mV-HH7"/>
+                            <constraint firstItem="mW3-bm-ayw" firstAttribute="centerY" secondItem="gq6-6b-Rfu" secondAttribute="centerY" id="Yzq-iO-M1e"/>
+                            <constraint firstItem="5mh-qp-1jM" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="10" id="ZW3-c3-I1D"/>
+                            <constraint firstItem="Hip-yc-ZfG" firstAttribute="top" secondItem="hSG-1B-4Fl" secondAttribute="bottom" constant="15" id="lXj-XP-MMd"/>
+                            <constraint firstItem="ZvO-eI-Gv2" firstAttribute="leading" secondItem="eBp-Tb-hgu" secondAttribute="trailing" constant="5" id="mHc-Gj-kGc"/>
+                            <constraint firstAttribute="trailing" secondItem="hSG-1B-4Fl" secondAttribute="trailing" id="pQD-fP-z3p"/>
+                            <constraint firstItem="U39-zW-udc" firstAttribute="top" secondItem="gq6-6b-Rfu" secondAttribute="top" constant="17" id="pWl-AS-Ulp"/>
+                            <constraint firstItem="eBp-Tb-hgu" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="10" id="tEr-7p-yGR"/>
+                            <constraint firstItem="U39-zW-udc" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leadingMargin" constant="14" id="uhj-Eq-xYP"/>
+                            <constraint firstItem="ZvO-eI-Gv2" firstAttribute="top" secondItem="5mh-qp-1jM" secondAttribute="bottom" constant="3" id="xqg-mA-7qa"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="gq6-6b-Rfu" secondAttribute="trailing" id="0fe-jJ-Suf"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="gq6-6b-Rfu" secondAttribute="bottom" id="Fb6-JP-89f"/>
+                <constraint firstItem="gq6-6b-Rfu" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="LNp-Ac-x2x"/>
+                <constraint firstItem="gq6-6b-Rfu" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="PXc-B5-CPL"/>
+            </constraints>
+            <size key="customSize" width="403" height="403"/>
+            <connections>
+                <outlet property="beachHouseImage" destination="hSG-1B-4Fl" id="gNx-Aj-mVC"/>
+                <outlet property="beachName" destination="5mh-qp-1jM" id="co2-AR-9j8"/>
+                <outlet property="calendarImg" destination="Hip-yc-ZfG" id="r3V-zb-gC2"/>
+                <outlet property="date" destination="0nx-3N-RoN" id="mcn-dR-IMP"/>
+                <outlet property="daysLbl" destination="72N-L1-UCm" id="PbW-Ae-NAy"/>
+                <outlet property="daysView" destination="U39-zW-udc" id="X0A-NX-0a1"/>
+                <outlet property="emptyLbl" destination="mW3-bm-ayw" id="Ewl-XQ-BOn"/>
+                <outlet property="locationImg" destination="eBp-Tb-hgu" id="k8i-4P-o2Z"/>
+                <outlet property="locationLbl" destination="ZvO-eI-Gv2" id="55H-Rz-j02"/>
+            </connections>
+            <point key="canvasLocation" x="281.67938931297709" y="101.7605633802817"/>
+        </collectionViewCell>
+    </objects>
+    <designables>
+        <designable name="0nx-3N-RoN">
+            <size key="intrinsicContentSize" width="35.333333333333336" height="17"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="calendar" width="14" height="14.333333015441895"/>
+        <image name="location" width="10" height="14.333333015441895"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

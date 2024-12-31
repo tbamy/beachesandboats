@@ -25,20 +25,56 @@ class ServiceDashboard: UITabBarController {
         tabBar.unselectedItemTintColor = .gray // For unselected items
         tabBar.isTranslucent = false
         
-        // Set up each tab item
-        let homeVC = ServiceHostingHomeView()
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeIcon"), tag: 0)
+//        // Set up each tab item
+//        let homeVC = ServiceHostingHomeView()
+//        let homeNavController = UINavigationController(rootViewController: homeVC)
+//        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeIcon"), tag: 0)
+//        
+//        let messagesVC = MessagesView()
+//        let messagesNavController = UINavigationController(rootViewController: messagesVC)
+//        messagesVC.tabBarItem = UITabBarItem(title: "Messages", image: UIImage(named: "messagesIcon"), tag: 1)
+//        
+//        let earningsVC = UIViewController()
+//        earningsVC.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(named: "earningsIcon"), tag: 2)
+//        
+//        let menuVC = UIViewController()
+//        menuVC.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.horizontal.3"), tag: 3)
         
-        let messagesVC = MessagesView()
-        messagesVC.tabBarItem = UITabBarItem(title: "Messages", image: UIImage(named: "messagesIcon"), tag: 1)
-        
-        let earningsVC = UIViewController()
-        earningsVC.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(named: "earningsIcon"), tag: 2)
-        
-        let menuVC = UIViewController()
-        menuVC.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.horizontal.3"), tag: 3)
-        
-        viewControllers = [homeVC, messagesVC, UIViewController(), earningsVC, menuVC]
+//        viewControllers = [homeVC, messagesVC, UIViewController(), earningsVC, menuVC]
+        viewControllers = [ServiceHomeController(), MessageController(), UIViewController(), EarningController(), MenuController()]
+
+    }
+    
+    func wrapInNavigationController(_ viewController: UIViewController) -> BaseNavigationController {
+        return BaseNavigationController(rootViewController: viewController)
+    }
+    
+    func ServiceHomeController() -> UINavigationController {
+        let navController = BaseNavigationController()
+        let coordinator = ServiceCoordinator(navigationController: navController, completion: nil)
+        coordinator.start()
+        return navController
+    }
+    
+    func MessageController() -> UINavigationController {
+        let navController = BaseNavigationController()
+        let coordinator = MessagesCoordinator(navigationController: navController, completion: nil)
+        coordinator.start()
+        return navController
+    }
+      
+    func EarningController() -> UINavigationController {
+        let navController = BaseNavigationController()
+//        let coordinator = Earning(navigationController: navController, completion: nil)
+//        coordinator.start()
+        return navController
+    }
+    
+    func MenuController() -> UINavigationController {
+        let navController = BaseNavigationController()
+//        let coordinator = MessagesCoordinator(navigationController: navController, completion: nil)
+//        coordinator.start()
+        return navController
     }
 
     private func setupMiddleButton() {

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="79" id="KGk-i7-Jjw" customClass="MessageViewCell" customModule="BeachesAndBoats" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="362" height="79"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="362" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFX-k3-RYf">
+                        <rect key="frame" x="0.0" y="0.0" width="362" height="79"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boatListingSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="SfW-nG-xSw">
+                                <rect key="frame" x="20" y="19.666666666666671" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3kz-zQ-6hQ"/>
+                                    <constraint firstAttribute="width" constant="40" id="6wv-XK-UNC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrD-8n-OR9" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="68" y="19" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNM-sz-zBI">
+                                <rect key="frame" x="68" y="45" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPm-Y4-cfw">
+                                <rect key="frame" x="120" y="19" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="lNM-sz-zBI" firstAttribute="top" secondItem="FrD-8n-OR9" secondAttribute="bottom" constant="5" id="8bC-QC-9xy"/>
+                            <constraint firstItem="lNM-sz-zBI" firstAttribute="leading" secondItem="SfW-nG-xSw" secondAttribute="trailing" constant="8" symbolic="YES" id="MoJ-G8-tdy"/>
+                            <constraint firstItem="SfW-nG-xSw" firstAttribute="leading" secondItem="YFX-k3-RYf" secondAttribute="leading" constant="20" id="OTr-At-V2B"/>
+                            <constraint firstItem="SfW-nG-xSw" firstAttribute="centerY" secondItem="YFX-k3-RYf" secondAttribute="centerY" id="VeL-Ke-xJN"/>
+                            <constraint firstItem="kPm-Y4-cfw" firstAttribute="leading" secondItem="FrD-8n-OR9" secondAttribute="trailing" constant="10" id="h9c-hB-u05"/>
+                            <constraint firstItem="FrD-8n-OR9" firstAttribute="leading" secondItem="SfW-nG-xSw" secondAttribute="trailing" constant="8" symbolic="YES" id="hZj-MA-0gh"/>
+                            <constraint firstItem="kPm-Y4-cfw" firstAttribute="top" secondItem="YFX-k3-RYf" secondAttribute="top" constant="19" id="lTA-gS-6B6"/>
+                            <constraint firstItem="FrD-8n-OR9" firstAttribute="top" secondItem="YFX-k3-RYf" secondAttribute="top" constant="19" id="yHn-Ir-sbs"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="YFX-k3-RYf" secondAttribute="bottom" id="5MY-nG-TsC"/>
+                    <constraint firstItem="YFX-k3-RYf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bbX-er-2Zo"/>
+                    <constraint firstAttribute="trailing" secondItem="YFX-k3-RYf" secondAttribute="trailing" id="dZ9-wT-Py0"/>
+                    <constraint firstItem="YFX-k3-RYf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rN8-Bb-aGQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="contactImg" destination="SfW-nG-xSw" id="pPQ-vk-GG4"/>
+                <outlet property="contactName" destination="FrD-8n-OR9" id="qle-E9-7un"/>
+                <outlet property="lastMsgLbl" destination="lNM-sz-zBI" id="fYr-od-ncs"/>
+                <outlet property="stateLbl" destination="kPm-Y4-cfw" id="lxz-9R-T0p"/>
+            </connections>
+            <point key="canvasLocation" x="158.77862595419847" y="32.04225352112676"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="boatListingSuccess" width="383" height="317"/>
+        <namedColor name="Background">
+            <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

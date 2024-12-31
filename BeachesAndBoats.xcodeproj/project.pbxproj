@@ -205,6 +205,19 @@
 		A6617A502CAF557900514576 /* BookingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A4E2CAF557900514576 /* BookingsView.xib */; };
 		A6617A532CAF559600514576 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A512CAF559600514576 /* SavedView.swift */; };
 		A6617A542CAF559600514576 /* SavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A522CAF559600514576 /* SavedView.xib */; };
+		A669F79C2D22B84000230E0A /* HostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F79B2D22B84000230E0A /* HostType.swift */; };
+		A669F7A12D22E90800230E0A /* HostingBookingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */; };
+		A669F7A32D22F2B500230E0A /* ServiceHostingHomeViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A22D22F2B500230E0A /* ServiceHostingHomeViewVM.swift */; };
+		A669F7A52D22F2FA00230E0A /* HostingTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A42D22F2FA00230E0A /* HostingTarget.swift */; };
+		A669F7A82D22F41300230E0A /* HostingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A72D22F41300230E0A /* HostingService.swift */; };
+		A669F7AC2D22F43300230E0A /* HostingServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7AB2D22F43300230E0A /* HostingServiceImplementation.swift */; };
+		A669F7B32D23DAB800230E0A /* HostingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A669F7B22D23DAB800230E0A /* HostingCollectionViewCell.xib */; };
+		A669F7B42D23DAB800230E0A /* HostingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7B12D23DAB800230E0A /* HostingCollectionViewCell.swift */; };
+		A669F7BB2D23F91600230E0A /* ServiceHostingDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A669F7BA2D23F91600230E0A /* ServiceHostingDetailsView.xib */; };
+		A669F7BC2D23F91600230E0A /* ServiceHostingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7B92D23F91600230E0A /* ServiceHostingDetailsView.swift */; };
+		A669F7BF2D2409D700230E0A /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A669F7BE2D2409D700230E0A /* MessageViewCell.xib */; };
+		A669F7C02D2409D700230E0A /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7BD2D2409D700230E0A /* MessageViewCell.swift */; };
+		A669F7C22D241AE600230E0A /* ServiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7C12D241AE600230E0A /* ServiceCoordinator.swift */; };
 		A6757D802C9746E8000D6302 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D7F2C9746E8000D6302 /* Dashboard.swift */; };
 		A6757D822C987A0F000D6302 /* ExploreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D812C987A0F000D6302 /* ExploreCoordinator.swift */; };
 		A6757D842C987A2A000D6302 /* SavedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6757D832C987A2A000D6302 /* SavedCoordinator.swift */; };
@@ -603,6 +616,19 @@
 		A6617A4E2CAF557900514576 /* BookingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingsView.xib; sourceTree = "<group>"; };
 		A6617A512CAF559600514576 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		A6617A522CAF559600514576 /* SavedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedView.xib; sourceTree = "<group>"; };
+		A669F79B2D22B84000230E0A /* HostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostType.swift; sourceTree = "<group>"; };
+		A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingBookingResponse.swift; sourceTree = "<group>"; };
+		A669F7A22D22F2B500230E0A /* ServiceHostingHomeViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHostingHomeViewVM.swift; sourceTree = "<group>"; };
+		A669F7A42D22F2FA00230E0A /* HostingTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingTarget.swift; sourceTree = "<group>"; };
+		A669F7A72D22F41300230E0A /* HostingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingService.swift; sourceTree = "<group>"; };
+		A669F7AB2D22F43300230E0A /* HostingServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingServiceImplementation.swift; sourceTree = "<group>"; };
+		A669F7B12D23DAB800230E0A /* HostingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingCollectionViewCell.swift; sourceTree = "<group>"; };
+		A669F7B22D23DAB800230E0A /* HostingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostingCollectionViewCell.xib; sourceTree = "<group>"; };
+		A669F7B92D23F91600230E0A /* ServiceHostingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHostingDetailsView.swift; sourceTree = "<group>"; };
+		A669F7BA2D23F91600230E0A /* ServiceHostingDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceHostingDetailsView.xib; sourceTree = "<group>"; };
+		A669F7BD2D2409D700230E0A /* MessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.swift; sourceTree = "<group>"; };
+		A669F7BE2D2409D700230E0A /* MessageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewCell.xib; sourceTree = "<group>"; };
+		A669F7C12D241AE600230E0A /* ServiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCoordinator.swift; sourceTree = "<group>"; };
 		A6757D7F2C9746E8000D6302 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		A6757D812C987A0F000D6302 /* ExploreCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCoordinator.swift; sourceTree = "<group>"; };
 		A6757D832C987A2A000D6302 /* SavedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCoordinator.swift; sourceTree = "<group>"; };
@@ -929,6 +955,7 @@
 		A61627672C7DB04600F6B452 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A669F7A62D22F3FD00230E0A /* Hosting */,
 				A675D9A12D16C8C2003E297B /* Booking */,
 				A6A2E8422CBE8561004E58EB /* Profile */,
 				A63F31262CB07D2D00D402F4 /* Listing */,
@@ -1025,6 +1052,7 @@
 				A60580A62CD8EE3A00B17505 /* HostingHomeCoordinator.swift */,
 				A60580A82CD8EE5400B17505 /* HostingEarningsCoordinator.swift */,
 				A60580AA2CD8EE6500B17505 /* HostingMenuCoordinator.swift */,
+				A669F7C12D241AE600230E0A /* ServiceCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1437,6 +1465,8 @@
 			children = (
 				A6617A492CAF555700514576 /* MessagesView.swift */,
 				A6617A4A2CAF555700514576 /* MessagesView.xib */,
+				A669F7BD2D2409D700230E0A /* MessageViewCell.swift */,
+				A669F7BE2D2409D700230E0A /* MessageViewCell.xib */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -1459,6 +1489,23 @@
 				A6617A522CAF559600514576 /* SavedView.xib */,
 			);
 			path = Saved;
+			sourceTree = "<group>";
+		};
+		A669F79D2D22E8B000230E0A /* Hosting */ = {
+			isa = PBXGroup;
+			children = (
+				A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */,
+			);
+			path = Hosting;
+			sourceTree = "<group>";
+		};
+		A669F7A62D22F3FD00230E0A /* Hosting */ = {
+			isa = PBXGroup;
+			children = (
+				A669F7A72D22F41300230E0A /* HostingService.swift */,
+				A669F7AB2D22F43300230E0A /* HostingServiceImplementation.swift */,
+			);
+			path = Hosting;
 			sourceTree = "<group>";
 		};
 		A675D99B2D16BDE1003E297B /* Profile */ = {
@@ -1515,6 +1562,7 @@
 			isa = PBXGroup;
 			children = (
 				A675D9E22D22B349003E297B /* HouseBookingType.swift */,
+				A669F79B2D22B84000230E0A /* HostType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1595,6 +1643,7 @@
 				A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */,
 				A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */,
 				A675D9A82D16C914003E297B /* BookingTarget.swift */,
+				A669F7A42D22F2FA00230E0A /* HostingTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -1602,6 +1651,7 @@
 		A6C20FBE2C84F9A90045C670 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				A669F79D2D22E8B000230E0A /* Hosting */,
 				A675D9B22D172DD0003E297B /* Booking */,
 				A675D99B2D16BDE1003E297B /* Profile */,
 				A63F31232CB07A3800D402F4 /* Listing */,
@@ -1797,6 +1847,11 @@
 			children = (
 				A6E0504B2CEF47DE00F0211C /* ServiceHostingHomeView.swift */,
 				A6E0504C2CEF47DE00F0211C /* ServiceHostingHomeView.xib */,
+				A669F7A22D22F2B500230E0A /* ServiceHostingHomeViewVM.swift */,
+				A669F7B12D23DAB800230E0A /* HostingCollectionViewCell.swift */,
+				A669F7B22D23DAB800230E0A /* HostingCollectionViewCell.xib */,
+				A669F7B92D23F91600230E0A /* ServiceHostingDetailsView.swift */,
+				A669F7BA2D23F91600230E0A /* ServiceHostingDetailsView.xib */,
 			);
 			path = ServiceHostingHome;
 			sourceTree = "<group>";
@@ -2039,9 +2094,12 @@
 				A6CA3D242CB9BA7D009307B2 /* BoatPeopleRules.xib in Resources */,
 				A6CA3D202CB9B89B009307B2 /* BoatRulesView.xib in Resources */,
 				A6F406A72C02D3A800973BD7 /* Montserrat-LightItalic.ttf in Resources */,
+				A669F7BF2D2409D700230E0A /* MessageViewCell.xib in Resources */,
 				A6E0504A2CEF428800F0211C /* BeachHostingHomeView.xib in Resources */,
+				A669F7B32D23DAB800230E0A /* HostingCollectionViewCell.xib in Resources */,
 				A6CA3D142CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.xib in Resources */,
 				A614993A2C5E9A3C00E0CDFC /* FilterModal.xib in Resources */,
+				A669F7BB2D23F91600230E0A /* ServiceHostingDetailsView.xib in Resources */,
 				A61B3C292CB6EF6600C89C14 /* RoomsListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2164,6 +2222,7 @@
 				A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */,
 				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */,
+				A669F7A32D22F2B500230E0A /* ServiceHostingHomeViewVM.swift in Sources */,
 				A6C20FDC2C859D9C0045C670 /* SignUpResponse.swift in Sources */,
 				A6FB74542C1355D900A26806 /* UserInformationModal.swift in Sources */,
 				A65C514C2CAC35260027E5F1 /* HouseRulesView.swift in Sources */,
@@ -2184,6 +2243,7 @@
 				A6F406862C02D1A300973BD7 /* GeneralFormatter.swift in Sources */,
 				A61627782C7DBD3700F6B452 /* UserDefault.swift in Sources */,
 				A6CA3D642CB9CE24009307B2 /* BouncerInformationView.swift in Sources */,
+				A669F7A52D22F2FA00230E0A /* HostingTarget.swift in Sources */,
 				A651257B2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift in Sources */,
 				A6C20FD72C859C780045C670 /* SignUpRequest.swift in Sources */,
 				A651256A2CBC0EF400AFA0F9 /* PaypalPaymentView.swift in Sources */,
@@ -2200,6 +2260,7 @@
 				A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */,
 				A65C51142CAB215D0027E5F1 /* DynamicTableViewCell.swift in Sources */,
 				A65C50F42CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift in Sources */,
+				A669F7BC2D23F91600230E0A /* ServiceHostingDetailsView.swift in Sources */,
 				A6A2E8712CD4C93A004E58EB /* DJAvailableDatesView.swift in Sources */,
 				A6FB744C2C13558000A26806 /* ConfirmAccountModal.swift in Sources */,
 				A675D9CF2D201F4C003E297B /* ImageCell.swift in Sources */,
@@ -2219,6 +2280,7 @@
 				A675D9A72D16C900003E297B /* BookingServiceMock.swift in Sources */,
 				A65628332CB569CA00947BA5 /* UploadImageView.swift in Sources */,
 				A65125772CBC290C00AFA0F9 /* AddPhoneNumberModal.swift in Sources */,
+				A669F7A12D22E90800230E0A /* HostingBookingResponse.swift in Sources */,
 				A675D9B42D172E07003E297B /* GetBookingCategoryResponse.swift in Sources */,
 				A60580A72CD8EE3A00B17505 /* HostingHomeCoordinator.swift in Sources */,
 				A6B415B52D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift in Sources */,
@@ -2245,11 +2307,14 @@
 				A6CA3D032CB96A21009307B2 /* SegmentOptionView.swift in Sources */,
 				A656280D2CB3C47800947BA5 /* SelectableCheckbox.swift in Sources */,
 				A65628182CB4744D00947BA5 /* TimePicker.swift in Sources */,
+				A669F7C22D241AE600230E0A /* ServiceCoordinator.swift in Sources */,
+				A669F7B42D23DAB800230E0A /* HostingCollectionViewCell.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
 				A61499392C5E9A3C00E0CDFC /* FilterModal.swift in Sources */,
 				A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */,
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
 				A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */,
+				A669F79C2D22B84000230E0A /* HostType.swift in Sources */,
 				A6CA3D172CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift in Sources */,
 				A61B3C282CB6EF6600C89C14 /* RoomsListView.swift in Sources */,
 				A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */,
@@ -2260,8 +2325,10 @@
 				A65C51302CAC32A50027E5F1 /* PropertyNameView.swift in Sources */,
 				A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */,
 				A63357692BF15406008AF034 /* InputField.swift in Sources */,
+				A669F7AC2D22F43300230E0A /* HostingServiceImplementation.swift in Sources */,
 				A675D9BF2D19AE15003E297B /* BeachDetailsView.swift in Sources */,
 				A63F31212CAF7D7F00D402F4 /* ListingNotif.swift in Sources */,
+				A669F7C02D2409D700230E0A /* MessageViewCell.swift in Sources */,
 				A6757D862C987A49000D6302 /* BookingsCoordinator.swift in Sources */,
 				A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */,
 				A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */,
@@ -2285,6 +2352,7 @@
 				A6E050492CEF428800F0211C /* BeachHostingHomeView.swift in Sources */,
 				A633577A2BF162A7008AF034 /* String.swift in Sources */,
 				A65628232CB5230000947BA5 /* RoomPriceView.swift in Sources */,
+				A669F7A82D22F41300230E0A /* HostingService.swift in Sources */,
 				A6B415B32D0B794E00717CE9 /* UserDevice.swift in Sources */,
 				A6617A532CAF559600514576 /* SavedView.swift in Sources */,
 				A6E0504D2CEF47DE00F0211C /* ServiceHostingHomeView.swift in Sources */,

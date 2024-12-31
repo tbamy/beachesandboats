@@ -64,4 +64,7 @@ enum Urls: String {
     
     case createService = "api/v1/provider/create"
     
+    //MARK: -  Hosting
+    
+    case getUpcomingBooking = "api/v1/hosting/dashboard/reservations"
 }
