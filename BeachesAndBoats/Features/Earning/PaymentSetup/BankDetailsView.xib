@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BankDetailsView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="accountNumberField" destination="tWu-GR-ham" id="4Im-Vr-Mby"/>
+                <outlet property="bankDropDownField" destination="HCm-lJ-Yl9" id="7YV-0Q-qNx"/>
+                <outlet property="bankNameField" destination="EAC-tb-fMX" id="8O1-Ys-pge"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-nR-WkN">
+                    <rect key="frame" x="44" y="89" width="46" height="22"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAC-tb-fMX" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="181" width="353" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="0j1-1f-cX9"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Bank name"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type bank account number"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWu-GR-ham" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="281" width="353" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="pjq-z1-7Us"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Bank account number"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type bank account number"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCm-lJ-Yl9" customClass="DropDown" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="381" width="353" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="IUL-Mg-xNr"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Bank"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Select bank"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3f-Nq-pN2" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="481" width="353" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="QPS-eE-kcA"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                    <connections>
+                        <action selector="saveBtnTapped:" destination="-1" eventType="touchUpInside" id="eat-K9-FNx"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="back"/>
+            <constraints>
+                <constraint firstItem="GYX-nR-WkN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="4Ri-mv-PT0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tWu-GR-ham" secondAttribute="trailing" constant="20" id="5fb-W9-iNP"/>
+                <constraint firstItem="HCm-lJ-Yl9" firstAttribute="top" secondItem="tWu-GR-ham" secondAttribute="bottom" constant="50" id="8k2-U9-HaO"/>
+                <constraint firstItem="D3f-Nq-pN2" firstAttribute="top" secondItem="HCm-lJ-Yl9" secondAttribute="bottom" constant="50" id="MwW-BZ-pBz"/>
+                <constraint firstItem="EAC-tb-fMX" firstAttribute="top" secondItem="GYX-nR-WkN" secondAttribute="bottom" constant="70" id="RHx-73-GCB"/>
+                <constraint firstItem="tWu-GR-ham" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="YWj-hK-rcb"/>
+                <constraint firstItem="tWu-GR-ham" firstAttribute="top" secondItem="EAC-tb-fMX" secondAttribute="bottom" constant="50" id="b3o-jv-dnX"/>
+                <constraint firstItem="EAC-tb-fMX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="eUX-ry-2ny"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EAC-tb-fMX" secondAttribute="trailing" constant="20" id="fhW-LD-eku"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GYX-nR-WkN" secondAttribute="trailing" constant="303" id="ghR-Wh-ieS"/>
+                <constraint firstItem="D3f-Nq-pN2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hF5-qD-4uy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HCm-lJ-Yl9" secondAttribute="trailing" constant="20" id="kbi-P4-xet"/>
+                <constraint firstItem="GYX-nR-WkN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="44" id="v0z-Rf-bAE"/>
+                <constraint firstItem="HCm-lJ-Yl9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="xeh-Ze-fai"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="D3f-Nq-pN2" secondAttribute="trailing" constant="20" id="zV2-8h-7gH"/>
+            </constraints>
+            <point key="canvasLocation" x="-25.190839694656489" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="back">
+            <color red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

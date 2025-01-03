@@ -2,7 +2,7 @@
 //  ServiceHostingDetailsView.swift
 //  BeachesAndBoats
 //
-//  Created by Paul Orimogunje on 31/12/2024.
+//  Created by Hefepa on 31/12/2024.
 //
 
 import UIKit

@@ -15,8 +15,11 @@ class ServiceDashboard: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let customTabBar = CustomTabBar()
+        setValue(customTabBar, forKey: "tabBar")
+        
         setupTabBar()
-        setupMiddleButton()
+//        setupMiddleButton()
     }
 
     private func setupTabBar() {
@@ -65,8 +68,8 @@ class ServiceDashboard: UITabBarController {
       
     func EarningController() -> UINavigationController {
         let navController = BaseNavigationController()
-//        let coordinator = Earning(navigationController: navController, completion: nil)
-//        coordinator.start()
+        let coordinator = EarningCoordinator(navigationController: navController, completion: nil)
+        coordinator.start()
         return navController
     }
     
@@ -77,37 +80,37 @@ class ServiceDashboard: UITabBarController {
         return navController
     }
 
-    private func setupMiddleButton() {
-        // Configure the middle button
-        middleButton.frame.size = CGSize(width: 64, height: 64)
-        middleButton.layer.cornerRadius = 32
-        middleButton.backgroundColor = .B_B
-        middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
-        middleButton.tintColor = .white
-        
-        // Add shadow
-        middleButton.layer.shadowColor = UIColor.black.cgColor
-        middleButton.layer.shadowOpacity = 0.3
-        middleButton.layer.shadowOffset = CGSize(width: 0, height: 5)
-        middleButton.layer.shadowRadius = 10
-        
-        middleButton.addTarget(self, action: #selector(middleButtonTapped), for: .touchUpInside)
-        
-        // Add the button to the main view (not the tabBar)
-        view.addSubview(middleButton)
-        
-        // Position the button in the center of the tab bar
-        middleButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            middleButton.centerXAnchor.constraint(equalTo: tabBar.centerXAnchor),
-            middleButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: -15), // Adjust position if needed
-            middleButton.widthAnchor.constraint(equalToConstant: 64),  // Set width
-            middleButton.heightAnchor.constraint(equalToConstant: 64)  // Set height
-        ])
-                    
-    }
-
-    @objc private func middleButtonTapped() {
-        // Handle middle button action
-    }
+//    private func setupMiddleButton() {
+//        // Configure the middle button
+//        middleButton.frame.size = CGSize(width: 64, height: 64)
+//        middleButton.layer.cornerRadius = 32
+//        middleButton.backgroundColor = .B_B
+//        middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
+//        middleButton.tintColor = .white
+//        
+//        // Add shadow
+//        middleButton.layer.shadowColor = UIColor.black.cgColor
+//        middleButton.layer.shadowOpacity = 0.3
+//        middleButton.layer.shadowOffset = CGSize(width: 0, height: 5)
+//        middleButton.layer.shadowRadius = 10
+//        
+//        middleButton.addTarget(self, action: #selector(middleButtonTapped), for: .touchUpInside)
+//        
+//        // Add the button to the main view (not the tabBar)
+//        view.addSubview(middleButton)
+//        
+//        // Position the button in the center of the tab bar
+//        middleButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            middleButton.centerXAnchor.constraint(equalTo: tabBar.centerXAnchor),
+//            middleButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: -15), // Adjust position if needed
+//            middleButton.widthAnchor.constraint(equalToConstant: 64),  // Set width
+//            middleButton.heightAnchor.constraint(equalToConstant: 64)  // Set height
+//        ])
+//                    
+//    }
+//
+//    @objc private func middleButtonTapped() {
+//        // Handle middle button action
+//    }
 }

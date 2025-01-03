@@ -2,13 +2,29 @@
 //  HostingServiceImplementation.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 30/12/2024.
+//  Created by Hefepa on 30/12/2024.
 //
 
 import Foundation
 import Moya
 
 class HostingServiceImplementation: Provider<HostingTarget>, HostingService {
+    func getBanks(completion: @escaping (Result<ListOfBanksResponse, ErrorResponse>) -> Void) {
+        provider.request(.getBanks){ completion( self.handleResult(result: $0)) }
+    }
+    
+    func makeWithdrawal(request: CreateWithdrawalRequest, completion: @escaping (Result<CreateWithdrawalResponse, ErrorResponse>) -> Void) {
+        provider.request(.MakeWithdrawal(request)) {completion(self.handleResult(result: $0))}
+    }
+    
+    func getWithdrawalHistory(completion: @escaping (Result<WithdrawalResponse, ErrorResponse>) -> Void) {
+        provider.request(.WithdrawHistory){ completion( self.handleResult(result: $0)) }
+    }
+    
+    func getTopEarnings(request: TopEarningRequest, completion: @escaping (Result<TopEarningResponse, ErrorResponse>) -> Void) {
+        provider.request(.TopEarnings(request)) {completion(self.handleResult(result: $0))}
+    }
+    
     func getUpcomingBooking(completion: @escaping (Result<ServiceReservations, ErrorResponse>) -> Void) {
         provider.request(.GetHostBooking){ completion( self.handleResult(result: $0)) }
     }

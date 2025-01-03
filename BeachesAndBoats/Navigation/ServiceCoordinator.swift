@@ -2,7 +2,7 @@
 //  ServiceCoordinator.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 31/12/2024.
+//  Created by Hefepa on 31/12/2024.
 //
 
 import Foundation

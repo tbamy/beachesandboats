@@ -122,6 +122,10 @@
 		A65125832CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */; };
 		A65125842CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */; };
 		A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125852CBC3C9400AFA0F9 /* PinField.swift */; };
+		A65192912D26CE060082C3C9 /* WithdrawalHistoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65192902D26CE060082C3C9 /* WithdrawalHistoryResponse.swift */; };
+		A65192932D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65192922D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift */; };
+		A65192982D26F15F0082C3C9 /* MakeWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65192972D26F15F0082C3C9 /* MakeWithdrawView.xib */; };
+		A65192992D26F15F0082C3C9 /* MakeWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65192962D26F15F0082C3C9 /* MakeWithdrawView.swift */; };
 		A65628072CB1B60B00947BA5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628052CB1B60B00947BA5 /* ProfileView.swift */; };
 		A65628082CB1B60B00947BA5 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628062CB1B60B00947BA5 /* ProfileView.xib */; };
 		A656280A2CB2B4EC00947BA5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65628092CB2B4EC00947BA5 /* NetworkManager.swift */; };
@@ -257,6 +261,26 @@
 		A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675D9DD2D202B98003E297B /* BookingRoomCell.swift */; };
 		A675D9E02D202B98003E297B /* BookingRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A675D9DE2D202B98003E297B /* BookingRoomCell.xib */; };
 		A67C426C2CB70250004CF98F /* DiscountField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67C426B2CB70250004CF98F /* DiscountField.swift */; };
+		A68A6EB52D244635000A67E1 /* EarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EB32D244635000A67E1 /* EarningsView.swift */; };
+		A68A6EB62D244635000A67E1 /* EarningsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EB42D244635000A67E1 /* EarningsView.xib */; };
+		A68A6EBA2D245072000A67E1 /* monthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EB82D245072000A67E1 /* monthCollectionViewCell.swift */; };
+		A68A6EBB2D245072000A67E1 /* monthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EB92D245072000A67E1 /* monthCollectionViewCell.xib */; };
+		A68A6EBD2D24545A000A67E1 /* EarningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EBC2D24545A000A67E1 /* EarningCoordinator.swift */; };
+		A68A6EC02D256823000A67E1 /* EarningDistributionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EBE2D256823000A67E1 /* EarningDistributionTableCell.swift */; };
+		A68A6EC12D256823000A67E1 /* EarningDistributionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EBF2D256823000A67E1 /* EarningDistributionTableCell.xib */; };
+		A68A6EC42D256B51000A67E1 /* TopEarningRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EC32D256B51000A67E1 /* TopEarningRequest.swift */; };
+		A68A6EC62D256BD9000A67E1 /* TopEarningResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EC52D256BD9000A67E1 /* TopEarningResponse.swift */; };
+		A68A6EC82D256F7C000A67E1 /* NetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EC72D256F7C000A67E1 /* NetworkUtility.swift */; };
+		A68A6ECB2D2578E4000A67E1 /* EarningsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6ECA2D2578E4000A67E1 /* EarningsVM.swift */; };
+		A68A6ECE2D25808E000A67E1 /* YearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6ECD2D25808E000A67E1 /* YearPicker.swift */; };
+		A68A6ED12D25EBD8000A67E1 /* YearlySummaryModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6ED02D25EBD8000A67E1 /* YearlySummaryModal.xib */; };
+		A68A6ED32D25EFB9000A67E1 /* YearlySummaryModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6ED22D25EFB9000A67E1 /* YearlySummaryModal.swift */; };
+		A68A6ED72D26C5DD000A67E1 /* WithdrawalMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6ED52D26C5DD000A67E1 /* WithdrawalMainView.swift */; };
+		A68A6ED82D26C5DD000A67E1 /* WithdrawalMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6ED62D26C5DD000A67E1 /* WithdrawalMainView.xib */; };
+		A68A6EDB2D26C6C6000A67E1 /* WithdrawHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6ED92D26C6C6000A67E1 /* WithdrawHistoryView.swift */; };
+		A68A6EDC2D26C6C6000A67E1 /* WithdrawHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EDA2D26C6C6000A67E1 /* WithdrawHistoryView.xib */; };
+		A68A6EDF2D26C755000A67E1 /* WithdrawHistoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */; };
+		A68A6EE02D26C755000A67E1 /* WithdrawHistoryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */; };
 		A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */; };
 		A6A2E8282CBCA3B6004E58EB /* BookingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */; };
 		A6A2E8442CBE8B8D004E58EB /* ProfileTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */; };
@@ -383,6 +407,19 @@
 		A6E050552CF0CAF300F0211C /* DashboardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E050532CF0CAF300F0211C /* DashboardViewCell.swift */; };
 		A6E050562CF0CAF300F0211C /* DashboardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E050542CF0CAF300F0211C /* DashboardViewCell.xib */; };
 		A6E7FACF2C21844800B01E6C /* ModalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */; };
+		A6EF00DC2D28318B00893C05 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00DB2D28318B00893C05 /* CustomTabBar.swift */; };
+		A6EF00DE2D2834E600893C05 /* KeyboardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00DD2D2834E600893C05 /* KeyboardType.swift */; };
+		A6EF00E02D283B6300893C05 /* CreateWithdrawalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00DF2D283B6300893C05 /* CreateWithdrawalRequest.swift */; };
+		A6EF00E22D283FE200893C05 /* CreateWithdrawalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00E12D283FE200893C05 /* CreateWithdrawalResponse.swift */; };
+		A6EF00E42D28421D00893C05 /* MakeWithdrawVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00E32D28421D00893C05 /* MakeWithdrawVM.swift */; };
+		A6EF00E62D2848F200893C05 /* ListOfBanksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00E52D2848F200893C05 /* ListOfBanksResponse.swift */; };
+		A6EF00E92D286CA300893C05 /* PaymentSetupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EF00E82D286CA300893C05 /* PaymentSetupView.xib */; };
+		A6EF00EA2D286CA300893C05 /* PaymentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00E72D286CA300893C05 /* PaymentSetupView.swift */; };
+		A6EF00EE2D28731400893C05 /* PaymentMethodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EF00ED2D28731400893C05 /* PaymentMethodView.xib */; };
+		A6EF00EF2D28731400893C05 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00EC2D28731400893C05 /* PaymentMethodView.swift */; };
+		A6EF00F22D28754700893C05 /* BankDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EF00F12D28754700893C05 /* BankDetailsView.xib */; };
+		A6EF00F32D28754700893C05 /* BankDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00F02D28754700893C05 /* BankDetailsView.swift */; };
+		A6EF00F52D287BB300893C05 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00F42D287BB300893C05 /* Country.swift */; };
 		A6F406822C02D18A00973BD7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406812C02D18A00973BD7 /* Helpers.swift */; };
 		A6F406842C02D19500973BD7 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406832C02D19500973BD7 /* Validator.swift */; };
 		A6F406862C02D1A300973BD7 /* GeneralFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406852C02D1A300973BD7 /* GeneralFormatter.swift */; };
@@ -533,6 +570,10 @@
 		A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailAddressModal.swift; sourceTree = "<group>"; };
 		A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmEmailAddressModal.xib; sourceTree = "<group>"; };
 		A65125852CBC3C9400AFA0F9 /* PinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinField.swift; sourceTree = "<group>"; };
+		A65192902D26CE060082C3C9 /* WithdrawalHistoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalHistoryResponse.swift; sourceTree = "<group>"; };
+		A65192922D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalHistoryVM.swift; sourceTree = "<group>"; };
+		A65192962D26F15F0082C3C9 /* MakeWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWithdrawView.swift; sourceTree = "<group>"; };
+		A65192972D26F15F0082C3C9 /* MakeWithdrawView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MakeWithdrawView.xib; sourceTree = "<group>"; };
 		A65628052CB1B60B00947BA5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A65628062CB1B60B00947BA5 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		A65628092CB2B4EC00947BA5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -669,6 +710,26 @@
 		A675D9DE2D202B98003E297B /* BookingRoomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingRoomCell.xib; sourceTree = "<group>"; };
 		A675D9E22D22B349003E297B /* HouseBookingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseBookingType.swift; sourceTree = "<group>"; };
 		A67C426B2CB70250004CF98F /* DiscountField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountField.swift; sourceTree = "<group>"; };
+		A68A6EB32D244635000A67E1 /* EarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EarningsView.swift; path = BeachesAndBoats/Features/Earning/EarningsView.swift; sourceTree = SOURCE_ROOT; };
+		A68A6EB42D244635000A67E1 /* EarningsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EarningsView.xib; path = BeachesAndBoats/Features/Earning/EarningsView.xib; sourceTree = SOURCE_ROOT; };
+		A68A6EB82D245072000A67E1 /* monthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = monthCollectionViewCell.swift; sourceTree = "<group>"; };
+		A68A6EB92D245072000A67E1 /* monthCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = monthCollectionViewCell.xib; sourceTree = "<group>"; };
+		A68A6EBC2D24545A000A67E1 /* EarningCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningCoordinator.swift; sourceTree = "<group>"; };
+		A68A6EBE2D256823000A67E1 /* EarningDistributionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningDistributionTableCell.swift; sourceTree = "<group>"; };
+		A68A6EBF2D256823000A67E1 /* EarningDistributionTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarningDistributionTableCell.xib; sourceTree = "<group>"; };
+		A68A6EC32D256B51000A67E1 /* TopEarningRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEarningRequest.swift; sourceTree = "<group>"; };
+		A68A6EC52D256BD9000A67E1 /* TopEarningResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEarningResponse.swift; sourceTree = "<group>"; };
+		A68A6EC72D256F7C000A67E1 /* NetworkUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtility.swift; sourceTree = "<group>"; };
+		A68A6ECA2D2578E4000A67E1 /* EarningsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsVM.swift; sourceTree = "<group>"; };
+		A68A6ECD2D25808E000A67E1 /* YearPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearPicker.swift; sourceTree = "<group>"; };
+		A68A6ED02D25EBD8000A67E1 /* YearlySummaryModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YearlySummaryModal.xib; sourceTree = "<group>"; };
+		A68A6ED22D25EFB9000A67E1 /* YearlySummaryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlySummaryModal.swift; sourceTree = "<group>"; };
+		A68A6ED52D26C5DD000A67E1 /* WithdrawalMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalMainView.swift; sourceTree = "<group>"; };
+		A68A6ED62D26C5DD000A67E1 /* WithdrawalMainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawalMainView.xib; sourceTree = "<group>"; };
+		A68A6ED92D26C6C6000A67E1 /* WithdrawHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHistoryView.swift; sourceTree = "<group>"; };
+		A68A6EDA2D26C6C6000A67E1 /* WithdrawHistoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawHistoryView.xib; sourceTree = "<group>"; };
+		A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHistoryViewCell.swift; sourceTree = "<group>"; };
+		A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawHistoryViewCell.xib; sourceTree = "<group>"; };
 		A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsCell.swift; sourceTree = "<group>"; };
 		A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingsCell.xib; sourceTree = "<group>"; };
 		A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTarget.swift; sourceTree = "<group>"; };
@@ -793,6 +854,19 @@
 		A6E050532CF0CAF300F0211C /* DashboardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewCell.swift; sourceTree = "<group>"; };
 		A6E050542CF0CAF300F0211C /* DashboardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewCell.xib; sourceTree = "<group>"; };
 		A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCoordinator.swift; sourceTree = "<group>"; };
+		A6EF00DB2D28318B00893C05 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		A6EF00DD2D2834E600893C05 /* KeyboardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardType.swift; sourceTree = "<group>"; };
+		A6EF00DF2D283B6300893C05 /* CreateWithdrawalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWithdrawalRequest.swift; sourceTree = "<group>"; };
+		A6EF00E12D283FE200893C05 /* CreateWithdrawalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWithdrawalResponse.swift; sourceTree = "<group>"; };
+		A6EF00E32D28421D00893C05 /* MakeWithdrawVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWithdrawVM.swift; sourceTree = "<group>"; };
+		A6EF00E52D2848F200893C05 /* ListOfBanksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfBanksResponse.swift; sourceTree = "<group>"; };
+		A6EF00E72D286CA300893C05 /* PaymentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSetupView.swift; sourceTree = "<group>"; };
+		A6EF00E82D286CA300893C05 /* PaymentSetupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentSetupView.xib; sourceTree = "<group>"; };
+		A6EF00EC2D28731400893C05 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
+		A6EF00ED2D28731400893C05 /* PaymentMethodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentMethodView.xib; sourceTree = "<group>"; };
+		A6EF00F02D28754700893C05 /* BankDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsView.swift; sourceTree = "<group>"; };
+		A6EF00F12D28754700893C05 /* BankDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankDetailsView.xib; sourceTree = "<group>"; };
+		A6EF00F42D287BB300893C05 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		A6F406812C02D18A00973BD7 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A6F406832C02D19500973BD7 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		A6F406852C02D1A300973BD7 /* GeneralFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFormatter.swift; sourceTree = "<group>"; };
@@ -1053,6 +1127,7 @@
 				A60580A82CD8EE5400B17505 /* HostingEarningsCoordinator.swift */,
 				A60580AA2CD8EE6500B17505 /* HostingMenuCoordinator.swift */,
 				A669F7C12D241AE600230E0A /* ServiceCoordinator.swift */,
+				A68A6EBC2D24545A000A67E1 /* EarningCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1083,6 +1158,7 @@
 		A633574B2BF0D7D9008AF034 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A68A6EB72D244644000A67E1 /* Earning */,
 				A675D9AA2D16CA67003E297B /* Earnings */,
 				A6617A482CAF54A200514576 /* Saved */,
 				A6617A472CAF549A00514576 /* Bookings */,
@@ -1127,6 +1203,8 @@
 		A63357622BF15208008AF034 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A6EF00DA2D28316000893C05 /* TabBar */,
+				A68A6ECC2D258082000A67E1 /* YearPicker */,
 				A6C1C4142CBA6DBD001CD27D /* HorizonDate */,
 				A6CA3D2D2CB9BE0D009307B2 /* DestinationCheckbox */,
 				A6CA3D002CB96A0C009307B2 /* SegmentView */,
@@ -1164,6 +1242,7 @@
 				A61B3C1F2CB682FB00C89C14 /* NumberField.swift */,
 				A67C426B2CB70250004CF98F /* DiscountField.swift */,
 				A65125852CBC3C9400AFA0F9 /* PinField.swift */,
+				A6EF00DD2D2834E600893C05 /* KeyboardType.swift */,
 			);
 			path = InputField;
 			sourceTree = "<group>";
@@ -1208,6 +1287,10 @@
 				A675D9CE2D201F4C003E297B /* ImageCell.xib */,
 				A675D9DD2D202B98003E297B /* BookingRoomCell.swift */,
 				A675D9DE2D202B98003E297B /* BookingRoomCell.xib */,
+				A68A6EBE2D256823000A67E1 /* EarningDistributionTableCell.swift */,
+				A68A6EBF2D256823000A67E1 /* EarningDistributionTableCell.xib */,
+				A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */,
+				A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */,
 			);
 			path = ViewCell;
 			sourceTree = "<group>";
@@ -1495,6 +1578,10 @@
 			isa = PBXGroup;
 			children = (
 				A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */,
+				A68A6EC52D256BD9000A67E1 /* TopEarningResponse.swift */,
+				A65192902D26CE060082C3C9 /* WithdrawalHistoryResponse.swift */,
+				A6EF00E12D283FE200893C05 /* CreateWithdrawalResponse.swift */,
+				A6EF00E52D2848F200893C05 /* ListOfBanksResponse.swift */,
 			);
 			path = Hosting;
 			sourceTree = "<group>";
@@ -1570,6 +1657,7 @@
 		A67A579B2C0F07E200BC3201 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				A68A6ECF2D25EB30000A67E1 /* YearlySummaryModal */,
 				A65125742CBC28DE00AFA0F9 /* 2FA */,
 				A6C1C4252CBBFE9F001CD27D /* PaymentMethod */,
 				A6617A382CAD8B8C00514576 /* MapModal */,
@@ -1588,6 +1676,69 @@
 				A63F31202CAF7D7F00D402F4 /* ListingNotif.xib */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		A68A6EB72D244644000A67E1 /* Earning */ = {
+			isa = PBXGroup;
+			children = (
+				A6EF00EB2D286CCE00893C05 /* PaymentSetup */,
+				A68A6ED42D26C5B8000A67E1 /* Withdrawals */,
+				A68A6EC92D2578C5000A67E1 /* EarningVM */,
+				A68A6EB32D244635000A67E1 /* EarningsView.swift */,
+				A68A6EB42D244635000A67E1 /* EarningsView.xib */,
+				A68A6EB82D245072000A67E1 /* monthCollectionViewCell.swift */,
+				A68A6EB92D245072000A67E1 /* monthCollectionViewCell.xib */,
+			);
+			path = Earning;
+			sourceTree = "<group>";
+		};
+		A68A6EC22D256B37000A67E1 /* Hosting */ = {
+			isa = PBXGroup;
+			children = (
+				A68A6EC32D256B51000A67E1 /* TopEarningRequest.swift */,
+				A6EF00DF2D283B6300893C05 /* CreateWithdrawalRequest.swift */,
+			);
+			path = Hosting;
+			sourceTree = "<group>";
+		};
+		A68A6EC92D2578C5000A67E1 /* EarningVM */ = {
+			isa = PBXGroup;
+			children = (
+				A68A6ECA2D2578E4000A67E1 /* EarningsVM.swift */,
+			);
+			path = EarningVM;
+			sourceTree = "<group>";
+		};
+		A68A6ECC2D258082000A67E1 /* YearPicker */ = {
+			isa = PBXGroup;
+			children = (
+				A68A6ECD2D25808E000A67E1 /* YearPicker.swift */,
+			);
+			path = YearPicker;
+			sourceTree = "<group>";
+		};
+		A68A6ECF2D25EB30000A67E1 /* YearlySummaryModal */ = {
+			isa = PBXGroup;
+			children = (
+				A68A6ED22D25EFB9000A67E1 /* YearlySummaryModal.swift */,
+				A68A6ED02D25EBD8000A67E1 /* YearlySummaryModal.xib */,
+			);
+			path = YearlySummaryModal;
+			sourceTree = "<group>";
+		};
+		A68A6ED42D26C5B8000A67E1 /* Withdrawals */ = {
+			isa = PBXGroup;
+			children = (
+				A68A6ED52D26C5DD000A67E1 /* WithdrawalMainView.swift */,
+				A68A6ED62D26C5DD000A67E1 /* WithdrawalMainView.xib */,
+				A68A6ED92D26C6C6000A67E1 /* WithdrawHistoryView.swift */,
+				A68A6EDA2D26C6C6000A67E1 /* WithdrawHistoryView.xib */,
+				A65192922D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift */,
+				A65192962D26F15F0082C3C9 /* MakeWithdrawView.swift */,
+				A65192972D26F15F0082C3C9 /* MakeWithdrawView.xib */,
+				A6EF00E32D28421D00893C05 /* MakeWithdrawVM.swift */,
+			);
+			path = Withdrawals;
 			sourceTree = "<group>";
 		};
 		A6A2E8422CBE8561004E58EB /* Profile */ = {
@@ -1630,6 +1781,7 @@
 				A6C20FBE2C84F9A90045C670 /* Response */,
 				A6C20FBD2C84F9A20045C670 /* Targets */,
 				A61627672C7DB04600F6B452 /* Services */,
+				A6EF00F42D287BB300893C05 /* Country.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1666,6 +1818,7 @@
 		A6C20FBF2C84F9B50045C670 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				A68A6EC22D256B37000A67E1 /* Hosting */,
 				A675D9AD2D171DAC003E297B /* Booking */,
 				A675D99E2D16C6B1003E297B /* Profile */,
 				A63F31322CB0A9CC00D402F4 /* Listing */,
@@ -1867,12 +2020,34 @@
 			path = BeachHostingHome;
 			sourceTree = "<group>";
 		};
+		A6EF00DA2D28316000893C05 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				A6EF00DB2D28318B00893C05 /* CustomTabBar.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		A6EF00EB2D286CCE00893C05 /* PaymentSetup */ = {
+			isa = PBXGroup;
+			children = (
+				A6EF00E72D286CA300893C05 /* PaymentSetupView.swift */,
+				A6EF00E82D286CA300893C05 /* PaymentSetupView.xib */,
+				A6EF00EC2D28731400893C05 /* PaymentMethodView.swift */,
+				A6EF00ED2D28731400893C05 /* PaymentMethodView.xib */,
+				A6EF00F02D28754700893C05 /* BankDetailsView.swift */,
+				A6EF00F12D28754700893C05 /* BankDetailsView.xib */,
+			);
+			path = PaymentSetup;
+			sourceTree = "<group>";
+		};
 		A6F406802C02D17400973BD7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				A6F406812C02D18A00973BD7 /* Helpers.swift */,
 				A6F406832C02D19500973BD7 /* Validator.swift */,
 				A6F406852C02D1A300973BD7 /* GeneralFormatter.swift */,
+				A68A6EC72D256F7C000A67E1 /* NetworkUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1951,7 +2126,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A650AAD62CB7ED9200A70CF4 /* SelectHouseTypeView.xib in Resources */,
+				A68A6EDC2D26C6C6000A67E1 /* WithdrawHistoryView.xib in Resources */,
 				A6C20FF52C8713A20045C670 /* HomeView.xib in Resources */,
+				A68A6EBB2D245072000A67E1 /* monthCollectionViewCell.xib in Resources */,
 				A65628392CB5769A00947BA5 /* UploadImageField.xib in Resources */,
 				A6F406A92C02D3A800973BD7 /* Montserrat-Italic.ttf in Resources */,
 				A65C51552CAD6CC40027E5F1 /* HouseTypeViewCell.xib in Resources */,
@@ -1985,6 +2162,7 @@
 				A6CA3D752CB9CFB8009307B2 /* BouncerUploadImagesView.xib in Resources */,
 				A6CA3D5D2CB9CDD0009307B2 /* DJPriceView.xib in Resources */,
 				A65C51352CAC32C90027E5F1 /* PropertyAddressView.xib in Resources */,
+				A68A6EB62D244635000A67E1 /* EarningsView.xib in Resources */,
 				A614992E2C5E98A100E0CDFC /* LoadingModal.xib in Resources */,
 				A6CA3D082CB9B0C7009307B2 /* BoatHouseTypeView.xib in Resources */,
 				A63357612BF129A6008AF034 /* LoginView.xib in Resources */,
@@ -1992,7 +2170,9 @@
 				A6617A442CAD95EA00514576 /* ListRoomsView.xib in Resources */,
 				A6F406A02C02D3A800973BD7 /* Montserrat-Regular.ttf in Resources */,
 				A65C514D2CAC35260027E5F1 /* HouseRulesView.xib in Resources */,
+				A65192982D26F15F0082C3C9 /* MakeWithdrawView.xib in Resources */,
 				A65C511B2CAB22820027E5F1 /* PropertyListModal.xib in Resources */,
+				A6EF00E92D286CA300893C05 /* PaymentSetupView.xib in Resources */,
 				A65C51452CAC34930027E5F1 /* AboutYouLanguageView.xib in Resources */,
 				A6CA3D352CB9C8DD009307B2 /* BoatUploadImageView.xib in Resources */,
 				A675D9D42D2022EC003E297B /* SinglePhotoView.xib in Resources */,
@@ -2012,6 +2192,7 @@
 				A6CA3D512CB9CD56009307B2 /* ChefUploadFoodImagesView.xib in Resources */,
 				A6F406A52C02D3A800973BD7 /* Montserrat-SemiBold.ttf in Resources */,
 				A65125782CBC290C00AFA0F9 /* AddPhoneNumberModal.xib in Resources */,
+				A6EF00EE2D28731400893C05 /* PaymentMethodView.xib in Resources */,
 				A6CA3D102CB9B4E2009307B2 /* BoatFacilitiesView.xib in Resources */,
 				A6CA3D042CB96A21009307B2 /* SegmentOptionView.xib in Resources */,
 				A6617A502CAF557900514576 /* BookingsView.xib in Resources */,
@@ -2041,9 +2222,11 @@
 				A65628342CB569CA00947BA5 /* UploadImageView.xib in Resources */,
 				A65C51412CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.xib in Resources */,
 				A6CA3D792CBA4F88009307B2 /* CalendarTestView.xib in Resources */,
+				A6EF00F22D28754700893C05 /* BankDetailsView.xib in Resources */,
 				A651256F2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib in Resources */,
 				A6CA3D392CB9C990009307B2 /* ListingSuccessView.xib in Resources */,
 				A65C50ED2CA6640E0027E5F1 /* WhatAreYouView.xib in Resources */,
+				A68A6ED12D25EBD8000A67E1 /* YearlySummaryModal.xib in Resources */,
 				A60580BC2CDBADE000B17505 /* BoatAvailableDatesView.xib in Resources */,
 				A650AAE22CB867E600A70CF4 /* VerificationFormView.xib in Resources */,
 				A6CA3D552CB9CD8E009307B2 /* DJInformationVIew.xib in Resources */,
@@ -2053,6 +2236,7 @@
 				A63357512BF0D82F008AF034 /* WelcomeScreen.xib in Resources */,
 				A656283D2CB57C8300947BA5 /* ImageView.xib in Resources */,
 				A633576A2BF15406008AF034 /* InputField.xib in Resources */,
+				A68A6ED82D26C5DD000A67E1 /* WithdrawalMainView.xib in Resources */,
 				A651256B2CBC0EF400AFA0F9 /* PaypalPaymentView.xib in Resources */,
 				A656280E2CB3C47900947BA5 /* SelectableCheckbox.xib in Resources */,
 				A65C50F92CA665110027E5F1 /* SelectServiceType.xib in Resources */,
@@ -2082,7 +2266,9 @@
 				A65125802CBC293700AFA0F9 /* AddEmailAddressModal.xib in Resources */,
 				A6CA3D592CB9CDAE009307B2 /* DJUploadProfileImageView.xib in Resources */,
 				A65628202CB518B400947BA5 /* RoomAmenitiesView.xib in Resources */,
+				A68A6EC12D256823000A67E1 /* EarningDistributionTableCell.xib in Resources */,
 				A6F406A42C02D3A800973BD7 /* Montserrat-Medium.ttf in Resources */,
+				A68A6EE02D26C755000A67E1 /* WithdrawHistoryViewCell.xib in Resources */,
 				A6F406A12C02D3A800973BD7 /* Montserrat-Bold.ttf in Resources */,
 				A675D9C82D1EAC06003E297B /* HorizonCalendarModal.xib in Resources */,
 				A65125842CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib in Resources */,
@@ -2113,6 +2299,7 @@
 			files = (
 				A6FB74482C134EC700A26806 /* SignupView.swift in Sources */,
 				A6CA3D542CB9CD8E009307B2 /* DJInformationVIew.swift in Sources */,
+				A68A6ED72D26C5DD000A67E1 /* WithdrawalMainView.swift in Sources */,
 				A6A2E8642CD4BBE8004E58EB /* CreateServiceListingRequest.swift in Sources */,
 				A60580A32CD8E80F00B17505 /* CreateBoatListingRequest.swift in Sources */,
 				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
@@ -2120,6 +2307,7 @@
 				A616276B2C7DB0BB00F6B452 /* Environments.swift in Sources */,
 				A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */,
 				A63F312A2CB07D5600D402F4 /* ListingServiceImplementation.swift in Sources */,
+				A68A6EC82D256F7C000A67E1 /* NetworkUtility.swift in Sources */,
 				A63F31282CB07D4100D402F4 /* ListingService.swift in Sources */,
 				A65C51052CAA82A40027E5F1 /* SelectorModal.swift in Sources */,
 				A6CA3D2B2CB9BDE2009307B2 /* DestinationCheckboxView.swift in Sources */,
@@ -2128,6 +2316,7 @@
 				A6CA3D272CB9BBE5009307B2 /* BoatAddressView.swift in Sources */,
 				A6C20FCB2C85053C0045C670 /* MiddleModalModel.swift in Sources */,
 				A650AADD2CB867CD00A70CF4 /* VerifyAccountView.swift in Sources */,
+				A68A6ED32D25EFB9000A67E1 /* YearlySummaryModal.swift in Sources */,
 				A6A2E8442CBE8B8D004E58EB /* ProfileTarget.swift in Sources */,
 				A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */,
 				A675D9A02D16C6C9003E297B /* SendKYCRequest.swift in Sources */,
@@ -2151,6 +2340,7 @@
 				A60580A92CD8EE5400B17505 /* HostingEarningsCoordinator.swift in Sources */,
 				A65C51012CA9510F0027E5F1 /* CountdownTimer.swift in Sources */,
 				A6C20FF42C8713A20045C670 /* HomeView.swift in Sources */,
+				A6EF00E62D2848F200893C05 /* ListOfBanksResponse.swift in Sources */,
 				A6CA3D5C2CB9CDD0009307B2 /* DJPriceView.swift in Sources */,
 				A6C20FCD2C859B680045C670 /* OnboardingService.swift in Sources */,
 				A656281B2CB48F5400947BA5 /* IncreaseDecreaseField.swift in Sources */,
@@ -2195,8 +2385,11 @@
 				A6CA3D602CB9CDF4009307B2 /* DJUploadInstrumentsView.swift in Sources */,
 				A6C20FCF2C859B940045C670 /* OnboardingServiceImplementation.swift in Sources */,
 				A65C51342CAC32C90027E5F1 /* PropertyAddressView.swift in Sources */,
+				A68A6EC42D256B51000A67E1 /* TopEarningRequest.swift in Sources */,
 				A60580A12CD8C60600B17505 /* BoatDataResponse.swift in Sources */,
 				A65125832CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift in Sources */,
+				A6EF00F52D287BB300893C05 /* Country.swift in Sources */,
+				A68A6ECE2D25808E000A67E1 /* YearPicker.swift in Sources */,
 				A6CA3D682CB9CEB5009307B2 /* BouncerGenderView.swift in Sources */,
 				A60580BB2CDBADE000B17505 /* BoatAvailableDatesView.swift in Sources */,
 				A65C512C2CAC319A0027E5F1 /* HouseSizeListView.swift in Sources */,
@@ -2207,10 +2400,12 @@
 				A60580AD2CDAA27D00B17505 /* Helper+Extensions.swift in Sources */,
 				A6C20FF82C8715130045C670 /* SearchField.swift in Sources */,
 				A6C1C41C2CBBC9ED001CD27D /* HorizonDateField.swift in Sources */,
+				A6EF00DE2D2834E600893C05 /* KeyboardType.swift in Sources */,
 				A65C51252CAC300E0027E5F1 /* TextViewField.swift in Sources */,
 				A63F31312CB09ABE00D402F4 /* BeachDataViewModel.swift in Sources */,
 				A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */,
 				A6A2E84A2CBFB650004E58EB /* ProfileServiceImplementation.swift in Sources */,
+				A6EF00E22D283FE200893C05 /* CreateWithdrawalResponse.swift in Sources */,
 				A6E050552CF0CAF300F0211C /* DashboardViewCell.swift in Sources */,
 				A6C20FDA2C859D8D0045C670 /* RefreshTokenResponse.swift in Sources */,
 				A6C20FE62C85B7D60045C670 /* ConfirmAccountRequest.swift in Sources */,
@@ -2222,6 +2417,7 @@
 				A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */,
 				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */,
+				A68A6EC02D256823000A67E1 /* EarningDistributionTableCell.swift in Sources */,
 				A669F7A32D22F2B500230E0A /* ServiceHostingHomeViewVM.swift in Sources */,
 				A6C20FDC2C859D9C0045C670 /* SignUpResponse.swift in Sources */,
 				A6FB74542C1355D900A26806 /* UserInformationModal.swift in Sources */,
@@ -2237,6 +2433,7 @@
 				A6F406AC2C02D4DC00973BD7 /* UIColor.swift in Sources */,
 				A6CA3D702CB9CF7B009307B2 /* BouncerPriceVIew.swift in Sources */,
 				A675D9A92D16C914003E297B /* BookingTarget.swift in Sources */,
+				A65192932D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift in Sources */,
 				A633576E2BF156F9008AF034 /* Labels.swift in Sources */,
 				A67C426C2CB70250004CF98F /* DiscountField.swift in Sources */,
 				A6617A4B2CAF555700514576 /* MessagesView.swift in Sources */,
@@ -2270,6 +2467,9 @@
 				A65C51542CAD6CC40027E5F1 /* HouseTypeViewCell.swift in Sources */,
 				A6C20FC42C84FCFB0045C670 /* UserSession.swift in Sources */,
 				A6617A432CAD95EA00514576 /* ListRoomsView.swift in Sources */,
+				A6EF00DC2D28318B00893C05 /* CustomTabBar.swift in Sources */,
+				A68A6EDF2D26C755000A67E1 /* WithdrawHistoryViewCell.swift in Sources */,
+				A6EF00EA2D286CA300893C05 /* PaymentSetupView.swift in Sources */,
 				A633574A2BF0D30C008AF034 /* Images.swift in Sources */,
 				A6A2E8662CD4BFAC004E58EB /* BoatDataViewModel.swift in Sources */,
 				A65628072CB1B60B00947BA5 /* ProfileView.swift in Sources */,
@@ -2281,6 +2481,7 @@
 				A65628332CB569CA00947BA5 /* UploadImageView.swift in Sources */,
 				A65125772CBC290C00AFA0F9 /* AddPhoneNumberModal.swift in Sources */,
 				A669F7A12D22E90800230E0A /* HostingBookingResponse.swift in Sources */,
+				A6EF00F32D28754700893C05 /* BankDetailsView.swift in Sources */,
 				A675D9B42D172E07003E297B /* GetBookingCategoryResponse.swift in Sources */,
 				A60580A72CD8EE3A00B17505 /* HostingHomeCoordinator.swift in Sources */,
 				A6B415B52D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift in Sources */,
@@ -2289,6 +2490,7 @@
 				A6617A3F2CAD8F5300514576 /* ConfirmAddressModal.swift in Sources */,
 				A675D9D32D2022EC003E297B /* SinglePhotoView.swift in Sources */,
 				A6E050422CEE05E900F0211C /* ServiceDashboard.swift in Sources */,
+				A6EF00E02D283B6300893C05 /* CreateWithdrawalRequest.swift in Sources */,
 				A63F31342CB0A9EF00D402F4 /* CreateBeachListingRequest.swift in Sources */,
 				A614992D2C5E98A100E0CDFC /* LoadingModal.swift in Sources */,
 				A6757D8A2C987A81000D6302 /* AccountCoordinator.swift in Sources */,
@@ -2298,6 +2500,7 @@
 				A6CA3D0F2CB9B4E2009307B2 /* BoatFacilitiesView.swift in Sources */,
 				A63357782BF1611F008AF034 /* DatePicker.swift in Sources */,
 				A6CA3D232CB9BA7D009307B2 /* BoatPeopleRules.swift in Sources */,
+				A68A6EBD2D24545A000A67E1 /* EarningCoordinator.swift in Sources */,
 				A60580FA2CDE874400B17505 /* ListBoatViewModel.swift in Sources */,
 				A675D9B12D171ED3003E297B /* CreateBoatBookingRequest.swift in Sources */,
 				A65C513C2CAC33170027E5F1 /* PropertyAmenitiesView.swift in Sources */,
@@ -2313,6 +2516,7 @@
 				A61499392C5E9A3C00E0CDFC /* FilterModal.swift in Sources */,
 				A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */,
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
+				A68A6EBA2D245072000A67E1 /* monthCollectionViewCell.swift in Sources */,
 				A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */,
 				A669F79C2D22B84000230E0A /* HostType.swift in Sources */,
 				A6CA3D172CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift in Sources */,
@@ -2321,6 +2525,7 @@
 				A61499292C5E97DB00E0CDFC /* FullModal.swift in Sources */,
 				A6CA3D072CB9B0C7009307B2 /* BoatHouseTypeView.swift in Sources */,
 				A675D9B72D18C5FC003E297B /* TopRatedCollectionCell.swift in Sources */,
+				A68A6EC62D256BD9000A67E1 /* TopEarningResponse.swift in Sources */,
 				A6A2E8742CD4E955004E58EB /* ChefDishesResponse.swift in Sources */,
 				A65C51302CAC32A50027E5F1 /* PropertyNameView.swift in Sources */,
 				A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */,
@@ -2328,8 +2533,10 @@
 				A669F7AC2D22F43300230E0A /* HostingServiceImplementation.swift in Sources */,
 				A675D9BF2D19AE15003E297B /* BeachDetailsView.swift in Sources */,
 				A63F31212CAF7D7F00D402F4 /* ListingNotif.swift in Sources */,
+				A6EF00E42D28421D00893C05 /* MakeWithdrawVM.swift in Sources */,
 				A669F7C02D2409D700230E0A /* MessageViewCell.swift in Sources */,
 				A6757D862C987A49000D6302 /* BookingsCoordinator.swift in Sources */,
+				A6EF00EF2D28731400893C05 /* PaymentMethodView.swift in Sources */,
 				A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */,
 				A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */,
 				A6C20FDE2C859E520045C670 /* ErrorResponse.swift in Sources */,
@@ -2337,6 +2544,7 @@
 				A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */,
 				A6CA3D382CB9C990009307B2 /* ListingSuccessView.swift in Sources */,
 				A65125662CBC0AF100AFA0F9 /* CreditCardPaymentView.swift in Sources */,
+				A65192992D26F15F0082C3C9 /* MakeWithdrawView.swift in Sources */,
 				A65C51482CAC34B10027E5F1 /* AboutYouDescriptionView.swift in Sources */,
 				A675D99D2D16BDFC003E297B /* DashboardUserReponse.swift in Sources */,
 				A6C20FC22C84FA950045C670 /* BaseTarget.swift in Sources */,
@@ -2344,7 +2552,9 @@
 				A65C51172CAB226B0027E5F1 /* PropertyListField.swift in Sources */,
 				A6F406842C02D19500973BD7 /* Validator.swift in Sources */,
 				A61B3C202CB682FB00C89C14 /* NumberField.swift in Sources */,
+				A68A6EB52D244635000A67E1 /* EarningsView.swift in Sources */,
 				A6CA3D302CB9C64C009307B2 /* TravelLocationView.swift in Sources */,
+				A68A6EDB2D26C6C6000A67E1 /* WithdrawHistoryView.swift in Sources */,
 				A60580AB2CD8EE6500B17505 /* HostingMenuCoordinator.swift in Sources */,
 				A6757D842C987A2A000D6302 /* SavedCoordinator.swift in Sources */,
 				A650AAD52CB7ED9200A70CF4 /* SelectHouseTypeView.swift in Sources */,
@@ -2358,6 +2568,8 @@
 				A6E0504D2CEF47DE00F0211C /* ServiceHostingHomeView.swift in Sources */,
 				A6757D802C9746E8000D6302 /* Dashboard.swift in Sources */,
 				A6A2E8692CD4C800004E58EB /* BouncerAvailableDatesView.swift in Sources */,
+				A68A6ECB2D2578E4000A67E1 /* EarningsVM.swift in Sources */,
+				A65192912D26CE060082C3C9 /* WithdrawalHistoryResponse.swift in Sources */,
 				A63F312C2CB07D6400D402F4 /* ListingServiceMock.swift in Sources */,
 				A65C51082CAA86660027E5F1 /* Dropdown.swift in Sources */,
 				A675D9AF2D171DD6003E297B /* CreateBeachHouseBookingRequest.swift in Sources */,

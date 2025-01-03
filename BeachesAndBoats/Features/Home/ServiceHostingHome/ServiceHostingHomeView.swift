@@ -48,7 +48,7 @@ class ServiceHostingHomeView: UIViewController {
     }
     
     func setupUI() {
-        welcomeLabel.text = "Welcomen \(userDetails?.first_name ?? "")"
+        welcomeLabel.text = "Welcome \(userDetails?.first_name ?? "")"
     }
 
     func setupCollectionView() {
@@ -92,9 +92,9 @@ extension ServiceHostingHomeView {
 extension ServiceHostingHomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
-            return upcomingBookingData.isEmpty ? 2 :upcomingBookingData.count
+            return upcomingBookingData.isEmpty ? 1 :upcomingBookingData.count
         } else if collectionView.tag == 2 {
-            return pastBookingData.isEmpty ? 2 : pastBookingData.count
+            return pastBookingData.isEmpty ? 1 : pastBookingData.count
         }
         return 0
     }
