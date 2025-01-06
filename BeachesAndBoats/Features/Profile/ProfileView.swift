@@ -90,6 +90,8 @@ class ProfileView: UIViewController {
             coordinator?.backToHostingDashboard()
         }else if hasSeviceRole{
             coordinator?.backToServiceDashboard()
+//            coordinator?.backToHostingDashboard()
+
         }else{
             Toast.show(message: "You have no Dashboard to switch to")
         }

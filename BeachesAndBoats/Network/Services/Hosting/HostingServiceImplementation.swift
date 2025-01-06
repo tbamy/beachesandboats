@@ -9,6 +9,21 @@ import Foundation
 import Moya
 
 class HostingServiceImplementation: Provider<HostingTarget>, HostingService {
+    func twoFACompleteVerification(request: TwoFACompleteVerificationRequest, completion: @escaping (Result<TwoFACompleteVerificationResponse, ErrorResponse>) -> Void) {
+        provider.request(.TwoFACompleteVerification(request)) {completion(self.handleResult(result: $0))}
+
+    }
+    
+    func getPhoneSecurity(request: TwoFAPhoneSecurityRequest, completion: @escaping (Result<TwoFASecurityResponse, ErrorResponse>) -> Void) {
+        provider.request(.PhoneNumberSecurity(request)) {completion(self.handleResult(result: $0))}
+
+    }
+    
+    func getEmailSecurity(request: TwoFAEmailSecurityRequest, completion: @escaping (Result<TwoFASecurityResponse, ErrorResponse>) -> Void) {
+        provider.request(.EmailSecurity(request)) {completion(self.handleResult(result: $0))}
+
+    }
+    
     func getBanks(completion: @escaping (Result<ListOfBanksResponse, ErrorResponse>) -> Void) {
         provider.request(.getBanks){ completion( self.handleResult(result: $0)) }
     }

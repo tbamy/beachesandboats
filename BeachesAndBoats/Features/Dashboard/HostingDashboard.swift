@@ -26,7 +26,7 @@ class HostingDashboard: UITabBarController {
         tabBar.isTranslucent = false
         
         // Set up each tab item
-        let homeVC = UIViewController()
+        let homeVC = ListingDashboard()
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
         let messagesVC = UIViewController()

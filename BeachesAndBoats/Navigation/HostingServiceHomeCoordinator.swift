@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ServiceCoordinator: Coordinator {
+class HostingServiceHomeCoordinator: Coordinator {
     
     override func start() {
         let vc: ServiceHostingHomeView = .fromNib()

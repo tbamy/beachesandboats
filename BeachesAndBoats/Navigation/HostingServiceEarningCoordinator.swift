@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class EarningCoordinator: Coordinator {
+class HostingServiceEarningCoordinator: Coordinator {
     
     override func start() {
         let vc: EarningsView = .fromNib()
-        vc.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(named: "earningsIcon"), tag: 3)
+        vc.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(named: "earningsIcon"), tag: 2)
         vc.tabBarItem.accessibilityIdentifier = "Earnings"
         vc.coordinator = self
         push(viewController: vc)

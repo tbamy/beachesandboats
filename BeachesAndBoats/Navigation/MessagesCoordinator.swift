@@ -12,7 +12,7 @@ import UIKit
 class MessagesCoordinator: Coordinator{
     override func start() {
         let vc: MessagesView = .fromNib()
-        vc.tabBarItem = UITabBarItem(title: "Messages", image: Assets.messages_menu.image, tag: 2)
+        vc.tabBarItem = UITabBarItem(title: "Messages", image: Assets.messages_menu.image, tag: 1)
         vc.tabBarItem.accessibilityIdentifier = "message"
         vc.coordinator = self
         push(viewController: vc)

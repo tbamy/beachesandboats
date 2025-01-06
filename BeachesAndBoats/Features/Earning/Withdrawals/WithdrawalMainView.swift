@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WithdrawalMainView: BaseViewController {
+class WithdrawalMainView: BaseViewControllerPlain {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var parentView: UIView!
@@ -15,7 +15,7 @@ class WithdrawalMainView: BaseViewController {
     private var historyViewController: UIViewController!
     private var makeWithdrawViewController: UIViewController!
     
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()

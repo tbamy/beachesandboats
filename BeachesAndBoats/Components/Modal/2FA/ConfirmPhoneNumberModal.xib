@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,6 +16,10 @@
                 <outlet property="pinFieldsStack" destination="uJ6-5l-4C3" id="VzR-Zw-TJr"/>
                 <outlet property="resendCode" destination="qzj-r4-5du" id="xP2-rU-a6V"/>
                 <outlet property="sendBtn" destination="ON2-ey-jNO" id="k4n-5Q-4AG"/>
+                <outletCollection property="otpCode" destination="t6s-3v-egh" collectionClass="NSMutableArray" id="QdD-K5-lyu"/>
+                <outletCollection property="otpCode" destination="lk0-71-9dh" collectionClass="NSMutableArray" id="QOs-Pe-a0p"/>
+                <outletCollection property="otpCode" destination="yv0-Tn-zzP" collectionClass="NSMutableArray" id="8rN-Ys-car"/>
+                <outletCollection property="otpCode" destination="eQ2-lY-kxv" collectionClass="NSMutableArray" id="r5P-Ix-mUm"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,7 +29,7 @@
             <subviews>
                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Co6-8s-WtL">
                     <rect key="frame" x="20" y="74" width="20" height="20"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="6Wk-Zh-sRj"/>
                         <constraint firstAttribute="height" constant="20" id="mH5-8T-JeB"/>

@@ -39,8 +39,10 @@ class AddPhoneNumberModal: BaseXib {
     }
     
     @objc func sendTapped(){
-        callback(phoneNumberField.text)
-        dismiss()
+        if validate() {
+            callback(phoneNumberField.text)
+            dismiss()
+        }
     }
     
     func validate() -> Bool{

@@ -23,7 +23,7 @@ class ServiceHostingHomeView: UIViewController {
     let disposeBag = DisposeBag()
     let input = PublishSubject<ServiceHostingHomeViewVM.Input>()
     
-    var coordinator: ServiceCoordinator?
+    var coordinator: HostingServiceHomeCoordinator?
     
     let userDetails = UserSession.shared.userDetails
     
@@ -43,7 +43,7 @@ class ServiceHostingHomeView: UIViewController {
         setupUI()
         
         if coordinator == nil {
-            coordinator = ServiceCoordinator(navigationController: self.navigationController, completion: nil)
+            coordinator = HostingServiceHomeCoordinator(navigationController: self.navigationController, completion: nil)
         }
     }
     

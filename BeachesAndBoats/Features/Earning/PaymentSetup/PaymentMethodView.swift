@@ -2,16 +2,16 @@
 //  PaymentMethodView.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 03/01/2025.
+//  Created by Hefepa on 03/01/2025.
 //
 
 import UIKit
 
-class PaymentMethodView: BaseViewController {
+class PaymentMethodView: BaseViewControllerPlain {
     
     @IBOutlet weak var bankCheckBox: CheckboxButton!
     
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
     var country: String = ""
 
     override func viewDidLoad() {

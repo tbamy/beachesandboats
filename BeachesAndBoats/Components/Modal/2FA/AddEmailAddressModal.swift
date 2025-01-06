@@ -39,17 +39,29 @@ class AddEmailAddressModal: BaseXib {
     }
     
     @objc func sendTapped(){
-        callback(emailField.text)
-        dismiss()
+        if validate() {
+            callback(emailField.text)
+            dismiss()
+        }
+        
     }
     
     func validate() -> Bool{
-        if emailField.text.isEmpty {
+        if emailField.text.isEmpty  {
             emailField.error = "Please enter Email Address"
+            return false
+        } else if !isValidEmail(emailField.text) {
+            emailField.error = "Please enter a valid email"
             return false
         }
         
         return true
+    }
+    
+    public func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 
 }

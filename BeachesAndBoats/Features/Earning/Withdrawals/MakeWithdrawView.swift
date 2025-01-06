@@ -30,7 +30,7 @@ class MakeWithdrawView: UIViewController {
     var paymentDestination: PaymentDestination?
     weak var paymentSelectedDelegate: PaymentSelected?
     
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
     
     let vm = MakeWithdrawVM()
     let disposeBag = DisposeBag()

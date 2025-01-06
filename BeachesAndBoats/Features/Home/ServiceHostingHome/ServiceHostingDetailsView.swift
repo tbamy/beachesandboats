@@ -23,7 +23,8 @@ class ServiceHostingDetailsView: UIViewController {
     @IBOutlet weak var descriptionLbl: RegularLabel!
     @IBOutlet weak var shareicon: UIImageView!
     @IBOutlet weak var backIcon: UIImageView!
-    var coordinator: ServiceCoordinator?
+    
+    var coordinator: HostingServiceHomeCoordinator?
     
     private var isExpanded = false
     
@@ -39,7 +40,7 @@ class ServiceHostingDetailsView: UIViewController {
         super.viewDidLoad()
     
         if coordinator == nil {
-            coordinator = ServiceCoordinator(navigationController: self.navigationController, completion: nil)
+            coordinator = HostingServiceHomeCoordinator(navigationController: self.navigationController, completion: nil)
         }
         gestureRecognizer()
         setupUI()

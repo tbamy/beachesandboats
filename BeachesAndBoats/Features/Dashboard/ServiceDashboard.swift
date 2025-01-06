@@ -54,7 +54,7 @@ class ServiceDashboard: UITabBarController {
     
     func ServiceHomeController() -> UINavigationController {
         let navController = BaseNavigationController()
-        let coordinator = ServiceCoordinator(navigationController: navController, completion: nil)
+        let coordinator = HostingServiceHomeCoordinator(navigationController: navController, completion: nil)
         coordinator.start()
         return navController
     }
@@ -68,15 +68,15 @@ class ServiceDashboard: UITabBarController {
       
     func EarningController() -> UINavigationController {
         let navController = BaseNavigationController()
-        let coordinator = EarningCoordinator(navigationController: navController, completion: nil)
+        let coordinator = HostingServiceEarningCoordinator(navigationController: navController, completion: nil)
         coordinator.start()
         return navController
     }
     
     func MenuController() -> UINavigationController {
         let navController = BaseNavigationController()
-//        let coordinator = MessagesCoordinator(navigationController: navController, completion: nil)
-//        coordinator.start()
+        let coordinator = HostingServiceMenuCoordinator(navigationController: navController, completion: nil)
+        coordinator.start()
         return navController
     }
 

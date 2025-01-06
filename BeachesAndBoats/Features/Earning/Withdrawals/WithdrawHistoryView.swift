@@ -19,7 +19,7 @@ class WithdrawHistoryView: UIViewController {
     var historyData: [WithdrawalDetail] = []
     var groupedData: [(date: String, transactions: [WithdrawalDetail])] = []
 
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

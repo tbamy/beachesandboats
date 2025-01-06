@@ -22,6 +22,7 @@ class ManageAccountView: BaseViewControllerPlain {
 
         title = "Manage Account"
         setupCustomNavigationButton()
+        setupDetails()
     }
     
     func setupDetails(){

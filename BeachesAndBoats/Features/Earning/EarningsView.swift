@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class EarningsView: UIViewController {
+class EarningsView: BaseViewControllerPlain {
     
     @IBOutlet weak var yearBtn: YearPickerButton!
     @IBOutlet weak var totalEarning: UILabel!
@@ -22,7 +22,7 @@ class EarningsView: UIViewController {
     @IBOutlet weak var noInfoLabel: RegularLabel!
     @IBOutlet weak var editBtn: UIButton!
     
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
     
     var arrayOfMonths: [String] = ["All", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     var topEarningBookingData: [TopEarningResponse] = []

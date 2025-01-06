@@ -71,4 +71,6 @@ enum Urls: String {
     case getWithdrawHistory = "api/v1/hosting/dashboard/withdrawal-history"
     case makeWithdrawal = "api/v1/hosting/dashboard/create-withdrawal"
     case bankList = "api/v1/hosting/dashboard/banks"
+    case twoFASecurity = "api/v1/user/send-mfa-otp"
+    case twoFACompleteVerification = "api/v1/user/update-mfa-security"
 }

@@ -2,18 +2,18 @@
 //  BankDetailsView.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 03/01/2025.
+//  Created by Hefepa on 03/01/2025.
 //
 
 import UIKit
 
-class BankDetailsView: BaseViewController {
+class BankDetailsView: BaseViewControllerPlain {
     
     @IBOutlet weak var bankNameField: InputField!
     @IBOutlet weak var accountNumberField: InputField!
     @IBOutlet weak var bankDropDownField: DropDown!
     
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
     
     var country: String = ""
     var paymentMethod: String = ""

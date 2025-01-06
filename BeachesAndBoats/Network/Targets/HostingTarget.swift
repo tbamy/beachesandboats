@@ -14,6 +14,9 @@ enum HostingTarget{
     case WithdrawHistory
     case MakeWithdrawal(CreateWithdrawalRequest)
     case getBanks
+    case PhoneNumberSecurity(TwoFAPhoneSecurityRequest)
+    case EmailSecurity(TwoFAEmailSecurityRequest)
+    case TwoFACompleteVerification(TwoFACompleteVerificationRequest)
 }
 
 extension HostingTarget: BaseTarget{
@@ -29,6 +32,12 @@ extension HostingTarget: BaseTarget{
             return Urls.makeWithdrawal.rawValue
         case .getBanks:
             return Urls.bankList.rawValue
+        case .PhoneNumberSecurity:
+            return Urls.twoFASecurity.rawValue
+        case .EmailSecurity:
+            return Urls.twoFASecurity.rawValue
+        case .TwoFACompleteVerification:
+            return Urls.twoFACompleteVerification.rawValue
         }
     }
     
@@ -36,7 +45,7 @@ extension HostingTarget: BaseTarget{
         switch self {
         case .GetHostBooking, .TopEarnings, .WithdrawHistory, .getBanks:
             return .get
-        case .MakeWithdrawal:
+        case .MakeWithdrawal, .EmailSecurity, .PhoneNumberSecurity, .TwoFACompleteVerification:
             return .post
         }
     }
@@ -54,6 +63,12 @@ extension HostingTarget: BaseTarget{
             return .requestJSONEncodable(request)
         case .getBanks:
             return .requestPlain
+        case .PhoneNumberSecurity(let request):
+            return .requestJSONEncodable(request)
+        case .EmailSecurity(let request):
+            return .requestJSONEncodable(request)
+        case .TwoFACompleteVerification(let request):
+            return .requestJSONEncodable(request)
         }
     }
 }

@@ -2,16 +2,16 @@
 //  PaymentSetupView.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 03/01/2025.
+//  Created by Hefepa on 03/01/2025.
 //
 
 import UIKit
 
-class PaymentSetupView: BaseViewController {
+class PaymentSetupView: BaseViewControllerPlain {
     
     @IBOutlet weak var countryDropdownField: DropDown!
     
-    var coordinator: EarningCoordinator?
+    var coordinator: HostingServiceEarningCoordinator?
     var selectedCountry: String = ""
 
     override func viewDidLoad() {
