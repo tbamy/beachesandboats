@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookingRoomsListView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="reserveBtn" destination="K4X-BW-kVv" id="qT4-UO-bWS"/>
+                <outlet property="reserveBtnView" destination="R4T-eN-xdM" id="Byv-yP-IiO"/>
+                <outlet property="roomsCollectionView" destination="0XF-Xg-wPc" id="oH2-qP-vYD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0XF-Xg-wPc">
+                    <rect key="frame" x="20" y="79" width="353" height="719"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fl1-z1-ddE">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4T-eN-xdM">
+                    <rect key="frame" x="0.0" y="696" width="393" height="122"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4X-BW-kVv" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="20" y="42" width="353" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="9Zh-27-02u"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <connections>
+                                <action selector="reserveBtnTapped:" destination="-1" eventType="touchUpInside" id="bcq-I1-zUo"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="K4X-BW-kVv" secondAttribute="bottom" constant="30" id="4Ic-tM-hyv"/>
+                        <constraint firstItem="K4X-BW-kVv" firstAttribute="leading" secondItem="R4T-eN-xdM" secondAttribute="leading" constant="20" id="5MW-Sb-1G8"/>
+                        <constraint firstAttribute="trailing" secondItem="K4X-BW-kVv" secondAttribute="trailing" constant="20" id="8GD-hn-Hvt"/>
+                        <constraint firstAttribute="height" constant="122" id="dzC-GT-3Qn"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="0XF-Xg-wPc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="14z-CJ-fMA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0XF-Xg-wPc" secondAttribute="trailing" constant="20" id="1y6-Rv-BGD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="R4T-eN-xdM" secondAttribute="trailing" id="8Qf-bn-WE1"/>
+                <constraint firstItem="R4T-eN-xdM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Nbl-Cl-dzS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="R4T-eN-xdM" secondAttribute="bottom" id="hBU-fj-Gal"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0XF-Xg-wPc" secondAttribute="bottom" constant="20" id="j5O-To-yEK"/>
+                <constraint firstItem="0XF-Xg-wPc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ooA-UA-1hN"/>
+            </constraints>
+            <point key="canvasLocation" x="138" y="20"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="K4X-BW-kVv">
+            <size key="intrinsicContentSize" width="75" height="34.333333333333336"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

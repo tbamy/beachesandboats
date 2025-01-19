@@ -38,13 +38,13 @@ class BoatAddressView: BaseViewControllerPlain {
         super.viewDidLoad()
         title = "Boats"
         setup()
-        
     }
     
     func setup(){
-        stepOneProgress.setProgress(0.50, animated: true)
-        stepOneProgress.tintColor = .B_B
-        stepTwoProgress.setProgress(0, animated: false)
+        stepOneProgress.setProgress(1, animated: false)
+        stepOneProgress.tintColor = .success
+        stepTwoProgress.setProgress(0.2, animated: true)
+        stepTwoProgress.tintColor = .B_B
         
         statesData()
         countryField.text = "Nigeria"
@@ -54,19 +54,19 @@ class BoatAddressView: BaseViewControllerPlain {
         titleLabel.text = "What is the main location of your \(boatType ?? "")?"
         subtitleLabel.text = "Provide the starting location of your \(boatType ?? "")"
         
-//        stateField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//
-//        streetField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//
-//        cityField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//
-//        nextBtn.isEnabled = false
+        stateField.textChanged = { [weak self] _, _, _ in
+            self?.validate()
+        }
+
+        streetField.textChanged = { [weak self] _, _, _ in
+            self?.validate()
+        }
+
+        cityField.textChanged = { [weak self] _, _, _ in
+            self?.validate()
+        }
+
+        nextBtn.isEnabled = false
     }
 
 //    func textFieldDidEndEditing(_ textField: UITextField) {
@@ -113,11 +113,32 @@ class BoatAddressView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
   
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: createBoatListing?.preferred_languages ?? [], brief_introduction: createBoatListing?.brief_introduction ?? "", rules: createBoatListing?.rules ?? [], no_of_adults: createBoatListing?.no_of_adults ?? 0, no_of_children: createBoatListing?.no_of_children ?? 0, no_of_pets: createBoatListing?.no_of_pets ?? 0, country: countryField.text, state: stateField.text, city: cityField.text, street_address: streetField.text, destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.country = countryField.text
+                createBoatListing.state = stateField.text
+                createBoatListing.city = cityField.text
+                createBoatListing.streetName = streetField.text
+                print(createBoatListing)
+                
+                
+                coordinator?.gotoTravelLocationView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
             
-            coordinator?.gotoTravelLocationView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
         
+        
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.country = countryField.text
+            createBoatListing.state = stateField.text
+            createBoatListing.city = cityField.text
+            createBoatListing.streetName = streetField.text
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
     }
 }
 

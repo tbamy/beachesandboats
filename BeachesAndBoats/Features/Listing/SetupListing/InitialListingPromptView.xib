@@ -20,8 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide1" translatesAutoresizingMaskIntoConstraints="NO" id="ZhK-h8-olY">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ListingBase" translatesAutoresizingMaskIntoConstraints="NO" id="ZhK-h8-olY">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kea-0T-mE0" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                     <rect key="frame" x="20" y="698" width="353" height="50"/>
@@ -49,14 +49,14 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iDG-HT-FGi" secondAttribute="trailing" constant="50" id="264-Yu-e3y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kea-0T-mE0" secondAttribute="bottom" constant="70" id="Ac4-Si-uxG"/>
                 <constraint firstItem="iDG-HT-FGi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="Hd2-FN-nzg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZhK-h8-olY" secondAttribute="bottom" id="Ja2-dm-twp"/>
-                <constraint firstItem="ZhK-h8-olY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="YIf-b6-no7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZhK-h8-olY" secondAttribute="bottom" constant="-34" id="Ja2-dm-twp"/>
+                <constraint firstItem="ZhK-h8-olY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-59" id="YIf-b6-no7"/>
                 <constraint firstItem="kea-0T-mE0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Z5x-XY-sNB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZhK-h8-olY" secondAttribute="trailing" id="jAB-99-ELm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kea-0T-mE0" secondAttribute="trailing" constant="20" id="jbt-T4-8m7"/>
                 <constraint firstItem="ZhK-h8-olY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yJy-yT-3gb"/>
             </constraints>
-            <point key="canvasLocation" x="27" y="20"/>
+            <point key="canvasLocation" x="26.717557251908396" y="19.718309859154932"/>
         </view>
     </objects>
     <designables>
@@ -65,8 +65,8 @@
         </designable>
     </designables>
     <resources>
-        <image name="close_icon" width="24" height="24"/>
-        <image name="slide1" width="430" height="932"/>
+        <image name="ListingBase" width="414" height="621.33331298828125"/>
+        <image name="close_icon" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

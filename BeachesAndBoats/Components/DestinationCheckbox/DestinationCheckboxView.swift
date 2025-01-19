@@ -9,9 +9,10 @@ import UIKit
 
 class DestinationCheckboxView: BaseXib {
 
-    @IBOutlet weak var checkBox: SelectableCheckbox!
-    @IBOutlet weak var moneyInput: BigMoneyInputField!
-    @IBOutlet weak var moneyStack: UIStackView!
+    @IBOutlet weak public var checkBox: CheckboxButton!
+    @IBOutlet weak public var titleLabel: UILabel!
+    @IBOutlet weak public var moneyInput: BigMoneyInputField!
+    @IBOutlet weak public var moneyStack: UIStackView!
 
     public var model: DestinationCheckboxModel = DestinationCheckboxModel() {
         didSet {
@@ -46,32 +47,45 @@ class DestinationCheckboxView: BaseXib {
     }
 
     func setup() {
-        checkBox.model.title = model.title
-        checkBox.model.state = model.state
-        moneyStack.isHidden = !checkBox.model.state
+        // Disable interaction on other parts of the cell
+        titleLabel.isUserInteractionEnabled = false
+        self.isUserInteractionEnabled = true // enable overall view touch handling
+        moneyInput.textField.font = UIFont.systemFont(ofSize: 20, weight: .regular)
 
-        // Setup checkbox state change handling
-        checkBox.model.tapped = { [weak self] in
+        titleLabel.text = model.title
+        checkBox.isChecked = model.state
+        moneyStack.isHidden = !checkBox.isChecked
+
+        // Enable only the checkbox and money input field
+        checkBox.isUserInteractionEnabled = false
+        moneyInput.isUserInteractionEnabled = true
+
+        // Handle checkbox state changes
+        checkBox.stateChanged = { [weak self] state in
             guard let self = self else { return }
-            self.model.state = !self.model.state
-            self.setState()
+            self.model.state = state
+            self.updateInputFieldVisibility()
         }
 
-        // Save the entered money when user types in the money input
-        moneyInput.onTextChanged = { [weak self] enteredText in
-            self?.model.onMoneyEntered(Int(enteredText) ?? 0)
-        }
+        // Handle money input changes
+          moneyInput.amountChanged = { [weak self] in
+              guard let self = self else { return }
+              let enteredAmount = self.moneyInput.getDoubleValue() ?? 0
+//              print("Money Input Value Changed: \(enteredAmount)")
+              self.model.amount = enteredAmount
+              self.model.onMoneyEntered(enteredAmount)
+          }
+          
+          // Initial call to update model with current money input value
+          model.onMoneyEntered(moneyInput.getDoubleValue() ?? 0)
+
+        
     }
 
-    func setState() {
-        if model.state {
-            moneyStack.isHidden = false
-            moneyInput.isUserInteractionEnabled = true
-            checkBox.state = true
-        } else {
-            moneyStack.isHidden = true
-            checkBox.state = false
-        }
+    func updateInputFieldVisibility() {
+        // Toggle visibility of the money input field based on checkbox state
+        moneyStack.isHidden = !model.state
+        moneyInput.isUserInteractionEnabled = model.state
     }
 
 }
@@ -80,5 +94,6 @@ struct DestinationCheckboxModel{
     public var title: String = ""
     public var state: Bool = false
     public var tapped: () -> Void = {}
-    public var onMoneyEntered: (Int) -> Void = {_ in }
+    public var amount: Double = 0
+    public var onMoneyEntered: (Double) -> Void = {_ in }
 }

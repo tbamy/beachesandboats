@@ -20,9 +20,17 @@ class UserSession {
     
     var loginRes: LoginResponse? {
         didSet {
-            token = loginRes?.access_token
-            userDetails = loginRes?.user
-            print("User token is : \(token ?? "")")
+            token = loginRes?.data?.access_token
+            userDetails = loginRes?.data?.user
+            print("User token is : \(token)")
+        }
+    }
+    
+    var signupRes: SignUpResponse? {
+        didSet {
+            token = signupRes?.data?.accessToken
+            userDetails = signupRes?.data?.user
+            print("User token is : \(token)")
         }
     }
     

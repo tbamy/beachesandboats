@@ -18,6 +18,7 @@ class SelectHouseTypeView: BaseViewControllerPlain {
     
     var beachDataR: BeachDatas?
     var houseTypes: [BeachCategory]?
+    var hostType: HostType?
     
     var vm = BeachDataViewModel()
     var disposeBag = DisposeBag()
@@ -50,7 +51,7 @@ class SelectHouseTypeView: BaseViewControllerPlain {
             switch response {
             case .getBeachDataSuccess(let response):
                 self?.beachDataR = response.data
-                self?.houseTypes = response.data.categories
+                self?.houseTypes = response.data?.categories
                 self?.collectionView.reloadData()
             case .getBeachDataError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error, onConfirm: { self?.coordinator?.pop() })
@@ -77,9 +78,9 @@ extension SelectHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Go to next screen")
-        let cat = houseTypes?[indexPath.item].categoryID ?? ""
+        let cat = houseTypes?[indexPath.item].id ?? ""
         if let beachDataR = beachDataR{
-            coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat)
+            coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat, type: hostType ?? .primaryHost)
         }
     }
     

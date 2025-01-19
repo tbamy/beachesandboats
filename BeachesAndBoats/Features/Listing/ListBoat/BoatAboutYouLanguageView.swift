@@ -19,8 +19,8 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
     
-    var languageList: [Language]?
-    var selectedItems: [String] = []
+    var languageList: [Languages]?
+    var selectedLanguages: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +45,25 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
  
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: selectedItems, brief_introduction: "", rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.languages = selectedLanguages
+                
+                print(createBoatListing)
+                
+                coordinator?.gotoBoatAboutYouDescriptionView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
             
-            coordinator?.gotoBoatAboutYouDescriptionView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.languages = selectedLanguages
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
+        
     }
 
 
@@ -67,8 +82,8 @@ extension BoatAboutYouLanguageView: UICollectionViewDelegate, UICollectionViewDa
         view.identifier = "Languages Cell " + indexPath.description
         let item = languageList?[indexPath.row]
         
-        let itemId = item?.languageID ?? ""
-        if selectedItems.contains(itemId) {
+        let itemId = item?.id ?? ""
+        if selectedLanguages.contains(itemId) {
             view.model.state = true
         } else {
             view.model.state = false
@@ -93,13 +108,13 @@ extension BoatAboutYouLanguageView: UICollectionViewDelegate, UICollectionViewDa
         let view = SelectableCheckbox(frame: cell.bounds)
         guard let item = languageList?[indexPath.row] else { return }
         
-        let itemId = item.languageID
+        let itemId = item.id ?? ""
         
-        if selectedItems.contains(itemId) {
-            selectedItems.removeAll { $0 == itemId }
+        if selectedLanguages.contains(itemId) {
+            selectedLanguages.removeAll { $0 == itemId }
             view.model.state = false
         } else {
-            selectedItems.append(itemId)
+            selectedLanguages.append(itemId)
             view.model.state = true
         }
         

@@ -28,7 +28,7 @@ class ChefUploadProfileImageView: BaseViewControllerPlain {
         }
     }
     
-//    var roomImages: [Data] = []
+//    var images: [Data] = []
     
     var profileImage: Data?
     
@@ -77,12 +77,36 @@ class ChefUploadProfileImageView: BaseViewControllerPlain {
         if let imageData = image?.pngData() {
             profileImage = imageData
             
-            let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: profileImage ?? Data(), from_when: "", to_when: "", dishes: [], price: 0, sample_images: [], type: "", gender: "")
+//            images.append(imageData)
             
-            coordinator?.gotoChefAvailableDatesView(createServiceListingData: request)
+            if var createServiceListing = createServiceListing{
+                createServiceListing.profilePic = profileImage
+                
+                print(createServiceListing)
+                
+                coordinator?.gotoChefAvailableDatesView(createServiceListingData: createServiceListing)
+            }
+            
         }
         
 
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        
+        if let imageData = image?.pngData() {
+            profileImage = imageData
+//            images.append(imageData)
+            
+            if var createServiceListing = createServiceListing{
+                createServiceListing.profilePic = profileImage
+                
+                AppStorage.serviceListing = createServiceListing
+                coordinator?.backToDashboard()
+            }
+        }
+        
+        
     }
             
     func deleteImage() {

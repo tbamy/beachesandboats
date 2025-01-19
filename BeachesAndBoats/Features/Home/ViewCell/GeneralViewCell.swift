@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 class GeneralViewCell: BaseXib {
+    
+    let nibName = "GeneralViewCell"
+    
     @IBOutlet var cellView: UIView!
-    @IBOutlet weak var title: UILabel!
+//    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var bannerImg: UIImageView!
     @IBOutlet weak var saveBtn: UIImageView!
+    @IBOutlet weak var ratingIcon: UIImageView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceStack: UIStackView!
@@ -51,9 +56,35 @@ class GeneralViewCell: BaseXib {
     }
     
     func setup(){
-        bannerImg.layer.cornerRadius = 8
-        cellView.layer.cornerRadius = 8
-//        title
+        bannerImg.layer.cornerRadius = 15
+        cellView.layer.cornerRadius = 15
+//        title.isHidden = true
+        titleLabel.text = model.titleLabel
+        infoOneLabel.text = model.infoOneLabel
+        infoTwoLabel.text = model.infoTwoLabel
+        priceLabel.text = model.priceLabel
+        ratingLabel.text = model.ratingLabel
+
+        
+        if let url = URL(string: model.bannerImg.replacingOccurrences(of: "http://", with: "https://")) {
+            bannerImg.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "dummy"),
+                options: nil,
+                completionHandler: { result in
+                    switch result {
+                    case .success(let value):
+                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Failed to load image: \(error.localizedDescription)")
+                        self.bannerImg.image = UIImage(named: "dummy")
+                    }
+                }
+            )
+        } else {
+            bannerImg.image = UIImage(named: "dummy")
+        }
+
         
         if isBoatMode{
             setupBoatMode()
@@ -68,6 +99,7 @@ class GeneralViewCell: BaseXib {
     func setupBeachHouseMode(){
         infoOneIcon.image = Assets.location.image
         infoTwoIcon.image = Assets.calendar.image
+
     }
     
     func setupBoatMode(){
@@ -79,12 +111,12 @@ class GeneralViewCell: BaseXib {
 }
 
 struct GeneralViewCellModel{
-    public var title: String = ""
+//    public var title: String = ""
     public var titleLabel: String = ""
     public var priceLabel: String = ""
     public var ratingLabel: String = ""
     public var infoOneLabel: String = ""
     public var infoTwoLabel: String = ""
-    public var bannerImg: UIImage = UIImage()
+    public var bannerImg: String = ""
     public var tapped: () -> Void = {}
 }

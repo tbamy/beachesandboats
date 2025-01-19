@@ -19,10 +19,10 @@ class TravelLocationView: BaseViewControllerPlain {
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
     
-    var selectedItems: [DestinationPrices] = []
-    var moneyInput: MoneyEnteredModel?
+    var selectedItems: [Destination] = []
+//    var moneyInput: MoneyEnteredModel?
     
-    var destinationList: [DestinationsData]?
+    var destinationList: [Destinations]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
@@ -30,11 +30,13 @@ class TravelLocationView: BaseViewControllerPlain {
     }
     
     func setup(){
-        stepOneProgress.setProgress(0.60, animated: true)
-        stepOneProgress.tintColor = .B_B
-        stepTwoProgress.setProgress(0, animated: false)
+        stepOneProgress.setProgress(1, animated: false)
+        stepOneProgress.tintColor = .success
+        stepTwoProgress.setProgress(0.55, animated: true)
+        stepTwoProgress.tintColor = .B_B
         
         destinationList = boatData?.destinations
+        nextBtn.isEnabled = true
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -45,10 +47,25 @@ class TravelLocationView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: createBoatListing?.preferred_languages ?? [], brief_introduction: createBoatListing?.brief_introduction ?? "", rules: createBoatListing?.rules ?? [], no_of_adults: createBoatListing?.no_of_adults ?? 0, no_of_children: createBoatListing?.no_of_children ?? 0, no_of_pets: createBoatListing?.no_of_pets ?? 0, country: createBoatListing?.country ?? "", state: createBoatListing?.state ?? "", city: createBoatListing?.city ?? "", street_address: createBoatListing?.street_address ?? "", destinations_prices: selectedItems, images: [])
-            print(request)
-            coordinator?.gotoBoatUploadImageView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
+            if var createBoatListing = createBoatListing{
+                createBoatListing.destinations = selectedItems
+                print(createBoatListing)
+                
+                
+                coordinator?.gotoBoatUploadImageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
+            
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.destinations = selectedItems
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
+
     }
     
 
@@ -59,75 +76,78 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
         return destinationList?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-
-        cell.isUserInteractionEnabled = true
-        let view = DestinationCheckboxView(frame: cell.bounds)
-        view.identifier = "Destination Cell " + indexPath.description
-        let item = destinationList?[indexPath.row]
-        
-        let itemId = item?.destination_id ?? ""
-        
-        if let existingIndex = selectedItems.firstIndex(where: { $0.id == itemId }) {
-            view.model.state = true
-        } else {
-            view.model.state = false
-        }
-                
-        
-        view.model.title = item?.name ?? ""
-        view.model.onMoneyEntered = { moneyEntered in
-            self.moneyInput?.id = "\(itemId)"
-            self.moneyInput?.amount = moneyEntered
-        }
-        
-        view.isUserInteractionEnabled = false
-        cell.applyView(view: view)
-        return cell
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let widthOfScreen: CGFloat = collectionView.bounds.width
-//        let heightOfScreen = collectionView.bounds.height
+        //        let heightOfScreen = collectionView.bounds.height
         return CGSize(width: widthOfScreen, height: 70)
-       
+        
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! DynamicCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+
+        let view = DestinationCheckboxView(frame: cell.bounds)
+        view.identifier = "Destination Cell " + indexPath.description
+        let item = destinationList?[indexPath.row]
+        let itemId = item?.id ?? ""
+        
+        if let selectedItem = selectedItems.first(where: { $0.destinationId == itemId }) {
+            view.model.state = true
+            view.model.title = item?.name ?? ""
+            view.moneyInput.text = "\(selectedItem.pricePerHour)"
+        } else {
+            view.model.state = false
+            view.model.title = item?.name ?? ""
+            view.moneyInput.text = ""
+        }
+        
+        view.model.onMoneyEntered = { [weak self] moneyEntered in
+            guard let self = self else { return }
+
+            if let index = self.selectedItems.firstIndex(where: { $0.destinationId == itemId }) {
+                // Update price if item is already selected
+                self.selectedItems[index].pricePerHour = moneyEntered
+                print("Updated price for \(itemId) to \(moneyEntered)")
+            }
+
+            self.nextBtn.isEnabled = !self.selectedItems.isEmpty
+        }
+                
+        
+        cell.applyView(view: view)
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
         let view = DestinationCheckboxView(frame: cell.bounds)
         guard let item = destinationList?[indexPath.row] else { return }
-        
-        let itemId = item.destination_id
-        
-        if let existingIndex = selectedItems.firstIndex(where: { $0.id == itemId }) {
-            // Item is already selected, so remove it from selectedItems
-            selectedItems.remove(at: existingIndex)
-            view.model.state = true
-        } else {
-            // Item is not selected, so add it to selectedItems
-            let newMoneyEntered = DestinationPrices(id: itemId, price: moneyInput?.amount ?? 0)
-            selectedItems.append(newMoneyEntered)
-            view.model.state = false
-        }
-        
-        view.model.title = item.name
-        view.model.onMoneyEntered = { moneyEntered in
-            self.moneyInput?.id = "\(itemId)"
-            self.moneyInput?.amount = moneyEntered
-        }
-        
-        collectionView.reloadItems(at: [indexPath])
-            
-        nextBtn.isEnabled = true
-    }
+        let itemId = item.id ?? ""
 
+        if let index = selectedItems.firstIndex(where: { $0.destinationId == itemId }) {
+            selectedItems.remove(at: index)
+        } else {
+            let defaultAmount: Double = 0
+            let newMoneyEntered = Destination(destinationId: itemId, pricePerHour: defaultAmount)
+            selectedItems.append(newMoneyEntered)
+        }
+
+        collectionView.reloadItems(at: [indexPath])
+        nextBtn.isEnabled = !selectedItems.isEmpty
+        print("Updated selected items: \(selectedItems)")
+    }
+    
+    
+
+    
+    
     
 }
 
-struct MoneyEnteredModel{
-    var id: String
-    var amount: Int
-}
+
+
+//struct MoneyEnteredModel{
+//    var id: String
+//    var amount: Int
+//}

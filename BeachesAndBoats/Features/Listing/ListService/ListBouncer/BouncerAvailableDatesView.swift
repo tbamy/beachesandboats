@@ -22,7 +22,6 @@ class BouncerAvailableDatesView: BaseViewControllerPlain {
     
     var currentDate = Date()
     
-    var amenitiesList: [Amenity]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bouncers"
@@ -34,7 +33,7 @@ class BouncerAvailableDatesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        calendarView.onDateSelected = { startDate, endDate in
+        calendarView.onDatesSelected = { startDate, endDate in
             
             self.from_when = startDate
             if let endDate = endDate {
@@ -52,8 +51,24 @@ class BouncerAvailableDatesView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-        let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: from_when?.toBackendDateAlone() ?? "", to_when: to_when?.toBackendDateAlone() ?? "", dishes: [], price: 0, sample_images: [], type: "", gender: createServiceListing?.gender ?? "")
-        coordinator?.gotoBouncerPriceView(createServiceListingData: request)
+        if var createServiceListing = createServiceListing{
+            createServiceListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createServiceListing.availableTo = to_when?.toBackendDate() ?? ""
+            
+            print(createServiceListing)
+            
+            coordinator?.gotoBouncerPriceView(createServiceListingData: createServiceListing)
+        }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createServiceListing.availableTo = to_when?.toBackendDate() ?? ""
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
     
 

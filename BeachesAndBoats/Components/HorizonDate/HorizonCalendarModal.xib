@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HorizonCalendarModal" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="calendarView" destination="9Be-aV-DUT" id="P8y-dt-XmJ"/>
+                <outlet property="clearBtn" destination="uSW-Pa-MZX" id="bmX-aK-HaV"/>
+                <outlet property="close" destination="ak3-Ge-Rrr" id="OTD-lk-ZT1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Be-aV-DUT" customClass="HorizonCalendar" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="161" width="353" height="571"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dL-PH-PHr" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="752" width="353" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="MU2-A6-NWh"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                    <connections>
+                        <action selector="saveTapped:" destination="-1" eventType="touchUpInside" id="6Fp-Of-RTz"/>
+                    </connections>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EeS-YF-mMH">
+                    <rect key="frame" x="20" y="68" width="353" height="35"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancelIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ak3-Ge-Rrr">
+                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="l62-9j-UdZ"/>
+                                <constraint firstAttribute="height" constant="35" id="wwu-0R-ycn"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOR-xs-SKj">
+                            <rect key="frame" x="45" y="0.0" width="229" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear dates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSW-Pa-MZX">
+                            <rect key="frame" x="284" y="0.0" width="69" height="35"/>
+                            <color key="tintColor" name="B&amp;B"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" name="B&amp;B"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select dates from available dates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RI0-Fn-X8a">
+                    <rect key="frame" x="20" y="128" width="353" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9Be-aV-DUT" secondAttribute="trailing" constant="20" id="5xN-Yq-L8Y"/>
+                <constraint firstItem="RI0-Fn-X8a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Bug-Qy-s0j"/>
+                <constraint firstItem="9dL-PH-PHr" firstAttribute="top" secondItem="9Be-aV-DUT" secondAttribute="bottom" constant="20" id="JLa-wQ-SJW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EeS-YF-mMH" secondAttribute="trailing" constant="20" id="TjI-gY-hOk"/>
+                <constraint firstItem="9Be-aV-DUT" firstAttribute="top" secondItem="RI0-Fn-X8a" secondAttribute="bottom" constant="15" id="dXq-bb-QNd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9dL-PH-PHr" secondAttribute="bottom" constant="10" id="fS0-WW-zkY"/>
+                <constraint firstItem="RI0-Fn-X8a" firstAttribute="top" secondItem="EeS-YF-mMH" secondAttribute="bottom" constant="25" id="j4K-cZ-Uvi"/>
+                <constraint firstItem="9dL-PH-PHr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jP2-aK-wmk"/>
+                <constraint firstItem="EeS-YF-mMH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="9" id="n46-HJ-WGv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RI0-Fn-X8a" secondAttribute="trailing" constant="20" id="sFC-gR-gvh"/>
+                <constraint firstItem="9Be-aV-DUT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="tMb-NI-gYG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9dL-PH-PHr" secondAttribute="trailing" constant="20" id="xtz-p6-SLM"/>
+                <constraint firstItem="EeS-YF-mMH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="zXz-ot-D2G"/>
+            </constraints>
+            <point key="canvasLocation" x="136.64122137404578" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="9dL-PH-PHr">
+            <size key="intrinsicContentSize" width="61" height="34.333333333333336"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="cancelIcon" width="30" height="30"/>
+        <namedColor name="B&amp;B">
+            <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

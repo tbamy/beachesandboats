@@ -8,9 +8,17 @@
 import Foundation
 
 class ListingServiceMock: Provider<ListingTarget>, ListingService{
+    func ListBeach(request: CreateBeachListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
+    func ListBoat(request: CreateBoatListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
     
     var successMode: Bool = true
-    let error = ErrorResponse(message: "Error encountered", status: false)
+    let error = ErrorResponse(message: "Error encountered", status: false, errors: [])
     
     func BeachData(completion: @escaping (Result<BeachDataResponse, ErrorResponse>) -> Void) {
 

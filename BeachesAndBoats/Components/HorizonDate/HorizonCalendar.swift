@@ -13,14 +13,23 @@ class HorizonCalendar: BaseXib {
     @IBOutlet weak var calendarViewContainer: UIView!
     @IBOutlet weak var selectedDateLabel: UILabel!
     
-    private var selectedStartDate: Date = Date()
+    private var selectedDate: Date? = nil
+    private var selectedStartDate: Date? = nil
     private var selectedEndDate: Date? = nil
     
     private var calendarView: CalendarView!
     var indicatorView: DayRangeIndicatorView?
     var calendarContent: CalendarViewContent?
     
-    var onDateSelected: ((Date, Date?) -> Void)?
+    var onDatesSelected: ((Date, Date?) -> Void)?
+    var onDateSelected: ((Date) -> Void)?
+    var isSingleDate: Bool = false
+    
+    public var model: HorizonCalendarModel = HorizonCalendarModel() {
+        didSet {
+            setupCalendar()
+        }
+    }
     
     @IBInspectable var calendarOnlyMode: Bool = false {
         didSet { setupCalendar() }
@@ -45,9 +54,11 @@ class HorizonCalendar: BaseXib {
         
         let currentDate = Date()
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        let startDate = calendar.date(from: components)!
-        let endDate = calendar.date(byAdding: .month, value: 6, to: startDate)!
+//        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+//        let startDate = calendar.date(from: components)!
+//        let endDate = calendar.date(byAdding: .month, value: 6, to: startDate)!
+        let startDate = model.startDate
+        let endDate = model.endDate
 
         calendarContent = CalendarViewContent(
             calendar: calendar,
@@ -78,7 +89,7 @@ class HorizonCalendar: BaseXib {
                 backgroundColor = .beachBlue
             } else if let selectedEndDate = self.selectedEndDate,
                       let date = date,
-                      date > self.selectedStartDate && date < selectedEndDate {
+                      date > self.selectedStartDate ?? Date() && date < selectedEndDate {
                 // Highlight for dates in between the range
                 textColor = .label
                 backgroundColor = .bBLight
@@ -120,26 +131,49 @@ class HorizonCalendar: BaseXib {
                 day: day.day
             ))!
             
-            if self.selectedEndDate == nil {
-                if selectedDate > self.selectedStartDate {
-                    self.selectedEndDate = selectedDate
-                } else {
-                    self.selectedEndDate = self.selectedStartDate
-                    self.selectedStartDate = selectedDate
-                }
-            } else {
-                self.selectedStartDate = selectedDate
-                self.selectedEndDate = nil
-            }
-
-            // Update content to reflect selection
-            self.updateHighlightedDateRange(start: self.selectedStartDate, end: self.selectedEndDate)
-            self.onDateSelected?(self.selectedStartDate, self.selectedEndDate)
+            let availableDateRange = model.availableDateRange
             
-            if let endDate = selectedEndDate{
-                selectedDateLabel.text = "\(selectedStartDate.toFormattedDate()) - \(endDate.toFormattedDate())"
-            }else{
-                selectedDateLabel.text = selectedStartDate.toFormattedDate()
+            guard availableDateRange.contains(selectedDate) else {
+                MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
+                return
+            }
+            
+            if self.isSingleDate {
+                // Handle single date selection
+                self.selectedDate = selectedDate
+                self.onDateSelected?(selectedDate)
+                self.selectedDateLabel.text = selectedDate.toFormattedDate()
+            } else {
+                
+                if self.selectedStartDate == nil {
+                    // Set the start date if it hasn't been selected yet
+                    self.selectedStartDate = selectedDate
+                } else if self.selectedEndDate == nil {
+                    // Set the end date if it hasn't been selected
+                    if selectedDate > self.selectedStartDate! {
+                        self.selectedEndDate = selectedDate
+                    } else {
+                        // Swap start and end dates if the new selection is earlier
+                        self.selectedEndDate = self.selectedStartDate
+                        self.selectedStartDate = selectedDate
+                    }
+                } else {
+                    // Reset the selection if both start and end dates are already set
+                    self.selectedStartDate = selectedDate
+                    self.selectedEndDate = nil
+                }
+                
+                
+                // Update content to reflect selection
+                self.updateHighlightedDateRange(start: self.selectedStartDate ?? Date(), end: self.selectedEndDate)
+                
+                self.onDatesSelected?(self.selectedStartDate ?? Date(), self.selectedEndDate)
+                
+                if let endDate = selectedEndDate{
+                    selectedDateLabel.text = "\(selectedStartDate?.toFormattedDate() ?? "") - \(endDate.toFormattedDate())"
+                }else{
+                    selectedDateLabel.text = selectedStartDate?.toFormattedDate()
+                }
             }
             
         }
@@ -147,8 +181,10 @@ class HorizonCalendar: BaseXib {
 
     // Method to update the highlighted range in the calendar view
     func updateHighlightedDateRange(start: Date, end: Date?) {
-//        let calendar = Calendar.current
-
+        if isSingleDate {
+            return
+        }
+        guard let start = selectedStartDate else { return }
         // Determine the range to highlight
         if let endDate = end {
             let dateRangeToHighlight = start...endDate
@@ -159,6 +195,11 @@ class HorizonCalendar: BaseXib {
                 )
             }
         }
+        
+        if let content = calendarContent {
+            calendarView.setContent(content)
+        }
+                    
 
         // Refresh calendar content to apply new highlights immediately
         calendarView.setContent(calendarContent!)
@@ -212,5 +253,23 @@ struct DayLabel: CalendarItemViewRepresentable {
         view.text = "\(content.day.day)"
     }
     
+}
+
+//struct HorizonCalendarModel{
+//    var startDate: Date = Date()
+//    var endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+//    var availableDateRange: ClosedRange<Date> = Date()...Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+//}
+
+struct HorizonCalendarModel {
+    var startDate: Date
+    var endDate: Date
+    var availableDateRange: ClosedRange<Date>
+    
+    init(startDate: Date = Date(), endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!) {
+        self.startDate = startDate
+        self.endDate = endDate
+        self.availableDateRange = startDate...endDate
+    }
 }
 

@@ -32,7 +32,8 @@ public class Provider<T: TargetType> {
     private func getSession() -> Session {
         let serverTrustPolicies: [String: ServerTrustEvaluating] = [
 //            "benbsbackend.etogetherness.com": PinnedCertificatesTrustEvaluator()
-            "benb.wqcdesigns.com": DisabledTrustEvaluator()
+            "preview.beachesandboat.com": DisabledTrustEvaluator()
+//            "preview.beachesandboat.com" : PinnedCertificatesTrustEvaluator()
         ]
         let manager = ServerTrustManager(evaluators: serverTrustPolicies)
         return Session.init(serverTrustManager: manager)
@@ -97,23 +98,23 @@ public class Provider<T: TargetType> {
         case .statusCode(let error):
             return handleErrorCodes(error.statusCode)
         default:
-            return ErrorResponse(message: "Something went wrong", status: false)
+            return ErrorResponse(message: "Something went wrong", status: false, errors: [])
         }
     }
     
     func handleErrorCodes(_ code: Int) -> ErrorResponse {
         switch code {
          case 401:
-            return ErrorResponse(message: "Unauthorized Access", status: false)
+            return ErrorResponse(message: "Unauthorized Access", status: false, errors: [])
         case 408:
-            return ErrorResponse(message: "Request timeout", status: false)
+            return ErrorResponse(message: "Request timeout", status: false, errors: [])
         default:
-            return ErrorResponse(message: "Something went wrong", status: false)
+            return ErrorResponse(message: "Something went wrong", status: false, errors: [])
         }
     }
     
     func handleNoInternetError() -> ErrorResponse {
-        ErrorResponse(message: "Looks like the server is unreachable. You may need to check your network and try again.", status: false)
+        ErrorResponse(message: "Looks like the server is unreachable. You may need to check your network and try again.", status: false, errors: [])
     }
 }
 

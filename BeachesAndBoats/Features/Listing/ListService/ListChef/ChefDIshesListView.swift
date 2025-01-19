@@ -18,11 +18,12 @@ class ChefDIshesListView: BaseViewControllerPlain {
     
     var createServiceListing: CreateServiceListingRequest?
     var selectedItems: [String] = []
+    var cat = ""
     
     var vm = ChefDishesViewModel()
     var disposeBag = DisposeBag()
     
-    var chefDishes: [DishesData]?
+    var chefDishes: [Dishes]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chefs"
@@ -50,7 +51,8 @@ class ChefDIshesListView: BaseViewControllerPlain {
             
             switch response {
             case .getChefDishesSuccess(let response):
-                self?.chefDishes = response.data.dishes
+                self?.chefDishes = response.data?.dishes
+                self?.cat = response.data?.categories?.first?.id ?? ""
                 self?.collectionView.reloadData()
             case .getChefDishesError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
@@ -61,10 +63,25 @@ class ChefDIshesListView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-
-        let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: createServiceListing?.from_when ?? "", to_when: createServiceListing?.to_when ?? "", dishes: selectedItems, price: 0, sample_images: [], type: "", gender: createServiceListing?.gender ?? "")
         
-        coordinator?.gotoChefPriceView(createServiceListingData: request)
+        if var createServiceListing = createServiceListing{
+            createServiceListing.dishes = selectedItems
+            createServiceListing.categoryId = cat
+            
+            print(selectedItems)
+            print(createServiceListing)
+            
+            coordinator?.gotoChefPriceView(createServiceListingData: createServiceListing)
+        }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.dishes = selectedItems
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
     
 
@@ -83,7 +100,7 @@ extension ChefDIshesListView: UICollectionViewDelegate, UICollectionViewDataSour
         view.identifier = "Amenities Cell " + indexPath.description
         let item = chefDishes?[indexPath.row]
         
-        let itemId = item?.dish_id ?? ""
+        let itemId = item?.id ?? ""
         if selectedItems.contains(itemId) {
             view.model.state = true
         } else {
@@ -109,7 +126,7 @@ extension ChefDIshesListView: UICollectionViewDelegate, UICollectionViewDataSour
         let view = SelectableCheckbox(frame: cell.bounds)
         guard let item = chefDishes?[indexPath.row] else { return }
         
-        let itemId = item.dish_id
+        let itemId = item.id
         
         if selectedItems.contains(itemId) {
             selectedItems.removeAll { $0 == itemId }

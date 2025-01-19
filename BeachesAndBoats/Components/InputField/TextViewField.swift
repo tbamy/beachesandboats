@@ -9,15 +9,28 @@ import UIKit
 
 @IBDesignable public class TextViewField: InputField, NSTextStorageDelegate {
     
+//    override public var text: String {
+//        get {
+//            if textArea.text == placeHolder {
+//                return ""
+//            }
+//            return textArea.text ?? ""
+//        }
+//        set {textArea.text = newValue}
+//    }
+
+    
+
     override public var text: String {
         get {
-            if textArea.text == placeHolder {
-                return ""
-            }
-            return textArea.text ?? ""
+            // Only return `textArea.text` if it’s not the placeholder
+            return textArea.text == placeHolder ? "" : textArea.text
         }
-        set {textArea.text = newValue}
+        set {
+            textArea.text = newValue.isEmpty ? placeHolder : newValue
+        }
     }
+
     
     @IBInspectable public var isCounterVisible: Bool = false {
         didSet {
@@ -63,7 +76,9 @@ import UIKit
         counter.isHidden = !isCounterVisible
     }
             
-
+    func textViewDidChange(_ textView: UITextView) {
+        onTextChanged?(text)
+    }
     
     public func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorage.EditActions, range editedRange: NSRange, changeInLength delta: Int) {
         error = ""

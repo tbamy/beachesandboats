@@ -85,7 +85,7 @@
                         <action selector="proceedTapped:" destination="-1" eventType="touchUpInside" id="3t2-FA-oDy"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Pch-rd-su1">
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancelIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Pch-rd-su1">
                     <rect key="frame" x="20" y="29" width="30" height="30"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -165,7 +165,7 @@
         </designable>
     </designables>
     <resources>
-        <image name="close_icon" width="30" height="30"/>
+        <image name="cancelIcon" width="30" height="30"/>
         <namedColor name="B&amp;B">
             <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

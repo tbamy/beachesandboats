@@ -73,14 +73,34 @@ class BouncerUploadImagesView: BaseViewControllerPlain {
                     bouncerImages.append(imageData)
                 }
             }
-        
-        let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: createServiceListing?.from_when ?? "", to_when: createServiceListing?.to_when ?? "", dishes: [], price: createServiceListing?.price ?? 0, sample_images: bouncerImages, type: "bouncer", gender: createServiceListing?.gender ?? "")
-        
-        print(request)
-        //make request
-        LoadingModal.show(title: "Hold on while we list your service")
-        vm.createService(request)
+        let images = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing{
+            createServiceListing.images = images + bouncerImages
+            
+            print(createServiceListing)
+            
+            LoadingModal.show(title: "Hold on while we list your service")
+            vm.createService(createServiceListing)
+        }
 
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        bouncerImages.removeAll()
+            for image in images {
+                if let imageData = image.pngData() {
+                    bouncerImages.append(imageData)
+                }
+            }
+        
+        let images = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing{
+            createServiceListing.images = images + bouncerImages
+            
+            print(createServiceListing)
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
     
     func bindNetwork(){

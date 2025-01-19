@@ -16,10 +16,10 @@ class HouseTypeListView: BaseViewControllerPlain {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nextBtn: PrimaryButton!
     
-    var houseLists: [BeachSubCategory]?
+    var houseLists: [BeachSubCategory] = []
     var beachData: BeachDatas?
     var cat: String?
-    
+    var hostType: HostType?
     
     var createBeachListing: CreateBeachListingRequest?
     
@@ -37,7 +37,14 @@ class HouseTypeListView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        houseLists = beachData?.subCategories.filter({ $0.categoryID == cat}) ?? []
+        if let categories = beachData?.categories {
+            let matchingSubCategories = categories.compactMap { category in
+                category.id == cat ? category.subCategories : nil
+            }
+            .flatMap { $0 }
+
+            houseLists = matchingSubCategories
+        }
         nextBtn.isEnabled = false
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -47,21 +54,30 @@ class HouseTypeListView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(category_id: cat ?? "", sub_cat_id: selectedHouse, guest_booking_id: "", name: "", description: "", country: "", state: "", city: "", street_address: "", from_when: "", to_when: "", amenities: [], preferred_languages: [""], brief_introduction: "", house_rules: [], check_in_start: "", check_in_end: "", check_out_start: "", check_out_end: "", roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0)
             
-            if cat == "HC21849"{
+            if cat == "06d196a0-56aa-4914-9f63-2fbd801ca39e"{
                 coordinator?.gotoPropertyNameView(beachData: beachData, createBeachListingData: request)
             }else{
                 coordinator?.gotoHouseSizeListView(beachData: beachData, createBeachListingData: request)
             }
         }
     }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0)
+            
+            AppStorage.beachListing = request
+            coordinator?.backToDashboard()
+        
+
+    }
 
 }
 
 extension HouseTypeListView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return houseLists?.count ?? 0
+        return houseLists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,9 +88,9 @@ extension HouseTypeListView: UICollectionViewDelegate, UICollectionViewDataSourc
         view.identifier = "House Type Cell " + indexPath.description
         view.titleAndSubtitleOnlyMode = true
         view.backgroundColor = .white
-        let item = houseLists?[indexPath.row]
-        view.model.title = item?.name ?? ""
-        view.model.subtitle = item?.description ?? ""
+        let item = houseLists[indexPath.row]
+        view.model.title = item.name ?? ""
+        view.model.subtitle = item.description ?? ""
         view.isUserInteractionEnabled = false
         cell.applyView(view: view)
         return cell
@@ -97,7 +113,7 @@ extension HouseTypeListView: UICollectionViewDelegate, UICollectionViewDataSourc
                 v.model.state = true
             }
         }
-        selectedHouse = houseLists?[indexPath.row].subCatID ?? ""
+        selectedHouse = houseLists[indexPath.row].id ?? ""
         nextBtn.isEnabled = true
     }
 

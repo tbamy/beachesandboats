@@ -19,8 +19,8 @@
                 <outlet property="stepOneProgress" destination="6Ww-rQ-8Sn" id="Pt6-cK-jyg"/>
                 <outlet property="stepTwoProgress" destination="JQH-FA-2f2" id="Tbn-QW-d01"/>
                 <outlet property="streetField" destination="AfN-Sk-7GU" id="Di0-iJ-HE6"/>
-                <outlet property="subtitleLabel" destination="aUk-Te-Mlo" id="Ont-fA-YK8"/>
-                <outlet property="titleLabel" destination="srU-TP-LUl" id="siD-JV-NtW"/>
+                <outlet property="subtitleLabel" destination="aUk-Te-Mlo" id="MwA-st-zfB"/>
+                <outlet property="titleLabel" destination="srU-TP-LUl" id="Xnc-C4-BUg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -79,137 +79,150 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4zi-tc-aRb">
                     <rect key="frame" x="0.0" y="142" width="393" height="641"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
-                            <rect key="frame" x="15.666666666666657" y="9.9999999999999964" width="361.66666666666674" height="48.666666666666657"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hql-nP-Z43">
+                            <rect key="frame" x="0.0" y="31" width="393" height="599.33333333333337"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is the location of your beach house?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
-                                    <rect key="frame" x="0.0" y="0.0" width="361.66666666666669" height="21.666666666666668"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the location guest can see in your listing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-fL-Ens">
-                                    <rect key="frame" x="0.0" y="31.666666666666657" width="361.66666666666669" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aOx-7z-CHf">
-                            <rect key="frame" x="15.666666666666657" y="88.666666666666657" width="322.66666666666674" height="51.333333333333343"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide the address for your beach house " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUk-Te-Mlo">
-                                    <rect key="frame" x="0.0" y="0.0" width="318.33333333333331" height="19.333333333333332"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add address using google map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWr-zw-ta3">
-                                    <rect key="frame" x="0.0" y="34.333333333333343" width="199.66666666666666" height="17"/>
-                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="inQ-ae-xDr">
-                            <rect key="frame" x="20" y="160" width="357.33333333333331" height="398"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mM3-Lf-9h6">
-                                    <rect key="frame" x="0.0" y="0.0" width="357.33333333333331" height="180"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
+                                    <rect key="frame" x="20" y="20" width="353" height="70"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubl-oh-bV3" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="357.33333333333331" height="50"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="wHO-Xa-9KV"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Country"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJZ-gx-RJW" customClass="DropDown" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="65" width="357.33333333333331" height="50"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="mLH-6t-DMY"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="State"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KDC-x1-lEf">
-                                            <rect key="frame" x="0.0" y="130" width="357.33333333333331" height="50"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfN-Sk-7GU" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="173.66666666666666" height="50"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="4mr-Wr-0Ql"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Street Address"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKY-A8-xSj" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                                    <rect key="frame" x="183.66666666666669" y="0.0" width="173.66666666666669" height="50"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="fi9-rs-cqI"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="City"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is the location of your beach house?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the location guest can see in your listing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-fL-Ens">
+                                            <rect key="frame" x="0.0" y="53" width="353" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="LJZ-gx-RJW" secondAttribute="trailing" id="6fX-sx-wDb"/>
-                                        <constraint firstItem="Ubl-oh-bV3" firstAttribute="leading" secondItem="mM3-Lf-9h6" secondAttribute="leading" id="9NA-Qx-44z"/>
-                                        <constraint firstAttribute="trailing" secondItem="KDC-x1-lEf" secondAttribute="trailing" id="DHf-bR-SlD"/>
-                                        <constraint firstItem="KDC-x1-lEf" firstAttribute="leading" secondItem="mM3-Lf-9h6" secondAttribute="leading" id="JjX-1P-YMj"/>
-                                        <constraint firstItem="LJZ-gx-RJW" firstAttribute="leading" secondItem="mM3-Lf-9h6" secondAttribute="leading" id="c3K-08-Gvp"/>
-                                        <constraint firstAttribute="trailing" secondItem="Ubl-oh-bV3" secondAttribute="trailing" id="iVh-2r-e44"/>
-                                    </constraints>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mRH-N9-qFe">
-                                    <rect key="frame" x="0.0" y="200" width="357.33333333333331" height="198"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aOx-7z-CHf">
+                                    <rect key="frame" x="20" y="119.99999999999999" width="353" height="51.333333333333329"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location on Map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZS-Te-2y2">
-                                            <rect key="frame" x="0.0" y="0.0" width="107" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide the address for your beach house " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUk-Te-Mlo">
+                                            <rect key="frame" x="0.0" y="0.0" width="318.33333333333331" height="19.333333333333332"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add address using google map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWr-zw-ta3">
+                                            <rect key="frame" x="0.0" y="34.333333333333314" width="199.66666666666666" height="17"/>
                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wn6-IA-pDk">
-                                            <rect key="frame" x="0.0" y="25" width="357.33333333333331" height="173"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="173" id="jJV-QZ-npa"/>
-                                            </constraints>
-                                            <standardMapConfiguration key="preferredConfiguration"/>
-                                        </mapView>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Wn6-IA-pDk" secondAttribute="trailing" id="ccp-Yi-QjY"/>
-                                        <constraint firstItem="Wn6-IA-pDk" firstAttribute="leading" secondItem="mRH-N9-qFe" secondAttribute="leading" id="hE5-aS-xf8"/>
-                                    </constraints>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="inQ-ae-xDr">
+                                    <rect key="frame" x="20" y="191.33333333333331" width="353" height="397.99999999999994"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mM3-Lf-9h6">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="180"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubl-oh-bV3" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="wHO-Xa-9KV"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Country"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJZ-gx-RJW" customClass="DropDown" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="65" width="353" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="mLH-6t-DMY"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="State"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KDC-x1-lEf">
+                                                    <rect key="frame" x="0.0" y="130" width="353" height="50"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfN-Sk-7GU" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="50"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="4mr-Wr-0Ql"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Street Address"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKY-A8-xSj" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                            <rect key="frame" x="181.66666666666663" y="0.0" width="171.33333333333337" height="50"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="fi9-rs-cqI"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="City"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="LJZ-gx-RJW" secondAttribute="trailing" id="6fX-sx-wDb"/>
+                                                <constraint firstItem="Ubl-oh-bV3" firstAttribute="leading" secondItem="mM3-Lf-9h6" secondAttribute="leading" id="9NA-Qx-44z"/>
+                                                <constraint firstAttribute="trailing" secondItem="KDC-x1-lEf" secondAttribute="trailing" id="DHf-bR-SlD"/>
+                                                <constraint firstItem="KDC-x1-lEf" firstAttribute="leading" secondItem="mM3-Lf-9h6" secondAttribute="leading" id="JjX-1P-YMj"/>
+                                                <constraint firstItem="LJZ-gx-RJW" firstAttribute="leading" secondItem="mM3-Lf-9h6" secondAttribute="leading" id="c3K-08-Gvp"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ubl-oh-bV3" secondAttribute="trailing" id="iVh-2r-e44"/>
+                                            </constraints>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mRH-N9-qFe">
+                                            <rect key="frame" x="0.0" y="200.00000000000006" width="353" height="198"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location on Map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZS-Te-2y2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="17"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wn6-IA-pDk">
+                                                    <rect key="frame" x="0.0" y="25" width="353" height="173"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="173" id="jJV-QZ-npa"/>
+                                                    </constraints>
+                                                    <standardMapConfiguration key="preferredConfiguration"/>
+                                                </mapView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Wn6-IA-pDk" secondAttribute="trailing" id="ccp-Yi-QjY"/>
+                                                <constraint firstItem="Wn6-IA-pDk" firstAttribute="leading" secondItem="mRH-N9-qFe" secondAttribute="leading" id="hE5-aS-xf8"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
                                 </stackView>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="aOx-7z-CHf" firstAttribute="top" secondItem="Wkl-5C-22f" secondAttribute="bottom" constant="30" id="2WR-oG-KFo"/>
+                                <constraint firstItem="aOx-7z-CHf" firstAttribute="leading" secondItem="Hql-nP-Z43" secondAttribute="leading" constant="20" id="3xD-Lr-Uxc"/>
+                                <constraint firstAttribute="trailing" secondItem="inQ-ae-xDr" secondAttribute="trailing" constant="20" id="AK9-Hk-owR"/>
+                                <constraint firstItem="Wkl-5C-22f" firstAttribute="top" secondItem="Hql-nP-Z43" secondAttribute="top" constant="20" symbolic="YES" id="BzB-TW-dVY"/>
+                                <constraint firstItem="inQ-ae-xDr" firstAttribute="leading" secondItem="Hql-nP-Z43" secondAttribute="leading" constant="20" id="KBQ-ct-aYy"/>
+                                <constraint firstAttribute="bottom" secondItem="inQ-ae-xDr" secondAttribute="bottom" constant="10" id="NnF-fU-lWt"/>
+                                <constraint firstAttribute="trailing" secondItem="aOx-7z-CHf" secondAttribute="trailing" constant="20" id="QqO-Gm-lGd"/>
+                                <constraint firstItem="inQ-ae-xDr" firstAttribute="top" secondItem="aOx-7z-CHf" secondAttribute="bottom" constant="20" id="YQq-z9-akN"/>
+                                <constraint firstAttribute="trailing" secondItem="Wkl-5C-22f" secondAttribute="trailing" constant="20" id="lgl-3Y-lhj"/>
+                                <constraint firstItem="Wkl-5C-22f" firstAttribute="leading" secondItem="Hql-nP-Z43" secondAttribute="leading" constant="20" id="m2S-6V-0uf"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="aOx-7z-CHf" secondAttribute="trailing" constant="59" id="8g0-YH-9Lw"/>
-                        <constraint firstAttribute="trailing" secondItem="inQ-ae-xDr" secondAttribute="trailing" constant="20" id="FBk-0T-gAs"/>
-                        <constraint firstItem="Wkl-5C-22f" firstAttribute="top" secondItem="4zi-tc-aRb" secondAttribute="top" constant="10" id="NvM-HN-H92"/>
-                        <constraint firstItem="inQ-ae-xDr" firstAttribute="leading" secondItem="4zi-tc-aRb" secondAttribute="leading" constant="20" id="OCG-ms-5yZ"/>
-                        <constraint firstAttribute="bottom" secondItem="inQ-ae-xDr" secondAttribute="bottom" constant="20" id="RHH-Gx-KUE"/>
-                        <constraint firstItem="inQ-ae-xDr" firstAttribute="top" secondItem="aOx-7z-CHf" secondAttribute="bottom" constant="20" id="RXl-Hk-YKY"/>
-                        <constraint firstItem="aOx-7z-CHf" firstAttribute="top" secondItem="Wkl-5C-22f" secondAttribute="bottom" constant="30" id="eBZ-ql-qx4"/>
-                        <constraint firstItem="Wkl-5C-22f" firstAttribute="leading" secondItem="4zi-tc-aRb" secondAttribute="leading" constant="15.666666666666657" id="lbe-lY-ou7"/>
-                        <constraint firstItem="aOx-7z-CHf" firstAttribute="leading" secondItem="4zi-tc-aRb" secondAttribute="leading" constant="15.666666666666657" id="qxZ-at-Otf"/>
-                        <constraint firstAttribute="trailing" secondItem="Wkl-5C-22f" secondAttribute="trailing" constant="20" symbolic="YES" id="rmq-4j-m57"/>
+                        <constraint firstAttribute="bottom" secondItem="Hql-nP-Z43" secondAttribute="bottom" constant="32" id="2PM-j9-nSI"/>
+                        <constraint firstItem="Hql-nP-Z43" firstAttribute="top" secondItem="4zi-tc-aRb" secondAttribute="top" constant="31" id="BVm-2C-wmW"/>
+                        <constraint firstItem="Hql-nP-Z43" firstAttribute="width" secondItem="4zi-tc-aRb" secondAttribute="width" id="diw-74-bRd"/>
+                        <constraint firstItem="Hql-nP-Z43" firstAttribute="leading" secondItem="4zi-tc-aRb" secondAttribute="leading" id="ufs-k6-Fbt"/>
+                        <constraint firstAttribute="trailing" secondItem="Hql-nP-Z43" secondAttribute="trailing" id="zHk-Es-NVT"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="vt6-U1-h40"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="YBq-RN-NPf"/>
@@ -224,6 +237,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
+                            <connections>
+                                <action selector="saveAndExit:" destination="-1" eventType="touchUpInside" id="yYE-Bc-0Pu"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWh-4v-bHX" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="201.66666666666663" y="0.0" width="151.33333333333337" height="50"/>

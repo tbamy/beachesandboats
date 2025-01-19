@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BeachHostingHomeView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="1419"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxa-tX-HYq">
+                    <rect key="frame" x="277" y="80" width="75" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGD-he-8Xb">
+                    <rect key="frame" x="20" y="139" width="353" height="33.666666666666657"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvu-a2-qqX">
+                    <rect key="frame" x="0.0" y="192.66666666666663" width="393" height="1192.3333333333335"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E8B-L1-Ydc">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="1168"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyH-Id-BfS">
+                                    <rect key="frame" x="20" y="5" width="353" height="201"/>
+                                    <color key="backgroundColor" name="Dashboard"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="201" id="yUW-Dd-4vB"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cTx-Sw-dv9">
+                                    <rect key="frame" x="20" y="255.99999999999997" width="353" height="386.33333333333314"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Booking (3)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0b-Xh-k2H">
+                                            <rect key="frame" x="0.0" y="0.0" width="171.33333333333334" height="20.333333333333332"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-yt-UvE">
+                                            <rect key="frame" x="0.0" y="36.333333333333314" width="353" height="350"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="350" id="EM9-72-gsx"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="LG0-yt-UvE" firstAttribute="leading" secondItem="cTx-Sw-dv9" secondAttribute="leading" id="69N-Hu-tgc"/>
+                                        <constraint firstAttribute="trailing" secondItem="LG0-yt-UvE" secondAttribute="trailing" id="zJn-5K-bkt"/>
+                                    </constraints>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gBe-5L-URv">
+                                    <rect key="frame" x="20" y="672.33333333333337" width="353" height="386.33333333333337"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Booking (3)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrK-Sx-l5V">
+                                            <rect key="frame" x="0.0" y="0.0" width="171.33333333333334" height="20.333333333333332"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTf-1e-If2">
+                                            <rect key="frame" x="0.0" y="36.333333333333371" width="353" height="350"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="350" id="HPQ-R0-L6I"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rTf-1e-If2" firstAttribute="leading" secondItem="gBe-5L-URv" secondAttribute="leading" id="5lb-wr-8kO"/>
+                                        <constraint firstAttribute="trailing" secondItem="rTf-1e-If2" secondAttribute="trailing" id="xEG-eZ-oi0"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="gBe-5L-URv" firstAttribute="top" secondItem="cTx-Sw-dv9" secondAttribute="bottom" constant="30" id="7cW-ut-ZuA"/>
+                                <constraint firstItem="wyH-Id-BfS" firstAttribute="leading" secondItem="E8B-L1-Ydc" secondAttribute="leading" constant="20" id="7z8-cz-AbP"/>
+                                <constraint firstItem="cTx-Sw-dv9" firstAttribute="top" secondItem="wyH-Id-BfS" secondAttribute="bottom" constant="50" id="9Yq-Bs-CfC"/>
+                                <constraint firstItem="wyH-Id-BfS" firstAttribute="top" secondItem="E8B-L1-Ydc" secondAttribute="top" constant="5" id="HeZ-en-TzU"/>
+                                <constraint firstAttribute="trailing" secondItem="gBe-5L-URv" secondAttribute="trailing" constant="20" id="Nqe-jm-LRb"/>
+                                <constraint firstAttribute="trailing" secondItem="wyH-Id-BfS" secondAttribute="trailing" constant="20" id="Ocp-cQ-4iO"/>
+                                <constraint firstAttribute="bottom" secondItem="gBe-5L-URv" secondAttribute="bottom" constant="109.33333333333326" id="VBF-Nm-t7o"/>
+                                <constraint firstItem="cTx-Sw-dv9" firstAttribute="leading" secondItem="E8B-L1-Ydc" secondAttribute="leading" constant="20" id="Vnn-fh-Ua7"/>
+                                <constraint firstItem="gBe-5L-URv" firstAttribute="leading" secondItem="E8B-L1-Ydc" secondAttribute="leading" constant="20" id="iFL-tc-7h9"/>
+                                <constraint firstAttribute="trailing" secondItem="cTx-Sw-dv9" secondAttribute="trailing" constant="20" id="iO5-Uq-AMm"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="E8B-L1-Ydc" firstAttribute="width" secondItem="uvu-a2-qqX" secondAttribute="width" id="54c-n3-bB2"/>
+                        <constraint firstAttribute="trailing" secondItem="E8B-L1-Ydc" secondAttribute="trailing" id="FAM-0t-tHK"/>
+                        <constraint firstItem="E8B-L1-Ydc" firstAttribute="leading" secondItem="uvu-a2-qqX" secondAttribute="leading" id="q6e-pi-Dqv"/>
+                        <constraint firstAttribute="bottom" secondItem="E8B-L1-Ydc" secondAttribute="bottom" id="tW4-le-XJq"/>
+                        <constraint firstItem="E8B-L1-Ydc" firstAttribute="top" secondItem="uvu-a2-qqX" secondAttribute="top" id="xX5-lp-rz6"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="AUP-LD-Svu"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="1m1-bd-X5r"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uvu-a2-qqX" secondAttribute="trailing" id="4t4-uO-g6i"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uvu-a2-qqX" secondAttribute="bottom" id="F0k-6a-64S"/>
+                <constraint firstItem="uvu-a2-qqX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kaV-Mh-uyr"/>
+                <constraint firstItem="uvu-a2-qqX" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="m3Y-yL-3ge"/>
+                <constraint firstItem="jGD-he-8Xb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="mk9-Lc-rvU"/>
+                <constraint firstItem="uvu-a2-qqX" firstAttribute="top" secondItem="jGD-he-8Xb" secondAttribute="bottom" constant="20" id="oga-ku-Kbt"/>
+                <constraint firstItem="jGD-he-8Xb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="qGP-1b-VVA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jGD-he-8Xb" secondAttribute="trailing" constant="20" id="zNA-BK-M0r"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="43.511450381679388" y="219.36619718309859"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Dashboard">
+            <color red="0.0078431372549019607" green="0.058823529411764705" blue="0.13725490196078433" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

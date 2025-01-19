@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import UIKit
 
 class BigMoneyInputField: InputField {
@@ -41,13 +40,15 @@ override func setup() {
     textField.backgroundColor = .white
 }
 
-@objc func editingChanged() {
-    // Format the number when the editingChanged event is triggered
-    if let text = textField.text {
-        textField.text = formatNumber(text)
+    @objc func editingChanged() {
+        if let text = textField.text {
+            textField.text = formatNumber(text)
+            if let amount = getIntValue() {
+                amountChanged()
+            }
+        }
     }
-    amountChanged()
-}
+
 
 public override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     error = ""
@@ -137,12 +138,24 @@ extension BigMoneyInputField{
         guard let text = textField.text else { return nil }
         return formattedStringToDouble(text, currencySymbol: currency)
     }
+    
+    public func getFloatValue() -> Float? {
+        guard let text = textField.text else { return nil }
+        return formattedStringToFloat(text, currencySymbol: currency)
+    }
 
     func formattedStringToDouble(_ formattedString: String, currencySymbol: String) -> Double? {
         let stringWithoutCurrency = formattedString.replacingOccurrences(of: currencySymbol, with: "")
         let stringWithoutCommas = stringWithoutCurrency.replacingOccurrences(of: ",", with: "")
         let trimmedString = stringWithoutCommas.trimmingCharacters(in: .whitespacesAndNewlines)
         return Double(trimmedString)
+    }
+    
+    func formattedStringToFloat(_ formattedString: String, currencySymbol: String) -> Float? {
+        let stringWithoutCurrency = formattedString.replacingOccurrences(of: currencySymbol, with: "")
+        let stringWithoutCommas = stringWithoutCurrency.replacingOccurrences(of: ",", with: "")
+        let trimmedString = stringWithoutCommas.trimmingCharacters(in: .whitespacesAndNewlines)
+        return Float(trimmedString)
     }
     
     func formattedStringToInt(_ formattedString: String, currencySymbol: String) -> Int? {

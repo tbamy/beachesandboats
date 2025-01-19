@@ -8,7 +8,7 @@
 import UIKit
 
 public protocol OTPDelegate {
-    func userOTP(otp: String?)
+    func userOTP(otp: String?, keepSignIn: Bool)
     func resendOTP()
 }
 
@@ -33,6 +33,8 @@ public class ConfirmAccountModal: BaseXib {
     weak var transitionDelegate: ModalTransitionDelegate?
     private var countdownTimer: CountdownTimer!
     
+    var purpose: ConfirmOtpPurpose = .createAccount
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -49,7 +51,8 @@ public class ConfirmAccountModal: BaseXib {
     
     @IBAction func proceedTapped(_ sender: Any) {
         if validateOtpField(){
-            otpDelegate?.userOTP(otp: otpField.text)
+            
+            otpDelegate?.userOTP(otp: otpField.text, keepSignIn: false)
         }
         
     }
@@ -87,16 +90,6 @@ public class ConfirmAccountModal: BaseXib {
     }
 
     
-//    func dismiss() {
-//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-//            self?.frame.origin.y = Helpers.screenHeight
-//            self?.layoutIfNeeded()
-//        }, completion: { [weak self] _ in
-//            self?.superview?.removeFromSuperview()
-//        })
-//        
-//    }
-    
     public static func dismiss() {        
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
@@ -123,8 +116,18 @@ public class ConfirmAccountModal: BaseXib {
     
     func setup() {
         resendCodeBtn.isHidden = true
+        timeStack.isHidden = true
+        resendCodeBtn.isUserInteractionEnabled = true
+        checkboxBtn.isUserInteractionEnabled = true
         resendCodeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resendOtpTapped)))
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
+        
+
+        
+//        checkboxBtn.stateChanged = { isChecked in
+//            print("Checkbox isChecked: \(isChecked)")
+//        }
+
     }
     
     @objc func resendOtpTapped(){
@@ -144,13 +147,20 @@ public class ConfirmAccountModal: BaseXib {
         ConfirmAccountModal.dismiss()
     } 
     
-    public static func startConfirmModal(on view: UIView, delegate otpDel: OTPDelegate, transitionDelegate transDel: ModalTransitionDelegate) {
+    public static func startConfirmModal(on view: UIView, delegate otpDel: OTPDelegate, transitionDelegate transDel: ModalTransitionDelegate, purpose otpPurpose: ConfirmOtpPurpose) {
         let backDrop = UIView(frame: Helpers.screen)
         backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         
         let modal = ConfirmAccountModal()
         modal.otpDelegate = otpDel
         modal.transitionDelegate = transDel
+        modal.purpose = otpPurpose
+        print(modal.purpose)
+        
+        if modal.purpose == .createAccount{
+            modal.setupCountdown()
+            modal.timeStack.isHidden = false
+        }
         
         modal.layer.cornerRadius = 20
         modal.backgroundColor = .white
@@ -169,4 +179,9 @@ public class ConfirmAccountModal: BaseXib {
             backDrop.layoutIfNeeded()
         }, completion: nil)
     }
+}
+
+public enum ConfirmOtpPurpose: String{
+    case createAccount = "createAccount"
+    case switchDevice = "switchDevice"
 }

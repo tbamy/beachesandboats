@@ -21,8 +21,8 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
     
     var selectedItems: [String] = []
     
-    var safetyAmenitiesList: [Amenity]?
-    var otherAmenitiesList: [Amenity]?
+    var safetyAmenitiesList: [RoomAmenities]?
+    var otherAmenitiesList: [RoomAmenities]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +35,8 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        safetyAmenitiesList = beachData?.amenities.first{ $0.name == "Safety Amenities"}?.amenities
-        otherAmenitiesList = beachData?.amenities.first{ $0.name == "Other Amenities"}?.amenities
+        safetyAmenitiesList = beachData?.amenities?.filter{ $0.amenityType == "Safety"}
+        otherAmenitiesList = beachData?.amenities?.filter{ $0.amenityType == "Others"}
         
         safetyAmenitiesCollectionView.backgroundColor = UIColor.background.lighter(by: 17)
         otherAmenitiesCollectionView.backgroundColor = UIColor.background.lighter(by: 17)
@@ -57,10 +57,26 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             let amenities = (createBeachListing?.amenities ?? []) + selectedItems
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: amenities, preferred_languages: [""], brief_introduction: "", house_rules: [], check_in_start: "", check_in_end: "", check_out_start: "", check_out_end: "", roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.amenities = amenities
+                print(createBeachListing)
+                
+                coordinator?.gotoAboutYouLanguageView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
             
-            coordinator?.gotoAboutYouLanguageView(beachData: beachData, createBeachListingData: request)
         }
+    }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let amenities = (createBeachListing?.amenities ?? []) + selectedItems
+        if var createBeachListing = createBeachListing{
+            createBeachListing.amenities = amenities
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
     }
 
 
@@ -84,7 +100,7 @@ extension PropertyAdditionalAmenitiesView: UICollectionViewDelegate, UICollectio
         
         if collectionView.tag == 0{
             let item = safetyAmenitiesList?[indexPath.row]
-            let itemId = item?.amenityID ?? ""
+            let itemId = item?.id ?? ""
             if selectedItems.contains(itemId) {
                 view.model.state = true
             } else {
@@ -96,7 +112,7 @@ extension PropertyAdditionalAmenitiesView: UICollectionViewDelegate, UICollectio
             cell.applyView(view: view)
         }else{
             let item = otherAmenitiesList?[indexPath.row]
-            let itemId = item?.amenityID ?? ""
+            let itemId = item?.id ?? ""
             if selectedItems.contains(itemId) {
                 view.model.state = true
             } else {
@@ -127,7 +143,7 @@ extension PropertyAdditionalAmenitiesView: UICollectionViewDelegate, UICollectio
         if collectionView.tag == 0{
             guard let item = safetyAmenitiesList?[indexPath.row] else { return }
             
-            let itemId = item.amenityID
+            let itemId = item.id ?? ""
             
             if selectedItems.contains(itemId) {
                 selectedItems.removeAll { $0 == itemId }
@@ -139,7 +155,7 @@ extension PropertyAdditionalAmenitiesView: UICollectionViewDelegate, UICollectio
         }else{
             guard let item = otherAmenitiesList?[indexPath.row] else { return }
             
-            let itemId = item.amenityID
+            let itemId = item.id ?? ""
             
             if selectedItems.contains(itemId) {
                 selectedItems.removeAll { $0 == itemId }

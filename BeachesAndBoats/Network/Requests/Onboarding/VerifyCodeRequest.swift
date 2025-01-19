@@ -8,5 +8,6 @@
 import Foundation
 
 struct VerifyCodeRequest: Codable{
-    let code: String?
+    var otp_code: String?
+    var email: String?
 }

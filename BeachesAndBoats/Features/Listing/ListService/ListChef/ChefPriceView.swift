@@ -20,6 +20,7 @@ class ChefPriceView: BaseViewControllerPlain {
     
     var createServiceListing: CreateServiceListingRequest?
     let discount: Double = 0.9
+    var discountedAmount: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,21 +52,20 @@ class ChefPriceView: BaseViewControllerPlain {
     }
     
     func updateCommission(with enteredText: String) {
-        // Remove the Naira symbol and commas if present
-        let cleanText = enteredText.replacingOccurrences(of: "₦", with: "").replacingOccurrences(of: ",", with: "")
-        
-        // Convert the cleaned text to a Double
-        guard let enteredAmount = Double(cleanText) else {
+        // Get the numeric value from moneyField
+        guard let enteredAmount = moneyField.getDoubleValue() else {
             commissionField.text = ""
+            commissionView.isHidden = true
             return
         }
         
-        // Apply a 10% discount (adjust percentage as needed)
-        let discountedAmount = enteredAmount * discount
+        print("Entered Amount: \(enteredAmount)")
+        // Apply a 10% discount
+        discountedAmount = enteredAmount * discount
         
         // Update the commissionField to display the discounted amount with 2 decimal places
         commissionView.isHidden = false
-        commissionField.text = String(format: "You earn ₦%", discountedAmount)
+        commissionField.text = String(format: "You earn ₦%.2f", discountedAmount)
     }
             
 
@@ -74,9 +74,23 @@ class ChefPriceView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
 
-        let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: createServiceListing?.from_when ?? "", to_when: createServiceListing?.to_when ?? "", dishes: [], price: moneyField.getIntValue() ?? 0, sample_images: [], type: "", gender: createServiceListing?.gender ?? "")
+        if var createServiceListing = createServiceListing{
+            createServiceListing.startingPrice = moneyField.getDoubleValue() ?? 0
+            
+            print(createServiceListing)
+            
+            coordinator?.gotoChefUploadFoodImagesView(createServiceListingData: createServiceListing)
+        }
         
-        coordinator?.gotoChefUploadFoodImagesView(createServiceListingData: request)
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.startingPrice = moneyField.getDoubleValue() ?? 0
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
     }
 
 }

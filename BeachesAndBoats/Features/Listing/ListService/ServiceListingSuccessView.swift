@@ -23,7 +23,7 @@ class ServiceListingSuccessView: UIViewController {
     }
 
     @IBAction func finishListing(_ sender: Any) {
-        coordinator?.backToHostingDashboard()
+        coordinator?.backToServiceDashboard()
     }
     
 }

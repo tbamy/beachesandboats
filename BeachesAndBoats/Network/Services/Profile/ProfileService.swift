@@ -8,5 +8,6 @@
 import Foundation
 
 protocol ProfileService{
-    func BeachData(completion: @escaping(Result<BeachDataResponse, ErrorResponse>) -> Void)
+    func getDashboardUser(completion: @escaping(Result<DashboardUserReponse, ErrorResponse>) -> Void)
+    func sendKYC(request: SendKYCRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
 }

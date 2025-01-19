@@ -21,9 +21,9 @@ class BoatFacilitiesView: BaseViewControllerPlain {
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
     
-    var selectedItems: [String] = []
+    var selectedFacilities: [String] = []
     
-    var amenitiesList: [Amenity]?
+    var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
@@ -38,7 +38,7 @@ class BoatFacilitiesView: BaseViewControllerPlain {
         titleLabel.text = "What are the features in your \(boatType ?? "")?"
         subtitleLabel.text = "Provide the correct details and info about your \(boatType ?? "")"
         
-        amenitiesList = boatData?.amenities.first{ $0.name == "Main"}?.amenities
+        amenitiesList = boatData?.amenities?.filter{ $0.amenityType == "General"}
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -50,10 +50,26 @@ class BoatFacilitiesView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
 
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: selectedItems, preferred_languages: [], brief_introduction: "", rules: [], no_of_adults: 0, no_of_children: 0, no_of_pets: 0, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.amenities = selectedFacilities
+                
+                print("Main Amenities: \(selectedFacilities)")
+                print(createBoatListing)
+                
+                coordinator?.gotoBoatAdditionalAmenitiesView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
             
-            coordinator?.gotoBoatAdditionalAmenitiesView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.amenities = selectedFacilities
+            
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
+        }
+
     }
     
 
@@ -72,8 +88,8 @@ extension BoatFacilitiesView: UICollectionViewDelegate, UICollectionViewDataSour
         view.identifier = "Amenities Cell " + indexPath.description
         let item = amenitiesList?[indexPath.row]
         
-        let itemId = item?.amenityID ?? ""
-        if selectedItems.contains(itemId) {
+        let itemId = item?.id ?? ""
+        if selectedFacilities.contains(itemId) {
             view.model.state = true
         } else {
             view.model.state = false
@@ -98,14 +114,14 @@ extension BoatFacilitiesView: UICollectionViewDelegate, UICollectionViewDataSour
         let view = SelectableCheckbox(frame: cell.bounds)
         guard let item = amenitiesList?[indexPath.row] else { return }
         
-        let itemId = item.amenityID
+        let itemId = item.id ?? ""
         
-        if selectedItems.contains(itemId) {
-            selectedItems.removeAll { $0 == itemId }
+        if selectedFacilities.contains(itemId) {
+            selectedFacilities.removeAll { $0 == itemId }
             view.model.state = true
 //            view.model.image = UIImage.uncheckIcon
         } else {
-            selectedItems.append(itemId)
+            selectedFacilities.append(itemId)
             view.model.state = false
 //            view.model.image = UIImage.checkIcon
         }

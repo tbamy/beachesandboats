@@ -11,49 +11,59 @@ import Foundation
 extension CreateBeachListingRequest {
     func toDictionary() -> [String: Any] {
         var dict: [String: Any] = [
-            "category_id": category_id,
-            "sub_cat_id": sub_cat_id,
-            "guest_booking_id": guest_booking_id,
             "name": name,
             "description": description,
+            "about_owner": aboutOwner,
+            "check_in_from": checkInFrom,
+            "check_in_to": checkInTo,
+            "check_out_from": checkOutFrom,
+            "check_out_to": checkOutTo,
+            "category_id": categoryId,
+            "sub_category_id": subCategoryId,
+            "booking_type": bookingType ?? "",
             "country": country,
             "state": state,
+            "street_name": streetName,
             "city": city,
-            "street_address": street_address,
-            "from_when": from_when,
-            "to_when": to_when,
-            "brief_introduction": brief_introduction,
-            "check_in_start": check_in_start,
-            "check_in_end": check_in_end,
-            "check_out_start": check_out_start,
-            "check_out_end": check_out_end,
-            "full_apartment_cost": full_apartment_cost,
-            "full_apartment_discount": full_apartment_discount,
-            "full_apartment_amount_to_earn": full_apartment_amount_to_earn
+            "latitude": latitude ?? 0.0,
+            "longitude": longitude ?? 0.0,
+            "available_from": availableFrom,
+            "available_to": availableTo,
+            "amenities": amenities,
+            "languages": languages,
+            "houserules": houseRules,
+            "role_type": roleType
         ]
         
-        // Convert arrays to JSON-compatible strings
-        dict["amenities"] = amenities.joined(separator: ",")
-        dict["preferred_languages"] = preferred_languages.joined(separator: ",")
-        dict["house_rules"] = house_rules.joined(separator: ",")
-
-        // Handle nested roominfo array
-        dict["roominfo"] = roominfo.map { room in
-            [
-                "id": room.id,
+        // Convert nested rooms array to dictionaries
+        dict["rooms"] = rooms.map { room in
+            var roomDict: [String: Any] = [
                 "name": room.name,
                 "description": room.description,
-                "amenities": room.amenities.joined(separator: ","),
-                "price_per_night": room.price_per_night,
-                "discount": room.discount,
-                "amount_to_earn": room.amount_to_earn,
-                "number_of_guests": room.number_of_guests,
-                "number_of_rooms": room.number_of_rooms,
-                "number_of_beds": room.number_of_beds
+                "quantity": room.quantity,
+                "room_amenities": room.roomAmenities,
+                "price_per_night": room.pricePerNight,
+                "discount_percent": room.discountPercent,
+                "has_private_bathroom": room.hasPrivateBathroom,
+                "no_of_occupant": room.noOfOccupant
             ]
+            
+            // Convert nested bedTypes array to dictionaries
+            roomDict["bedTypes"] = room.bedTypes.map { bedType in
+                return [
+                    "id": bedType.id,
+                    "quantity": bedType.quantity
+                ]
+            }
+            
+            // Add images if available
+            if let images = room.images {
+                roomDict["images"] = images.map { $0.base64EncodedString() }
+            }
+            
+            return roomDict
         }
         
         return dict
     }
 }
-

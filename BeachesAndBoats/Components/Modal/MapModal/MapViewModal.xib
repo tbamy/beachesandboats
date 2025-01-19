@@ -64,6 +64,11 @@
             <point key="canvasLocation" x="115.26717557251908" y="66.549295774647888"/>
         </view>
     </objects>
+    <designables>
+        <designable name="qjx-nJ-9Cc">
+            <size key="intrinsicContentSize" width="92.666666666666671" height="34.333333333333336"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

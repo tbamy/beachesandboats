@@ -44,10 +44,11 @@ public class UserInformationModal: BaseXib {
     
     @IBAction func continueTapped(_ sender: Any) {
         if valiidateFields(){
-            let userinfo = SignUpRequest(first_name: firstname.text, last_name: lastname.text, dob: birthday.text.convertToBackendDate(from: birthday.text), phone_code: "+234", phone: phoneNumber, email: emailAddress, password: "", password_confirmation: "")
+            
+            let userInfo = SignUpRequest(first_name: firstname.text, last_name: lastname.text, email: emailAddress, birthday: birthday.text, password: "", password_confirmation: "", keep_signed_in: userInfo?.keep_signed_in, phone_number: phoneNumber, device_id: UserDevice().imei)
            
-            infoDelegate?.userInfo(info: userinfo)
-            print("user info sent: \(userinfo)")
+            infoDelegate?.userInfo(info: userInfo)
+            print("user info sent: \(userInfo)")
         }
     }
     
@@ -112,9 +113,9 @@ public class UserInformationModal: BaseXib {
         modal.email.text = info.email ?? ""
         modal.firstname.text = info.first_name ?? ""
         modal.lastname.text = info.last_name ?? ""
-        modal.birthday.selectedDate = info.dob?.convertFromBackendDate(from: info.dob ?? "")
+        modal.birthday.selectedDate = info.birthday?.convertFromBackendDate(from: info.birthday ?? "")
         modal.emailAddress = info.email
-        modal.phoneNumber = info.phone
+        modal.phoneNumber = info.phone_number
         
         modal.layer.cornerRadius = 20
         modal.backgroundColor = .white

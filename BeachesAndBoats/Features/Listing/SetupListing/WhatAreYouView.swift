@@ -22,6 +22,9 @@ class WhatAreYouView: BaseViewControllerPlain {
         
     }
     
+    @IBAction func setupTapped(_ sender: Any) {
+        coordinator?.backToDashboard()
+    }
     
     func setup(){
         navigationItem.hidesBackButton = true
@@ -37,13 +40,13 @@ class WhatAreYouView: BaseViewControllerPlain {
     @IBAction func proceedTapped(_ sender: Any) {
         switch selected {
         case "Primary":
-            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 2)
+            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 2, type: .primaryHost)
         case "Secondary":
             coordinator?.gotoSelectPropertyTypeSecondaryHost()
         case "Service":
             coordinator?.gotoSelectServiceType()
         default:
-            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 2)
+            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 2, type: .primaryHost)
         }
         
     }

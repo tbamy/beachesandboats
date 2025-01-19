@@ -50,4 +50,17 @@ extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         self.setBackgroundImage(image(withColor: color), for: state)
       }
+    
+    func configureButtonTitle(title: String, fontSize: CGFloat = 14, underline: Bool = true) {
+        var attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: fontSize)
+        ]
+        
+        if underline {
+            attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
+        }
+        
+        let attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        self.setAttributedTitle(attributedTitle, for: .normal)
+    }
 }

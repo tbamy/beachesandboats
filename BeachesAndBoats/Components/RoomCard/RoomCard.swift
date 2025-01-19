@@ -46,13 +46,14 @@ class RoomCard: BaseXib {
     
     func setup(){
         layer.cornerRadius = 8
+        mainImage.layer.cornerRadius = 10
         backgroundColor = .white
         
         mainImage.image = model.image
         roomName.text = model.roomName
-        guestsNum.text = model.numberOfGuests
-        roomsNum.text = model.numberOfRooms
-        bedsNum.text = model.numberOfBeds
+        guestsNum.text = "\(model.numberOfGuests)"
+        roomsNum.text = "\(model.numberOfRooms)"
+        bedsNum.text = "\(model.numberOfBeds)"
         roomPrice.text = model.roomPrice
         
         deleteBtn.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
@@ -72,9 +73,9 @@ class RoomCard: BaseXib {
 
 public struct RoomCardModel{
     public var roomName: String = ""
-    public var numberOfGuests: String = ""
-    public var numberOfRooms: String = ""
-    public var numberOfBeds: String = ""
+    public var numberOfGuests: Int = 0
+    public var numberOfRooms: Int = 0
+    public var numberOfBeds: Int = 0
     public var roomPrice: String = ""
     public var image: UIImage? = nil
     public var editTapped: () -> Void = {}

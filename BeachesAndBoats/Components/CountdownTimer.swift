@@ -12,7 +12,7 @@ public class CountdownTimer {
     private var remainingTime: Int // time in seconds
 
     public init(minutes: Int) {
-        self.remainingTime = minutes * 60
+        self.remainingTime = minutes * 10
     }
 
     public func start(updateHandler: @escaping (String) -> Void, completion: @escaping () -> Void) {

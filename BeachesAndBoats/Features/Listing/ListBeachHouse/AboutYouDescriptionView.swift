@@ -38,10 +38,24 @@ class AboutYouDescriptionView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: createBeachListing?.amenities ?? [], preferred_languages: createBeachListing?.preferred_languages ?? [], brief_introduction: descriptionLabel.text, house_rules: [], check_in_start: "", check_in_end: "", check_out_start: "", check_out_end: "", roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
-
-            coordinator?.gotoHouseRulesView(beachData: beachData, createBeachListingData: request)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.aboutOwner = descriptionLabel.text
+                print(createBeachListing)
+                
+                coordinator?.gotoHouseRulesView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
         }
+    }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.aboutOwner = descriptionLabel.text
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
     }
 
 

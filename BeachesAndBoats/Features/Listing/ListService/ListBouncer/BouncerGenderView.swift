@@ -51,9 +51,29 @@ class BouncerGenderView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if (gender != ""){
-            let request = CreateServiceListingRequest(name: createServiceListing?.name ?? "", description: createServiceListing?.description ?? "", profile_image: createServiceListing?.profile_image ?? Data(), from_when: "", to_when: "", dishes: [], price: 0, sample_images: [], type: "", gender: gender ?? "")
-            coordinator?.gotoBouncerUploadProfileImageView(createServiceListingData: request)
+            
+            if var createServiceListing = createServiceListing{
+                createServiceListing.gender = gender
+                
+                print(createServiceListing)
+                
+                coordinator?.gotoBouncerUploadProfileImageView(createServiceListingData: createServiceListing)
+            }
+            
         }
+        
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createServiceListing = createServiceListing{
+            createServiceListing.gender = gender
+            
+            print(createServiceListing)
+            
+            AppStorage.serviceListing = createServiceListing
+            coordinator?.backToDashboard()
+        }
+        
         
     }
     

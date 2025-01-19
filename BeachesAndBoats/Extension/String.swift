@@ -55,6 +55,14 @@ extension String {
         return formatter.date(from: self)
     }
     
+    func convertFromBackendDateString() -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX") 
+        return formatter.date(from: self)
+    }
+
+    
     public func getCleanedURL() -> URL? {
         guard self.isEmpty == false else {
             return nil
@@ -106,6 +114,56 @@ extension String {
         }
         return nil // Return nil if conversion fails
     }
+    
+    public func convertToShortDateFormat(from inputFormat: String = "MM/dd/yy") -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = inputFormat
+        
+        if let date = inputDateFormatter.date(from: self) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "E, MMM dd"
+            return outputDateFormatter.string(from: date)
+        }
+        return nil
+    }
+    
+    public func convertToShorterDateFormat(from inputFormat: String = "MM/dd/yy") -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = inputFormat
+        
+        if let date = inputDateFormatter.date(from: self) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "MMM dd"
+            return outputDateFormatter.string(from: date)
+        }
+        return nil
+    }
+    
+    func toBackendDate2(from inputFormat: String = "MM/dd/yyyy", to outputFormat: String = "yyyy-MM-dd") -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = inputFormat
+        
+        if let date = inputDateFormatter.date(from: self) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = outputFormat
+            return outputDateFormatter.string(from: date)
+        }
+        return nil // Return nil if the conversion fails
+    }
+    
+    func toBackendDate(from inputFormat: String = "dd/MM/yyyy", to outputFormat: String = "MM/dd/yyyy") -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = inputFormat
+        
+        if let date = inputDateFormatter.date(from: self) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = outputFormat
+            return outputDateFormatter.string(from: date)
+        }
+        return nil // Return nil if the conversion fails
+    }
+
+
 
 
 }

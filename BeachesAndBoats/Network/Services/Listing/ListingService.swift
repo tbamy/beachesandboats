@@ -12,4 +12,6 @@ protocol ListingService{
     func BoatData(completion: @escaping(Result<BoatDataResponse, ErrorResponse>) -> Void)
     func chefDishes(completion: @escaping(Result<ChefDishesResponse, ErrorResponse>) -> Void)
     func ListService(request: CreateServiceListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    func ListBoat(request: CreateBoatListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    func ListBeach(request: CreateBeachListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
 }

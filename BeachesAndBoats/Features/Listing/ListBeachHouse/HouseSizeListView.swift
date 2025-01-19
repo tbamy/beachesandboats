@@ -18,7 +18,7 @@ class HouseSizeListView: BaseViewControllerPlain {
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
-    var houseSizeLists: [GuestAllowed]?
+    var houseSizeLists: [HouseListModel] = []
     var selectedHouse: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,11 @@ class HouseSizeListView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        houseSizeLists = beachData?.guestAllowed
+        houseSizeLists = [
+            .init(name: "Entire beach house", image: "", description: "Guest enjoy exclusive access to the entire premises, without the need to share the space with the host or any other guests.", type: .full),
+            .init(name: "A private room", image: "", description: "Guests can book private individual rooms, with common areas like sitting room and kitchen shared by the host and other guests.", type: .single),
+            .init(name: "Entire house or a private room", image: "", description: "Guest can book either the whole house to themselves or book private room with shared areas with other guests or host.", type: .any)
+                        ]
 
         nextBtn.isEnabled = false
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
@@ -43,16 +47,32 @@ class HouseSizeListView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: selectedHouse, name: "", description: "", country: "", state: "", city: "", street_address: "", from_when: "", to_when: "", amenities: [], preferred_languages: [""], brief_introduction: "", house_rules: [], check_in_start: "", check_in_end: "", check_out_start: "", check_out_end: "", roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.bookingType = selectedHouse
+                
+                print(createBeachListing)
+                
+                coordinator?.gotoPropertyNameView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
             
-            coordinator?.gotoPropertyNameView(beachData: beachData, createBeachListingData: request)
+            
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.bookingType = selectedHouse
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
     }
 }
 
 extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return houseSizeLists?.count ?? 0
+        return houseSizeLists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -64,9 +84,9 @@ extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSourc
         view.titleAndSubtitleWithImageOnlyMode = true
         view.displayImage = .property
         view.backgroundColor = .white
-        let item = houseSizeLists?[indexPath.row]
-        view.model.title = item?.name ?? ""
-        view.model.subtitle = item?.description ?? ""
+        let item = houseSizeLists[indexPath.row]
+        view.model.title = item.name ?? ""
+        view.model.subtitle = item.description ?? ""
         view.isUserInteractionEnabled = false
         cell.applyView(view: view)
         return cell
@@ -89,7 +109,7 @@ extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSourc
                 v.model.state = true
             }
         }
-        selectedHouse = houseSizeLists?[indexPath.row].bookingID ?? ""
+        selectedHouse = houseSizeLists[indexPath.row].type?.rawValue ?? ""
         nextBtn.isEnabled = true
     }
 
@@ -108,3 +128,8 @@ extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSourc
     
 }
 
+
+struct HouseListModel{
+    let name, image, description: String?
+    let type: HouseBookingType?
+}

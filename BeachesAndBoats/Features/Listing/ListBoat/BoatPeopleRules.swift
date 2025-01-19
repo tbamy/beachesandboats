@@ -31,24 +31,41 @@ class BoatPeopleRules: BaseViewControllerPlain {
     }
     
     func setup(){
-        stepOneProgress.setProgress(0.90, animated: true)
+        stepOneProgress.setProgress(1, animated: true)
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         subtitleLabel.text = "Select the maximum number people that can be in your \(boatType ?? "") at once"
 //        houseRulesList = boatData?.
         
-        numberOfAdults.model = IncreaseDecreaseModel(type: "Number of adults", subtitle: "Ages 17+ years", count: 0)
-        numberOfChildren.model = IncreaseDecreaseModel(type: "Number of children", subtitle: "Ages 0-16 years", count: 0)
-        numberOfPets.model = IncreaseDecreaseModel(type: "Number of Pets", subtitle: "eg. dogs, cats etc.", count: 0)
+        numberOfAdults.model = IncreaseDecreaseModel(id: "", type: "Number of adults", subtitle: "Ages 17+ years", count: 0)
+        numberOfChildren.model = IncreaseDecreaseModel(id: "", type: "Number of children", subtitle: "Ages 0-16 years", count: 0)
+        numberOfPets.model = IncreaseDecreaseModel(id: "", type: "Number of Pets", subtitle: "eg. dogs, cats etc.", count: 0)
         
     }
 
     @IBAction func nextTapped(_ sender: Any) {
         
         if let boatData = boatData{
-            let request = CreateBoatListingRequest(type: createBoatListing?.type ?? [], name: createBoatListing?.name ?? "", description: createBoatListing?.description ?? "", from_when: createBoatListing?.from_when ?? "", to_when: createBoatListing?.to_when ?? "", amenities: createBoatListing?.amenities ?? [], preferred_languages: createBoatListing?.preferred_languages ?? [], brief_introduction: createBoatListing?.brief_introduction ?? "", rules: createBoatListing?.rules ?? [], no_of_adults: numberOfAdults.count, no_of_children: numberOfChildren.count, no_of_pets: numberOfPets.count, country: "", state: "", city: "", street_address: "", destinations_prices: [], images: [])
+            if var createBoatListing = createBoatListing{
+                createBoatListing.noOfAdults = numberOfAdults.count
+                createBoatListing.noOfChildren = numberOfChildren.count
+                createBoatListing.noOfPets = numberOfPets.count
+                print(createBoatListing)
+                
+                
+                coordinator?.gotoBoatAddressView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+            }
+        }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBoatListing = createBoatListing{
+            createBoatListing.noOfAdults = numberOfAdults.count
+            createBoatListing.noOfChildren = numberOfChildren.count
+            createBoatListing.noOfPets = numberOfPets.count
             
-            coordinator?.gotoBoatAddressView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
+            AppStorage.boatListing = createBoatListing
+            coordinator?.backToDashboard()
         }
     }
 

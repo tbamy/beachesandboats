@@ -18,6 +18,8 @@ class LoginView: BaseViewControllerPlain {
     
     var vm = LoginViewModel()
     var disposeBag = DisposeBag()
+    var phoneNumber = ""
+    var resendOtp: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +36,12 @@ class LoginView: BaseViewControllerPlain {
     @objc func gotoSignUp(){
         coordinator?.gotoSignup()
     }
+    
 
     @IBAction func continueTapped(_ sender: Any) {
         if validateFields(){
             LoadingModal.show()
-            let request = LoginRequest(email: emailAddress.text, password: password.text)
+            let request = LoginRequest(email: emailAddress.text, password: password.text, device_id: UserDevice().imei)
             vm.login(request: request)
         }
         
@@ -49,13 +52,37 @@ class LoginView: BaseViewControllerPlain {
             LoadingModal.dismiss()
             
             switch response {
+                
             case .loginSuccess(let response):
 //                UserSession.shared.userDetails = response.user
-                AppStorage.username = response.user?.email
-                UserSession.shared.loginRes = response
-                self?.coordinator?.goToDashboard()
+                if response.data?.switch_device == true{
+                    self?.presentConfirmAccountModal()
+                }else{
+                    AppStorage.username = response.data?.user?.email
+                    UserSession.shared.loginRes = response
+                    self?.coordinator?.goToDashboard()
+                }
             case .loginError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
+                
+                //MARK: Request Otp
+//            case .confirmAccountSuccess(let response):
+//                if self?.resendOtp == false{
+//                    self?.presentConfirmAccountModal()
+//                }else{
+//                    Toast.show(message: response.message ?? "OTP sent successfully")
+//                }
+//            case .confirmAccountError(let error):
+//                print(error)
+//                MiddleModal.show(title: error.message ?? "", type: .error)
+                
+                //MARK: Verify Otp
+            case .verifyOtpSuccess(let response):
+                AppStorage.username = response.data?.user?.email
+                UserSession.shared.loginRes = response
+                self?.coordinator?.goToDashboard()
+            case .verifyOtpError(let error):
+                Toast.show(message: error.message ?? "Invalid OTP")
             }
             
             
@@ -74,5 +101,39 @@ class LoginView: BaseViewControllerPlain {
         
         return true
     }
+    
+}
+
+
+extension LoginView: ModalTransitionDelegate{
+    func presentUserInformationModal(userInfo: SignUpRequest) {
+        print("")
+    }
+    
+    func presentCreatePasswordModal() {
+        print("")
+    }
+    
+    func presentConfirmAccountModal() {
+        ConfirmAccountModal.startConfirmModal(on: view, delegate: self, transitionDelegate: self, purpose: .switchDevice)
+    }
+    
+    
+}
+
+extension LoginView: OTPDelegate{
+    func resendOTP() {
+        resendOtp = true
+//        requestOTP()
+        
+    }
+    
+    func userOTP(otp: String?, keepSignIn: Bool) {
+        print(otp ?? "No otp")
+        let request = VerifyLoginOtpRequest(email: emailAddress.text, otp_code: otp, device_id: UserDevice().imei)
+        LoadingModal.show()
+        vm.verifyOtp(request: request)
+    }
+    
     
 }

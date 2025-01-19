@@ -34,11 +34,12 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoSelectPropertyTypePrimaryHost(tag: Int){
+    func gotoSelectPropertyTypePrimaryHost(tag: Int, type: HostType){
         let vc: SelectPropertyTypePrimaryHost = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         vc.tag = tag
+        vc.hostType = type
         push(viewController: vc)
     }
     
@@ -56,17 +57,19 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoSelectHouseTypeView(){
+    func gotoSelectHouseTypeView(type: HostType){
         let vc: SelectHouseTypeView = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
+        vc.hostType = type
         push(viewController: vc)
     }
     
-    func gotoHouseTypeListView(beachData: BeachDatas, cat: String){
+    func gotoHouseTypeListView(beachData: BeachDatas, cat: String, type: HostType){
         let vc: HouseTypeListView = .fromNib()
         vc.cat = cat
         vc.beachData = beachData
+        vc.hostType = type
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
@@ -216,12 +219,12 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoListBeachSuccessView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
-        let vc: ListBeachSuccessView = .fromNib()
-        vc.coordinator = self
-        vc.hidesBottomBarWhenPushed = true
-        push(viewController: vc)
-    }
+//    func gotoListBeachSuccessView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+//        let vc: ListBeachSuccessView = .fromNib()
+//        vc.coordinator = self
+//        vc.hidesBottomBarWhenPushed = true
+//        push(viewController: vc)
+//    }
     
     
     
@@ -371,6 +374,14 @@ class AccountCoordinator: Coordinator{
     func gotoServiceListingSuccessView(){
         let vc: ServiceListingSuccessView = .fromNib()
         vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoListingSuccessView(type: Int){
+        let vc: ListingSuccessView = .fromNib()
+        vc.coordinator = self
+        vc.type = type
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
@@ -562,6 +573,15 @@ class AccountCoordinator: Coordinator{
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             keyWindow.rootViewController = HostingDashboard()
+        }
+
+    }
+    
+    func backToServiceDashboard() {
+        navigationController = BaseNavigationController(rootViewController: ServiceDashboard())
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.rootViewController = ServiceDashboard()
         }
 
     }

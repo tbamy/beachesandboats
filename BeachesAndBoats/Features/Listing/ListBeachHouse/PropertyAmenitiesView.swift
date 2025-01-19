@@ -19,7 +19,7 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
     var createBeachListing: CreateBeachListingRequest?
     var selectedItems: [String] = []
     
-    var amenitiesList: [Amenity]?
+    var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beaches Houses"
@@ -31,7 +31,7 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        amenitiesList = beachData?.amenities.first{ $0.name == "Main"}?.amenities
+        amenitiesList = beachData?.amenities?.filter{ $0.amenityType == "General"}
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -42,10 +42,24 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(category_id: createBeachListing?.category_id ?? "", sub_cat_id: createBeachListing?.sub_cat_id ?? "", guest_booking_id: createBeachListing?.guest_booking_id ?? "", name: createBeachListing?.name ?? "", description: createBeachListing?.description ?? "", country: createBeachListing?.country ?? "", state: createBeachListing?.state ?? "", city: createBeachListing?.city ?? "", street_address: createBeachListing?.street_address ?? "", from_when: "", to_when: "", amenities: selectedItems, preferred_languages: [""], brief_introduction: "", house_rules: [], check_in_start: "", check_in_end: "", check_out_start: "", check_out_end: "", roominfo: [], full_apartment_cost: 0, full_apartment_discount: 0, full_apartment_amount_to_earn: 0)
-            
-            coordinator?.gotoPropertyAdditionalAmenitiesView(beachData: beachData, createBeachListingData: request)
+            if var createBeachListing = createBeachListing{
+                createBeachListing.amenities = selectedItems
+                print(createBeachListing)
+                
+                coordinator?.gotoPropertyAdditionalAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
         }
+    }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.amenities = selectedItems
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
     }
     
 
@@ -64,7 +78,7 @@ extension PropertyAmenitiesView: UICollectionViewDelegate, UICollectionViewDataS
         view.identifier = "Amenities Cell " + indexPath.description
         let item = amenitiesList?[indexPath.row]
         
-        let itemId = item?.amenityID ?? ""
+        let itemId = item?.id ?? ""
         if selectedItems.contains(itemId) {
             view.model.state = true
         } else {
@@ -90,7 +104,7 @@ extension PropertyAmenitiesView: UICollectionViewDelegate, UICollectionViewDataS
         let view = SelectableCheckbox(frame: cell.bounds)
         guard let item = amenitiesList?[indexPath.row] else { return }
         
-        let itemId = item.amenityID
+        let itemId = item.id ?? ""
         
         if selectedItems.contains(itemId) {
             selectedItems.removeAll { $0 == itemId }

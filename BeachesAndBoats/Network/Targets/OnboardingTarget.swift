@@ -14,6 +14,7 @@ enum OnboardingTarget{
     case ConfirmAccount(ConfirmAccountRequest)
     case VerifyCode(VerifyCodeRequest)
     case Login(LoginRequest)
+    case VerifyLoginOtp(VerifyLoginOtpRequest)
 }
 
 extension OnboardingTarget: BaseTarget{
@@ -29,12 +30,16 @@ extension OnboardingTarget: BaseTarget{
             return Urls.verifyCode.rawValue
         case .Login:
             return Urls.login.rawValue
+        case .VerifyLoginOtp:
+            return Urls.verifyLoginOtp.rawValue
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .RefreshToken, .SignUp, .ConfirmAccount, .VerifyCode, .Login:
+            return .post
+        case .VerifyLoginOtp(_):
             return .post
         }
     }
@@ -50,6 +55,8 @@ extension OnboardingTarget: BaseTarget{
         case .VerifyCode(let request):
             return .requestJSONEncodable(request)
         case .Login(let request):
+            return .requestJSONEncodable(request)
+        case .VerifyLoginOtp(let request):
             return .requestJSONEncodable(request)
         }
     }

@@ -16,6 +16,13 @@ class LoginViewModel{
     enum Output {
         case loginSuccess(LoginResponse)
         case loginError(ErrorResponse)
+        
+        case verifyOtpSuccess(LoginResponse)
+        case verifyOtpError(ErrorResponse)
+        
+//        case confirmAccountSuccess(GeneralResponse)
+//        case confirmAccountError(ErrorResponse)
+        
     }
     
     func login(request: LoginRequest) {
@@ -25,6 +32,28 @@ class LoginViewModel{
                 self?.output.onNext(.loginSuccess(response))
             case .failure(let error):
                 self?.output.onNext(.loginError(error))
+            }
+        })
+    }
+    
+//    func confirmAccount(request: ConfirmAccountRequest) {
+//        onboardingService.confirmAccount(request: request, completion: { [ weak self ] data in
+//            switch data {
+//            case .success(let response):
+//                self?.output.onNext(.confirmAccountSuccess(response))
+//            case .failure(let error):
+//                self?.output.onNext(.confirmAccountError(error))
+//            }
+//        })
+//    }
+    
+    func verifyOtp(request: VerifyLoginOtpRequest) {
+        onboardingService.verifyLoginOtp(request: request, completion: { [ weak self ] data in
+            switch data {
+            case .success(let response):
+                self?.output.onNext(.verifyOtpSuccess(response))
+            case .failure(let error):
+                self?.output.onNext(.verifyOtpError(error))
             }
         })
     }
