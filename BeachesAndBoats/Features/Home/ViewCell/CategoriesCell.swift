@@ -57,7 +57,7 @@ class CategoriesCell: BaseXib, Sizeable {
         title.text = model.title
         title.font.withSize(12)
         
-        if let url = URL(string: model.image) {
+        if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
             image.kf.setImage(
                 with: url,
                 placeholder: UIImage(named: "calendar"),
@@ -75,8 +75,8 @@ class CategoriesCell: BaseXib, Sizeable {
         } else {
             image.image = UIImage(named: "calendar")
         }
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapped)))
         
-        setState()
     }
     
     public func getHeight() -> CGFloat {
@@ -84,14 +84,16 @@ class CategoriesCell: BaseXib, Sizeable {
     }
     
     @objc func onTapped(_ sender: UITapGestureRecognizer) {
-        model.tapped()
-        model.state = true
+//        model.tapped()
+//        model.state = true
+        setState()
     }
     
     func setState() {
         if model.state {
             image.layer.borderColor = UIColor.systemOrange.cgColor
             image.layer.borderWidth = 2
+            image.layer.cornerRadius = 8
         } else {
             image.layer.borderColor = UIColor.clear.cgColor
             image.layer.borderWidth = 0

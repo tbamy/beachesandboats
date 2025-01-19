@@ -7,11 +7,12 @@
 
 import Foundation
 import RxSwift
+//import RxRelay
 
 class HomeViewVM{
-    var disposeBag = DisposeBag()
-    let bookingService: BookingService = BookingServiceImplementation()
-    var output = PublishSubject<Output>()
+    private let disposeBag = DisposeBag()
+    private let bookingService: BookingService
+    let output = PublishSubject<Output>()
     
     enum Input {
         case getBookingCategories(page: String)
@@ -20,6 +21,11 @@ class HomeViewVM{
     enum Output {
         case getBookingCategoriesSuccess(GetBookingCategoryResponse)
         case getBookingCategoriesFailed(ErrorResponse)
+    }
+    
+    
+    init(bookingService: BookingService = BookingServiceImplementation()) {
+        self.bookingService = bookingService
     }
     
     func transform(input: PublishSubject<Input>) {

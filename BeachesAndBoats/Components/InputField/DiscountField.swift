@@ -15,7 +15,7 @@ class DiscountField: InputField {
     override func setup() {
         super.setup()
 //        textField.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        textField.font = UIFont.systemFont(ofSize: 45, weight: .medium)
+        textField.font = UIFont.systemFont(ofSize: 40, weight: .medium)
         textField.textAlignment = .left
         textField.backgroundColor = .white
         
@@ -36,7 +36,7 @@ class DiscountField: InputField {
         let percentageRange = (cleanText as NSString).range(of: percentageSymbol)
         
         // Set color for the percentage symbol
-        attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: percentageRange) // Change to any color you prefer
+        attributedText.addAttribute(.foregroundColor, value: UIColor.gray, range: percentageRange) // Change to any color you prefer
         
         // Set the attributed text to the textField
         textField.attributedText = attributedText
@@ -47,5 +47,26 @@ class DiscountField: InputField {
         
         return false
     }
+    
+    public func getDoubleValue() -> Double? {
+        guard let text = textField.text else { return nil }
+        
+        // Remove the percentage symbol and any whitespace
+        let numericText = text.replacingOccurrences(of: percentageSymbol, with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Convert the remaining text to Double
+        return Double(numericText)
+    }
+
+    public func getIntValue() -> Int? {
+        guard let text = textField.text else { return nil }
+        
+        // Remove the percentage symbol and any whitespace
+        let numericText = text.replacingOccurrences(of: percentageSymbol, with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Convert the remaining text to Double
+        return Int(numericText)
+    }
+
 }
 

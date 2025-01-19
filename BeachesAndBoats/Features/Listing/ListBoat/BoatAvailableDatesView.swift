@@ -36,7 +36,7 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        calendarView.onDateSelected = { startDate, endDate in
+        calendarView.onDatesSelected = { startDate, endDate in
             
             self.from_when = startDate
             if let endDate = endDate {
@@ -58,8 +58,8 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
             if var createBoatListing = createBoatListing{
-                createBoatListing.availableFrom = from_when?.toBackendDateAlone() ?? ""
-                createBoatListing.availableTo = to_when?.toBackendDateAlone() ?? ""
+                createBoatListing.availableFrom = from_when?.toBackendDate() ?? ""
+                createBoatListing.availableTo = to_when?.toBackendDate() ?? ""
                 
                 print(createBoatListing)
                 
@@ -71,8 +71,8 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBoatListing = createBoatListing{
-            createBoatListing.availableFrom = from_when?.toBackendDateAlone() ?? ""
-            createBoatListing.availableTo = to_when?.toBackendDateAlone() ?? ""
+            createBoatListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createBoatListing.availableTo = to_when?.toBackendDate() ?? ""
             
             print(createBoatListing)
             

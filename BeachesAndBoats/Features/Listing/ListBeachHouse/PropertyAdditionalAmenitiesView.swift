@@ -66,6 +66,18 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
             
         }
     }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let amenities = (createBeachListing?.amenities ?? []) + selectedItems
+        if var createBeachListing = createBeachListing{
+            createBeachListing.amenities = amenities
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
 
 
 }

@@ -52,6 +52,17 @@ class AboutYouLanguageView: BaseViewControllerPlain {
         
         }
     }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.languages = selectedItems
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
 
 
 }

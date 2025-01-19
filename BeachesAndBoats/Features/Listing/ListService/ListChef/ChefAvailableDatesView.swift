@@ -33,7 +33,7 @@ class ChefAvailableDatesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        calendarView.onDateSelected = { startDate, endDate in
+        calendarView.onDatesSelected = { startDate, endDate in
             
             self.from_when = startDate
             if let endDate = endDate {

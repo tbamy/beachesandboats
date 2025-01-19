@@ -15,7 +15,7 @@ struct CreateBeachHouseBookingRequest: Codable {
     var checkingTime: String
     var checkoutTime: String
     var numberOfPeople: Int
-    var amount: Double
+    var amount: Float
     var units: Int
 
     enum CodingKeys: String, CodingKey {

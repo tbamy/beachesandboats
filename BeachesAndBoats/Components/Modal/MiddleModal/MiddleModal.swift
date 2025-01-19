@@ -76,13 +76,13 @@ import MessageUI
     }
     
     func getHeight() -> CGFloat {
-        var contentHeight = 50.0
+        var contentHeight = 60.0
         contentHeight += !icon.isHidden ? icon.bounds.height + 10.0 : 0
         contentHeight += !title.isHidden ? title.bounds.height + 10.0 : 0
         contentHeight += !subtitle.isHidden ? subtitle.bounds.height + 10.0 : 0
         contentHeight += !extraViewStack.isHidden ? extraViewStack.bounds.height + 10.0 : 0
-        contentHeight += !confirmButton.isHidden ? confirmButton.bounds.height + 10.0 : 0
-        contentHeight += !cancelButton.isHidden ? cancelButton.bounds.height + 10.0 : 0
+        contentHeight += !confirmButton.isHidden ? confirmButton.bounds.height + 20.0 : 0
+        contentHeight += !cancelButton.isHidden ? cancelButton.bounds.height + 20.0 : 0
         contentHeight += !tetiaryStack.isHidden ? tetiaryStack.bounds.height + 12.0 : 0
         
         return contentHeight

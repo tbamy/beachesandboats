@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoatUploadImageView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="RZy-ZG-5Zg" id="zPb-rF-xmF"/>
+                <outlet property="collectionViewHeight" destination="ObY-DG-SJl" id="bSV-hm-C4o"/>
                 <outlet property="nextBtn" destination="sKh-zW-Idt" id="uAi-bu-VY7"/>
                 <outlet property="stepOneProgress" destination="g5J-yF-Y7Q" id="pqT-9x-hKd"/>
                 <outlet property="stepTwoProgress" destination="8g0-vC-Aio" id="v0u-hN-zWm"/>

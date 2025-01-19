@@ -46,6 +46,7 @@ class RoomCard: BaseXib {
     
     func setup(){
         layer.cornerRadius = 8
+        mainImage.layer.cornerRadius = 10
         backgroundColor = .white
         
         mainImage.image = model.image

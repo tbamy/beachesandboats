@@ -219,12 +219,12 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoListBeachSuccessView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
-        let vc: ListBeachSuccessView = .fromNib()
-        vc.coordinator = self
-        vc.hidesBottomBarWhenPushed = true
-        push(viewController: vc)
-    }
+//    func gotoListBeachSuccessView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+//        let vc: ListBeachSuccessView = .fromNib()
+//        vc.coordinator = self
+//        vc.hidesBottomBarWhenPushed = true
+//        push(viewController: vc)
+//    }
     
     
     

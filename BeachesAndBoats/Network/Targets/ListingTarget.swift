@@ -74,7 +74,9 @@ extension ListingTarget: BaseTarget {
                 "longitude": data.longitude,
                 "available_from": data.availableFrom,
                 "available_to": data.availableTo,
-                "role_type": data.roleType
+                "role_type": data.roleType,
+                "listing_price": data.listingPrice,
+                "discount_percent": data.discountPercent
             ]
             
             for (key, value) in fields {
@@ -124,7 +126,7 @@ extension ListingTarget: BaseTarget {
                     multipartData.append(MultipartFormData(provider: .data(imageData), name: "rooms[\(roomIndex)][images][\(imageIndex)]", fileName: "room_image_\(roomIndex)_\(imageIndex).jpg", mimeType: "image/jpeg"))
                 }
             }
-
+                print("Multipart Data: \(multipartData)")
             return .uploadMultipart(multipartData)
 
             

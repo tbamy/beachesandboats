@@ -45,7 +45,7 @@ public class UserInformationModal: BaseXib {
     @IBAction func continueTapped(_ sender: Any) {
         if valiidateFields(){
             
-            let userInfo = SignUpRequest(first_name: firstname.text, last_name: lastname.text, email: userInfo?.email, birthday: birthday.text.convertToBackendDate(from: birthday.text), password: "", password_confirmation: "", keep_signed_in: userInfo?.keep_signed_in, phone_number: phoneNumber, device_id: UserDevice().imei)
+            let userInfo = SignUpRequest(first_name: firstname.text, last_name: lastname.text, email: emailAddress, birthday: birthday.text, password: "", password_confirmation: "", keep_signed_in: userInfo?.keep_signed_in, phone_number: phoneNumber, device_id: UserDevice().imei)
            
             infoDelegate?.userInfo(info: userInfo)
             print("user info sent: \(userInfo)")

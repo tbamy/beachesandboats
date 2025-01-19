@@ -26,6 +26,14 @@ class UserSession {
         }
     }
     
+    var signupRes: SignUpResponse? {
+        didSet {
+            token = signupRes?.data?.accessToken
+            userDetails = signupRes?.data?.user
+            print("User token is : \(token)")
+        }
+    }
+    
     var token: String?
     var startSession: Bool = false {
         didSet {

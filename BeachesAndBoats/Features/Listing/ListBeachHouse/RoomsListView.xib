@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoomsListView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="addNewBtn" destination="ifX-eO-wb3" id="33p-DR-O0s"/>
                 <outlet property="collectionView" destination="SQH-kc-wr3" id="2G1-uB-bBO"/>
+                <outlet property="collectionViewHeightConstraint" destination="WRr-uE-A6K" id="8Oj-QH-Ue8"/>
+                <outlet property="duplicateBtn" destination="vu4-Tg-o82" id="J7A-KA-a9v"/>
                 <outlet property="nextBtn" destination="lWh-4v-bHX" id="ql3-n9-NAZ"/>
                 <outlet property="stepOneProgress" destination="6Ww-rQ-8Sn" id="9uy-EJ-dHS"/>
                 <outlet property="stepTwoProgress" destination="JQH-FA-2f2" id="jk7-Fw-j84"/>
@@ -92,8 +96,11 @@
                     </subviews>
                 </stackView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SQH-kc-wr3">
-                    <rect key="frame" x="20" y="152" width="353" height="546"/>
+                    <rect key="frame" x="0.0" y="152" width="393" height="447"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="447" id="WRr-uE-A6K"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LT1-3l-FNk">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -101,18 +108,37 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="spS-TF-Eja">
+                    <rect key="frame" x="20" y="619" width="353" height="34.333333333333371"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-eO-wb3">
+                            <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="34.333333333333336"/>
+                            <color key="tintColor" name="B&amp;B"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Add another room"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vu4-Tg-o82">
+                            <rect key="frame" x="177.66666666666663" y="0.0" width="175.33333333333337" height="34.333333333333336"/>
+                            <color key="tintColor" name="B&amp;B"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Duplicate room"/>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SQH-kc-wr3" secondAttribute="trailing" constant="20" id="2pf-OU-Gdl"/>
-                <constraint firstItem="aEf-4U-Ete" firstAttribute="top" secondItem="SQH-kc-wr3" secondAttribute="bottom" constant="40" id="DcE-SM-kI9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SQH-kc-wr3" secondAttribute="trailing" id="2pf-OU-Gdl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="txp-bU-xFJ" secondAttribute="trailing" constant="20" id="IDo-aH-f6C"/>
+                <constraint firstItem="spS-TF-Eja" firstAttribute="top" secondItem="SQH-kc-wr3" secondAttribute="bottom" constant="20" id="KHa-oT-BWv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aEf-4U-Ete" secondAttribute="trailing" constant="20" id="Ktv-WW-5W8"/>
                 <constraint firstItem="txp-bU-xFJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="TQN-JM-zDn"/>
-                <constraint firstItem="SQH-kc-wr3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="bCD-Dz-0Zn"/>
+                <constraint firstItem="SQH-kc-wr3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bCD-Dz-0Zn"/>
+                <constraint firstItem="spS-TF-Eja" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="lJD-FO-JsC"/>
                 <constraint firstItem="SQH-kc-wr3" firstAttribute="top" secondItem="txp-bU-xFJ" secondAttribute="bottom" constant="20" id="oRp-3U-ps6"/>
                 <constraint firstItem="aEf-4U-Ete" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="psE-kV-I8h"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="spS-TF-Eja" secondAttribute="trailing" constant="20" id="qpl-f3-Su2"/>
                 <constraint firstItem="txp-bU-xFJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="usj-y6-9fq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aEf-4U-Ete" secondAttribute="bottom" constant="30" id="zAx-JI-EZU"/>
             </constraints>
@@ -128,6 +154,9 @@
         </designable>
     </designables>
     <resources>
+        <namedColor name="B&amp;B">
+            <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

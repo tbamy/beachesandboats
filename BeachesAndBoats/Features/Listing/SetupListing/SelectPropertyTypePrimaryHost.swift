@@ -47,6 +47,10 @@ class SelectPropertyTypePrimaryHost: BaseViewControllerPlain {
         coordinator?.gotoSelectHouseTypeView(type: hostType ?? .primaryHost)
     }
 
+    @IBAction func saveTapped(_ sender: Any) {
+        coordinator?.backToDashboard()
+    }
+    
     @objc func gotoBoat(){
         print("Go to Boat")
         coordinator?.gotoBoatHouseTypeView()

@@ -58,6 +58,16 @@ class HouseSizeListView: BaseViewControllerPlain {
             
         }
     }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.bookingType = selectedHouse
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
 }
 
 extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

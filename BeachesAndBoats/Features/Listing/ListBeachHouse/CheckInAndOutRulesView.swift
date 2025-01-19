@@ -35,20 +35,58 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
         
         
     }
-    
+
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            if var createBeachListing = createBeachListing{
-                createBeachListing.checkInFrom = checkInFrom.text
-                createBeachListing.checkInTo = checkInUntil.text
-                createBeachListing.checkOutFrom = checkOutFrom.text
-                createBeachListing.checkOutTo = checkOutUntil.text
-                print(createBeachListing)
-                
-                coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
-            }
+        guard
+            let checkInFromTime = checkInFrom.selectedTime,
+            let checkInUntilTime = checkInUntil.selectedTime,
+            let checkOutFromTime = checkOutFrom.selectedTime,
+            let checkOutUntilTime = checkOutUntil.selectedTime
+        else {
+            MiddleModal.show(title: "Invalid Input", subtitle: "Please select all check-in and check-out times.", type: .error, dismissable: true, dismissOnConfirm: true)
+            return
+        }
+        
+        // Validation logic
+        if checkInUntilTime <= checkInFromTime {
+            MiddleModal.show(title: "Invalid Check-In Time", subtitle: "Check-in until time must be after check-in from time.", type: .error, dismissable: true, dismissOnConfirm: true)
+            return
+        }
+        
+        if checkOutFromTime <= checkInUntilTime {
+            MiddleModal.show(title: "Invalid Check-Out Time", subtitle: "Check-out from time must be after check-in until time.", type: .error, dismissable: true, dismissOnConfirm: true)
+            return
+        }
+        
+        if checkOutUntilTime <= checkOutFromTime {
+            MiddleModal.show(title: "Invalid Check-Out Time", subtitle: "Check-out until time must be after check-out from time.", type: .error, dismissable: true, dismissOnConfirm: true)
+            return
+        }
+        
+        if let beachData = beachData, var createBeachListing = createBeachListing {
+            createBeachListing.checkInFrom = checkInFrom.text
+            createBeachListing.checkInTo = checkInUntil.text
+            createBeachListing.checkOutFrom = checkOutFrom.text
+            createBeachListing.checkOutTo = checkOutUntil.text
+            print(createBeachListing)
             
+            coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
         }
     }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.checkInFrom = checkInFrom.text
+            createBeachListing.checkInTo = checkInUntil.text
+            createBeachListing.checkOutFrom = checkOutFrom.text
+            createBeachListing.checkOutTo = checkOutUntil.text
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
+
 
 }

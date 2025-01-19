@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import PaystackCore
+//import
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setupCoordinator(application)
+        
+        _ = try? PaystackBuilder
+              .newInstance
+              .setKey("pk_test_86bef2313897f8e69fa1067e9bb722f400883417")
+              .build()
+        
         return true
     }
 

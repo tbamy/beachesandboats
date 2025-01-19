@@ -62,38 +62,83 @@ class UploadImageView: BaseViewControllerPlain {
 
     
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            for image in images {
-                if let imageData = image.pngData() {
-                    roomImages.append(imageData)
-                }
+        guard let beachData = beachData else { return }
+        guard let createBeachListing = createBeachListing else { return }
+        
+        for image in images {
+            if let imageData = image.pngData() {
+                roomImages.append(imageData)
             }
-            
-            let roomIndex = createBeachListing?.rooms.indices.last ?? -1
-            print("Current room index is \(roomIndex)")
-//            guard let beachData = beachData, let roomIndex = currentRoomIndex else { return }
-            
-            var updatedRoomInfo = createBeachListing?.rooms ?? []
-            if roomIndex < updatedRoomInfo.count {
-                    // Append selected items to the amenities of the room at the specified index
-                var existingRoom = updatedRoomInfo[roomIndex]
-                
-                existingRoom.images = roomImages
-                        
-                } else {
-                    print("Error: Room at index \(roomIndex) does not exist in roominfo.")
-                    return
-                }
-            
-            if var createBeachListing = createBeachListing{
-                createBeachListing.rooms = updatedRoomInfo
-                print(createBeachListing)
-                
-                coordinator?.gotoRoomsListView(beachData: beachData, createBeachListingData: createBeachListing)
-            }
-            
         }
+
+        // Get the last index of the rooms array
+        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        print("Current room index is \(roomIndex)")
+
+        // Safely get a mutable copy of the rooms array
+        var updatedRoomInfo = createBeachListing.rooms
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+            // Update the room amenities at the current room index
+            var existingRoom = updatedRoomInfo[roomIndex]
+            existingRoom.images = roomImages
+            
+            // Reassign the updated room back to the array
+            updatedRoomInfo[roomIndex] = existingRoom
+            
+            print("Updated Room: \(existingRoom)")
+        } else {
+            print("Error: Room at index \(roomIndex) does not exist in room info.")
+            return
+        }
+
+        // Create a mutable copy of the createBeachListing and update its rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+        
+        print("Updated CreateBeachListing: \(updatedBeachListing)")
+        coordinator?.gotoRoomsListView(beachData: beachData, createBeachListingData: updatedBeachListing)
     }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        guard let createBeachListing = createBeachListing else { return }
+        
+        for image in images {
+            if let imageData = image.pngData() {
+                roomImages.append(imageData)
+            }
+        }
+
+        // Get the last index of the rooms array
+        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        print("Current room index is \(roomIndex)")
+
+        // Safely get a mutable copy of the rooms array
+        var updatedRoomInfo = createBeachListing.rooms
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+            // Update the room amenities at the current room index
+            var existingRoom = updatedRoomInfo[roomIndex]
+            existingRoom.images = roomImages
+            
+            // Reassign the updated room back to the array
+            updatedRoomInfo[roomIndex] = existingRoom
+            
+            print("Updated Room: \(existingRoom)")
+        } else {
+            print("Error: Room at index \(roomIndex) does not exist in room info.")
+            return
+        }
+
+        // Create a mutable copy of the createBeachListing and update its rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+            
+            AppStorage.beachListing = updatedBeachListing
+            coordinator?.backToDashboard()
+
+    }
+    
+    
             
     func deleteImage(image: UIImage) {
         if let index = images.firstIndex(where: { $0 == image }) {
@@ -187,6 +232,7 @@ extension UploadImageView: UIImagePickerControllerDelegate, UINavigationControll
         if let selectedImage = info[.originalImage] as? UIImage {
             images.append(selectedImage)
             collectionView.reloadData()
+            
         }
         picker.dismiss(animated: true, completion: nil)
     }

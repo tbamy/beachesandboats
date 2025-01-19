@@ -139,7 +139,7 @@ class CreatePasswordModal: BaseXib {
     @objc func backBtnTapped(_ sender: Any) {
         CreatePasswordModal.dismiss()
         let info = SignUpRequest(first_name: userInfo?.first_name, last_name: userInfo?.last_name, email: userInfo?.email, birthday: userInfo?.birthday, password: userInfo?.password, password_confirmation: userInfo?.password_confirmation, keep_signed_in: userInfo?.keep_signed_in, phone_number: userInfo?.phone_number, device_id: userInfo?.device_id)
-    
+    print("DOB is: \(userInfo?.birthday?.toBackendDate())")
         transitionDelegate?.presentUserInformationModal(userInfo: info)
     }
 
@@ -156,12 +156,12 @@ class CreatePasswordModal: BaseXib {
             
             var containsNameOrEmail = false
             
-            for namePart in nameComponents {
-                if validator.execute(lowercasedPassword, String(namePart)) {
-                    containsNameOrEmail = true
-                    break
-                }
-            }
+//            for namePart in nameComponents {
+//                if validator.execute(lowercasedPassword, String(namePart)) {
+//                    containsNameOrEmail = true
+//                    break
+//                }
+//            }
             
             if validator.execute(lowercasedPassword, email.lowercased()) {
                 containsNameOrEmail = true
@@ -240,14 +240,14 @@ class CreatePasswordModal: BaseXib {
         if passAllChecks {
             createPasswordBtn.isEnabled = true
         } else {
-            print("Password: \(newPasswordField.text) - Confirm Password: \(confirmPasswordField.text)")
+//            print("Password: \(newPasswordField.text) - Confirm Password: \(confirmPasswordField.text)")
             createPasswordBtn.isEnabled = false
         }
     }
     
     @IBAction func continueBtnAction(_ sender: Any) {
         
-        let request = SignUpRequest(first_name: userInfo?.first_name, last_name: userInfo?.last_name, email: userInfo?.email, birthday: userInfo?.birthday, password: newPasswordField.text, password_confirmation: confirmPasswordField.text, keep_signed_in: userInfo?.keep_signed_in, phone_number: userInfo?.phone_number, device_id: userInfo?.device_id)
+        let request = SignUpRequest(first_name: userInfo?.first_name, last_name: userInfo?.last_name, email: userInfo?.email, birthday: userInfo?.birthday?.toBackendDate(), password: newPasswordField.text, password_confirmation: confirmPasswordField.text, keep_signed_in: userInfo?.keep_signed_in, phone_number: userInfo?.phone_number, device_id: userInfo?.device_id)
         
         createAccountDelegate?.signUpInfo(info: request)
     }

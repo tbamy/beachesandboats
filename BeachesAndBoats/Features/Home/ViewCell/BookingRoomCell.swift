@@ -7,10 +7,11 @@
 
 import UIKit
 
-class BookingRoomCell: BaseXib {
+class BookingRoomCell: BaseXib{
 
     let nibName = "BookingRoomCell"
     
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var guestsLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,6 +21,7 @@ class BookingRoomCell: BaseXib {
     @IBOutlet weak var selectBtn: PlainOutlineButton!
     @IBOutlet weak var selectedBtn: PlainOutlineButton!
     @IBOutlet weak var amenitiesCollectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     @IBInspectable public var identifier: String = "" { didSet {
         self.accessibilityIdentifier = identifier
@@ -55,46 +57,67 @@ class BookingRoomCell: BaseXib {
     }
     
     func setup(){
+        setState()
+        cellView.layer.cornerRadius = 15
+        cellView.backgroundColor = .white
         selectedBtn.isHidden = true
         selectBtn.layer.borderColor = UIColor.grey.cgColor
         selectBtn.tintColor = .beachBlue
         selectedBtn.layer.borderColor = UIColor.beachBlue.cgColor
         selectedBtn.tintColor = .beachBlue
+        selectedBtn.backgroundColor = .bBLight
         guestsLabel.text =  model.guests
         bedTypeLabel.text = model.bedType
         dateLabel.text = model.date
         priceLabel.text = model.price
-        amenities = model.amenities
+        
+//        print("Amenities Data: \(amenities)")
+        
         titleLabel.text = model.title
         
+        if let layout = amenitiesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            layout.minimumInteritemSpacing = 10
+            layout.minimumLineSpacing = 15
+        }
+                    
         amenitiesCollectionView.delegate = self
         amenitiesCollectionView.dataSource = self
         amenitiesCollectionView.backgroundColor = .clear
         amenitiesCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        amenities = model.amenities
+//        amenitiesCollectionView.updateCollectionViewHeight(amenitiesCollectionView, collectionViewHeight, self)
 
         
         if let url = URL(string: model.img.replacingOccurrences(of: "http://", with: "https://")) {
             image.kf.setImage(with: url)
         }
         
-        setState()
+        selectBtn.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
     }
     
+//    @objc func onTapped(_ sender: UITapGestureRecognizer) {
+////        model.tapped()
+//        model.state = true
+//        setState()
+//    }
+    
     @objc func onTapped(_ sender: UITapGestureRecognizer) {
-        model.tapped()
-        model.state = true
+        model.tapped() 
     }
+
     
     func setState() {
         if model.state {
-            image.layer.borderColor = UIColor.beachBlue.cgColor
-            image.layer.borderWidth = 2
+            layer.borderColor = UIColor.beachBlue.cgColor
+            layer.borderWidth = 2
+            layer.cornerRadius = 8
             selectBtn.isHidden = true
             selectedBtn.isHidden = false
             
         } else {
-            image.layer.borderColor = UIColor.clear.cgColor
-            image.layer.borderWidth = 0
+            layer.borderColor = UIColor.clear.cgColor
+            layer.borderWidth = 0
             selectBtn.isHidden = false
             selectedBtn.isHidden = true
         }
@@ -112,18 +135,17 @@ extension BookingRoomCell: UICollectionViewDelegate, UICollectionViewDataSource,
         let cell = amenitiesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
         let cellAt = amenities[indexPath.item]
         
-        let view = CategoriesCell(frame: cell.bounds)
+        let view = CatViewCell(frame: cell.bounds)
         view.identifier = "Amenitiess " + indexPath.description
         view.model.image = cellAt.icon ?? ""
         view.model.title = cellAt.name ?? ""
-        view.isSubcategory = true
         
         cell.applyView(view: view)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.width / 6), height: 50)
+        return CGSize(width: (collectionView.bounds.width / 4) - 5, height: 20)
     }
     
     

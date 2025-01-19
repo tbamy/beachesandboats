@@ -32,8 +32,14 @@ class BeachDetailsView: BaseViewControllerPlain {
     
     
     var beachDetails: Listing?
-//    var beachBookingRequest: CreateBeachHouseBookingRequest?
     var amenities: [Amenity] = []
+    var roomImages: [String] = []
+    
+    var from_when: Date?
+    var to_when: Date?
+    
+    var backendFrom_when: Date?
+    var backendTo_when: Date?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +51,56 @@ class BeachDetailsView: BaseViewControllerPlain {
     
     func setup(){
         if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-            print("Image Url is: \(url)")
+//            print("Image Url is: \(url)")
             topImage.kf.setImage(with: url)
         }
+//        print("Beach Details: \(beachDetails)")
+        
+        
+        backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
+        backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
+        
+//        print("Available From: \(backendFrom_when) - Available To: \(backendTo_when)")
+        
+        checkinDateLabel.onDateSelected = { (date) in
+//            checkinDateLabel.onDateSelected = { (startDateString, endDateString) in
+//            let startDate = startDateString.toBackendDate()
+//            let endDate = endDateString?.toBackendDate()
+            
+            self.from_when = date
+            
+            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
+                guard date >= backendFrom && date <= backendTo else {
+                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
+                    return
+                }
+                self.checkinDateLabel.text = "\(date.toFormattedDate())"
+
+            } else {
+                print("Backend dates are not set.")
+                self.checkinDateLabel.text = "\(date.toFormattedDate())"
+            }
+        }
+
+        
+        checkoutDateLabel.onDateSelected = { (date) in
+            
+            self.to_when = date
+            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
+                guard date >= backendFrom && date <= backendTo else {
+                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
+                    return
+                }
+                
+                
+                self.checkoutDateLabel.text = "\(date.toFormattedDate())"
+            
+            } else {
+                print("Backend dates are not set.")
+                self.checkoutDateLabel.text = "\(date.toFormattedDate())"
+            }
+        }
+        
         titleLabel.text = beachDetails?.name
         locationLabel.text = "\(beachDetails?.locations?.city ?? ""), \(beachDetails?.locations?.state ?? "") \(beachDetails?.locations?.country ?? "")"
         locationView.layer.cornerRadius = 8
@@ -59,14 +112,29 @@ class BeachDetailsView: BaseViewControllerPlain {
         let totalGuests = (beachDetails?.noOfAdults ?? 0) + (beachDetails?.noOfChildren ?? 0)
         roomAndGuestsLabel.text = "\(totalGuests) guests, \(beachDetails?.rooms?.count ?? 0) rooms"
         
+        
         amenities = beachDetails?.amenities ?? []
-        print(amenities)
+        
+        
+        topImage.isUserInteractionEnabled = true
+        topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
+        
+    }
+    
+    @objc func viewImages(){
+        
+        if let rooms = beachDetails?.rooms{
+            roomImages = rooms.compactMap { $0.images }
+                .flatMap { $0 }
+                .compactMap { $0.url }
+            coordinator?.gotoAllPhotos(images: roomImages)
+        }
         
     }
     
     func configureAllCollectionViews() {
         configureCollectionView(categoriesCollectionView, tag: 1)
-//        configureCollectionView(guestCommentsCollectionView, tag: 2)
+        configureCollectionView(guestCommentsCollectionView, tag: 2)
     }
 
     
@@ -80,11 +148,15 @@ class BeachDetailsView: BaseViewControllerPlain {
 
     @IBAction func continueBookingTapped(_ sender: Any) {
         print("Continue Tapped")
-        if let beachDetails = beachDetails{
-            let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: checkinDateLabel.text, checkoutDate: checkoutDateLabel.text, checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0)
-            print(beachBookingRequest)
-            
-            coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+        if let fromWhen = from_when, let toWhen = to_when{
+            if let beachDetails = beachDetails{
+                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: from_when?.toBackendDate() ?? "", checkoutDate: to_when?.toBackendDate() ?? "", checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0)
+                print(beachBookingRequest)
+                
+                coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+            }
+        }else{
+            MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
         }
         
     }

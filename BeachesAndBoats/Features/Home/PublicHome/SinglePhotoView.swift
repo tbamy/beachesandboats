@@ -13,14 +13,17 @@ class SinglePhotoView: BaseViewControllerPlain {
     @IBOutlet weak var photosCount: UILabel!
     @IBOutlet weak var previousBtn: UIImageView!
     @IBOutlet weak var nextBtn: UIImageView!
+    @IBOutlet weak var cancelBtn: UIImageView!
     
     
     var images: [String] = []
     var initialIndex: Int = 0
     
+    var currentPage: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .black
         setup()
     }
     
@@ -29,6 +32,55 @@ class SinglePhotoView: BaseViewControllerPlain {
         photosCollectionView.dataSource = self
         photosCollectionView.backgroundColor = .clear
         photosCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
+        nextBtn.isUserInteractionEnabled = true
+        previousBtn.isUserInteractionEnabled = true
+        cancelBtn.isUserInteractionEnabled = true
+        
+        nextBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(nextButtonTapped)))
+        previousBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(previousButtonTapped)))
+        cancelBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeGallery)))
+    }
+    
+    @objc private func closeGallery() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func nextButtonTapped() {
+        scrollToNextCell()
+    }
+    
+    @objc func previousButtonTapped() {
+        scrollToPreviousCell()
+    }
+    
+    func scrollToNextCell() {
+        guard currentPage > 0 else {
+            return
+        }
+        
+        currentPage += 1
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        self.photosCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            
+        updatePhotosCount()
+
+    }
+    
+    func scrollToPreviousCell() {
+        guard currentPage > 0 else {
+            return
+        }
+        
+        currentPage -= 1
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        self.photosCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+        updatePhotosCount()
+    }
+    
+    func updatePhotosCount() {
+        photosCount.text = "\(currentPage + 1) / \(images.count)"
     }
 
 
@@ -55,14 +107,17 @@ extension SinglePhotoView: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.frame.size
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let galleryVC = SinglePhotoView()
-        galleryVC.images = images
-        galleryVC.initialIndex = indexPath.item
-        galleryVC.modalPresentationStyle = .fullScreen
-        self.present(galleryVC, animated: true, completion: nil)
-                
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / pageWidth)
+        photosCount.text = "\(currentPage + 1) / \(images.count)"
+    }
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / pageWidth)
+        photosCount.text = "\(currentPage + 1) / \(images.count)"
     }
     
     

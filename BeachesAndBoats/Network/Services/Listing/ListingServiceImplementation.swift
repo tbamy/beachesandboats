@@ -28,6 +28,10 @@ class ListingServiceImplementation: Provider<ListingTarget>, ListingService{
         provider.request(.CreateBoatListing(data: request)){ completion( self.handleResult(result: $0))}
     }
     
+    func ListBeach(request: CreateBeachListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.CreateBeachListing(data: request)){ completion( self.handleResult(result: $0))}
+    }
+    
     
     
 }
