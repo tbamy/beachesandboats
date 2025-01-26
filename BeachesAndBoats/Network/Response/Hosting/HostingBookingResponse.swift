@@ -22,7 +22,7 @@ struct DataClass: Codable {
 
 struct BeachHouseReservations: Codable {
     let upcomingReservations, currentReservations: [BeachHouseReservationsCurrentReservation]?
-    let cancelledReservations: [String]?
+    let cancelledReservations: [BeachHouseReservationsCurrentReservation]?//[String]?
 
     enum CodingKeys: String, CodingKey {
         case upcomingReservations = "upcoming_reservations"

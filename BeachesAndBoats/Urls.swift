@@ -66,11 +66,15 @@ enum Urls: String {
     
     //MARK: -  Hosting
     
-    case getUpcomingBooking = "api/v1/hosting/dashboard/reservations"
+    case reservations = "api/v1/hosting/dashboard/reservations"
     case getTopEarnings = "api/v1/hosting/dashboard/earnings"
     case getWithdrawHistory = "api/v1/hosting/dashboard/withdrawal-history"
     case makeWithdrawal = "api/v1/hosting/dashboard/create-withdrawal"
     case bankList = "api/v1/hosting/dashboard/banks"
     case twoFASecurity = "api/v1/user/send-mfa-otp"
     case twoFACompleteVerification = "api/v1/user/update-mfa-security"
+    
+    //MARK: - Listing
+    case beachHouseAndBoatListing = "api/v1/hosting/dashboard/listings"
+    
 }

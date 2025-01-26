@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 class HostingServiceMenuCoordinator: Coordinator {
     
+    var isComingFromHostingSideHouseAndBoat: Bool = false
+    
     override func start() {
         let vc: MenuView = .fromNib()
         vc.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(named: "menuIcon"), tag: 3)
@@ -50,20 +52,27 @@ class HostingServiceMenuCoordinator: Coordinator {
     }
     
     func gotoEarningView() {
-        guard let tabBarController = self.navigationController?.tabBarController,
-              let tabs = tabBarController.viewControllers else {
-            print("TabBarController or its view controllers are nil")
-            return
-        }
-        
-        // Find the index of the tab with the "Earnings" identifier
-        if let earningTabIndex = tabs.firstIndex(where: {
-            $0.tabBarItem.accessibilityIdentifier == "Earnings"
-        }) {
-            tabBarController.selectedIndex = earningTabIndex
+        if isComingFromHostingSideHouseAndBoat {
+            let coordinator = HostingServiceEarningCoordinator(navigationController: self.navigationController)
+            coordinator.isComingFromHostingSideHouseAndBoat = true
+            coordinator.start()
         } else {
-            print("Earnings tab not found")
+            guard let tabBarController = self.navigationController?.tabBarController,
+                  let tabs = tabBarController.viewControllers else {
+                print("TabBarController or its view controllers are nil")
+                return
+            }
+            
+            // Find the index of the tab with the "Earnings" identifier
+            if let earningTabIndex = tabs.firstIndex(where: {
+                $0.tabBarItem.accessibilityIdentifier == "Earnings"
+            }) {
+                tabBarController.selectedIndex = earningTabIndex
+            } else {
+                print("Earnings tab not found")
+            }
         }
+       
     }
 
     

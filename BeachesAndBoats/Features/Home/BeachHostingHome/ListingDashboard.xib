@@ -11,13 +11,25 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListingDashboard" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="amountLbl" destination="p8L-lf-cdf" id="EKt-V8-Nwo"/>
+                <outlet property="beachReservation" destination="is0-UF-SSE" id="71F-or-jJH"/>
+                <outlet property="boatListing" destination="Hal-23-zW1" id="ZaI-fR-O1S"/>
+                <outlet property="boatReservation" destination="jC5-8M-KeK" id="Q06-k8-FCw"/>
                 <outlet property="cancelBookingCollectionView" destination="Rcg-iU-9Hj" id="ZVV-N9-ppl"/>
                 <outlet property="cancelBookingNoDataImg" destination="NeT-Ed-dyw" id="nX3-Qu-NIw"/>
+                <outlet property="cancelLbl" destination="YrC-o5-vnM" id="KUJ-T4-DIS"/>
                 <outlet property="checkOutCollectionView" destination="MiS-dZ-ctp" id="NRl-18-r61"/>
                 <outlet property="checkOutNoDataImg" destination="tbG-GH-qok" id="8qi-Xa-GGA"/>
+                <outlet property="checkingOutLbl" destination="riT-gg-o7I" id="Q28-jx-NMq"/>
+                <outlet property="currentEarningYearLbl" destination="mLc-FV-Tjs" id="Szw-5n-yA4"/>
                 <outlet property="currentHostingCollectionView" destination="XqS-0M-byq" id="lmP-SB-DDy"/>
+                <outlet property="currentHostingLbl" destination="vYE-7d-z6Q" id="KOm-FK-PCT"/>
                 <outlet property="currentHostingNoDataImg" destination="vcQ-Xx-b9g" id="Ue9-Uk-61b"/>
+                <outlet property="houseListing" destination="OYZ-A9-eaw" id="exJ-2T-MRW"/>
+                <outlet property="listingLbl" destination="Vq1-Ar-Knr" id="aEm-39-pdz"/>
+                <outlet property="notificationImg" destination="QUn-sx-pGl" id="yu1-wK-T6w"/>
                 <outlet property="upcomingCollectionView" destination="4x0-Le-NAW" id="gUN-bi-uTi"/>
+                <outlet property="upcomingLbl" destination="9ne-Fc-ze5" id="8Ep-tw-dsj"/>
                 <outlet property="upcomingNoDataImg" destination="jBa-g1-0rJ" id="Zl7-qV-F2Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="images" destination="tbG-GH-qok" collectionClass="NSMutableArray" id="QwX-a6-2V3"/>
@@ -56,12 +68,49 @@
                                                         <constraint firstAttribute="height" constant="54" id="skM-pH-C0b"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLc-FV-Tjs">
+                                                    <rect key="frame" x="20" y="85.000000000000028" width="313" height="19.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8L-lf-cdf">
+                                                    <rect key="frame" x="20" y="124.33333333333334" width="76.666666666666671" height="36"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                    <color key="textColor" red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="242" translatesAutoresizingMaskIntoConstraints="NO" id="OYZ-A9-eaw">
+                                                    <rect key="frame" x="20" y="188.00000000000003" width="312.66666666666669" height="17"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vq1-Ar-Knr">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35.333333333333336" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hal-23-zW1">
+                                                            <rect key="frame" x="277.33333333333331" y="0.0" width="35.333333333333314" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" name="Dashboard"/>
                                             <constraints>
+                                                <constraint firstItem="p8L-lf-cdf" firstAttribute="top" secondItem="mLc-FV-Tjs" secondAttribute="bottom" constant="20" id="55P-fE-ecN"/>
+                                                <constraint firstItem="mLc-FV-Tjs" firstAttribute="leading" secondItem="36z-TZ-f1N" secondAttribute="leading" constant="20" id="6M6-eZ-H02"/>
+                                                <constraint firstItem="mLc-FV-Tjs" firstAttribute="top" secondItem="GQ0-5t-b0E" secondAttribute="bottom" constant="18" id="RJP-0o-ZCg"/>
                                                 <constraint firstItem="GQ0-5t-b0E" firstAttribute="top" secondItem="36z-TZ-f1N" secondAttribute="top" constant="13" id="edo-il-y9f"/>
+                                                <constraint firstItem="p8L-lf-cdf" firstAttribute="leading" secondItem="36z-TZ-f1N" secondAttribute="leading" constant="20" symbolic="YES" id="kLb-I4-wdl"/>
                                                 <constraint firstAttribute="height" constant="225" id="kwv-bO-jEf"/>
+                                                <constraint firstAttribute="trailing" secondItem="OYZ-A9-eaw" secondAttribute="trailing" constant="20.333333333333314" id="nSz-EZ-BXM"/>
                                                 <constraint firstAttribute="trailing" secondItem="GQ0-5t-b0E" secondAttribute="trailing" constant="17" id="oHk-VC-XIf"/>
+                                                <constraint firstAttribute="trailing" secondItem="mLc-FV-Tjs" secondAttribute="trailing" constant="20" id="rgk-2e-P7A"/>
+                                                <constraint firstAttribute="bottom" secondItem="OYZ-A9-eaw" secondAttribute="bottom" constant="20" id="top-fP-PQF"/>
+                                                <constraint firstItem="OYZ-A9-eaw" firstAttribute="leading" secondItem="36z-TZ-f1N" secondAttribute="leading" constant="20" symbolic="YES" id="yag-5h-f6g"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -126,6 +175,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="buC-WP-vgB"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Beach Houses Reservation"/>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jC5-8M-KeK" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="180.33333333333337" y="0.0" width="172.66666666666663" height="25"/>
@@ -133,6 +185,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="Ffa-Ia-9WY"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Boats Reservations"/>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                 </stackView>
@@ -151,7 +206,10 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJD-ob-iPY">
                                                     <rect key="frame" x="227.66666666666666" y="0.0" width="125.33333333333334" height="34.333333333333336"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="View all"/>
+                                                    <connections>
+                                                        <action selector="checkingOutViewAll:" destination="-1" eventType="touchUpInside" id="fru-s5-v0n"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -206,6 +264,9 @@
                                                     <rect key="frame" x="245.33333333333329" y="0.0" width="107.66666666666666" height="34.333333333333336"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <connections>
+                                                        <action selector="currentHostingViewAll:" destination="-1" eventType="touchUpInside" id="xze-Qv-beM"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -254,6 +315,9 @@
                                                     <rect key="frame" x="205.33333333333337" y="0.0" width="147.66666666666663" height="34.333333333333336"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <connections>
+                                                        <action selector="upcomingViewAll:" destination="-1" eventType="touchUpInside" id="E8o-UM-RrP"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -302,6 +366,9 @@
                                                     <rect key="frame" x="268" y="0.0" width="85" height="34.333333333333336"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <connections>
+                                                        <action selector="cancelBookingViewAll:" destination="-1" eventType="touchUpInside" id="CGi-ce-4hx"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -369,12 +436,21 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="b72-8b-gCN"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="SXM-DR-8vT"/>
                 </scrollView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification" translatesAutoresizingMaskIntoConstraints="NO" id="QUn-sx-pGl">
+                    <rect key="frame" x="349" y="89" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="QEY-zr-AOA"/>
+                        <constraint firstAttribute="width" constant="24" id="U7h-zt-PdW"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Uwc-bI-7Oi" secondAttribute="bottom" id="3K3-Af-7N9"/>
                 <constraint firstItem="Uwc-bI-7Oi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8EP-bx-FOe"/>
+                <constraint firstItem="QUn-sx-pGl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="91N-2k-z8F"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QUn-sx-pGl" secondAttribute="trailing" constant="20" id="BVo-JQ-1NX"/>
                 <constraint firstItem="5LC-Mb-vHo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="EmH-OG-cNw"/>
                 <constraint firstItem="Uwc-bI-7Oi" firstAttribute="top" secondItem="5LC-Mb-vHo" secondAttribute="bottom" constant="26" id="JDK-cP-CB7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uwc-bI-7Oi" secondAttribute="trailing" id="bGS-9f-ivC"/>
@@ -389,6 +465,7 @@
     <resources>
         <image name="B&amp;BLogo2" width="90" height="54"/>
         <image name="greyCard" width="600" height="300"/>
+        <image name="notification" width="24" height="24"/>
         <image name="warning" width="21.666666030883789" height="22"/>
         <namedColor name="B&amp;BLight">
             <color red="0.80800002813339233" green="0.85900002717971802" blue="0.94499999284744263" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

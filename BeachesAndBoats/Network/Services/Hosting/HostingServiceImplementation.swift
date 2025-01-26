@@ -9,6 +9,26 @@ import Foundation
 import Moya
 
 class HostingServiceImplementation: Provider<HostingTarget>, HostingService {
+    func beachHouseListing(completion: @escaping (Result<BeachHouseListingResponse, ErrorResponse>) -> Void) {
+        provider.request(.beachHouseListing) { completion(self.handleResult(result: $0))}
+    }
+    
+    func boatHouseListing(completion: @escaping (Result<BeachHouseListingResponse, ErrorResponse>) -> Void) {
+        provider.request(.boatHouseListing) { completion(self.handleResult(result: $0))}
+    }
+    
+//    func beachHouseListing(completion: @escaping (Result<BeachHouseListingResponseData, ErrorResponse>) -> Void) {
+//        provider.request(.beachHouseListing) { completion(self.handleResult(result: $0))}
+//    }
+    
+    func beachHouseReservation(completion: @escaping (Result<BeachHouseReservations, ErrorResponse>) -> Void) {
+        provider.request(.beachHouseReservations) { completion(self.handleResult(result: $0))}
+    }
+    
+    func boatReservation(completion: @escaping (Result<BoatReservations, ErrorResponse>) -> Void) {
+        provider.request(.boatReservations) { completion(self.handleResult(result: $0))}
+    }
+    
     func twoFACompleteVerification(request: TwoFACompleteVerificationRequest, completion: @escaping (Result<TwoFACompleteVerificationResponse, ErrorResponse>) -> Void) {
         provider.request(.TwoFACompleteVerification(request)) {completion(self.handleResult(result: $0))}
 

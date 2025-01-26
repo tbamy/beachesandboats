@@ -17,13 +17,17 @@ enum HostingTarget{
     case PhoneNumberSecurity(TwoFAPhoneSecurityRequest)
     case EmailSecurity(TwoFAEmailSecurityRequest)
     case TwoFACompleteVerification(TwoFACompleteVerificationRequest)
+    case beachHouseReservations
+    case boatReservations
+    case beachHouseListing
+    case boatHouseListing
 }
 
 extension HostingTarget: BaseTarget{
     var path: String {
         switch self {
         case .GetHostBooking:
-            return Urls.getUpcomingBooking.rawValue
+            return Urls.reservations.rawValue
         case .TopEarnings:
             return Urls.getTopEarnings.rawValue
         case .WithdrawHistory:
@@ -38,12 +42,21 @@ extension HostingTarget: BaseTarget{
             return Urls.twoFASecurity.rawValue
         case .TwoFACompleteVerification:
             return Urls.twoFACompleteVerification.rawValue
+        case .beachHouseReservations:
+            return Urls.reservations.rawValue
+        case .boatReservations:
+            return Urls.reservations.rawValue
+        case .beachHouseListing:
+            return Urls.beachHouseAndBoatListing.rawValue
+        case .boatHouseListing:
+            return Urls.beachHouseAndBoatListing.rawValue
+
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .GetHostBooking, .TopEarnings, .WithdrawHistory, .getBanks:
+        case .GetHostBooking, .TopEarnings, .WithdrawHistory, .getBanks, .boatReservations, .beachHouseReservations, .beachHouseListing, .boatHouseListing:
             return .get
         case .MakeWithdrawal, .EmailSecurity, .PhoneNumberSecurity, .TwoFACompleteVerification:
             return .post
@@ -69,6 +82,14 @@ extension HostingTarget: BaseTarget{
             return .requestJSONEncodable(request)
         case .TwoFACompleteVerification(let request):
             return .requestJSONEncodable(request)
+        case .beachHouseReservations:
+            return .requestPlain
+        case .boatReservations:
+            return .requestPlain
+        case .beachHouseListing:
+            return .requestPlain
+        case .boatHouseListing:
+            return .requestPlain
         }
     }
 }

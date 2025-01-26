@@ -194,6 +194,19 @@
 		A65C51512CAC35470027E5F1 /* CheckInAndOutRulesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C514F2CAC35470027E5F1 /* CheckInAndOutRulesView.xib */; };
 		A65C51542CAD6CC40027E5F1 /* HouseTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C51522CAD6CC40027E5F1 /* HouseTypeViewCell.swift */; };
 		A65C51552CAD6CC40027E5F1 /* HouseTypeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C51532CAD6CC40027E5F1 /* HouseTypeViewCell.xib */; };
+		A65E835D2D2F1CEF009F2B89 /* ListingDashboardVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E835C2D2F1CEF009F2B89 /* ListingDashboardVM.swift */; };
+		A65E83612D308CA4009F2B89 /* HostingHouseAndBoatHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83602D308CA4009F2B89 /* HostingHouseAndBoatHomeCoordinator.swift */; };
+		A65E83632D308DEB009F2B89 /* HostingHouseAndBoatListingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83622D308DEB009F2B89 /* HostingHouseAndBoatListingCoordinator.swift */; };
+		A65E83662D308E71009F2B89 /* HostListingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65E83652D308E70009F2B89 /* HostListingVC.xib */; };
+		A65E83672D308E71009F2B89 /* HostListingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83642D308E70009F2B89 /* HostListingVC.swift */; };
+		A65E83742D32D898009F2B89 /* BeachHouseListingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83732D32D898009F2B89 /* BeachHouseListingResponse.swift */; };
+		A65E83762D32DF23009F2B89 /* HostListingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83752D32DF23009F2B89 /* HostListingVM.swift */; };
+		A65E837B2D32FD60009F2B89 /* HostListingSortView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65E837A2D32FD60009F2B89 /* HostListingSortView.xib */; };
+		A65E837C2D32FD60009F2B89 /* HostListingSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83792D32FD60009F2B89 /* HostListingSortView.swift */; };
+		A65E83802D36D6E4009F2B89 /* HostListingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65E837F2D36D6E3009F2B89 /* HostListingTableView.xib */; };
+		A65E83812D36D6E4009F2B89 /* HostListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E837E2D36D6E3009F2B89 /* HostListingTableView.swift */; };
+		A65E838E2D3B0E33009F2B89 /* UnfinishedListingModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65E838D2D3B0E33009F2B89 /* UnfinishedListingModal.xib */; };
+		A65E83922D3B0F14009F2B89 /* UnfinishedListingModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65E83912D3B0F14009F2B89 /* UnfinishedListingModal.swift */; };
 		A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A392CAD8BB000514576 /* MapViewModal.swift */; };
 		A6617A3C2CAD8BB000514576 /* MapViewModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A3A2CAD8BB000514576 /* MapViewModal.xib */; };
 		A6617A3F2CAD8F5300514576 /* ConfirmAddressModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A3D2CAD8F5300514576 /* ConfirmAddressModal.swift */; };
@@ -653,6 +666,19 @@
 		A65C514F2CAC35470027E5F1 /* CheckInAndOutRulesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckInAndOutRulesView.xib; sourceTree = "<group>"; };
 		A65C51522CAD6CC40027E5F1 /* HouseTypeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseTypeViewCell.swift; sourceTree = "<group>"; };
 		A65C51532CAD6CC40027E5F1 /* HouseTypeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseTypeViewCell.xib; sourceTree = "<group>"; };
+		A65E835C2D2F1CEF009F2B89 /* ListingDashboardVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDashboardVM.swift; sourceTree = "<group>"; };
+		A65E83602D308CA4009F2B89 /* HostingHouseAndBoatHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingHouseAndBoatHomeCoordinator.swift; sourceTree = "<group>"; };
+		A65E83622D308DEB009F2B89 /* HostingHouseAndBoatListingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingHouseAndBoatListingCoordinator.swift; sourceTree = "<group>"; };
+		A65E83642D308E70009F2B89 /* HostListingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostListingVC.swift; sourceTree = "<group>"; };
+		A65E83652D308E70009F2B89 /* HostListingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostListingVC.xib; sourceTree = "<group>"; };
+		A65E83732D32D898009F2B89 /* BeachHouseListingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachHouseListingResponse.swift; sourceTree = "<group>"; };
+		A65E83752D32DF23009F2B89 /* HostListingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostListingVM.swift; sourceTree = "<group>"; };
+		A65E83792D32FD60009F2B89 /* HostListingSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostListingSortView.swift; sourceTree = "<group>"; };
+		A65E837A2D32FD60009F2B89 /* HostListingSortView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostListingSortView.xib; sourceTree = "<group>"; };
+		A65E837E2D36D6E3009F2B89 /* HostListingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostListingTableView.swift; sourceTree = "<group>"; };
+		A65E837F2D36D6E3009F2B89 /* HostListingTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostListingTableView.xib; sourceTree = "<group>"; };
+		A65E838D2D3B0E33009F2B89 /* UnfinishedListingModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnfinishedListingModal.xib; sourceTree = "<group>"; };
+		A65E83912D3B0F14009F2B89 /* UnfinishedListingModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfinishedListingModal.swift; sourceTree = "<group>"; };
 		A6617A392CAD8BB000514576 /* MapViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModal.swift; sourceTree = "<group>"; };
 		A6617A3A2CAD8BB000514576 /* MapViewModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewModal.xib; sourceTree = "<group>"; };
 		A6617A3D2CAD8F5300514576 /* ConfirmAddressModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAddressModal.swift; sourceTree = "<group>"; };
@@ -1149,6 +1175,8 @@
 				A669F7C12D241AE600230E0A /* HostingServiceHomeCoordinator.swift */,
 				A68A6EBC2D24545A000A67E1 /* HostingServiceEarningCoordinator.swift */,
 				A66F3FAD2D29770400902E43 /* HostingServiceMenuCoordinator.swift */,
+				A65E83602D308CA4009F2B89 /* HostingHouseAndBoatHomeCoordinator.swift */,
+				A65E83622D308DEB009F2B89 /* HostingHouseAndBoatListingCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1555,6 +1583,24 @@
 			path = ListBoat;
 			sourceTree = "<group>";
 		};
+		A65E837D2D36D6BB009F2B89 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A65E837E2D36D6E3009F2B89 /* HostListingTableView.swift */,
+				A65E837F2D36D6E3009F2B89 /* HostListingTableView.xib */,
+			);
+			path = ViewCell;
+			sourceTree = "<group>";
+		};
+		A65E838C2D3B0E17009F2B89 /* UnfininshedListing */ = {
+			isa = PBXGroup;
+			children = (
+				A65E838D2D3B0E33009F2B89 /* UnfinishedListingModal.xib */,
+				A65E83912D3B0F14009F2B89 /* UnfinishedListingModal.swift */,
+			);
+			path = UnfininshedListing;
+			sourceTree = "<group>";
+		};
 		A6617A382CAD8B8C00514576 /* MapModal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1607,6 +1653,7 @@
 				A6EF00E52D2848F200893C05 /* ListOfBanksResponse.swift */,
 				A66F3FBE2D2C733F00902E43 /* TwoFASecurityResponse.swift */,
 				A66F3FC22D2C954D00902E43 /* TwoFACompleteVerificationResponse.swift */,
+				A65E83732D32D898009F2B89 /* BeachHouseListingResponse.swift */,
 			);
 			path = Hosting;
 			sourceTree = "<group>";
@@ -1870,6 +1917,7 @@
 		A6C20FC52C8504490045C670 /* MiddleModal */ = {
 			isa = PBXGroup;
 			children = (
+				A65E838C2D3B0E17009F2B89 /* UnfininshedListing */,
 				A6C20FC62C85045F0045C670 /* MiddleModal.swift */,
 				A6C20FC72C85045F0045C670 /* MiddleModal.xib */,
 				A6C20FCA2C85053C0045C670 /* MiddleModalModel.swift */,
@@ -2052,10 +2100,17 @@
 		A6E050462CEF425000F0211C /* BeachHostingHome */ = {
 			isa = PBXGroup;
 			children = (
+				A65E837D2D36D6BB009F2B89 /* ViewCell */,
 				A6CA3CFC2CB919AE009307B2 /* ListingDashboard.swift */,
 				A6CA3CFD2CB919AE009307B2 /* ListingDashboard.xib */,
+				A65E835C2D2F1CEF009F2B89 /* ListingDashboardVM.swift */,
 				A6E050472CEF428800F0211C /* BeachHostingHomeView.swift */,
 				A6E050482CEF428800F0211C /* BeachHostingHomeView.xib */,
+				A65E83642D308E70009F2B89 /* HostListingVC.swift */,
+				A65E83652D308E70009F2B89 /* HostListingVC.xib */,
+				A65E83752D32DF23009F2B89 /* HostListingVM.swift */,
+				A65E83792D32FD60009F2B89 /* HostListingSortView.swift */,
+				A65E837A2D32FD60009F2B89 /* HostListingSortView.xib */,
 			);
 			path = BeachHostingHome;
 			sourceTree = "<group>";
@@ -2171,6 +2226,7 @@
 				A6C20FF52C8713A20045C670 /* HomeView.xib in Resources */,
 				A68A6EBB2D245072000A67E1 /* monthCollectionViewCell.xib in Resources */,
 				A65628392CB5769A00947BA5 /* UploadImageField.xib in Resources */,
+				A65E837B2D32FD60009F2B89 /* HostListingSortView.xib in Resources */,
 				A6F406A92C02D3A800973BD7 /* Montserrat-Italic.ttf in Resources */,
 				A65C51552CAD6CC40027E5F1 /* HouseTypeViewCell.xib in Resources */,
 				A6C1C4242CBBFCAB001CD27D /* ProfilePaymentView.xib in Resources */,
@@ -2240,6 +2296,7 @@
 				A675D9D02D201F4C003E297B /* ImageCell.xib in Resources */,
 				A65125732CBC240200AFA0F9 /* TwoFASecurityView.xib in Resources */,
 				A6F406A62C02D3A800973BD7 /* Montserrat-ThinItalic.ttf in Resources */,
+				A65E838E2D3B0E33009F2B89 /* UnfinishedListingModal.xib in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
 				A6C20FFE2C8715F30045C670 /* SearchView.xib in Resources */,
 				A6FB74492C134EC700A26806 /* SignupView.xib in Resources */,
@@ -2249,6 +2306,7 @@
 				A614992A2C5E97DB00E0CDFC /* FullModal.xib in Resources */,
 				A6FB744D2C13558000A26806 /* ConfirmAccountModal.xib in Resources */,
 				A65C51492CAC34B10027E5F1 /* AboutYouDescriptionView.xib in Resources */,
+				A65E83802D36D6E4009F2B89 /* HostListingTableView.xib in Resources */,
 				A65125672CBC0AF100AFA0F9 /* CreditCardPaymentView.xib in Resources */,
 				A6F4069A2C02D3A800973BD7 /* Montserrat-ExtraBold.ttf in Resources */,
 				A6C1C4292CBBFEB5001CD27D /* PaymentMethodModal.xib in Resources */,
@@ -2307,6 +2365,7 @@
 				A6CA3D6D2CB9CF4E009307B2 /* BouncerUploadProfileImageView.xib in Resources */,
 				A60580B52CDAAD0300B17505 /* ServiceListingSuccessView.xib in Resources */,
 				A65125802CBC293700AFA0F9 /* AddEmailAddressModal.xib in Resources */,
+				A65E83662D308E71009F2B89 /* HostListingVC.xib in Resources */,
 				A6CA3D592CB9CDAE009307B2 /* DJUploadProfileImageView.xib in Resources */,
 				A65628202CB518B400947BA5 /* RoomAmenitiesView.xib in Resources */,
 				A68A6EC12D256823000A67E1 /* EarningDistributionTableCell.xib in Resources */,
@@ -2347,6 +2406,7 @@
 				A6A2E8642CD4BBE8004E58EB /* CreateServiceListingRequest.swift in Sources */,
 				A60580A32CD8E80F00B17505 /* CreateBoatListingRequest.swift in Sources */,
 				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
+				A65E83762D32DF23009F2B89 /* HostListingVM.swift in Sources */,
 				A63CE7BC2C8F3645008D91C5 /* GeneralViewCell.swift in Sources */,
 				A616276B2C7DB0BB00F6B452 /* Environments.swift in Sources */,
 				A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */,
@@ -2365,6 +2425,7 @@
 				A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */,
 				A675D9A02D16C6C9003E297B /* SendKYCRequest.swift in Sources */,
 				A63357722BF157B9008AF034 /* UILabel.swift in Sources */,
+				A65E835D2D2F1CEF009F2B89 /* ListingDashboardVM.swift in Sources */,
 				A6CA3D582CB9CDAE009307B2 /* DJUploadProfileImageView.swift in Sources */,
 				A633573C2BF0CAAB008AF034 /* Coordinator.swift in Sources */,
 				A63357452BF0D281008AF034 /* Date.swift in Sources */,
@@ -2383,6 +2444,7 @@
 				A65C51402CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift in Sources */,
 				A65C51012CA9510F0027E5F1 /* CountdownTimer.swift in Sources */,
 				A6C20FF42C8713A20045C670 /* HomeView.swift in Sources */,
+				A65E83812D36D6E4009F2B89 /* HostListingTableView.swift in Sources */,
 				A6EF00E62D2848F200893C05 /* ListOfBanksResponse.swift in Sources */,
 				A6CA3D5C2CB9CDD0009307B2 /* DJPriceView.swift in Sources */,
 				A6C20FCD2C859B680045C670 /* OnboardingService.swift in Sources */,
@@ -2397,6 +2459,7 @@
 				A6C1C4282CBBFEB5001CD27D /* PaymentMethodModal.swift in Sources */,
 				A65628152CB3C62300947BA5 /* ToggleSwitch.swift in Sources */,
 				A6A2E84F2CBFE286004E58EB /* NotificationSettingsView.swift in Sources */,
+				A65E83632D308DEB009F2B89 /* HostingHouseAndBoatListingCoordinator.swift in Sources */,
 				A63357602BF129A6008AF034 /* LoginView.swift in Sources */,
 				A650AAD92CB866B600A70CF4 /* ListBeachSuccessView.swift in Sources */,
 				A6A2E8482CBFB63D004E58EB /* ProfileService.swift in Sources */,
@@ -2423,6 +2486,7 @@
 				A63357502BF0D82F008AF034 /* WelcomeScreen.swift in Sources */,
 				A65C51502CAC35470027E5F1 /* CheckInAndOutRulesView.swift in Sources */,
 				A63F312E2CB08C8A00D402F4 /* ListingTarget.swift in Sources */,
+				A65E837C2D32FD60009F2B89 /* HostListingSortView.swift in Sources */,
 				A63357472BF0D2B3008AF034 /* UIView.swift in Sources */,
 				A6CA3D502CB9CD56009307B2 /* ChefUploadFoodImagesView.swift in Sources */,
 				A6CA3D602CB9CDF4009307B2 /* DJUploadInstrumentsView.swift in Sources */,
@@ -2492,6 +2556,7 @@
 				A6C20FD72C859C780045C670 /* SignUpRequest.swift in Sources */,
 				A651256A2CBC0EF400AFA0F9 /* PaypalPaymentView.swift in Sources */,
 				A675D9C72D1EAC06003E297B /* HorizonCalendarModal.swift in Sources */,
+				A65E83612D308CA4009F2B89 /* HostingHouseAndBoatHomeCoordinator.swift in Sources */,
 				A65C50FF2CA9506C0027E5F1 /* Toast.swift in Sources */,
 				A65C51102CAACC030027E5F1 /* AutoSizingTableViewCell.swift in Sources */,
 				A66F3FC12D2C938400902E43 /* TwoFACompleteVerificationRequest.swift in Sources */,
@@ -2562,6 +2627,7 @@
 				A656280D2CB3C47800947BA5 /* SelectableCheckbox.swift in Sources */,
 				A65628182CB4744D00947BA5 /* TimePicker.swift in Sources */,
 				A669F7C22D241AE600230E0A /* HostingServiceHomeCoordinator.swift in Sources */,
+				A65E83672D308E71009F2B89 /* HostListingVC.swift in Sources */,
 				A669F7B42D23DAB800230E0A /* HostingCollectionViewCell.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
 				A61499392C5E9A3C00E0CDFC /* FilterModal.swift in Sources */,
@@ -2569,6 +2635,7 @@
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
 				A66F3FBF2D2C733F00902E43 /* TwoFASecurityResponse.swift in Sources */,
 				A66F3FBD2D2C729800902E43 /* TwoFAEmailSecurityRequest.swift in Sources */,
+				A65E83922D3B0F14009F2B89 /* UnfinishedListingModal.swift in Sources */,
 				A68A6EBA2D245072000A67E1 /* monthCollectionViewCell.swift in Sources */,
 				A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */,
 				A669F79C2D22B84000230E0A /* HostType.swift in Sources */,
@@ -2627,6 +2694,7 @@
 				A675D9AF2D171DD6003E297B /* CreateBeachHouseBookingRequest.swift in Sources */,
 				A6CA3D442CB9CCD1009307B2 /* ChefUploadProfileImageView.swift in Sources */,
 				A65628302CB55C2900947BA5 /* BigMoneyInputField.swift in Sources */,
+				A65E83742D32D898009F2B89 /* BeachHouseListingResponse.swift in Sources */,
 				A6015B0E2BEA223400545164 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,11 +10,16 @@ import UIKit
 
 class HostingServiceEarningCoordinator: Coordinator {
     
+    var isComingFromHostingSideHouseAndBoat = false
+    
     override func start() {
         let vc: EarningsView = .fromNib()
+        vc.coordinator = self
         vc.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(named: "earningsIcon"), tag: 2)
         vc.tabBarItem.accessibilityIdentifier = "Earnings"
-        vc.coordinator = self
+        if isComingFromHostingSideHouseAndBoat  {
+            vc.hidesBottomBarWhenPushed = true
+        }
         push(viewController: vc)
     }
     

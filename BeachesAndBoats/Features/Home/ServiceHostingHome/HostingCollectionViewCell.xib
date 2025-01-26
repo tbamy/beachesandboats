@@ -70,8 +70,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvO-eI-Gv2" customClass="LightLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                <rect key="frame" x="27.000000000000004" y="262.33333333333331" width="35.333333333333343" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="26.999999999999996" y="262.33333333333331" width="34.666666666666657" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -98,6 +98,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nyv-Zq-i2C">
+                                <rect key="frame" x="10" y="284" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="ZOD-ih-RDz"/>
+                                    <constraint firstAttribute="width" constant="12" id="qPn-57-fH9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsC-qM-k6l">
+                                <rect key="frame" x="26.999999999999996" y="281.33333333333331" width="34.666666666666657" height="17.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aox-4n-K2R">
+                                <rect key="frame" x="347" y="281.66666666666669" width="36" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -106,15 +125,23 @@
                             <constraint firstAttribute="trailing" secondItem="0nx-3N-RoN" secondAttribute="trailing" constant="10" id="5z3-Qu-lsA"/>
                             <constraint firstItem="hSG-1B-4Fl" firstAttribute="top" secondItem="gq6-6b-Rfu" secondAttribute="top" id="9L8-t1-Lqj"/>
                             <constraint firstItem="mW3-bm-ayw" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="30" id="9Yt-q8-ZOW"/>
+                            <constraint firstItem="gsC-qM-k6l" firstAttribute="centerY" secondItem="nyv-Zq-i2C" secondAttribute="centerY" id="A0Z-hN-dwQ"/>
+                            <constraint firstItem="gsC-qM-k6l" firstAttribute="top" secondItem="ZvO-eI-Gv2" secondAttribute="bottom" constant="3" id="Arm-c2-6NO"/>
                             <constraint firstItem="hSG-1B-4Fl" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" id="C2N-Em-Y6L"/>
                             <constraint firstItem="5mh-qp-1jM" firstAttribute="top" secondItem="hSG-1B-4Fl" secondAttribute="bottom" constant="10" id="ElY-Y4-aAW"/>
+                            <constraint firstItem="nyv-Zq-i2C" firstAttribute="top" secondItem="eBp-Tb-hgu" secondAttribute="bottom" constant="7.6666666666666856" id="FUi-K7-gcC"/>
                             <constraint firstAttribute="trailing" secondItem="mW3-bm-ayw" secondAttribute="trailing" constant="30" id="Jeu-OG-pzC"/>
+                            <constraint firstItem="ZvO-eI-Gv2" firstAttribute="centerY" secondItem="eBp-Tb-hgu" secondAttribute="centerY" id="N2d-DQ-Jgq"/>
+                            <constraint firstItem="nyv-Zq-i2C" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="10" id="Ppg-n7-spr"/>
                             <constraint firstItem="0nx-3N-RoN" firstAttribute="top" secondItem="hSG-1B-4Fl" secondAttribute="bottom" constant="10" id="T8x-KK-D3V"/>
                             <constraint firstItem="0nx-3N-RoN" firstAttribute="leading" secondItem="Hip-yc-ZfG" secondAttribute="trailing" constant="5" id="XkF-mV-HH7"/>
                             <constraint firstItem="mW3-bm-ayw" firstAttribute="centerY" secondItem="gq6-6b-Rfu" secondAttribute="centerY" id="Yzq-iO-M1e"/>
                             <constraint firstItem="5mh-qp-1jM" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="10" id="ZW3-c3-I1D"/>
+                            <constraint firstItem="Aox-4n-K2R" firstAttribute="centerY" secondItem="gsC-qM-k6l" secondAttribute="centerY" id="aBI-HH-aOr"/>
+                            <constraint firstAttribute="trailing" secondItem="Aox-4n-K2R" secondAttribute="trailing" constant="20" id="kY9-ko-Cbm"/>
                             <constraint firstItem="Hip-yc-ZfG" firstAttribute="top" secondItem="hSG-1B-4Fl" secondAttribute="bottom" constant="15" id="lXj-XP-MMd"/>
                             <constraint firstItem="ZvO-eI-Gv2" firstAttribute="leading" secondItem="eBp-Tb-hgu" secondAttribute="trailing" constant="5" id="mHc-Gj-kGc"/>
+                            <constraint firstItem="gsC-qM-k6l" firstAttribute="leading" secondItem="nyv-Zq-i2C" secondAttribute="trailing" constant="5" id="mKj-as-xbr"/>
                             <constraint firstAttribute="trailing" secondItem="hSG-1B-4Fl" secondAttribute="trailing" id="pQD-fP-z3p"/>
                             <constraint firstItem="U39-zW-udc" firstAttribute="top" secondItem="gq6-6b-Rfu" secondAttribute="top" constant="17" id="pWl-AS-Ulp"/>
                             <constraint firstItem="eBp-Tb-hgu" firstAttribute="leading" secondItem="gq6-6b-Rfu" secondAttribute="leading" constant="10" id="tEr-7p-yGR"/>
@@ -133,6 +160,8 @@
             </constraints>
             <size key="customSize" width="403" height="403"/>
             <connections>
+                <outlet property="amountPerNight" destination="Aox-4n-K2R" id="xyR-NH-cPE"/>
+                <outlet property="availabilityDate" destination="gsC-qM-k6l" id="jzr-vx-uLs"/>
                 <outlet property="beachHouseImage" destination="hSG-1B-4Fl" id="gNx-Aj-mVC"/>
                 <outlet property="beachName" destination="5mh-qp-1jM" id="co2-AR-9j8"/>
                 <outlet property="calendarImg" destination="Hip-yc-ZfG" id="r3V-zb-gC2"/>
@@ -142,6 +171,7 @@
                 <outlet property="emptyLbl" destination="mW3-bm-ayw" id="Ewl-XQ-BOn"/>
                 <outlet property="locationImg" destination="eBp-Tb-hgu" id="k8i-4P-o2Z"/>
                 <outlet property="locationLbl" destination="ZvO-eI-Gv2" id="55H-Rz-j02"/>
+                <outlet property="reservationCalendar" destination="nyv-Zq-i2C" id="X4g-Fe-cZK"/>
             </connections>
             <point key="canvasLocation" x="281.67938931297709" y="101.7605633802817"/>
         </collectionViewCell>
@@ -149,6 +179,18 @@
     <designables>
         <designable name="0nx-3N-RoN">
             <size key="intrinsicContentSize" width="35.333333333333336" height="17"/>
+        </designable>
+        <designable name="5mh-qp-1jM">
+            <size key="intrinsicContentSize" width="39.666666666666664" height="19.333333333333332"/>
+        </designable>
+        <designable name="72N-L1-UCm">
+            <size key="intrinsicContentSize" width="35.333333333333336" height="17"/>
+        </designable>
+        <designable name="ZvO-eI-Gv2">
+            <size key="intrinsicContentSize" width="34.666666666666664" height="17"/>
+        </designable>
+        <designable name="mW3-bm-ayw">
+            <size key="intrinsicContentSize" width="39.666666666666664" height="19.333333333333332"/>
         </designable>
     </designables>
     <resources>

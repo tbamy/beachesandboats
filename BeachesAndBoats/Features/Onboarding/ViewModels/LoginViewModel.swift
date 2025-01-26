@@ -30,6 +30,8 @@ class LoginViewModel{
             switch data {
             case .success(let response):
                 self?.output.onNext(.loginSuccess(response))
+                let token = response.data?.access_token
+                UserSession.shared.startSession = true
             case .failure(let error):
                 self?.output.onNext(.loginError(error))
             }

@@ -31,4 +31,7 @@ final class AppStorage {
     
     @UserDefault("serviceListing")
     static var serviceListing: CreateServiceListingRequest?
+    
+    @UserDefault("userToken")
+    static var userToken: String?
 }
