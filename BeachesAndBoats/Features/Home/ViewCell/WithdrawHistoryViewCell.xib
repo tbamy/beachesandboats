@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="KGk-i7-Jjw" customClass="WithdrawHistoryViewCell" customModule="BeachesAndBoats" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="392" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="392" height="96"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHD-RD-piy">
+                        <rect key="frame" x="0.0" y="0.0" width="392" height="96"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKQ-nv-9CP">
+                                <rect key="frame" x="20" y="10" width="36" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkO-cz-7jA">
+                                <rect key="frame" x="20" y="31.999999999999996" width="30.666666666666671" height="14.333333333333332"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPn-1w-06u" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="336" y="15" width="36" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" name="BRed"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AkO-cz-7jA" firstAttribute="leading" secondItem="OHD-RD-piy" secondAttribute="leading" constant="20" id="2Fc-NN-xzj"/>
+                            <constraint firstAttribute="trailing" secondItem="IPn-1w-06u" secondAttribute="trailing" constant="20" id="536-b0-3zH"/>
+                            <constraint firstItem="rKQ-nv-9CP" firstAttribute="top" secondItem="OHD-RD-piy" secondAttribute="top" constant="10" id="A8M-Es-QMS"/>
+                            <constraint firstItem="IPn-1w-06u" firstAttribute="top" secondItem="OHD-RD-piy" secondAttribute="top" constant="15" id="Fra-3N-4S5"/>
+                            <constraint firstItem="AkO-cz-7jA" firstAttribute="top" secondItem="rKQ-nv-9CP" secondAttribute="bottom" constant="5" id="gfy-39-8Rf"/>
+                            <constraint firstItem="rKQ-nv-9CP" firstAttribute="leading" secondItem="OHD-RD-piy" secondAttribute="leading" constant="20" id="xCg-rp-VAB"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OHD-RD-piy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YWb-6E-Eus"/>
+                    <constraint firstAttribute="trailing" secondItem="OHD-RD-piy" secondAttribute="trailing" id="aN7-J8-KmR"/>
+                    <constraint firstAttribute="bottom" secondItem="OHD-RD-piy" secondAttribute="bottom" id="e9U-7W-Gww"/>
+                    <constraint firstItem="OHD-RD-piy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ltb-s5-K5B"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="amountLbl" destination="IPn-1w-06u" id="SYi-3X-AcE"/>
+                <outlet property="timeLbl" destination="AkO-cz-7jA" id="b1f-Gq-oID"/>
+                <outlet property="withdrawalSource" destination="rKQ-nv-9CP" id="IcM-YA-g2X"/>
+            </connections>
+            <point key="canvasLocation" x="22.900763358778626" y="38.028169014084511"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="AkO-cz-7jA">
+            <size key="intrinsicContentSize" width="30.666666666666668" height="14.333333333333334"/>
+        </designable>
+        <designable name="IPn-1w-06u">
+            <size key="intrinsicContentSize" width="36" height="17"/>
+        </designable>
+        <designable name="rKQ-nv-9CP">
+            <size key="intrinsicContentSize" width="36" height="17"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="BRed">
+            <color red="0.66274509803921566" green="0.031372549019607843" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
