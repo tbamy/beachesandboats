@@ -121,6 +121,8 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     func setup(){
+        print(configuration)
+        
         configureButtons()
         let startDateString = booking?.checkingDate ?? ""
         let endDateString = booking?.checkoutDate ?? ""
@@ -130,12 +132,12 @@ class ConfirmBookingView: BaseViewControllerPlain {
         
         let nights = calculateNights(from: startDateString, to: endDateString) ?? 0
         
-        datesLabel.text = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToxShorterDateFormat() ?? "") (\(nights) Nights)"
+        datesLabel.text = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
 //        timeLabel
         if let price = room?.pricePerNight {
             timeLabel.text = "\(checkingTime) - \(checkoutTime)"
             guestLabel.text = "\(guests) Guests"
-            costLabel.text = "\(room?.pricePerNight) x \(nights)Nights"
+            costLabel.text = "\(price ?? 0) x \(nights)Nights"
             let totalCost = (price ?? 0) * Float(nights)
             let configurationCost = configuration?.roomCleaningFee ?? 0
             let serviceCost = configuration?.houseServiceFee ?? 0

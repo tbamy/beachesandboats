@@ -8,5 +8,5 @@
 import Foundation
 
 struct RefreshTokenResponse: Codable{
-    
+    let data: String
 }

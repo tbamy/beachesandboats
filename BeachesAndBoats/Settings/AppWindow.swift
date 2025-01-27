@@ -5,9 +5,12 @@
 //  Created by Tolu Akintayo on 12/05/2024.
 //
 
+
 import UIKit
 
 class AppWindow: UIWindow {
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let onboardingService = OnboardingServiceImplementation()
     var count = 0
     var timedOut: Bool = false
@@ -16,14 +19,10 @@ class AppWindow: UIWindow {
     var refreshTime = (3*60) - 30
     var backgroundTime = 1*30
     var timer: Timer = Timer()
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier = .invalid
-    
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate(_:)), name: UIApplication.willTerminateNotification, object: nil)
@@ -33,47 +32,9 @@ class AppWindow: UIWindow {
         super.init(coder: coder)
     }
     
-    override func sendEvent(_ event: UIEvent) {
-        super.sendEvent(event)
-        
-        start()
-        let touchUps = event.allTouches?.filter { $0.phase == .ended }
-
-        touchUps?.forEach { _ in
-            count = 0
-        }
-    }
-    
-    func start() {
-//        print(timer.isValid)
-        if !timer.isValid, UserSession.shared.startSession {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-                guard let self = self else { return }
-                if UserSession.shared.startSession {
-                    self.handleSession()
-                } else {
-                    self.timer.invalidate()
-                }
-            }
-        }
-    }
-    
     @objc func applicationWillTerminate(_ application: UIApplication) {
         
     }
-    
-    @objc func applicationWillResignActive(_ application: UIApplication) {
-        if UserSession.shared.startSession {
-            AppStorage.backTime = Date().toBackendDateString()
-        }
-    }
-    
-//    @objc func applicationDidEnterBackground(_ application: UIApplication) {
-//        if UserSession.shared.startSession {
-//            AppStorage.backTime = Date().toBackendDateString()
-//            print(AppStorage.backTime)
-//        }
-//    }
     
     @objc func applicationDidBecomeActive(_ application: UIApplication) {
         if UserSession.shared.startSession {
@@ -90,6 +51,40 @@ class AppWindow: UIWindow {
         }
     }
     
+    @objc func applicationWillResignActive(_ application: UIApplication) {
+        if UserSession.shared.startSession {
+            AppStorage.backTime = Date().toBackendDateString()
+        }
+    }
+    
+    
+    override func sendEvent(_ event: UIEvent) {
+        super.sendEvent(event)
+        
+        start()
+        let touchUps = event.allTouches?.filter { $0.phase == .ended }
+
+        touchUps?.forEach { _ in
+            count = 0
+        }
+    }
+    
+    func start() {
+        print(timer.isValid)
+        if !timer.isValid, UserSession.shared.startSession {
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+                guard let self = self else { return }
+                if UserSession.shared.startSession {
+                    self.handleSession()
+                } else {
+                    self.timer.invalidate()
+                }
+            }
+        }
+    }
+
+
+    
     func handleSession() {
         count += 1
         reissueCount += 1
@@ -105,7 +100,7 @@ class AppWindow: UIWindow {
         if reissueCount == refreshTime {
             refreshToken()
         }
-//        print("⏳", count)
+        print("⏳", count)
     }
     
     func logOut() {
@@ -114,20 +109,18 @@ class AppWindow: UIWindow {
     }
     
     func refreshToken() {
-//        if let user = UserSession.shared.userDetails {
-//            let request = RefreshTokenRequest(token: user.token, username: user.userName ?? "", customerId: user.customerId )
-//            onboardingService.refreshToken(request: request) { [weak self] data in
-//                self?.reissueCount = 0
-//                switch data {
-//                case .success(let response):
-//                    UserSession.shared.userDetails?.token = response.data.accessToken ?? ""
-//                    UserSession.shared.token = response.data.accessToken
-//                case .failure(_):
-//                    break
-//                }
-//            }
-//        }
+        if let user = UserSession.shared.token {
+            let request = RefreshTokenRequest(token: user)
+            onboardingService.refreshToken(request: request) { [weak self] data in
+                self?.reissueCount = 0
+                switch data {
+                case .success(let response):
+                    UserSession.shared.token = response.data
+                case .failure(_):
+                    break
+                }
+            }
+        }
     }
-    
     
 }

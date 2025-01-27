@@ -56,6 +56,10 @@ class BookingRoomsListView: BaseViewControllerPlain {
     }
     
     @IBAction func reserveBtnTapped(_ sender: Any){
+        print("Listing: \(listing)")
+        print("Booking: \(booking)")
+        print("Romm ID: \(roomId)")
+        
         if let listing = listing, let booking = booking, let roomId = roomId{
             
             coordinator?.gotoConfirmBookingView(listing: listing, booking: booking, roomId: roomId)
@@ -100,8 +104,10 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
         view.model.tapped = { [weak self] in
             guard let self = self else { return }
             self.selectedIndex = indexPath.item
-            view.model.state = true
-            self.roomsCollectionView.reloadData() // Update UI to reflect selection
+//            view.model.state = true
+            
+            self.roomsCollectionView.reloadData()
+            roomId = rooms[indexPath.item].id
             self.reserveBtnView.isHidden = false
             if let price = cellAt.pricePerNight {
                 self.reserveBtn.setTitle("Reserve for ₦ \(price ?? 0)", for: .normal)

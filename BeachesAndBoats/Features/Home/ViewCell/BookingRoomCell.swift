@@ -60,7 +60,6 @@ class BookingRoomCell: BaseXib{
         setState()
         cellView.layer.cornerRadius = 15
         cellView.backgroundColor = .white
-        selectedBtn.isHidden = true
         selectBtn.layer.borderColor = UIColor.grey.cgColor
         selectBtn.tintColor = .beachBlue
         selectedBtn.layer.borderColor = UIColor.beachBlue.cgColor
