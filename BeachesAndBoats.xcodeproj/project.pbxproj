@@ -242,7 +242,6 @@
 		A675D9DC2D202849003E297B /* BookingRoomsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A675D9DA2D202849003E297B /* BookingRoomsListView.xib */; };
 		A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675D9DD2D202B98003E297B /* BookingRoomCell.swift */; };
 		A675D9E02D202B98003E297B /* BookingRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A675D9DE2D202B98003E297B /* BookingRoomCell.xib */; };
-		A675D9E42D22F339003E297B /* HostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675D9E32D22F339003E297B /* HostType.swift */; };
 		A675D9E72D26A2A3003E297B /* CatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675D9E52D26A2A3003E297B /* CatViewCell.swift */; };
 		A675D9E82D26A2A3003E297B /* CatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A675D9E62D26A2A3003E297B /* CatViewCell.xib */; };
 		A675D9EB2D26AB46003E297B /* ConfirmBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675D9E92D26AB46003E297B /* ConfirmBookingView.swift */; };
@@ -655,8 +654,6 @@
 		A675D9DA2D202849003E297B /* BookingRoomsListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingRoomsListView.xib; sourceTree = "<group>"; };
 		A675D9DD2D202B98003E297B /* BookingRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRoomCell.swift; sourceTree = "<group>"; };
 		A675D9DE2D202B98003E297B /* BookingRoomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingRoomCell.xib; sourceTree = "<group>"; };
-		A675D9E22D22B349003E297B /* HouseBookingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseBookingType.swift; sourceTree = "<group>"; };
-		A675D9E32D22F339003E297B /* HostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostType.swift; sourceTree = "<group>"; };
 		A675D9E52D26A2A3003E297B /* CatViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatViewCell.swift; sourceTree = "<group>"; };
 		A675D9E62D26A2A3003E297B /* CatViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatViewCell.xib; sourceTree = "<group>"; };
 		A675D9E92D26AB46003E297B /* ConfirmBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookingView.swift; sourceTree = "<group>"; };
@@ -1558,8 +1555,6 @@
 		A675D9E12D22B342003E297B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				A675D9E22D22B349003E297B /* HouseBookingType.swift */,
-				A675D9E32D22F339003E297B /* HostType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -2312,7 +2307,6 @@
 				A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */,
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
 				A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */,
-				A675D9E42D22F339003E297B /* HostType.swift in Sources */,
 				A6CA3D172CB9B6F9009307B2 /* BoatAboutYouLanguageView.swift in Sources */,
 				A61B3C282CB6EF6600C89C14 /* RoomsListView.swift in Sources */,
 				A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */,
