@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol GestureRecognizer: AnyObject {
+    func changePhoneNumberTapped()
+    func resendCodeTapped()
+}
+
 class ConfirmPhoneNumberModal: BaseXib {
 
     @IBOutlet weak var close: UIImageView!
@@ -14,11 +19,15 @@ class ConfirmPhoneNumberModal: BaseXib {
     @IBOutlet weak var sendBtn: PrimaryButton!
     @IBOutlet weak var changePhoneNumber: UILabel!
     @IBOutlet weak var resendCode: UILabel!
+    @IBOutlet var otpCode: [PinField]!
+    
+    weak var confirmPhoneNumberDelegate: GestureRecognizer?
     
 
     let nibName = "ConfirmPhoneNumberModal"
     
     var callback: (String?) -> Void = { _ in }
+    var typeOfSecurity: String? = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,28 +43,61 @@ class ConfirmPhoneNumberModal: BaseXib {
         sendBtn.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
         
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
-        changePhoneNumber.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
-        resendCode.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
+        changePhoneNumber.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleChangePhoneNumber(_ :))))
+        resendCode.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleResendCode(_ :))))
+        configureFields()
+        otpSetup()
     }
     
     @objc func handleDismiss(_ sender: UITapGestureRecognizer) {
         dismiss()
     }
     
-    @objc func sendTapped(){
-//        callback(phoneNumberField.text)
+    @objc func handleChangePhoneNumber(_ sender: UITapGestureRecognizer) {
+        confirmPhoneNumberDelegate?.changePhoneNumberTapped()
+    }
+    
+    @objc func handleResendCode(_ sender: UITapGestureRecognizer) {
+        confirmPhoneNumberDelegate?.resendCodeTapped()
+    }
+    
+    func otpSetup() {
+        for otp in otpCode {
+            otp.textAlignment = .center
+        }
+    }
+    
+    @objc func sendTapped() {
+        var otpString = ""
+        
+        for otp in otpCode {
+            if let text = otp.text, !text.isEmpty {
+                otpString += text
+                otp.textAlignment = .center
+            } else {
+                print("Please enter all OTP fields")
+                return
+            }
+        }
+        
+        print("Concatenated OTP: \(otpString)")
+        callback(otpString)
         dismiss()
     }
 
-    
     func configureFields() {
         // Loop through each view in the stack and set them up
-        for view in pinFieldsStack.subviews {
-            if let pinField = view as? PinField {
-                pinField.isUserInteractionEnabled = true
-                pinField.keyboardType = .numberPad
-                pinField.delegate = self
-            }
+//        for view in pinFieldsStack.subviews {
+//            if let pinField = view as? PinField {
+//                pinField.isUserInteractionEnabled = true
+//                pinField.keyboardType = .numberPad
+//                pinField.delegate = self
+//            }
+//        }
+        for otp in otpCode {
+            otp.isUserInteractionEnabled = true
+            otp.keyboardType = .numberPad
+            otp.delegate = self
         }
     }
             
@@ -86,21 +128,27 @@ extension ConfirmPhoneNumberModal: UITextFieldDelegate{
     
     // Method to move to the next field
     func moveToNextField(currentField: UITextField) {
-        guard let currentIndex = pinFieldsStack.subviews.firstIndex(of: currentField) else { return }
-        if currentIndex < pinFieldsStack.subviews.count - 1 {
-            if let nextField = pinFieldsStack.subviews[currentIndex + 1] as? PinField {
-                nextField.becomeFirstResponder()
-            }
+//        guard let currentIndex = pinFieldsStack.subviews.firstIndex(of: currentField) else { return }
+        guard let currentIndex = otpCode.firstIndex(of: currentField as! PinField) else { return }
+        if currentIndex < otpCode.count - 1 {
+            otpCode[currentIndex + 1].becomeFirstResponder()
+
+//            if let nextField = pinFieldsStack.subviews[currentIndex + 1] as? PinField {
+//                nextField.becomeFirstResponder()
+//            }
         }
     }
 
     // Method to move to the previous field
     func moveToPreviousField(currentField: UITextField) {
-        guard let currentIndex = pinFieldsStack.subviews.firstIndex(of: currentField) else { return }
+//        guard let currentIndex = pinFieldsStack.subviews.firstIndex(of: currentField) else { return }
+        guard let currentIndex = otpCode.firstIndex(of: currentField as! PinField) else { return }
         if currentIndex > 0 {
-            if let previousField = pinFieldsStack.subviews[currentIndex - 1] as? PinField {
-                previousField.becomeFirstResponder()
-            }
+            otpCode[currentIndex - 1].becomeFirstResponder()
+
+//            if let previousField = pinFieldsStack.subviews[currentIndex - 1] as? PinField {
+//                previousField.becomeFirstResponder()
+//            }
         }
     }
             
@@ -108,22 +156,28 @@ extension ConfirmPhoneNumberModal: UITextFieldDelegate{
 
 extension ConfirmPhoneNumberModal{
     
-    public static func show(callBack: @escaping (String?) -> Void) {
+    public static func show(callBack: @escaping (String?) -> Void, isPhoneNumber: Bool) {
         let backDrop = UIView(frame: Helpers.screen)
         backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         
-        let modal = AddPhoneNumberModal()
+        let modal = ConfirmPhoneNumberModal()
         modal.callback = callBack
         
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
+        if isPhoneNumber {
+            modal.changePhoneNumber.text = "Change email address"
+            
+        } else {
+            modal.changePhoneNumber.text = "Change phone number"
+        }
         backDrop.addSubview(modal)
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             keyWindow.addSubview(backDrop)
         }
-        let height = Helpers.screenHeight * 0.4
+        let height = Helpers.screenHeight * 0.5
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         

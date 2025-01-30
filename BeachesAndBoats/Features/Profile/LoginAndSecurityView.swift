@@ -13,7 +13,13 @@ class LoginAndSecurityView: BaseViewControllerPlain {
     @IBOutlet weak var currentPasswordField: InputField!
     @IBOutlet weak var newPasswordField: InputField!
     @IBOutlet weak var addBtn: PlainOutlineButton!
-
+    @IBOutlet weak var addAuthenticationView: UIView!
+    @IBOutlet weak var authenticationDetailsView: UIView!
+    @IBOutlet weak var phoneDetailsStack: UIStackView!
+    @IBOutlet weak var emailDetailsStack: UIStackView!
+    @IBOutlet weak var phoneLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,8 +27,13 @@ class LoginAndSecurityView: BaseViewControllerPlain {
        
     }
 
-
+    @IBAction func editForEmail(_ sender: Any) {
+    }
+    
+    @IBAction func editForPhoneNo(_ sender: Any) {
+    }
+    
     @IBAction func addBtnTapped(_ sender: Any) {
-        
+        coordinator?.goto2FASecurityView()
     }
 }

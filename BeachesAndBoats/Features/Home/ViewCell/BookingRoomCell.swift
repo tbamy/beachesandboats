@@ -113,6 +113,7 @@ class BookingRoomCell: BaseXib{
             layer.cornerRadius = 8
             selectBtn.isHidden = true
             selectedBtn.isHidden = false
+            selectedBtn.setTitle("1 Unit", for: .normal)
             
         } else {
             layer.borderColor = UIColor.clear.cgColor

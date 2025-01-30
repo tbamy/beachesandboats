@@ -31,6 +31,11 @@ class BeachDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var continueBookingView: UIView!
     
     
+    @IBOutlet weak var dayBookingBtn: CheckboxButton!
+    @IBOutlet weak var nightBookingBtn: CheckboxButton!
+    
+    var isDayBooking: Bool = false
+    
     var beachDetails: Listing?
     var amenities: [Amenity] = []
     var roomImages: [String] = []
@@ -59,6 +64,18 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
+        
+        dayBookingBtn.stateChanged = { [weak self] isSelected in
+            guard let self = self else { return }
+            self.isDayBooking = isSelected
+            self.nightBookingBtn.isChecked = false
+        }
+        
+        nightBookingBtn.stateChanged = { [weak self] isSelected in
+            guard let self = self else { return }
+            self.isDayBooking = isSelected
+            self.nightBookingBtn.isChecked = false
+        }
         
 //        print("Available From: \(backendFrom_when) - Available To: \(backendTo_when)")
         
@@ -148,9 +165,11 @@ class BeachDetailsView: BaseViewControllerPlain {
 
     @IBAction func continueBookingTapped(_ sender: Any) {
         print("Continue Tapped")
+        let bookingType = isDayBooking ? "DAY" : "NIGHT"
+
         if let fromWhen = from_when, let toWhen = to_when{
             if let beachDetails = beachDetails{
-                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: from_when?.toBackendDate() ?? "", checkoutDate: to_when?.toBackendDate() ?? "", checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0)
+                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: from_when?.toBackendDate() ?? "", checkoutDate: to_when?.toBackendDate() ?? "", checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
                 print(beachBookingRequest)
                 
                 coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)

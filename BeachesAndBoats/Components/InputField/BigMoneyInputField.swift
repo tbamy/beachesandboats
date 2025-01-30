@@ -35,9 +35,9 @@ override func setup() {
     super.setup()
     textField.keyboardType = .decimalPad
     textField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
-    textField.font = UIFont.systemFont(ofSize: 45, weight: .medium)
+    textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
     textField.textAlignment = .left
-    textField.backgroundColor = .white
+//    textField.backgroundColor = .white
 }
 
     @objc func editingChanged() {

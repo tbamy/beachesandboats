@@ -30,6 +30,12 @@ class ConfirmBookingView: BaseViewControllerPlain {
     var listing: Listing?
     var booking: CreateBeachHouseBookingRequest?
     var configuration: BookingConfigurationData?
+    var checkInTime: String?
+    var checkOutTime: String?
+    var numberOfGuests: Int?
+    var startDate: String?
+    var endDate: String?
+    
     
     let vm = BookingConfigurationVM()
     let disposeBag = DisposeBag()
@@ -40,6 +46,9 @@ class ConfirmBookingView: BaseViewControllerPlain {
     var accessCode: String?
     var amount: Float?
     
+    
+    var picker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,7 +57,6 @@ class ConfirmBookingView: BaseViewControllerPlain {
         bind()
         LoadingModal.show()
         input.onNext(.getBookingConfiguration)
-        setup()
     }
 
     @IBAction func makePaymentTapped(_ sender: Any) {
@@ -56,6 +64,12 @@ class ConfirmBookingView: BaseViewControllerPlain {
             bookingRequest.amount = amount ?? 0
             bookingRequest.userId = user ?? ""
             bookingRequest.beachHouseRoomId = roomId ?? ""
+            bookingRequest.checkingTime = checkInTime?.toBackendTime() ?? ""
+            bookingRequest.checkoutTime = checkOutTime?.toBackendTime() ?? ""
+            bookingRequest.numberOfPeople = numberOfGuests ?? 1
+            
+            bookingRequest.units = 1 //temporary, would update
+            
             print(bookingRequest)
             
             LoadingModal.show()
@@ -64,17 +78,19 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     @IBAction func editTimeBtnTapped(_ sender: Any) {
-        if let bookingRequest = booking{
-            LoadingModal.show()
-            vm.createBeachHouseBooking(request: bookingRequest)
+        showTimePicker(title: "Select Check-in Time") { [weak self] selectedTime in
+            guard let self = self else { return }
+            self.checkInTime = selectedTime
+            self.showTimePicker(title: "Select Check-out Time") { selectedTime in
+                self.checkOutTime = selectedTime
+                self.timeLabel.text = "\(self.checkInTime ?? "") - \(self.checkOutTime ?? "")"
+            }
         }
     }
     
+    
     @IBAction func editGuestBtnTapped(_ sender: Any) {
-        if let bookingRequest = booking{
-            LoadingModal.show()
-            vm.createBeachHouseBooking(request: bookingRequest)
-        }
+        showGuestPicker()
     }
     
     @IBAction func editDateBtnTapped(_ sender: Any) {
@@ -83,23 +99,28 @@ class ConfirmBookingView: BaseViewControllerPlain {
             if endDate == nil{
                 if let startDate = startDate{
                     print("\(startDate)")
+                    self.startDate = startDate.toFormattedDate()
+                    self.endDate = startDate.toFormattedDate()
                 }
             }else{
                 if let startDate = startDate, let endDate = endDate{
                     print("\(startDate) - \(endDate)")
-                    
+                    self.startDate = startDate.toFormattedDate()
+                    self.endDate = endDate.toFormattedDate()
                 }
             }
         }
     }
     
-    
-    func validateRequest() -> Bool{
-        if let beachHouseRoomId = booking?.beachHouseRoomId, let userId = booking?.userId, let checkingDate = booking?.checkingDate, let checkoutDate = booking?.checkoutDate, let checkingTime = booking?.checkingTime, let checkoutTime = booking?.checkoutTime, let amount = booking?.amount, let units = booking?.units{
-            return true
+    func setupPicker(){
+        picker.timeZone = .current
+        picker.datePickerMode = .time
+        picker.locale = Locale(identifier: "en_US_POSIX") // Ensures consistent AM/PM handling
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
         }
         
-        return false
+
     }
     
     func calculateNights(from startDateString: String, to endDateString: String, format: String = "MM/dd/yyyy") -> Int? {
@@ -121,31 +142,33 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     func setup(){
-        print(configuration)
         
         configureButtons()
-        let startDateString = booking?.checkingDate ?? ""
-        let endDateString = booking?.checkoutDate ?? ""
-        let checkingTime = listing?.checkInFrom ?? ""
-        let checkoutTime = listing?.checkOutTo ?? ""
-        let guests = room?.noOfOccupant ?? 0
         
-        let nights = calculateNights(from: startDateString, to: endDateString) ?? 0
+        room = listing?.rooms?.first { $0.id == roomId }
+
+        startDate = booking?.checkingDate ?? ""
+        endDate = booking?.checkoutDate ?? ""
+        checkInTime = listing?.checkInFrom
+        checkOutTime = listing?.checkOutTo
+        numberOfGuests = room?.noOfOccupant ?? 0
         
-        datesLabel.text = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
+        let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+        
+        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
 //        timeLabel
         if let price = room?.pricePerNight {
-            timeLabel.text = "\(checkingTime) - \(checkoutTime)"
-            guestLabel.text = "\(guests) Guests"
-            costLabel.text = "\(price ?? 0) x \(nights)Nights"
+            timeLabel.text = "\(checkInTime ?? "") - \(checkOutTime ?? "")"
+            guestLabel.text = "\(numberOfGuests ?? 0) Guests"
+            costLabel.text = "₦\(price ?? 0) x \(nights) Nights"
             let totalCost = (price ?? 0) * Float(nights)
-            let configurationCost = configuration?.roomCleaningFee ?? 0
+//            let configurationCost = configuration?.roomCleaningFee ?? 0
             let serviceCost = configuration?.houseServiceFee ?? 0
             costAmountLabel.text = "₦ \(totalCost)"
-            cleaningFeeLabel.text = "₦ \(configurationCost)"
+//            cleaningFeeLabel.text = "₦ \(configurationCost)"
             serviceFeeLabel.text = "₦ \(serviceCost)"
             cancellationPolicyLabel.text = configuration?.cancellationPolicy
-            let finalTotal = totalCost + serviceCost + configurationCost
+            let finalTotal = totalCost + serviceCost
             totalAmountLabel.text = "₦ \(finalTotal)"
             amount = finalTotal
         }
@@ -172,6 +195,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
             switch data {
             case .getBookingConfigurationSuccess(let response):
                 self?.configuration = response.data
+                self?.setup()
                 print(self?.configuration)
                 
             case .getBookingConfigurationFailed(let error) :
@@ -184,4 +208,86 @@ class ConfirmBookingView: BaseViewControllerPlain {
             }
         }).disposed(by: disposeBag)
     }
+    
+    func showTimePicker(title: String, completion: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+
+        let picker = UIDatePicker()
+        picker.datePickerMode = .time
+        picker.preferredDatePickerStyle = .wheels
+        picker.locale = Locale(identifier: "en_US_POSIX") // Ensures consistent time format
+        picker.calendar = Calendar(identifier: .gregorian) // Avoids unexpected locale behaviors
+        picker.timeZone = TimeZone.current
+
+        alert.view.addSubview(picker)
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            picker.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor),
+            picker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 40),
+            picker.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -40)
+        ])
+
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm:ss" // Ensures 24-hour format
+            formatter.locale = Locale(identifier: "en_US_POSIX") // Ensures correct formatting
+            formatter.timeZone = TimeZone.current
+
+            let timeString = formatter.string(from: picker.date)
+            completion(timeString)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+
+
+    func showGuestPicker() {
+        let alert = UIAlertController(title: "Select Number of Guests", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        
+        alert.view.addSubview(picker)
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            picker.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor),
+            picker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 40),
+            picker.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -40)
+        ])
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
+            let selectedRow = picker.selectedRow(inComponent: 0)
+            self.numberOfGuests = selectedRow + 1
+            self.guestLabel.text = "\(self.numberOfGuests ?? 1) Guests"
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+
 }
+
+extension ConfirmBookingView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10 // Maximum number of guests
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(row + 1) Guests"
+    }
+}
+

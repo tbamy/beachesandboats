@@ -545,7 +545,7 @@ class AccountCoordinator: Coordinator{
     }
     
     func goto2FASecurityView(){
-        let vc: _FASecurityView = .fromNib()
+        let vc: TwoFASecurityView = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)

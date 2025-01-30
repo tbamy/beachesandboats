@@ -24,9 +24,14 @@ class MakePaymentView: UIViewController {
     }
     
     @objc func paymentTapped(){
-//        paystack?.presentChargeUI(on: self,
-//                                          accessCode: "transaction access code",
-//                                          onComplete: paymentDone)
+        let paystack = try? PaystackBuilder
+               .newInstance
+               .setKey("pk_test_86bef2313897f8e69fa1067e9bb722f400883417")
+               .build()
+        
+        paystack?.presentChargeUI(on: self,
+                                          accessCode: "transaction access code",
+                                          onComplete: paymentDone)
     }
 
 

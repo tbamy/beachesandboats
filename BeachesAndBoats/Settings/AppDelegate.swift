@@ -20,11 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         setupCoordinator(application)
         
-        _ = try? PaystackBuilder
-              .newInstance
-              .setKey("pk_test_86bef2313897f8e69fa1067e9bb722f400883417")
-              .build()
-        
         return true
     }
 

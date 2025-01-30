@@ -29,5 +29,21 @@ public class GeneralFormatter{
         formatter.numberStyle = .spellOut
         return (formatter.string(for: amount) ?? "") + " naira only"
     }
+    
+    //Formatting digit with comma
+    static func decimalToString(_ decimalValue: Decimal) -> String {
+        // Use a NumberFormatter to convert the Decimal to a String
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        
+        if let formattedString = formatter.string(from: NSDecimalNumber(decimal: decimalValue)) {
+            return formattedString
+        }
+        
+        // If formatting fails, return the raw decimal as a string
+        return "\(decimalValue)"
+    }
 }
 

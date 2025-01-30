@@ -101,6 +101,14 @@ extension SelectorModal: UICollectionViewDataSource, UICollectionViewDelegate, U
         let view = SelectableView(frame: cell.bounds)
         view.identifier = "Picker cell " + indexPath.description
         view.titleOnlyMode = true
+
+//        view.model.noCheckBox = true
+//        if view.model.noCheckBox == true {
+//            view.noCheckBox = true
+//        } else {
+//            view.titleOnlyMode = true
+//        }
+
         let item = filteredItems.count > 0 ? filteredItems[indexPath.row] : model.items[indexPath.row]
         view.model.image = UIImage(named: item.value) ?? UIImage()
         view.model.title = item.name
