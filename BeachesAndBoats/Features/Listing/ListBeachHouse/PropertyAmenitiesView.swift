@@ -51,6 +51,17 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
         }
     }
     
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.amenities = selectedItems
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
+    
 
 }
 

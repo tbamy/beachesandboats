@@ -15,7 +15,8 @@ public class HorizonDateField: UIView {
     private let calendarIcon = UIImageView()
 
     // Callback to handle date selection
-    public var onDateSelected: ((String) -> Void)?
+    public var onDateSelected: ((Date) -> Void)?
+    public var onDatesSelected: ((Date, Date?) -> Void)?
 
     // MARK: - Properties
     public var titleText: String = "" {
@@ -98,12 +99,27 @@ public class HorizonDateField: UIView {
 
     // MARK: - Actions
     @objc private func showCalendarModal() {
-        HorizonCalendarModal.show { [weak self] selectedDateRange in
-            guard let self = self, let dateRange = selectedDateRange else { return }
-            self.text = dateRange
-            self.onDateSelected?(dateRange)
+        HorizonCalendarModal.show { [weak self] startDate, endDate in
+            guard let self = self else { return }
+            if endDate == nil{
+                if let startDate = startDate{
+                    print("\(startDate)")
+//                    self.text = "\(startDate)"
+                    self.onDateSelected?(startDate)
+                }
+            }else{
+                if let startDate = startDate, let endDate = endDate{
+                    print("\(startDate) - \(endDate)")
+//                    self.text = "\(startDate) - \(endDate)"
+                    self.onDatesSelected?(startDate, endDate)
+                }
+            }
+            
+            
         }
     }
+    
+
 }
 
 

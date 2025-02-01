@@ -21,6 +21,16 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0XF-Xg-wPc">
+                    <rect key="frame" x="20" y="79" width="353" height="719"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fl1-z1-ddE">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4T-eN-xdM">
                     <rect key="frame" x="0.0" y="696" width="393" height="122"/>
                     <subviews>
@@ -31,6 +41,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <connections>
+                                <action selector="reserveBtnTapped:" destination="-1" eventType="touchUpInside" id="bcq-I1-zUo"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -41,16 +54,6 @@
                         <constraint firstAttribute="height" constant="122" id="dzC-GT-3Qn"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0XF-Xg-wPc">
-                    <rect key="frame" x="20" y="79" width="353" height="617"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fl1-z1-ddE">
-                        <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -60,12 +63,17 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="R4T-eN-xdM" secondAttribute="trailing" id="8Qf-bn-WE1"/>
                 <constraint firstItem="R4T-eN-xdM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Nbl-Cl-dzS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="R4T-eN-xdM" secondAttribute="bottom" id="hBU-fj-Gal"/>
-                <constraint firstItem="R4T-eN-xdM" firstAttribute="top" secondItem="0XF-Xg-wPc" secondAttribute="bottom" id="hsg-wj-PHp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0XF-Xg-wPc" secondAttribute="bottom" constant="20" id="j5O-To-yEK"/>
                 <constraint firstItem="0XF-Xg-wPc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ooA-UA-1hN"/>
             </constraints>
             <point key="canvasLocation" x="138" y="20"/>
         </view>
     </objects>
+    <designables>
+        <designable name="K4X-BW-kVv">
+            <size key="intrinsicContentSize" width="75" height="34.333333333333336"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -33,7 +33,7 @@ class DJAvailableDatesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        calendarView.onDateSelected = { startDate, endDate in
+        calendarView.onDatesSelected = { startDate, endDate in
             
             self.from_when = startDate
             if let endDate = endDate {
@@ -52,8 +52,8 @@ class DJAvailableDatesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if var createServiceListing = createServiceListing{
-            createServiceListing.availableFrom = from_when?.toBackendDateAlone() ?? ""
-            createServiceListing.availableTo = to_when?.toBackendDateAlone() ?? ""
+            createServiceListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createServiceListing.availableTo = to_when?.toBackendDate() ?? ""
             
             print(createServiceListing)
             
@@ -64,8 +64,8 @@ class DJAvailableDatesView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createServiceListing = createServiceListing{
-            createServiceListing.availableFrom = from_when?.toBackendDateAlone() ?? ""
-            createServiceListing.availableTo = to_when?.toBackendDateAlone() ?? ""
+            createServiceListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createServiceListing.availableTo = to_when?.toBackendDate() ?? ""
             
             AppStorage.serviceListing = createServiceListing
             coordinator?.backToDashboard()

@@ -51,6 +51,17 @@ class HouseRulesView: BaseViewControllerPlain {
             }
         }
     }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.houseRules = selectedItems
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
 
 
 }
@@ -70,16 +81,29 @@ extension HouseRulesView: UICollectionViewDelegate, UICollectionViewDataSource, 
         view.model.title = item?.name ?? ""
 //        print("Rule: \(item?.description)")
         let itemId = item?.id ?? ""
-        if selectedItems.contains(itemId) {
-            view.model.state =  true
-        } else {
-            view.model.state = false
-        }
+        view.isToggled = selectedItems.contains(itemId)
         
+        // Setup toggle action to update selectedRules
+        view.toggleSwitch.addTarget(self, action: #selector(toggleSwitchChanged(_:)), for: .valueChanged)
+        view.toggleSwitch.tag = indexPath.row
         
-        view.toggleSwitch.isUserInteractionEnabled = true
         cell.applyView(view: view)
         return cell
+    }
+    
+    @objc func toggleSwitchChanged(_ sender: UISwitch) {
+        let index = sender.tag
+        guard let itemId = houseRulesList?[index].id else { return }
+        
+        if sender.isOn {
+            if !selectedItems.contains(itemId) {
+                selectedItems.append(itemId)
+            }
+        } else {
+            selectedItems.removeAll { $0 == itemId }
+        }
+        
+        nextBtn.isEnabled = !selectedItems.isEmpty
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -90,25 +114,25 @@ extension HouseRulesView: UICollectionViewDelegate, UICollectionViewDataSource, 
        
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! DynamicCollectionViewCell
-        let view = ToggleSwitch(frame: cell.bounds)
-        guard let item = houseRulesList?[indexPath.row] else { return }
-        
-        let itemId = item.id ?? ""
-        view.toggleSwitch.isUserInteractionEnabled = true
-        if selectedItems.contains(itemId) {
-            selectedItems.removeAll { $0 == itemId }
-            view.model.state = false
-        } else {
-            selectedItems.append(itemId)
-            view.model.state = true
-        }
-        
-        collectionView.reloadItems(at: [indexPath])
-            
-        nextBtn.isEnabled = true
-    }
+//    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let cell = collectionView.cellForItem(at: indexPath) as! DynamicCollectionViewCell
+//        let view = ToggleSwitch(frame: cell.bounds)
+//        guard let item = houseRulesList?[indexPath.row] else { return }
+//        
+//        let itemId = item.id ?? ""
+//        view.toggleSwitch.isUserInteractionEnabled = true
+//        if selectedItems.contains(itemId) {
+//            selectedItems.removeAll { $0 == itemId }
+//            view.model.state = false
+//        } else {
+//            selectedItems.append(itemId)
+//            view.model.state = true
+//        }
+//        
+//        collectionView.reloadItems(at: [indexPath])
+//            
+//        nextBtn.isEnabled = true
+//    }
 
     
 }

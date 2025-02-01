@@ -16,12 +16,21 @@ extension UIView {
     }
     
     func applyDarkEffect() {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurEffectView)
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+    }
+    
+    func applyDark() {
 //        let blurEffect = UIBlurEffect(style: .dark)
 //        let blurEffectView = UIVisualEffectView(effect: blurEffect)
 //        blurEffectView.frame = bounds
 //        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //        addSubview(blurEffectView)
-        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
     func addDashedStroke(color: UIColor? = UIColor.background.lighter(by: 10), width: CGFloat = 2) {

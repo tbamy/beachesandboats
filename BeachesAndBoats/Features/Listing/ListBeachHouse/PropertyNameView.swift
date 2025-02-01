@@ -66,4 +66,15 @@ class PropertyNameView: BaseViewControllerPlain {
         }
     }
     
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.name = nameLabel.text
+            createBeachListing.description = descriptionLabel.text
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
+    
 }

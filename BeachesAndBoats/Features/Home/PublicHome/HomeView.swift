@@ -54,6 +54,9 @@ class HomeView: BaseViewControllerPlain {
     
     var selectedBeachCat: [String] = []
     var selectedBoatCat: String = ""
+    var selectedServiceCat: String = ""
+    
+    var selectedCatIndex: Int? = nil
     
     var details: Listing?
     
@@ -85,6 +88,8 @@ class HomeView: BaseViewControllerPlain {
         topRatedBoatStack.isHidden = true
         boatStack.isHidden = true
         serviceStack.isHidden = true
+        
+        searchField
         
     }
     
@@ -152,7 +157,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case 2:
             return subcategories.count
         case 3:
-            print(topRatedBoats.count)
+//            print(topRatedBoats.count)
             return topRatedBeaches.count
         case 4:
             print(beaches.count)
@@ -179,6 +184,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.model.image = cellAt.image ?? ""
             view.model.title = cellAt.name ?? ""
             
+//            view.model.state = (indexPath.item == selectedCatIndex)
+//            view.model.tapped = { [weak self] in
+//                guard let self = self else { return }
+//                self.selectedCatIndex = indexPath.item
+//                self.categoryCollectionView.reloadData()
+//            }
+                
+            
             cell.applyView(view: view)
             return cell
             
@@ -203,7 +216,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.isBeachHouseMode = true
             view.model.titleLabel = beach.name ?? ""
             view.model.infoOneLabel = "\(beach.locations?.city ?? ""), \(beach.locations?.state ?? "") \(beach.locations?.country ?? "")"
-            view.model.infoTwoLabel = "\(beach.availabilities?.availableFrom ?? "") - \(beach.availabilities?.availableTo ?? "")"
+            view.model.infoTwoLabel = "\(beach.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(beach.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
             view.model.priceLabel = "₦ \(beach.pricePerNight ?? 0)"
             view.model.ratingLabel = "\(beach.rating ?? 0)"
             view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
@@ -223,7 +236,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.isBeachHouseMode = true
             view.model.titleLabel = beach.name ?? ""
             view.model.infoOneLabel = "\(beach.locations?.city ?? ""), \(beach.locations?.state ?? "") \(beach.locations?.country ?? "")"
-            view.model.infoTwoLabel = "\(beach.availabilities?.availableFrom?.convertToShortDateFormat() ?? "") - \(beach.availabilities?.availableTo?.convertToShortDateFormat() ?? "")"
+            view.model.infoTwoLabel = "\(beach.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(beach.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
             view.model.priceLabel = "₦ \(beach.pricePerNight ?? 0)"
             view.model.ratingLabel = "\(beach.rating ?? 0)"
             view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
@@ -233,14 +246,52 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             
         case 5:
             let cell = topRatedBoatCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            
+            let boat = boats[indexPath.item]
+            let view = GeneralViewCell(frame: cell.bounds)
+            view.identifier = "TopRated " + indexPath.description
+            view.isBoatMode = true
+            view.model.titleLabel = boat.name ?? ""
+            view.model.infoOneLabel = "Capacity of People: 1 - \((boat.noOfAdults ?? 0) + (boat.noOfChildren ?? 0)) "
+            view.model.infoTwoLabel = "\(boat.locations?.city ?? ""), \(boat.locations?.state ?? "") \(boat.locations?.country ?? "")"
+            view.model.ratingLabel = "\(boat.rating ?? 0)"
+            view.model.bannerImg = boat.images?.first?.url ?? ""
+            
+            cell.applyView(view: view)
+            cell.layer.backgroundColor = UIColor.white.cgColor
+            cell.layer.cornerRadius = 15
+            
             return cell
             
         case 6:
             let cell = boatCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            
+            let boat = boats[indexPath.item]
+            print("Boat Data: \(boats)")
+            let view = GeneralViewCell(frame: cell.bounds)
+            view.identifier = "Boats " + indexPath.description
+            view.isBoatMode = true
+            view.model.titleLabel = boat.name ?? ""
+            view.model.infoOneLabel = "Capacity of People: 1 - \((boat.noOfAdults ?? 0) + (boat.noOfChildren ?? 0)) )"
+            view.model.infoTwoLabel = "\(boat.locations?.city ?? ""), \(boat.locations?.state ?? "") \(boat.locations?.country ?? "")"
+            view.model.ratingLabel = "\(boat.rating ?? 0)"
+            view.model.bannerImg = boat.images?.first?.url ?? ""
+
+            cell.applyView(view: view)
+            
             return cell
             
         case 7:
             let cell = serviceCollectionVIew.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            
+            let service = services[indexPath.item]
+            
+            let view = BookingViewCell(frame: cell.bounds)
+            view.identifier = "Services " + indexPath.description
+            view.model.date = "\(service.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(service.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
+            view.model.image = service.images?.first?.url ?? ""
+            view.model.location = "\(service.locations?.city ?? ""), \(service.locations?.state ?? "") \(service.locations?.country ?? "")"
+            view.model.title = "\(service.name ?? "")"
             return cell
             
         default:
@@ -261,12 +312,13 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return selectedBeachCat.contains(categoryId)
                 }
                 self.beaches = selectedCategories.compactMap { $0.listings }.flatMap { $0 }
-                self.topRatedBeaches = self.beaches.filter({$0.rating == 5})
+                self.topRatedBeaches = self.beaches.filter({$0.rating == 0})
                 self.topRatedBeachHouseStack.isHidden = self.topRatedBeaches.isEmpty
                 self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
                 self.reloadCollectionViews()
                 print("Beaches Data: \(self.beaches)")
                 topRatedBoatStack.isHidden = true
+                topRatedBeachHouseStack.isHidden = false
                 boatStack.isHidden = true
                 topRatedBeachHouseStack.isHidden = topRatedBeaches.isEmpty
                 beachHouseStack.isHidden = false
@@ -290,12 +342,28 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 topRatedBoatStack.isHidden = topRatedBoats.isEmpty
                 boatStack.isHidden = false
                 topRatedBeachHouseStack.isHidden = true
+                topRatedBoatStack.isHidden = false
                 beachHouseStack.isHidden = true
                 self.updateCollectionViewHeight(self.boatCollectionView, self.boatCollectionViewHeightConstraint)
                 self.updateCollectionViewHeight(self.topRatedBoatCollectionView, self.topRatedBoatCollectionVIewHeightConstraint)
                 
             }else if indexPath.item == 2{
-                
+                self.selectedServiceCat = categories[indexPath.item].id ?? ""
+                let selectedCategories = self.categories.filter { category in
+                    let selectedServiceCat = self.selectedServiceCat
+                    let categoryId = category.id ?? ""
+                    return selectedServiceCat.contains(categoryId)
+                }
+                self.services = selectedCategories.compactMap { $0.listings}.flatMap{ $0 }
+                self.reloadCollectionViews()
+                print("Sselected service: \(self.selectedServiceCat)")
+                print("Services Data: \(self.services)")
+                subcategoryCollectionView.isHidden = true
+                topRatedBoatStack.isHidden = true
+                boatStack.isHidden = true
+                topRatedBeachHouseStack.isHidden = true
+                beachHouseStack.isHidden = true
+
             }
             
             // Highlight the selected cell by setting a border
@@ -331,9 +399,9 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             coordinator?.gotoBeachDetails(details: beaches[indexPath.item])
             
         case 5:
-            coordinator?.gotoBoatDetails(details: beaches[indexPath.item])
+            coordinator?.gotoBoatDetails(details: boats[indexPath.item])
         case 6:
-            coordinator?.gotoBoatDetails(details: beaches[indexPath.item])
+            coordinator?.gotoBoatDetails(details: boats[indexPath.item])
         case 7:
             print("DO something")
         default:
@@ -350,11 +418,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case 2:
             return CGSize(width: (collectionView.bounds.width / 4), height: 50)
         case 3:
-            return CGSize(width: collectionView.bounds.width - 50, height: 400)
+            return CGSize(width: collectionView.bounds.width - 35, height: 400)
         case 4:
             return CGSize(width: collectionView.bounds.width - 10, height: 400)
         case 5:
-            return CGSize(width: collectionView.bounds.width - 50, height: 400)
+            return CGSize(width: collectionView.bounds.width - 35, height: 400)
         case 6:
             return CGSize(width: collectionView.bounds.width - 10, height: 400)
         case 7:

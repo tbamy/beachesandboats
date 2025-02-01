@@ -118,6 +118,19 @@ class PropertyAddressView: BaseViewControllerPlain {
             
         }
     }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.country = countryField.text
+            createBeachListing.state = stateField.text
+            createBeachListing.city = cityField.text
+            createBeachListing.streetName = streetField.text
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
+    }
 }
 
 

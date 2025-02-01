@@ -27,9 +27,9 @@ class RoomPriceView: BaseViewControllerPlain {
         super.viewDidLoad()
         title = "Beaches Houses"
         setup()
-        
-    }
 
+    }
+    
     func setup(){
         stepOneProgress.setProgress(1, animated: false)
         stepOneProgress.tintColor = .success
@@ -38,67 +38,103 @@ class RoomPriceView: BaseViewControllerPlain {
         
         nextBtn.isEnabled = true
         moneyField.updateHeight(to: 70)
-        moneyField.onTextChanged = { [weak self] enteredText in
-            self?.updateCommission(with: enteredText)
+        moneyField.amountChanged = { [weak self] in
+            if let amount = self?.moneyField.getDoubleValue() {
+                self?.updateCommission(with: String(amount))
+            }
         }
         
         commissionView.layer.borderWidth = 1
         commissionView.layer.borderColor = UIColor.background.cgColor
         
         commissionView.isHidden = true
-                    
+        
     }
     
     func updateCommission(with enteredText: String) {
-        // Remove the Naira symbol and commas if present
-        let cleanText = enteredText.replacingOccurrences(of: "₦", with: "").replacingOccurrences(of: ",", with: "")
-        
-        // Convert the cleaned text to a Double
-        guard let enteredAmount = Double(cleanText) else {
+        guard let enteredAmount = moneyField.getDoubleValue(), enteredAmount > 0 else {
             commissionField.text = ""
+            commissionView.isHidden = true
             return
         }
         
-        // Apply a 10% discount (adjust percentage as needed)
+        print("Valid Entered Amount: \(enteredAmount)")
+        
         discountedAmount = enteredAmount * discount
         
-        // Update the commissionField to display the discounted amount with 2 decimal places
+        // Update the commissionField to display the discounted amount
         commissionView.isHidden = false
-        commissionField.text = String(format: "You earn ₦%", discountedAmount)
+        commissionField.text = String(format: "You earn ₦%.2f", discountedAmount)
+        print("Discounted Amount: \(discountedAmount)")
+        
     }
-            
-
-            
 
     
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
+        guard let beachData = beachData else { return }
+        guard let createBeachListing = createBeachListing else { return }
+        
+        // Get the last index of the rooms array
+        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        print("Current room index is \(roomIndex)")
+        
+        // Safely get a mutable copy of the rooms array
+        var updatedRoomInfo = createBeachListing.rooms
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+            // Update the room price and discount at the current room index
+            var existingRoom = updatedRoomInfo[roomIndex]
+            existingRoom.pricePerNight = moneyField.getFloatValue() ?? 0
+            existingRoom.discountPercent = 10
             
-            let roomIndex = createBeachListing?.rooms.indices.last ?? -1 
-            print("Current room index is \(roomIndex)")
-//            guard let beachData = beachData, let roomIndex = currentRoomIndex else { return }
+            // Reassign the updated room back to the array
+            updatedRoomInfo[roomIndex] = existingRoom
             
-            var updatedRoomInfo = createBeachListing?.rooms ?? []
-            if roomIndex < updatedRoomInfo.count {
-                    // Append selected items to the amenities of the room at the specified index
-                var existingRoom = updatedRoomInfo[roomIndex]
-                
-                existingRoom.pricePerNight = Double(moneyField.text) ?? 0
-                existingRoom.discountPercent = Double(discount)
-                        
-                } else {
-                    print("Error: Room at index \(roomIndex) does not exist in roominfo.")
-                    return
-                }
-            
-            if var createBeachListing = createBeachListing{
-                createBeachListing.rooms = updatedRoomInfo
-                print(createBeachListing)
-                
-                coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: createBeachListing)
-            }
-            
+            print("Updated Room: \(existingRoom)")
+        } else {
+            print("Error: Room at index \(roomIndex) does not exist in room info.")
+            return
         }
+        
+        // Create a mutable copy of the createBeachListing and update its rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+        
+        print("Updated CreateBeachListing: \(updatedBeachListing)")
+        
+        coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: updatedBeachListing)
     }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        guard let createBeachListing = createBeachListing else { return }
+        
+        // Get the last index of the rooms array
+        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        print("Current room index is \(roomIndex)")
+        
+        // Safely get a mutable copy of the rooms array
+        var updatedRoomInfo = createBeachListing.rooms
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+            // Update the room price and discount at the current room index
+            var existingRoom = updatedRoomInfo[roomIndex]
+            existingRoom.pricePerNight = moneyField.getFloatValue() ?? 0
+            existingRoom.discountPercent = 10
+            
+            // Reassign the updated room back to the array
+            updatedRoomInfo[roomIndex] = existingRoom
+            
+            print("Updated Room: \(existingRoom)")
+        } else {
+            print("Error: Room at index \(roomIndex) does not exist in room info.")
+            return
+        }
+        
+        // Create a mutable copy of the createBeachListing and update its rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+            
+            AppStorage.beachListing = updatedBeachListing
+            coordinator?.backToDashboard()
 
+    }
 }

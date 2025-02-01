@@ -64,10 +64,25 @@ class GeneralViewCell: BaseXib {
         infoTwoLabel.text = model.infoTwoLabel
         priceLabel.text = model.priceLabel
         ratingLabel.text = model.ratingLabel
-        
+
         
         if let url = URL(string: model.bannerImg.replacingOccurrences(of: "http://", with: "https://")) {
-            bannerImg.kf.setImage(with: url)
+            bannerImg.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "dummy"),
+                options: nil,
+                completionHandler: { result in
+                    switch result {
+                    case .success(let value):
+                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Failed to load image: \(error.localizedDescription)")
+                        self.bannerImg.image = UIImage(named: "dummy")
+                    }
+                }
+            )
+        } else {
+            bannerImg.image = UIImage(named: "dummy")
         }
 
         

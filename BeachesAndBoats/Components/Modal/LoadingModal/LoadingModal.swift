@@ -31,7 +31,7 @@ public class LoadingModal: BaseXib {
     func setup() {
         backDrop.backgroundColor = .clear
         
-        backDrop.applyDarkEffect()
+        backDrop.applyDark()
     }
     
     public static func show(title: String = "Loading...") {

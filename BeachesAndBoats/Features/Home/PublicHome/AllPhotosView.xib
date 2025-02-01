@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllPhotosView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="photosCollectionView" destination="6eW-09-hr3" id="qmz-H1-HQ1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -37,7 +37,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Abt-lD-GFV">
                                         <rect key="frame" x="0.0" y="31.333333333333329" width="180" height="14"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uXU-w9-prA">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="uXU-w9-prA">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="aJh-Jj-BBs"/>
@@ -55,7 +55,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="btn-Ry-2Oo">
                                         <rect key="frame" x="0.0" y="57.333333333333329" width="180" height="14"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Ej-mQ-GlD">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="2Ej-mQ-GlD">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="14" id="2Ss-eE-tYq"/>
@@ -82,7 +82,17 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="Lad-KA-bNp" id="cPJ-Vr-4jT"/>
+                <outlet property="img" destination="iaB-Fw-foZ" id="6lq-GS-ckI"/>
+                <outlet property="locationLabel" destination="U2y-qh-IM5" id="qTp-ff-kPv"/>
+                <outlet property="titleLabel" destination="0c8-cc-W4E" id="yRn-cu-Tom"/>
+            </connections>
             <point key="canvasLocation" x="25.954198473282442" y="55.985915492957751"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="calendar" width="14" height="14.333333015441895"/>
+        <image name="location" width="10" height="14.333333015441895"/>
+    </resources>
 </document>

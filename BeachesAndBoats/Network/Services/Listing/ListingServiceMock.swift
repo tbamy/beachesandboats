@@ -8,6 +8,10 @@
 import Foundation
 
 class ListingServiceMock: Provider<ListingTarget>, ListingService{
+    func ListBeach(request: CreateBeachListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
     func ListBoat(request: CreateBoatListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         
     }

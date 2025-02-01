@@ -54,7 +54,7 @@ class HouseTypeListView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "")
+            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0)
             
             if cat == "06d196a0-56aa-4914-9f63-2fbd801ca39e"{
                 coordinator?.gotoPropertyNameView(beachData: beachData, createBeachListingData: request)
@@ -62,6 +62,15 @@ class HouseTypeListView: BaseViewControllerPlain {
                 coordinator?.gotoHouseSizeListView(beachData: beachData, createBeachListingData: request)
             }
         }
+    }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0)
+            
+            AppStorage.beachListing = request
+            coordinator?.backToDashboard()
+        
+
     }
 
 }

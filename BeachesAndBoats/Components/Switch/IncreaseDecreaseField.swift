@@ -20,11 +20,15 @@ import UIKit
     
     
     public var minValue: Int = 0
-    public var maxValue: Int = 4
+    public var maxValue: Int = 10
 
+//    public var onCountChanged: ((Int) -> Void)?
+    public var onValueChange: ((IncreaseDecreaseModel) -> Void)?
+    
     public var count: Int = 0 {
         didSet {
             updateCountLabel()
+//            onCountChanged?(count)
         }
     }
     
@@ -91,7 +95,11 @@ import UIKit
             count -= 1
             model?.count = count
             updateCountLabel()
-            print("DecreaseCount: \(model?.type ?? "") count: \(count)")
+            if let model = model {
+                onValueChange?(model) // Trigger the closure
+            }
+                            
+//            print("DecreaseCount: \(model?.type ?? "") count: \(count)")
         }
     }
     
@@ -100,7 +108,10 @@ import UIKit
             count += 1
             model?.count = count
             updateCountLabel()
-            print("IncreaseCount: \(model?.type ?? "") count: \(count)")
+            if let model = model {
+                onValueChange?(model) // Trigger the closure
+            }
+//            print("IncreaseCount: \(model?.type ?? "") count: \(count)")
         }
     }
 }
@@ -112,11 +123,13 @@ extension InputField {
 }
 
 public struct IncreaseDecreaseModel {
+    public var id: String
     public var type: String
     public var subtitle: String
     public var count: Int
     
-    public init(type: String, subtitle: String, count: Int) {
+    public init(id: String, type: String, subtitle: String, count: Int) {
+        self.id = id
         self.type = type
         self.subtitle = subtitle
         self.count = count

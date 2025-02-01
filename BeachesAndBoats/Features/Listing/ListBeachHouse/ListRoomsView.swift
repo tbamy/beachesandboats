@@ -5,6 +5,7 @@
 //  Created by Tolu Akintayo on 02/10/2024.
 //
 
+
 import UIKit
 
 class ListRoomsView: BaseViewControllerPlain {
@@ -28,7 +29,7 @@ class ListRoomsView: BaseViewControllerPlain {
     
     var bedTypes: [BedTypes] = []
     var selectedBedTypes: [BedType] = []
-    var privateStatus: Bool?
+    var privateStatus: Int?
     
     var allRoomData : [Room] = []
     var currentRoomIndex: Int = 0
@@ -36,33 +37,36 @@ class ListRoomsView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beaches Houses"
-        
         setup()
-        
     }
     
-    func setup(){
+    func setup() {
         stepOneProgress.setProgress(1, animated: false)
         stepOneProgress.tintColor = .success
         stepTwoProgress.setProgress(0.1, animated: true)
         stepTwoProgress.tintColor = .B_B
         
-        privateRoomNo.isUserInteractionEnabled = true
-        privateRoomYes.isUserInteractionEnabled = true
-        
         privateRoomNo.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
-            self.privateStatus = isSelected
-            privateRoomYes.isChecked = false
+//            self.privateStatus = isSelected
+            if isSelected{
+                self.privateStatus = 1
+            }else{
+                self.privateStatus = 0
+            }
+            self.privateRoomYes.isChecked = false
         }
         
         privateRoomYes.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
-            self.privateStatus = isSelected
-            privateRoomNo.isChecked = false
+//            self.privateStatus = isSelected
+            if isSelected{
+                self.privateStatus = 1
+            }else{
+                self.privateStatus = 0
+            }
+            self.privateRoomNo.isChecked = false
         }
-        
-        updateCollectionViewHeight(collectionView, collectionViewHeight)
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -70,54 +74,39 @@ class ListRoomsView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
-        
-        
+        allRoomData = createBeachListing?.rooms ?? []
+        bedTypes = beachData?.bed_types ?? []
+        collectionView.reloadData()
+        updateCollectionViewHeight(collectionView, collectionViewHeight)
     }
 
     func updateCollectionViewHeight(_ collectionView: UICollectionView, _ collectionViewHeightConstraint: NSLayoutConstraint) {
         collectionView.layoutIfNeeded()
         let contentHeight = collectionView.contentSize.height
         collectionViewHeightConstraint.constant = contentHeight
-        
         self.view.layoutIfNeeded()
     }
-    
-    
-    func getSelectedBedTypes() -> [BedType] {
-        var selectedBedTypes: [BedType] = []
-
-        for cell in collectionView.visibleCells {
-            if let dynamicCell = cell as? DynamicCollectionViewCell,
-               let increaseDecreaseField = dynamicCell.contentView.subviews.first(where: { $0 is IncreaseDecreaseField }) as? IncreaseDecreaseField,
-               let model = increaseDecreaseField.model,
-               let indexPath = collectionView.indexPath(for: dynamicCell) { // Get the indexPath of the cell
-                
-                if indexPath.row < bedTypes.count {
-                    let bedType = bedTypes[indexPath.row]
-                    if model.count > 0 { // Only include bed types with count > 0
-                        let selectedBedType = BedType(id: bedType.id ?? "", quantity: model.count)
-                        selectedBedTypes.append(selectedBedType)
-                    }
-                }
-            }
-        }
-
-        return selectedBedTypes
-    }
-
-
-
 
     
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            let roomId = allRoomData.count
-            let selectedBedTypes = getSelectedBedTypes()
-            let newRoomData = Room(name: roomName.text, description: roomDescription.text, quantity: Int(roomCount.text) ?? 0, roomAmenities: [], pricePerNight: 0, discountPercent: 0, bedTypes: selectedBedTypes, hasPrivateBathroom: privateStatus ?? false, noOfOccupant: Int(peopleCount.text) ?? 0, images: [])
+        if let beachData = beachData {
+            
+            let newRoomData = Room(
+                name: roomName.text,
+                description: roomDescription.text,
+                quantity: Int(roomCount.text) ?? 0,
+                roomAmenities: [],
+                pricePerNight: 0,
+                discountPercent: 0,
+                bedTypes: selectedBedTypes,
+                hasPrivateBathroom: privateStatus ?? 0,
+                noOfOccupant: Int(peopleCount.text) ?? 0,
+                images: []
+            )
             
             allRoomData.append(newRoomData)
             
-            if var createBeachListing = createBeachListing{
+            if var createBeachListing = createBeachListing {
                 createBeachListing.rooms = allRoomData
                 print(createBeachListing)
                 
@@ -125,10 +114,34 @@ class ListRoomsView: BaseViewControllerPlain {
             }
         }
     }
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        let newRoomData = Room(
+            name: roomName.text,
+            description: roomDescription.text,
+            quantity: Int(roomCount.text) ?? 0,
+            roomAmenities: [],
+            pricePerNight: 0,
+            discountPercent: 0,
+            bedTypes: selectedBedTypes,
+            hasPrivateBathroom: privateStatus ?? 0,
+            noOfOccupant: Int(peopleCount.text) ?? 0,
+            images: []
+        )
+        
+        allRoomData.append(newRoomData)
+        
+        if var createBeachListing = createBeachListing {
+            createBeachListing.rooms = allRoomData
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
 
+    }
 }
 
-extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return bedTypes.count
     }
@@ -136,32 +149,35 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
 
-        cell.isUserInteractionEnabled = true
-        let view = IncreaseDecreaseField(frame: cell.bounds)
-        let item = bedTypes[indexPath.row]
-        
-        let itemId = item.id ?? ""
-        
-        view.model = IncreaseDecreaseModel(
-                type: item.name ?? "",
-                subtitle: item.description ?? "",
-                count: 0
-            )
-        view.tag = indexPath.row
-        
-        view.isUserInteractionEnabled = false
-        cell.applyView(view: view)
+        // Ensure index is within bounds
+        if indexPath.row >= 0 && indexPath.row < bedTypes.count {
+            let bedTypeModel = bedTypes[indexPath.row]
+            let increaseDecreaseField = IncreaseDecreaseField()
+            increaseDecreaseField.model = IncreaseDecreaseModel(id: bedTypeModel.id ?? "", type: bedTypeModel.name ?? "", subtitle: bedTypeModel.description ?? "", count: 0)
+
+            // Handle updates using the closure
+            increaseDecreaseField.onValueChange = { [weak self] updatedModel in
+                guard let self = self else { return }
+                if let index = self.selectedBedTypes.firstIndex(where: { $0.id == updatedModel.id }) {
+                    // Update existing entry
+                    self.selectedBedTypes[index].quantity = updatedModel.count
+                } else if updatedModel.count > 0 {
+                    // Add new entry
+                    self.selectedBedTypes.append(BedType(id: updatedModel.id, quantity: updatedModel.count))
+                }
+                // Remove entries with zero count
+                self.selectedBedTypes.removeAll { $0.quantity == 0 }
+            }
+
+            cell.applyView(view: increaseDecreaseField)
+        }
+
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let widthOfScreen: CGFloat = collectionView.bounds.width
-//        let heightOfScreen = collectionView.bounds.height
-        return CGSize(width: widthOfScreen, height: 28)
-       
-    }
-    
 
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let widthOfScreen: CGFloat = collectionView.bounds.width
+        return CGSize(width: widthOfScreen, height: 56)
+    }
 }

@@ -35,7 +35,7 @@ class PropertyAvailableDatesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        calendarView.onDateSelected = { startDate, endDate in
+        calendarView.onDatesSelected = { startDate, endDate in
             
             self.from_when = startDate
             if let endDate = endDate {
@@ -55,14 +55,26 @@ class PropertyAvailableDatesView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
-                createBeachListing.availableFrom = from_when?.toFormattedDate() ?? ""
-                createBeachListing.availableTo = to_when?.toFormattedDate() ?? ""
+                createBeachListing.availableFrom = from_when?.toBackendDate() ?? ""
+                createBeachListing.availableTo = to_when?.toBackendDate() ?? ""
                 print(createBeachListing)
                 
                 coordinator?.gotoPropertyAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing)
             }
             
         }
+    }
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+            createBeachListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createBeachListing.availableTo = to_when?.toBackendDate() ?? ""
+            
+            AppStorage.beachListing = createBeachListing
+            coordinator?.backToDashboard()
+        }
+
     }
     
 

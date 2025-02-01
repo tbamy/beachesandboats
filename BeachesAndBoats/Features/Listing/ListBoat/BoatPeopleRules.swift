@@ -37,9 +37,9 @@ class BoatPeopleRules: BaseViewControllerPlain {
         subtitleLabel.text = "Select the maximum number people that can be in your \(boatType ?? "") at once"
 //        houseRulesList = boatData?.
         
-        numberOfAdults.model = IncreaseDecreaseModel(type: "Number of adults", subtitle: "Ages 17+ years", count: 0)
-        numberOfChildren.model = IncreaseDecreaseModel(type: "Number of children", subtitle: "Ages 0-16 years", count: 0)
-        numberOfPets.model = IncreaseDecreaseModel(type: "Number of Pets", subtitle: "eg. dogs, cats etc.", count: 0)
+        numberOfAdults.model = IncreaseDecreaseModel(id: "", type: "Number of adults", subtitle: "Ages 17+ years", count: 0)
+        numberOfChildren.model = IncreaseDecreaseModel(id: "", type: "Number of children", subtitle: "Ages 0-16 years", count: 0)
+        numberOfPets.model = IncreaseDecreaseModel(id: "", type: "Number of Pets", subtitle: "eg. dogs, cats etc.", count: 0)
         
     }
 

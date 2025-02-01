@@ -42,32 +42,75 @@ class RoomAmenitiesView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            let roomIndex = createBeachListing?.rooms.indices.last ?? -1 
-            print("Current room index is \(roomIndex)")
-//            guard let beachData = beachData, let roomIndex = currentRoomIndex else { return }
+        guard let beachData = beachData else { return }
+        guard let createBeachListing = createBeachListing else { return }
+
+        // Get the last index of the rooms array
+        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        print("Current room index is \(roomIndex)")
+
+        // Safely get a mutable copy of the rooms array
+        var updatedRoomInfo = createBeachListing.rooms
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+            // Update the room amenities at the current room index
+            var existingRoom = updatedRoomInfo[roomIndex]
+            existingRoom.roomAmenities = selectedItems
             
-            var updatedRoomInfo = createBeachListing?.rooms ?? []
-            if roomIndex < updatedRoomInfo.count {
-                    // Append selected items to the amenities of the room at the specified index
-                var existingRoom = updatedRoomInfo[roomIndex]
-                
-                existingRoom.roomAmenities = selectedItems
-                        
-                } else {
-                    print("Error: Room at index \(roomIndex) does not exist in roominfo.")
-                    return
-                }
+            // Reassign the updated room back to the array
+            updatedRoomInfo[roomIndex] = existingRoom
             
-            if var createBeachListing = createBeachListing{
-                createBeachListing.rooms = updatedRoomInfo
-                print(createBeachListing)
-                
-                coordinator?.gotoRoomPriceView(beachData: beachData, createBeachListingData: createBeachListing)
-            }
-       
+            print("Selected Items: \(selectedItems)")
+            print("Updated Room: \(existingRoom)")
+        } else {
+            print("Error: Room at index \(roomIndex) does not exist in room info.")
+            return
         }
+
+        // Create a mutable copy of the createBeachListing and update its rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+        
+        print("Updated CreateBeachListing: \(updatedBeachListing)")
+        
+        coordinator?.gotoRoomPriceView(beachData: beachData, createBeachListingData: updatedBeachListing)
     }
+    
+    
+    
+    @IBAction func saveAndExit(_ sender: Any) {
+        guard let createBeachListing = createBeachListing else { return }
+
+        // Get the last index of the rooms array
+        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        print("Current room index is \(roomIndex)")
+
+        // Safely get a mutable copy of the rooms array
+        var updatedRoomInfo = createBeachListing.rooms
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+            // Update the room amenities at the current room index
+            var existingRoom = updatedRoomInfo[roomIndex]
+            existingRoom.roomAmenities = selectedItems
+            
+            // Reassign the updated room back to the array
+            updatedRoomInfo[roomIndex] = existingRoom
+            
+            print("Selected Items: \(selectedItems)")
+            print("Updated Room: \(existingRoom)")
+        } else {
+            print("Error: Room at index \(roomIndex) does not exist in room info.")
+            return
+        }
+
+        // Create a mutable copy of the createBeachListing and update its rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+            
+            AppStorage.beachListing = updatedBeachListing
+            coordinator?.backToDashboard()
+        
+
+    }
+
     
 
 }

@@ -29,7 +29,7 @@ class ExploreCoordinator: Coordinator{
     func gotoBoatDetails(details: Listing){
         let vc: BoatDetailsView = .fromNib()
         vc.coordinator = self
-        vc.beachDetails = details
+        vc.boatDetails = details
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
@@ -39,6 +39,42 @@ class ExploreCoordinator: Coordinator{
         vc.coordinator = self
         vc.listing = listing
         vc.booking = booking
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoRoomDetailsView(listing: Listing, booking: CreateBeachHouseBookingRequest, room: BookingRoom){
+        let vc: RoomDetailsView = .fromNib()
+        vc.coordinator = self
+        vc.listing = listing
+        vc.booking = booking
+        vc.room = room
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoConfirmBookingView(listing: Listing, booking: CreateBeachHouseBookingRequest, roomId: String){
+        let vc: ConfirmBookingView = .fromNib()
+        vc.coordinator = self
+        vc.listing = listing
+        vc.booking = booking
+        vc.roomId = roomId
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoMakePayment(accessCode: String){
+        let vc: MakePaymentView = .fromNib()
+        vc.coordinator = self
+        vc.accessCode = accessCode
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoAllPhotos(images: [String]){
+        let vc: AllPhotosView = .fromNib()
+        vc.coordinator = self
+        vc.images = images
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }

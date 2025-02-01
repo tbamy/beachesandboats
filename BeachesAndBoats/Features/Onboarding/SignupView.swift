@@ -89,7 +89,7 @@ class SignupView: BaseViewControllerPlain{
             case .signUpSuccess(let response):
                 AppStorage.hasSignedUp = true
                 AppStorage.username = email
-                UserSession.shared.loginRes = response
+                UserSession.shared.signupRes = response
                 MiddleModal.show(title: response.message ?? "Registration Successful", type: .success, onConfirm: navigateToHome)
             case .signUpError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
@@ -147,7 +147,6 @@ extension SignupView: InfoDelegate{
 extension SignupView: CreateAccountDelegate{
     func signUpInfo(info: SignUpRequest) {
         print(info)
-        userInfo = info
         LoadingModal.show()
         vm.signUp(profileRequest: info)
     }

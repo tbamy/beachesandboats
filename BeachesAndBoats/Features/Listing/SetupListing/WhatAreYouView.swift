@@ -22,6 +22,9 @@ class WhatAreYouView: BaseViewControllerPlain {
         
     }
     
+    @IBAction func setupTapped(_ sender: Any) {
+        coordinator?.backToDashboard()
+    }
     
     func setup(){
         navigationItem.hidesBackButton = true

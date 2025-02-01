@@ -175,6 +175,9 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
+                    <connections>
+                        <action selector="setupTapped:" destination="-1" eventType="touchUpInside" id="RHb-im-1dD"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mS9-XE-Juh" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                     <rect key="frame" x="20" y="718" width="353" height="50"/>

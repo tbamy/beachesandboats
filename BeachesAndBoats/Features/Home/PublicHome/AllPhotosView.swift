@@ -9,6 +9,8 @@ import UIKit
 
 class AllPhotosView: BaseViewControllerPlain {
     
+    var coordinator: ExploreCoordinator?
+    
     @IBOutlet weak var photosCollectionView: UICollectionView!
 
     var images: [String] = []
@@ -19,6 +21,7 @@ class AllPhotosView: BaseViewControllerPlain {
         title = "Photos"
         
         setup()
+        print("Total Images: \(images.count)")
     }
     
     func setup(){
@@ -49,7 +52,7 @@ extension AllPhotosView: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.width / 2) - 4, height: 180)
+        return CGSize(width: (collectionView.bounds.width / 2), height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

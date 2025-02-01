@@ -16,7 +16,9 @@ class HorizonCalendarModal: BaseXib {
     let nibName = "HorizonCalendarModal"
     
     var selectedItem: String?
-    var callback: (String?) -> Void = { _ in }
+    var callback: (Date?, Date?) -> Void = { _,_  in }
+    var startDate: Date?
+    var endDate: Date?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,8 +34,15 @@ class HorizonCalendarModal: BaseXib {
         clearBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clearDates)))
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
         
-        calendarView.onDateSelected = { startDate, endDate in
+        calendarView.onDatesSelected = { startDate, endDate in
             self.selectedItem = "\(startDate.toFormattedDate()) - \(endDate?.toFormattedDate() ?? "")"
+            self.startDate = startDate
+            self.endDate = endDate
+        }
+        
+        calendarView.onDateSelected = { startDate in
+            self.selectedItem = "\(startDate.toFormattedDate())"
+            self.startDate = startDate
         }
     }
     
@@ -46,7 +55,8 @@ class HorizonCalendarModal: BaseXib {
     }
     
     @IBAction func saveTapped(_ sender: Any) {
-        callback(selectedItem)
+        callback(startDate, endDate)
+        print("Start Date: \(startDate), End Date: \(endDate)")
         dismiss()
     }
     
@@ -54,7 +64,7 @@ class HorizonCalendarModal: BaseXib {
 
 extension HorizonCalendarModal{
     
-    public static func show(callBack: @escaping (String?) -> Void) {
+    public static func show(callBack: @escaping (Date?, Date?) -> Void) {
         let backDrop = UIView(frame: Helpers.screen)
         backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         

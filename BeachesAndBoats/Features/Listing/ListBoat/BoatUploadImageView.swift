@@ -20,6 +20,7 @@ class BoatUploadImageView: BaseViewControllerPlain {
     @IBOutlet weak var nextBtn: PrimaryButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     var disposeBag = DisposeBag()
     var vm = ListBoatViewModel()
@@ -59,6 +60,17 @@ class BoatUploadImageView: BaseViewControllerPlain {
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
     
+    func updateCollectionViewHeight(_ collectionView: UICollectionView, _ collectionViewHeightConstraint: NSLayoutConstraint) {
+        DispatchQueue.main.async {
+            collectionView.layoutIfNeeded()
+            let contentHeight = collectionView.contentSize.height
+            collectionViewHeightConstraint.constant = contentHeight
+            self.view.layoutIfNeeded()
+        }
+    }
+
+
+    
     func setupDragAndDrop() {
         uploadBtn.onImageDropped = { [weak self] image in
             self?.images.append(image)
@@ -97,11 +109,13 @@ class BoatUploadImageView: BaseViewControllerPlain {
             if var createBoatListing = createBoatListing{
                 createBoatListing.images = boatImages
                 print(createBoatListing)
-                
+                LoadingModal.show(title: "Hold on while we list your Boat")
+                vm.createBoat(createBoatListing)
                 
             }
             
         }
+        
     }
     
     
@@ -216,6 +230,7 @@ extension BoatUploadImageView: UIImagePickerControllerDelegate, UINavigationCont
         if let selectedImage = info[.originalImage] as? UIImage {
             images.append(selectedImage)
             collectionView.reloadData()
+            updateCollectionViewHeight(collectionView, collectionViewHeight)
         }
         picker.dismiss(animated: true, completion: nil)
     }
