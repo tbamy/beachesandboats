@@ -1,0 +1,67 @@
+//
+//  MakeBoatPaymentView.swift
+//  BeachesAndBoats
+//
+//  Created by Tolu Akintayo on 06/02/2025.
+//
+
+import UIKit
+import PaystackCore
+import PaystackUI
+
+class MakeBoatPaymentView: UIViewController {
+    
+    var coordinator: ExploreCoordinator?
+
+    @IBOutlet weak var payButton: PrimaryButton!
+  
+//    var accessCode: String?
+    var bookingResponse: BoatBookingResponse?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Pay with Paystack"
+
+        let amountToPay: Float = bookingResponse?.data?.bookingDetail?.total ?? 0
+        let buttonTitle = "Pay (₦\(amountToPay))"
+        payButton.setTitle(buttonTitle, for: .normal)
+    }
+    
+    @IBAction func payTapped(_ sender: Any) {
+        let paystack = try? PaystackBuilder
+               .newInstance
+               .setKey("pk_test_86bef2313897f8e69fa1067e9bb722f400883417")
+               .build()
+        
+        if let accessCode = bookingResponse?.data?.paymentData?.accessCode{
+            paystack?.presentChargeUI(on: self,
+                                              accessCode: accessCode,
+                                              onComplete: paymentDone)
+        }else{
+            MiddleModal.show(title: "Oops!", subtitle: "Something went wrong during your booking.", type: .error, dismissable: true, dismissOnConfirm: true)
+        }
+    }
+
+
+
+    func paymentDone(_ result: TransactionResult) {
+        switch (result){
+        case .completed(let details):
+            print("Transaction completed with reference: \(details.reference)")
+            MiddleModal.show(title: "Payment and booking made successfully!", type: .success, primaryText: "View Booking", secondaryText: "Done", dismissable: false, dismissOnConfirm: false, onConfirm: { self.gotoViewBooking() }, onCancel: { self.coordinator?.backToDashboard() })
+        case .cancelled:
+            MiddleModal.show(title: "An Error Occured", subtitle: "Payment was cancelled", type: .error, dismissable: true, dismissOnConfirm: true)
+        case .error(error: let error, reference: let reference):
+            MiddleModal.show(title: "An error occured", subtitle: error.message, type: .error, dismissable: true, dismissOnConfirm: true)
+            print("An error occured: \(error.message) with reference: \(String(describing: reference))")
+        }
+    }
+    
+    func gotoViewBooking(){
+        coordinator?.switchToBookingCoordinator()
+    }
+}
+
+
+

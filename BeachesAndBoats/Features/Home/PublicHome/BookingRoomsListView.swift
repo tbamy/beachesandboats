@@ -98,7 +98,7 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
         view.model.img = cellAt.images?.first?.url ?? ""
         view.model.amenities = listing?.amenities ?? []
         if let price = cellAt.pricePerNight {
-            view.model.price = "₦ \(price ?? 0)"
+            view.model.price = "₦ \(price)"
         }
         
         view.model.tapped = { [weak self] in
@@ -110,7 +110,7 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
             roomId = rooms[indexPath.item].id
             self.reserveBtnView.isHidden = false
             if let price = cellAt.pricePerNight {
-                self.reserveBtn.setTitle("Reserve for ₦ \(price ?? 0)", for: .normal)
+                self.reserveBtn.setTitle("Reserve for ₦ \(price)", for: .normal)
             }
         }
 

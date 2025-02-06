@@ -49,6 +49,8 @@ class ConfirmBookingView: BaseViewControllerPlain {
     
     var picker = UIDatePicker()
     
+    var bookingResponse: BeachHouseBookingResponse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +59,41 @@ class ConfirmBookingView: BaseViewControllerPlain {
         bind()
         LoadingModal.show()
         input.onNext(.getBookingConfiguration)
+    }
+    
+    func setup(){
+        
+        configureButtons()
+        
+        room = listing?.rooms?.first { $0.id == roomId }
+
+        startDate = booking?.checkingDate ?? ""
+        endDate = booking?.checkoutDate ?? ""
+        checkInTime = listing?.checkInFrom
+        checkOutTime = listing?.checkOutTo
+        numberOfGuests = room?.noOfOccupant ?? 0
+        
+        let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+        
+        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
+//        timeLabel
+        if let price = room?.pricePerNight {
+            timeLabel.text = "\(checkInTime ?? "") - \(checkOutTime ?? "")"
+            guestLabel.text = "\(numberOfGuests ?? 0) Guests"
+            costLabel.text = "₦\(price) x \(nights) Nights"
+            let totalCost = (price) * Float(nights)
+//            let configurationCost = configuration?.roomCleaningFee ?? 0
+            let serviceCost = configuration?.houseServiceFee ?? 0
+            costAmountLabel.text = "₦ \(totalCost)"
+//            cleaningFeeLabel.text = "₦ \(configurationCost)"
+            serviceFeeLabel.text = "₦ \(serviceCost)"
+            cancellationPolicyLabel.text = configuration?.cancellationPolicy
+            let finalTotal = totalCost + serviceCost
+            totalAmountLabel.text = "₦ \(finalTotal)"
+            amount = finalTotal
+        }
+        
+
     }
 
     @IBAction func makePaymentTapped(_ sender: Any) {
@@ -94,19 +131,23 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     @IBAction func editDateBtnTapped(_ sender: Any) {
-        HorizonCalendarModal.show { [weak self] startDate, endDate in
+        HorizonCalendarModal.show { [weak self] startDatee, endDatee in
             guard let self = self else { return }
-            if endDate == nil{
-                if let startDate = startDate{
-                    print("\(startDate)")
-                    self.startDate = startDate.toFormattedDate()
-                    self.endDate = startDate.toFormattedDate()
+            if endDatee == nil{
+                if let startDatee = startDatee{
+                    print("\(startDatee)")
+                    self.startDate = startDatee.toFormattedDate()
+                    self.endDate = startDatee.toFormattedDate()
+                    let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
                 }
             }else{
-                if let startDate = startDate, let endDate = endDate{
-                    print("\(startDate) - \(endDate)")
-                    self.startDate = startDate.toFormattedDate()
-                    self.endDate = endDate.toFormattedDate()
+                if let startDatee = startDatee, let endDatee = endDatee{
+                    print("\(startDatee) - \(endDatee)")
+                    self.startDate = startDatee.toFormattedDate()
+                    self.endDate = endDatee.toFormattedDate()
+                    let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
                 }
             }
         }
@@ -141,40 +182,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
         return components.day
     }
     
-    func setup(){
-        
-        configureButtons()
-        
-        room = listing?.rooms?.first { $0.id == roomId }
 
-        startDate = booking?.checkingDate ?? ""
-        endDate = booking?.checkoutDate ?? ""
-        checkInTime = listing?.checkInFrom
-        checkOutTime = listing?.checkOutTo
-        numberOfGuests = room?.noOfOccupant ?? 0
-        
-        let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
-        
-        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
-//        timeLabel
-        if let price = room?.pricePerNight {
-            timeLabel.text = "\(checkInTime ?? "") - \(checkOutTime ?? "")"
-            guestLabel.text = "\(numberOfGuests ?? 0) Guests"
-            costLabel.text = "₦\(price ?? 0) x \(nights) Nights"
-            let totalCost = (price ?? 0) * Float(nights)
-//            let configurationCost = configuration?.roomCleaningFee ?? 0
-            let serviceCost = configuration?.houseServiceFee ?? 0
-            costAmountLabel.text = "₦ \(totalCost)"
-//            cleaningFeeLabel.text = "₦ \(configurationCost)"
-            serviceFeeLabel.text = "₦ \(serviceCost)"
-            cancellationPolicyLabel.text = configuration?.cancellationPolicy
-            let finalTotal = totalCost + serviceCost
-            totalAmountLabel.text = "₦ \(finalTotal)"
-            amount = finalTotal
-        }
-        
-
-    }
     
     func configureButtons(){
         editDateBtn.configureButtonTitle(title: "Edit")
@@ -196,13 +204,15 @@ class ConfirmBookingView: BaseViewControllerPlain {
             case .getBookingConfigurationSuccess(let response):
                 self?.configuration = response.data
                 self?.setup()
-                print(self?.configuration)
+//                print(self?.configuration)
                 
             case .getBookingConfigurationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
             case .createBeachHouseBookingSuccess(let response):
-                self?.accessCode = response.data?.paymentData?.accessCode
-                self?.coordinator?.gotoMakePayment(accessCode: self?.accessCode ?? "")
+                self?.bookingResponse = response
+//                self?.accessCode = response.data?.paymentData?.accessCode
+                guard let booking = self?.bookingResponse else { return  }
+                self?.coordinator?.gotoMakePayment(bookingResponse: booking)
             case .createBeachHouseBookingFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }

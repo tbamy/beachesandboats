@@ -12,7 +12,7 @@ public class HorizonDateField: UIView {
     // MARK: - UI Components
     private let titleLabel = UILabel()
     private let textField = UITextField()
-    private let calendarIcon = UIImageView()
+//    private let calendarIcon = UIImageView()
 
     // Callback to handle date selection
     public var onDateSelected: ((Date) -> Void)?
@@ -38,9 +38,9 @@ public class HorizonDateField: UIView {
         set { textField.text = newValue }
     }
 
-    public var icon: UIImage? {
-        didSet { calendarIcon.image = icon }
-    }
+//    public var icon: UIImage? {
+//        didSet { calendarIcon.image = icon }
+//    }
 
     // MARK: - Initializer
     public override init(frame: CGRect) {
@@ -66,12 +66,12 @@ public class HorizonDateField: UIView {
         textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
         textField.rightViewMode = .always
 
-        // Configure calendar icon
-        calendarIcon.image = UIImage(named: "calendar")
-        calendarIcon.contentMode = .scaleAspectFit
-        calendarIcon.isUserInteractionEnabled = true
+//        // Configure calendar icon
+//        calendarIcon.image = UIImage(named: "calendar")
+//        calendarIcon.contentMode = .scaleAspectFit
+        textField.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showCalendarModal))
-        calendarIcon.addGestureRecognizer(tapGesture)
+        textField.addGestureRecognizer(tapGesture)
 
         // Add subviews and layout
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField])
@@ -79,21 +79,21 @@ public class HorizonDateField: UIView {
         stackView.spacing = 4
 
         addSubview(stackView)
-        addSubview(calendarIcon)
+//        addSubview(calendarIcon)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        calendarIcon.translatesAutoresizingMaskIntoConstraints = false
+//        calendarIcon.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: calendarIcon.leadingAnchor, constant: -8),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
 
-            calendarIcon.widthAnchor.constraint(equalToConstant: 24),
-            calendarIcon.heightAnchor.constraint(equalToConstant: 24),
-            calendarIcon.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
-            calendarIcon.trailingAnchor.constraint(equalTo: trailingAnchor)
+//            calendarIcon.widthAnchor.constraint(equalToConstant: 24),
+//            calendarIcon.heightAnchor.constraint(equalToConstant: 24),
+//            calendarIcon.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
+//            calendarIcon.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 

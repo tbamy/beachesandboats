@@ -8,6 +8,34 @@
 import Foundation
 
 class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
+    func getAllDishes(completion: @escaping (Result<GetAllDishesResponse, ErrorResponse>) -> Void) {
+        provider.request(.AllDishes){ completion( self.handleResult(result: $0))}
+    }
+    
+    func addOrUpdateFavourite(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
+        provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func findChefByDishes(dishIds: String, completion: @escaping (Result<FindServiceProviderResponse, ErrorResponse>) -> Void) {
+        provider.request(.FindChefByDishes(dishIds: dishIds)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func findBouncers(gender: String, completion: @escaping (Result<FindServiceProviderResponse, ErrorResponse>) -> Void) {
+        provider.request(.FindBouncers(gender: gender)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func findDJ(completion: @escaping (Result<FindServiceProviderResponse, ErrorResponse>) -> Void) {
+        provider.request(.FindDj){ completion( self.handleResult(result: $0))}
+    }
+    
+    func updateProviderBookingDate(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
+        provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func bookServiceProvider(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
+        provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
+    }
+    
     func createBeachHouseBooking(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
         provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
     }

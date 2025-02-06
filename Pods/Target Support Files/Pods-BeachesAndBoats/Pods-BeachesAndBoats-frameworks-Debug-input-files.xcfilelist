@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-BeachesAndBoats/Pods-BeachesAndBoats-frameworks.sh
+${BUILT_PRODUCTS_DIR}/NWWebSocket/NWWebSocket.framework
+${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework
+${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework

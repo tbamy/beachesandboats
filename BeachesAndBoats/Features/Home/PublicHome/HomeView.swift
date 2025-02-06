@@ -48,7 +48,7 @@ class HomeView: BaseViewControllerPlain {
     var subcategories: [SubCategory] = []
     var boats: [Listing] = []
     var beaches: [Listing] = []
-    var services: [Listing] = []
+    var services: [BeachHouseBooking] = []
     var topRatedBoats: [Listing] = []
     var topRatedBeaches: [Listing] = []
     
@@ -56,7 +56,8 @@ class HomeView: BaseViewControllerPlain {
     var selectedBoatCat: String = ""
     var selectedServiceCat: String = ""
     
-    var selectedCatIndex: Int? = nil
+    var selectedCatIndex: Int? = 0
+//    var selectedServiceProvider: String = ""
     
     var details: Listing?
     
@@ -89,7 +90,11 @@ class HomeView: BaseViewControllerPlain {
         boatStack.isHidden = true
         serviceStack.isHidden = true
         
-        searchField
+        searchField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchTapped)))
+        
+    }
+    
+    @objc func searchTapped(){
         
     }
     
@@ -113,8 +118,6 @@ class HomeView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.tag = tag
         collectionView.backgroundColor = .clear
-//        collectionView.layer.borderColor = UIColor.beachBlue.cgColor
-//        collectionView.layer.borderWidth = 2
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
 
@@ -157,7 +160,6 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case 2:
             return subcategories.count
         case 3:
-//            print(topRatedBoats.count)
             return topRatedBeaches.count
         case 4:
             print(beaches.count)
@@ -179,18 +181,18 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case 1:
             let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
             let cellAt = categories[indexPath.item]
+            cell.isUserInteractionEnabled = true
             let view = CategoriesCell(frame: cell.bounds)
             view.identifier = "Categories " + indexPath.description
             view.model.image = cellAt.image ?? ""
             view.model.title = cellAt.name ?? ""
             
-//            view.model.state = (indexPath.item == selectedCatIndex)
 //            view.model.tapped = { [weak self] in
 //                guard let self = self else { return }
 //                self.selectedCatIndex = indexPath.item
 //                self.categoryCollectionView.reloadData()
 //            }
-                
+            view.model.state = (indexPath.item == selectedCatIndex)
             
             cell.applyView(view: view)
             return cell
@@ -286,12 +288,15 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             
             let service = services[indexPath.item]
             
-            let view = BookingViewCell(frame: cell.bounds)
+            let view = BookingCell(frame: cell.bounds)
             view.identifier = "Services " + indexPath.description
-            view.model.date = "\(service.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(service.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
-            view.model.image = service.images?.first?.url ?? ""
-            view.model.location = "\(service.locations?.city ?? ""), \(service.locations?.state ?? "") \(service.locations?.country ?? "")"
-            view.model.title = "\(service.name ?? "")"
+            view.model.date = "\(service.checkingDate?.convertToShorterDateFormat() ?? "") - \(service.checkoutDate?.convertToShorterDateFormat() ?? "")"
+            view.model.image = service.beachHouse?.image ?? ""
+            view.model.location = "\(service.beachHouse?.locations?.city ?? ""), \(service.beachHouse?.locations?.state ?? "") \(service.beachHouse?.locations?.country ?? "")"
+            view.model.title = "\(service.beachHouse?.name ?? "")"
+            
+            cell.applyView(view: view)
+            
             return cell
             
         default:
@@ -302,8 +307,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView.tag {
+            
         case 1:
             print("DO something")
+            self.selectedCatIndex = indexPath.item
+            self.categoryCollectionView.reloadData()
             if indexPath.item == 0{
                 self.selectedBeachCat = categories.prefix(2).compactMap { $0.id }
                 let selectedCategories = self.categories.filter { category in
@@ -312,11 +320,13 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return selectedBeachCat.contains(categoryId)
                 }
                 self.beaches = selectedCategories.compactMap { $0.listings }.flatMap { $0 }
-                self.topRatedBeaches = self.beaches.filter({$0.rating == 0})
+                self.topRatedBeaches = self.beaches.filter({$0.rating == 7})
                 self.topRatedBeachHouseStack.isHidden = self.topRatedBeaches.isEmpty
                 self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
                 self.reloadCollectionViews()
                 print("Beaches Data: \(self.beaches)")
+                print("TopRated Beaches: \(self.topRatedBeaches)")
+                subcategoryCollectionView.isHidden = false
                 topRatedBoatStack.isHidden = true
                 topRatedBeachHouseStack.isHidden = false
                 boatStack.isHidden = true
@@ -339,10 +349,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
                 self.reloadCollectionViews()
                 print("Boat Data: \(self.boats)")
+                print("TopRated Boats: \(self.topRatedBoats)")
                 topRatedBoatStack.isHidden = topRatedBoats.isEmpty
+                subcategoryCollectionView.isHidden = false
                 boatStack.isHidden = false
                 topRatedBeachHouseStack.isHidden = true
-                topRatedBoatStack.isHidden = false
                 beachHouseStack.isHidden = true
                 self.updateCollectionViewHeight(self.boatCollectionView, self.boatCollectionViewHeightConstraint)
                 self.updateCollectionViewHeight(self.topRatedBoatCollectionView, self.topRatedBoatCollectionVIewHeightConstraint)
@@ -354,42 +365,21 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     let categoryId = category.id ?? ""
                     return selectedServiceCat.contains(categoryId)
                 }
-                self.services = selectedCategories.compactMap { $0.listings}.flatMap{ $0 }
+                self.services = selectedCategories.compactMap { $0.beachHouseBookings}.flatMap{ $0 }
                 self.reloadCollectionViews()
                 print("Sselected service: \(self.selectedServiceCat)")
                 print("Services Data: \(self.services)")
+                if services.isEmpty{
+                    
+                }
                 subcategoryCollectionView.isHidden = true
                 topRatedBoatStack.isHidden = true
                 boatStack.isHidden = true
                 topRatedBeachHouseStack.isHidden = true
                 beachHouseStack.isHidden = true
+                serviceStack.isHidden = false
 
             }
-            
-            // Highlight the selected cell by setting a border
-            if collectionView.cellForItem(at: indexPath) is DynamicCollectionViewCell {
-                let selectedView = CategoriesCell()
-                selectedView.model.state = true
-//                selectedCell.layer.borderWidth = 3
-//                selectedCell.layer.borderColor = UIColor.systemOrange.cgColor
-//                selectedCell.layer.cornerRadius = 8
-            }
-
-            // Remove the border for other cells
-            for cell in collectionView.visibleCells {
-                guard let cardCell = cell as? DynamicCollectionViewCell else {
-                    continue
-                }
-
-                if let cellIndexPath = collectionView.indexPath(for: cardCell), cellIndexPath != indexPath {
-                    let selectedView = CategoriesCell()
-                    selectedView.model.state = false
-//                    cardCell.layer.borderWidth = 0
-//                    cardCell.layer.borderColor = UIColor.clear.cgColor
-                }
-            }
-
-                    
             
         case 2:
             print("Do Nothing")
@@ -403,7 +393,9 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case 6:
             coordinator?.gotoBoatDetails(details: boats[indexPath.item])
         case 7:
-            print("DO something")
+            print("Select a provider")
+            selectServiceProvider()
+
         default:
             print("DO something")
         }
@@ -459,6 +451,7 @@ extension HomeView{
                     self.topRatedBeaches = self.beaches.filter({$0.rating == 0}) 
                     self.topRatedBeachHouseStack.isHidden = self.topRatedBeaches.isEmpty
                     self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 } 
+//                    self.services = selectedCategories.compactMap{ $0.}
                     self.reloadCollectionViews()
                     print("Beaches Data: \(self.beaches)")
                     self.updateCollectionViewHeight(self.beachHouseCollectionView, self.beachHouseCollectionViewHeightConstraint)
@@ -507,7 +500,9 @@ extension HomeView{
             description: firstCategory.description, // Optionally keep the description of the first
             image: firstCategory.image, // Optionally keep the image of the first
             subCategories: mergedSubCategories,
-            listings: mergedListings
+            listings: mergedListings,
+            boatBookings: firstCategory.boatBookings,
+            beachHouseBookings: firstCategory.beachHouseBookings
         )
         
         // Update the array
@@ -515,6 +510,22 @@ extension HomeView{
         updatedCategories.remove(at: 1)       // Remove the second category
         
         return updatedCategories
+    }
+    
+    
+    func selectServiceProvider(){
+        SelectServiceModal.show(callBack: { [weak self] selected in
+            switch selected {
+            case "CHEF":
+                self?.coordinator?.gotoFindChef()
+            case "BOUNCER":
+                self?.coordinator?.gotoFindBouncer()
+            case "DJ":
+                self?.coordinator?.gotoFindDj()
+            default:
+                print("Nothing")
+            }
+        })
     }
 
 }

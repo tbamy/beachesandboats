@@ -114,6 +114,7 @@ class BookingRoomCell: BaseXib{
             selectBtn.isHidden = true
             selectedBtn.isHidden = false
             selectedBtn.setTitle("1 Unit", for: .normal)
+            selectBtn.setTitleColor(.beachBlue, for: .normal)
             
         } else {
             layer.borderColor = UIColor.clear.cgColor

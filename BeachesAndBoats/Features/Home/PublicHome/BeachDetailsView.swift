@@ -55,6 +55,9 @@ class BeachDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
+        checkinDateLabel.placeholder = "Select Date"
+        checkoutDateLabel.placeholder = "Select Date"
+        
         if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
 //            print("Image Url is: \(url)")
             topImage.kf.setImage(with: url)
@@ -65,6 +68,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
         
+        nightBookingBtn.isChecked = true
         dayBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
             self.isDayBooking = isSelected
@@ -74,7 +78,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         nightBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
             self.isDayBooking = isSelected
-            self.nightBookingBtn.isChecked = false
+            self.dayBookingBtn.isChecked = false
         }
         
 //        print("Available From: \(backendFrom_when) - Available To: \(backendTo_when)")

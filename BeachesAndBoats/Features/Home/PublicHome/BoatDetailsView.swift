@@ -47,6 +47,9 @@ class BoatDetailsView: BaseViewControllerPlain {
     
     var numberOfPeoplePickerItems: [PickerItem] = []
     var cruiseLengthPickerItems: [PickerItem] = []
+    
+    var isCruising: Bool = false
+    let user = UserSession.shared.userDetails?.id
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +61,7 @@ class BoatDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
-        if let url = URL(string: boatDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
+        if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             print("Image Url is: \(url)")
             topImage.kf.setImage(with: url)
         }
@@ -75,20 +78,36 @@ class BoatDetailsView: BaseViewControllerPlain {
         amenities = boatDetails?.amenities ?? []
         destinations = boatDetails?.destinations ?? []
         pickerItems = destinations.compactMap{ destination in
-                guard let id = destination.id, let name = destination.name else {
-                    return nil
-                }
-                return PickerItem(name: name, value: id)
+            guard let id = destination.id, let name = destination.name else {
+                return nil
+            }
+            return PickerItem(name: name, value: id)
+                
         }
         myDestinationDropdown.items = pickerItems
         
         numberOfPeoplePickerItems = (1...10).map { PickerItem(name: "\($0)", value: "\($0)") }
-        cruiseLengthPickerItems = (1...10).map { PickerItem(name: "\($0)", value: "\($0)") }
+        cruiseLengthPickerItems = (1...10).map { PickerItem(name: "\($0) hours", value: "\($0)") }
         
         numberOfPeopleLabel.items = numberOfPeoplePickerItems
         cruiseLengthLabel.items = cruiseLengthPickerItems
                 
+        travelDestinationOption.isChecked = true
+        cruisingOption.stateChanged = { [weak self] isSelected in
+            guard let self = self else { return }
+            self.isCruising = isSelected
+            self.travelDestinationOption.isChecked = false
+            cruiseLengthStack.isHidden = false
+            myDestinationStack.isHidden = true
+        }
         
+        travelDestinationOption.stateChanged = { [weak self] isSelected in
+            guard let self = self else { return }
+            self.isCruising = isSelected
+            self.cruisingOption.isChecked = false
+            myDestinationStack.isHidden = false
+            cruiseLengthStack.isHidden = true
+        }
 
         
         topImage.isUserInteractionEnabled = true
@@ -112,13 +131,35 @@ class BoatDetailsView: BaseViewControllerPlain {
 
     @objc func viewImages(){
         
-        if let rooms = boatDetails?.rooms{
-            roomImages = rooms.compactMap { $0.images }
-                .flatMap { $0 }
-                .compactMap { $0.url }
+        if let rooms = boatDetails?.images{
+            roomImages = rooms.compactMap { $0.url }
             coordinator?.gotoAllPhotos(images: roomImages)
         }
         
+    }
+    
+    @IBAction func continueBookingTapped(_ sender: Any) {
+        print("Continue Tapped")
+        
+        let bookingType = isCruising ? "CRUISE" : "TRAVEL"
+        
+        if validateRequest(){
+            if let bookingDate = bookingDateLabel.selectedDate, let bookingTime = bookingTimeLabel.selectedTime, let cruiseLength = cruiseLengthLabel.selectedItem, let numberOfPeople = numberOfPeopleLabel.selectedItem{
+                let request = CreateBoatBookingRequest(boatId: boatDetails?.id ?? "", userId: user ?? "", bookingDate: bookingDate.toBackendDate(), bookingTime: bookingTime.toBackendTime(), bookingType: bookingType, numberOfPeople: Int(numberOfPeople.value) ?? 1, destinationId: myDestinationDropdown.selectedItem?.value ?? "", cruiseLength: Int(cruiseLength.value) ?? 1)
+                print(request)
+                
+            }
+        }
+        
+    }
+    
+    func validateRequest() -> Bool{
+        let validateBookingDate = bookingDateLabel.validate(rules: [Rule(.isEmpty, "Booking Date must be selected")])
+        let validateBookingTime = bookingTimeLabel.validate(rules: [Rule(.isEmpty, "Booking Time must be selected")])
+//        let validateCruiseLength = cruiseLengthLabel.validate(rules: [Rule(.isEmpty, "Select must be selected")])
+        let validateNumberOfPeople = numberOfPeopleLabel.validate(rules: [Rule(.isEmpty, "Departure Date must be selected")])
+        
+        return validateBookingDate && validateBookingTime && validateNumberOfPeople
     }
 
 }

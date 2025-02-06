@@ -24,6 +24,8 @@ struct PropertyCategory: Codable {
     let image: String?
     let subCategories: [SubCategory]?
     let listings: [Listing]?
+    let boatBookings: [BoatBooking]?
+    let beachHouseBookings: [BeachHouseBooking]?
     
 }
 
@@ -42,10 +44,8 @@ struct Listing: Codable {
     let name: String?
     let description: String?
     let aboutOwner: String?
-    let checkInFrom: String?
-    let checkInTo: String?
-    let checkOutFrom: String?
-    let checkOutTo: String?
+    let pricePerDay, dayDiscountPercent, listingPrice, discountPercent: Float?
+    let checkInFrom, checkInTo, checkOutFrom, checkOutTo: String?
     let pricePerNight: Float?
     let bookingType: String?
     let category: Category?
@@ -66,38 +66,78 @@ struct Listing: Codable {
     let noOfPets: Int?
     let destinations: [Destinations]?
     let images: [RoomImage]?
-//    let boatBookings: [BoatBooking]?
-//    let beachHouseBookings: [BeachHouseBooking]?
+
     
     enum CodingKeys: String, CodingKey {
         case id, name, description
         case aboutOwner = "about_owner"
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
+        case listingPrice = "listing_price"
+        case discountPercent = "discount_percent"
         case checkInFrom = "check_in_from"
         case checkInTo = "check_in_to"
         case checkOutFrom = "check_out_from"
-        case checkOutTo = "check_out_to"
         case pricePerNight = "price_per_night"
+        case checkOutTo = "check_out_to"
         case bookingType = "booking_type"
         case category
         case subCategory = "sub_category"
-        case owner
-        case amenities
-        case languages
-        case locations
-        case availabilities
-        case houseRules
-        case rooms
-        case userReviewed
-        case rating
-        case userFavourite
-        case reviews
-        case noOfAdults = "no_of_adults"
-        case noOfChildren = "no_of_children"
-        case noOfPets = "no_of_pets"
-        case destinations
-        case images
+        case owner, amenities, languages, locations, availabilities, houseRules, rooms, userReviewed, rating, userFavourite, reviews
+        case noOfAdults
+        case noOfChildren
+        case noOfPets
+        case destinations, images
     }
 }
+
+//struct Listingg: Codable {
+//    let id, name, description, aboutOwner: String
+//    let pricePerDay, dayDiscountPercent, listingPrice, discountPercent: Float?
+//    let checkInFrom, checkInTo, checkOutFrom: String?
+//    let pricePerNight: Float?
+//    let checkOutTo: String?
+//    let bookingType: HouseBookingType?
+//    let category, subCategory: SubCategory?
+//    let owner: Owner?
+//    let amenities: [Amenity]?
+//    let languages: [Language]?
+//    let locations: Location?
+//    let availabilities: Availabilities?
+//    let houseRules: [HouseRule]?
+//    let rooms: [Room]?
+//    let userReviewed: Bool?
+//    let rating: Int?
+//    let userFavourite: Bool?
+//    let reviews: [Review]?
+//    let noOfAdults, noOfChildren, noOfPets: Int?
+//    let images: [Image]?
+//    let destinations: [Destination]?
+//    let boatBookings: [BoatBooking]?
+//    let beachHouseBookings: [BeachHouseBooking]?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, name, description
+//        case aboutOwner = "about_owner"
+//        case pricePerDay = "price_per_day"
+//        case dayDiscountPercent = "day_discount_percent"
+//        case listingPrice = "listing_price"
+//        case discountPercent = "discount_percent"
+//        case checkInFrom = "check_in_from"
+//        case checkInTo = "check_in_to"
+//        case checkOutFrom = "check_out_from"
+//        case pricePerNight = "price_per_night"
+//        case checkOutTo = "check_out_to"
+//        case bookingType = "booking_type"
+//        case category
+//        case subCategory = "sub_category"
+//        case owner, amenities, languages, locations, availabilities, houseRules, rooms, userReviewed, rating, userFavourite, reviews
+//        case noOfAdults
+//        case noOfChildren
+//        case noOfPets
+//        case images, destinations, boatBokings, beachHouseBookings
+//    }
+//}
 
 // MARK: - Category
 struct Category: Codable {
@@ -185,21 +225,19 @@ struct BookingRoom: Codable {
     let id: String?
     let name: String?
     let description: String?
-    let pricePerNight: Float??
-    let discountPercent: Float?
+    let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
     let images: [RoomImage]?
     let bedTypes: [BookingCatBedType]?
     let noOfOccupant: Int?
     let hasPrivateBathroom: Int?
     
-    enum CodingKeys: String, CodingKey{
-        case id
-        case name
-        case description
+    enum CodingKeys: String, CodingKey {
+        case id, name, description
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
         case pricePerNight = "price_per_night"
         case discountPercent = "discount_percent"
-        case images
-        case bedTypes
+        case images, bedTypes
         case noOfOccupant = "no_of_occupant"
         case hasPrivateBathroom = "has_private_bathroom"
     }
@@ -219,14 +257,17 @@ struct RoomImage: Codable{
 
 // MARK: - Review
 struct Review: Codable {
-//    let id: String
-//    let userId: String
-//    let reviewableId: String
-//    let reviewableType: String
-//    let rating: Int
-//    let note: String
-//    let createdAt: String
-//    let updatedAt: String
+    let id, firstName, lastName, email: String?
+    let phoneCode, phoneNumber: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case email
+        case phoneCode = "phone_code"
+        case phoneNumber = "phone_number"
+    }
 }
 
 // MARK: - Boat Booking
@@ -236,7 +277,71 @@ struct BoatBooking: Codable {
 
 // MARK: - Beach House Booking
 struct BeachHouseBooking: Codable {
-    // Define properties if available
+    let id, hostID: String?
+    let beachHouseRoom: BookingBeachHouseRoom?
+    let beachHouse: BookingBeachHouse?
+    let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
+    let noOfPeople: Int?
+    let status: String?
+    let summary: String?
+    let units, total: Int?
+    let createdAt: String?
+    let adminCharge: Int?
+    let cleaningFee: String?
+    let noOfNights: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case hostID = "host_id"
+        case beachHouseRoom = "beach_house_room"
+        case beachHouse = "beach_house"
+        case checkingDate = "checking_date"
+        case checkoutDate = "checkout_date"
+        case checkingTime = "checking_time"
+        case checkoutTime = "checkout_time"
+        case noOfPeople = "no_of_people"
+        case status, summary, units, total
+        case createdAt = "created_at"
+        case adminCharge = "admin_charge"
+        case cleaningFee = "cleaning_fee"
+        case noOfNights = "no_of_nights"
+    }
+}
+
+struct BookingBeachHouseRoom: Codable {
+    let id, name, description: String?
+    let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
+    let images: [Image]?
+    let bedTypes: [BedType]?
+    let noOfOccupant, hasPrivateBathroom: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
+        case pricePerNight = "price_per_night"
+        case discountPercent = "discount_percent"
+        case images, bedTypes
+        case noOfOccupant = "no_of_occupant"
+        case hasPrivateBathroom = "has_private_bathroom"
+    }
+}
+
+struct BookingBeachHouse: Codable {
+    let id, name, description, aboutOwner: String
+    let listingPrice, discountPercent: Float?
+    let image: String?
+    let locations: Locations?
+    let availabilities: Availabilities?
+    let rating: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description
+        case aboutOwner = "about_owner"
+        case listingPrice = "listing_price"
+        case discountPercent = "discount_percent"
+        case image, locations, availabilities, rating
+    }
 }
 
 

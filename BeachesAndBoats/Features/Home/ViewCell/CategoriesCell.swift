@@ -15,6 +15,7 @@ class CategoriesCell: BaseXib, Sizeable {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    @IBOutlet weak var blurView: UIView!
     
     @IBInspectable public var identifier: String = "" { didSet {
         self.accessibilityIdentifier = identifier
@@ -50,7 +51,10 @@ class CategoriesCell: BaseXib, Sizeable {
     }
     
     func setup(){
+        blurView.isHidden = false
+        blurView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         if isSubcategory{
+            blurView.isHidden = true
             imageHeight.constant = 20
             image.contentMode = .scaleAspectFit
         }
@@ -60,7 +64,7 @@ class CategoriesCell: BaseXib, Sizeable {
         if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
             image.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "calendar"),
+                placeholder: UIImage(named: "bookings_menu"),
                 options: nil,
                 completionHandler: { result in
                     switch result {
@@ -68,14 +72,17 @@ class CategoriesCell: BaseXib, Sizeable {
                         print("Image loaded: \(value.source.url?.absoluteString ?? "")")
                     case .failure(let error):
                         print("Failed to load image: \(error.localizedDescription)")
-                        self.image.image = UIImage(named: "calendar")
+                        self.image.image = UIImage(named: "bookings_menu")
                     }
                 }
             )
         } else {
-            image.image = UIImage(named: "calendar")
+            image.image = UIImage(named: "bookings_menu")
         }
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapped)))
+        
+            setState()
+//        model.tapped()
+//        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapped)))
         
     }
     
@@ -86,7 +93,7 @@ class CategoriesCell: BaseXib, Sizeable {
     @objc func onTapped(_ sender: UITapGestureRecognizer) {
 //        model.tapped()
 //        model.state = true
-        setState()
+//        setState()
     }
     
     func setState() {
@@ -94,9 +101,11 @@ class CategoriesCell: BaseXib, Sizeable {
             image.layer.borderColor = UIColor.systemOrange.cgColor
             image.layer.borderWidth = 2
             image.layer.cornerRadius = 8
+            blurView.isHidden = true
         } else {
             image.layer.borderColor = UIColor.clear.cgColor
             image.layer.borderWidth = 0
+            blurView.isHidden = false
         }
     }
 }

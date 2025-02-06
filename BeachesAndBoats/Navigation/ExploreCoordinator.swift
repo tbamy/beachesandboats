@@ -63,10 +63,20 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoMakePayment(accessCode: String){
+    func gotoMakePayment(bookingResponse: BeachHouseBookingResponse){
         let vc: MakePaymentView = .fromNib()
         vc.coordinator = self
-        vc.accessCode = accessCode
+//        vc.accessCode = accessCode
+        vc.bookingResponse = bookingResponse
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoMakeBoatPayment(bookingResponse: BoatBookingResponse){
+        let vc: MakeBoatPaymentView = .fromNib()
+        vc.coordinator = self
+//        vc.accessCode = accessCode
+        vc.bookingResponse = bookingResponse
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
@@ -79,10 +89,57 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoFindChef(){
+        let vc: FindChefView = .fromNib()
+        vc.coordinator = self
+//        vc.images = images
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoFindBouncer(){
+        let vc: FindBouncerView = .fromNib()
+        vc.coordinator = self
+//        vc.images = images
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoFindDj(){
+        let vc: FindDJView = .fromNib()
+        vc.coordinator = self
+//        vc.images = images
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoRecommentdations(data: FindServiceProviderResponse, provider: String ){
+        let vc: RecommendationsView = .fromNib()
+        vc.coordinator = self
+        vc.data = data
+        vc.provider = provider
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoServiceProviderDetails(data: FindChefResponseData, provider: String ){
+        let vc: ServiceProviderDetailsView = .fromNib()
+        vc.coordinator = self
+        vc.data = data
+        vc.provider = provider
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
     
     func backToDashboard() {
         navigationController = BaseNavigationController(rootViewController: Dashboard())
         UIApplication.shared.windows.first?.rootViewController = Dashboard()
+    }
+    
+    func switchToBookingCoordinator(){
+        navigationController = BaseNavigationController(rootViewController: BookingsView())
+        let coordinator = BookingsCoordinator(navigationController: navigationController)
+        coordinator.start()
     }
     
 }

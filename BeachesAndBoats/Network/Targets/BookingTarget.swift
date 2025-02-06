@@ -16,10 +16,10 @@ enum BookingTarget{
     case CreateBoatBooking(CreateBoatBookingRequest)
     case BookingConfiguration
     case AllDishes
-    case FindChefByDishes
+    case FindChefByDishes(dishIds: String)
     case BookServiceProvider
     case UpdateProviderBookingDate
-    case FindBouncers
+    case FindBouncers(gender: String)
     case FindDj
 }
 
@@ -104,14 +104,20 @@ extension BookingTarget: BaseTarget{
             return .requestPlain
         case .AllDishes:
             return .requestPlain
-        case .FindChefByDishes:
-            return .requestPlain
+        case .FindChefByDishes(let dishIds):
+            return .requestParameters(
+                parameters: ["dish_ids": dishIds],
+                encoding: URLEncoding.queryString
+            )
         case .BookServiceProvider:
             return .requestPlain
         case .UpdateProviderBookingDate:
             return .requestPlain
-        case .FindBouncers:
-            return .requestPlain
+        case .FindBouncers(let gender):
+            return .requestParameters(
+                parameters: ["gender": gender],
+                encoding: URLEncoding.queryString
+            )
         case .FindDj:
             return .requestPlain
         }

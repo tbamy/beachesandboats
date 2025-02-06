@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MakePaymentView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
-                <outlet property="paymentStack" destination="Nbe-iy-0JA" id="qSW-Mv-Yfr"/>
+                <outlet property="payButton" destination="vEA-0b-f5k" id="9s5-lA-PkW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,70 +19,46 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07V-Jh-wvL">
-                    <rect key="frame" x="0.0" y="89" width="393" height="109.33333333333331"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Bdj-yb-WF5">
+                    <rect key="frame" x="20" y="104" width="353" height="93"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make Payement with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1s-c8-ZL8">
-                            <rect key="frame" x="20" y="26" width="353" height="19.333333333333329"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click the button below to pay" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFB-zK-AqY">
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Nbe-iy-0JA">
-                            <rect key="frame" x="20" y="65.333333333333343" width="353" height="24"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payment" translatesAutoresizingMaskIntoConstraints="NO" id="b54-d9-oUK">
-                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="8ru-bB-GFJ"/>
-                                        <constraint firstAttribute="width" constant="24" id="adZ-4I-nmy"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paystack" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xA2-cO-Wg4">
-                                    <rect key="frame" x="44" y="3.6666666666666572" width="265" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qPg-pa-Ebg">
-                                    <rect key="frame" x="329" y="2.3333333333333321" width="24" height="19.666666666666668"/>
-                                    <color key="tintColor" name="Background"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="8dI-5j-mys"/>
-                                        <constraint firstAttribute="width" constant="24" id="YBY-nB-L7n"/>
-                                    </constraints>
-                                </imageView>
-                            </subviews>
-                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEA-0b-f5k" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="37" width="353" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="msx-ab-CIZ"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <connections>
+                                <action selector="payTapped:" destination="-1" eventType="touchUpInside" id="CBO-ch-vED"/>
+                            </connections>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="Nbe-iy-0JA" firstAttribute="top" secondItem="L1s-c8-ZL8" secondAttribute="bottom" constant="20" id="4AM-Di-x3R"/>
-                        <constraint firstItem="Nbe-iy-0JA" firstAttribute="leading" secondItem="07V-Jh-wvL" secondAttribute="leading" constant="20" id="5vE-DX-tq8"/>
-                        <constraint firstItem="L1s-c8-ZL8" firstAttribute="leading" secondItem="07V-Jh-wvL" secondAttribute="leading" constant="20" id="78w-A9-jfX"/>
-                        <constraint firstAttribute="trailing" secondItem="Nbe-iy-0JA" secondAttribute="trailing" constant="20" id="Cy8-vs-zIh"/>
-                        <constraint firstAttribute="bottom" secondItem="Nbe-iy-0JA" secondAttribute="bottom" constant="20" id="ZiD-en-aqv"/>
-                        <constraint firstAttribute="trailing" secondItem="L1s-c8-ZL8" secondAttribute="trailing" constant="20" id="bEY-Ps-I3d"/>
-                        <constraint firstItem="L1s-c8-ZL8" firstAttribute="top" secondItem="07V-Jh-wvL" secondAttribute="top" constant="26" id="bX9-Zz-qVK"/>
+                        <constraint firstAttribute="trailing" secondItem="vEA-0b-f5k" secondAttribute="trailing" id="RLT-0R-Dxg"/>
+                        <constraint firstItem="vEA-0b-f5k" firstAttribute="leading" secondItem="Bdj-yb-WF5" secondAttribute="leading" id="XdP-BO-guK"/>
+                        <constraint firstAttribute="trailing" secondItem="UFB-zK-AqY" secondAttribute="trailing" id="u89-cx-kKX"/>
+                        <constraint firstItem="UFB-zK-AqY" firstAttribute="leading" secondItem="Bdj-yb-WF5" secondAttribute="leading" id="vkB-9i-dsw"/>
                     </constraints>
-                </view>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="07V-Jh-wvL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lx2-kt-ssC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="07V-Jh-wvL" secondAttribute="trailing" id="afW-Bc-vdO"/>
-                <constraint firstItem="07V-Jh-wvL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="mGP-X9-ENO"/>
+                <constraint firstItem="Bdj-yb-WF5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9Dn-Mp-WBS"/>
+                <constraint firstItem="Bdj-yb-WF5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="45" id="UcK-Xg-euH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Bdj-yb-WF5" secondAttribute="trailing" constant="20" id="q8a-l0-7vv"/>
             </constraints>
             <point key="canvasLocation" x="138" y="20"/>
         </view>
     </objects>
     <resources>
-        <image name="payment" width="24" height="24"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
-        <namedColor name="Background">
-            <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
