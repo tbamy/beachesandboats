@@ -10,5 +10,6 @@ import Foundation
 struct ErrorResponse: Codable, Error {
     let message: String?
     let status: Bool?
+//    let errors: [String: [String]]?
     let errors: [String]?
 }

@@ -160,7 +160,7 @@ struct Boat: Codable {
     let id, name, description: String?
     let locations: Locations?
     let availabilities: Availabilities?
-    let images: [Image]?
+    let images: String? //[Image]?
     let destinations: [DestinationDetails]?
     let rating: Int?
 }

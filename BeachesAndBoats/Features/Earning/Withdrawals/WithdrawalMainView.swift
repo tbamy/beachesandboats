@@ -16,6 +16,7 @@ class WithdrawalMainView: BaseViewControllerPlain {
     private var makeWithdrawViewController: UIViewController!
     
     var coordinator: HostingServiceEarningCoordinator?
+    var withdrawHistory: WithdrawalResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()

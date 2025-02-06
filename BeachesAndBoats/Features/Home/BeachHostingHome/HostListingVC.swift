@@ -19,7 +19,7 @@ class HostListingVC: BaseViewControllerPlain {
     @IBOutlet weak var unfinishedListingName: UILabel!
     @IBOutlet weak var unfinishedListingLocation: UILabel!
     @IBOutlet weak var unfinishedListingStack: UIStackView!
-    
+    @IBOutlet weak var viewContainerHeightConstraint: NSLayoutConstraint!
     var coordinator: HostingHouseAndBoatListingCoordinator?
     
     let vm = HostListingVM()
@@ -46,6 +46,9 @@ class HostListingVC: BaseViewControllerPlain {
         bind()
         setupRightNavigationBar()
         gestureRecognizers()
+//        isShowingBeachHouses = true
+        beachHouseListingSegment.contentView.backgroundColor = .none
+        boatListingSegment.contentView.backgroundColor = .none
     }
     
     func gestureRecognizers() {
@@ -96,16 +99,24 @@ class HostListingVC: BaseViewControllerPlain {
     
     @objc func beachHouseTapped() {
         isShowingBeachHouses = true
-        beachHouseListingSegment.isSelected = true
-        boatListingSegment.isSelected = false
-        listingTableView.reloadData()
+        updateSelection()
     }
     
     @objc func boatTapped() {
         isShowingBeachHouses = false
-        boatListingSegment.isSelected = true
-        beachHouseListingSegment.isSelected = false
+        updateSelection()
+    }
+    
+    private func updateSelection() {
+        if isShowingBeachHouses {
+            beachHouseListingSegment.isSelected = true
+            boatListingSegment.isSelected = false
+        } else {
+            beachHouseListingSegment.isSelected = false
+            boatListingSegment.isSelected = true
+        }
         listingTableView.reloadData()
+        self.updateTableHeight()
     }
     
     func setupRightNavigationBar() {
@@ -127,6 +138,13 @@ class HostListingVC: BaseViewControllerPlain {
         searchField.duration.isHidden = true
         
     }
+    
+    private func updateTableHeight() {
+        listingTableView.layoutIfNeeded()
+        let contentHeight = listingTableView.contentSize.height
+        viewContainerHeightConstraint.constant = contentHeight + 350
+        view.layoutIfNeeded()
+    }
 }
 
 //MARK: - Binding
@@ -139,12 +157,17 @@ extension HostListingVC {
             case .beachHouseListingSuccess(let response):
                 if let listings = response.data?.beachHouseListings {
                     self?.beachHouseListingData = listings
+                    self?.beachHouseListingSegment.title = "Beach Houses Reservation (\(self?.beachHouseListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
+                    self?.updateTableHeight()
                 }
                 if let boatListings = response.data?.boatListings {
                     self?.boatListingData = boatListings
+                    self?.boatListingSegment.title = "Boats Reservation (\(self?.boatListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
+                    self?.updateTableHeight()
                 }
+                self?.updateSelection()
             case .beachHouseListingFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
@@ -169,7 +192,20 @@ extension HostListingVC: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         return cell
-       
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+            // Get actual content height
+            tableView.layoutIfNeeded()
+            let contentHeight = tableView.contentSize.height
+            
+            // Add height of UIView (300) + margins (50)
+            let totalHeight = contentHeight + 350
+            
+            viewContainerHeightConstraint.constant = totalHeight
+            view.layoutIfNeeded()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

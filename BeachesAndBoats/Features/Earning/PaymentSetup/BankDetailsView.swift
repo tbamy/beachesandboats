@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BankDetailsView: BaseViewControllerPlain {
     
@@ -15,21 +16,58 @@ class BankDetailsView: BaseViewControllerPlain {
     
     var coordinator: HostingServiceEarningCoordinator?
     
+    let vm = BankDetailsVM()
+    let disposeBag = DisposeBag()
+    let input = PublishSubject<BankDetailsVM.Input>()
+    
     var country: String = ""
     var paymentMethod: String = ""
-
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        input.onNext(.getBanks)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = "Payment Settings"
-
+        bind()
+        //        title = "Payment Settings"
+        
     }
-
+    
     @IBAction func saveBtnTapped(_ sender: Any) {
         if validateFields() {
             
         }
     }
     
+    func getBanks(_ banks: ListOfBanksResponse) {
+        guard let listOfBanks = banks.data else { return }
+        
+        bankDropDownField.items = listOfBanks.compactMap { bank in
+            let bankName = bank.name
+            let bankCode = bank.code
+            
+            return PickerItem(name: bankName ?? "", value: bankCode ?? "")
+        }
+    }
+}
+
+//MARK: - Bindin
+extension BankDetailsView {
+    func bind() {
+        vm.transform(input: input)
+        vm.output.subscribe(onNext: { [weak self] output in
+            LoadingModal.dismiss()
+            switch output {
+            case .getBanksSuccess(let response):
+                self?.getBanks(response)
+            case .getBanksFailure(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+    }
 }
 
 //MARK: - Field Validation

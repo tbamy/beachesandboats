@@ -57,16 +57,21 @@ class ListingDashboardVM {
             }})
     }
     
-    func handleBoatSuccess(_ response: BoatReservations) {
-        output.onNext(.boatReservationSuccess(response))
+    func handleBoatSuccess(_ response: HostingBookingResponse) {
+        if let boatReservation = response.data?.boatReservations {
+            output.onNext(.boatReservationSuccess(boatReservation))
+        }
     }
     
     func handleBoatFailure(_ error: ErrorResponse) {
         output.onNext(.boatReservationFailure(error))
     }
     
-    func handleBeachHouseSuccess(_ response: BeachHouseReservations) {
-        output.onNext(.beachHouseReservationSuccess(response))
+    func handleBeachHouseSuccess(_ response: HostingBookingResponse) {
+        if let beachHouseReservation = response.data?.beachHouseReservations
+        {
+            output.onNext(.beachHouseReservationSuccess(beachHouseReservation))
+        }
     }
     
     func handleBeachHouseFailure(_ error: ErrorResponse) {

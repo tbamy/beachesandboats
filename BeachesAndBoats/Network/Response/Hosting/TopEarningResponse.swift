@@ -32,8 +32,8 @@ struct EarningsData: Codable {
 }
 
 struct TopEarner: Codable {
-    let totalEarnings: Int
-    let propertyType: String
+    let totalEarnings: Decimal?
+    let propertyType: String?
     let beachHouse: BeachHouseData?
     let boat: String?
     
