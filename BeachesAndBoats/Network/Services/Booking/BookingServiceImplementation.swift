@@ -8,6 +8,10 @@
 import Foundation
 
 class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
+    func createBoatBooking(request: CreateBoatBookingRequest, completion: @escaping (Result<BoatBookingResponse, ErrorResponse>) -> Void) {
+        provider.request(.CreateBoatBooking(request)){ completion( self.handleResult(result: $0))}
+    }
+    
     func getAllDishes(completion: @escaping (Result<GetAllDishesResponse, ErrorResponse>) -> Void) {
         provider.request(.AllDishes){ completion( self.handleResult(result: $0))}
     }

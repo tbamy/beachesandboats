@@ -77,4 +77,11 @@ enum Urls: String {
     //MARK: - Listing
     case beachHouseAndBoatListing = "api/v1/hosting/dashboard/listings"
     
+    
+    //MARK: - Chats
+    case startConversation = "api/v1/chat/start-conversation"
+    case sendChat = "api/v1/chat/send-chat"
+    case getConservations = "api/v1/chat/get-conversations"
+    case getMessageHistory = "api/v1/chat/get-messages/%@"
+    
 }

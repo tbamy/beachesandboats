@@ -257,6 +257,21 @@
                   endingLineNumber = "77"
                   offsetFromSymbolStart = "2408">
                </Location>
+               <Location
+                  uuid = "24FC3947-F1C2-4831-9C12-739F5EBD0EC9 - 214caa5d45b9f85e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.ConfirmBookingView.makePaymentTapped(Any) -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/ConfirmBookingView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "2408">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

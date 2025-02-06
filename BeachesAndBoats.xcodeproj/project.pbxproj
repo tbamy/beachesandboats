@@ -110,6 +110,9 @@
 		A642F9232D54E1D00089F593 /* ConfirmBoatBookingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9212D54E1D00089F593 /* ConfirmBoatBookingView.xib */; };
 		A642F9262D54ED050089F593 /* MakeBoatPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9242D54ED050089F593 /* MakeBoatPaymentView.swift */; };
 		A642F9272D54ED050089F593 /* MakeBoatPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9252D54ED050089F593 /* MakeBoatPaymentView.xib */; };
+		A642F9292D5534710089F593 /* ChatsTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9282D5534710089F593 /* ChatsTarget.swift */; };
+		A642F92E2D55355C0089F593 /* ChatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F92D2D55355C0089F593 /* ChatsService.swift */; };
+		A642F9302D55356F0089F593 /* ChatsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F92F2D55356F0089F593 /* ChatsImplementation.swift */; };
 		A645D0402D3637C3005BFCD5 /* BookingConfigurationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */; };
 		A645D0432D363951005BFCD5 /* BookingConfigurationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */; };
 		A645D0452D3659FF005BFCD5 /* BeachHouseBookingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */; };
@@ -621,6 +624,9 @@
 		A642F9212D54E1D00089F593 /* ConfirmBoatBookingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmBoatBookingView.xib; sourceTree = "<group>"; };
 		A642F9242D54ED050089F593 /* MakeBoatPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBoatPaymentView.swift; sourceTree = "<group>"; };
 		A642F9252D54ED050089F593 /* MakeBoatPaymentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MakeBoatPaymentView.xib; sourceTree = "<group>"; };
+		A642F9282D5534710089F593 /* ChatsTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTarget.swift; sourceTree = "<group>"; };
+		A642F92D2D55355C0089F593 /* ChatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsService.swift; sourceTree = "<group>"; };
+		A642F92F2D55356F0089F593 /* ChatsImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsImplementation.swift; sourceTree = "<group>"; };
 		A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfigurationResponse.swift; sourceTree = "<group>"; };
 		A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfigurationVM.swift; sourceTree = "<group>"; };
 		A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachHouseBookingResponse.swift; sourceTree = "<group>"; };
@@ -1177,6 +1183,7 @@
 		A61627672C7DB04600F6B452 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A642F92C2D5535360089F593 /* Chats */,
 				A669F7A62D22F3FD00230E0A /* Hosting */,
 				A675D9A12D16C8C2003E297B /* Booking */,
 				A6A2E8422CBE8561004E58EB /* Profile */,
@@ -1495,6 +1502,29 @@
 				A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */,
 			);
 			path = Listing;
+			sourceTree = "<group>";
+		};
+		A642F92A2D55347D0089F593 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		A642F92B2D5534C50089F593 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		A642F92C2D5535360089F593 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				A642F92D2D55355C0089F593 /* ChatsService.swift */,
+				A642F92F2D55356F0089F593 /* ChatsImplementation.swift */,
+			);
+			path = Chats;
 			sourceTree = "<group>";
 		};
 		A645D0412D363930005BFCD5 /* ViewModel */ = {
@@ -2013,6 +2043,7 @@
 				A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */,
 				A675D9A82D16C914003E297B /* BookingTarget.swift */,
 				A669F7A42D22F2FA00230E0A /* HostingTarget.swift */,
+				A642F9282D5534710089F593 /* ChatsTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -2020,6 +2051,7 @@
 		A6C20FBE2C84F9A90045C670 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				A642F92A2D55347D0089F593 /* Chats */,
 				A669F79D2D22E8B000230E0A /* Hosting */,
 				A675D9B22D172DD0003E297B /* Booking */,
 				A675D99B2D16BDE1003E297B /* Profile */,
@@ -2035,6 +2067,7 @@
 		A6C20FBF2C84F9B50045C670 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				A642F92B2D5534C50089F593 /* Chats */,
 				A68A6EC22D256B37000A67E1 /* Hosting */,
 				A675D9AD2D171DAC003E297B /* Booking */,
 				A675D99E2D16C6B1003E297B /* Profile */,
@@ -2707,6 +2740,7 @@
 				A68A6EC42D256B51000A67E1 /* TopEarningRequest.swift in Sources */,
 				A60580A12CD8C60600B17505 /* BoatDataResponse.swift in Sources */,
 				A65125832CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift in Sources */,
+				A642F9292D5534710089F593 /* ChatsTarget.swift in Sources */,
 				A6EF00F52D287BB300893C05 /* Country.swift in Sources */,
 				A68A6ECE2D25808E000A67E1 /* YearPicker.swift in Sources */,
 				A6CA3D682CB9CEB5009307B2 /* BouncerGenderView.swift in Sources */,
@@ -2722,6 +2756,7 @@
 				A60580AD2CDAA27D00B17505 /* Helper+Extensions.swift in Sources */,
 				A6C20FF82C8715130045C670 /* SearchField.swift in Sources */,
 				A66F3FAE2D29770400902E43 /* HostingServiceMenuCoordinator.swift in Sources */,
+				A642F92E2D55355C0089F593 /* ChatsService.swift in Sources */,
 				A6C1C41C2CBBC9ED001CD27D /* HorizonDateField.swift in Sources */,
 				A6EF00DE2D2834E600893C05 /* KeyboardType.swift in Sources */,
 				A65C51252CAC300E0027E5F1 /* TextViewField.swift in Sources */,
@@ -2738,6 +2773,7 @@
 				A61627692C7DB05900F6B452 /* Urls.swift in Sources */,
 				A60580F72CDD43E900B17505 /* BoatNameView.swift in Sources */,
 				A63CE7B22C8ED236008D91C5 /* DateRangePicker.swift in Sources */,
+				A642F9302D55356F0089F593 /* ChatsImplementation.swift in Sources */,
 				A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */,
 				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */,
@@ -3073,12 +3109,14 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3102,12 +3140,14 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

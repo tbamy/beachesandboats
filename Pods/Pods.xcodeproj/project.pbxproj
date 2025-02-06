@@ -117,7 +117,7 @@
 		08D6A97C3BFBE30B55D95EAFE26121E4 /* EventError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventError.swift; path = Sources/Models/EventError.swift; sourceTree = "<group>"; };
 		0A54512A7B6634FFE5820D56A41288F5 /* Pusher+ObjectiveC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pusher+ObjectiveC.swift"; path = "Sources/ObjC/Pusher+ObjectiveC.swift"; sourceTree = "<group>"; };
 		0AA334E3D2645BB36B5F49E6C479E144 /* PusherError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PusherError.swift; path = Sources/Models/PusherError.swift; sourceTree = "<group>"; };
-		0B32C323CD918E74390113D283732BDC /* PusherSwift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PusherSwift; path = PusherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B32C323CD918E74390113D283732BDC /* PusherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PusherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37202C4A25DD90D5E0ADC808C313F2 /* OCPusherHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OCPusherHost.swift; path = Sources/ObjC/OCPusherHost.swift; sourceTree = "<group>"; };
 		11AE5578BE2F805C9BCE45BCCAB9D6B9 /* PusherChannels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PusherChannels.swift; path = Sources/Models/PusherChannels.swift; sourceTree = "<group>"; };
 		13AE3BE95F0F6BD6221D7846E31E7761 /* TweetNacl-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TweetNacl-Info.plist"; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		288E3158D71B9C53C6346B43234162D0 /* Pods-BeachesAndBoats */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-BeachesAndBoats"; path = Pods_BeachesAndBoats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3059BE1E3FD98ACFDB08B34D06C2E14E /* ctweetnacl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ctweetnacl.h; path = Sources/CTweetNacl/include/ctweetnacl.h; sourceTree = "<group>"; };
 		30EF8005E6CBA469368197555CD016F0 /* EventParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventParser.swift; path = Sources/Helpers/EventParser.swift; sourceTree = "<group>"; };
-		317CDB3617AE7CFBD3C9B5B901F8F543 /* TweetNacl */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TweetNacl; path = TweetNacl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		317CDB3617AE7CFBD3C9B5B901F8F543 /* TweetNacl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TweetNacl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3871C71073E4CB9B2C424C8D37BC1751 /* PusherError+ObjectiveC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PusherError+ObjectiveC.swift"; path = "Sources/ObjC/PusherError+ObjectiveC.swift"; sourceTree = "<group>"; };
 		3A9EA80EE0F1B5ACCF030E94FE39D688 /* PusherChannel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PusherChannel.swift; path = Sources/Models/PusherChannel.swift; sourceTree = "<group>"; };
 		3B776635E3739143C45C913C93AB5A5E /* Constant.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = Sources/TweetNacl/Constant.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		4FC4F57DC5B85DE2010D1F3BB18F4C26 /* PusherConnection+ObjectiveC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PusherConnection+ObjectiveC.swift"; path = "Sources/ObjC/PusherConnection+ObjectiveC.swift"; sourceTree = "<group>"; };
 		535C93CABFBA750D6916D7AFA6116071 /* QueuedClientEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QueuedClientEvent.swift; path = Sources/Models/QueuedClientEvent.swift; sourceTree = "<group>"; };
 		5A294C5C8DAD2BB84B31CDE86F09A690 /* ChannelsProtocolCloseCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChannelsProtocolCloseCode.swift; path = Sources/Models/ChannelsProtocolCloseCode.swift; sourceTree = "<group>"; };
-		5AA54D493197D8BFB8F1DE6C698EEB70 /* ctweetnacl.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ctweetnacl.c; path = Sources/CTweetNacl/ctweetnacl.c; sourceTree = "<group>"; };
+		5AA54D493197D8BFB8F1DE6C698EEB70 /* ctweetnacl.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ctweetnacl.c; path = Sources/CTweetNacl/ctweetnacl.c; sourceTree = "<group>"; };
 		63B40BC2BAFF10022E05FDD245D455C4 /* NWWebSocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NWWebSocket.release.xcconfig; sourceTree = "<group>"; };
 		67014C9D7CFAB7E97102F881C7EA4317 /* PusherChannel+EncryptionHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PusherChannel+EncryptionHelpers.swift"; path = "Sources/Extensions/PusherChannel+EncryptionHelpers.swift"; sourceTree = "<group>"; };
 		719EF5B96F42BA751125EC58D7ADCF1D /* PusherSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PusherSwift.swift; path = Sources/PusherSwift.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 		9437F5C5C5CCA939B81BB07B83E32D2C /* ChannelEventFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChannelEventFactory.swift; path = Sources/Services/ChannelEventFactory.swift; sourceTree = "<group>"; };
 		9800ABFC87B09634B3DAE7758021E32D /* TweetNacl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TweetNacl.release.xcconfig; sourceTree = "<group>"; };
 		9D05D82E8D4B9D9D127A6EC199F2E807 /* Pods-BeachesAndBoats-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BeachesAndBoats-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DAE5173F26D37C9EA4E4D5909F0F5A6 /* Pods-BeachesAndBoats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BeachesAndBoats.release.xcconfig"; sourceTree = "<group>"; };
 		9E29296BB1B975554C550AEF8A59EC37 /* PusherGlobalChannel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PusherGlobalChannel.swift; path = Sources/Models/PusherGlobalChannel.swift; sourceTree = "<group>"; };
 		9F518FBA3940BFFB510D446DF959A27A /* ConnectionState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectionState.swift; path = Sources/Models/ConnectionState.swift; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		DC80D1350F1F920AD839DE09EC73642F /* PusherHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PusherHost.swift; path = Sources/Models/PusherHost.swift; sourceTree = "<group>"; };
 		DE2749783F5D36B1C046C95BCED1095D /* TweetNacl-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TweetNacl-umbrella.h"; sourceTree = "<group>"; };
 		E4DBB88D317A166D1E665AEC1BFADF9E /* WebSocketConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocketConnection.swift; path = Sources/NWWebSocket/Protocol/WebSocketConnection.swift; sourceTree = "<group>"; };
-		E7192481BB5D3F04E8A606F149CD8E9D /* NWWebSocket */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NWWebSocket; path = NWWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7192481BB5D3F04E8A606F149CD8E9D /* NWWebSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NWWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E849AF10428E54857225B4C33F4ADC1B /* PusherSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PusherSwift-dummy.m"; sourceTree = "<group>"; };
 		EAF6409826CAB83E0E5766F3341B814C /* PusherSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PusherSwift.release.xcconfig; sourceTree = "<group>"; };
 		EFD898192251335D1D246CA3AD389D1F /* Pods-BeachesAndBoats-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BeachesAndBoats-Info.plist"; sourceTree = "<group>"; };
@@ -262,10 +262,10 @@
 		5AD0C6A38DA070666FC287B9C18BB56D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E7192481BB5D3F04E8A606F149CD8E9D /* NWWebSocket */,
+				E7192481BB5D3F04E8A606F149CD8E9D /* NWWebSocket.framework */,
 				288E3158D71B9C53C6346B43234162D0 /* Pods-BeachesAndBoats */,
-				0B32C323CD918E74390113D283732BDC /* PusherSwift */,
-				317CDB3617AE7CFBD3C9B5B901F8F543 /* TweetNacl */,
+				0B32C323CD918E74390113D283732BDC /* PusherSwift.framework */,
+				317CDB3617AE7CFBD3C9B5B901F8F543 /* TweetNacl.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -343,7 +343,6 @@
 				25304BD8835E33163442105261DB5F77 /* URL+Pusher.swift */,
 				19883B443E58286174306C436954AFB2 /* Support Files */,
 			);
-			name = PusherSwift;
 			path = PusherSwift;
 			sourceTree = "<group>";
 		};
@@ -355,7 +354,6 @@
 				E4DBB88D317A166D1E665AEC1BFADF9E /* WebSocketConnection.swift */,
 				F0ACA400A88B2477B43FBDF34B85A963 /* Support Files */,
 			);
-			name = NWWebSocket;
 			path = NWWebSocket;
 			sourceTree = "<group>";
 		};
@@ -369,7 +367,6 @@
 				000D4A4D5564C62E8BB1416FA8E04D97 /* TweetNacl.swift */,
 				8EBEBD99AB92490B76E68E6462A6B515 /* Support Files */,
 			);
-			name = TweetNacl;
 			path = TweetNacl;
 			sourceTree = "<group>";
 		};
@@ -487,7 +484,7 @@
 			);
 			name = NWWebSocket;
 			productName = NWWebSocket;
-			productReference = E7192481BB5D3F04E8A606F149CD8E9D /* NWWebSocket */;
+			productReference = E7192481BB5D3F04E8A606F149CD8E9D /* NWWebSocket.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		4921D5B9FFDABBEE3823ABC7E8DAA736 /* PusherSwift */ = {
@@ -507,7 +504,7 @@
 			);
 			name = PusherSwift;
 			productName = PusherSwift;
-			productReference = 0B32C323CD918E74390113D283732BDC /* PusherSwift */;
+			productReference = 0B32C323CD918E74390113D283732BDC /* PusherSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		98C5CCD1091EBDAD2041C66DF0DE6DC9 /* Pods-BeachesAndBoats */ = {
@@ -546,7 +543,7 @@
 			);
 			name = TweetNacl;
 			productName = TweetNacl;
-			productReference = 317CDB3617AE7CFBD3C9B5B901F8F543 /* TweetNacl */;
+			productReference = 317CDB3617AE7CFBD3C9B5B901F8F543 /* TweetNacl.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -567,7 +564,6 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			minimizedProjectReferenceProxies = 0;
 			productRefGroup = 5AD0C6A38DA070666FC287B9C18BB56D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -807,7 +803,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/PusherSwift/PusherSwift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/PusherSwift/PusherSwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -982,7 +978,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TweetNacl/TweetNacl-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TweetNacl/TweetNacl-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1017,7 +1013,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TweetNacl/TweetNacl-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TweetNacl/TweetNacl-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1052,7 +1048,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NWWebSocket/NWWebSocket-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NWWebSocket/NWWebSocket-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1088,7 +1084,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NWWebSocket/NWWebSocket-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NWWebSocket/NWWebSocket-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1123,7 +1119,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/PusherSwift/PusherSwift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/PusherSwift/PusherSwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
