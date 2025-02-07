@@ -2,7 +2,7 @@
 //  BankDetailsVM.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 04/02/2025.
+//  Created by Hefepa on 04/02/2025.
 //
 
 import Foundation
