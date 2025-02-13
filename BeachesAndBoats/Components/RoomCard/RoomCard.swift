@@ -56,6 +56,8 @@ class RoomCard: BaseXib {
         bedsNum.text = "\(model.numberOfBeds)"
         roomPrice.text = model.roomPrice
         
+        deleteBtn.setImage(UIImage(systemName: "trash"), for: .normal)
+        deleteBtn.setTitleColor(.red, for: .normal)
         deleteBtn.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         editBtn.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
         

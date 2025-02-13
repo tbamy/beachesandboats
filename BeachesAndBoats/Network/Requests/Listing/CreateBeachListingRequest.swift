@@ -33,6 +33,8 @@ struct CreateBeachListingRequest: Codable {
     var roleType: String
     var listingPrice: Float
     var discountPercent: Int
+    var pricePerDay: Float
+    var dayDiscountPercent: Int
 
     
     enum CodingKeys: String, CodingKey {
@@ -54,6 +56,8 @@ struct CreateBeachListingRequest: Codable {
         case roleType = "role_type"
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
     }
 }
 
@@ -64,6 +68,8 @@ struct Room: Codable {
     var roomAmenities: [String]
     var pricePerNight: Float
     var discountPercent: Int
+    var pricePerDay: Float
+    var dayDiscountPercent: Int
     var bedTypes: [BedType]
     var hasPrivateBathroom: Int
     var noOfOccupant: Int
@@ -74,6 +80,8 @@ struct Room: Codable {
         case roomAmenities = "room_amenities"
         case pricePerNight = "price_per_night"
         case discountPercent = "discount_percent"
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
         case bedTypes = "bedTypes"
         case hasPrivateBathroom = "has_private_bathroom"
         case noOfOccupant = "no_of_occupant"

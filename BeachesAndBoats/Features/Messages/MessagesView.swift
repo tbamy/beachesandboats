@@ -8,7 +8,7 @@
 import UIKit
 import PusherSwift
 
-class MessagesView: UIViewController {
+class MessagesView: BaseViewControllerPlain {
 
     @IBOutlet weak var chatTableView: UITableView!
     
@@ -23,7 +23,6 @@ class MessagesView: UIViewController {
         super.viewDidLoad()
         title = "Message"
         setupTable()
-
     
     }
     

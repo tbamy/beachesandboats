@@ -112,7 +112,32 @@
 		A642F9272D54ED050089F593 /* MakeBoatPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9252D54ED050089F593 /* MakeBoatPaymentView.xib */; };
 		A642F9292D5534710089F593 /* ChatsTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9282D5534710089F593 /* ChatsTarget.swift */; };
 		A642F92E2D55355C0089F593 /* ChatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F92D2D55355C0089F593 /* ChatsService.swift */; };
-		A642F9302D55356F0089F593 /* ChatsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F92F2D55356F0089F593 /* ChatsImplementation.swift */; };
+		A642F9322D55469E0089F593 /* StartConversationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9312D55469E0089F593 /* StartConversationRequest.swift */; };
+		A642F9342D5546C20089F593 /* SendChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9332D5546C20089F593 /* SendChatRequest.swift */; };
+		A642F9362D55483A0089F593 /* StartConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9352D55483A0089F593 /* StartConversationResponse.swift */; };
+		A642F9382D5548480089F593 /* SendChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9372D5548480089F593 /* SendChatResponse.swift */; };
+		A642F93A2D554A830089F593 /* GetConversationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9392D554A820089F593 /* GetConversationsResponse.swift */; };
+		A642F93C2D554AB30089F593 /* GetMessageHistoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F93B2D554AB30089F593 /* GetMessageHistoryResponse.swift */; };
+		A642F93E2D554CD30089F593 /* ChatServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F93D2D554CD30089F593 /* ChatServiceImplementation.swift */; };
+		A642F9402D55D2C60089F593 /* PusherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F93F2D55D2C60089F593 /* PusherManager.swift */; };
+		A642F9452D55DD0D0089F593 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9432D55DD0D0089F593 /* ChatView.swift */; };
+		A642F9462D55DD0D0089F593 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9442D55DD0D0089F593 /* ChatView.xib */; };
+		A642F94B2D5614460089F593 /* StartConversationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F94A2D5614460089F593 /* StartConversationVM.swift */; };
+		A642F94D2D56DB800089F593 /* ChatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F94C2D56DB800089F593 /* ChatVM.swift */; };
+		A642F9512D578B910089F593 /* RoomPricePerDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F94F2D578B910089F593 /* RoomPricePerDayView.swift */; };
+		A642F9522D578B910089F593 /* RoomPricePerDayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9502D578B910089F593 /* RoomPricePerDayView.xib */; };
+		A642F9592D57939C0089F593 /* EntireApartmentPricePerDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9572D57939C0089F593 /* EntireApartmentPricePerDayView.swift */; };
+		A642F95A2D57939C0089F593 /* EntireApartmentPricePerDayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9582D57939C0089F593 /* EntireApartmentPricePerDayView.xib */; };
+		A642F95D2D57B0060089F593 /* CommentsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F95B2D57B0060089F593 /* CommentsViewCell.swift */; };
+		A642F95E2D57B0060089F593 /* CommentsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F95C2D57B0060089F593 /* CommentsViewCell.xib */; };
+		A642F9602D58840F0089F593 /* AddFavouriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F95F2D58840F0089F593 /* AddFavouriteRequest.swift */; };
+		A642F9622D58841D0089F593 /* AddReviewRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9612D58841D0089F593 /* AddReviewRequest.swift */; };
+		A642F9652D588D780089F593 /* SavedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9632D588D780089F593 /* SavedListView.swift */; };
+		A642F9662D588D780089F593 /* SavedListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642F9642D588D780089F593 /* SavedListView.xib */; };
+		A642F96A2D58D25F0089F593 /* GetSavedFavouritesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9692D58D25F0089F593 /* GetSavedFavouritesResponse.swift */; };
+		A642F96C2D58D2720089F593 /* GetUserBookingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F96B2D58D2720089F593 /* GetUserBookingsResponse.swift */; };
+		A642F9702D59164D0089F593 /* BookingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F96F2D59164D0089F593 /* BookingsVM.swift */; };
+		A642F9722D59165E0089F593 /* SavedFavouritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9712D59165E0089F593 /* SavedFavouritesVM.swift */; };
 		A645D0402D3637C3005BFCD5 /* BookingConfigurationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */; };
 		A645D0432D363951005BFCD5 /* BookingConfigurationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */; };
 		A645D0452D3659FF005BFCD5 /* BeachHouseBookingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */; };
@@ -626,7 +651,32 @@
 		A642F9252D54ED050089F593 /* MakeBoatPaymentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MakeBoatPaymentView.xib; sourceTree = "<group>"; };
 		A642F9282D5534710089F593 /* ChatsTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTarget.swift; sourceTree = "<group>"; };
 		A642F92D2D55355C0089F593 /* ChatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsService.swift; sourceTree = "<group>"; };
-		A642F92F2D55356F0089F593 /* ChatsImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsImplementation.swift; sourceTree = "<group>"; };
+		A642F9312D55469E0089F593 /* StartConversationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartConversationRequest.swift; sourceTree = "<group>"; };
+		A642F9332D5546C20089F593 /* SendChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatRequest.swift; sourceTree = "<group>"; };
+		A642F9352D55483A0089F593 /* StartConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartConversationResponse.swift; sourceTree = "<group>"; };
+		A642F9372D5548480089F593 /* SendChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatResponse.swift; sourceTree = "<group>"; };
+		A642F9392D554A820089F593 /* GetConversationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetConversationsResponse.swift; sourceTree = "<group>"; };
+		A642F93B2D554AB30089F593 /* GetMessageHistoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessageHistoryResponse.swift; sourceTree = "<group>"; };
+		A642F93D2D554CD30089F593 /* ChatServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceImplementation.swift; sourceTree = "<group>"; };
+		A642F93F2D55D2C60089F593 /* PusherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherManager.swift; sourceTree = "<group>"; };
+		A642F9432D55DD0D0089F593 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A642F9442D55DD0D0089F593 /* ChatView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
+		A642F94A2D5614460089F593 /* StartConversationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartConversationVM.swift; sourceTree = "<group>"; };
+		A642F94C2D56DB800089F593 /* ChatVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVM.swift; sourceTree = "<group>"; };
+		A642F94F2D578B910089F593 /* RoomPricePerDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPricePerDayView.swift; sourceTree = "<group>"; };
+		A642F9502D578B910089F593 /* RoomPricePerDayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomPricePerDayView.xib; sourceTree = "<group>"; };
+		A642F9572D57939C0089F593 /* EntireApartmentPricePerDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntireApartmentPricePerDayView.swift; sourceTree = "<group>"; };
+		A642F9582D57939C0089F593 /* EntireApartmentPricePerDayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntireApartmentPricePerDayView.xib; sourceTree = "<group>"; };
+		A642F95B2D57B0060089F593 /* CommentsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewCell.swift; sourceTree = "<group>"; };
+		A642F95C2D57B0060089F593 /* CommentsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsViewCell.xib; sourceTree = "<group>"; };
+		A642F95F2D58840F0089F593 /* AddFavouriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavouriteRequest.swift; sourceTree = "<group>"; };
+		A642F9612D58841D0089F593 /* AddReviewRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewRequest.swift; sourceTree = "<group>"; };
+		A642F9632D588D780089F593 /* SavedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedListView.swift; sourceTree = "<group>"; };
+		A642F9642D588D780089F593 /* SavedListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedListView.xib; sourceTree = "<group>"; };
+		A642F9692D58D25F0089F593 /* GetSavedFavouritesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSavedFavouritesResponse.swift; sourceTree = "<group>"; };
+		A642F96B2D58D2720089F593 /* GetUserBookingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserBookingsResponse.swift; sourceTree = "<group>"; };
+		A642F96F2D59164D0089F593 /* BookingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsVM.swift; sourceTree = "<group>"; };
+		A642F9712D59165E0089F593 /* SavedFavouritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFavouritesVM.swift; sourceTree = "<group>"; };
 		A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfigurationResponse.swift; sourceTree = "<group>"; };
 		A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfigurationVM.swift; sourceTree = "<group>"; };
 		A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachHouseBookingResponse.swift; sourceTree = "<group>"; };
@@ -1190,6 +1240,7 @@
 				A63F31262CB07D2D00D402F4 /* Listing */,
 				A6C20FD22C859BAB0045C670 /* Onboarding */,
 				A6C20FE12C85A5560045C670 /* Provider.swift */,
+				A642F93F2D55D2C60089F593 /* PusherManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1456,6 +1507,8 @@
 				A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */,
 				A63D48D02D4F9614002C48F7 /* RecommendationsViewCell.swift */,
 				A63D48D12D4F9614002C48F7 /* RecommendationsViewCell.xib */,
+				A642F95B2D57B0060089F593 /* CommentsViewCell.swift */,
+				A642F95C2D57B0060089F593 /* CommentsViewCell.xib */,
 			);
 			path = ViewCell;
 			sourceTree = "<group>";
@@ -1507,6 +1560,10 @@
 		A642F92A2D55347D0089F593 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				A642F9352D55483A0089F593 /* StartConversationResponse.swift */,
+				A642F9372D5548480089F593 /* SendChatResponse.swift */,
+				A642F9392D554A820089F593 /* GetConversationsResponse.swift */,
+				A642F93B2D554AB30089F593 /* GetMessageHistoryResponse.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -1514,6 +1571,8 @@
 		A642F92B2D5534C50089F593 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				A642F9312D55469E0089F593 /* StartConversationRequest.swift */,
+				A642F9332D5546C20089F593 /* SendChatRequest.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -1522,9 +1581,54 @@
 			isa = PBXGroup;
 			children = (
 				A642F92D2D55355C0089F593 /* ChatsService.swift */,
-				A642F92F2D55356F0089F593 /* ChatsImplementation.swift */,
+				A642F93D2D554CD30089F593 /* ChatServiceImplementation.swift */,
 			);
 			path = Chats;
+			sourceTree = "<group>";
+		};
+		A642F9472D55E7080089F593 /* BoatBooking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BoatBooking;
+			sourceTree = "<group>";
+		};
+		A642F9482D55E7130089F593 /* BeachBooking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BeachBooking;
+			sourceTree = "<group>";
+		};
+		A642F9492D55E71C0089F593 /* ServiceBooking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ServiceBooking;
+			sourceTree = "<group>";
+		};
+		A642F94E2D5780750089F593 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				A642F94C2D56DB800089F593 /* ChatVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		A642F96D2D59162B0089F593 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				A642F96F2D59164D0089F593 /* BookingsVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		A642F96E2D59163C0089F593 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				A642F9712D59165E0089F593 /* SavedFavouritesVM.swift */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		A645D0412D363930005BFCD5 /* ViewModel */ = {
@@ -1533,6 +1637,7 @@
 				A675D9AB2D16E157003E297B /* HomeViewVM.swift */,
 				A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */,
 				A63D48CA2D4E5CAE002C48F7 /* FindServiceProviderVM.swift */,
+				A642F94A2D5614460089F593 /* StartConversationVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1688,12 +1793,16 @@
 				A656281E2CB518B400947BA5 /* RoomAmenitiesView.xib */,
 				A65628212CB5230000947BA5 /* RoomPriceView.swift */,
 				A65628222CB5230000947BA5 /* RoomPriceView.xib */,
+				A642F94F2D578B910089F593 /* RoomPricePerDayView.swift */,
+				A642F9502D578B910089F593 /* RoomPricePerDayView.xib */,
 				A65628312CB569CA00947BA5 /* UploadImageView.swift */,
 				A65628322CB569CA00947BA5 /* UploadImageView.xib */,
 				A61B3C262CB6EF6600C89C14 /* RoomsListView.swift */,
 				A61B3C272CB6EF6600C89C14 /* RoomsListView.xib */,
 				A61B3C2A2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift */,
 				A61B3C2B2CB6F3FC00C89C14 /* EntireApartmentPriceView.xib */,
+				A642F9572D57939C0089F593 /* EntireApartmentPricePerDayView.swift */,
+				A642F9582D57939C0089F593 /* EntireApartmentPricePerDayView.xib */,
 			);
 			path = ListBeachHouse;
 			sourceTree = "<group>";
@@ -1761,10 +1870,13 @@
 		A6617A462CAF549400514576 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				A642F94E2D5780750089F593 /* VM */,
 				A6617A492CAF555700514576 /* MessagesView.swift */,
 				A6617A4A2CAF555700514576 /* MessagesView.xib */,
 				A669F7BD2D2409D700230E0A /* MessageViewCell.swift */,
 				A669F7BE2D2409D700230E0A /* MessageViewCell.xib */,
+				A642F9432D55DD0D0089F593 /* ChatView.swift */,
+				A642F9442D55DD0D0089F593 /* ChatView.xib */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -1772,6 +1884,7 @@
 		A6617A472CAF549A00514576 /* Bookings */ = {
 			isa = PBXGroup;
 			children = (
+				A642F96D2D59162B0089F593 /* VM */,
 				A6617A4D2CAF557900514576 /* BookingsView.swift */,
 				A6617A4E2CAF557900514576 /* BookingsView.xib */,
 				A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */,
@@ -1783,8 +1896,11 @@
 		A6617A482CAF54A200514576 /* Saved */ = {
 			isa = PBXGroup;
 			children = (
+				A642F96E2D59163C0089F593 /* VM */,
 				A6617A512CAF559600514576 /* SavedView.swift */,
 				A6617A522CAF559600514576 /* SavedView.xib */,
+				A642F9632D588D780089F593 /* SavedListView.swift */,
+				A642F9642D588D780089F593 /* SavedListView.xib */,
 			);
 			path = Saved;
 			sourceTree = "<group>";
@@ -1830,6 +1946,8 @@
 			isa = PBXGroup;
 			children = (
 				A675D99C2D16BDFC003E297B /* DashboardUserReponse.swift */,
+				A642F9692D58D25F0089F593 /* GetSavedFavouritesResponse.swift */,
+				A642F96B2D58D2720089F593 /* GetUserBookingsResponse.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1864,6 +1982,8 @@
 			children = (
 				A675D9AE2D171DD6003E297B /* CreateBeachHouseBookingRequest.swift */,
 				A675D9B02D171ED3003E297B /* CreateBoatBookingRequest.swift */,
+				A642F95F2D58840F0089F593 /* AddFavouriteRequest.swift */,
+				A642F9612D58841D0089F593 /* AddReviewRequest.swift */,
 			);
 			path = Booking;
 			sourceTree = "<group>";
@@ -2229,6 +2349,9 @@
 		A6E050442CEF423100F0211C /* PublicHome */ = {
 			isa = PBXGroup;
 			children = (
+				A642F9492D55E71C0089F593 /* ServiceBooking */,
+				A642F9482D55E7130089F593 /* BeachBooking */,
+				A642F9472D55E7080089F593 /* BoatBooking */,
 				A6C20FF22C8713A20045C670 /* HomeView.swift */,
 				A6C20FF32C8713A20045C670 /* HomeView.xib */,
 				A675D9BD2D19AE15003E297B /* BeachDetailsView.swift */,
@@ -2422,6 +2545,7 @@
 				A6E0504E2CEF47DE00F0211C /* ServiceHostingHomeView.xib in Resources */,
 				A65C51292CAC30F60027E5F1 /* HouseTypeListView.xib in Resources */,
 				A61499362C5E9A2A00E0CDFC /* SearchModal.xib in Resources */,
+				A642F9662D588D780089F593 /* SavedListView.xib in Resources */,
 				A6F4069F2C02D3A800973BD7 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
 				A65C50F52CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.xib in Resources */,
 				A60580F82CDD43E900B17505 /* BoatNameView.xib in Resources */,
@@ -2514,6 +2638,7 @@
 				A63CE7BD2C8F3645008D91C5 /* GeneralViewCell.xib in Resources */,
 				A6F406A22C02D3A800973BD7 /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				A6F406A82C02D3A800973BD7 /* Montserrat-ExtraLight.ttf in Resources */,
+				A642F95A2D57939C0089F593 /* EntireApartmentPricePerDayView.xib in Resources */,
 				A65C510C2CAACB620027E5F1 /* SelectableView.xib in Resources */,
 				A675D9C42D1DABFF003E297B /* BoatDetailsView.xib in Resources */,
 				A65628342CB569CA00947BA5 /* UploadImageView.xib in Resources */,
@@ -2545,6 +2670,7 @@
 				A6F406992C02D3A800973BD7 /* Montserrat-BlackItalic.ttf in Resources */,
 				A675D9BC2D195F40003E297B /* CategoriesCell.xib in Resources */,
 				A6617A3C2CAD8BB000514576 /* MapViewModal.xib in Resources */,
+				A642F9522D578B910089F593 /* RoomPricePerDayView.xib in Resources */,
 				A6FB74512C1355B100A26806 /* CreatePasswordModal.xib in Resources */,
 				A642F9272D54ED050089F593 /* MakeBoatPaymentView.xib in Resources */,
 				A675D9DC2D202849003E297B /* BookingRoomsListView.xib in Resources */,
@@ -2565,6 +2691,7 @@
 				A65125802CBC293700AFA0F9 /* AddEmailAddressModal.xib in Resources */,
 				A65E83662D308E71009F2B89 /* HostListingVC.xib in Resources */,
 				A6CA3D592CB9CDAE009307B2 /* DJUploadProfileImageView.xib in Resources */,
+				A642F95E2D57B0060089F593 /* CommentsViewCell.xib in Resources */,
 				A65628202CB518B400947BA5 /* RoomAmenitiesView.xib in Resources */,
 				A68A6EC12D256823000A67E1 /* EarningDistributionTableCell.xib in Resources */,
 				A6F406A42C02D3A800973BD7 /* Montserrat-Medium.ttf in Resources */,
@@ -2573,6 +2700,7 @@
 				A675D9C82D1EAC06003E297B /* HorizonCalendarModal.xib in Resources */,
 				A65125842CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib in Resources */,
 				A6A857922D4BF1D8008BC9A0 /* FindChefView.xib in Resources */,
+				A642F9462D55DD0D0089F593 /* ChatView.xib in Resources */,
 				A65628082CB1B60B00947BA5 /* ProfileView.xib in Resources */,
 				A6A2E8542CC0ECAD004E58EB /* TableViewCell.xib in Resources */,
 				A6CA3D452CB9CCD1009307B2 /* ChefUploadProfileImageView.xib in Resources */,
@@ -2656,6 +2784,7 @@
 				A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */,
 				A63F312A2CB07D5600D402F4 /* ListingServiceImplementation.swift in Sources */,
 				A68A6EC82D256F7C000A67E1 /* NetworkUtility.swift in Sources */,
+				A642F93C2D554AB30089F593 /* GetMessageHistoryResponse.swift in Sources */,
 				A63F31282CB07D4100D402F4 /* ListingService.swift in Sources */,
 				A65C51052CAA82A40027E5F1 /* SelectorModal.swift in Sources */,
 				A6CA3D2B2CB9BDE2009307B2 /* DestinationCheckboxView.swift in Sources */,
@@ -2668,6 +2797,7 @@
 				A6A2E8442CBE8B8D004E58EB /* ProfileTarget.swift in Sources */,
 				A63D48D22D4F9614002C48F7 /* RecommendationsViewCell.swift in Sources */,
 				A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */,
+				A642F94D2D56DB800089F593 /* ChatVM.swift in Sources */,
 				A675D9A02D16C6C9003E297B /* SendKYCRequest.swift in Sources */,
 				A63357722BF157B9008AF034 /* UILabel.swift in Sources */,
 				A65E835D2D2F1CEF009F2B89 /* ListingDashboardVM.swift in Sources */,
@@ -2688,6 +2818,7 @@
 				A65C51402CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift in Sources */,
 				A65C51012CA9510F0027E5F1 /* CountdownTimer.swift in Sources */,
 				A6C20FF42C8713A20045C670 /* HomeView.swift in Sources */,
+				A642F9342D5546C20089F593 /* SendChatRequest.swift in Sources */,
 				A65E83812D36D6E4009F2B89 /* HostListingTableView.swift in Sources */,
 				A6EF00E62D2848F200893C05 /* ListOfBanksResponse.swift in Sources */,
 				A6CA3D5C2CB9CDD0009307B2 /* DJPriceView.swift in Sources */,
@@ -2697,10 +2828,12 @@
 				A65628382CB5769A00947BA5 /* UploadImageField.swift in Sources */,
 				A675D9A52D16C8F1003E297B /* BookingServiceImplementation.swift in Sources */,
 				A6CA3D4C2CB9CD31009307B2 /* ChefPriceView.swift in Sources */,
+				A642F9402D55D2C60089F593 /* PusherManager.swift in Sources */,
 				A675D9CB2D201DD0003E297B /* AllPhotosView.swift in Sources */,
 				A6A2E8532CC0ECAD004E58EB /* TableViewCell.swift in Sources */,
 				A63858272BF8E24B00040677 /* TextView.swift in Sources */,
 				A6C1C4282CBBFEB5001CD27D /* PaymentMethodModal.swift in Sources */,
+				A642F9382D5548480089F593 /* SendChatResponse.swift in Sources */,
 				A65628152CB3C62300947BA5 /* ToggleSwitch.swift in Sources */,
 				A6A2E84F2CBFE286004E58EB /* NotificationSettingsView.swift in Sources */,
 				A645D0452D3659FF005BFCD5 /* BeachHouseBookingResponse.swift in Sources */,
@@ -2710,6 +2843,7 @@
 				A6A2E86D2CD4C923004E58EB /* ChefAvailableDatesView.swift in Sources */,
 				A6C20FD52C859C5D0045C670 /* RefreshTokenRequest.swift in Sources */,
 				A61627762C7DBCF400F6B452 /* AppStorage.swift in Sources */,
+				A642F95D2D57B0060089F593 /* CommentsViewCell.swift in Sources */,
 				A6C20FD12C859BA30045C670 /* OnboardingServiceMock.swift in Sources */,
 				A675D9A32D16C8DB003E297B /* BookingService.swift in Sources */,
 				A63357762BF160E9008AF034 /* PasswordField.swift in Sources */,
@@ -2762,6 +2896,7 @@
 				A65C51252CAC300E0027E5F1 /* TextViewField.swift in Sources */,
 				A66F3FAA2D29635500902E43 /* MenuView.swift in Sources */,
 				A63F31312CB09ABE00D402F4 /* BeachDataViewModel.swift in Sources */,
+				A642F96C2D58D2720089F593 /* GetUserBookingsResponse.swift in Sources */,
 				A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */,
 				A6A2E84A2CBFB650004E58EB /* ProfileServiceImplementation.swift in Sources */,
 				A6EF00E22D283FE200893C05 /* CreateWithdrawalResponse.swift in Sources */,
@@ -2773,7 +2908,6 @@
 				A61627692C7DB05900F6B452 /* Urls.swift in Sources */,
 				A60580F72CDD43E900B17505 /* BoatNameView.swift in Sources */,
 				A63CE7B22C8ED236008D91C5 /* DateRangePicker.swift in Sources */,
-				A642F9302D55356F0089F593 /* ChatsImplementation.swift in Sources */,
 				A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */,
 				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */,
@@ -2820,14 +2954,17 @@
 				A65C50E82CA663E60027E5F1 /* InitialListingPromptView.swift in Sources */,
 				A63D48C92D4E5406002C48F7 /* BoatBookingResponse.swift in Sources */,
 				A675D9AC2D16E157003E297B /* HomeViewVM.swift in Sources */,
+				A642F9602D58840F0089F593 /* AddFavouriteRequest.swift in Sources */,
 				A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */,
 				A65C51142CAB215D0027E5F1 /* DynamicTableViewCell.swift in Sources */,
 				A65C50F42CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift in Sources */,
+				A642F93A2D554A830089F593 /* GetConversationsResponse.swift in Sources */,
 				A669F7BC2D23F91600230E0A /* ServiceHostingDetailsView.swift in Sources */,
 				A6A2E8712CD4C93A004E58EB /* DJAvailableDatesView.swift in Sources */,
 				A6FB744C2C13558000A26806 /* ConfirmAccountModal.swift in Sources */,
 				A675D9CF2D201F4C003E297B /* ImageCell.swift in Sources */,
 				A6C1530D2D511439004078A3 /* GetAllDishesResponse.swift in Sources */,
+				A642F9362D55483A0089F593 /* StartConversationResponse.swift in Sources */,
 				A6C20FE82C85B86E0045C670 /* VerifyCodeRequest.swift in Sources */,
 				A656280A2CB2B4EC00947BA5 /* NetworkManager.swift in Sources */,
 				A651256E2CBC1FEB00AFA0F9 /* LoginAndSecurityView.swift in Sources */,
@@ -2836,9 +2973,12 @@
 				A6617A432CAD95EA00514576 /* ListRoomsView.swift in Sources */,
 				A6EF00DC2D28318B00893C05 /* CustomTabBar.swift in Sources */,
 				A642F9262D54ED050089F593 /* MakeBoatPaymentView.swift in Sources */,
+				A642F9512D578B910089F593 /* RoomPricePerDayView.swift in Sources */,
 				A68A6EDF2D26C755000A67E1 /* WithdrawHistoryViewCell.swift in Sources */,
 				A6EF00EA2D286CA300893C05 /* PaymentSetupView.swift in Sources */,
 				A633574A2BF0D30C008AF034 /* Images.swift in Sources */,
+				A642F9452D55DD0D0089F593 /* ChatView.swift in Sources */,
+				A642F93E2D554CD30089F593 /* ChatServiceImplementation.swift in Sources */,
 				A6A2E8662CD4BFAC004E58EB /* BoatDataViewModel.swift in Sources */,
 				A65628072CB1B60B00947BA5 /* ProfileView.swift in Sources */,
 				A61B3C232CB6E2C500C89C14 /* RoomCard.swift in Sources */,
@@ -2878,6 +3018,7 @@
 				A68A6EBD2D24545A000A67E1 /* HostingServiceEarningCoordinator.swift in Sources */,
 				A60580FA2CDE874400B17505 /* ListBoatViewModel.swift in Sources */,
 				A675D9B12D171ED3003E297B /* CreateBoatBookingRequest.swift in Sources */,
+				A642F94B2D5614460089F593 /* StartConversationVM.swift in Sources */,
 				A65C513C2CAC33170027E5F1 /* PropertyAmenitiesView.swift in Sources */,
 				A6E7FACF2C21844800B01E6C /* ModalCoordinator.swift in Sources */,
 				A656281F2CB518B400947BA5 /* RoomAmenitiesView.swift in Sources */,
@@ -2892,6 +3033,7 @@
 				A6AF51322D48EB4D009AEB00 /* HostType.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
 				A675D9E72D26A2A3003E297B /* CatViewCell.swift in Sources */,
+				A642F9702D59164D0089F593 /* BookingsVM.swift in Sources */,
 				A61499392C5E9A3C00E0CDFC /* FilterModal.swift in Sources */,
 				A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */,
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
@@ -2905,8 +3047,10 @@
 				A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */,
 				A61499292C5E97DB00E0CDFC /* FullModal.swift in Sources */,
 				A6CA3D072CB9B0C7009307B2 /* BoatHouseTypeView.swift in Sources */,
+				A642F9722D59165E0089F593 /* SavedFavouritesVM.swift in Sources */,
 				A675D9B72D18C5FC003E297B /* TopRatedCollectionCell.swift in Sources */,
 				A68A6EC62D256BD9000A67E1 /* TopEarningResponse.swift in Sources */,
+				A642F96A2D58D25F0089F593 /* GetSavedFavouritesResponse.swift in Sources */,
 				A6A2E8742CD4E955004E58EB /* ChefDishesResponse.swift in Sources */,
 				A65C51302CAC32A50027E5F1 /* PropertyNameView.swift in Sources */,
 				A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */,
@@ -2921,6 +3065,7 @@
 				A6EF00EF2D28731400893C05 /* PaymentMethodView.swift in Sources */,
 				A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */,
 				A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */,
+				A642F9652D588D780089F593 /* SavedListView.swift in Sources */,
 				A6C20FDE2C859E520045C670 /* ErrorResponse.swift in Sources */,
 				A675D9EB2D26AB46003E297B /* ConfirmBookingView.swift in Sources */,
 				A6A857912D4BF1D8008BC9A0 /* FindChefView.swift in Sources */,
@@ -2938,6 +3083,7 @@
 				A63D48BA2D4D4EF2002C48F7 /* RecommendationsView.swift in Sources */,
 				A61B3C202CB682FB00C89C14 /* NumberField.swift in Sources */,
 				A68A6EB52D244635000A67E1 /* EarningsView.swift in Sources */,
+				A642F9322D55469E0089F593 /* StartConversationRequest.swift in Sources */,
 				A6CA3D302CB9C64C009307B2 /* TravelLocationView.swift in Sources */,
 				A68A6EDB2D26C6C6000A67E1 /* WithdrawHistoryView.swift in Sources */,
 				A6757D842C987A2A000D6302 /* SavedCoordinator.swift in Sources */,
@@ -2955,8 +3101,10 @@
 				A6757D802C9746E8000D6302 /* Dashboard.swift in Sources */,
 				A6A2E8692CD4C800004E58EB /* BouncerAvailableDatesView.swift in Sources */,
 				A68A6ECB2D2578E4000A67E1 /* EarningsVM.swift in Sources */,
+				A642F9622D58841D0089F593 /* AddReviewRequest.swift in Sources */,
 				A65192912D26CE060082C3C9 /* WithdrawalHistoryResponse.swift in Sources */,
 				A63F312C2CB07D6400D402F4 /* ListingServiceMock.swift in Sources */,
+				A642F9592D57939C0089F593 /* EntireApartmentPricePerDayView.swift in Sources */,
 				A65C51082CAA86660027E5F1 /* Dropdown.swift in Sources */,
 				A675D9EF2D272FB4003E297B /* MakePaymentView.swift in Sources */,
 				A675D9AF2D171DD6003E297B /* CreateBeachHouseBookingRequest.swift in Sources */,

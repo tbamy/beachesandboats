@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-//import RxRelay
 
 class HomeViewVM{
     private let disposeBag = DisposeBag()
@@ -16,11 +15,15 @@ class HomeViewVM{
     
     enum Input {
         case getBookingCategories(page: String)
+        case addFavourite(AddFavouriteRequest)
     }
     
     enum Output {
         case getBookingCategoriesSuccess(GetBookingCategoryResponse)
         case getBookingCategoriesFailed(ErrorResponse)
+        
+        case addFavouriteSuccess(GeneralResponse)
+        case addFavouriteFailed(ErrorResponse)
     }
     
     
@@ -33,6 +36,8 @@ class HomeViewVM{
             switch event {
             case .getBookingCategories(let page):
                 self?.getBookingCategories(page: page)
+            case .addFavourite(let request):
+                self?.AddFavourite(request: request)
             }
         }).disposed(by: disposeBag)
     }
@@ -44,6 +49,17 @@ class HomeViewVM{
                 self?.output.onNext(.getBookingCategoriesSuccess(response))
             case .failure(let error):
                 self?.output.onNext(.getBookingCategoriesFailed(error))
+            }
+        })
+    }
+    
+    func AddFavourite(request: AddFavouriteRequest) {
+        bookingService.addOrUpdateFavourite(request: request, completion:  { [ weak self ] data in
+            switch data {
+            case .success(let response):
+                self?.output.onNext(.addFavouriteSuccess(response))
+            case .failure(let error):
+                self?.output.onNext(.addFavouriteFailed(error))
             }
         })
     }

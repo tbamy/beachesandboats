@@ -44,7 +44,10 @@ struct Listing: Codable {
     let name: String?
     let description: String?
     let aboutOwner: String?
-    let pricePerDay, dayDiscountPercent, listingPrice, discountPercent: Float?
+    let listingPrice: Float?
+    let discountPercent: Int?
+    let pricePerDay: Float?
+    let dayDiscountPercent: Int?
     let checkInFrom, checkInTo, checkOutFrom, checkOutTo: String?
     let pricePerNight: Float?
     let bookingType: String?
@@ -312,7 +315,7 @@ struct BookingBeachHouseRoom: Codable {
     let id, name, description: String?
     let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
     let images: [Image]?
-    let bedTypes: [BedType]?
+    let bedTypes: [BookingBedType]?
     let noOfOccupant, hasPrivateBathroom: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -346,25 +349,25 @@ struct BookingBeachHouse: Codable {
 
 
 
-@propertyWrapper
-struct StringOrNumber: Codable {
-    var wrappedValue: String?
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let stringValue = try? container.decode(String.self) {
-            wrappedValue = stringValue
-        } else if let doubleValue = try? container.decode(Double.self) {
-            wrappedValue = String(doubleValue)
-        } else if let intValue = try? container.decode(Int.self) {
-            wrappedValue = String(intValue)
-        } else {
-            wrappedValue = nil // Handle missing key by setting nil
-        }
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(wrappedValue)
-    }
-}
+//@propertyWrapper
+//struct StringOrNumber: Codable {
+//    var wrappedValue: String?
+//
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.singleValueContainer()
+//        if let stringValue = try? container.decode(String.self) {
+//            wrappedValue = stringValue
+//        } else if let doubleValue = try? container.decode(Double.self) {
+//            wrappedValue = String(doubleValue)
+//        } else if let intValue = try? container.decode(Int.self) {
+//            wrappedValue = String(intValue)
+//        } else {
+//            wrappedValue = nil // Handle missing key by setting nil
+//        }
+//    }
+//
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.singleValueContainer()
+//        try container.encode(wrappedValue)
+//    }
+//}

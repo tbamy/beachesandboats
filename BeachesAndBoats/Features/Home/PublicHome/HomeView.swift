@@ -223,6 +223,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.model.ratingLabel = "\(beach.rating ?? 0)"
             view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
             
+            view.onSaveFavouriteTapped = { [weak self] in
+                if let beachId = beach.id{
+                    let request = AddFavouriteRequest(itemId: beachId, type: BookingType.BeachHouse.rawValue, note: "")
+                    self?.input.onNext(.addFavourite(request))
+                    Toast.show(message: "Saving Favourite")
+                }
+            }
+            
             cell.applyView(view: view)
             cell.layer.backgroundColor = UIColor.white.cgColor
             cell.layer.cornerRadius = 15
@@ -242,6 +250,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.model.priceLabel = "₦ \(beach.pricePerNight ?? 0)"
             view.model.ratingLabel = "\(beach.rating ?? 0)"
             view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
+            
+            view.onSaveFavouriteTapped = { [weak self] in
+                if let beachId = beach.id{
+                    let request = AddFavouriteRequest(itemId: beachId, type: BookingType.BeachHouse.rawValue, note: "")
+                    self?.input.onNext(.addFavourite(request))
+                    Toast.show(message: "Saving Favourite")
+                }
+            }
 
             cell.applyView(view: view)
             return cell
@@ -258,6 +274,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.model.infoTwoLabel = "\(boat.locations?.city ?? ""), \(boat.locations?.state ?? "") \(boat.locations?.country ?? "")"
             view.model.ratingLabel = "\(boat.rating ?? 0)"
             view.model.bannerImg = boat.images?.first?.url ?? ""
+            
+            view.onSaveFavouriteTapped = { [weak self] in
+                if let boatId = boat.id{
+                    let request = AddFavouriteRequest(itemId: boatId, type: BookingType.Boat.rawValue, note: "")
+                    self?.input.onNext(.addFavourite(request))
+                    Toast.show(message: "Saving Favourite")
+                }
+            }
             
             cell.applyView(view: view)
             cell.layer.backgroundColor = UIColor.white.cgColor
@@ -278,6 +302,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.model.infoTwoLabel = "\(boat.locations?.city ?? ""), \(boat.locations?.state ?? "") \(boat.locations?.country ?? "")"
             view.model.ratingLabel = "\(boat.rating ?? 0)"
             view.model.bannerImg = boat.images?.first?.url ?? ""
+            
+            view.onSaveFavouriteTapped = { [weak self] in
+                if let boatId = boat.id{
+                    let request = AddFavouriteRequest(itemId: boatId, type: BookingType.Boat.rawValue, note: "")
+                    self?.input.onNext(.addFavourite(request))
+                    Toast.show(message: "Saving Favourite")
+                }
+            }
 
             cell.applyView(view: view)
             
@@ -463,6 +495,10 @@ extension HomeView{
             case .getBookingCategoriesFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
                 self.refreshControl.endRefreshing()
+            case .addFavouriteSuccess(let response):
+                Toast.show(message: response.message ?? "Saved to Favourites")
+            case .addFavouriteFailed(let error):
+                Toast.show(message: error.message ?? "Error Saving to Favourites")
             }
         }).disposed(by: disposeBag)
     }

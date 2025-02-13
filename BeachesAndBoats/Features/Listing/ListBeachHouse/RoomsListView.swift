@@ -38,7 +38,7 @@ class RoomsListView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0.75, animated: true)
         stepTwoProgress.tintColor = .B_B
         
-        nextBtn.isEnabled = true
+        
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -60,7 +60,7 @@ class RoomsListView: BaseViewControllerPlain {
         addNewBtn.addTarget(self, action: #selector(addNewRoom), for: .touchUpInside)
         duplicateBtn.addTarget(self, action: #selector(duplicateRoom), for: .touchUpInside)
         
-        
+        nextBtn.isEnabled = !roomsList.isEmpty
     }
     
     func updateCollectionViewHeight(_ CollectionView: UICollectionView, _ CollectionViewHeightConstraint: NSLayoutConstraint) {
@@ -81,7 +81,7 @@ class RoomsListView: BaseViewControllerPlain {
     @objc func duplicateRoom(){
         if var createBeachListing = createBeachListing{
             if let existingRoom = createBeachListing.rooms.first{
-                let roomDuplicate = Room(name: "\(existingRoom.name) Copy", description: existingRoom.description, quantity: existingRoom.quantity, roomAmenities: existingRoom.roomAmenities, pricePerNight: existingRoom.pricePerNight, discountPercent: existingRoom.discountPercent, bedTypes: existingRoom.bedTypes, hasPrivateBathroom: existingRoom.hasPrivateBathroom, noOfOccupant: existingRoom.noOfOccupant, images: existingRoom.images)
+                let roomDuplicate = Room(name: "\(existingRoom.name) Copy", description: existingRoom.description, quantity: existingRoom.quantity, roomAmenities: existingRoom.roomAmenities, pricePerNight: existingRoom.pricePerNight, discountPercent: existingRoom.discountPercent, pricePerDay: existingRoom.pricePerDay, dayDiscountPercent: existingRoom.dayDiscountPercent, bedTypes: existingRoom.bedTypes, hasPrivateBathroom: existingRoom.hasPrivateBathroom, noOfOccupant: existingRoom.noOfOccupant, images: existingRoom.images)
                 
                 createBeachListing.rooms.append(roomDuplicate)
                 roomsList = createBeachListing.rooms
@@ -94,15 +94,12 @@ class RoomsListView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            
-            if let createBeachListing = createBeachListing{
+        if let beachData = beachData, let createBeachListing = createBeachListing{
                 print(createBeachListing)
                 
                 coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: createBeachListing)
             }
             
-        }
     }
     
     

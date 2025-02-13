@@ -21,3 +21,9 @@ enum HostType: String{
     case dj = "dj"
     case bouncer = "bouncer"
 }
+
+enum BookingType: String{
+    case Boat = "Boat"
+    case BeachHouse = "BeachHouse"
+    case Services = "Services"
+}

@@ -8,6 +8,10 @@
 import Foundation
 
 class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
+    func addOrUpdateReview(request: AddReviewRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.AddOrUpdateReview(request)){ completion( self.handleResult(result: $0))}
+    }
+    
     func createBoatBooking(request: CreateBoatBookingRequest, completion: @escaping (Result<BoatBookingResponse, ErrorResponse>) -> Void) {
         provider.request(.CreateBoatBooking(request)){ completion( self.handleResult(result: $0))}
     }
@@ -16,8 +20,8 @@ class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
         provider.request(.AllDishes){ completion( self.handleResult(result: $0))}
     }
     
-    func addOrUpdateFavourite(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
-        provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
+    func addOrUpdateFavourite(request: AddFavouriteRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.AddOrUpdateFavourite(request)){ completion( self.handleResult(result: $0))}
     }
     
     func findChefByDishes(dishIds: String, completion: @escaping (Result<FindServiceProviderResponse, ErrorResponse>) -> Void) {

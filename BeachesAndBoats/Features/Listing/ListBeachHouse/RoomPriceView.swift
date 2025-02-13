@@ -16,11 +16,15 @@ class RoomPriceView: BaseViewControllerPlain {
     @IBOutlet weak var moneyField: BigMoneyInputField!
     @IBOutlet weak var commissionView: UIView!
     @IBOutlet weak var commissionField: UILabel!
+    @IBOutlet weak var discountCheck: UIImageView!
+    @IBOutlet weak var discountField: DiscountField!
     
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
-    let discount: Double = 0.9
+    
+    var isDiscountChecked: Bool = false
+    var discount: Double = 0
     var discountedAmount: Double = 0
     
     override func viewDidLoad() {
@@ -36,9 +40,21 @@ class RoomPriceView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0.35, animated: true)
         stepTwoProgress.tintColor = .B_B
         
-        nextBtn.isEnabled = true
+        discountCheck.isUserInteractionEnabled = true
+        discountCheck.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(discountCheckTapped)))
+        discountCheck.image = isDiscountChecked ? UIImage(named: "check_icon") : UIImage(named: "uncheck_icon")
+        discountField.isHidden = !isDiscountChecked
+        
+//        nextBtn.isEnabled = moneyField
         moneyField.updateHeight(to: 70)
         moneyField.amountChanged = { [weak self] in
+            if let amount = self?.moneyField.getDoubleValue() {
+                self?.updateCommission(with: String(amount))
+            }
+            self?.nextBtn.isEnabled = true
+        }
+        
+        discountField.textChanged = { [weak self] _,_,_ in
             if let amount = self?.moneyField.getDoubleValue() {
                 self?.updateCommission(with: String(amount))
             }
@@ -51,6 +67,12 @@ class RoomPriceView: BaseViewControllerPlain {
         
     }
     
+    @objc func discountCheckTapped() {
+        isDiscountChecked.toggle()
+        discountCheck.image = isDiscountChecked ? UIImage(named: "check_icon") : UIImage(named: "uncheck_icon")
+        discountField.isHidden = !isDiscountChecked
+    }
+    
     func updateCommission(with enteredText: String) {
         guard let enteredAmount = moneyField.getDoubleValue(), enteredAmount > 0 else {
             commissionField.text = ""
@@ -58,9 +80,15 @@ class RoomPriceView: BaseViewControllerPlain {
             return
         }
         
+        if isDiscountChecked{
+            discount = (discountField.getDoubleValue() ?? 0)  / 100
+        }else{
+            discount = 0.1
+        }
+        
         print("Valid Entered Amount: \(enteredAmount)")
         
-        discountedAmount = enteredAmount * discount
+        discountedAmount = enteredAmount - (enteredAmount * discount)
         
         // Update the commissionField to display the discounted amount
         commissionView.isHidden = false
@@ -101,7 +129,7 @@ class RoomPriceView: BaseViewControllerPlain {
         
         print("Updated CreateBeachListing: \(updatedBeachListing)")
         
-        coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: updatedBeachListing)
+        coordinator?.gotoRoomPricePerDayView(beachData: beachData, createBeachListingData: updatedBeachListing)
     }
     
     

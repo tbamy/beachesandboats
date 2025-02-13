@@ -32,6 +32,9 @@ enum Urls: String {
     case getDashboardUser = "api/v1/hosting/dashboard/user"
     case sendKYC = "api/v1/kyc-request"
     
+    case getUserBookings = "api/v1/user/bookings"
+    case getSavedFavourites = "api/v1/user/favourites"
+    
     
     //MARK: Booking
     

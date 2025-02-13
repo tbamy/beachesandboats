@@ -8,10 +8,10 @@
 import Foundation
 
 struct FindServiceProviderResponse: Codable{
-    let data: [FindChefResponseData]?
+    let data: [FindProviderResponseData]?
 }
 
-struct FindChefResponseData: Codable{
+struct FindProviderResponseData: Codable{
     let id, name, description: String?
     let startingPrice: Float?
     let gender: String?

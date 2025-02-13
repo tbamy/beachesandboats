@@ -10,8 +10,8 @@ import Moya
 
 enum BookingTarget{
     case GetBookingCategories(page: String)
-    case AddOrUpdateReview
-    case AddOrUpdateFavourite
+    case AddOrUpdateReview(AddReviewRequest)
+    case AddOrUpdateFavourite(AddFavouriteRequest)
     case CreateBeachHouseBooking(CreateBeachHouseBookingRequest)
     case CreateBoatBooking(CreateBoatBookingRequest)
     case BookingConfiguration
@@ -92,10 +92,10 @@ extension BookingTarget: BaseTarget{
                 parameters: ["page": page],
                 encoding: URLEncoding.queryString
             )
-        case .AddOrUpdateReview:
-            return .requestPlain
-        case .AddOrUpdateFavourite:
-            return .requestPlain
+        case .AddOrUpdateReview(let request):
+            return .requestJSONEncodable(request)
+        case .AddOrUpdateFavourite(let request):
+            return .requestJSONEncodable(request)
         case .CreateBeachHouseBooking(let request):
             return .requestJSONEncodable(request)
         case .CreateBoatBooking(let request):

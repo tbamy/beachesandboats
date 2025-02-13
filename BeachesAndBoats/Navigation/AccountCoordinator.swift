@@ -192,6 +192,15 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoRoomPricePerDayView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+        let vc: RoomPricePerDayView = .fromNib()
+        vc.beachData = beachData
+        vc.coordinator = self
+        vc.createBeachListing = createBeachListingData
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
     func gotoUploadImageView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
         let vc: UploadImageView = .fromNib()
         vc.beachData = beachData
@@ -212,6 +221,15 @@ class AccountCoordinator: Coordinator{
     
     func gotoEntireApartmentPriceView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
         let vc: EntireApartmentPriceView = .fromNib()
+        vc.beachData = beachData
+        vc.coordinator = self
+        vc.createBeachListing = createBeachListingData
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoEntireApartmentPricePerDayView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+        let vc: EntireApartmentPricePerDayView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData

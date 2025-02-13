@@ -15,6 +15,8 @@ enum ProfileTarget{
 //    case RequestCode2FA
     case GetDashboardUser
     case sendKYC(SendKYCRequest)
+    case getUserBookings
+    case getSavedFavourites
     
 }
 
@@ -33,6 +35,10 @@ extension ProfileTarget: BaseTarget{
             return Urls.getDashboardUser.rawValue
         case .sendKYC:
             return Urls.sendKYC.rawValue
+        case .getUserBookings:
+            return Urls.getUserBookings.rawValue
+        case .getSavedFavourites:
+            return Urls.getSavedFavourites.rawValue
         }
     }
     
@@ -44,6 +50,10 @@ extension ProfileTarget: BaseTarget{
             return .get
         case .sendKYC:
             return .post
+        case .getUserBookings:
+            return .get
+        case .getSavedFavourites:
+            return .get
         }
     }
     
@@ -95,6 +105,10 @@ extension ProfileTarget: BaseTarget{
                     
 
             return .uploadMultipart(multipartData)
+        case .getUserBookings:
+            return .requestPlain
+        case .getSavedFavourites:
+            return .requestPlain
         }
     }
     

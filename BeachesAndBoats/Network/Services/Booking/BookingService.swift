@@ -14,9 +14,9 @@ protocol BookingService{
     
     func createBoatBooking(request: CreateBoatBookingRequest, completion: @escaping(Result<BoatBookingResponse, ErrorResponse>) -> Void)
     
-//    func addOrUpdateReview(request: CreateBeachHouseBookingRequest, completion: @escaping(Result<BeachHouseBookingResponse, ErrorResponse>) -> Void)
+    func addOrUpdateReview(request: AddReviewRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     
-    func addOrUpdateFavourite(request: CreateBeachHouseBookingRequest, completion: @escaping(Result<BeachHouseBookingResponse, ErrorResponse>) -> Void)
+    func addOrUpdateFavourite(request: AddFavouriteRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     
     func findChefByDishes(dishIds: String, completion: @escaping(Result<FindServiceProviderResponse, ErrorResponse>) -> Void)
     

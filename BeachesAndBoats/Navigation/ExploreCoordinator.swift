@@ -122,11 +122,19 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoServiceProviderDetails(data: FindChefResponseData, provider: String ){
+    func gotoServiceProviderDetails(data: FindProviderResponseData, provider: String ){
         let vc: ServiceProviderDetailsView = .fromNib()
         vc.coordinator = self
         vc.data = data
         vc.provider = provider
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoChat(data: StartConversationData){
+        let vc: ChatView = .fromNib()
+        vc.coordinator = self
+        vc.data = data
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }

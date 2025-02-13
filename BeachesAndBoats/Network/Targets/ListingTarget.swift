@@ -76,7 +76,9 @@ extension ListingTarget: BaseTarget {
                 "available_to": data.availableTo,
                 "role_type": data.roleType,
                 "listing_price": data.listingPrice,
-                "discount_percent": data.discountPercent
+                "discount_percent": data.discountPercent,
+                "price_per_day": data.pricePerDay,
+                "day_discount_percent": data.dayDiscountPercent
             ]
             
             for (key, value) in fields {
@@ -107,6 +109,8 @@ extension ListingTarget: BaseTarget {
                 multipartData.append(MultipartFormData(provider: .data(String(room.quantity).data(using: .utf8)!), name: "rooms[\(roomIndex)][quantity]"))
                 multipartData.append(MultipartFormData(provider: .data(String(room.pricePerNight).data(using: .utf8)!), name: "rooms[\(roomIndex)][price_per_night]"))
                 multipartData.append(MultipartFormData(provider: .data(String(room.discountPercent).data(using: .utf8)!), name: "rooms[\(roomIndex)][discount_percent]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.pricePerDay).data(using: .utf8)!), name: "rooms[\(roomIndex)][price_per_day]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.dayDiscountPercent).data(using: .utf8)!), name: "rooms[\(roomIndex)][day_discount_percent]"))
                 multipartData.append(MultipartFormData(provider: .data(String(room.noOfOccupant).data(using: .utf8)!), name: "rooms[\(roomIndex)][no_of_occupant]"))
                 multipartData.append(MultipartFormData(provider: .data(String(room.hasPrivateBathroom).data(using: .utf8)!), name: "rooms[\(roomIndex)][has_private_bathroom]"))
 

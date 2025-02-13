@@ -39,6 +39,7 @@ class BeachDetailsView: BaseViewControllerPlain {
     var beachDetails: Listing?
     var amenities: [Amenity] = []
     var roomImages: [String] = []
+    var comments: [Review] = []
     
     var from_when: Date?
     var to_when: Date?
@@ -135,7 +136,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         
         amenities = beachDetails?.amenities ?? []
-        
+        comments = beachDetails?.reviews ?? []
         
         topImage.isUserInteractionEnabled = true
         topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
@@ -188,25 +189,60 @@ class BeachDetailsView: BaseViewControllerPlain {
 
 extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return amenities.count
+        switch collectionView.tag {
+        case 0:
+            return amenities.count
+        case 1:
+            return comments.count
+        default:
+            return 0
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-        let cellAt = amenities[indexPath.item]
         
-        let view = CategoriesCell(frame: cell.bounds)
-        view.identifier = "Amenitiess " + indexPath.description
-        view.model.image = cellAt.icon ?? ""
-        view.model.title = cellAt.name ?? ""
-        view.isSubcategory = true
-        
-        cell.applyView(view: view)
-        return cell
+        switch collectionView.tag {
+        case 0:
+            let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            let cellAt = amenities[indexPath.item]
+            
+            let view = CategoriesCell(frame: cell.bounds)
+            view.identifier = "Amenitiess " + indexPath.description
+            view.model.image = cellAt.icon ?? ""
+            view.model.title = cellAt.name ?? ""
+            view.isSubcategory = true
+            
+            cell.applyView(view: view)
+            return cell
+            
+        case 1:
+            let cell = guestCommentsCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            let cellAt = comments[indexPath.item]
+            
+            let view = CommentsViewCell(frame: cell.bounds)
+            view.identifier = "GuestComments " + indexPath.description
+            view.model.name = cellAt.firstName ?? ""
+            view.model.rating = 1
+            view.model.comment = "Lorem ipsum"
+            
+            cell.applyView(view: view)
+            return cell
+            
+        default:
+            return UICollectionViewCell()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.width / 6), height: 50)
+        switch collectionView.tag {
+        case 0:
+            return CGSize(width: (collectionView.bounds.width / 6), height: 50)
+        case 1:
+            return CGSize(width: (collectionView.bounds.width) - 20, height: 150)
+        default:
+            return CGSize()
+        }
     }
     
     

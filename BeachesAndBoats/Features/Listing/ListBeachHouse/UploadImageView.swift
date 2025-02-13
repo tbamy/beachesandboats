@@ -46,6 +46,7 @@ class UploadImageView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
     }
     
     func setupDragAndDrop() {

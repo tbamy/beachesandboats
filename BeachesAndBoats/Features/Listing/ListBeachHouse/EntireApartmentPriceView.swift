@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxSwift
 
 class EntireApartmentPriceView: UIViewController {
 
@@ -21,9 +20,6 @@ class EntireApartmentPriceView: UIViewController {
     @IBOutlet weak var discountCheck: UIImageView!
     @IBOutlet weak var discountField: DiscountField!
     
-    var disposeBag = DisposeBag()
-    var vm = ListBeachViewModel()
-    
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     
@@ -35,8 +31,6 @@ class EntireApartmentPriceView: UIViewController {
         super.viewDidLoad()
         title = "Beaches Houses"
         setup()
-        
-        bindNetwork()
         
     }
 
@@ -51,9 +45,16 @@ class EntireApartmentPriceView: UIViewController {
         stepTwoProgress.setProgress(0.85, animated: true)
         stepTwoProgress.tintColor = .B_B
         
-        nextBtn.isEnabled = true
+//        nextBtn.isEnabled = true
         moneyField.updateHeight(to: 70)
         moneyField.amountChanged = { [weak self] in
+            if let amount = self?.moneyField.getDoubleValue() {
+                self?.updateCommission(with: String(amount))
+            }
+            self?.nextBtn.isEnabled = true
+        }
+        
+        discountField.textChanged = { [weak self] _,_,_ in
             if let amount = self?.moneyField.getDoubleValue() {
                 self?.updateCommission(with: String(amount))
             }
@@ -86,8 +87,13 @@ class EntireApartmentPriceView: UIViewController {
         print("Valid Entered Amount: \(enteredAmount)")
         
         // Apply the 10% discount
-        discount = discountField.getDoubleValue() ?? 0.9
-        discountedAmount = enteredAmount * discount
+//        discount = discountField.getDoubleValue() ?? 0.9
+        if isDiscountChecked{
+            discount = (discountField.getDoubleValue() ?? 0)  / 100
+        }else{
+            discount = 0.1
+        }
+        discountedAmount = enteredAmount - (enteredAmount * discount)
         
         // Update the commissionField to display the discounted amount
         commissionView.isHidden = false
@@ -96,24 +102,19 @@ class EntireApartmentPriceView: UIViewController {
         
     }
 
-            
-
-            
-
     
     @IBAction func nextTapped(_ sender: Any) {
-        if var createBeachListing = createBeachListing{
+        if var createBeachListing = createBeachListing, let beachData = beachData{
             createBeachListing.listingPrice = moneyField.getFloatValue() ?? 0
             createBeachListing.discountPercent = discountField.getIntValue() ?? 10
             
             if createBeachListing.bookingType?.isEmpty ?? true {
                 createBeachListing.bookingType = "FULL"
             }
-            print("Final Request is: \(createBeachListing)")
+            print("Request is: \(createBeachListing)")
             
-            
-            LoadingModal.show(title: "Hold on while we list your Property")
-            vm.createBeach(createBeachListing)
+            coordinator?.gotoEntireApartmentPricePerDayView(beachData: beachData, createBeachListingData: createBeachListing)
+
             
         }
     }
@@ -130,21 +131,6 @@ class EntireApartmentPriceView: UIViewController {
             coordinator?.backToDashboard()
         }
 
-    }
-    
-    func bindNetwork(){
-        vm.output.subscribe(onNext: {[weak self] response in
-            LoadingModal.dismiss()
-            
-            switch response {
-            case .listBeachSuccessful(let response):
-                print(response)
-                self?.coordinator?.gotoListingSuccessView(type: 2)
-            case .listBeachFailed(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error)
-            }
-            
-        }).disposed(by: disposeBag)
     }
 
 }

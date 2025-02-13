@@ -10,4 +10,6 @@ import Foundation
 protocol ProfileService{
     func getDashboardUser(completion: @escaping(Result<DashboardUserReponse, ErrorResponse>) -> Void)
     func sendKYC(request: SendKYCRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    func getSavedFavourites(completion: @escaping(Result<GetSavedFavouritesResponse, ErrorResponse>) -> Void)
+    func getUserBookings(completion: @escaping(Result<GetUserBookingsResponse, ErrorResponse>) -> Void)
 }

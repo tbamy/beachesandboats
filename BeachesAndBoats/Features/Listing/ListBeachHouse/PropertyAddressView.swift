@@ -46,28 +46,28 @@ class PropertyAddressView: BaseViewControllerPlain {
         countryField.textField.isEnabled = false
         stateField.items = states ?? []
         
-//        stateField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//        
-//        streetField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//        
-//        cityField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
+        stateField.textChanged = { [weak self] _, _, _ in
+            self?.validate()
+        }
+        
+        streetField.textChanged = { [weak self] _, _, _ in
+            self?.validate()
+        }
+        
+        cityField.textChanged = { [weak self] _, _, _ in
+            self?.validate()
+        }
 //                
 //        nextBtn.isEnabled = false
     }
 
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField == cityField || textField == stateField {
-//            stateName = stateField.text
-//            cityName = cityField.text
-//            searchLocation()
-//        }
-//    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == cityField || textField == stateField {
+            stateName = stateField.text
+            cityName = cityField.text
+            searchLocation()
+        }
+    }
     
     func searchLocation() {
         guard let city = cityName, !city.isEmpty,

@@ -7,13 +7,14 @@
 
 import UIKit
 import PaystackCore
-//import
+//import PusherSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var coordinator: AppCoordinator?
     var window: UIWindow?
+//    var pusher: Pusher!
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

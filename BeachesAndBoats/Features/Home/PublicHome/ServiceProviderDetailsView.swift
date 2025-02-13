@@ -7,13 +7,16 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
 
 class ServiceProviderDetailsView: BaseViewControllerPlain {
     
     var coordinator: ExploreCoordinator?
     var provider: String?
-    var data: FindChefResponseData?
+    var data: FindProviderResponseData?
     var images: [Image]?
+    var bookingId: String?
+    var propertyType: String?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
@@ -27,6 +30,13 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var commentsCollectionView: UICollectionView!
     @IBOutlet weak var contactBtn: PlainOutlineButton!
     
+    var conversationRequest: StartConversationRequest?
+    var conversationResponse: StartConversationResponse?
+    let user = UserSession.shared.userDetails?.id
+    
+    let vm = StartConversationVM()
+    let disposeBag = DisposeBag()
+    let input = PublishSubject<StartConversationVM.Input>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +46,23 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
+        
+        switch provider {
+        case "Chef":
+            photosTitleLabel.text = "Food Samples"
+            genderLabel.isHidden = true
+            genderLabel2.text = data?.dishes?.map { "ID: \($0.id), Name: \($0.name)" }
+                .joined(separator: "\n")
+        case "Bouncer":
+            photosTitleLabel.text = "Bouncer's Pictures"
+            genderLabel2.text = data?.gender
+        case "Dj":
+            photosTitleLabel.text = "DJ’s pictures"
+            genderLabel.isHidden = true
+            genderLabel2.isHidden = true
+        default:
+            photosTitleLabel.text = "Food Samples"
+        }
         image.layer.cornerRadius = image.frame.height / 2
         if let url = URL(string: data?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             image.kf.setImage(
@@ -77,7 +104,33 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
         
     }
 
+    @IBAction func contactMeTapped(_ sender: Any) {
+        //start conversation
+        conversationRequest?.bookingId = bookingId
+        conversationRequest?.personId = user ?? ""
+        conversationRequest?.propertyType = propertyType
+        
+        if let conversationRequest = conversationRequest{
+            input.onNext(.startConversation(conversationRequest))
+            LoadingModal.show()
+        }
+    }
 
+    
+    func bind(){
+        vm.transform(input: input)
+        
+        vm.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .startConversationSuccess(let response):
+                self?.conversationResponse = response
+//                self?.coordinator.goto
+            case .startConversationFailed(let error) :
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+    }
 
 }
 

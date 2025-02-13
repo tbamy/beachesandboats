@@ -28,6 +28,8 @@ class GeneralViewCell: BaseXib {
     @IBOutlet weak var infoTwoStack: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    var onSaveFavouriteTapped: (() -> Void)?
+    
     @IBInspectable var isBeachHouseMode: Bool = false {
         didSet { setup() }
     }
@@ -65,6 +67,7 @@ class GeneralViewCell: BaseXib {
         priceLabel.text = model.priceLabel
         ratingLabel.text = model.ratingLabel
 
+        saveBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(saveBtnTapped)))
         
         if let url = URL(string: model.bannerImg.replacingOccurrences(of: "http://", with: "https://")) {
             bannerImg.kf.setImage(
@@ -106,6 +109,10 @@ class GeneralViewCell: BaseXib {
         infoOneIcon.image = Assets.people.image
         infoTwoIcon.image = Assets.location.image
         priceStack.isHidden = true
+    }
+    
+    @objc func saveBtnTapped(){
+        onSaveFavouriteTapped?()
     }
 
 }

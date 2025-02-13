@@ -61,7 +61,7 @@ extension RecommendationsView: UICollectionViewDelegate, UICollectionViewDataSou
         
         let view = RecommendationsViewCell(frame: cell.bounds)
         view.model.image = name?.images?.first?.url ?? ""
-        view.model.name = "\(provider ?? "") \(name?.name ?? "")"
+        view.model.name = "\(name?.name ?? "")"
         view.model.rating = name?.rating ?? 0
         view.model.price = name?.startingPrice ?? 0
         
