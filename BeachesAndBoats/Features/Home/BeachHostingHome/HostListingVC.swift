@@ -49,6 +49,7 @@ class HostListingVC: BaseViewControllerPlain {
 //        isShowingBeachHouses = true
         beachHouseListingSegment.contentView.backgroundColor = .none
         boatListingSegment.contentView.backgroundColor = .none
+        unfinishedListingStack.isHidden = true
     }
     
     func gestureRecognizers() {
@@ -111,9 +112,23 @@ class HostListingVC: BaseViewControllerPlain {
         if isShowingBeachHouses {
             beachHouseListingSegment.isSelected = true
             boatListingSegment.isSelected = false
+            if let unfinishedBeachListing = AppStorage.beachListing {
+                unfinishedListingStack.isHidden = false
+                unfinishedListingName.text = unfinishedBeachListing.name
+                unfinishedListingLocation.text = unfinishedBeachListing.streetName + ", " + unfinishedBeachListing.state + unfinishedBeachListing.country
+            } else {
+                unfinishedListingStack.isHidden = true
+            }
         } else {
             beachHouseListingSegment.isSelected = false
             boatListingSegment.isSelected = true
+            if let unfinishedBoatListing = AppStorage.boatListing {
+                unfinishedListingStack.isHidden = false
+                unfinishedListingName.text = unfinishedBoatListing.name
+                unfinishedListingLocation.text = unfinishedBoatListing.streetName + ", " + unfinishedBoatListing.state + unfinishedBoatListing.country
+            } else {
+                unfinishedListingStack.isHidden = true
+            }
         }
         listingTableView.reloadData()
         self.updateTableHeight()
