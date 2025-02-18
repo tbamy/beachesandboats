@@ -71,7 +71,7 @@ struct BookingsBeachHouseRoom: Codable {
 
 // MARK: - BoatBookings
 struct BoatBookings: Codable {
-    let upcoming, past: [BoatBookingsPast]
+    let upcoming, past: [BoatBookingsPast]?
 }
 
 // MARK: - BoatBookingsPast

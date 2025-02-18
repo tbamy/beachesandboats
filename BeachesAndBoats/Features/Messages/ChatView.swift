@@ -15,7 +15,7 @@ class ChatView: BaseViewControllerPlain {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: InputField!
-    @IBOutlet weak var sendButton: UILabel!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var hostNameLabel: UILabel!
     @IBOutlet weak var hostImage: UIImageView!
     @IBOutlet weak var bookingImage: UIImageView!
@@ -24,8 +24,13 @@ class ChatView: BaseViewControllerPlain {
     @IBOutlet weak var bookingPriceLabel: UILabel!
     
     var conversationId: String?
-    var messages: [SendChatResponseData] = []
-    
+    var messages: [MessagesData] = [] {
+        didSet {
+            tableView.reloadData()
+            scrollToBottom()
+        }
+    }
+
     var vm: ChatVM!
     let disposeBag = DisposeBag()
     let input = PublishSubject<ChatVM.Input>()
@@ -36,24 +41,33 @@ class ChatView: BaseViewControllerPlain {
         guard let conversationId = conversationId else { return } // Ensure we have a conversationId
         vm = ChatVM(conversationId: conversationId) // Pass conversationId to VM
 
-        bind()
         setup()
+        bind()
     }
     
-    func setup(){
+    func setup() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "MessageViewCell", bundle: nil), forCellReuseIdentifier: "MessageViewCell")
         
-        
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.register(UINib(nibName: "MessageViewCell", bundle: nil), forCellReuseIdentifier: "MessageViewCell")
+        sendButton.isEnabled = false // Disable initially
+        messageTextField.onTextChanged = { [weak self] _ in
+            self?.textFieldChanged()
+        }
+    }
+
+    func textFieldChanged() {
+        sendButton.isEnabled = !(messageTextField.text.isEmpty)
     }
 
     @IBAction func sendButtonTapped(_ sender: UIButton) {
         guard let conversationId = conversationId else { return }
         let message = messageTextField.text
+        
         let request = SendChatRequest(conversation_id: conversationId, message: message)
         input.onNext(.sendChat(request)) // Send chat message
         messageTextField.text = ""
+        sendButton.isEnabled = false
     }
     
     func bind() {
@@ -62,6 +76,8 @@ class ChatView: BaseViewControllerPlain {
         vm.output
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] data in
+                guard let self = self else { return }
+                
                 switch data {
                 case .sendChatSuccess(let response):
                     print("Sent: \(response)")
@@ -70,27 +86,41 @@ class ChatView: BaseViewControllerPlain {
                     print("Error: \(error)")
 
                 case .newMessageReceived(let message):
-                    self?.messages.append(message)
-                    self?.tableView.reloadData()
+                    self.messages.append(message)
+
                 case .getMessageHistorySuccess(let response):
-                    print("Sent: \(response)")
+                    self.messages = response.data?.data // Ensure history loads correctly
+                    print("Loaded: \(response)")
+
                 case .getMessageHistoryFailed(let error):
                     print("Error: \(error)")
                 }
             })
             .disposed(by: disposeBag)
+        
+        // Fetch existing chat history
+        if let conversationId = conversationId {
+            input.onNext(.getChatHistory(conversationId: conversationId))
+        }
+    }
+    
+    func scrollToBottom() {
+        if !messages.isEmpty {
+            let indexPath = IndexPath(row: messages.count - 1, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
     }
 }
 
-
-//extension ChatView: UITableViewDelegate, UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//    
-//    
-//}
+// MARK: - UITableViewDataSource & UITableViewDelegate
+extension ChatView: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageViewCell", for: indexPath) as! MessageViewCell
+        cell.configure(with: messages[indexPath.row])
+        return cell
+    }
+}

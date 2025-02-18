@@ -1,6 +1,6 @@
 //
 //  GetMessageHistoryResponse.swift
-//  BeachesAndBoats
+//  BeachesAndBoatsw
 //
 //  Created by Tolu Akintayo on 06/02/2025.
 //

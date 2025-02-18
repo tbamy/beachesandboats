@@ -164,6 +164,10 @@
 		A65125832CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */; };
 		A65125842CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */; };
 		A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65125852CBC3C9400AFA0F9 /* PinField.swift */; };
+		A65155AF2D5E94E60018C6DB /* BeachBookingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65155AD2D5E94E60018C6DB /* BeachBookingDetailsView.swift */; };
+		A65155B02D5E94E60018C6DB /* BeachBookingDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65155AE2D5E94E60018C6DB /* BeachBookingDetailsView.xib */; };
+		A65155B32D5E95000018C6DB /* BoatBookingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65155B12D5E95000018C6DB /* BoatBookingDetailsView.swift */; };
+		A65155B42D5E95000018C6DB /* BoatBookingDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65155B22D5E95000018C6DB /* BoatBookingDetailsView.xib */; };
 		A65192912D26CE060082C3C9 /* WithdrawalHistoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65192902D26CE060082C3C9 /* WithdrawalHistoryResponse.swift */; };
 		A65192932D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65192922D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift */; };
 		A65192982D26F15F0082C3C9 /* MakeWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65192972D26F15F0082C3C9 /* MakeWithdrawView.xib */; };
@@ -703,6 +707,10 @@
 		A65125812CBC294D00AFA0F9 /* ConfirmEmailAddressModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailAddressModal.swift; sourceTree = "<group>"; };
 		A65125822CBC294D00AFA0F9 /* ConfirmEmailAddressModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmEmailAddressModal.xib; sourceTree = "<group>"; };
 		A65125852CBC3C9400AFA0F9 /* PinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinField.swift; sourceTree = "<group>"; };
+		A65155AD2D5E94E60018C6DB /* BeachBookingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachBookingDetailsView.swift; sourceTree = "<group>"; };
+		A65155AE2D5E94E60018C6DB /* BeachBookingDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeachBookingDetailsView.xib; sourceTree = "<group>"; };
+		A65155B12D5E95000018C6DB /* BoatBookingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatBookingDetailsView.swift; sourceTree = "<group>"; };
+		A65155B22D5E95000018C6DB /* BoatBookingDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatBookingDetailsView.xib; sourceTree = "<group>"; };
 		A65192902D26CE060082C3C9 /* WithdrawalHistoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalHistoryResponse.swift; sourceTree = "<group>"; };
 		A65192922D26D0AB0082C3C9 /* WithdrawalHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalHistoryVM.swift; sourceTree = "<group>"; };
 		A65192962D26F15F0082C3C9 /* MakeWithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWithdrawView.swift; sourceTree = "<group>"; };
@@ -1889,6 +1897,10 @@
 				A6617A4E2CAF557900514576 /* BookingsView.xib */,
 				A6A2E8252CBCA3B6004E58EB /* BookingsCell.swift */,
 				A6A2E8262CBCA3B6004E58EB /* BookingsCell.xib */,
+				A65155AD2D5E94E60018C6DB /* BeachBookingDetailsView.swift */,
+				A65155AE2D5E94E60018C6DB /* BeachBookingDetailsView.xib */,
+				A65155B12D5E95000018C6DB /* BoatBookingDetailsView.swift */,
+				A65155B22D5E95000018C6DB /* BoatBookingDetailsView.xib */,
 			);
 			path = Bookings;
 			sourceTree = "<group>";
@@ -2626,6 +2638,7 @@
 				A6FB744D2C13558000A26806 /* ConfirmAccountModal.xib in Resources */,
 				A65C51492CAC34B10027E5F1 /* AboutYouDescriptionView.xib in Resources */,
 				A65E83802D36D6E4009F2B89 /* HostListingTableView.xib in Resources */,
+				A65155B42D5E95000018C6DB /* BoatBookingDetailsView.xib in Resources */,
 				A65125672CBC0AF100AFA0F9 /* CreditCardPaymentView.xib in Resources */,
 				A6F4069A2C02D3A800973BD7 /* Montserrat-ExtraBold.ttf in Resources */,
 				A6C1C4292CBBFEB5001CD27D /* PaymentMethodModal.xib in Resources */,
@@ -2653,6 +2666,7 @@
 				A60580BC2CDBADE000B17505 /* BoatAvailableDatesView.xib in Resources */,
 				A650AAE22CB867E600A70CF4 /* VerificationFormView.xib in Resources */,
 				A675D9F02D272FB4003E297B /* MakePaymentView.xib in Resources */,
+				A65155B02D5E94E60018C6DB /* BeachBookingDetailsView.xib in Resources */,
 				A6CA3D552CB9CD8E009307B2 /* DJInformationVIew.xib in Resources */,
 				A65628242CB5230000947BA5 /* RoomPriceView.xib in Resources */,
 				A65C51512CAC35470027E5F1 /* CheckInAndOutRulesView.xib in Resources */,
@@ -2882,6 +2896,7 @@
 				A66F3FAC2D29742100902E43 /* GestureRecognizerHelper.swift in Sources */,
 				A65C512C2CAC319A0027E5F1 /* HouseSizeListView.swift in Sources */,
 				A66F3FB42D29DA4F00902E43 /* ColorTextLabel.swift in Sources */,
+				A65155AF2D5E94E60018C6DB /* BeachBookingDetailsView.swift in Sources */,
 				A63D48C72D4E4C89002C48F7 /* FindServiceProviderResponse.swift in Sources */,
 				A6FB74572C13573500A26806 /* CheckboxButton.swift in Sources */,
 				A6C20FEA2C85BD610045C670 /* GeneralResponse.swift in Sources */,
@@ -2898,6 +2913,7 @@
 				A63F31312CB09ABE00D402F4 /* BeachDataViewModel.swift in Sources */,
 				A642F96C2D58D2720089F593 /* GetUserBookingsResponse.swift in Sources */,
 				A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */,
+				A65155B32D5E95000018C6DB /* BoatBookingDetailsView.swift in Sources */,
 				A6A2E84A2CBFB650004E58EB /* ProfileServiceImplementation.swift in Sources */,
 				A6EF00E22D283FE200893C05 /* CreateWithdrawalResponse.swift in Sources */,
 				A6E050552CF0CAF300F0211C /* DashboardViewCell.swift in Sources */,
@@ -3254,9 +3270,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2X3R3Z358K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
@@ -3285,9 +3302,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2X3R3Z358K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;

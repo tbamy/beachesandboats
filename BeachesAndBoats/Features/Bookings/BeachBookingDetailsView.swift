@@ -1,15 +1,14 @@
 //
-//  SavedView.swift
+//  BeachBookingDetailsView.swift
 //  BeachesAndBoats
 //
-//  Created by Tolu Akintayo on 03/10/2024.
+//  Created by Tolu Akintayo on 13/02/2025.
 //
 
 import UIKit
 
-class SavedView: BaseViewControllerPlain {
+class BeachBookingDetailsView: UIViewController {
 
-    var coordinator: SavedCoordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
 

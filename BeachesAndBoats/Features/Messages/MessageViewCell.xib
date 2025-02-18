@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,47 +21,46 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFX-k3-RYf">
                         <rect key="frame" x="0.0" y="0.0" width="362" height="79"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boatListingSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="SfW-nG-xSw">
-                                <rect key="frame" x="20" y="19.666666666666671" width="40" height="40"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="SfW-nG-xSw">
+                                <rect key="frame" x="20" y="21.000000000000004" width="40" height="37.333333333333343"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3kz-zQ-6hQ"/>
                                     <constraint firstAttribute="width" constant="40" id="6wv-XK-UNC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrD-8n-OR9" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                <rect key="frame" x="68" y="19" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
-                                        <real key="value" value="14"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNM-sz-zBI">
-                                <rect key="frame" x="68" y="45" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9q-ko-GfC">
+                                <rect key="frame" x="70" y="49.333333333333336" width="35.333333333333343" height="19.666666666666664"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPm-Y4-cfw">
-                                <rect key="frame" x="120" y="19" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UWG-LN-cyR">
+                                <rect key="frame" x="70" y="14.999999999999998" width="72.666666666666686" height="19.333333333333329"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzY-X8-WqV" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="19.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cJ-ll-7f9">
+                                        <rect key="frame" x="46.333333333333329" y="0.0" width="26.333333333333329" height="19.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="lNM-sz-zBI" firstAttribute="top" secondItem="FrD-8n-OR9" secondAttribute="bottom" constant="5" id="8bC-QC-9xy"/>
-                            <constraint firstItem="lNM-sz-zBI" firstAttribute="leading" secondItem="SfW-nG-xSw" secondAttribute="trailing" constant="8" symbolic="YES" id="MoJ-G8-tdy"/>
+                            <constraint firstAttribute="bottom" secondItem="Y9q-ko-GfC" secondAttribute="bottom" constant="10" id="Eeg-NH-e6I"/>
                             <constraint firstItem="SfW-nG-xSw" firstAttribute="leading" secondItem="YFX-k3-RYf" secondAttribute="leading" constant="20" id="OTr-At-V2B"/>
+                            <constraint firstItem="Y9q-ko-GfC" firstAttribute="top" secondItem="UWG-LN-cyR" secondAttribute="bottom" constant="15" id="R4T-lG-Y0G"/>
                             <constraint firstItem="SfW-nG-xSw" firstAttribute="centerY" secondItem="YFX-k3-RYf" secondAttribute="centerY" id="VeL-Ke-xJN"/>
-                            <constraint firstItem="kPm-Y4-cfw" firstAttribute="leading" secondItem="FrD-8n-OR9" secondAttribute="trailing" constant="10" id="h9c-hB-u05"/>
-                            <constraint firstItem="FrD-8n-OR9" firstAttribute="leading" secondItem="SfW-nG-xSw" secondAttribute="trailing" constant="8" symbolic="YES" id="hZj-MA-0gh"/>
-                            <constraint firstItem="kPm-Y4-cfw" firstAttribute="top" secondItem="YFX-k3-RYf" secondAttribute="top" constant="19" id="lTA-gS-6B6"/>
-                            <constraint firstItem="FrD-8n-OR9" firstAttribute="top" secondItem="YFX-k3-RYf" secondAttribute="top" constant="19" id="yHn-Ir-sbs"/>
+                            <constraint firstItem="UWG-LN-cyR" firstAttribute="top" secondItem="YFX-k3-RYf" secondAttribute="top" constant="15" id="XGR-nY-g7q"/>
+                            <constraint firstItem="Y9q-ko-GfC" firstAttribute="leading" secondItem="SfW-nG-xSw" secondAttribute="trailing" constant="10" id="cwa-c8-2LS"/>
+                            <constraint firstItem="UWG-LN-cyR" firstAttribute="leading" secondItem="SfW-nG-xSw" secondAttribute="trailing" constant="10" id="g1t-wD-uyQ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -73,16 +73,16 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="contactImg" destination="SfW-nG-xSw" id="pPQ-vk-GG4"/>
-                <outlet property="contactName" destination="FrD-8n-OR9" id="qle-E9-7un"/>
-                <outlet property="lastMsgLbl" destination="lNM-sz-zBI" id="fYr-od-ncs"/>
-                <outlet property="stateLbl" destination="kPm-Y4-cfw" id="lxz-9R-T0p"/>
+                <outlet property="messageLbl" destination="Y9q-ko-GfC" id="KMb-8N-tds"/>
+                <outlet property="timeLbl" destination="8cJ-ll-7f9" id="Jmc-FZ-ODR"/>
+                <outlet property="userImg" destination="SfW-nG-xSw" id="oA5-7J-1CK"/>
+                <outlet property="userName" destination="lzY-X8-WqV" id="nYT-Gl-567"/>
             </connections>
             <point key="canvasLocation" x="158.77862595419847" y="32.04225352112676"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="boatListingSuccess" width="383" height="317"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <namedColor name="Background">
             <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

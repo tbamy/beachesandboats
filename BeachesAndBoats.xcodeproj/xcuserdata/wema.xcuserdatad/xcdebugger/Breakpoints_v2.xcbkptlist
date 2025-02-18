@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
             endingLineNumber = "111"
-            landmarkName = "editDateBtnTapped(_:)"
+            landmarkName = "makePaymentTapped(_:)"
             landmarkType = "7">
             <Locations>
                <Location
