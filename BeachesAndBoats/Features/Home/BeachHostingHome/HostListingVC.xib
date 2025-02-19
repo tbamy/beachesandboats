@@ -20,6 +20,7 @@
                 <outlet property="unfinishedListingName" destination="mm8-K1-J8V" id="w3h-Ff-qBs"/>
                 <outlet property="unfinishedListingStack" destination="qqG-7Y-j5l" id="m54-ki-web"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewContainerHeightConstraint" destination="LP2-YX-eh5" id="ibB-o4-FnF"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,24 +35,25 @@
                         <constraint firstAttribute="height" constant="44" id="PLE-nf-MkH"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="A04-hf-wtZ">
-                    <rect key="frame" x="20" y="143" width="487" height="30"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A04-hf-wtZ">
+                    <rect key="frame" x="10" y="143" width="507" height="30"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIf-Vt-5es" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="221.33333333333334" height="30"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="MIf-Vt-5es" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="248.66666666666666" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="Beach Houses Reservation"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fO8-rK-vNk" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="241.33333333333331" y="0.0" width="245.66666666666669" height="30"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="fO8-rK-vNk" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="258.66666666666669" y="0.0" width="248.33333333333331" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="Boats Reservations"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ANg-fU-64V"/>
                     </constraints>
@@ -188,9 +190,9 @@
                 <constraint firstAttribute="bottom" secondItem="f1S-dL-lME" secondAttribute="bottom" id="e9A-9w-Xah"/>
                 <constraint firstItem="f1S-dL-lME" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hiq-6F-85f"/>
                 <constraint firstItem="A04-hf-wtZ" firstAttribute="top" secondItem="sWc-PQ-Dgj" secondAttribute="bottom" constant="20" id="s9w-Ik-A4c"/>
-                <constraint firstItem="A04-hf-wtZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="sgh-Vv-kcV"/>
+                <constraint firstItem="A04-hf-wtZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="sgh-Vv-kcV"/>
                 <constraint firstItem="sWc-PQ-Dgj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="yZa-hl-Dy1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="A04-hf-wtZ" secondAttribute="trailing" constant="20" id="zrf-jn-437"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="A04-hf-wtZ" secondAttribute="trailing" constant="10" id="zrf-jn-437"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="90.839694656488547" y="234.50704225352115"/>

@@ -72,7 +72,7 @@ import Foundation
 struct WithdrawalResponse: Codable {
     let status: Bool?
     let message: String?
-    let data: [WithdrawalDetail]?// Changed from [String: [WithdrawalDetail]]
+    let data: [String: [WithdrawalDetail]]? 
     let errors: String?
 }
 
@@ -96,32 +96,72 @@ extension WithdrawalResponse {
             status: true,
             message: "Success!",
             data: [
-                WithdrawalDetail(
-                    id: "1",
-                    amount: 55000,
-                    status: "completed",
-                    createdAt: "2024-01-02T10:10:00Z"
-                ),
-                WithdrawalDetail(
-                    id: "2",
-                    amount: 55000,
-                    status: "completed",
-                    createdAt: "2024-01-02T22:08:00Z"
-                ),
-                WithdrawalDetail(
-                    id: "3",
-                    amount: 55000,
-                    status: "completed",
-                    createdAt: "2024-01-04T10:39:00Z"
-                ),
-                WithdrawalDetail(
-                    id: "4",
-                    amount: 55000,
-                    status: "completed",
-                    createdAt: "2024-01-04T10:39:00Z"
-                )
+                "January 2, 2024": [
+                    WithdrawalDetail(
+                        id: "1",
+                        amount: 55000,
+                        status: "completed",
+                        createdAt: "2024-01-02T10:10:00Z"
+                    ),
+                    WithdrawalDetail(
+                        id: "2",
+                        amount: 55000,
+                        status: "completed",
+                        createdAt: "2024-01-02T22:08:00Z"
+                    )
+                ],
+                "January 4, 2024": [
+                    WithdrawalDetail(
+                        id: "3",
+                        amount: 55000,
+                        status: "completed",
+                        createdAt: "2024-01-04T10:39:00Z"
+                    ),
+                    WithdrawalDetail(
+                        id: "4",
+                        amount: 55000,
+                        status: "completed",
+                        createdAt: "2024-01-04T10:39:00Z"
+                    )
+                ]
             ],
             errors: nil
         )
     }
 }
+
+//extension WithdrawalResponse {
+//    static var mockData: WithdrawalResponse {
+//        return WithdrawalResponse(
+//            status: true,
+//            message: "Success!",
+//            data: [
+//                WithdrawalDetail(
+//                    id: "1",
+//                    amount: 55000,
+//                    status: "completed",
+//                    createdAt: "2024-01-02T10:10:00Z"
+//                ),
+//                WithdrawalDetail(
+//                    id: "2",
+//                    amount: 55000,
+//                    status: "completed",
+//                    createdAt: "2024-01-02T22:08:00Z"
+//                ),
+//                WithdrawalDetail(
+//                    id: "3",
+//                    amount: 55000,
+//                    status: "completed",
+//                    createdAt: "2024-01-04T10:39:00Z"
+//                ),
+//                WithdrawalDetail(
+//                    id: "4",
+//                    amount: 55000,
+//                    status: "completed",
+//                    createdAt: "2024-01-04T10:39:00Z"
+//                )
+//            ],
+//            errors: nil
+//        )
+//    }
+//}

@@ -178,12 +178,12 @@ struct BeachHouseRoom: Codable {
     let id: String
     let name: String
     let description: String
-    let pricePerNight: String
-    let discountPercent: String
-    let images: [String]
+    let pricePerNight: Double //String
+    let discountPercent: Double//String
+    let images: [Image]
     let bedTypes: [BookingBedType]?
     let noOfOccupant: Int
-    let hasPrivateBathroom: Bool
+    let hasPrivateBathroom: Int //Bool
 
     enum CodingKeys: String, CodingKey {
         case id

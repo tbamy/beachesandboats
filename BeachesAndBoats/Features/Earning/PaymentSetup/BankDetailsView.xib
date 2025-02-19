@@ -22,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-nR-WkN">
-                    <rect key="frame" x="44" y="89" width="46" height="22"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter bank details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-nR-WkN">
+                    <rect key="frame" x="44" y="89" width="151" height="22"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -85,7 +85,6 @@
                 <constraint firstItem="tWu-GR-ham" firstAttribute="top" secondItem="EAC-tb-fMX" secondAttribute="bottom" constant="50" id="b3o-jv-dnX"/>
                 <constraint firstItem="EAC-tb-fMX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="eUX-ry-2ny"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EAC-tb-fMX" secondAttribute="trailing" constant="20" id="fhW-LD-eku"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GYX-nR-WkN" secondAttribute="trailing" constant="303" id="ghR-Wh-ieS"/>
                 <constraint firstItem="D3f-Nq-pN2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hF5-qD-4uy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HCm-lJ-Yl9" secondAttribute="trailing" constant="20" id="kbi-P4-xet"/>
                 <constraint firstItem="GYX-nR-WkN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="44" id="v0z-Rf-bAE"/>
@@ -95,9 +94,14 @@
             <point key="canvasLocation" x="-25.190839694656489" y="19.718309859154932"/>
         </view>
     </objects>
+    <designables>
+        <designable name="D3f-Nq-pN2">
+            <size key="intrinsicContentSize" width="61" height="34.333333333333336"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="back">
-            <color red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -21,11 +21,11 @@ class HostingServiceImplementation: Provider<HostingTarget>, HostingService {
 //        provider.request(.beachHouseListing) { completion(self.handleResult(result: $0))}
 //    }
     
-    func beachHouseReservation(completion: @escaping (Result<BeachHouseReservations, ErrorResponse>) -> Void) {
+    func beachHouseReservation(completion: @escaping (Result<HostingBookingResponse, ErrorResponse>) -> Void) {
         provider.request(.beachHouseReservations) { completion(self.handleResult(result: $0))}
     }
     
-    func boatReservation(completion: @escaping (Result<BoatReservations, ErrorResponse>) -> Void) {
+    func boatReservation(completion: @escaping (Result<HostingBookingResponse, ErrorResponse>) -> Void) {
         provider.request(.boatReservations) { completion(self.handleResult(result: $0))}
     }
     

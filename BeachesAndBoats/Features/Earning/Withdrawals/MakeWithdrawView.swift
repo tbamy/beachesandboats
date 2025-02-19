@@ -141,7 +141,7 @@ extension MakeWithdrawView {
             LoadingModal.dismiss()
             switch output {
             case .makeWithdrawalSuccess(let response):
-                MiddleModal.show(title: response.message ?? "", primaryText: "Done", onConfirm: {
+                MiddleModal.show(title: response.message ?? "", type: .success, primaryText: "Done", onConfirm: {
                     self?.coordinator?.gotoServiceDashboard()
                 })
             case .makeWithdrawalFailure(let error):

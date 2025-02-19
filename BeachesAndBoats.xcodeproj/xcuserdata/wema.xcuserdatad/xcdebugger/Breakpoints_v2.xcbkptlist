@@ -3,6 +3,7 @@
    uuid = "896A6358-AFA5-4240-AAE2-FD1C9B4DCCD3"
    type = "1"
    version = "2.0">
+<<<<<<< HEAD
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -164,4 +165,6 @@
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
+=======
+>>>>>>> HefepaNew
 </Bucket>

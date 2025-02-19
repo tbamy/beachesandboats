@@ -169,7 +169,7 @@ enum BookingItem{
     var image: String{
         switch self {
         case .boat(let booking):
-            return booking.boat.images?.first?.url ?? ""
+            return booking.boat.images ?? ""
         case .beachHouse(let booking):
             return booking.beachHouse?.image ?? ""
         }

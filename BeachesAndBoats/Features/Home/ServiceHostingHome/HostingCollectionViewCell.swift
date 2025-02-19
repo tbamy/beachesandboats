@@ -22,21 +22,44 @@ class HostingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var availabilityDate: UILabel!
     @IBOutlet weak var reservationCalendar: UIImageView!
     @IBOutlet weak var amountPerNight: UILabel!
-    
+    @IBOutlet weak var containerView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        containerView.layer.cornerRadius = 10
+        containerView.clipsToBounds = true
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.04
+        containerView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        containerView.layer.shadowRadius = 10
     }
     
+    //For beach reservation
     func currentHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
         beachName.text = data?.beachHouse?.name
         locationLbl.text = "\(data?.beachHouse?.locations?.city ?? ""), \(data?.beachHouse?.locations?.state ?? ""), \(data?.beachHouse?.locations?.country ?? "")"
         availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom ?? "") - \(data?.beachHouse?.availabilities?.availableTo ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
-        amountPerNight.text = data?.beachHouseRoom?.pricePerNight
+        amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
         beachHouseImage.image = UIImage(named: data?.beachHouse?.image ?? "")
+        reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.beachHouse?.image)
+    }
+    
+    //For boat reservation
+    func boatCurrentHostingCell(with data: BoatReservationsCurrentReservation?) {
+        beachName.text = data?.boat?.name
+        locationLbl.text = "\(data?.boat?.locations?.city ?? ""), \(data?.boat?.locations?.state ?? ""), \(data?.boat?.locations?.country ?? "")"
+        availabilityDate.text = "\(data?.boat?.availabilities?.availableFrom ?? "") - \(data?.boat?.availabilities?.availableTo ?? "")"
+        calendarImg.image = UIImage(named: "ratingIcon")
+        date.text = "\(data?.boat?.rating ?? 0)"
+        amountPerNight.isHidden = true
+//        amountPerNight.text = "₦\(data?.boat?.pricePerNight ?? 0.00) / night"
+        beachHouseImage.image = UIImage(named: data?.boat?.images ?? "")
+        reservationCalendar.image = UIImage(named: "calendar")
+        loadImage(urlString: data?.boat?.images)
     }
     
     func upcomingHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
@@ -45,8 +68,9 @@ class HostingCollectionViewCell: UICollectionViewCell {
         availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom ?? "") - \(data?.beachHouse?.availabilities?.availableTo ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
-        amountPerNight.text = data?.beachHouseRoom?.pricePerNight
+        amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
         beachHouseImage.image = UIImage(named: data?.beachHouse?.image ?? "")
+        reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.beachHouse?.image)
     }
     
@@ -56,7 +80,8 @@ class HostingCollectionViewCell: UICollectionViewCell {
         availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom ?? "") - \(data?.beachHouse?.availabilities?.availableTo ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
-        amountPerNight.text = data?.beachHouseRoom?.pricePerNight
+        amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
+        reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.beachHouse?.image)
 
     }
@@ -104,6 +129,7 @@ class HostingCollectionViewCell: UICollectionViewCell {
         locationImg.isHidden = isEmpty
         calendarImg.isHidden = isEmpty
         emptyLbl.isHidden = !isEmpty
+        availabilityDate.isHidden = isEmpty
         
         if isEmpty {
             emptyLbl.text = message

@@ -57,8 +57,8 @@
                         </label>
                     </subviews>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ush-Oo-qAI">
-                    <rect key="frame" x="19.999999999999996" y="79" width="37.666666666666657" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ush-Oo-qAI">
+                    <rect key="frame" x="20" y="79" width="143.33333333333334" height="17"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Isl-Hl-Oh6">
-                    <rect key="frame" x="20" y="165.99999999999997" width="353" height="390.33333333333326"/>
+                    <rect key="frame" x="20" y="166" width="353" height="420"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFj-rP-0nA" customClass="BigMoneyInputField" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="75"/>
@@ -109,7 +109,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rT8-An-dYY">
-                            <rect key="frame" x="0.0" y="190" width="353" height="105.33333333333331"/>
+                            <rect key="frame" x="0.0" y="190" width="353" height="135"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fa-38-zLk" customClass="DigitField" customModule="BeachesAndBoats" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="353" height="75"/>
@@ -119,8 +119,8 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type account number"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHU-Kr-04o">
-                                    <rect key="frame" x="0.0" y="85" width="353" height="20.333333333333329"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHU-Kr-04o">
+                                    <rect key="frame" x="0.0" y="85" width="353" height="50"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -128,7 +128,7 @@
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMh-KZ-WNj" customClass="DigitField" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="315.33333333333331" width="353" height="75"/>
+                            <rect key="frame" x="0.0" y="345" width="353" height="75"/>
                             <color key="backgroundColor" systemColor="systemCyanColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Enter mobile money number"/>
@@ -141,7 +141,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flG-ZD-bHz" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="636.33333333333337" width="353" height="50"/>
+                    <rect key="frame" x="20" y="666" width="353" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="hsd-Vd-o5m"/>
                     </constraints>

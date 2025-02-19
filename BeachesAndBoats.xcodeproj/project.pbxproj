@@ -398,6 +398,7 @@
 		A6B415B52D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */; };
 		A6B415B82D0E98E900717CE9 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = A6B415B72D0E98E900717CE9 /* DeviceKit */; };
 		A6C1530D2D511439004078A3 /* GetAllDishesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1530C2D511439004078A3 /* GetAllDishesResponse.swift */; };
+		A6BC757C2D52C38A001B128A /* BankDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */; };
 		A6C1C4162CBA6E6C001CD27D /* DateRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */; };
 		A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */; };
 		A6C1C41A2CBBC4F1001CD27D /* HorizonCalendar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */; };
@@ -937,6 +938,7 @@
 		A6B415B22D0B794E00717CE9 /* UserDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDevice.swift; sourceTree = "<group>"; };
 		A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyLoginOtpRequest.swift; sourceTree = "<group>"; };
 		A6C1530C2D511439004078A3 /* GetAllDishesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllDishesResponse.swift; sourceTree = "<group>"; };
+		A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsVM.swift; sourceTree = "<group>"; };
 		A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeIndicatorView.swift; sourceTree = "<group>"; };
 		A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendar.swift; sourceTree = "<group>"; };
 		A6C1C4182CBBC4F1001CD27D /* HorizonCalendar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizonCalendar.xib; sourceTree = "<group>"; };
@@ -2449,6 +2451,7 @@
 				A6EF00ED2D28731400893C05 /* PaymentMethodView.xib */,
 				A6EF00F02D28754700893C05 /* BankDetailsView.swift */,
 				A6EF00F12D28754700893C05 /* BankDetailsView.xib */,
+				A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */,
 			);
 			path = PaymentSetup;
 			sourceTree = "<group>";
@@ -2928,6 +2931,7 @@
 				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */,
 				A68A6EC02D256823000A67E1 /* EarningDistributionTableCell.swift in Sources */,
+				A6BC757C2D52C38A001B128A /* BankDetailsVM.swift in Sources */,
 				A669F7A32D22F2B500230E0A /* ServiceHostingHomeViewVM.swift in Sources */,
 				A6C20FDC2C859D9C0045C670 /* SignUpResponse.swift in Sources */,
 				A6FB74542C1355D900A26806 /* UserInformationModal.swift in Sources */,

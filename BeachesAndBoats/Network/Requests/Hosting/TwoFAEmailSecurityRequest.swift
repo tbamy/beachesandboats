@@ -2,7 +2,7 @@
 //  TwoFAEmailSecurityRequest.swift
 //  BeachesAndBoats
 //
-//  Created by WEMA on 06/01/2025.
+//  Created by Hefepa on 06/01/2025.
 //
 
 import Foundation
