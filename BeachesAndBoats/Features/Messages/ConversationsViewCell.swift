@@ -1,17 +1,17 @@
 //
-//  MessageViewCell.swift
+//  ConversationsViewCell.swift
 //  BeachesAndBoats
 //
-//  Created by Hefepa on 31/12/2024.
+//  Created by Tolu Akintayo on 20/02/2025.
 //
 
 import UIKit
 
-class MessageViewCell: UITableViewCell {
+class ConversationsViewCell: UITableViewCell {
     
     @IBOutlet weak var userImg: UIImageView!
     @IBOutlet weak var userName: BoldLabel!
-    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var messageLbl: UILabel!
     
 
@@ -20,7 +20,7 @@ class MessageViewCell: UITableViewCell {
     }
     
     
-    func configure(with: ChatMessage){
+    func configure(with: GetConversationsData){
 //        if let url = URL(string: with.userImg.replacingOccurrences(of: "http://", with: "https://")) {
 //            userImg.kf.setImage(
 //                with: url,
@@ -40,9 +40,9 @@ class MessageViewCell: UITableViewCell {
 //            userImg.image = UIImage(named: "dummy")
 //        }
         
-        userName.text = with.name
-        timeLbl.text = with.time?.toBackendTime()
-        messageLbl.text = with.message
+        userName.text = with.otherUser.firstName
+        locationLbl.text = with.propertyType
+        messageLbl.text = with.lastMessage
     }
     
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetConversationsResponse: Codable{
-    let data: GetConversationsData?
+    let data: [GetConversationsData]?
 }
 
 // MARK: - Datum

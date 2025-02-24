@@ -79,8 +79,8 @@ struct ProviderBookingDetail: Codable {
     let amount, total: Int
     let status: String?
     let agreementDescription: String
-//    let boatBooking: JSONNull?
-    let beachHouseBooking: BeachHouseBooking
+    let boatBooking: BoatBooking?
+    let beachHouseBooking: BeachHouseBooking?
     let bookingableType: String
 
     enum CodingKeys: String, CodingKey {
@@ -89,6 +89,7 @@ struct ProviderBookingDetail: Codable {
         case bookingDate = "booking_date"
         case amount, total, status
         case agreementDescription = "agreement_description"
+        case boatBooking
         case beachHouseBooking
         case bookingableType = "bookingable_type"
     }

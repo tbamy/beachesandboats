@@ -63,6 +63,16 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoConfirmBoatBookingView(listing: Listing, booking: CreateBoatBookingRequest, destination: Destination){
+        let vc: ConfirmBoatBookingView = .fromNib()
+        vc.coordinator = self
+        vc.listing = listing
+        vc.booking = booking
+        vc.selectedDestination = destination
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
     func gotoMakePayment(bookingResponse: BeachHouseBookingResponse){
         let vc: MakePaymentView = .fromNib()
         vc.coordinator = self
@@ -131,10 +141,10 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoChat(data: StartConversationData){
+    func gotoChat(data: [ChatMessage]){
         let vc: ChatView = .fromNib()
         vc.coordinator = self
-        vc.data = data
+        vc.messages = data
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }

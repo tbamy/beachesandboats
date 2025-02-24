@@ -15,6 +15,7 @@ class ServiceDashboard: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoadingModal.dismiss()
         let customTabBar = CustomTabBar()
         setValue(customTabBar, forKey: "tabBar")
         

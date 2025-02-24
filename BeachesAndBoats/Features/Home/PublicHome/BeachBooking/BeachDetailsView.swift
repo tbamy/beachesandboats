@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import Kingfisher
+import RxSwift
 
 class BeachDetailsView: BaseViewControllerPlain {
     
@@ -46,6 +47,10 @@ class BeachDetailsView: BaseViewControllerPlain {
     
     var backendFrom_when: Date?
     var backendTo_when: Date?
+    
+    let vm = StartConversationVM()
+    let disposeBag = DisposeBag()
+    let input = PublishSubject<StartConversationVM.Input>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +58,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         setup()
         configureAllCollectionViews()
         setupCustomNavigationButtons()
+        bind()
     }
     
     func setup(){
@@ -174,7 +180,7 @@ class BeachDetailsView: BaseViewControllerPlain {
 
         if let fromWhen = from_when, let toWhen = to_when{
             if let beachDetails = beachDetails{
-                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: from_when?.toBackendDate() ?? "", checkoutDate: to_when?.toBackendDate() ?? "", checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
+                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: fromWhen.toBackendDate() , checkoutDate: toWhen.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
                 print(beachBookingRequest)
                 
                 coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
@@ -183,6 +189,33 @@ class BeachDetailsView: BaseViewControllerPlain {
             MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
         }
         
+    }
+    
+    @IBAction func sendPreBookingTapped(_ sender: Any) {
+        //start conversation
+        let personId = beachDetails?.owner?.id ?? ""
+        let conversationRequest = StartConversationRequest(personId: personId, bookingId: nil, propertyType: nil)
+        print(conversationRequest)
+            input.onNext(.startConversation(conversationRequest))
+            LoadingModal.show()
+    }
+    
+    func bind(){
+        vm.transform(input: input)
+        
+        vm.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .startConversationSuccess(let response):
+//                self?.conversationResponse = response
+                if let res = response.data{
+                    let data = ChatMessage(message: "", name: "", time: "")
+                    self?.coordinator?.gotoChat(data: [data])
+                }
+            case .startConversationFailed(let error) :
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
     }
     
 }
@@ -273,6 +306,5 @@ extension BeachDetailsView {
     @objc func settingsBtnTapped() {
         print("Settings button tapped")
     }
-
 
 }

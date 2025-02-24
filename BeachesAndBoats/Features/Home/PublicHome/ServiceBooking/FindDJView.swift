@@ -1,5 +1,5 @@
 //
-//  FindChefView.swift
+//  FindDJView.swift
 //  BeachesAndBoats
 //
 //  Created by Tolu Akintayo on 30/01/2025.
@@ -8,31 +8,27 @@
 import UIKit
 import RxSwift
 
-class FindChefView: BaseViewControllerPlain {
+class FindDJView: BaseViewControllerPlain {
     var coordinator: ExploreCoordinator?
     
     @IBOutlet weak var dateField: HorizonDateField!
-    @IBOutlet weak var dishTypesField: DropDown!
     @IBOutlet weak var numberOfPeopleCollectionView: UICollectionView!
     
     var numberOfPeople: [String]?
     var selectedNumber: String?
-    var dishesData: [PickerItem]?
     
     let vm = FindServiceProviderVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<FindServiceProviderVM.Input>()
     
-    var findChefResponse: FindServiceProviderResponse?
+    var findDjResponse: FindServiceProviderResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Chef"
+        
+        title = "Dj"
         
         bind()
-        input.onNext(.getAllDishes)
-        LoadingModal.show()
         setup()
     }
     
@@ -49,60 +45,46 @@ class FindChefView: BaseViewControllerPlain {
         ]
         
         dateField.placeholder = "Select available date from calendar"
+        dateField.placeHolderColor = .B_B
+        dateField.onDateSelected = { (date) in
+//            self.day = date
+            self.dateField.text = "\(date.toFormattedDate())"
+        }
         
         numberOfPeopleCollectionView.delegate = self
         numberOfPeopleCollectionView.dataSource = self
         numberOfPeopleCollectionView.backgroundColor = .clear
         numberOfPeopleCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
-
-    @IBAction func findChefTapped(_ sender: Any) {
-        let request = dishTypesField.selectedItem?.value ?? ""
-        if request == ""{
-            MiddleModal.show(title: "Select a dish", type: .error)
-        }else{
-            input.onNext(.findChef(request))
-            LoadingModal.show()
-        }
-    }
     
+    @IBAction func findDjTapped(_ sender: Any) {
+        input.onNext(.findDj)
+        LoadingModal.show()
+    }
+
+
     func bind(){
         vm.transform(input: input)
         
-        vm.chefOutput.subscribe(onNext: {[weak self] event in
+        vm.djOutput.subscribe(onNext: {[weak self] event in
             guard let self = self else { return }
-
             LoadingModal.dismiss()
             switch event {
-            case .findChefSuccessful(let response):
-                self.findChefResponse = response
-                if let chefResponse = findChefResponse{
-                    self.coordinator?.gotoRecommentdations(data: chefResponse, provider: "Chef")
+            case .findDjSuccessful(let response):
+                self.findDjResponse = response
+                if let djResponse = findDjResponse{
+                    self.coordinator?.gotoRecommentdations(data: djResponse, provider: "Dj")
                 }
-            case .findChefFailed(let error):
+            case .findDjFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
                 
-            case .getAllDishesSuccessful(let response):
-                dishesData = self.convertDishesToPickerItems(response: response)
-                if let dishesData = dishesData{
-                    dishTypesField.items = dishesData
-                }
-            case .getAllDishesFailed(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error, dismissable: false, onConfirm: {self.coordinator?.pop() })
             }
         }).disposed(by: disposeBag)
     }
-    
-    func convertDishesToPickerItems(response: GetAllDishesResponse) -> [PickerItem] {
-        guard let dishes = response.data else { return [] }
-        return dishes.map { PickerItem(name: $0.name, value: $0.id) }
-    }
-
-
 
 }
 
-extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension FindDJView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfPeople?.count ?? 0
     }
@@ -122,7 +104,6 @@ extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedNumber = numberOfPeople?[indexPath.item]
-        
         
     }
     

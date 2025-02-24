@@ -25,7 +25,7 @@ struct CreateBoatListingRequest: Codable {
     var amenities: [String]
     var languages: [String]
     var houseRules: [String]
-    var destinations: [Destination]
+    var destinations: [CreateDestination]
     var images: [Data]
 
     enum CodingKeys: String, CodingKey {
@@ -51,9 +51,9 @@ struct CreateBoatListingRequest: Codable {
     }
 }
 
-struct Destination: Codable {
+struct CreateDestination: Codable {
     var destinationId: String
-    var pricePerHour: Double
+    var pricePerHour: Float
 
     enum CodingKeys: String, CodingKey {
         case destinationId = "destination_id"

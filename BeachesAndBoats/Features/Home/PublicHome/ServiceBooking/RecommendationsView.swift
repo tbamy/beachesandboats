@@ -64,6 +64,13 @@ extension RecommendationsView: UICollectionViewDelegate, UICollectionViewDataSou
         view.model.name = "\(name?.name ?? "")"
         view.model.rating = name?.rating ?? 0
         view.model.price = name?.startingPrice ?? 0
+        if provider == "Bouncer"{
+            view.model.dishOrSex = name?.gender ?? ""
+        }else if provider == "Chef"{
+            view.model.dishOrSex = name?.dishes?.map { "\($0.name)" }
+                .joined(separator: "\n") ?? ""
+        }
+            
         
         view.onViewBtnTapped = { [weak self] in
             guard let self = self, let name = name, let provider = self.provider else { return }

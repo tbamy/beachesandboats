@@ -37,6 +37,13 @@ class FindBouncerView: BaseViewControllerPlain {
     }
 
     func setup(){
+        dateField.placeholder = "Select available date from calendar"
+        dateField.placeHolderColor = .B_B
+        dateField.onDateSelected = { (date) in
+//            self.day = date
+            self.dateField.text = "\(date.toFormattedDate())"
+        }
+        
         maleCheckbox.stateChanged = { [weak self] maleSelected in
             guard let self = self else { return }
             

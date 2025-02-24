@@ -14,7 +14,7 @@ class HostingDashboard: UITabBarController {
     private let middleButton = UIButton()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        LoadingModal.dismiss()
         super.viewDidLoad()
         let customTabBar = CustomTabBar()
         setValue(customTabBar, forKey: "tabBar")

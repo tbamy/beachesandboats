@@ -410,7 +410,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 topRatedBeachHouseStack.isHidden = true
                 beachHouseStack.isHidden = true
                 serviceStack.isHidden = false
-
+                self.updateCollectionViewHeight(self.serviceCollectionVIew, self.serviceCollectionVIewHeightConstraint)
             }
             
         case 2:

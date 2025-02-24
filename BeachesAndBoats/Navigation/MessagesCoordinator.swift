@@ -18,6 +18,14 @@ class MessagesCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoChat(data: [ChatMessage]){
+        let vc: ChatView = .fromNib()
+        vc.chatcoordinator = self
+        vc.messages = data
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
     func backToDashboard() {
         navigationController = BaseNavigationController(rootViewController: Dashboard())
         UIApplication.shared.windows.first?.rootViewController = Dashboard()

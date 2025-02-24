@@ -13,11 +13,12 @@ struct StartConversationResponse: Codable{
 
 // MARK: - DataClass
 struct StartConversationData: Codable {
-    let id, user1_ID, user2_ID, bookingID: String
-    let propertyType: String
+    let id, user1_ID, user2_ID: String
+    let bookingID: String?
+    let propertyType: String?
     let lastMessage: String?
     let beachHouseBooking: BeachHouseBooking?
-//    let boatBooking: JSONNull?
+    let boatBooking: BoatBooking?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,6 +28,6 @@ struct StartConversationData: Codable {
         case propertyType = "property_type"
         case lastMessage = "last_message"
         case beachHouseBooking = "beach_house_booking"
-//        case boatBooking = "boat_booking"
+        case boatBooking = "boat_booking"
     }
 }

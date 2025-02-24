@@ -19,7 +19,7 @@ struct BoatDatas: Codable{
     let amenities: [RoomAmenities]?
     let house_rules: [HouseRule]?
     let languages: [Languages]?
-    let destinations: [Destinations]?
+    let destinations: [BoatDestinations]?
 }
 struct BoatCategory: Codable{
     let id: String?
@@ -38,7 +38,7 @@ struct BoatTypes: Codable{
     let icon : String?
 }
 
-struct Destinations: Codable{
+struct BoatDestinations: Codable{
     let id : String?
     let name : String?
 }

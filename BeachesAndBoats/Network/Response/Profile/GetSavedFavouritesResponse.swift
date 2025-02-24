@@ -14,8 +14,8 @@ struct GetSavedFavouritesResponse: Codable{
 // MARK: - Datum
 struct SavedFavouritesData: Codable {
     let id, itemID, favouritableType: String
-    let beachHouse: BeachHouse?
-    let boat: Boat?
+    let beachHouse: FavouriteBeachHouse?
+    let boat: FavouriteBoat?
     let createdAt: String
 
     enum CodingKeys: String, CodingKey {
@@ -28,13 +28,13 @@ struct SavedFavouritesData: Codable {
 }
 
 // MARK: - BeachHouse
-struct BeachHouse: Codable {
-    let id, name, description, aboutOwner: String
-    let listingPrice, discountPercent: Int
-    let image: String
-    let locations: Locations
+struct FavouriteBeachHouse: Codable {
+    let id, name, description, aboutOwner: String?
+    let listingPrice, discountPercent: Float?
+    let image: String?
+    let locations: Locations?
     let availabilities: Availabilities
-    let rating: Int
+    let rating: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -43,5 +43,14 @@ struct BeachHouse: Codable {
         case discountPercent = "discount_percent"
         case image, locations, availabilities, rating
     }
+}
+
+struct FavouriteBoat: Codable {
+    let id, name, description: String?
+    let locations: Locations?
+    let availabilities: Availabilities?
+    let images: [Image]?
+    let destinations: [DestinationDetails]?
+    let rating: Int?
 }
 

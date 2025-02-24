@@ -26,7 +26,7 @@ struct BeachHouseBookings: Codable {
 struct BeachHouseBookingsPast: Codable {
     let id, hostID: String
     let beachHouseRoom: BookingsBeachHouseRoom?
-    let beachHouse: BeachHouse?
+    let beachHouse: FavouriteBeachHouse?
     let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
     let noOfPeople: Int?
     let status: String?
@@ -76,7 +76,7 @@ struct BoatBookings: Codable {
 
 // MARK: - BoatBookingsPast
 struct BoatBookingsPast: Codable {
-    let boat: Boat
+    let boat: FavouriteBoat
     let total: Int
     let summary: String?
     let status: String

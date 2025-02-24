@@ -46,6 +46,7 @@ import UIKit
     }
     
     func setup(){
+        backgroundColor = .clear
         isUserInteractionEnabled = true
         let tapped = UITapGestureRecognizer(target: self, action: #selector(selected))
         addGestureRecognizer(tapped)

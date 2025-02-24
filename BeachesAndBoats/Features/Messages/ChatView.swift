@@ -11,20 +11,22 @@ import RxSwift
 class ChatView: BaseViewControllerPlain {
     
     var coordinator: ExploreCoordinator?
-    var data: StartConversationData?
+    var chatcoordinator: MessagesCoordinator?
+//    var data: StartConversationData?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: InputField!
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var sendButton: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
     @IBOutlet weak var hostImage: UIImageView!
     @IBOutlet weak var bookingImage: UIImageView!
     @IBOutlet weak var bookingTitleLabel: UILabel!
     @IBOutlet weak var bookingDateLabel: UILabel!
     @IBOutlet weak var bookingPriceLabel: UILabel!
+    @IBOutlet weak var bookingView: UIView!
     
     var conversationId: String?
-    var messages: [MessagesData] = [] {
+    var messages: [ChatMessage] = [] {
         didSet {
             tableView.reloadData()
             scrollToBottom()
@@ -34,6 +36,9 @@ class ChatView: BaseViewControllerPlain {
     var vm: ChatVM!
     let disposeBag = DisposeBag()
     let input = PublishSubject<ChatVM.Input>()
+    
+    var chatResponse: SendChatResponseData?
+//    var chatMessages: [ChatMessage]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,28 +51,33 @@ class ChatView: BaseViewControllerPlain {
     }
     
     func setup() {
+        bookingView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "MessageViewCell", bundle: nil), forCellReuseIdentifier: "MessageViewCell")
         
-        sendButton.isEnabled = false // Disable initially
+//        sendButton.isEnabled = false // Disable initially
+        sendButton.isUserInteractionEnabled = false
+        sendButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped)))
         messageTextField.onTextChanged = { [weak self] _ in
             self?.textFieldChanged()
         }
     }
 
     func textFieldChanged() {
-        sendButton.isEnabled = !(messageTextField.text.isEmpty)
+        sendButton.isUserInteractionEnabled = !(messageTextField.text.isEmpty)
+//        sendButton.isEnabled = !(messageTextField.text.isEmpty)
     }
 
-    @IBAction func sendButtonTapped(_ sender: UIButton) {
+   @objc func sendButtonTapped(_ sender: Any) {
         guard let conversationId = conversationId else { return }
         let message = messageTextField.text
         
         let request = SendChatRequest(conversation_id: conversationId, message: message)
         input.onNext(.sendChat(request)) // Send chat message
         messageTextField.text = ""
-        sendButton.isEnabled = false
+//        sendButton.isEnabled = false
+       sendButton.isUserInteractionEnabled = false
     }
     
     func bind() {
@@ -86,10 +96,11 @@ class ChatView: BaseViewControllerPlain {
                     print("Error: \(error)")
 
                 case .newMessageReceived(let message):
-                    self.messages.append(message)
+//                    self.messages.append(message)
+                    print("New message: \(message)")
 
                 case .getMessageHistorySuccess(let response):
-                    self.messages = response.data?.data // Ensure history loads correctly
+//                    self.messages = response.data?.data ?? [] // Ensure history loads correctly
                     print("Loaded: \(response)")
 
                 case .getMessageHistoryFailed(let error):
@@ -123,4 +134,10 @@ extension ChatView: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: messages[indexPath.row])
         return cell
     }
+}
+
+struct ChatMessage: Codable{
+    let message: String?
+    let name: String?
+    let time: String?
 }

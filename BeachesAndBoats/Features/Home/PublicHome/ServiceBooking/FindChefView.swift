@@ -1,5 +1,5 @@
 //
-//  FindDJView.swift
+//  FindChefView.swift
 //  BeachesAndBoats
 //
 //  Created by Tolu Akintayo on 30/01/2025.
@@ -8,32 +8,37 @@
 import UIKit
 import RxSwift
 
-class FindDJView: BaseViewControllerPlain {
+class FindChefView: BaseViewControllerPlain {
     var coordinator: ExploreCoordinator?
     
     @IBOutlet weak var dateField: HorizonDateField!
+    @IBOutlet weak var dishTypesField: DropDown!
     @IBOutlet weak var numberOfPeopleCollectionView: UICollectionView!
     
     var numberOfPeople: [String]?
     var selectedNumber: String?
+    var dishesData: [PickerItem]?
+    var day: Date?
     
     let vm = FindServiceProviderVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<FindServiceProviderVM.Input>()
     
-    var findDjResponse: FindServiceProviderResponse?
+    var findChefResponse: FindServiceProviderResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Dj"
+
+        title = "Chef"
         
         bind()
+        input.onNext(.getAllDishes)
+        LoadingModal.show()
         setup()
     }
     
     func setup(){
-        
+        dishTypesField.pickerTitle = "Select Dishes"
         numberOfPeople = ["1 - 3 People",
                           "4 - 6 People",
                           "7 - 10 People",
@@ -45,41 +50,65 @@ class FindDJView: BaseViewControllerPlain {
         ]
         
         dateField.placeholder = "Select available date from calendar"
-        
+        dateField.placeHolderColor = .B_B
+        dateField.onDateSelected = { (date) in
+            self.day = date
+            self.dateField.text = "\(date.toFormattedDate())"
+        }
+        numberOfPeopleCollectionView.isHidden = true
         numberOfPeopleCollectionView.delegate = self
         numberOfPeopleCollectionView.dataSource = self
         numberOfPeopleCollectionView.backgroundColor = .clear
         numberOfPeopleCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
-    
-    @IBAction func findDjTapped(_ sender: Any) {
-        input.onNext(.findDj)
-        LoadingModal.show()
+
+    @IBAction func findChefTapped(_ sender: Any) {
+        let request = dishTypesField.selectedItem?.value ?? ""
+        if request == ""{
+            MiddleModal.show(title: "Select a dish", type: .error)
+        }else{
+            input.onNext(.findChef(request))
+            LoadingModal.show()
+        }
     }
-
-
+    
     func bind(){
         vm.transform(input: input)
         
-        vm.djOutput.subscribe(onNext: {[weak self] event in
+        vm.chefOutput.subscribe(onNext: {[weak self] event in
             guard let self = self else { return }
+
             LoadingModal.dismiss()
             switch event {
-            case .findDjSuccessful(let response):
-                self.findDjResponse = response
-                if let djResponse = findDjResponse{
-                    self.coordinator?.gotoRecommentdations(data: djResponse, provider: "Dj")
+            case .findChefSuccessful(let response):
+                self.findChefResponse = response
+                if let chefResponse = findChefResponse{
+                    self.coordinator?.gotoRecommentdations(data: chefResponse, provider: "Chef")
                 }
-            case .findDjFailed(let error):
+            case .findChefFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
                 
+            case .getAllDishesSuccessful(let response):
+                dishesData = self.convertDishesToPickerItems(response: response)
+                if let dishesData = dishesData{
+                    dishTypesField.items = dishesData
+                }
+            case .getAllDishesFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error, dismissable: false, onConfirm: {self.coordinator?.pop() })
             }
         }).disposed(by: disposeBag)
     }
+    
+    func convertDishesToPickerItems(response: GetAllDishesResponse) -> [PickerItem] {
+        guard let dishes = response.data else { return [] }
+        return dishes.map { PickerItem(name: $0.name, value: $0.id) }
+    }
+
+
 
 }
 
-extension FindDJView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfPeople?.count ?? 0
     }

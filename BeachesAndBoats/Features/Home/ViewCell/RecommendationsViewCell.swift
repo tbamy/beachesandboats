@@ -47,9 +47,9 @@ class RecommendationsViewCell: BaseXib {
         nameLabel.text = model.name
         priceLabel.text = "From ₦\(model.price) / day"
         ratingLabel.text = "\(model.rating)"
-        if model.dishOrSex == ""{
-            dishOrSexLabel.isHidden = true
-        }
+//        if model.dishOrSex == ""{
+        dishOrSexLabel.isHidden = model.dishOrSex.isEmpty
+//        }
         dishOrSexLabel.text = model.dishOrSex
         
         image.layer.cornerRadius = 10

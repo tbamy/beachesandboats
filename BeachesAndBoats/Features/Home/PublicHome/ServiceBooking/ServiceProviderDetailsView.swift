@@ -30,8 +30,8 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var commentsCollectionView: UICollectionView!
     @IBOutlet weak var contactBtn: PlainOutlineButton!
     
-    var conversationRequest: StartConversationRequest?
-    var conversationResponse: StartConversationResponse?
+//    var conversationRequest: StartConversationRequest?
+//    var conversationResponse: StartConversationResponse?
     let user = UserSession.shared.userDetails?.id
     
     let vm = StartConversationVM()
@@ -46,12 +46,12 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
-        
+        commentsCollectionView.isHidden = true
         switch provider {
         case "Chef":
             photosTitleLabel.text = "Food Samples"
             genderLabel.isHidden = true
-            genderLabel2.text = data?.dishes?.map { "ID: \($0.id), Name: \($0.name)" }
+            genderLabel2.text = data?.dishes?.map { "\($0.name)" }
                 .joined(separator: "\n")
         case "Bouncer":
             photosTitleLabel.text = "Bouncer's Pictures"
@@ -64,6 +64,7 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
             photosTitleLabel.text = "Food Samples"
         }
         image.layer.cornerRadius = image.frame.height / 2
+        nameLabel.text = data?.name
         if let url = URL(string: data?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             image.kf.setImage(
                 with: url,
@@ -106,14 +107,11 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
 
     @IBAction func contactMeTapped(_ sender: Any) {
         //start conversation
-        conversationRequest?.bookingId = bookingId
-        conversationRequest?.personId = user ?? ""
-        conversationRequest?.propertyType = propertyType
-        
-        if let conversationRequest = conversationRequest{
+        let personId = data?.chefInfo?.id ?? ""
+        let conversationRequest = StartConversationRequest(personId: personId , bookingId: nil, propertyType: nil)
+        print(conversationRequest)
             input.onNext(.startConversation(conversationRequest))
             LoadingModal.show()
-        }
     }
 
     
@@ -124,8 +122,11 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
             LoadingModal.dismiss()
             switch data {
             case .startConversationSuccess(let response):
-                self?.conversationResponse = response
-//                self?.coordinator.goto
+//                self?.conversationResponse = response
+                if let res = response.data{
+                    let data = ChatMessage(message: "", name: "", time: "")
+                    self?.coordinator?.gotoChat(data: [data])
+                }
             case .startConversationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }

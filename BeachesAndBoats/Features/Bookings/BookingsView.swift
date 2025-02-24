@@ -15,14 +15,15 @@ class BookingsView: BaseViewControllerPlain {
     @IBOutlet weak var upcomingBookingSegment: SegmentOptionView!
     @IBOutlet weak var pastBookingSegment: SegmentOptionView!
     @IBOutlet weak var upcomingCollectionView: UICollectionView!
-    @IBOutlet weak var pastCollectionView: UICollectionView!
+    @IBOutlet weak var emptyBooking: UIView!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     let vm = BookingsVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<BookingsVM.Input>()
     
     var bookingItems: [BookingItem] = []
-    var responseData: GetUserBookingsResponse?
+    var responseData: UserBookingsData?
     
     var isDisplayingUpcoming: Bool = true
     
@@ -32,45 +33,97 @@ class BookingsView: BaseViewControllerPlain {
         title = "Booking"
         setupCustomNavigationButton()
         setup()
+        
+        bind()
+//        input.onNext(.getUserBookings)
+        LoadingModal.show()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        input.onNext(.getUserBookings)
+//        LoadingModal.show()
     }
     
     func setup(){
-        upcomingBookingSegment.isSelected = true
+        emptyBooking.isHidden = true
         upcomingCollectionView.delegate = self
         upcomingCollectionView.dataSource = self
         upcomingCollectionView.backgroundColor = .clear
-        upcomingCollectionView.tag = 0
         upcomingCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
-        pastCollectionView.delegate = self
-        pastCollectionView.dataSource = self
-        pastCollectionView.backgroundColor = .clear
-        pastCollectionView.tag = 1
-        pastCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
 
+        setupSegmentControl()
+    }
+    
+    func updateInitialUpcoming(){
+        upcomingBookingSegment.isSelected = true
+        isDisplayingUpcoming = true
+        upcomingBookingSegment.isSelected = true
+        pastBookingSegment.isSelected = false
+        
+        if let responseData = responseData{
+            emptyBooking.isHidden = true
+            updateBookings(forUpcoming: true, response: responseData)
+        }
     }
     
     func setupSegmentControl(){
-//        upcomingBookingSegment.isSelected =
+        upcomingBookingSegment.onSelect = { [weak self] in
+            self?.isDisplayingUpcoming = true
+            self?.upcomingBookingSegment.isSelected = true
+            self?.pastBookingSegment.isSelected = false
+            
+            if let responseData = self?.responseData{
+                self?.emptyBooking.isHidden = true
+                self?.updateBookings(forUpcoming: true, response: responseData)
+            }
+        }
+        
+        pastBookingSegment.onSelect = { [weak self] in
+            self?.isDisplayingUpcoming = false
+            self?.upcomingBookingSegment.isSelected = false
+            self?.pastBookingSegment.isSelected = true
+            
+            if let responseData = self?.responseData{
+                self?.emptyBooking.isHidden = true
+                self?.updateBookings(forUpcoming: false, response: responseData)
+            }
+        }
     }
     
-    func updateBookings(forUpcoming upcoming: Bool, response: GetUserBookingsResponse) {
+    func updateBookings(forUpcoming upcoming: Bool, response: UserBookingsData) {
         if upcoming {
-            if let upcomingBoatBookings = response.data?.boatBookings?.upcoming, let upcomingBeachBookings = response.data?.beachHouseBookings?.upcoming{
+            if let upcomingBoatBookings = response.boatBookings?.upcoming, !upcomingBoatBookings.isEmpty, let upcomingBeachBookings = response.beachHouseBookings?.upcoming, !upcomingBeachBookings.isEmpty{
                 let boatUpcoming = upcomingBoatBookings.map{ BookingItem.boat($0)}
                 let beachUpcoming = upcomingBeachBookings.map { BookingItem.beachHouse($0) }
                 
                 bookingItems = boatUpcoming + beachUpcoming
+            }else{
+                emptyBooking.isHidden = false
+                upcomingCollectionView.isHidden = true
             }
         } else {
-            if let pastBoatBookings = response.data?.boatBookings?.past, let pastBeachBookings = response.data?.beachHouseBookings?.past{
+            if let pastBoatBookings = response.boatBookings?.past, !pastBoatBookings.isEmpty, let pastBeachBookings = response.beachHouseBookings?.past, !pastBeachBookings.isEmpty{
                 let boatPast = pastBoatBookings.map{ BookingItem.boat($0)}
                 let beachPast = pastBeachBookings.map { BookingItem.beachHouse($0) }
                 
                 bookingItems = boatPast + beachPast
+            }else{
+                emptyBooking.isHidden = false
+                upcomingCollectionView.isHidden = true
             }
         }
         upcomingCollectionView.reloadData()
+        updateCollectionViewHeight(upcomingCollectionView, collectionViewHeightConstraint)
+    }
+    
+    func updateCollectionViewHeight(_ collectionView: UICollectionView, _ collectionViewHeightConstraint: NSLayoutConstraint) {
+        collectionView.layoutIfNeeded()
+        let contentHeight = collectionView.contentSize.height
+        collectionViewHeightConstraint.constant = contentHeight
+        
+        self.view.layoutIfNeeded()
     }
     
     
@@ -82,9 +135,11 @@ class BookingsView: BaseViewControllerPlain {
             LoadingModal.dismiss()
             switch event {
             case .getUserBookingsSuccess(let response):
-                self.responseData = response
+                self.responseData = response.data
+                self.updateInitialUpcoming()
+                
             case .getUserBookingsFailed(let error):
-                <#code#>
+                MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
     }
@@ -122,6 +177,12 @@ extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UI
             // Navigate to beach house booking details
             coordinator?.gotoBeachHouseBookingDetails(booking: beachBooking)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.width - 10, height: 400)
+       
     }
     
     
@@ -169,7 +230,7 @@ enum BookingItem{
     var image: String{
         switch self {
         case .boat(let booking):
-            return booking.boat.images ?? ""
+            return booking.boat.images?.first?.url ?? ""
         case .beachHouse(let booking):
             return booking.beachHouse?.image ?? ""
         }
@@ -189,7 +250,7 @@ enum BookingItem{
         case .boat(let booking):
             return "\(booking.boat.locations?.city ?? ""), \(booking.boat.locations?.state ?? "") \(booking.boat.locations?.country ?? "")"
         case .beachHouse(let booking):
-            return "\(booking.beachHouse?.locations.city ?? ""), \(booking.beachHouse?.locations.state ?? "") \(booking.beachHouse?.locations.country ?? "")"
+            return "\(booking.beachHouse?.locations?.city ?? ""), \(booking.beachHouse?.locations?.state ?? "") \(booking.beachHouse?.locations?.country ?? "")"
         }
     }
 }

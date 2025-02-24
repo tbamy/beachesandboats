@@ -67,6 +67,7 @@ class GeneralViewCell: BaseXib {
         priceLabel.text = model.priceLabel
         ratingLabel.text = model.ratingLabel
 
+        saveBtn.isUserInteractionEnabled = true
         saveBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(saveBtnTapped)))
         
         if let url = URL(string: model.bannerImg.replacingOccurrences(of: "http://", with: "https://")) {

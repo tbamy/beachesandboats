@@ -1,14 +1,14 @@
 //
-//  ConfirmBoatBookingView.swift
+//  ConfirmBookingView.swift
 //  BeachesAndBoats
 //
-//  Created by Tolu Akintayo on 06/02/2025.
+//  Created by Tolu Akintayo on 02/01/2025.
 //
 
 import UIKit
 import RxSwift
 
-class ConfirmBoatBookingView: BaseViewControllerPlain {
+class ConfirmBookingView: BaseViewControllerPlain {
     
     var coordinator: ExploreCoordinator?
     
@@ -25,19 +25,16 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
     @IBOutlet weak var totalAmountLabel: UILabel!
     @IBOutlet weak var cancellationPolicyLabel: UILabel!
     
-    @IBOutlet weak var cruiseLengthStack: UIStackView!
-    @IBOutlet weak var cruiseLengthBtn: UIButton!
-    @IBOutlet weak var cruiseLengthLabel: UILabel!
-    
-//    var room: BookingRoom?
-    var boatId: String?
+    var room: BookingRoom?
+    var roomId: String?
     var listing: Listing?
-    var booking: CreateBoatBookingRequest?
+    var booking: CreateBeachHouseBookingRequest?
     var configuration: BookingConfigurationData?
-    var bookingTime: String?
+    var checkInTime: String?
+    var checkOutTime: String?
     var numberOfGuests: Int?
-    var bookingDate: String?
-    var cruiseLength: Int?
+    var startDate: String?
+    var endDate: String?
     
     
     let vm = BookingConfigurationVM()
@@ -52,7 +49,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
     
     var picker = UIDatePicker()
     
-    var bookingResponse: BoatBookingResponse?
+    var bookingResponse: BeachHouseBookingResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,22 +64,26 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
     func setup(){
         
         configureButtons()
+        
+        room = listing?.rooms?.first { $0.id == roomId }
 
-        bookingDate = booking?.bookingDate ?? ""
-        bookingTime = booking?.bookingTime ?? ""
-        cruiseLength = booking?.cruiseLength ?? 0
-        numberOfGuests = booking?.numberOfPeople ?? 0
+        startDate = booking?.checkingDate ?? ""
+        endDate = booking?.checkoutDate ?? ""
+        checkInTime = listing?.checkInFrom
+        checkOutTime = listing?.checkOutTo
+        numberOfGuests = room?.noOfOccupant ?? 0
         
+        let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
         
-        datesLabel.text = "\(bookingDate?.convertToShorterDateFormat() ?? "")"
+        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
 //        timeLabel
-        if let price = listing?.listingPrice {
-            timeLabel.text = bookingTime ?? ""
-            guestLabel.text = "\(numberOfGuests ?? 0)"
-            costLabel.text = "₦\(price) x \(cruiseLength ?? 0) Hours"
-            let totalCost = (price) * Float(cruiseLength ?? 0)
+        if let price = room?.pricePerNight {
+            timeLabel.text = "\(checkInTime ?? "") - \(checkOutTime ?? "")"
+            guestLabel.text = "\(numberOfGuests ?? 0) Guests"
+            costLabel.text = "₦\(price) x \(nights) Nights"
+            let totalCost = (price) * Float(nights)
 //            let configurationCost = configuration?.roomCleaningFee ?? 0
-            let serviceCost = configuration?.boatServiceFee ?? 0
+            let serviceCost = configuration?.houseServiceFee ?? 0
             costAmountLabel.text = "₦ \(totalCost)"
 //            cleaningFeeLabel.text = "₦ \(configurationCost)"
             serviceFeeLabel.text = "₦ \(serviceCost)"
@@ -97,22 +98,32 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
 
     @IBAction func makePaymentTapped(_ sender: Any) {
         if var bookingRequest = booking{
-            bookingRequest.bookingTime = bookingTime?.toBackendTime() ?? ""
-            bookingRequest.bookingDate = bookingDate?.toBackendTime() ?? ""
+            bookingRequest.amount = amount ?? 0
+            bookingRequest.userId = user ?? ""
+            bookingRequest.beachHouseRoomId = roomId ?? ""
+            bookingRequest.checkingDate = startDate ?? ""
+            bookingRequest.checkoutDate = endDate ?? ""
+            bookingRequest.checkingTime = checkInTime?.toBackendTime() ?? ""
+            bookingRequest.checkoutTime = checkOutTime?.toBackendTime() ?? ""
             bookingRequest.numberOfPeople = numberOfGuests ?? 1
-            bookingRequest.cruiseLength = cruiseLength ?? 0
+            
+            bookingRequest.units = 1 //temporary, would update
             
             print(bookingRequest)
             
             LoadingModal.show()
-            vm.createBoatBooking(request: bookingRequest)
+            vm.createBeachHouseBooking(request: bookingRequest)
         }
     }
     
     @IBAction func editTimeBtnTapped(_ sender: Any) {
         showTimePicker(title: "Select Check-in Time") { [weak self] selectedTime in
             guard let self = self else { return }
-            self.bookingTime = selectedTime
+            self.checkInTime = selectedTime
+            self.showTimePicker(title: "Select Check-out Time") { selectedTime in
+                self.checkOutTime = selectedTime
+                self.timeLabel.text = "\(self.checkInTime ?? "") - \(self.checkOutTime ?? "")"
+            }
         }
     }
     
@@ -122,20 +133,26 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
     }
     
     @IBAction func editDateBtnTapped(_ sender: Any) {
-        HorizonCalendarModal.show { [weak self] startDate, endDate in
+        HorizonCalendarModal.show { [weak self] startDatee, endDatee in
             guard let self = self else { return }
-            if endDate == nil{
-                if let startDate = startDate{
-                    print("\(startDate)")
-                    self.bookingDate = startDate.toFormattedDate()
-                    self.datesLabel.text = bookingDate?.convertToShorterDateFormat()
+            if endDatee == nil{
+                if let startDatee = startDatee{
+                    print("\(startDatee)")
+                    self.startDate = startDatee.toFormattedDate()
+                    self.endDate = startDatee.toFormattedDate()
+                    let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
+                }
+            }else{
+                if let startDatee = startDatee, let endDatee = endDatee{
+                    print("\(startDatee) - \(endDatee)")
+                    self.startDate = startDatee.toFormattedDate()
+                    self.endDate = endDatee.toFormattedDate()
+                    let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
                 }
             }
         }
-    }
-    
-    @IBAction func cruiseLengthBtnTapped(_ sender: Any) {
-        showCruiseLengthPicker()
     }
     
     func setupPicker(){
@@ -149,6 +166,24 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
 
     }
     
+    func calculateNights(from startDateString: String, to endDateString: String, format: String = "MM/dd/yyyy") -> Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        print("From: \(startDateString) - To: \(endDateString)")
+        guard let startDate = dateFormatter.date(from: startDateString),
+              let endDate = dateFormatter.date(from: endDateString) else {
+            return nil
+        }
+        
+        guard endDate > startDate else { return nil }
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+        
+        return components.day
+    }
+    
 
     
     func configureButtons(){
@@ -160,15 +195,12 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
         
         editGuestBtn.configureButtonTitle(title: "Edit")
         editGuestBtn.setTitleColor(.B_B, for: .normal)
-        
-        cruiseLengthBtn.configureButtonTitle(title: "Edit")
-        cruiseLengthBtn.setTitleColor(.B_B, for: .normal)
     }
     
     func bind(){
         vm.transform(input: input)
         
-        vm.boatOutput.subscribe(onNext: { [weak self] data in
+        vm.output.subscribe(onNext: { [weak self] data in
             LoadingModal.dismiss()
             switch data {
             case .getBookingConfigurationSuccess(let response):
@@ -178,11 +210,12 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
                 
             case .getBookingConfigurationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
-            case .createBoatBookingSuccess(let response):
+            case .createBeachHouseBookingSuccess(let response):
                 self?.bookingResponse = response
+//                self?.accessCode = response.data?.paymentData?.accessCode
                 guard let booking = self?.bookingResponse else { return  }
-                self?.coordinator?.gotoMakeBoatPayment(bookingResponse: booking)
-            case .createBoatBookingFailed(let error):
+                self?.coordinator?.gotoMakePayment(bookingResponse: booking)
+            case .createBeachHouseBookingFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
@@ -226,7 +259,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
 
 
     func showGuestPicker() {
-        let alert = UIAlertController(title: "Select Number of People", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Select Number of Guests", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         
         let picker = UIPickerView()
         picker.delegate = self
@@ -243,36 +276,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
             let selectedRow = picker.selectedRow(inComponent: 0)
             self.numberOfGuests = selectedRow + 1
-            self.guestLabel.text = "\(self.numberOfGuests ?? 1)"
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(confirmAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func showCruiseLengthPicker() {
-        let alert = UIAlertController(title: "Select Cruise Length", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-        
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        
-        alert.view.addSubview(picker)
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            picker.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor),
-            picker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 40),
-            picker.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -40)
-        ])
-        
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-            let selectedRow = picker.selectedRow(inComponent: 0)
-            self.cruiseLength = selectedRow + 1
-            self.cruiseLengthLabel.text = "\(self.numberOfGuests ?? 1) hours"
+            self.guestLabel.text = "\(self.numberOfGuests ?? 1) Guests"
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -285,7 +289,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
 
 }
 
-extension ConfirmBoatBookingView: UIPickerViewDelegate, UIPickerViewDataSource {
+extension ConfirmBookingView: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -298,3 +302,4 @@ extension ConfirmBoatBookingView: UIPickerViewDelegate, UIPickerViewDataSource {
         return "\(row + 1) Guests"
     }
 }
+

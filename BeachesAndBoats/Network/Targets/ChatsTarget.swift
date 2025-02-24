@@ -19,7 +19,7 @@ extension ChatsTarget: BaseTarget{
     var path: String {
         switch self {
 
-        case .startConversation(_):
+        case .startConversation:
             return Urls.startConversation.rawValue
         case .sendChat(_):
             return Urls.sendChat.rawValue

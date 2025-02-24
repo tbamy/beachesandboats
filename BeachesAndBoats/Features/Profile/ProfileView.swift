@@ -67,11 +67,11 @@ class ProfileView: UIViewController {
     }
     
     @objc func supportAction(){
-        
+        Toast.show(message: "Coming Soon")
     }
     
     @objc func guideBookAction(){
-        
+        Toast.show(message: "Coming Soon")
     }
     
     @objc func listPropertyAction(){
@@ -87,8 +87,10 @@ class ProfileView: UIViewController {
             let hasSeviceRole = userRoles.contains { serviceRoleStrings.contains($0)}
             
             if hasHostRole{
+                LoadingModal.show(title: "Switching to Hosting Dashboard...")
                 coordinator?.backToHostingDashboard()
             }else if hasSeviceRole{
+                LoadingModal.show(title: "Switching to Service Dashboard...")
                 coordinator?.backToServiceDashboard()
                 //            coordinator?.backToHostingDashboard()
                 

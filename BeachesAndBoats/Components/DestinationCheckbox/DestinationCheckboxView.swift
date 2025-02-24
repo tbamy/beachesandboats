@@ -70,14 +70,14 @@ class DestinationCheckboxView: BaseXib {
         // Handle money input changes
           moneyInput.amountChanged = { [weak self] in
               guard let self = self else { return }
-              let enteredAmount = self.moneyInput.getDoubleValue() ?? 0
+              let enteredAmount = self.moneyInput.getFloatValue() ?? 0
 //              print("Money Input Value Changed: \(enteredAmount)")
               self.model.amount = enteredAmount
               self.model.onMoneyEntered(enteredAmount)
           }
           
           // Initial call to update model with current money input value
-          model.onMoneyEntered(moneyInput.getDoubleValue() ?? 0)
+          model.onMoneyEntered(moneyInput.getFloatValue() ?? 0)
 
         
     }
@@ -94,6 +94,6 @@ struct DestinationCheckboxModel{
     public var title: String = ""
     public var state: Bool = false
     public var tapped: () -> Void = {}
-    public var amount: Double = 0
-    public var onMoneyEntered: (Double) -> Void = {_ in }
+    public var amount: Float = 0
+    public var onMoneyEntered: (Float) -> Void = {_ in }
 }
