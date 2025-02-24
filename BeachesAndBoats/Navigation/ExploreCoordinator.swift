@@ -141,11 +141,13 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoChat(data: [ChatMessage]){
+    func gotoChat(otherUser: String, conversationId: String){
         let vc: ChatView = .fromNib()
         vc.coordinator = self
-        vc.messages = data
-        vc.hidesBottomBarWhenPushed = true
+//        vc.messages = data
+        vc.otherUser = otherUser
+        vc.conversationId = conversationId
+//        vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     

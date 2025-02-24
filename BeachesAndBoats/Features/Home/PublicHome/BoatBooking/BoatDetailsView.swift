@@ -198,8 +198,7 @@ class BoatDetailsView: BaseViewControllerPlain {
             case .startConversationSuccess(let response):
 //                self?.conversationResponse = response
                 if let res = response.data{
-                    let data = ChatMessage(message: "", name: "", time: "")
-                    self?.coordinator?.gotoChat(data: [data])
+                    self?.coordinator?.gotoChat(otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id)
                 }
             case .startConversationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)

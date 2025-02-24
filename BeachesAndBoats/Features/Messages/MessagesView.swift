@@ -34,9 +34,13 @@ class MessagesView: BaseViewControllerPlain {
         
         bind()
         
-        input.onNext(.getConversations)
         LoadingModal.show()
     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        input.onNext(.getConversations)
     }
     
     func setupTable() {
@@ -96,8 +100,8 @@ extension MessagesView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mes = messages[indexPath.row]
-//        let data = ChatMessage(message: mes., name: <#T##String#>, time: <#T##String#>)
-//        coordinator?.gotoChat(data: [data])
+        let data = ChatMessage(message: mes.lastMessage, name: mes.otherUser.firstName, time: "")
+        coordinator?.gotoChat(otherUser: mes.otherUser.firstName, conversationId: mes.id)
     }
     
 }

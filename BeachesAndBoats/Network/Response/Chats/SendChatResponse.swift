@@ -13,8 +13,8 @@ struct SendChatResponse: Codable{
 
 // MARK: - DataClass
 struct SendChatResponseData: Codable {
-    let id, user1_ID, user2_ID, bookingID: String
-    let propertyType, lastMessage: String
+    let id, user1_ID, user2_ID, bookingID: String?
+    let propertyType, lastMessage: String?
 
     enum CodingKeys: String, CodingKey {
         case id
