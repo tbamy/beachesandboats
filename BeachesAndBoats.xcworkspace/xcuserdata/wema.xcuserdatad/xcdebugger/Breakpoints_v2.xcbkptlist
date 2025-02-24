@@ -34,38 +34,6 @@
             endingLineNumber = "121"
             landmarkName = "makePaymentTapped(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5CA270A2-A47D-46E7-B43E-47A0E1E35F8C - dcf62d7798290e78"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.ConfirmBoatBookingView.makePaymentTapped(Any) -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BoatBooking/ConfirmBoatBookingView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "1824">
-               </Location>
-               <Location
-                  uuid = "5CA270A2-A47D-46E7-B43E-47A0E1E35F8C - dcf62d7798290e78"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.ConfirmBoatBookingView.makePaymentTapped(Any) -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BoatBooking/ConfirmBoatBookingView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "1856">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -82,38 +50,6 @@
             endingLineNumber = "177"
             landmarkName = "continueBookingTapped(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2C75E340-B257-4D17-A906-1041F0E6971E - 91b50711d987207"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.BoatDetailsView.validateRequest() -&gt; Swift.Bool"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BoatBooking/BoatDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "2C75E340-B257-4D17-A906-1041F0E6971E - 2a090619685dcd1c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.BoatDetailsView.continueBookingTapped(Any) -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BoatBooking/BoatDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "177"
-                  endingLineNumber = "177"
-                  offsetFromSymbolStart = "3492">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -130,38 +66,6 @@
             endingLineNumber = "94"
             landmarkName = "bind()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B10EEDC2-7187-4563-A52D-F6E4333AF3F8 - 6e490705c6d7f27c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (BeachesAndBoats.ChatVM.Output) -&gt; () in BeachesAndBoats.ChatView.bind() -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Messages/ChatView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "672">
-               </Location>
-               <Location
-                  uuid = "B10EEDC2-7187-4563-A52D-F6E4333AF3F8 - 6e490705c6d7f253"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (BeachesAndBoats.ChatVM.Output) -&gt; () in BeachesAndBoats.ChatView.bind() -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Messages/ChatView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "672">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -178,53 +82,37 @@
             endingLineNumber = "97"
             landmarkName = "bind()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B44DA6E0-06CC-4713-B81D-53691B92BDCD - 6e490705c6d7f211"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (BeachesAndBoats.ChatVM.Output) -&gt; () in BeachesAndBoats.ChatView.bind() -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Messages/ChatView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "1068">
-               </Location>
-               <Location
-                  uuid = "B44DA6E0-06CC-4713-B81D-53691B92BDCD - 6e490705c6d7f3f0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (BeachesAndBoats.ChatVM.Output) -&gt; () in BeachesAndBoats.ChatView.bind() -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Messages/ChatView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "1068">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "94FA59BC-17D0-4D8B-81BD-3969F3D0AD33"
+            uuid = "1CF74BD8-C17C-4DAA-BB30-F02003E0459F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/Messages/MessagesView.swift"
+            filePath = "BeachesAndBoats/Components/TabBar/CustomTabBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "setupMiddleButton()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "33DBD4AE-5F45-466E-A0DE-722ADADDCD1F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Components/TabBar/CustomTabBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "setupMiddleButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

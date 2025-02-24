@@ -73,10 +73,11 @@ class HostListingVC: BaseViewControllerPlain {
             showDeleteStack: false,
             buttonOneTitle: "Continue Listing",
             buttonOneAction: { [self] in
-                showDeleteModal()
+                print("Continue")
             },
             buttonTwoTitle: "Delete Listing",
             buttonTwoAction: {
+                self.showDeleteModal()
                 print("Cancel button tapped!")
             }
         )
@@ -89,13 +90,25 @@ class HostListingVC: BaseViewControllerPlain {
             showDeleteStack: true,
             buttonOneTitle: "Yes, delete",
             buttonOneAction: { [self] in
-               print("Delete")
+                deleteListing()
             },
             buttonTwoTitle: "Cancel",
             buttonTwoAction: {
+                self.dismiss(animated: true)
                 print("Cancel button tapped!")
             }
         )
+    }
+    
+    func deleteListing() {
+        if isShowingBeachHouses {
+            AppStorage.beachListing = nil
+            showListingForBeaches()
+        } else {
+            AppStorage.boatListing = nil
+            showListingForBoats()
+        }
+        self.dismiss(animated: true)
     }
     
     @objc func beachHouseTapped() {
@@ -108,27 +121,35 @@ class HostListingVC: BaseViewControllerPlain {
         updateSelection()
     }
     
+    func showListingForBeaches() {
+        if let unfinishedBeachListing = AppStorage.beachListing {
+            unfinishedListingStack.isHidden = false
+            unfinishedListingName.text = unfinishedBeachListing.name
+            unfinishedListingLocation.text = unfinishedBeachListing.streetName + ", " + unfinishedBeachListing.state + unfinishedBeachListing.country
+        } else {
+            unfinishedListingStack.isHidden = true
+        }
+    }
+    
+    func showListingForBoats() {
+        if let unfinishedBoatListing = AppStorage.boatListing {
+            unfinishedListingStack.isHidden = false
+            unfinishedListingName.text = unfinishedBoatListing.name
+            unfinishedListingLocation.text = unfinishedBoatListing.streetName + ", " + unfinishedBoatListing.state + " " + unfinishedBoatListing.country
+        } else {
+            unfinishedListingStack.isHidden = true
+        }
+    }
+    
     private func updateSelection() {
         if isShowingBeachHouses {
             beachHouseListingSegment.isSelected = true
             boatListingSegment.isSelected = false
-            if let unfinishedBeachListing = AppStorage.beachListing {
-                unfinishedListingStack.isHidden = false
-                unfinishedListingName.text = unfinishedBeachListing.name
-                unfinishedListingLocation.text = unfinishedBeachListing.streetName + ", " + unfinishedBeachListing.state + unfinishedBeachListing.country
-            } else {
-                unfinishedListingStack.isHidden = true
-            }
+            showListingForBeaches()
         } else {
             beachHouseListingSegment.isSelected = false
             boatListingSegment.isSelected = true
-            if let unfinishedBoatListing = AppStorage.boatListing {
-                unfinishedListingStack.isHidden = false
-                unfinishedListingName.text = unfinishedBoatListing.name
-                unfinishedListingLocation.text = unfinishedBoatListing.streetName + ", " + unfinishedBoatListing.state + unfinishedBoatListing.country
-            } else {
-                unfinishedListingStack.isHidden = true
-            }
+            showListingForBoats()
         }
         listingTableView.reloadData()
         self.updateTableHeight()

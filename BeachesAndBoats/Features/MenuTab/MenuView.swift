@@ -20,6 +20,8 @@ class MenuView: UIViewController {
     @IBOutlet weak var cxSupportBtn: UIStackView!
     @IBOutlet weak var logOutBtn: UIStackView!
     
+    
+    
     var coordinator: HostingServiceMenuCoordinator?
     
     override func viewDidLoad() {
@@ -84,6 +86,7 @@ class MenuView: UIViewController {
     
 
     @IBAction func switchBtnTapped(_ sender: Any) {
+        coordinator?.goToHomeDashboard()
     }
     
     

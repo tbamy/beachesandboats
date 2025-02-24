@@ -74,6 +74,14 @@ class HostingServiceMenuCoordinator: Coordinator {
         }
        
     }
+    
+    func goToHomeDashboard() {
+        navigationController = BaseNavigationController(rootViewController: Dashboard())
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.rootViewController = Dashboard()
+        }
+    }
 
     
 //    func gotoEarningView() {

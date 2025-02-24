@@ -10,6 +10,10 @@ import UIKit
 
 class CustomTabBar: UITabBar {
     private let middleButton = UIButton()
+    
+    var user = UserSession.shared.userDetails
+    let serviceRoles: [HostType] = [.chef, .dj, .bouncer]
+    let hostRoles: [HostType] = [.primaryHost, .secondaryHost]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +29,19 @@ class CustomTabBar: UITabBar {
         middleButton.frame.size = CGSize(width: 64, height: 64)
         middleButton.layer.cornerRadius = 32
         middleButton.backgroundColor = .B_B
-        middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
+        if let userRoles = user?.roles {
+            let hostRoleStrings = self.hostRoles.map { $0.rawValue }
+            let hasHostRole = userRoles.contains { hostRoleStrings.contains($0) }
+            
+            let serviceRoleStrings = serviceRoles.map { $0.rawValue }
+            let hasSeviceRole = userRoles.contains { serviceRoleStrings.contains($0)}
+            
+            if hasHostRole {
+                middleButton.setImage(UIImage(named: "plusTab"), for: .normal)
+            } else if hasSeviceRole {
+                middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
+            }
+        }
         middleButton.tintColor = .white
         
         // Add shadow

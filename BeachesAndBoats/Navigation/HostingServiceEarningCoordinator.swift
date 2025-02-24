@@ -73,4 +73,12 @@ class HostingServiceEarningCoordinator: Coordinator {
             tabBarController.selectedIndex = 1
         }
     }
+    
+    func goToHomeDashboard() {
+        navigationController = BaseNavigationController(rootViewController: Dashboard())
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.rootViewController = Dashboard()
+        }
+    }
 }

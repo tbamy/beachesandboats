@@ -149,6 +149,13 @@ extension EarningsView {
             switch output {
             case .topEarningsSuccess(let response):
                 self?.topEarningBookingData = [response]
+                if let topEarner = response.data?.topEarners.values.first {
+                    let earningsText = "\(topEarner.totalEarnings ?? 0)"
+                    
+                    DispatchQueue.main.async {
+                        self?.totalEarning.text = "₦" + earningsText
+                    }
+                }
             case .topEarningsFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
