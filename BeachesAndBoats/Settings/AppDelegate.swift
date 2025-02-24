@@ -7,6 +7,7 @@
 
 import UIKit
 import PaystackCore
+import IQKeyboardManagerSwift
 //import PusherSwift
 
 @main
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setupCoordinator(application)
+        
+        IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
         
         return true
     }

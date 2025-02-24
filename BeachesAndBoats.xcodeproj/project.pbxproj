@@ -545,6 +545,7 @@
 		A6F406B02C02DB3800973BD7 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406AF2C02DB3800973BD7 /* PrimaryButton.swift */; };
 		A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406B12C02DB7F00973BD7 /* PlainOutlineButton.swift */; };
 		A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406B32C02DBDA00973BD7 /* UIButton.swift */; };
+		A6FA71672D6CB35B00BB5E44 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */; };
 		A6FB74482C134EC700A26806 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB74462C134EC700A26806 /* SignupView.swift */; };
 		A6FB74492C134EC700A26806 /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6FB74472C134EC700A26806 /* SignupView.xib */; };
 		A6FB744C2C13558000A26806 /* ConfirmAccountModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB744A2C13558000A26806 /* ConfirmAccountModal.swift */; };
@@ -1110,6 +1111,7 @@
 				A616276E2C7DBC2700F6B452 /* CombineMoya in Frameworks */,
 				A6C210012C874D980045C670 /* HorizonCalendar in Frameworks */,
 				A675D9FB2D2D1084003E297B /* PaystackPusherWrapper in Frameworks */,
+				A6FA71672D6CB35B00BB5E44 /* IQKeyboardManagerSwift in Frameworks */,
 				A6B415B82D0E98E900717CE9 /* DeviceKit in Frameworks */,
 				A675D9F92D2D1084003E297B /* PaystackCore in Frameworks */,
 				A61627742C7DBC2700F6B452 /* RxMoya in Frameworks */,
@@ -2506,6 +2508,7 @@
 				A675D9F82D2D1084003E297B /* PaystackCore */,
 				A675D9FA2D2D1084003E297B /* PaystackPusherWrapper */,
 				A675D9FC2D2D1084003E297B /* PaystackUI */,
+				A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */,
 			);
 			productName = BeachesAndBoats;
 			productReference = A6015B0A2BEA223400545164 /* BeachesAndBoats.app */;
@@ -2541,6 +2544,7 @@
 				A60580B62CDBA9C900B17505 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				A6B415B62D0E98E900717CE9 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 				A675D9F72D2D1084003E297B /* XCRemoteSwiftPackageReference "paystack-sdk-ios" */,
+				A6FA71652D6CB35B00BB5E44 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = A6015B0B2BEA223400545164 /* Products */;
 			projectDirPath = "";
@@ -3408,6 +3412,14 @@
 				kind = branch;
 			};
 		};
+		A6FA71652D6CB35B00BB5E44 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3460,6 +3472,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A6C20FFF2C874D980045C670 /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
 			productName = HorizonCalendar;
+		};
+		A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A6FA71652D6CB35B00BB5E44 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
