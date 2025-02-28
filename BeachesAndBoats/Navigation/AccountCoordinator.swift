@@ -523,6 +523,20 @@ class AccountCoordinator: Coordinator{
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
+
+    func gotoVerifyAccountView(){
+        let vc: VerifyAccountView = .fromNib()
+        vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoVerificationFormView(){
+        let vc: VerificationFormView = .fromNib()
+        vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
     
     
 //MARK: Profile Management
@@ -571,6 +585,13 @@ class AccountCoordinator: Coordinator{
     
     func gotoNotificationSettings(){
         let vc: NotificationSettingsView = .fromNib()
+        vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoContactSupportView(){
+        let vc: ContactSupportView = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)

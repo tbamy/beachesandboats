@@ -302,6 +302,10 @@
                                             </collectionViewFlowLayout>
                                         </collectionView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="BTC-bG-SM9" firstAttribute="leading" secondItem="L5B-03-zfG" secondAttribute="leading" id="XSf-dU-RIW"/>
+                                        <constraint firstAttribute="trailing" secondItem="BTC-bG-SM9" secondAttribute="trailing" id="YgM-Gy-l3B"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                             <constraints>

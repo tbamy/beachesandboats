@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -10,6 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VerificationFormView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="currentPictureField" destination="QTG-Lp-m4k" id="Fuq-Hx-lBt"/>
+                <outlet property="emailField" destination="OF8-kN-con" id="jaS-5F-0R4"/>
+                <outlet property="firstNameField" destination="fOa-jb-FrZ" id="D8z-NY-prL"/>
+                <outlet property="lastNameField" destination="fAV-q3-0uK" id="sWt-RS-GUo"/>
+                <outlet property="middleNameField" destination="Sqq-TL-Mno" id="YoN-if-Lbb"/>
+                <outlet property="phoneField" destination="VPw-Vp-FUo" id="iAR-H3-QrX"/>
+                <outlet property="uploadIdField" destination="waL-am-Clp" id="WpX-uq-Ns4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -85,14 +93,14 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Phone number"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waL-am-Clp" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waL-am-Clp" customClass="UploadButtonField" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="350" width="345" height="50"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Upload your ID"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTG-Lp-m4k" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTG-Lp-m4k" customClass="UploadButtonField" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="420" width="345" height="50"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <userDefinedRuntimeAttributes>

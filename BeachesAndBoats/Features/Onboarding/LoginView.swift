@@ -15,6 +15,7 @@ class LoginView: BaseViewControllerPlain {
     @IBOutlet weak var password: PasswordField!
     @IBOutlet weak var emailAddress: InputField!
     @IBOutlet weak var signUpBtn: UILabel!
+    @IBOutlet weak var forgotPassword: UILabel!
     
     var vm = LoginViewModel()
     var disposeBag = DisposeBag()
@@ -28,6 +29,11 @@ class LoginView: BaseViewControllerPlain {
         let signUpGesture = UITapGestureRecognizer(target: self, action: #selector(gotoSignUp))
         signUpBtn.isUserInteractionEnabled = true
         signUpBtn.addGestureRecognizer(signUpGesture)
+        
+        forgotPassword.attributedText = forgotPassword.underlinedText("Forgot Password?", color: .B_B)
+        let forgotPasswordGesture = UITapGestureRecognizer(target: self, action: #selector(gotoForgotPassword))
+        forgotPassword.isUserInteractionEnabled = true
+        forgotPassword.addGestureRecognizer(forgotPasswordGesture)
         emailAddress.text = AppStorage.username ?? ""
         
         bindNetwork()
@@ -35,6 +41,10 @@ class LoginView: BaseViewControllerPlain {
     
     @objc func gotoSignUp(){
         coordinator?.gotoSignup()
+    }
+    
+    @objc func gotoForgotPassword(){
+        coordinator?.gotoForgotPassword()
     }
     
 
@@ -55,9 +65,10 @@ class LoginView: BaseViewControllerPlain {
                 
             case .loginSuccess(let response):
 //                UserSession.shared.userDetails = response.user
-                if response.data?.switch_device == true{
+                if response.data?.switch_device == true || response.data?.user?.mfa_enabled == true{
                     self?.presentConfirmAccountModal()
                 }else{
+                    AppStorage.hasSignedIn = true
                     AppStorage.username = response.data?.user?.email
                     UserSession.shared.loginRes = response
                     self?.coordinator?.goToDashboard()
@@ -78,6 +89,7 @@ class LoginView: BaseViewControllerPlain {
                 
                 //MARK: Verify Otp
             case .verifyOtpSuccess(let response):
+                AppStorage.hasSignedIn = true
                 AppStorage.username = response.data?.user?.email
                 UserSession.shared.loginRes = response
                 self?.coordinator?.goToDashboard()

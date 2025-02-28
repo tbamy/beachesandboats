@@ -156,7 +156,7 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
         // Ensure index is within bounds
         if indexPath.row >= 0 && indexPath.row < bedTypes.count {
             let bedTypeModel = bedTypes[indexPath.row]
-            let increaseDecreaseField = IncreaseDecreaseField()
+            let increaseDecreaseField = IncreaseDecreaseField(frame: cell.bounds)
             increaseDecreaseField.model = IncreaseDecreaseModel(id: bedTypeModel.id ?? "", type: bedTypeModel.name ?? "", subtitle: bedTypeModel.description ?? "", count: 0)
 
             // Handle updates using the closure
@@ -182,6 +182,6 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let widthOfScreen: CGFloat = collectionView.bounds.width
-        return CGSize(width: widthOfScreen, height: 56)
+        return CGSize(width: widthOfScreen - 20, height: 56)
     }
 }

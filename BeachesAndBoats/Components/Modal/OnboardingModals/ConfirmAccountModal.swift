@@ -29,6 +29,10 @@ public class ConfirmAccountModal: BaseXib {
     @IBOutlet weak var timeCountdown: UILabel!
     @IBOutlet weak var timeStack: UIStackView!
     
+    
+    @IBOutlet weak var keepSigninStack: UIStackView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     var otpDelegate: OTPDelegate?
     weak var transitionDelegate: ModalTransitionDelegate?
     private var countdownTimer: CountdownTimer!
@@ -121,12 +125,6 @@ public class ConfirmAccountModal: BaseXib {
         checkboxBtn.isUserInteractionEnabled = true
         resendCodeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resendOtpTapped)))
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
-        
-
-        
-//        checkboxBtn.stateChanged = { isChecked in
-//            print("Checkbox isChecked: \(isChecked)")
-//        }
 
     }
     
@@ -136,12 +134,6 @@ public class ConfirmAccountModal: BaseXib {
         resendCodeBtn.isHidden = true
     }
     
-//    func sendOtp(){
-//        LoadingModal.show()
-//        let request = OTPandPasscodeRequest(phoneNumber: phoneNumber, adminPhoneNumber: adminPhoneNumber, emailAddress: email, name: name, customerId: customerId, purpose: .MultipleSignatoryApproverSoftTokenRequestOtp, deliveryType: .PhoneNumber, purposeReference: purpose)
-//        
-//        input.onNext(.oTPandPasscodeRequest(request))
-//    }
     
     @objc func handleDismissal() {
         ConfirmAccountModal.dismiss()
@@ -160,6 +152,9 @@ public class ConfirmAccountModal: BaseXib {
         if modal.purpose == .createAccount{
             modal.setupCountdown()
             modal.timeStack.isHidden = false
+        }else{
+            modal.keepSigninStack.isHidden = true
+            modal.titleLabel.text = "Verify OTP"
         }
         
         modal.layer.cornerRadius = 20

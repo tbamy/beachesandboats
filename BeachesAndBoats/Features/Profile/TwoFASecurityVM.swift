@@ -12,11 +12,14 @@ class TwoFASecurityVM {
     
     var dispose = DisposeBag()
     var hostingService: HostingService = HostingServiceImplementation()
+    var profileService: ProfileService = ProfileServiceImplementation()
     
     enum Input {
         case phoneSecurity(TwoFAPhoneSecurityRequest)
         case emailSecurity(TwoFAEmailSecurityRequest)
         case completeTwoFA(TwoFACompleteVerificationRequest)
+        
+        case changePassword(ChangePasswordRequest)
     }
     
     enum Output {
@@ -28,7 +31,13 @@ class TwoFASecurityVM {
         case completeTwoFAFailure(ErrorResponse)
     }
     
+    enum ChangePasswordOutput {
+        case changePasswordSuccess(UpdateProfileResponse)
+        case changePasswordFailed(ErrorResponse)
+    }
+    
     var output = PublishSubject<Output>()
+    var changePasswordOutput = PublishSubject<ChangePasswordOutput>()
     
     func transform(input: PublishSubject<Input>) {
         input.subscribe(onNext: { [weak self] event in
@@ -39,6 +48,8 @@ class TwoFASecurityVM {
                 self?.phoneSecurity(request)
             case .completeTwoFA(let request):
                 self?.getTwoFACompletion(request)
+            case .changePassword(let request):
+                self?.changePassword(request)
             }
         }).disposed(by: dispose)
     }
@@ -71,6 +82,17 @@ class TwoFASecurityVM {
             case .failure(let error):
                 self?.handlePhoneSecurityFailure(error)
             }})
+    }
+    
+    func changePassword(_ request: ChangePasswordRequest){
+        profileService.changePasswordRequest(request: request, completion: {[weak self] result in
+            switch result {
+            case .success(let response):
+                self?.changePasswordOutput.onNext(.changePasswordSuccess(response))
+            case .failure(let error):
+                self?.changePasswordOutput.onNext(.changePasswordFailed(error))
+            }
+        })
     }
     
     func handleCompleteVerificationSuccess(_ response: TwoFACompleteVerificationResponse) {

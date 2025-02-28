@@ -98,22 +98,23 @@ class NumberField: InputField{
     
     func setRightImage() {
         textField.text = "0"
+        textField.keyboardType = .numberPad
         
         // Create the container view for the stack
-        let iconContainer = UIView(frame: CGRect(x: 5, y: 5, width: 15, height: 15))
+        let iconContainer = UIView(frame: CGRect(x: 5, y: 5, width: 10, height: 10))
         
         // Create the stack view to hold the images
         let stackView = UIStackView(frame: iconContainer.bounds)
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.spacing = 4 // Add spacing between images
+        stackView.spacing = 2 // Add spacing between images
         
         // Create the chevron.up image view
         let upImageView = UIImageView()
         upImageView.image = UIImage(systemName: "chevron.up")
         upImageView.tintColor = .label
-        upImageView.contentMode = .scaleAspectFit
+        upImageView.contentMode = .center
         upImageView.isUserInteractionEnabled = true // Enable user interaction
         let upTapGesture = UITapGestureRecognizer(target: self, action: #selector(incrementValue))
         upImageView.addGestureRecognizer(upTapGesture)
@@ -122,7 +123,7 @@ class NumberField: InputField{
         let downImageView = UIImageView()
         downImageView.image = UIImage(systemName: "chevron.down")
         downImageView.tintColor = .label
-        downImageView.contentMode = .scaleAspectFit
+        downImageView.contentMode = .center
         downImageView.isUserInteractionEnabled = true // Enable user interaction
         let downTapGesture = UITapGestureRecognizer(target: self, action: #selector(decrementValue))
         downImageView.addGestureRecognizer(downTapGesture)

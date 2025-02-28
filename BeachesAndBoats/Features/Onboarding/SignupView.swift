@@ -87,7 +87,7 @@ class SignupView: BaseViewControllerPlain{
                 
                 //MARK: SignUp
             case .signUpSuccess(let response):
-                AppStorage.hasSignedUp = true
+                AppStorage.hasSignedIn = true
                 AppStorage.username = email
                 UserSession.shared.signupRes = response
                 MiddleModal.show(title: response.message ?? "Registration Successful", type: .success, onConfirm: navigateToHome)

@@ -34,6 +34,15 @@ class ListingDashboard: UIViewController {
     @IBOutlet weak var notificationImg: UIImageView!
     @IBOutlet weak var userName: UILabel!
     
+    
+    @IBOutlet weak var verificationView: UIView!
+    @IBOutlet weak var verificationTitle: UILabel!
+    @IBOutlet weak var verificationSubtitle: UILabel!
+    @IBOutlet weak var verificationBtn: UILabel!
+    
+    let verificationStatus = UserSession.shared.userDetails?.verificationStatus
+    let isAccountVerified = UserSession.shared.userDetails?.isAccountVerified
+    
     var coordinator: HostingHouseAndBoatHomeCoordinator?
     
     let vm = ListingDashboardVM()
@@ -77,6 +86,29 @@ class ListingDashboard: UIViewController {
         userName.text = "Welcome, " + (UserSession.shared.userDetails?.first_name ?? "User")
         beachReservation.contentView.backgroundColor = .none
         boatReservation.contentView.backgroundColor = .none
+        
+        
+        verificationView.isHidden = isAccountVerified ?? false
+        verificationBtn.isUserInteractionEnabled = true
+        verificationBtn.attributedText = verificationBtn.underlinedText("Verify now", color: .beachBlue)
+        verificationBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(verifySelected)))
+        
+        switch verificationStatus {
+        case "pending":
+            verificationView.isHidden = false
+            verificationTitle.text = "Account verification in progress"
+            verificationSubtitle.text = "Your account is under verification. This will take 2-3 business days for the verification process to be complete."
+            verificationBtn.isHidden = true
+        case "rejected":
+            verificationView.isHidden = true
+        case "approved":
+            verificationView.isHidden = true
+        default:
+            verificationView.isHidden = false
+            verificationTitle.text = "Verify your account"
+            verificationSubtitle.text = "Your listings have been saved. Verify your account so that your listings can go live."
+            verificationBtn.isHidden = false
+        }
     }
    
     func gestureRecognizer() {
@@ -118,6 +150,10 @@ class ListingDashboard: UIViewController {
     @objc func boatReservationSelected() {
         isBeachReservation = false
         updateSegmentSelection()
+    }
+    
+    @objc func verifySelected() {
+        coordinator?.gotoVerifyAccountView()
     }
     
     func setupUI() {

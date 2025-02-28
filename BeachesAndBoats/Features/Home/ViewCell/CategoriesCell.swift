@@ -61,10 +61,13 @@ class CategoriesCell: BaseXib, Sizeable {
         title.text = model.title
         title.font.withSize(12)
         
+//        let imageUrl = model.image
+//        imageUrl.loadImage(into: image, placeholder: model.dummyImage)
+        
         if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
             image.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "bookings_menu"),
+                placeholder: UIImage(named: model.dummyImage),
                 options: nil,
                 completionHandler: { result in
                     switch result {
@@ -72,12 +75,12 @@ class CategoriesCell: BaseXib, Sizeable {
                         print("Image loaded: \(value.source.url?.absoluteString ?? "")")
                     case .failure(let error):
                         print("Failed to load image: \(error.localizedDescription)")
-                        self.image.image = UIImage(named: "bookings_menu")
+                        self.image.image = UIImage(named: self.model.dummyImage)
                     }
                 }
             )
-        } else {
-            image.image = UIImage(named: "bookings_menu")
+//        } else {
+//            image.image = UIImage(named: "boatCat")
         }
         
             setState()
@@ -114,6 +117,8 @@ class CategoriesCell: BaseXib, Sizeable {
 struct CategoriesCellModel{
     public var title: String = ""
     public var image: String = ""
+    public var dummyImage: String = ""
+//    public var image: UIImage = UIImage()
     public var state: Bool = false
     public var tapped: () -> Void = {}
 //    public var isBeach: Bool = true

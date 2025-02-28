@@ -45,11 +45,21 @@ class HostingServiceMenuCoordinator: Coordinator {
         coordinator.gotoLoginAndSecurityView()
     }
     
-    func gotoContactSupport() {
-        let vc: ContactSupportView = .fromNib()
-        vc.coordinator = self
-        push(viewController: vc)
+    func gotoVerifyAccountView() {
+        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+        coordinator.gotoVerifyAccountView()
     }
+    
+    func gotoContactSupport() {
+        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+        coordinator.gotoContactSupportView()
+    }
+    
+//    func gotoContactSupport() {
+//        let vc: ContactSupportView = .fromNib()
+//        vc.coordinator = self
+//        push(viewController: vc)
+//    }
     
     func gotoEarningView() {
         if isComingFromHostingSideHouseAndBoat {

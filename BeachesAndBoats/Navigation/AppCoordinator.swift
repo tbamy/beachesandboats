@@ -37,6 +37,19 @@ final class AppCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoForgotPassword(){
+        let vc: ForgotPasswordView = .fromNib()
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoResetPassword(userEmail: String){
+        let vc: ResetPasswordView = .fromNib()
+        vc.coordinator = self
+        vc.userEmail = userEmail
+        push(viewController: vc)
+    }
+    
     func gotoCalendarTest(){
         let vc: CalendarTestView = .fromNib()
         vc.coordinator = self

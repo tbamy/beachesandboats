@@ -17,4 +17,15 @@ class HostingHouseAndBoatHomeCoordinator: Coordinator {
         vc.coordinator = self
         push(viewController: vc)
     }
+    
+    func gotoVerifyAccountView() {
+        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+        coordinator.gotoVerifyAccountView()
+    }
+    
+    func gotoVerificationFormView() {
+        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+        coordinator.gotoVerificationFormView()
+    }
+    
 }

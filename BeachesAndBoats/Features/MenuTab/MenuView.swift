@@ -21,6 +21,11 @@ class MenuView: UIViewController {
     @IBOutlet weak var logOutBtn: UIStackView!
     
     
+    @IBOutlet weak var verificationStatusView: UIView!
+    @IBOutlet weak var verificationStatusLabel: UILabel!
+    
+    let verificationStatus = UserSession.shared.userDetails?.verificationStatus
+    let isAccountVerified = UserSession.shared.userDetails?.isAccountVerified
     
     var coordinator: HostingServiceMenuCoordinator?
     
@@ -28,6 +33,23 @@ class MenuView: UIViewController {
         super.viewDidLoad()
         title = "Account"
         gestureRecognizers()
+        
+        verificationStatusView.layer.cornerRadius = 8
+        switch verificationStatus {
+        case "pending":
+            verificationStatusLabel.text = "Under verification"
+            verificationStatusView.backgroundColor = .systemYellow
+    
+        case "rejected":
+            verificationStatusLabel.text = "Rejected"
+            verificationStatusView.backgroundColor = .systemRed
+        case "approved":
+            verificationStatusLabel.text = "Approved"
+            verifyAccBtn.isUserInteractionEnabled = false
+            verificationStatusView.backgroundColor = .systemGreen
+        default:
+            verificationStatusView.isHidden = true
+        }
     }
     
     func gestureRecognizers() {
@@ -77,7 +99,7 @@ class MenuView: UIViewController {
     }
     
     @objc func verifyAccTapped() {
-        
+        coordinator?.gotoVerifyAccountView()
     }
     
     @objc func cxSupportTapped() {

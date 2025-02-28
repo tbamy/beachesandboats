@@ -38,5 +38,14 @@ extension UILabel {
         }
         self.attributedText = attributedText
     }
+    
+    
+    public func underlinedText(_ text: String, color: UIColor = .black, style: NSUnderlineStyle = .single) -> NSAttributedString {
+         let attributes: [NSAttributedString.Key: Any] = [
+             .underlineStyle: style.rawValue,
+             .foregroundColor: color
+         ]
+         return NSAttributedString(string: text, attributes: attributes)
+     }
 }
 

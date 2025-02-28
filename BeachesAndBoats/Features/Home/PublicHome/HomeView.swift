@@ -186,6 +186,17 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.identifier = "Categories " + indexPath.description
             view.model.image = cellAt.image ?? ""
             view.model.title = cellAt.name ?? ""
+            switch cellAt.name {
+            case "Beach Houses":
+                view.model.dummyImage = "beachCat"
+            case "Boats":
+                view.model.dummyImage = "boatsCat"
+            case "Services":
+                view.model.dummyImage = "serviceCat"
+            default:
+                view.model.dummyImage = "dummy"
+            }
+            
             
 //            view.model.tapped = { [weak self] in
 //                guard let self = self else { return }
@@ -356,8 +367,8 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.topRatedBeachHouseStack.isHidden = self.topRatedBeaches.isEmpty
                 self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
                 self.reloadCollectionViews()
-                print("Beaches Data: \(self.beaches)")
-                print("TopRated Beaches: \(self.topRatedBeaches)")
+//                print("Beaches Data: \(self.beaches)")
+//                print("TopRated Beaches: \(self.topRatedBeaches)")
                 subcategoryCollectionView.isHidden = false
                 topRatedBoatStack.isHidden = true
                 topRatedBeachHouseStack.isHidden = false
@@ -380,8 +391,8 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.topRatedBoatStack.isHidden = self.topRatedBoats.isEmpty
                 self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
                 self.reloadCollectionViews()
-                print("Boat Data: \(self.boats)")
-                print("TopRated Boats: \(self.topRatedBoats)")
+//                print("Boat Data: \(self.boats)")
+//                print("TopRated Boats: \(self.topRatedBoats)")
                 topRatedBoatStack.isHidden = topRatedBoats.isEmpty
                 subcategoryCollectionView.isHidden = false
                 boatStack.isHidden = false
@@ -399,8 +410,8 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 }
                 self.services = selectedCategories.compactMap { $0.beachHouseBookings}.flatMap{ $0 }
                 self.reloadCollectionViews()
-                print("Sselected service: \(self.selectedServiceCat)")
-                print("Services Data: \(self.services)")
+//                print("Sselected service: \(self.selectedServiceCat)")
+//                print("Services Data: \(self.services)")
                 if services.isEmpty{
                     
                 }

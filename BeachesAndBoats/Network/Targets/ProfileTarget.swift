@@ -17,6 +17,10 @@ enum ProfileTarget{
     case sendKYC(SendKYCRequest)
     case getUserBookings
     case getSavedFavourites
+    case updateNotificationSettings(NotificationSettingsRequest)
+    case getCustomerSupportInfo
+    case updateProfile(UpdateProfileRequest)
+    case changePassword(ChangePasswordRequest)
     
 }
 
@@ -39,6 +43,14 @@ extension ProfileTarget: BaseTarget{
             return Urls.getUserBookings.rawValue
         case .getSavedFavourites:
             return Urls.getSavedFavourites.rawValue
+        case .updateNotificationSettings(_):
+            return Urls.updateNotificationSettings.rawValue
+        case .getCustomerSupportInfo:
+            return Urls.customerSupport.rawValue
+        case .updateProfile(_):
+            return Urls.updateProfile.rawValue
+        case .changePassword(_):
+            return Urls.changePassword.rawValue
         }
     }
     
@@ -54,6 +66,14 @@ extension ProfileTarget: BaseTarget{
             return .get
         case .getSavedFavourites:
             return .get
+        case .updateNotificationSettings(_):
+            return .post
+        case .getCustomerSupportInfo:
+            return .get
+        case .updateProfile(_):
+            return .post
+        case .changePassword(_):
+            return .post
         }
     }
     
@@ -73,42 +93,59 @@ extension ProfileTarget: BaseTarget{
             var multipartData: [MultipartFormData] = []
 
             // Append standard fields as form data
-//            let fields: [String: Any] = [
-//                "role_type": data.roleType,
-//                "name": data.name,
-//                "description": data.description,
-//                "category_id": data.categoryId,
-//                "available_from": data.availableFrom,
-//                "available_to": data.availableTo,
-//                "starting_price": data.startingPrice
-//            ]
-//            
-//            for (key, value) in fields {
-//                if let stringValue = String(describing: value).data(using: .utf8) {
-//                    multipartData.append(MultipartFormData(provider: .data(stringValue), name: key))
-//                }
-//            }
-
+            let fields: [String: Any] = [
+                "first_name": data.first_name,
+                "last_name": data.last_name,
+                "middle_name": data.middle_name,
+                "email": data.email,
+                "phone_number": data.phone_number
+//                "id_document":
+//                "second_document":
+            ]
             
-            //Append profile picture
+            for (key, value) in fields {
+                if let stringValue = String(describing: value).data(using: .utf8) {
+                    multipartData.append(MultipartFormData(provider: .data(stringValue), name: key))
+                }
+            }
             
-//            if let profilePictureData = data.profilePic {
-//                multipartData.append(
-//                    MultipartFormData(
-//                        provider: .data(profilePictureData),
-//                        name: "profile_pic",
-//                        fileName: "profile_picture.jpg",
-//                        mimeType: "image/jpeg"
-//                    )
-//                )
-//            }
-                    
-
+//            Append id document
+            if let idDocumentData = data.id_document {
+                multipartData.append(
+                    MultipartFormData(
+                        provider: .data(idDocumentData),
+                        name: "id_document",
+                        fileName: "id_document_\(data.first_name).jpg",
+                        mimeType: "image/jpeg"
+                    )
+                )
+            }
+//            Append second document
+            if let secondDocumentData = data.second_document {
+                multipartData.append(
+                    MultipartFormData(
+                        provider: .data(secondDocumentData),
+                        name: "second_document",
+                        fileName: "second_document_\(data.first_name).jpg",
+                        mimeType: "image/jpeg"
+                    )
+                )
+            }
+            
             return .uploadMultipart(multipartData)
+            
         case .getUserBookings:
             return .requestPlain
         case .getSavedFavourites:
             return .requestPlain
+        case .updateNotificationSettings(let request):
+            return .requestJSONEncodable(request)
+        case .getCustomerSupportInfo:
+            return .requestPlain
+        case .updateProfile(let request):
+            return .requestJSONEncodable(request)
+        case .changePassword(let request):
+            return .requestJSONEncodable(request)
         }
     }
     

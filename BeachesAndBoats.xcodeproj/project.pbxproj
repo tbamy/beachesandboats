@@ -15,7 +15,6 @@
 		A60580A12CD8C60600B17505 /* BoatDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A02CD8C60600B17505 /* BoatDataResponse.swift */; };
 		A60580A32CD8E80F00B17505 /* CreateBoatListingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */; };
 		A60580A52CD8ECCC00B17505 /* HostingDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580A42CD8ECCC00B17505 /* HostingDashboard.swift */; };
-		A60580AD2CDAA27D00B17505 /* Helper+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */; };
 		A60580AF2CDAA86500B17505 /* ListServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580AE2CDAA86500B17505 /* ListServiceViewModel.swift */; };
 		A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580B02CDAA93D00B17505 /* CreateServiceListingResponse.swift */; };
 		A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580B22CDAAD0300B17505 /* ServiceListingSuccessView.swift */; };
@@ -505,6 +504,19 @@
 		A6E0504E2CEF47DE00F0211C /* ServiceHostingHomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E0504C2CEF47DE00F0211C /* ServiceHostingHomeView.xib */; };
 		A6E050552CF0CAF300F0211C /* DashboardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E050532CF0CAF300F0211C /* DashboardViewCell.swift */; };
 		A6E050562CF0CAF300F0211C /* DashboardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E050542CF0CAF300F0211C /* DashboardViewCell.xib */; };
+		A6E3A1182D705C25007BB665 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A1162D705C25007BB665 /* ForgotPasswordView.swift */; };
+		A6E3A1192D705C25007BB665 /* ForgotPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E3A1172D705C25007BB665 /* ForgotPasswordView.xib */; };
+		A6E3A11C2D70A467007BB665 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A11A2D70A467007BB665 /* ResetPasswordView.swift */; };
+		A6E3A11D2D70A467007BB665 /* ResetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E3A11B2D70A467007BB665 /* ResetPasswordView.xib */; };
+		A6E3A1242D70E03B007BB665 /* NotificationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A1222D70E03B007BB665 /* NotificationViewCell.swift */; };
+		A6E3A1252D70E03B007BB665 /* NotificationViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E3A1232D70E03B007BB665 /* NotificationViewCell.xib */; };
+		A6E3A1272D70F047007BB665 /* NotificationSettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A1262D70F047007BB665 /* NotificationSettingsVM.swift */; };
+		A6E3A1292D70F09B007BB665 /* NotificationSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A1282D70F09B007BB665 /* NotificationSettingsRequest.swift */; };
+		A6E3A12B2D70F826007BB665 /* ResetPasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A12A2D70F826007BB665 /* ResetPasswordVM.swift */; };
+		A6E3A12D2D717F33007BB665 /* ForgotPasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A12C2D717F33007BB665 /* ForgotPasswordVM.swift */; };
+		A6E3A12F2D7181BA007BB665 /* ForgotPasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A12E2D7181BA007BB665 /* ForgotPasswordRequest.swift */; };
+		A6E3A1312D7181D1007BB665 /* ResetPasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A1302D7181D1007BB665 /* ResetPasswordRequest.swift */; };
+		A6E3A1332D718ABF007BB665 /* UpdateProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3A1322D718ABF007BB665 /* UpdateProfileRequest.swift */; };
 		A6E7FACF2C21844800B01E6C /* ModalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */; };
 		A6EF00DC2D28318B00893C05 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00DB2D28318B00893C05 /* CustomTabBar.swift */; };
 		A6EF00DE2D2834E600893C05 /* KeyboardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF00DD2D2834E600893C05 /* KeyboardType.swift */; };
@@ -545,6 +557,14 @@
 		A6F406B02C02DB3800973BD7 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406AF2C02DB3800973BD7 /* PrimaryButton.swift */; };
 		A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406B12C02DB7F00973BD7 /* PlainOutlineButton.swift */; };
 		A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F406B32C02DBDA00973BD7 /* UIButton.swift */; };
+		A6F490F12D71D390002F8F5B /* UploadButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490EF2D71D390002F8F5B /* UploadButtonField.swift */; };
+		A6F490F22D71D390002F8F5B /* UploadButtonField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6F490F02D71D390002F8F5B /* UploadButtonField.xib */; };
+		A6F490F42D720C38002F8F5B /* KYCVerificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490F32D720C38002F8F5B /* KYCVerificationVM.swift */; };
+		A6F490F62D721986002F8F5B /* CustomerSupportInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490F52D721986002F8F5B /* CustomerSupportInfoResponse.swift */; };
+		A6F490F82D7225D4002F8F5B /* ChangePasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490F72D7225D3002F8F5B /* ChangePasswordRequest.swift */; };
+		A6F490FA2D722648002F8F5B /* UpdateProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490F92D722648002F8F5B /* UpdateProfileResponse.swift */; };
+		A6F490FC2D722C6F002F8F5B /* UpdateProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490FB2D722C6F002F8F5B /* UpdateProfileVM.swift */; };
+		A6F490FE2D723284002F8F5B /* ContactSupportVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490FD2D723284002F8F5B /* ContactSupportVM.swift */; };
 		A6FA71672D6CB35B00BB5E44 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */; };
 		A6FB74482C134EC700A26806 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB74462C134EC700A26806 /* SignupView.swift */; };
 		A6FB74492C134EC700A26806 /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6FB74472C134EC700A26806 /* SignupView.xib */; };
@@ -568,7 +588,6 @@
 		A60580A02CD8C60600B17505 /* BoatDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatDataResponse.swift; sourceTree = "<group>"; };
 		A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoatListingRequest.swift; sourceTree = "<group>"; };
 		A60580A42CD8ECCC00B17505 /* HostingDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingDashboard.swift; sourceTree = "<group>"; };
-		A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+Extensions.swift"; sourceTree = "<group>"; };
 		A60580AE2CDAA86500B17505 /* ListServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListServiceViewModel.swift; sourceTree = "<group>"; };
 		A60580B02CDAA93D00B17505 /* CreateServiceListingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateServiceListingResponse.swift; sourceTree = "<group>"; };
 		A60580B22CDAAD0300B17505 /* ServiceListingSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListingSuccessView.swift; sourceTree = "<group>"; };
@@ -1048,6 +1067,19 @@
 		A6E0504C2CEF47DE00F0211C /* ServiceHostingHomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceHostingHomeView.xib; sourceTree = "<group>"; };
 		A6E050532CF0CAF300F0211C /* DashboardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewCell.swift; sourceTree = "<group>"; };
 		A6E050542CF0CAF300F0211C /* DashboardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewCell.xib; sourceTree = "<group>"; };
+		A6E3A1162D705C25007BB665 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		A6E3A1172D705C25007BB665 /* ForgotPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordView.xib; sourceTree = "<group>"; };
+		A6E3A11A2D70A467007BB665 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		A6E3A11B2D70A467007BB665 /* ResetPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPasswordView.xib; sourceTree = "<group>"; };
+		A6E3A1222D70E03B007BB665 /* NotificationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewCell.swift; sourceTree = "<group>"; };
+		A6E3A1232D70E03B007BB665 /* NotificationViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewCell.xib; sourceTree = "<group>"; };
+		A6E3A1262D70F047007BB665 /* NotificationSettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsVM.swift; sourceTree = "<group>"; };
+		A6E3A1282D70F09B007BB665 /* NotificationSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsRequest.swift; sourceTree = "<group>"; };
+		A6E3A12A2D70F826007BB665 /* ResetPasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVM.swift; sourceTree = "<group>"; };
+		A6E3A12C2D717F33007BB665 /* ForgotPasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVM.swift; sourceTree = "<group>"; };
+		A6E3A12E2D7181BA007BB665 /* ForgotPasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRequest.swift; sourceTree = "<group>"; };
+		A6E3A1302D7181D1007BB665 /* ResetPasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRequest.swift; sourceTree = "<group>"; };
+		A6E3A1322D718ABF007BB665 /* UpdateProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileRequest.swift; sourceTree = "<group>"; };
 		A6E7FACE2C21844800B01E6C /* ModalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCoordinator.swift; sourceTree = "<group>"; };
 		A6EF00DB2D28318B00893C05 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		A6EF00DD2D2834E600893C05 /* KeyboardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardType.swift; sourceTree = "<group>"; };
@@ -1088,6 +1120,14 @@
 		A6F406AF2C02DB3800973BD7 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		A6F406B12C02DB7F00973BD7 /* PlainOutlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainOutlineButton.swift; sourceTree = "<group>"; };
 		A6F406B32C02DBDA00973BD7 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		A6F490EF2D71D390002F8F5B /* UploadButtonField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButtonField.swift; sourceTree = "<group>"; };
+		A6F490F02D71D390002F8F5B /* UploadButtonField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadButtonField.xib; sourceTree = "<group>"; };
+		A6F490F32D720C38002F8F5B /* KYCVerificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCVerificationVM.swift; sourceTree = "<group>"; };
+		A6F490F52D721986002F8F5B /* CustomerSupportInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerSupportInfoResponse.swift; sourceTree = "<group>"; };
+		A6F490F72D7225D3002F8F5B /* ChangePasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequest.swift; sourceTree = "<group>"; };
+		A6F490F92D722648002F8F5B /* UpdateProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileResponse.swift; sourceTree = "<group>"; };
+		A6F490FB2D722C6F002F8F5B /* UpdateProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileVM.swift; sourceTree = "<group>"; };
+		A6F490FD2D723284002F8F5B /* ContactSupportVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSupportVM.swift; sourceTree = "<group>"; };
 		A6FB74462C134EC700A26806 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		A6FB74472C134EC700A26806 /* SignupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignupView.xib; sourceTree = "<group>"; };
 		A6FB744A2C13558000A26806 /* ConfirmAccountModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAccountModal.swift; sourceTree = "<group>"; };
@@ -1291,6 +1331,10 @@
 				A66F3FBA2D2C726800902E43 /* TwoFASecurityVM.swift */,
 				A6A2E84D2CBFE286004E58EB /* NotificationSettingsView.swift */,
 				A6A2E84E2CBFE286004E58EB /* NotificationSettingsView.xib */,
+				A6E3A1222D70E03B007BB665 /* NotificationViewCell.swift */,
+				A6E3A1232D70E03B007BB665 /* NotificationViewCell.xib */,
+				A6E3A1262D70F047007BB665 /* NotificationSettingsVM.swift */,
+				A6F490FB2D722C6F002F8F5B /* UpdateProfileVM.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1389,6 +1433,7 @@
 				A6617A482CAF54A200514576 /* Saved */,
 				A6617A472CAF549A00514576 /* Bookings */,
 				A6617A462CAF549400514576 /* Messages */,
+				A6E050462CEF425000F0211C /* BeachHostingHome */,
 				A65C50E52CA663450027E5F1 /* Listing */,
 				A61627622C7BA13C00F6B452 /* Home */,
 				A61627612C7BA13000F6B452 /* Dashboard */,
@@ -1424,6 +1469,10 @@
 				A633575F2BF129A6008AF034 /* LoginView.xib */,
 				A6FB74462C134EC700A26806 /* SignupView.swift */,
 				A6FB74472C134EC700A26806 /* SignupView.xib */,
+				A6E3A1162D705C25007BB665 /* ForgotPasswordView.swift */,
+				A6E3A1172D705C25007BB665 /* ForgotPasswordView.xib */,
+				A6E3A11A2D70A467007BB665 /* ResetPasswordView.swift */,
+				A6E3A11B2D70A467007BB665 /* ResetPasswordView.xib */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1560,6 +1609,7 @@
 				A60580AE2CDAA86500B17505 /* ListServiceViewModel.swift */,
 				A60580F92CDE874400B17505 /* ListBoatViewModel.swift */,
 				A675DA022D2FC1CB003E297B /* ListBeachViewModel.swift */,
+				A6F490F32D720C38002F8F5B /* KYCVerificationVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1723,6 +1773,8 @@
 				A65628372CB5769A00947BA5 /* UploadImageField.xib */,
 				A656283A2CB57C8300947BA5 /* ImageView.swift */,
 				A656283B2CB57C8300947BA5 /* ImageView.xib */,
+				A6F490EF2D71D390002F8F5B /* UploadButtonField.swift */,
+				A6F490F02D71D390002F8F5B /* UploadButtonField.xib */,
 			);
 			path = UploadField;
 			sourceTree = "<group>";
@@ -1927,7 +1979,6 @@
 				A642F9442D55DD0D0089F593 /* ChatView.xib */,
 				A6A719C12D674399005FE3EE /* ConversationsViewCell.swift */,
 				A6A719C22D674399005FE3EE /* ConversationsViewCell.xib */,
-				A6E050462CEF425000F0211C /* BeachHostingHome */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -1993,6 +2044,7 @@
 				A66F3FB02D29D95E00902E43 /* SafetyAndGuideView.xib */,
 				A66F3FB62D29E64900902E43 /* ContactSupportView.swift */,
 				A66F3FB72D29E64900902E43 /* ContactSupportView.xib */,
+				A6F490FD2D723284002F8F5B /* ContactSupportVM.swift */,
 			);
 			path = MenuTab;
 			sourceTree = "<group>";
@@ -2003,6 +2055,8 @@
 				A675D99C2D16BDFC003E297B /* DashboardUserReponse.swift */,
 				A642F9692D58D25F0089F593 /* GetSavedFavouritesResponse.swift */,
 				A642F96B2D58D2720089F593 /* GetUserBookingsResponse.swift */,
+				A6F490F52D721986002F8F5B /* CustomerSupportInfoResponse.swift */,
+				A6F490F92D722648002F8F5B /* UpdateProfileResponse.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2011,6 +2065,9 @@
 			isa = PBXGroup;
 			children = (
 				A675D99F2D16C6C9003E297B /* SendKYCRequest.swift */,
+				A6E3A1282D70F09B007BB665 /* NotificationSettingsRequest.swift */,
+				A6E3A1322D718ABF007BB665 /* UpdateProfileRequest.swift */,
+				A6F490F72D7225D3002F8F5B /* ChangePasswordRequest.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2215,7 +2272,6 @@
 				A6C20FDF2C85A10A0045C670 /* OnboardingTarget.swift */,
 				A63F312D2CB08C8A00D402F4 /* ListingTarget.swift */,
 				A6A2E8432CBE8B8D004E58EB /* ProfileTarget.swift */,
-				A60580AC2CDAA27D00B17505 /* Helper+Extensions.swift */,
 				A675D9A82D16C914003E297B /* BookingTarget.swift */,
 				A669F7A42D22F2FA00230E0A /* HostingTarget.swift */,
 				A642F9282D5534710089F593 /* ChatsTarget.swift */,
@@ -2282,6 +2338,8 @@
 				A6C20FE72C85B86E0045C670 /* VerifyCodeRequest.swift */,
 				A63CE7A92C8E81BB008D91C5 /* LoginRequest.swift */,
 				A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */,
+				A6E3A12E2D7181BA007BB665 /* ForgotPasswordRequest.swift */,
+				A6E3A1302D7181D1007BB665 /* ResetPasswordRequest.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2301,6 +2359,8 @@
 			children = (
 				A6C20FF02C85BEA40045C670 /* ConfirmAccountViewModel.swift */,
 				A63CE7B32C8EDECC008D91C5 /* LoginViewModel.swift */,
+				A6E3A12A2D70F826007BB665 /* ResetPasswordVM.swift */,
+				A6E3A12C2D717F33007BB665 /* ForgotPasswordVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2615,6 +2675,7 @@
 				A6EF00E92D286CA300893C05 /* PaymentSetupView.xib in Resources */,
 				A65C51452CAC34930027E5F1 /* AboutYouLanguageView.xib in Resources */,
 				A675D9E82D26A2A3003E297B /* CatViewCell.xib in Resources */,
+				A6E3A11D2D70A467007BB665 /* ResetPasswordView.xib in Resources */,
 				A6CA3D352CB9C8DD009307B2 /* BoatUploadImageView.xib in Resources */,
 				A675D9D42D2022EC003E297B /* SinglePhotoView.xib in Resources */,
 				A65628162CB3C62300947BA5 /* ToggleSwitch.xib in Resources */,
@@ -2694,12 +2755,15 @@
 				A68A6ED82D26C5DD000A67E1 /* WithdrawalMainView.xib in Resources */,
 				A651256B2CBC0EF400AFA0F9 /* PaypalPaymentView.xib in Resources */,
 				A656280E2CB3C47900947BA5 /* SelectableCheckbox.xib in Resources */,
+				A6E3A1192D705C25007BB665 /* ForgotPasswordView.xib in Resources */,
 				A65C50F92CA665110027E5F1 /* SelectServiceType.xib in Resources */,
 				A6CA3D692CB9CEB5009307B2 /* BouncerGenderView.xib in Resources */,
 				A65C51312CAC32A50027E5F1 /* PropertyNameView.xib in Resources */,
+				A6F490F22D71D390002F8F5B /* UploadButtonField.xib in Resources */,
 				A675D9C02D19AE15003E297B /* BeachDetailsView.xib in Resources */,
 				A6F406992C02D3A800973BD7 /* Montserrat-BlackItalic.ttf in Resources */,
 				A675D9BC2D195F40003E297B /* CategoriesCell.xib in Resources */,
+				A6E3A1252D70E03B007BB665 /* NotificationViewCell.xib in Resources */,
 				A6617A3C2CAD8BB000514576 /* MapViewModal.xib in Resources */,
 				A642F9522D578B910089F593 /* RoomPricePerDayView.xib in Resources */,
 				A6FB74512C1355B100A26806 /* CreatePasswordModal.xib in Resources */,
@@ -2811,6 +2875,7 @@
 				A633575D2BF1039B008AF034 /* BaseViewController.swift in Sources */,
 				A65E83762D32DF23009F2B89 /* HostListingVM.swift in Sources */,
 				A63CE7BC2C8F3645008D91C5 /* GeneralViewCell.swift in Sources */,
+				A6F490F12D71D390002F8F5B /* UploadButtonField.swift in Sources */,
 				A616276B2C7DB0BB00F6B452 /* Environments.swift in Sources */,
 				A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */,
 				A63F312A2CB07D5600D402F4 /* ListingServiceImplementation.swift in Sources */,
@@ -2829,6 +2894,7 @@
 				A63D48D22D4F9614002C48F7 /* RecommendationsViewCell.swift in Sources */,
 				A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */,
 				A642F94D2D56DB800089F593 /* ChatVM.swift in Sources */,
+				A6E3A11C2D70A467007BB665 /* ResetPasswordView.swift in Sources */,
 				A675D9A02D16C6C9003E297B /* SendKYCRequest.swift in Sources */,
 				A63357722BF157B9008AF034 /* UILabel.swift in Sources */,
 				A65E835D2D2F1CEF009F2B89 /* ListingDashboardVM.swift in Sources */,
@@ -2878,6 +2944,7 @@
 				A6C20FD12C859BA30045C670 /* OnboardingServiceMock.swift in Sources */,
 				A675D9A32D16C8DB003E297B /* BookingService.swift in Sources */,
 				A63357762BF160E9008AF034 /* PasswordField.swift in Sources */,
+				A6E3A1182D705C25007BB665 /* ForgotPasswordView.swift in Sources */,
 				A65125722CBC240200AFA0F9 /* TwoFASecurityView.swift in Sources */,
 				A6C20FE02C85A10A0045C670 /* OnboardingTarget.swift in Sources */,
 				A6CA3D132CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift in Sources */,
@@ -2911,6 +2978,7 @@
 				A68A6ECE2D25808E000A67E1 /* YearPicker.swift in Sources */,
 				A6CA3D682CB9CEB5009307B2 /* BouncerGenderView.swift in Sources */,
 				A60580BB2CDBADE000B17505 /* BoatAvailableDatesView.swift in Sources */,
+				A6F490F62D721986002F8F5B /* CustomerSupportInfoResponse.swift in Sources */,
 				A66F3FAC2D29742100902E43 /* GestureRecognizerHelper.swift in Sources */,
 				A65C512C2CAC319A0027E5F1 /* HouseSizeListView.swift in Sources */,
 				A66F3FB42D29DA4F00902E43 /* ColorTextLabel.swift in Sources */,
@@ -2920,7 +2988,6 @@
 				A6C20FEA2C85BD610045C670 /* GeneralResponse.swift in Sources */,
 				A675D9C32D1DABFF003E297B /* BoatDetailsView.swift in Sources */,
 				A65C50F02CA664720027E5F1 /* SelectPropertyTypePrimaryHost.swift in Sources */,
-				A60580AD2CDAA27D00B17505 /* Helper+Extensions.swift in Sources */,
 				A6C20FF82C8715130045C670 /* SearchField.swift in Sources */,
 				A66F3FAE2D29770400902E43 /* HostingServiceMenuCoordinator.swift in Sources */,
 				A642F92E2D55355C0089F593 /* ChatsService.swift in Sources */,
@@ -2928,6 +2995,7 @@
 				A6EF00DE2D2834E600893C05 /* KeyboardType.swift in Sources */,
 				A65C51252CAC300E0027E5F1 /* TextViewField.swift in Sources */,
 				A66F3FAA2D29635500902E43 /* MenuView.swift in Sources */,
+				A6F490FA2D722648002F8F5B /* UpdateProfileResponse.swift in Sources */,
 				A63F31312CB09ABE00D402F4 /* BeachDataViewModel.swift in Sources */,
 				A642F96C2D58D2720089F593 /* GetUserBookingsResponse.swift in Sources */,
 				A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */,
@@ -2937,12 +3005,14 @@
 				A6E050552CF0CAF300F0211C /* DashboardViewCell.swift in Sources */,
 				A6C20FDA2C859D8D0045C670 /* RefreshTokenResponse.swift in Sources */,
 				A6C20FE62C85B7D60045C670 /* ConfirmAccountRequest.swift in Sources */,
+				A6E3A12B2D70F826007BB665 /* ResetPasswordVM.swift in Sources */,
 				A6CA3D742CB9CFB8009307B2 /* BouncerUploadImagesView.swift in Sources */,
 				A6CA3D782CBA4F88009307B2 /* CalendarTestView.swift in Sources */,
 				A61627692C7DB05900F6B452 /* Urls.swift in Sources */,
 				A60580F72CDD43E900B17505 /* BoatNameView.swift in Sources */,
 				A63CE7B22C8ED236008D91C5 /* DateRangePicker.swift in Sources */,
 				A6C210042C8B49650045C670 /* DateRangePage.swift in Sources */,
+				A6F490F42D720C38002F8F5B /* KYCVerificationVM.swift in Sources */,
 				A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */,
 				A675D9DF2D202B98003E297B /* BookingRoomCell.swift in Sources */,
 				A68A6EC02D256823000A67E1 /* EarningDistributionTableCell.swift in Sources */,
@@ -2966,6 +3036,7 @@
 				A633576E2BF156F9008AF034 /* Labels.swift in Sources */,
 				A67C426C2CB70250004CF98F /* DiscountField.swift in Sources */,
 				A675D9F62D2BE186003E297B /* CollectionView.swift in Sources */,
+				A6F490FC2D722C6F002F8F5B /* UpdateProfileVM.swift in Sources */,
 				A6617A4B2CAF555700514576 /* MessagesView.swift in Sources */,
 				A6F406862C02D1A300973BD7 /* GeneralFormatter.swift in Sources */,
 				A61627782C7DBD3700F6B452 /* UserDefault.swift in Sources */,
@@ -2975,6 +3046,7 @@
 				A6C20FD72C859C780045C670 /* SignUpRequest.swift in Sources */,
 				A651256A2CBC0EF400AFA0F9 /* PaypalPaymentView.swift in Sources */,
 				A675D9C72D1EAC06003E297B /* HorizonCalendarModal.swift in Sources */,
+				A6E3A12D2D717F33007BB665 /* ForgotPasswordVM.swift in Sources */,
 				A65E83612D308CA4009F2B89 /* HostingHouseAndBoatHomeCoordinator.swift in Sources */,
 				A65C50FF2CA9506C0027E5F1 /* Toast.swift in Sources */,
 				A6A8578D2D4BE5A2008BC9A0 /* SelectServiceModal.swift in Sources */,
@@ -3004,10 +3076,13 @@
 				A656280A2CB2B4EC00947BA5 /* NetworkManager.swift in Sources */,
 				A651256E2CBC1FEB00AFA0F9 /* LoginAndSecurityView.swift in Sources */,
 				A65C51542CAD6CC40027E5F1 /* HouseTypeViewCell.swift in Sources */,
+				A6E3A1242D70E03B007BB665 /* NotificationViewCell.swift in Sources */,
 				A6C20FC42C84FCFB0045C670 /* UserSession.swift in Sources */,
 				A6617A432CAD95EA00514576 /* ListRoomsView.swift in Sources */,
 				A6EF00DC2D28318B00893C05 /* CustomTabBar.swift in Sources */,
+				A6E3A1332D718ABF007BB665 /* UpdateProfileRequest.swift in Sources */,
 				A642F9262D54ED050089F593 /* MakeBoatPaymentView.swift in Sources */,
+				A6E3A12F2D7181BA007BB665 /* ForgotPasswordRequest.swift in Sources */,
 				A642F9512D578B910089F593 /* RoomPricePerDayView.swift in Sources */,
 				A68A6EDF2D26C755000A67E1 /* WithdrawHistoryViewCell.swift in Sources */,
 				A6EF00EA2D286CA300893C05 /* PaymentSetupView.swift in Sources */,
@@ -3085,6 +3160,7 @@
 				A6CA3D072CB9B0C7009307B2 /* BoatHouseTypeView.swift in Sources */,
 				A642F9722D59165E0089F593 /* SavedFavouritesVM.swift in Sources */,
 				A675D9B72D18C5FC003E297B /* TopRatedCollectionCell.swift in Sources */,
+				A6E3A1312D7181D1007BB665 /* ResetPasswordRequest.swift in Sources */,
 				A68A6EC62D256BD9000A67E1 /* TopEarningResponse.swift in Sources */,
 				A642F96A2D58D25F0089F593 /* GetSavedFavouritesResponse.swift in Sources */,
 				A6A2E8742CD4E955004E58EB /* ChefDishesResponse.swift in Sources */,
@@ -3101,12 +3177,14 @@
 				A6EF00EF2D28731400893C05 /* PaymentMethodView.swift in Sources */,
 				A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */,
 				A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */,
+				A6F490FE2D723284002F8F5B /* ContactSupportVM.swift in Sources */,
 				A642F9652D588D780089F593 /* SavedListView.swift in Sources */,
 				A6C20FDE2C859E520045C670 /* ErrorResponse.swift in Sources */,
 				A675D9EB2D26AB46003E297B /* ConfirmBookingView.swift in Sources */,
 				A6A857912D4BF1D8008BC9A0 /* FindChefView.swift in Sources */,
 				A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */,
 				A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */,
+				A6F490F82D7225D4002F8F5B /* ChangePasswordRequest.swift in Sources */,
 				A6CA3D382CB9C990009307B2 /* ListingSuccessView.swift in Sources */,
 				A65125662CBC0AF100AFA0F9 /* CreditCardPaymentView.swift in Sources */,
 				A65192992D26F15F0082C3C9 /* MakeWithdrawView.swift in Sources */,
@@ -3125,6 +3203,7 @@
 				A6757D842C987A2A000D6302 /* SavedCoordinator.swift in Sources */,
 				A650AAD52CB7ED9200A70CF4 /* SelectHouseTypeView.swift in Sources */,
 				A6CA3D342CB9C8DD009307B2 /* BoatUploadImageView.swift in Sources */,
+				A6E3A1272D70F047007BB665 /* NotificationSettingsVM.swift in Sources */,
 				A6E050492CEF428800F0211C /* BeachHostingHomeView.swift in Sources */,
 				A645D0402D3637C3005BFCD5 /* BookingConfigurationResponse.swift in Sources */,
 				A633577A2BF162A7008AF034 /* String.swift in Sources */,
@@ -3142,6 +3221,7 @@
 				A63F312C2CB07D6400D402F4 /* ListingServiceMock.swift in Sources */,
 				A642F9592D57939C0089F593 /* EntireApartmentPricePerDayView.swift in Sources */,
 				A65C51082CAA86660027E5F1 /* Dropdown.swift in Sources */,
+				A6E3A1292D70F09B007BB665 /* NotificationSettingsRequest.swift in Sources */,
 				A675D9EF2D272FB4003E297B /* MakePaymentView.swift in Sources */,
 				A675D9AF2D171DD6003E297B /* CreateBeachHouseBookingRequest.swift in Sources */,
 				A6CA3D442CB9CCD1009307B2 /* ChefUploadProfileImageView.swift in Sources */,
@@ -3299,8 +3379,8 @@
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3310,9 +3390,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbam.BeachesAndBoats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3331,8 +3414,8 @@
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3342,9 +3425,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbam.BeachesAndBoats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

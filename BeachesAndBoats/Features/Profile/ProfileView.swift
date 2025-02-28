@@ -67,7 +67,7 @@ class ProfileView: UIViewController {
     }
     
     @objc func supportAction(){
-        Toast.show(message: "Coming Soon")
+        coordinator?.gotoContactSupportView()
     }
     
     @objc func guideBookAction(){

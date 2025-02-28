@@ -76,16 +76,23 @@ class BeachDetailsView: BaseViewControllerPlain {
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
         
         nightBookingBtn.isChecked = true
+        totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
+        
+        
         dayBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
-            self.isDayBooking = isSelected
+            self.isDayBooking = true
             self.nightBookingBtn.isChecked = false
+            
+            totalAmountLabel.text = "₦ \(beachDetails?.pricePerDay ?? 0)"
         }
         
         nightBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
-            self.isDayBooking = isSelected
+            self.isDayBooking = false
             self.dayBookingBtn.isChecked = false
+            
+            totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
         }
         
 //        print("Available From: \(backendFrom_when) - Available To: \(backendTo_when)")
@@ -136,10 +143,10 @@ class BeachDetailsView: BaseViewControllerPlain {
         aboutHostLabel.text = beachDetails?.aboutOwner
         hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
         ratingLabel.text = "\(beachDetails?.rating ?? 0)"
-        totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
         let totalGuests = (beachDetails?.noOfAdults ?? 0) + (beachDetails?.noOfChildren ?? 0)
         roomAndGuestsLabel.text = "\(totalGuests) guests, \(beachDetails?.rooms?.count ?? 0) rooms"
-        
+        print("no of adults: \(beachDetails?.noOfAdults)")
+        print("no of children: \(beachDetails?.noOfChildren)")
         
         amenities = beachDetails?.amenities ?? []
         comments = beachDetails?.reviews ?? []
