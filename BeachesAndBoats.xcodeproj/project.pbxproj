@@ -280,6 +280,13 @@
 		A669F7BF2D2409D700230E0A /* MessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A669F7BE2D2409D700230E0A /* MessageViewCell.xib */; };
 		A669F7C02D2409D700230E0A /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7BD2D2409D700230E0A /* MessageViewCell.swift */; };
 		A669F7C22D241AE600230E0A /* HostingServiceHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7C12D241AE600230E0A /* HostingServiceHomeCoordinator.swift */; };
+		A66F13662D723FC700D4D533 /* CancelBookingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66F13652D723FC700D4D533 /* CancelBookingView.xib */; };
+		A66F13672D723FC700D4D533 /* CancelBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66F13642D723FC700D4D533 /* CancelBookingView.swift */; };
+		A66F136A2D72450400D4D533 /* CustomBottomSheetPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66F13692D72450400D4D533 /* CustomBottomSheetPresentationController.swift */; };
+		A66F136D2D725FF300D4D533 /* HouseAndGroundRulesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66F136C2D725FF300D4D533 /* HouseAndGroundRulesView.xib */; };
+		A66F136E2D725FF300D4D533 /* HouseAndGroundRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66F136B2D725FF300D4D533 /* HouseAndGroundRulesView.swift */; };
+		A66F13712D72F9C700D4D533 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66F13702D72F9C700D4D533 /* FilterView.xib */; };
+		A66F13722D72F9C700D4D533 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66F136F2D72F9C700D4D533 /* FilterView.swift */; };
 		A66F3FA92D29635500902E43 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66F3FA82D29635400902E43 /* MenuView.xib */; };
 		A66F3FAA2D29635500902E43 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66F3FA72D29635400902E43 /* MenuView.swift */; };
 		A66F3FAC2D29742100902E43 /* GestureRecognizerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66F3FAB2D29742100902E43 /* GestureRecognizerHelper.swift */; };
@@ -828,6 +835,13 @@
 		A669F7BD2D2409D700230E0A /* MessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.swift; sourceTree = "<group>"; };
 		A669F7BE2D2409D700230E0A /* MessageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewCell.xib; sourceTree = "<group>"; };
 		A669F7C12D241AE600230E0A /* HostingServiceHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingServiceHomeCoordinator.swift; sourceTree = "<group>"; };
+		A66F13642D723FC700D4D533 /* CancelBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBookingView.swift; sourceTree = "<group>"; };
+		A66F13652D723FC700D4D533 /* CancelBookingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancelBookingView.xib; sourceTree = "<group>"; };
+		A66F13692D72450400D4D533 /* CustomBottomSheetPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomSheetPresentationController.swift; sourceTree = "<group>"; };
+		A66F136B2D725FF300D4D533 /* HouseAndGroundRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseAndGroundRulesView.swift; sourceTree = "<group>"; };
+		A66F136C2D725FF300D4D533 /* HouseAndGroundRulesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseAndGroundRulesView.xib; sourceTree = "<group>"; };
+		A66F136F2D72F9C700D4D533 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		A66F13702D72F9C700D4D533 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		A66F3FA72D29635400902E43 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		A66F3FA82D29635400902E43 /* MenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
 		A66F3FAB2D29742100902E43 /* GestureRecognizerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerHelper.swift; sourceTree = "<group>"; };
@@ -1431,6 +1445,7 @@
 		A63357622BF15208008AF034 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A66F13682D7244E600D4D533 /* PresentationModal */,
 				A6EF00DA2D28316000893C05 /* TabBar */,
 				A68A6ECC2D258082000A67E1 /* YearPicker */,
 				A6C1C4142CBA6DBD001CD27D /* HorizonDate */,
@@ -1944,6 +1959,12 @@
 				A65155AE2D5E94E60018C6DB /* BeachBookingDetailsView.xib */,
 				A65155B12D5E95000018C6DB /* BoatBookingDetailsView.swift */,
 				A65155B22D5E95000018C6DB /* BoatBookingDetailsView.xib */,
+				A66F13642D723FC700D4D533 /* CancelBookingView.swift */,
+				A66F13652D723FC700D4D533 /* CancelBookingView.xib */,
+				A66F136B2D725FF300D4D533 /* HouseAndGroundRulesView.swift */,
+				A66F136C2D725FF300D4D533 /* HouseAndGroundRulesView.xib */,
+				A66F136F2D72F9C700D4D533 /* FilterView.swift */,
+				A66F13702D72F9C700D4D533 /* FilterView.xib */,
 			);
 			path = Bookings;
 			sourceTree = "<group>";
@@ -1982,6 +2003,14 @@
 				A669F7AB2D22F43300230E0A /* HostingServiceImplementation.swift */,
 			);
 			path = Hosting;
+			sourceTree = "<group>";
+		};
+		A66F13682D7244E600D4D533 /* PresentationModal */ = {
+			isa = PBXGroup;
+			children = (
+				A66F13692D72450400D4D533 /* CustomBottomSheetPresentationController.swift */,
+			);
+			path = PresentationModal;
 			sourceTree = "<group>";
 		};
 		A66F3FA62D29631800902E43 /* MenuTab */ = {
@@ -2594,6 +2623,7 @@
 				A6A2E86A2CD4C800004E58EB /* BouncerAvailableDatesView.xib in Resources */,
 				A6CA3D492CB9CD10009307B2 /* ChefDIshesListView.xib in Resources */,
 				A61B3C242CB6E2C500C89C14 /* RoomCard.xib in Resources */,
+				A66F13662D723FC700D4D533 /* CancelBookingView.xib in Resources */,
 				A6A2E8502CBFE286004E58EB /* NotificationSettingsView.xib in Resources */,
 				A6CA3D712CB9CF7B009307B2 /* BouncerPriceVIew.xib in Resources */,
 				A6CA3D652CB9CE24009307B2 /* BouncerInformationView.xib in Resources */,
@@ -2651,6 +2681,7 @@
 				A63D48D32D4F9614002C48F7 /* RecommendationsViewCell.xib in Resources */,
 				A6A719C42D674399005FE3EE /* ConversationsViewCell.xib in Resources */,
 				A6CA3D412CB9CCB3009307B2 /* ChefInformationView.xib in Resources */,
+				A66F13712D72F9C700D4D533 /* FilterView.xib in Resources */,
 				A614992A2C5E97DB00E0CDFC /* FullModal.xib in Resources */,
 				A6FB744D2C13558000A26806 /* ConfirmAccountModal.xib in Resources */,
 				A65C51492CAC34B10027E5F1 /* AboutYouDescriptionView.xib in Resources */,
@@ -2743,6 +2774,7 @@
 				A669F7BF2D2409D700230E0A /* MessageViewCell.xib in Resources */,
 				A6E0504A2CEF428800F0211C /* BeachHostingHomeView.xib in Resources */,
 				A6A8579A2D4BF1FD008BC9A0 /* FindDJView.xib in Resources */,
+				A66F136D2D725FF300D4D533 /* HouseAndGroundRulesView.xib in Resources */,
 				A642F9232D54E1D00089F593 /* ConfirmBoatBookingView.xib in Resources */,
 				A669F7B32D23DAB800230E0A /* HostingCollectionViewCell.xib in Resources */,
 				A66F3FA92D29635500902E43 /* MenuView.xib in Resources */,
@@ -2990,6 +3022,7 @@
 				A63D48C92D4E5406002C48F7 /* BoatBookingResponse.swift in Sources */,
 				A675D9AC2D16E157003E297B /* HomeViewVM.swift in Sources */,
 				A642F9602D58840F0089F593 /* AddFavouriteRequest.swift in Sources */,
+				A66F136E2D725FF300D4D533 /* HouseAndGroundRulesView.swift in Sources */,
 				A65125862CBC3C9400AFA0F9 /* PinField.swift in Sources */,
 				A65C51142CAB215D0027E5F1 /* DynamicTableViewCell.swift in Sources */,
 				A65C50F42CA6648D0027E5F1 /* SelectPropertyTypeSecondaryHost.swift in Sources */,
@@ -3051,6 +3084,7 @@
 				A63357782BF1611F008AF034 /* DatePicker.swift in Sources */,
 				A675DA002D2E84E7003E297B /* TestView.swift in Sources */,
 				A6CA3D232CB9BA7D009307B2 /* BoatPeopleRules.swift in Sources */,
+				A66F136A2D72450400D4D533 /* CustomBottomSheetPresentationController.swift in Sources */,
 				A68A6EBD2D24545A000A67E1 /* HostingServiceEarningCoordinator.swift in Sources */,
 				A60580FA2CDE874400B17505 /* ListBoatViewModel.swift in Sources */,
 				A675D9B12D171ED3003E297B /* CreateBoatBookingRequest.swift in Sources */,
@@ -3108,6 +3142,7 @@
 				A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */,
 				A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */,
 				A6CA3D382CB9C990009307B2 /* ListingSuccessView.swift in Sources */,
+				A66F13722D72F9C700D4D533 /* FilterView.swift in Sources */,
 				A65125662CBC0AF100AFA0F9 /* CreditCardPaymentView.swift in Sources */,
 				A65192992D26F15F0082C3C9 /* MakeWithdrawView.swift in Sources */,
 				A65C51482CAC34B10027E5F1 /* AboutYouDescriptionView.swift in Sources */,
@@ -3115,6 +3150,7 @@
 				A6C20FC22C84FA950045C670 /* BaseTarget.swift in Sources */,
 				A61499352C5E9A2A00E0CDFC /* SearchModal.swift in Sources */,
 				A65C51172CAB226B0027E5F1 /* PropertyListField.swift in Sources */,
+				A66F13672D723FC700D4D533 /* CancelBookingView.swift in Sources */,
 				A6F406842C02D19500973BD7 /* Validator.swift in Sources */,
 				A63D48BA2D4D4EF2002C48F7 /* RecommendationsView.swift in Sources */,
 				A61B3C202CB682FB00C89C14 /* NumberField.swift in Sources */,

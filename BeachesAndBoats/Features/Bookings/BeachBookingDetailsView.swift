@@ -38,10 +38,10 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var cleaningFeeLabel: UILabel!
     @IBOutlet weak var serviceFeeLabel: UILabel!
     @IBOutlet weak var CostTotalAmountLabel: UILabel!
-    
-    
     @IBOutlet weak var dayBookingBtn: CheckboxButton!
     @IBOutlet weak var nightBookingBtn: CheckboxButton!
+    @IBOutlet weak var upcomingStack: UIStackView!
+    @IBOutlet weak var pastBookingView: UIView!
     
     var isDayBooking: Bool = false
     
@@ -55,6 +55,11 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     
     var backendFrom_when: Date?
     var backendTo_when: Date?
+    
+    var isupcomingBooking: Bool = false
+    
+    private var currentModalHeight: CGFloat = UIScreen.main.bounds.height * 0.5
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +67,19 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         setup()
         configureAllCollectionViews()
         setupCustomNavigationButtons()
+        checkinDateLabel.isUserInteractionEnabled = false
+        checkoutDateLabel.isUserInteractionEnabled = false
+        itemToShow()
+    }
+    
+    func itemToShow() {
+        if isupcomingBooking {
+            pastBookingView.isHidden = true
+            upcomingStack.isHidden = false
+        } else {
+            upcomingStack.isHidden = true
+            pastBookingView.isHidden = false
+        }
     }
     
     func setup(){
@@ -142,6 +160,19 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
         let totalGuests = (beachDetails?.noOfAdults ?? 0) + (beachDetails?.noOfChildren ?? 0)
         roomAndGuestsLabel.text = "\(totalGuests) guests, \(beachDetails?.rooms?.count ?? 0) rooms"
+        checkinDateLabel.text = beachDetails?.checkInFrom ?? ""
+        checkoutDateLabel.text = beachDetails?.checkOutFrom ?? ""
+        
+        
+        if let latitude = Double(beachDetails?.locations?.latitude ?? ""),
+           let longitude = Double(beachDetails?.locations?.longitude ?? "") {
+           
+            let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let span = MKCoordinateSpan(latitudeDelta: latitude, longitudeDelta: longitude)
+            let region = MKCoordinateRegion(center: center, span: span)
+            
+            locationView.region = region
+        }
         
         
         amenities = beachDetails?.amenities ?? []
@@ -176,9 +207,33 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         collectionView.backgroundColor = .clear
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
+    
+    @IBAction func writeReviewTapped(_ sender: Any) {
+        
+        
+    }
+    
+    
+    @IBAction func cancelBookingTapped(_ sender: Any) {
+        let cancelBookingView = CancelBookingView()
+        cancelBookingView.modalPresentationStyle = .custom
+        cancelBookingView.transitioningDelegate = self
+        currentModalHeight = UIScreen.main.bounds.height * 0.75
+        cancelBookingView.transitioningDelegate = self
+
+        present(cancelBookingView, animated: true, completion: nil)
+    }
+    
 
     @IBAction func continueBookingTapped(_ sender: Any) {
         print("Continue Tapped")
+        
+        let houseRules = HouseAndGroundRulesView()
+        houseRules.modalPresentationStyle = .custom
+        houseRules.transitioningDelegate = self
+        currentModalHeight = UIScreen.main.bounds.height * 0.35
+
+        present(houseRules, animated: true, completion: nil)
 //        let bookingType = isDayBooking ? "DAY" : "NIGHT"
 //
 //        if let fromWhen = from_when, let toWhen = to_when{
@@ -255,6 +310,17 @@ extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDat
     }
     
     
+}
+
+extension BeachBookingDetailsView: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController,
+                              presenting: UIViewController?,
+                              source: UIViewController) -> UIPresentationController? {
+        return CustomBottomSheetPresentationController(
+            presentedViewController: presented,
+            presenting: presenting,
+            height: currentModalHeight)
+    }
 }
 
 
