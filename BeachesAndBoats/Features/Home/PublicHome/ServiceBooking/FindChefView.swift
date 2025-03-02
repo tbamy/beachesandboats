@@ -13,6 +13,7 @@ class FindChefView: BaseViewControllerPlain {
     
     @IBOutlet weak var dateField: HorizonDateField!
     @IBOutlet weak var dishTypesField: DropDown!
+    @IBOutlet weak var numberOfPeopleStack: UIStackView!
     @IBOutlet weak var numberOfPeopleCollectionView: UICollectionView!
     
     var numberOfPeople: [String]?
@@ -55,7 +56,7 @@ class FindChefView: BaseViewControllerPlain {
             self.day = date
             self.dateField.text = "\(date.toFormattedDate())"
         }
-        numberOfPeopleCollectionView.isHidden = true
+        numberOfPeopleStack.isHidden = true
         numberOfPeopleCollectionView.delegate = self
         numberOfPeopleCollectionView.dataSource = self
         numberOfPeopleCollectionView.backgroundColor = .clear
@@ -83,7 +84,12 @@ class FindChefView: BaseViewControllerPlain {
             case .findChefSuccessful(let response):
                 self.findChefResponse = response
                 if let chefResponse = findChefResponse{
-                    self.coordinator?.gotoRecommentdations(data: chefResponse, provider: "Chef")
+                    if let chefData = chefResponse.data, !chefData.isEmpty{
+                        self.coordinator?.gotoRecommentdations(data: chefResponse, provider: "Chef")
+                    }else{
+                        MiddleModal.show(title: "Oops!", subtitle: "No Data returned for your search, try another", type: .error)
+                    }
+                    
                 }
             case .findChefFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

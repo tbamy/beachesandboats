@@ -78,42 +78,10 @@
             filePath = "BeachesAndBoats/Features/Home/PublicHome/BoatBooking/BoatDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "continueBookingTapped(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2C75E340-B257-4D17-A906-1041F0E6971E - 91b50711d987207"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.BoatDetailsView.validateRequest() -&gt; Swift.Bool"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BoatBooking/BoatDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "2C75E340-B257-4D17-A906-1041F0E6971E - 2a090619685dcd1c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.BoatDetailsView.continueBookingTapped(Any) -&gt; ()"
-                  moduleName = "BeachesAndBoats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BoatBooking/BoatDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "177"
-                  endingLineNumber = "177"
-                  offsetFromSymbolStart = "3492">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -162,38 +130,6 @@
             endingLineNumber = "247"
             landmarkName = "bind()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "06DAC523-8268-4745-B9A7-56A0FAE86AD8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/Bookings/BookingsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "BookingsView"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EF28C9FA-3BEB-4F61-B809-D31B7896EE98"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/Bookings/BookingsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "BookingsView"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

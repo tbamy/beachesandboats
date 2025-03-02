@@ -23,9 +23,14 @@ class BookingsView: BaseViewControllerPlain {
     let input = PublishSubject<BookingsVM.Input>()
     
     var bookingItems: [BookingItem] = []
+    var filteredBookingItems: [BookingItem] = []
+    var sortedBookingItems: [BookingItem] = []
+    
     var responseData: UserBookingsData?
     
     var isDisplayingUpcoming: Bool = true
+    private var currentModalHeight: CGFloat = UIScreen.main.bounds.height * 0.5
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,6 +186,25 @@ class BookingsView: BaseViewControllerPlain {
         self.view.layoutIfNeeded()
     }
     
+    @objc func sortIconTapped() {
+        let sortModal = HostListingSortView()
+        sortModal.modalPresentationStyle = .custom
+        sortModal.transitioningDelegate = self
+        sortModal.isFromBooking = true
+        sortModal.sortDelegate = self
+        currentModalHeight = UIScreen.main.bounds.height * 0.90
+        present(sortModal, animated: true)
+    }
+    
+    @objc func filterIconTapped() {
+        let filterModal = FilterView()
+        filterModal.modalPresentationStyle = .custom
+        filterModal.transitioningDelegate = self
+        filterModal.filterDelegate = self
+        currentModalHeight = UIScreen.main.bounds.height * 0.50
+        present(filterModal, animated: true, completion: nil)
+    }
+   
     
     func bind(){
         vm.transform(input: input)
@@ -203,7 +227,8 @@ class BookingsView: BaseViewControllerPlain {
 
 extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bookingItems.count
+//        return bookingItems.count
+        return filteredBookingItems.isEmpty ? bookingItems.count : filteredBookingItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -223,14 +248,15 @@ extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = bookingItems[indexPath.item]
+//        let item = bookingItems[indexPath.item]
+        let item = filteredBookingItems.isEmpty ? bookingItems[indexPath.item] : filteredBookingItems[indexPath.item]
         switch item {
         case .boat(let boatBooking):
             // Navigate to boat booking details
-            coordinator?.gotoBoatBookingDetails(booking: boatBooking)
+            coordinator?.gotoBoatBookingDetails(booking: boatBooking, upcomingBookings: isDisplayingUpcoming)
         case .beachHouse(let beachBooking):
             // Navigate to beach house booking details
-            coordinator?.gotoBeachHouseBookingDetails(booking: beachBooking)
+            coordinator?.gotoBeachHouseBookingDetails(booking: beachBooking, upcomingBookings: isDisplayingUpcoming)
         }
     }
     
@@ -247,18 +273,57 @@ extension BookingsView{
     func setupCustomNavigationButton() {
         let customButtonRight = UIButton(type: .custom)
         customButtonRight.setImage(Assets.sortIcon.image, for: .normal)
-//        customButtonRight.addTarget(self, action: #selector(addNewBtnTapped), for: .touchUpInside)
+        customButtonRight.addTarget(self, action: #selector(sortIconTapped), for: .touchUpInside)
         let customRightBarButtonItem = UIBarButtonItem(customView: customButtonRight)
         navigationItem.rightBarButtonItem = customRightBarButtonItem
         
         let customButtonLeft = UIButton(type: .custom)
         customButtonLeft.setImage(Assets.filterIcon2.image, for: .normal)
-//        customButtonLeft.addTarget(self, action: #selector(addNewBtnTapped), for: .touchUpInside)
+        customButtonLeft.addTarget(self, action: #selector(filterIconTapped), for: .touchUpInside)
         let customLeftBarButtonItem = UIBarButtonItem(customView: customButtonLeft)
         navigationItem.leftBarButtonItem = customLeftBarButtonItem
     }
 }
 
+extension BookingsView: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController,
+                              presenting: UIViewController?,
+                              source: UIViewController) -> UIPresentationController? {
+        return CustomBottomSheetPresentationController(
+            presentedViewController: presented,
+            presenting: presenting,
+            height: currentModalHeight)
+    }
+}
+
+extension BookingsView: FilterDelegate, SortDelegate {
+    func getSelectedOption(selectedOption: String) {
+        //This takes care of the sorting
+    }
+    
+    func getSelectedItem(selectedItem: String) {
+        switch selectedItem {
+        case "BeachHouse":
+            filteredBookingItems = bookingItems.filter { bookingType in
+                if case .beachHouse = bookingType {
+                    return true
+                }
+                return false
+            }
+        case "Boat":
+            filteredBookingItems = bookingItems.filter {bookingType in
+                if case .boat = bookingType {
+                    return true
+                }
+                return false
+            }
+        default:
+            break
+        }
+    }
+    
+    
+}
 
 enum BookingItem{
     case boat(BoatBookingsPast)

@@ -73,7 +73,12 @@ class FindDJView: BaseViewControllerPlain {
             case .findDjSuccessful(let response):
                 self.findDjResponse = response
                 if let djResponse = findDjResponse{
-                    self.coordinator?.gotoRecommentdations(data: djResponse, provider: "Dj")
+                    if let djData = djResponse.data, !djData.isEmpty{
+                        self.coordinator?.gotoRecommentdations(data: djResponse, provider: "Dj")
+                    }else{
+                        MiddleModal.show(title: "Oops!", subtitle: "No Data returned for your search, try another", type: .error)
+                    }
+                    
                 }
             case .findDjFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

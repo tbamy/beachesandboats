@@ -72,6 +72,12 @@ extension SelectHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HouseTypeViewCell", for: indexPath) as! HouseTypeViewCell
         
         cell.updateContent(data: houseTypes?[indexPath.item])
+        cell.onSelect = { [weak self] in
+            let cat = self?.houseTypes?[indexPath.item].id ?? ""
+            if let beachDataR = self?.beachDataR{
+                self?.coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat, type: self?.hostType ?? .primaryHost)
+            }
+        }
         
         return cell
     }

@@ -79,8 +79,8 @@ class CategoriesCell: BaseXib, Sizeable {
                     }
                 }
             )
-//        } else {
-//            image.image = UIImage(named: "boatCat")
+        } else {
+            image.image = UIImage(named: "luxuryIcon")
         }
         
             setState()

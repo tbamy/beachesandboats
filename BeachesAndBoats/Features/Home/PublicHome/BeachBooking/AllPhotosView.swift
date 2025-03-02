@@ -19,7 +19,7 @@ class AllPhotosView: BaseViewControllerPlain {
         super.viewDidLoad()
 
         title = "Photos"
-        
+        setupCustomNavigationButtons()
         setup()
         print("Total Images: \(images.count)")
     }
@@ -65,4 +65,22 @@ extension AllPhotosView: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     
+}
+
+extension AllPhotosView {
+    func setupCustomNavigationButtons() {
+        
+        let addButton = UIButton(type: .custom)
+        addButton.setImage(Assets.favorite.image, for: .normal)
+//        addButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
+        let addBarButtonItem = UIBarButtonItem(customView: addButton)
+
+        let settingsButton = UIButton(type: .custom)
+        settingsButton.setImage(Assets.share .image, for: .normal)
+//        settingsButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
+        let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
+
+        navigationItem.rightBarButtonItems = [addBarButtonItem, settingsBarButtonItem]
+    }
+
 }

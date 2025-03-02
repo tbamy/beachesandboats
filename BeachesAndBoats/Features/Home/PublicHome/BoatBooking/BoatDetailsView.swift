@@ -69,10 +69,30 @@ class BoatDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
-        if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-            print("Image Url is: \(url)")
-            topImage.kf.setImage(with: url)
+//        if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
+//            print("Image Url is: \(url)")
+//            topImage.kf.setImage(with: url)
+//        }
+        
+        if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
+            topImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "dummy"),
+                options: nil,
+                completionHandler: { [self] result in
+                    switch result {
+                    case .success(let value):
+                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Failed to load image: \(error.localizedDescription)")
+                        topImage.image = UIImage(named: "dummy")
+                    }
+                }
+            )
+        } else {
+            topImage.image = UIImage(named: "dummy")
         }
+        
         titleLabel.text = boatDetails?.name
         locationLabel.text = "\(boatDetails?.locations?.city ?? ""), \(boatDetails?.locations?.state ?? "") \(boatDetails?.locations?.country ?? "")"
         locationView.layer.cornerRadius = 8
@@ -282,25 +302,16 @@ extension BoatDetailsView {
     func setupCustomNavigationButtons() {
         
         let addButton = UIButton(type: .custom)
-        addButton.setImage(Assets.backButton.image, for: .normal)
-        addButton.addTarget(self, action: #selector(addNewBtnTapped), for: .touchUpInside)
+        addButton.setImage(Assets.favorite.image, for: .normal)
+        addButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
         let addBarButtonItem = UIBarButtonItem(customView: addButton)
 
         let settingsButton = UIButton(type: .custom)
-        settingsButton.setImage(Assets.backButton .image, for: .normal)
-        settingsButton.addTarget(self, action: #selector(settingsBtnTapped), for: .touchUpInside)
+        settingsButton.setImage(Assets.share .image, for: .normal)
+        settingsButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
         let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
 
         navigationItem.rightBarButtonItems = [addBarButtonItem, settingsBarButtonItem]
-    }
-
-    // Actions for the buttons
-    @objc func addNewBtnTapped() {
-        print("Add button tapped")
-    }
-
-    @objc func settingsBtnTapped() {
-        print("Settings button tapped")
     }
 
 

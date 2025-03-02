@@ -105,8 +105,14 @@ class FindBouncerView: BaseViewControllerPlain {
             case .findBouncerSuccessful(let response):
                 self.findBouncerResponse = response
                 if let bouncerResponse = findBouncerResponse{
-                    self.coordinator?.gotoRecommentdations(data: bouncerResponse, provider: "Bouncer")
+                    if let bouncerData = bouncerResponse.data, !bouncerData.isEmpty{
+                        self.coordinator?.gotoRecommentdations(data: bouncerResponse, provider: "Bouncer")
+                    }else{
+                        MiddleModal.show(title: "Oops!", subtitle: "No Data returned for your search, try another", type: .error)
+                    }
+                    
                 }
+                
             case .findBouncerFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
                 

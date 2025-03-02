@@ -15,6 +15,8 @@ class HouseTypeViewCell: UICollectionViewCell {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var navigateBtn: UIButton!
     
+    var onSelect: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         container.backgroundColor = .white
@@ -27,6 +29,10 @@ class HouseTypeViewCell: UICollectionViewCell {
         icon.image = UIImage.property
         titleLabel.text = data?.name
         subtitleLabel.text = data?.description
+    }
+    
+    @IBAction func viewBtnTapped(_ sender: Any) {
+        onSelect?()
     }
 
 }
