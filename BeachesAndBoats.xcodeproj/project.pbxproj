@@ -565,6 +565,7 @@
 		A6F490FA2D722648002F8F5B /* UpdateProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490F92D722648002F8F5B /* UpdateProfileResponse.swift */; };
 		A6F490FC2D722C6F002F8F5B /* UpdateProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490FB2D722C6F002F8F5B /* UpdateProfileVM.swift */; };
 		A6F490FE2D723284002F8F5B /* ContactSupportVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490FD2D723284002F8F5B /* ContactSupportVM.swift */; };
+		A6F491002D736F7B002F8F5B /* PaymentCallbackVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F490FF2D736F7B002F8F5B /* PaymentCallbackVM.swift */; };
 		A6FA71672D6CB35B00BB5E44 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */; };
 		A6FB74482C134EC700A26806 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB74462C134EC700A26806 /* SignupView.swift */; };
 		A6FB74492C134EC700A26806 /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6FB74472C134EC700A26806 /* SignupView.xib */; };
@@ -1128,6 +1129,7 @@
 		A6F490F92D722648002F8F5B /* UpdateProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileResponse.swift; sourceTree = "<group>"; };
 		A6F490FB2D722C6F002F8F5B /* UpdateProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileVM.swift; sourceTree = "<group>"; };
 		A6F490FD2D723284002F8F5B /* ContactSupportVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSupportVM.swift; sourceTree = "<group>"; };
+		A6F490FF2D736F7B002F8F5B /* PaymentCallbackVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCallbackVM.swift; sourceTree = "<group>"; };
 		A6FB74462C134EC700A26806 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		A6FB74472C134EC700A26806 /* SignupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignupView.xib; sourceTree = "<group>"; };
 		A6FB744A2C13558000A26806 /* ConfirmAccountModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAccountModal.swift; sourceTree = "<group>"; };
@@ -2469,6 +2471,7 @@
 				A642F9472D55E7080089F593 /* BoatBooking */,
 				A6C20FF22C8713A20045C670 /* HomeView.swift */,
 				A6C20FF32C8713A20045C670 /* HomeView.xib */,
+				A6F490FF2D736F7B002F8F5B /* PaymentCallbackVM.swift */,
 			);
 			path = PublicHome;
 			sourceTree = "<group>";
@@ -3121,6 +3124,7 @@
 				A6C20FFD2C8715F30045C670 /* SearchView.swift in Sources */,
 				A6F406822C02D18A00973BD7 /* Helpers.swift in Sources */,
 				A66F3FC32D2C954D00902E43 /* TwoFACompleteVerificationResponse.swift in Sources */,
+				A6F491002D736F7B002F8F5B /* PaymentCallbackVM.swift in Sources */,
 				A6C20FF12C85BEA40045C670 /* ConfirmAccountViewModel.swift in Sources */,
 				A6CA3D0F2CB9B4E2009307B2 /* BoatFacilitiesView.swift in Sources */,
 				A63357782BF1611F008AF034 /* DatePicker.swift in Sources */,

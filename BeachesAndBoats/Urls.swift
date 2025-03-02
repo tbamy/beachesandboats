@@ -55,6 +55,7 @@ enum Urls: String {
     case updateProviderBookingDate = "api/v1/booking/update-service-booking"
     case findBouncers = "api/v1/booking/find-bouncer"
     case findDj = "api/v1/booking/find-dj"
+    case paymentCallback = "api/v1/callback/paystack/booking"
     
     
     

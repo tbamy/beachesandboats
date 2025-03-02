@@ -37,6 +37,11 @@ class GeneralViewCell: BaseXib {
     @IBInspectable var isBoatMode: Bool = false {
         didSet { setup() }
     }
+    
+    var isSaved: Bool = false {
+        didSet { setup() }
+    }
+    
     public var model: GeneralViewCellModel = GeneralViewCellModel(){
         didSet {
             setup()
@@ -89,13 +94,15 @@ class GeneralViewCell: BaseXib {
             bannerImg.image = UIImage(named: "dummy")
         }
 
+        if isSaved{
+            saveBtn.image = UIImage(named: "saveIconFilled")
+        }
         
         if isBoatMode{
             setupBoatMode()
             
         }else if isBeachHouseMode{
             setupBeachHouseMode()
-            
         }
         
     }

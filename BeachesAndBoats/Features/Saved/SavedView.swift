@@ -92,6 +92,7 @@ extension SavedView: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         let savedFavourites = savedFavourites[indexPath.item]
         let view = GeneralViewCell(frame: cell.bounds)
         view.identifier = "Saved " + indexPath.description
+        view.isSaved = true
         if savedFavourites.favouritableType == "Boat" {
             view.model.titleLabel = savedFavourites.boat?.name ?? ""
             view.model.infoOneLabel = "\(savedFavourites.boat?.locations?.city ?? ""), \(savedFavourites.boat?.locations?.state ?? "") \(savedFavourites.boat?.locations?.country ?? "")"

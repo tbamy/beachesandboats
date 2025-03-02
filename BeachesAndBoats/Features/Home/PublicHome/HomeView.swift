@@ -216,6 +216,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             view.identifier = "SubCategories " + indexPath.description
             view.model.image = cellAt.image ?? ""
             view.model.title = cellAt.name ?? ""
+            view.model.dummyImage = ""
             view.isSubcategory = true
             view.isUserInteractionEnabled = false
             cell.applyView(view: view)

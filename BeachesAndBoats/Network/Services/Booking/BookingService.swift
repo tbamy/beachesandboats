@@ -29,5 +29,5 @@ protocol BookingService{
     func bookServiceProvider(request: CreateBeachHouseBookingRequest, completion: @escaping(Result<BeachHouseBookingResponse, ErrorResponse>) -> Void)
     
     func getAllDishes(completion: @escaping(Result<GetAllDishesResponse, ErrorResponse>) -> Void)
-    
+    func paymentCallback(reference: String, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
 }

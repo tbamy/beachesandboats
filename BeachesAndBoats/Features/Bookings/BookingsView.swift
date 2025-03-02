@@ -94,29 +94,84 @@ class BookingsView: BaseViewControllerPlain {
     
     func updateBookings(forUpcoming upcoming: Bool, response: UserBookingsData) {
         if upcoming {
-            if let upcomingBoatBookings = response.boatBookings?.upcoming, !upcomingBoatBookings.isEmpty, let upcomingBeachBookings = response.beachHouseBookings?.upcoming, !upcomingBeachBookings.isEmpty{
-                let boatUpcoming = upcomingBoatBookings.map{ BookingItem.boat($0)}
-                let beachUpcoming = upcomingBeachBookings.map { BookingItem.beachHouse($0) }
+            let hasUpcomingBoatBookings = response.boatBookings?.upcoming != nil && !(response.boatBookings?.upcoming?.isEmpty ?? true)
+            let hasUpcomingBeachBookings = response.beachHouseBookings?.upcoming != nil && !(response.beachHouseBookings?.upcoming?.isEmpty ?? true)
+            
+            if hasUpcomingBoatBookings || hasUpcomingBeachBookings {
+                var bookingsArray = [BookingItem]()
                 
-                bookingItems = boatUpcoming + beachUpcoming
-            }else{
+                if hasUpcomingBoatBookings, let upcomingBoatBookings = response.boatBookings?.upcoming {
+                    let boatUpcoming = upcomingBoatBookings.map{ BookingItem.boat($0) }
+                    bookingsArray.append(contentsOf: boatUpcoming)
+                }
+                
+                if hasUpcomingBeachBookings, let upcomingBeachBookings = response.beachHouseBookings?.upcoming {
+                    let beachUpcoming = upcomingBeachBookings.map{ BookingItem.beachHouse($0) }
+                    bookingsArray.append(contentsOf: beachUpcoming)
+                }
+                
+                bookingItems = bookingsArray
+                emptyBooking.isHidden = true
+                upcomingCollectionView.isHidden = false
+            } else {
                 emptyBooking.isHidden = false
                 upcomingCollectionView.isHidden = true
             }
         } else {
-            if let pastBoatBookings = response.boatBookings?.past, !pastBoatBookings.isEmpty, let pastBeachBookings = response.beachHouseBookings?.past, !pastBeachBookings.isEmpty{
-                let boatPast = pastBoatBookings.map{ BookingItem.boat($0)}
-                let beachPast = pastBeachBookings.map { BookingItem.beachHouse($0) }
+            let hasPastBoatBookings = response.boatBookings?.past != nil && !(response.boatBookings?.past?.isEmpty ?? true)
+            let hasPastBeachBookings = response.beachHouseBookings?.past != nil && !(response.beachHouseBookings?.past?.isEmpty ?? true)
+            
+            if hasPastBoatBookings || hasPastBeachBookings {
+                var bookingsArray = [BookingItem]()
                 
-                bookingItems = boatPast + beachPast
-            }else{
+                if hasPastBoatBookings, let pastBoatBookings = response.boatBookings?.past {
+                    let boatPast = pastBoatBookings.map{ BookingItem.boat($0) }
+                    bookingsArray.append(contentsOf: boatPast)
+                }
+                
+                if hasPastBeachBookings, let pastBeachBookings = response.beachHouseBookings?.past {
+                    let beachPast = pastBeachBookings.map{ BookingItem.beachHouse($0) }
+                    bookingsArray.append(contentsOf: beachPast)
+                }
+                
+                bookingItems = bookingsArray
+                emptyBooking.isHidden = true
+                upcomingCollectionView.isHidden = false
+            } else {
                 emptyBooking.isHidden = false
                 upcomingCollectionView.isHidden = true
             }
         }
+        
         upcomingCollectionView.reloadData()
         updateCollectionViewHeight(upcomingCollectionView, collectionViewHeightConstraint)
     }
+    
+//    func updateBookings(forUpcoming upcoming: Bool, response: UserBookingsData) {
+//        if upcoming {
+//            if let upcomingBoatBookings = response.boatBookings?.upcoming, !upcomingBoatBookings.isEmpty, let upcomingBeachBookings = response.beachHouseBookings?.upcoming, !upcomingBeachBookings.isEmpty{
+//                let boatUpcoming = upcomingBoatBookings.map{ BookingItem.boat($0)}
+//                let beachUpcoming = upcomingBeachBookings.map { BookingItem.beachHouse($0) }
+//                
+//                bookingItems = boatUpcoming + beachUpcoming
+//            }else{
+//                emptyBooking.isHidden = false
+//                upcomingCollectionView.isHidden = true
+//            }
+//        } else {
+//            if let pastBoatBookings = response.boatBookings?.past, !pastBoatBookings.isEmpty, let pastBeachBookings = response.beachHouseBookings?.past, !pastBeachBookings.isEmpty{
+//                let boatPast = pastBoatBookings.map{ BookingItem.boat($0)}
+//                let beachPast = pastBeachBookings.map { BookingItem.beachHouse($0) }
+//                
+//                bookingItems = boatPast + beachPast
+//            }else{
+//                emptyBooking.isHidden = false
+//                upcomingCollectionView.isHidden = true
+//            }
+//        }
+//        upcomingCollectionView.reloadData()
+//        updateCollectionViewHeight(upcomingCollectionView, collectionViewHeightConstraint)
+//    }
     
     func updateCollectionViewHeight(_ collectionView: UICollectionView, _ collectionViewHeightConstraint: NSLayoutConstraint) {
         collectionView.layoutIfNeeded()
@@ -181,7 +236,7 @@ extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: collectionView.bounds.width - 10, height: 400)
+        return CGSize(width: collectionView.bounds.width - 10, height: 94)
        
     }
     

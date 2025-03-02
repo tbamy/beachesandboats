@@ -21,6 +21,7 @@ enum BookingTarget{
     case UpdateProviderBookingDate
     case FindBouncers(gender: String)
     case FindDj
+    case PaymentCallback(reference: String)
 }
 
 extension BookingTarget: BaseTarget{
@@ -51,6 +52,8 @@ extension BookingTarget: BaseTarget{
             return Urls.findBouncers.rawValue
         case .FindDj:
             return Urls.findDj.rawValue
+        case .PaymentCallback(reference: let reference):
+            return Urls.paymentCallback.rawValue
         }
     }
     
@@ -80,6 +83,8 @@ extension BookingTarget: BaseTarget{
         case .FindBouncers:
             return .get
         case .FindDj:
+            return .get
+        case .PaymentCallback(reference: let reference):
             return .get
         }
     }
@@ -120,6 +125,11 @@ extension BookingTarget: BaseTarget{
             )
         case .FindDj:
             return .requestPlain
+        case .PaymentCallback(reference: let reference):
+            return .requestParameters(
+                parameters: ["reference": reference],
+                encoding: URLEncoding.queryString
+            )
         }
     }
     

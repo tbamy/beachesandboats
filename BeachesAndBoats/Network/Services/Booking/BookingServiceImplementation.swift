@@ -8,6 +8,10 @@
 import Foundation
 
 class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
+    func paymentCallback(reference: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.PaymentCallback(reference: reference)){ completion( self.handleResult(result: $0))}
+    }
+    
     func addOrUpdateReview(request: AddReviewRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         provider.request(.AddOrUpdateReview(request)){ completion( self.handleResult(result: $0))}
     }

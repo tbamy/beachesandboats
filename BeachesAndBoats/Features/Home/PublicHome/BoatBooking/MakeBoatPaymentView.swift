@@ -8,12 +8,17 @@
 import UIKit
 import PaystackCore
 import PaystackUI
+import RxSwift
 
 class MakeBoatPaymentView: UIViewController {
     
     var coordinator: ExploreCoordinator?
 
     @IBOutlet weak var payButton: PrimaryButton!
+    
+    let vm = PaymentCallbackVM()
+    let disposeBag = DisposeBag()
+    let input = PublishSubject<PaymentCallbackVM.Input>()
   
 //    var accessCode: String?
     var bookingResponse: BoatBookingResponse?
@@ -22,7 +27,9 @@ class MakeBoatPaymentView: UIViewController {
         super.viewDidLoad()
         
         title = "Pay with Paystack"
-
+        
+        bind()
+        
         let amountToPay: Float = bookingResponse?.data?.bookingDetail?.total ?? 0
         let buttonTitle = "Pay (₦\(amountToPay))"
         payButton.setTitle(buttonTitle, for: .normal)
@@ -49,6 +56,7 @@ class MakeBoatPaymentView: UIViewController {
         switch (result){
         case .completed(let details):
             print("Transaction completed with reference: \(details.reference)")
+            input.onNext(.paymentCallback(reference: details.reference))
             MiddleModal.show(title: "Payment and booking made successfully!", type: .success, primaryText: "View Booking", secondaryText: "Done", dismissable: false, dismissOnConfirm: false, onConfirm: { self.gotoViewBooking() }, onCancel: { self.coordinator?.backToDashboard() })
         case .cancelled:
             MiddleModal.show(title: "An Error Occured", subtitle: "Payment was cancelled", type: .error, dismissable: true, dismissOnConfirm: true)
@@ -60,6 +68,20 @@ class MakeBoatPaymentView: UIViewController {
     
     func gotoViewBooking(){
         coordinator?.switchToBookingCoordinator()
+    }
+    
+    func bind(){
+        vm.transform(input: input)
+        
+        vm.output.subscribe(onNext: { data in
+            LoadingModal.dismiss()
+            switch data {
+            case .paymentCallbackSuccess(_):
+                print("Do Nothing")
+            case .paymentCallbackFailed(_):
+                print("Do Nothing")
+            }
+        }).disposed(by: disposeBag)
     }
 }
 

@@ -17,7 +17,7 @@ class ProfileServiceImplementation: Provider<ProfileTarget>, ProfileService{
     }
     
     func getCustomerSupportInfo(completion: @escaping (Result<CustomerSupportInfoResponse, ErrorResponse>) -> Void) {
-        provider.request(.getSavedFavourites){ completion( self.handleResult(result: $0))}
+        provider.request(.getCustomerSupportInfo){ completion( self.handleResult(result: $0))}
     }
     
     func updateNotificationSettings(request: NotificationSettingsRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
