@@ -227,14 +227,17 @@ class BookingsView: BaseViewControllerPlain {
 
 extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return bookingItems.count
-        return filteredBookingItems.isEmpty ? bookingItems.count : filteredBookingItems.count
+        //        return bookingItems.count
+        let count = filteredBookingItems.isEmpty ? bookingItems.count : filteredBookingItems.count
+        print("Collection view showing \(count) items")
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = upcomingCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
         
-        let item = bookingItems[indexPath.item]
+        //        let item = bookingItems[indexPath.item]
+        let item = filteredBookingItems.isEmpty ? bookingItems[indexPath.item] : filteredBookingItems[indexPath.item]
         let view = BookingCell(frame: cell.bounds)
         
         view.model.image = item.image
@@ -248,7 +251,7 @@ extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let item = bookingItems[indexPath.item]
+        //        let item = bookingItems[indexPath.item]
         let item = filteredBookingItems.isEmpty ? bookingItems[indexPath.item] : filteredBookingItems[indexPath.item]
         switch item {
         case .boat(let boatBooking):
@@ -263,10 +266,8 @@ extension BookingsView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.bounds.width - 10, height: 94)
-       
+        
     }
-    
-    
 }
 
 extension BookingsView{
@@ -302,6 +303,9 @@ extension BookingsView: FilterDelegate, SortDelegate {
     }
     
     func getSelectedItem(selectedItem: String) {
+        
+        print("Filter selected: \(selectedItem)")
+        print("Before filtering: \(bookingItems.count) items")
         switch selectedItem {
         case "BeachHouse":
             filteredBookingItems = bookingItems.filter { bookingType in
@@ -317,8 +321,32 @@ extension BookingsView: FilterDelegate, SortDelegate {
                 }
                 return false
             }
+        case "All":
+            // Reset filter
+            filteredBookingItems = []
         default:
-            break
+            filteredBookingItems = []
+        }
+        print("After filtering: \(filteredBookingItems.count) items")
+        
+        if filteredBookingItems.isEmpty && selectedItem != "All" {
+                // If we filtered and got no results
+                emptyBooking.isHidden = false
+                upcomingCollectionView.isHidden = true
+            } else if bookingItems.isEmpty {
+                // If there are no items at all
+                emptyBooking.isHidden = false
+                upcomingCollectionView.isHidden = true
+            } else {
+                // We have items to show
+                emptyBooking.isHidden = true
+                upcomingCollectionView.isHidden = false
+            }
+        
+        // Ensure UI updates on main thread
+        DispatchQueue.main.async {
+            self.upcomingCollectionView.reloadData()
+            self.updateCollectionViewHeight(self.upcomingCollectionView, self.collectionViewHeightConstraint)
         }
     }
     
