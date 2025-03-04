@@ -74,11 +74,11 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     
     func itemToShow() {
         if isupcomingBooking {
-            pastBookingView.isHidden = true
+            continueBookingView.isHidden = true
             upcomingStack.isHidden = false
         } else {
             upcomingStack.isHidden = true
-            pastBookingView.isHidden = false
+            continueBookingView.isHidden = false
         }
     }
     
@@ -86,10 +86,16 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         checkinDateLabel.placeholder = "Select Date"
         checkoutDateLabel.placeholder = "Select Date"
         
-        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-//            print("Image Url is: \(url)")
+//        topImage.image = UIImage(named: booking?.beachHouse?.image ?? "")
+        
+        if let url = URL(string: booking?.beachHouse?.image?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             topImage.kf.setImage(with: url)
         }
+        
+//        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
+////            print("Image Url is: \(url)")
+//            topImage.kf.setImage(with: url)
+//        }
 //        print("Beach Details: \(beachDetails)")
         
         
@@ -150,22 +156,22 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
             }
         }
         
-        titleLabel.text = beachDetails?.name
-        locationLabel.text = "\(beachDetails?.locations?.city ?? ""), \(beachDetails?.locations?.state ?? "") \(beachDetails?.locations?.country ?? "")"
+        titleLabel.text = booking?.beachHouse?.name
+        locationLabel.text = "\(booking?.beachHouse?.locations?.city ?? ""), \(booking?.beachHouse?.locations?.state ?? "") \(booking?.beachHouse?.locations?.country ?? "")"
         locationView.layer.cornerRadius = 8
-        descriptionLabel.text = beachDetails?.description
-        aboutHostLabel.text = beachDetails?.aboutOwner
-        hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
-        ratingLabel.text = "\(beachDetails?.rating ?? 0)"
-        totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
-        let totalGuests = (beachDetails?.noOfAdults ?? 0) + (beachDetails?.noOfChildren ?? 0)
-        roomAndGuestsLabel.text = "\(totalGuests) guests, \(beachDetails?.rooms?.count ?? 0) rooms"
-        checkinDateLabel.text = beachDetails?.checkInFrom ?? ""
-        checkoutDateLabel.text = beachDetails?.checkOutFrom ?? ""
+        descriptionLabel.text = booking?.beachHouse?.description
+        aboutHostLabel.text = booking?.beachHouse?.aboutOwner
+//        hostNameLabel.text = "\(booking?.beachHouse?.owner?.firstName ?? "") \(booking?.beachHouse?.owner?.lastName ?? "")"
+        ratingLabel.text = "\(booking?.beachHouse?.rating ?? 0)"
+        totalAmountLabel.text = "₦ \(booking?.beachHouseRoom?.pricePerNight ?? 0)"
+//        let totalGuests = (booking?.beachHouse?.noOfAdults ?? 0) + (booking?.beachHouse?.noOfChildren ?? 0)
+        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? 0) guests · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedrooms · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? 0) beds · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? 0) private baths"    //"\(totalGuests) guests, \(booking?.beachHouse?.rooms?.count ?? 0) rooms"
+        checkinDateLabel.text = booking?.checkingDate ?? ""
+        checkoutDateLabel.text = booking?.checkoutDate ?? ""
         
         
-        if let latitude = Double(beachDetails?.locations?.latitude ?? ""),
-           let longitude = Double(beachDetails?.locations?.longitude ?? "") {
+        if let latitude = Double(booking?.beachHouse?.locations?.latitude ?? ""),
+           let longitude = Double(booking?.beachHouse?.locations?.longitude ?? "") {
            
             let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let span = MKCoordinateSpan(latitudeDelta: latitude, longitudeDelta: longitude)
@@ -212,6 +218,10 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         
         
     }
+    
+    @IBAction func messageHostTapped(_ sender: Any) {
+    }
+    
     
     
     @IBAction func cancelBookingTapped(_ sender: Any) {
@@ -328,12 +338,12 @@ extension BeachBookingDetailsView {
     func setupCustomNavigationButtons() {
         
         let addButton = UIButton(type: .custom)
-        addButton.setImage(Assets.backButton.image, for: .normal)
+        addButton.setImage(Assets.favoriteTwo.image, for: .normal)
         addButton.addTarget(self, action: #selector(addNewBtnTapped), for: .touchUpInside)
         let addBarButtonItem = UIBarButtonItem(customView: addButton)
 
         let settingsButton = UIButton(type: .custom)
-        settingsButton.setImage(Assets.backButton .image, for: .normal)
+        settingsButton.setImage(Assets.shareTwo.image, for: .normal)
         settingsButton.addTarget(self, action: #selector(settingsBtnTapped), for: .touchUpInside)
         let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
 

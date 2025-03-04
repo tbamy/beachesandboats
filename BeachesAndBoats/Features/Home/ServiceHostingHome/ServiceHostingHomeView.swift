@@ -41,7 +41,7 @@ class ServiceHostingHomeView: UIViewController {
         bind()
         setupCollectionView()
         setupUI()
-        
+        notificationBtn.setTitle("", for: .normal)
         if coordinator == nil {
             coordinator = HostingServiceHomeCoordinator(navigationController: self.navigationController, completion: nil)
         }
