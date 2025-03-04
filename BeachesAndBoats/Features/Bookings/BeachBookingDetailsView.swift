@@ -86,7 +86,11 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         checkinDateLabel.placeholder = "Select Date"
         checkoutDateLabel.placeholder = "Select Date"
         
-        topImage.image = UIImage(named: booking?.beachHouse?.image ?? "")
+//        topImage.image = UIImage(named: booking?.beachHouse?.image ?? "")
+        
+        if let url = URL(string: booking?.beachHouse?.image?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
+            topImage.kf.setImage(with: url)
+        }
         
 //        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
 ////            print("Image Url is: \(url)")
@@ -215,6 +219,10 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         
     }
     
+    @IBAction func messageHostTapped(_ sender: Any) {
+    }
+    
+    
     
     @IBAction func cancelBookingTapped(_ sender: Any) {
         let cancelBookingView = CancelBookingView()
@@ -330,12 +338,12 @@ extension BeachBookingDetailsView {
     func setupCustomNavigationButtons() {
         
         let addButton = UIButton(type: .custom)
-        addButton.setImage(Assets.backButton.image, for: .normal)
+        addButton.setImage(Assets.favoriteTwo.image, for: .normal)
         addButton.addTarget(self, action: #selector(addNewBtnTapped), for: .touchUpInside)
         let addBarButtonItem = UIBarButtonItem(customView: addButton)
 
         let settingsButton = UIButton(type: .custom)
-        settingsButton.setImage(Assets.backButton .image, for: .normal)
+        settingsButton.setImage(Assets.shareTwo.image, for: .normal)
         settingsButton.addTarget(self, action: #selector(settingsBtnTapped), for: .touchUpInside)
         let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
 

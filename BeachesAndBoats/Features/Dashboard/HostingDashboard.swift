@@ -6,24 +6,33 @@
 //
 
 import Foundation
-
 import UIKit
 
 class HostingDashboard: UITabBarController {
     
     private let middleButton = UIButton()
+    
+    private var coordinator: AccountCoordinator?
+
 
     override func viewDidLoad() {
         LoadingModal.dismiss()
         super.viewDidLoad()
-        let customTabBar = CustomTabBar()
-        setValue(customTabBar, forKey: "tabBar")
         
         setupTabBar()
+        setupMiddleButton()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Ensure proper button positioning after view layout
+        positionMiddleButton()
     }
 
     private func setupTabBar() {
         tabBar.backgroundColor = .white
+        tabBar.barTintColor = .white
         tabBar.tintColor = .beachBlue // For selected item color
         tabBar.unselectedItemTintColor = .gray // For unselected items
         tabBar.isTranslucent = false
@@ -44,6 +53,101 @@ class HostingDashboard: UITabBarController {
 //        viewControllers = [homeVC, messagesVC, UIViewController(), earningsVC, menuVC]
         viewControllers = [homeTab(), listingTab(), UIViewController(), messagesTab(), menuTab()]
     }
+    
+    private func setupMiddleButton() {
+            // Configure button appearance
+            middleButton.frame.size = CGSize(width: 64, height: 64)
+            middleButton.layer.cornerRadius = 32
+            middleButton.backgroundColor = .B_B
+            
+            if let user = UserSession.shared.userDetails, let userRoles = user.roles {
+                let hostRoles: [HostType] = [.primaryHost, .secondaryHost]
+                let serviceRoles: [HostType] = [.chef, .dj, .bouncer]
+                
+                let hostRoleStrings = hostRoles.map { $0.rawValue }
+                let hasHostRole = userRoles.contains { hostRoleStrings.contains($0) }
+                
+                let serviceRoleStrings = serviceRoles.map { $0.rawValue }
+                let hasServiceRole = userRoles.contains { serviceRoleStrings.contains($0) }
+                
+                if hasHostRole {
+                    middleButton.setImage(UIImage(named: "plusTab"), for: .normal)
+                    middleButton.addTarget(self, action: #selector(hostBtnTapped), for: .touchUpInside)
+                } else if hasServiceRole {
+                    middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
+                    middleButton.addTarget(self, action: #selector(serviceBtnTapped), for: .touchUpInside)
+                }
+            }
+            
+            middleButton.tintColor = .white
+            
+            // Add shadow
+            middleButton.layer.shadowColor = UIColor.black.cgColor
+            middleButton.layer.shadowOpacity = 0.3
+            middleButton.layer.shadowOffset = CGSize(width: 0, height: 5)
+            middleButton.layer.shadowRadius = 10
+            
+            // Create coordinator for button actions
+            let navController = BaseNavigationController()
+            coordinator = AccountCoordinator(navigationController: navController)
+            
+            // Add button to view (not to tabBar)
+            tabBar.addSubview(middleButton)
+            tabBar.bringSubviewToFront(middleButton)
+        }
+    
+    private func positionMiddleButton() {
+        middleButton.center = CGPoint(
+            x: tabBar.bounds.midX,
+            y: tabBar.bounds.minY - 10 // Adjust to sit slightly above the tab bar
+        )
+    }
+
+    
+//    private func positionMiddleButton() {
+//        let centerX = tabBar.bounds.midX
+//        let centerY = tabBar.bounds.minY - 10
+//        
+//        middleButton.center = CGPoint(x: centerX, y: centerY)
+//    }
+    
+    @objc func hostBtnTapped() {
+        print("Host button tapped")
+
+        guard let navController = selectedViewController as? UINavigationController else {
+            print("No navigation controller found")
+            return
+        }
+        navController.delegate = self
+        let coordinator = AccountCoordinator(navigationController: navController)
+        coordinator.gotoSelectPropertyTypePrimaryHost(tag: 1, type: .primaryHost)
+    }
+
+    @objc func serviceBtnTapped() {
+        print("Service button tapped")
+
+        guard let navController = selectedViewController as? UINavigationController else {
+            print("No navigation controller found")
+            return
+        }
+        navController.delegate = self
+
+        let coordinator = AccountCoordinator(navigationController: navController)
+        coordinator.gotoSelectServiceType()
+    }
+
+        
+//    @objc func hostBtnTapped() {
+//        print("Host button tapped")
+//        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+//        coordinator.gotoSelectPropertyTypePrimaryHost(tag: 1, type: .primaryHost)
+//    }
+//        
+//    @objc func serviceBtnTapped() {
+//        print("Service button tapped")
+//        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+//        coordinator.gotoSelectServiceType()
+//    }
     
     func wrapInNavigationController(_ viewController: UIViewController) -> BaseNavigationController {
         return BaseNavigationController(rootViewController: viewController)
@@ -110,3 +214,19 @@ class HostingDashboard: UITabBarController {
 //        present(composeVC, animated: true, completion: nil)
 //    }
 }
+
+extension HostingDashboard: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController,
+                              willShow viewController: UIViewController,
+                              animated: Bool) {
+        let isRootViewController = navigationController.viewControllers.count == 1
+        middleButton.isHidden = !isRootViewController
+
+        if isRootViewController {
+            DispatchQueue.main.async {
+                self.positionMiddleButton()
+            }
+        }
+    }
+}
+

@@ -50,6 +50,8 @@ enum Assets: String {
     case people = "people"
     case favorite = "favoriteIcon"
     case share = "shareIcon"
+    case favoriteTwo = "FavouriteIcon"
+    case shareTwo = "ShareImg"
     
 
     
