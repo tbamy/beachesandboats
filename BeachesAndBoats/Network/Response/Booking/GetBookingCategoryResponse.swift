@@ -260,18 +260,32 @@ struct RoomImage: Codable{
 
 // MARK: - Review
 struct Review: Codable {
-    let id, firstName, lastName, email: String?
-    let phoneCode, phoneNumber: String?
+    let id, note, createdAt: String?
+    let rating: Int?
+    let user: User?
 
     enum CodingKeys: String, CodingKey {
         case id
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case email
-        case phoneCode = "phone_code"
-        case phoneNumber = "phone_number"
+        case createdAt = "created_at"
+        case rating
+        case note
+        case user
     }
 }
+
+//struct Review: Codable {
+//    let id, firstName, lastName, email: String?
+//    let phoneCode, phoneNumber: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case firstName = "first_name"
+//        case lastName = "last_name"
+//        case email
+//        case phoneCode = "phone_code"
+//        case phoneNumber = "phone_number"
+//    }
+//}
 
 // MARK: - Boat Booking
 struct BoatBooking: Codable {

@@ -109,6 +109,8 @@ class PropertyAddressView: BaseViewControllerPlain {
                 createBeachListing.state = stateField.text
                 createBeachListing.city = cityField.text
                 createBeachListing.streetName = streetField.text
+                createBeachListing.longitude = 0
+                createBeachListing.latitude = 0
                 print(createBeachListing)
                 
                 coordinator?.gotoPropertyAvailableDatesView(beachData: beachData, createBeachListingData: createBeachListing)

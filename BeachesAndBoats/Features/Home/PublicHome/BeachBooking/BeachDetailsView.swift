@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import Kingfisher
 import RxSwift
+import CoreLocation
 
 class BeachDetailsView: BaseViewControllerPlain {
     
@@ -31,10 +32,13 @@ class BeachDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var totalAmountLabel: UILabel!
     @IBOutlet weak var continueBookingView: UIView!
     
+    @IBOutlet weak var guestCommentsStack: UIStackView!
+    
     
     @IBOutlet weak var dayBookingBtn: CheckboxButton!
     @IBOutlet weak var nightBookingBtn: CheckboxButton!
     
+    let locationManager = CLLocationManager()
     var isDayBooking: Bool = false
     
     var beachDetails: Listing?
@@ -62,32 +66,31 @@ class BeachDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
+//        setupMap()
         checkinDateLabel.placeholder = "Select Date"
         checkoutDateLabel.placeholder = "Select Date"
         
-//        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-////            print("Image Url is: \(url)")
-//            topImage.kf.setImage(with: url)
-//        }
+        let imgUrl = beachDetails?.rooms?.first?.images?.first?.url
+        imgUrl?.loadImage(into: topImage, placeholder: "dummy")
         
-        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
-            topImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { [self] result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        topImage.image = UIImage(named: "dummy")
-                    }
-                }
-            )
-        } else {
-            topImage.image = UIImage(named: "dummy")
-        }
+//        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
+//            topImage.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "dummy"),
+//                options: nil,
+//                completionHandler: { [self] result in
+//                    switch result {
+//                    case .success(let value):
+//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                    case .failure(let error):
+//                        print("Failed to load image: \(error.localizedDescription)")
+//                        topImage.image = UIImage(named: "dummy")
+//                    }
+//                }
+//            )
+//        } else {
+//            topImage.image = UIImage(named: "dummy")
+//        }
 
         
         
@@ -158,6 +161,14 @@ class BeachDetailsView: BaseViewControllerPlain {
         titleLabel.text = beachDetails?.name
         locationLabel.text = "\(beachDetails?.locations?.city ?? ""), \(beachDetails?.locations?.state ?? "") \(beachDetails?.locations?.country ?? "")"
         locationView.layer.cornerRadius = 8
+//        let longitude = Double(beachDetails?.locations?.longitude ?? "") ?? 0
+//        let latitude = Double(beachDetails?.locations?.latitude ?? "") ?? 0
+        
+        let longitude = Double("-95.5878280") ?? 0
+        let latitude = Double("23.9900130") ?? 0
+        print("\(latitude), \(longitude)")
+        
+        centerMapOnLocation(latitude: latitude, longitude: longitude)
         descriptionLabel.text = beachDetails?.description
         aboutHostLabel.text = beachDetails?.aboutOwner
         hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
@@ -169,11 +180,25 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         amenities = beachDetails?.amenities ?? []
         comments = beachDetails?.reviews ?? []
+        guestCommentsStack.isHidden = comments.isEmpty
+    
+        print("Amenities: \(amenities)")
         
         topImage.isUserInteractionEnabled = true
         topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
         
     }
+    
+//    func setupMap(){
+//        locationView.showsUserLocation = true // Show user location on the map
+//        locationView.userTrackingMode = .follow // Keep map centered on user
+//
+////        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.requestWhenInUseAuthorization() // Request location access
+//        locationManager.startUpdatingLocation() // Start location updates
+//               
+//    }
     
     @objc func viewImages(){
         
@@ -248,9 +273,9 @@ class BeachDetailsView: BaseViewControllerPlain {
 extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
-        case 0:
-            return amenities.count
         case 1:
+            return amenities.count
+        case 2:
             return comments.count
         default:
             return 0
@@ -261,7 +286,7 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView.tag {
-        case 0:
+        case 1:
             let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
             let cellAt = amenities[indexPath.item]
             
@@ -269,20 +294,21 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
             view.identifier = "Amenitiess " + indexPath.description
             view.model.image = cellAt.icon ?? ""
             view.model.title = cellAt.name ?? ""
+            view.model.dummyImage = "luxuryIcon"
             view.isSubcategory = true
             
             cell.applyView(view: view)
             return cell
             
-        case 1:
+        case 2:
             let cell = guestCommentsCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
             let cellAt = comments[indexPath.item]
             
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
-            view.model.name = cellAt.firstName ?? ""
-            view.model.rating = 1
-            view.model.comment = "Lorem ipsum"
+            view.model.name = cellAt.user?.firstName ?? ""
+            view.model.rating = cellAt.rating ?? 0
+            view.model.comment = cellAt.note ?? ""
             
             cell.applyView(view: view)
             return cell
@@ -294,9 +320,9 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.tag {
-        case 0:
-            return CGSize(width: (collectionView.bounds.width / 6), height: 50)
         case 1:
+            return CGSize(width: (collectionView.bounds.width / 6), height: 50)
+        case 2:
             return CGSize(width: (collectionView.bounds.width) - 20, height: 150)
         default:
             return CGSize()
@@ -322,5 +348,35 @@ extension BeachDetailsView {
 
         navigationItem.rightBarButtonItems = [addBarButtonItem, settingsBarButtonItem]
     }
+    
+    func centerMapOnLocation(latitude: Double, longitude: Double, radius: Double = 500) {
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let region = MKCoordinateRegion(
+            center: location,
+            latitudinalMeters: radius,
+            longitudinalMeters: radius
+        )
+        locationView.setRegion(region, animated: true)
+    }
 
 }
+
+//extension BeachDetailsView: CLLocationManagerDelegate{
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let userLocation = locations.last else { return }
+//        
+//        let region = MKCoordinateRegion(
+//            center: userLocation.coordinate,
+//            latitudinalMeters: 500, longitudinalMeters: 500
+//        )
+//        
+//        locationView.setRegion(region, animated: true)
+//    }
+//
+//    // Handle permission denial
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .denied || status == .restricted {
+//            print("Location access denied. Please enable it in Settings.")
+//        }
+//    }
+//}

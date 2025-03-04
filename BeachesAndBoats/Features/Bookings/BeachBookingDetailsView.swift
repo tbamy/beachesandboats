@@ -286,9 +286,9 @@ extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDat
             
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
-            view.model.name = cellAt.firstName ?? ""
-            view.model.rating = 1
-            view.model.comment = "Lorem ipsum"
+            view.model.name = cellAt.user?.firstName ?? ""
+            view.model.rating = cellAt.rating ?? 0
+            view.model.comment = cellAt.note ?? ""
             
             cell.applyView(view: view)
             return cell

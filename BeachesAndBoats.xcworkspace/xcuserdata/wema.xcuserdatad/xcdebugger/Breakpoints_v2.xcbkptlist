@@ -132,5 +132,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3CD02F1A-8290-4A4F-AB04-4D4A08873282"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Home/PublicHome/BeachBooking/BeachDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "setup()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3CD02F1A-8290-4A4F-AB04-4D4A08873282 - 494337cfbed0576d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.setup() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachBooking/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "14560">
+               </Location>
+               <Location
+                  uuid = "3CD02F1A-8290-4A4F-AB04-4D4A08873282 - 494337cfbed0574c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeachesAndBoats.BeachDetailsView.setup() -&gt; ()"
+                  moduleName = "BeachesAndBoats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/Home/PublicHome/BeachBooking/BeachDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "14792">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E01B512C-C5F9-4F1E-995B-2A8F72499B8E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BeachesAndBoats/Features/Home/PublicHome/BeachBooking/BeachDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "collectionView(_:layout:sizeForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
