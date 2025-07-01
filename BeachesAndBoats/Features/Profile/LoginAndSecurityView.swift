@@ -51,7 +51,7 @@ class LoginAndSecurityView: BaseViewControllerPlain {
     }
 
     @IBAction func editForEmail(_ sender: Any) {
-        AddEmailAddressModal.show { userEmail in
+        AddEmailAddressModal.show(on: self.view) { userEmail in
             print(userEmail ?? "")
             self.email = userEmail
             LoadingModal.show(title: "Loading...")
@@ -61,7 +61,7 @@ class LoginAndSecurityView: BaseViewControllerPlain {
     }
     
     @IBAction func editForPhoneNo(_ sender: Any) {
-        AddPhoneNumberModal.show { userPhoneNumber in
+        AddPhoneNumberModal.show(on: view) { userPhoneNumber in
             print(userPhoneNumber ?? "")
             self.phoneNumber = userPhoneNumber
             LoadingModal.show(title: "Loading...")
@@ -95,25 +95,25 @@ extension LoginAndSecurityView{
             switch output {
             case .emailSecuritySuccess(let response):
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
-                    ConfirmPhoneNumberModal.show(callBack: { otp in
+                    ConfirmPhoneNumberModal.show(on: UIView(), callBack: { otp in
                         
                         self?.completeVerificationForEmail(otp ?? "")
-                    }, isPhoneNumber: false)
+                    }, isEmail: true)
                 })
                
             case .emailSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             case .phoneSecuritySuccess(let response):
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
-                    ConfirmPhoneNumberModal.show(callBack: { otp in
+                    ConfirmPhoneNumberModal.show(on: UIView(), callBack: { otp in
                         
                         self?.completeVerificationForPhoneNumber(otp ?? "")
-                    }, isPhoneNumber: true)
+                    }, isEmail: false)
                 })
             case .phoneSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             case .completeTwoFASuccess(let response):
-                let loginSecurity = LoginAndSecurityView()
+//                let loginSecurity = LoginAndSecurityView()
                 MiddleModal.show(title: "Double authentication added successful", subtitle: response.message ?? "", type: .success, primaryText: "Done", onConfirm: {
                     self?.coordinator?.pop(animated: true)
                 })

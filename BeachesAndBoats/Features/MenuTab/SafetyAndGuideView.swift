@@ -22,6 +22,7 @@ class SafetyAndGuideView: BaseViewControllerPlain {
     
     func safetyLblClicked() {
         safetyAndGuideLbl.onTextClicked = {
+            
         }
     }
 

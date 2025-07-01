@@ -13,7 +13,8 @@ protocol GestureRecognizer: AnyObject {
 }
 
 class ConfirmPhoneNumberModal: BaseXib {
-
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var close: UIImageView!
     @IBOutlet weak var pinFieldsStack: UIStackView!
     @IBOutlet weak var sendBtn: PrimaryButton!
@@ -29,6 +30,12 @@ class ConfirmPhoneNumberModal: BaseXib {
     var callback: (String?) -> Void = { _ in }
     var typeOfSecurity: String? = ""
     
+    var isEmail: Bool = false {
+        didSet {
+            setup()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -40,6 +47,14 @@ class ConfirmPhoneNumberModal: BaseXib {
     }
     
     func setup(){
+        if isEmail {
+            titleLabel.text = "Confirm Email Address"
+            changePhoneNumber.text = "Change email address"
+            
+        } else {
+            titleLabel.text = "Confirm Phone Number"
+            changePhoneNumber.text = "Change phone number"
+        }
         sendBtn.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
         
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
@@ -156,9 +171,7 @@ extension ConfirmPhoneNumberModal: UITextFieldDelegate{
 
 extension ConfirmPhoneNumberModal{
     
-    public static func show(callBack: @escaping (String?) -> Void, isPhoneNumber: Bool) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+    public static func show(on view: UIView, callBack: @escaping (String?) -> Void, isEmail: Bool) {
         
         let modal = ConfirmPhoneNumberModal()
         modal.callback = callBack
@@ -166,17 +179,13 @@ extension ConfirmPhoneNumberModal{
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
-        if isPhoneNumber {
-            modal.changePhoneNumber.text = "Change email address"
-            
-        } else {
-            modal.changePhoneNumber.text = "Change phone number"
-        }
+        modal.isEmail = isEmail
+        
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
+        view.addSubview(backDrop)
+        
         let height = Helpers.screenHeight * 0.5
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
@@ -185,6 +194,7 @@ extension ConfirmPhoneNumberModal{
             modal.frame.origin.y = Helpers.screenHeight - height
             backDrop.layoutIfNeeded()
         }, completion: nil)
+
     }
     
     func dismiss() {

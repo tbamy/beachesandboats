@@ -8,6 +8,14 @@
 import Foundation
 
 class ListingServiceMock: Provider<ListingTarget>, ListingService{
+    func EditBoat(request: CreateBoatListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
+    func EditBeach(request: CreateBeachListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
     func ListBeach(request: CreateBeachListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         
     }
@@ -18,7 +26,7 @@ class ListingServiceMock: Provider<ListingTarget>, ListingService{
     
     
     var successMode: Bool = true
-    let error = ErrorResponse(message: "Error encountered", status: false, errors: [])
+    let error = ErrorResponse(message: "Error encountered", status: false, errors: nil)
     
     func BeachData(completion: @escaping (Result<BeachDataResponse, ErrorResponse>) -> Void) {
 

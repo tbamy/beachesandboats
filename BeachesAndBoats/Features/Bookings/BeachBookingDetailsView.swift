@@ -92,12 +92,6 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
             topImage.kf.setImage(with: url)
         }
         
-//        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-////            print("Image Url is: \(url)")
-//            topImage.kf.setImage(with: url)
-//        }
-//        print("Beach Details: \(beachDetails)")
-        
         
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
@@ -165,7 +159,7 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         ratingLabel.text = "\(booking?.beachHouse?.rating ?? 0)"
         totalAmountLabel.text = "₦ \(booking?.beachHouseRoom?.pricePerNight ?? 0)"
 //        let totalGuests = (booking?.beachHouse?.noOfAdults ?? 0) + (booking?.beachHouse?.noOfChildren ?? 0)
-        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? 0) guests · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedrooms · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? 0) beds · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? 0) private baths"    //"\(totalGuests) guests, \(booking?.beachHouse?.rooms?.count ?? 0) rooms"
+        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? 0) guests · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedrooms · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? "") beds · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? 0) private baths"    //"\(totalGuests) guests, \(booking?.beachHouse?.rooms?.count ?? 0) rooms"
         checkinDateLabel.text = booking?.checkingDate ?? ""
         checkoutDateLabel.text = booking?.checkoutDate ?? ""
         
@@ -297,7 +291,7 @@ extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDat
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating ?? 0
+            view.model.rating = cellAt.rating ?? ""
             view.model.comment = cellAt.note ?? ""
             
             cell.applyView(view: view)

@@ -202,7 +202,7 @@ struct BookingBedType: Codable {
     let id: String
     let name: String
     let description: String
-    let quantity: Int
+    let quantity: String
 }
 //
 //struct BeachHouse: Codable {

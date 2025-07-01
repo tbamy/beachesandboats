@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookingsView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
-                <outlet property="collectionViewHeightConstraint" destination="cBg-6P-6SH" id="1kG-Ie-5Mz"/>
+                <outlet property="collectionViewHeightConstraint" destination="3s0-bB-nX4" id="khM-yt-zaU"/>
                 <outlet property="emptyBooking" destination="uyM-hr-1qF" id="eCy-1e-jxj"/>
                 <outlet property="pastBookingSegment" destination="Liq-fe-Dq3" id="Brg-xG-uW3"/>
                 <outlet property="upcomingBookingSegment" destination="yCA-8t-DVE" id="6Op-gD-vIk"/>
@@ -83,7 +83,7 @@
                             <rect key="frame" x="0.0" y="349" width="353" height="300"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="300" id="cBg-6P-6SH"/>
+                                <constraint firstAttribute="height" constant="300" id="3s0-bB-nX4"/>
                             </constraints>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6o1-Hc-nYY">
                                 <size key="itemSize" width="128" height="128"/>

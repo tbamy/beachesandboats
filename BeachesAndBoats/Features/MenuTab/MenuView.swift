@@ -35,6 +35,7 @@ class MenuView: UIViewController {
         gestureRecognizers()
         
         verificationStatusView.layer.cornerRadius = 8
+        verificationStatusLabel.textColor = .white
         switch verificationStatus {
         case "pending":
             verificationStatusLabel.text = "Under verification"

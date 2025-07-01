@@ -1,15 +1,15 @@
 //
-//  ListBoatViewModel.swift
+//  EditBoatVM.swift
 //  BeachesAndBoats
 //
-//  Created by Tolu Akintayo on 08/11/2024.
+//  Created by Tolu Akintayo on 25/04/2025.
 //
 
 import Foundation
 import RxSwift
 
 
-class ListBoatViewModel{
+class EditBoatViewModel{
     var disposeBag = DisposeBag()
     let listingService: ListingService
     var output = PublishSubject<Output>()
@@ -19,19 +19,18 @@ class ListBoatViewModel{
     }
     
     enum Output {
-        case listBoatSuccessful(GeneralResponse)
-        case listBoatFailed(ErrorResponse)
+        case editBoatSuccessful(GeneralResponse)
+        case editBoatFailed(ErrorResponse)
     }
     
     func createBoat(_ request: CreateBoatListingRequest) {
-        listingService.ListBoat(request: request, completion:  { [ weak self ] data in
+        listingService.EditBoat(request: request, completion:  { [ weak self ] data in
             switch data {
             case .success(let response):
-                self?.output.onNext(.listBoatSuccessful(response))
+                self?.output.onNext(.editBoatSuccessful(response))
             case .failure(let error):
-                self?.output.onNext(.listBoatFailed(error))
+                self?.output.onNext(.editBoatFailed(error))
             }
         })
     }
 }
-

@@ -82,7 +82,7 @@ struct BeachHouseDetails: Codable {
     let id, name, description, aboutOwner: String?
     let listingPrice, discountPercent: Int?
     let image: String?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
     let rating: Int?
 

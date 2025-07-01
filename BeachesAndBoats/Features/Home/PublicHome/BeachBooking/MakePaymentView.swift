@@ -38,7 +38,7 @@ class MakePaymentView: UIViewController {
     @IBAction func payTapped(_ sender: Any) {
         let paystack = try? PaystackBuilder
                .newInstance
-               .setKey("pk_test_86bef2313897f8e69fa1067e9bb722f400883417")
+               .setKey("pk_test_f8ec4b3cf27be399640fa068978ae06561567d0d")
                .build()
         
         if let accessCode = bookingResponse?.data?.paymentData?.accessCode{

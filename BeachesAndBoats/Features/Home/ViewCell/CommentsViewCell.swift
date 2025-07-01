@@ -38,7 +38,7 @@ class CommentsViewCell: BaseXib {
     
     func setup(){
         nameLabel.text = model.name
-        ratingLabel.text = "\(model.rating)"
+        ratingLabel.text = model.rating
         commentsLabel.text = model.comment
     }
 
@@ -47,5 +47,5 @@ class CommentsViewCell: BaseXib {
 struct CommentsViewCellModel{
     public var name: String = ""
     public var comment: String = ""
-    public var rating: Int = 0
+    public var rating: String = ""
 }

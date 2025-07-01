@@ -28,6 +28,7 @@ class SignupView: BaseViewControllerPlain{
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         
+        phoneNumber.keyboardType = .numberPad
         let loginGesture = UITapGestureRecognizer(target: self, action: #selector(gotoLogin))
         loginBtn.isUserInteractionEnabled = true
         loginBtn.addGestureRecognizer(loginGesture)

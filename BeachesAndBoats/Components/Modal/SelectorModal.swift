@@ -100,7 +100,7 @@ extension SelectorModal: UICollectionViewDataSource, UICollectionViewDelegate, U
         cell.isUserInteractionEnabled = true
         let view = SelectableView(frame: cell.bounds)
         view.identifier = "Picker cell " + indexPath.description
-        view.titleOnlyMode = true
+        view.subtitleOnlyMode = true
 
 //        view.model.noCheckBox = true
 //        if view.model.noCheckBox == true {
@@ -111,7 +111,7 @@ extension SelectorModal: UICollectionViewDataSource, UICollectionViewDelegate, U
 
         let item = filteredItems.count > 0 ? filteredItems[indexPath.row] : model.items[indexPath.row]
         view.model.image = UIImage(named: item.value) ?? UIImage()
-        view.model.title = item.name
+        view.model.subtitle = item.name
         view.isUserInteractionEnabled = false
         cell.applyView(view: view)
         return cell

@@ -62,10 +62,10 @@ class BookingsView: BaseViewControllerPlain {
     }
     
     func updateInitialUpcoming(){
-        upcomingBookingSegment.isSelected = true
+        upcomingBookingSegment.isNotSelected = true
         isDisplayingUpcoming = true
-        upcomingBookingSegment.isSelected = true
-        pastBookingSegment.isSelected = false
+        upcomingBookingSegment.isNotSelected = true
+        pastBookingSegment.isNotSelected = false
         
         if let responseData = responseData{
             emptyBooking.isHidden = true
@@ -76,8 +76,8 @@ class BookingsView: BaseViewControllerPlain {
     func setupSegmentControl(){
         upcomingBookingSegment.onSelect = { [weak self] in
             self?.isDisplayingUpcoming = true
-            self?.upcomingBookingSegment.isSelected = true
-            self?.pastBookingSegment.isSelected = false
+            self?.upcomingBookingSegment.isNotSelected = true
+            self?.pastBookingSegment.isNotSelected = false
             
             if let responseData = self?.responseData{
                 self?.emptyBooking.isHidden = true
@@ -87,8 +87,8 @@ class BookingsView: BaseViewControllerPlain {
         
         pastBookingSegment.onSelect = { [weak self] in
             self?.isDisplayingUpcoming = false
-            self?.upcomingBookingSegment.isSelected = false
-            self?.pastBookingSegment.isSelected = true
+            self?.upcomingBookingSegment.isNotSelected = false
+            self?.pastBookingSegment.isNotSelected = true
             
             if let responseData = self?.responseData{
                 self?.emptyBooking.isHidden = true

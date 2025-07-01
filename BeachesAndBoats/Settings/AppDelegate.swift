@@ -8,6 +8,7 @@
 import UIKit
 import PaystackCore
 import IQKeyboardManagerSwift
+import IQKeyboardToolbarManager
 //import PusherSwift
 
 @main
@@ -25,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.overrideUserInterfaceStyle = .light
         
         IQKeyboardManager.shared.isEnabled = true
-        IQKeyboardManager.shared.resignOnTouchOutside = true
+        IQKeyboardToolbarManager.shared.isEnabled = true
         
         return true
     }

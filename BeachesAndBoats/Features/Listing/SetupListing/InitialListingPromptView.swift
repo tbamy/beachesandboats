@@ -18,7 +18,7 @@ class InitialListingPromptView: BaseViewControllerPlain {
         super.viewDidLoad()
 
         navigationItem.hidesBackButton = true
-        
+        closeBtn.isUserInteractionEnabled = true
         closeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
         
     }

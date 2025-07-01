@@ -100,33 +100,38 @@ class NumberField: InputField{
         textField.text = "0"
         textField.keyboardType = .numberPad
         
-        // Create the container view for the stack
-        let iconContainer = UIView(frame: CGRect(x: 5, y: 5, width: 10, height: 10))
-        
-        // Create the stack view to hold the images
-        let stackView = UIStackView(frame: iconContainer.bounds)
+        let iconContainer = UIView()
+        iconContainer.translatesAutoresizingMaskIntoConstraints = false
+        iconContainer.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        iconContainer.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        // Create the stack view
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.spacing = 2 // Add spacing between images
-        
-        // Create the chevron.up image view
-        let upImageView = UIImageView()
-        upImageView.image = UIImage(systemName: "chevron.up")
+        stackView.spacing = 2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Create the up arrow
+        let upImageView = UIImageView(image: UIImage(systemName: "chevron.up"))
         upImageView.tintColor = .label
-        upImageView.contentMode = .center
-        upImageView.isUserInteractionEnabled = true // Enable user interaction
+        upImageView.contentMode = .scaleAspectFit
+        upImageView.isUserInteractionEnabled = true
         let upTapGesture = UITapGestureRecognizer(target: self, action: #selector(incrementValue))
         upImageView.addGestureRecognizer(upTapGesture)
+        upImageView.widthAnchor.constraint(equalToConstant: 13).isActive = true
+        upImageView.heightAnchor.constraint(equalToConstant: 13).isActive = true
 
-        // Create the chevron.down image view
-        let downImageView = UIImageView()
-        downImageView.image = UIImage(systemName: "chevron.down")
+        // Create the down arrow
+        let downImageView = UIImageView(image: UIImage(systemName: "chevron.down"))
         downImageView.tintColor = .label
-        downImageView.contentMode = .center
-        downImageView.isUserInteractionEnabled = true // Enable user interaction
+        downImageView.contentMode = .scaleAspectFit
+        downImageView.isUserInteractionEnabled = true
         let downTapGesture = UITapGestureRecognizer(target: self, action: #selector(decrementValue))
         downImageView.addGestureRecognizer(downTapGesture)
+        downImageView.widthAnchor.constraint(equalToConstant: 13).isActive = true
+        downImageView.heightAnchor.constraint(equalToConstant: 13).isActive = true
 
         // Add the image views to the stack view
         stackView.addArrangedSubview(upImageView)

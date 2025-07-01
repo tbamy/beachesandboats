@@ -98,14 +98,19 @@ extension BoatHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSourc
         cell.isUserInteractionEnabled = true
         let view = SelectableCheckbox(frame: cell.bounds)
         view.checkButton.btnType = "radio"
-        view.identifier = "Amenities Cell " + indexPath.description
-        let item = boatTypes?[indexPath.row]
+        view.identifier = "BoatTypes Cell " + indexPath.description
         
-        view.model.subtitle = item?.name ?? ""
-            
+        guard let item = boatTypes?[indexPath.row] else {
+            return cell
+        }
+        
+        view.model.subtitle = item.name ?? ""
+        
+        // Set the state based on whether this item is selected
+        view.model.state = (selectedIndex == indexPath.item)
+        
         view.isUserInteractionEnabled = false
         cell.applyView(view: view)
-        
         
         return cell
     }
@@ -120,29 +125,35 @@ extension BoatHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let previousIndex = selectedIndex else {
-            selectedIndex = indexPath.item
-            collectionView.reloadItems(at: [indexPath])
-            return
-        }
-
-        if previousIndex == indexPath.item {
+        let previousIndex = selectedIndex
+        
+        // Update selection
+        if selectedIndex == indexPath.item {
             selectedIndex = nil
-            collectionView.reloadItems(at: [indexPath])
+            selectedBoatType = nil
+            boatType = nil
+            nextBtn.isEnabled = false
         } else {
             selectedIndex = indexPath.item
-            collectionView.reloadItems(at: [IndexPath(item: previousIndex, section: 0), indexPath])
+            selectedBoatType = boatTypes?[indexPath.item].id
+            boatType = boatTypes?[indexPath.item].name
+            nextBtn.isEnabled = true
         }
         
-        print("selected Index \(selectedIndex)")
-
-        let selectedItem = boatTypes?[indexPath.row]
-        selectedBoatType = selectedItem?.id
-        boatType = selectedItem?.name
-
-        nextBtn.isEnabled = true
+        // Update the previously selected cell (if any)
+        if let previous = previousIndex,
+           let previousCell = collectionView.cellForItem(at: IndexPath(item: previous, section: 0)) as? DynamicCollectionViewCell,
+           let previousView = previousCell.subviews.first(where: { $0 is SelectableCheckbox }) as? SelectableCheckbox {
+            previousView.model.state = false
+        }
+        
+        // Update the currently selected cell
+        if let currentCell = collectionView.cellForItem(at: indexPath) as? DynamicCollectionViewCell,
+           let currentView = currentCell.subviews.first(where: { $0 is SelectableCheckbox }) as? SelectableCheckbox {
+            currentView.model.state = (selectedIndex == indexPath.item)
+        }
+        
+        print("Selected Index: \(selectedIndex ?? -1)")
     }
-
-
     
 }

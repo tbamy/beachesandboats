@@ -52,10 +52,10 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
             
             
             if var createBoatListing = createBoatListing{
-                let additionalAmenities = createBoatListing.amenities + selectedAmenities
+                let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
                 createBoatListing.amenities = additionalAmenities
                 
-                print("current amenities: \(createBoatListing.amenities)")
+                print("current amenities: \(createBoatListing.amenities ?? [])")
                 print("additional amenities: \(selectedAmenities)")
                 print(createBoatListing)
                 
@@ -67,7 +67,7 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBoatListing = createBoatListing{
-            let additionalAmenities = createBoatListing.amenities + selectedAmenities
+            let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
             createBoatListing.amenities = additionalAmenities
             
             AppStorage.boatListing = createBoatListing

@@ -25,7 +25,7 @@ class SelectHouseTypeView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         LoadingModal.show()
         vm.getBeachData()
         bindNetwork()

@@ -72,28 +72,6 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         let imgUrl = beachDetails?.rooms?.first?.images?.first?.url
         imgUrl?.loadImage(into: topImage, placeholder: "dummy")
-        
-//        if let url = URL(string: beachDetails?.rooms?.first?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
-//            topImage.kf.setImage(
-//                with: url,
-//                placeholder: UIImage(named: "dummy"),
-//                options: nil,
-//                completionHandler: { [self] result in
-//                    switch result {
-//                    case .success(let value):
-//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-//                    case .failure(let error):
-//                        print("Failed to load image: \(error.localizedDescription)")
-//                        topImage.image = UIImage(named: "dummy")
-//                    }
-//                }
-//            )
-//        } else {
-//            topImage.image = UIImage(named: "dummy")
-//        }
-
-        
-        
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
         
@@ -117,12 +95,7 @@ class BeachDetailsView: BaseViewControllerPlain {
             totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
         }
         
-//        print("Available From: \(backendFrom_when) - Available To: \(backendTo_when)")
-        
         checkinDateLabel.onDateSelected = { (date) in
-//            checkinDateLabel.onDateSelected = { (startDateString, endDateString) in
-//            let startDate = startDateString.toBackendDate()
-//            let endDate = endDateString?.toBackendDate()
             
             self.from_when = date
             
@@ -161,11 +134,11 @@ class BeachDetailsView: BaseViewControllerPlain {
         titleLabel.text = beachDetails?.name
         locationLabel.text = "\(beachDetails?.locations?.city ?? ""), \(beachDetails?.locations?.state ?? "") \(beachDetails?.locations?.country ?? "")"
         locationView.layer.cornerRadius = 8
-//        let longitude = Double(beachDetails?.locations?.longitude ?? "") ?? 0
-//        let latitude = Double(beachDetails?.locations?.latitude ?? "") ?? 0
+        let longitude = Double(beachDetails?.locations?.longitude ?? "") ?? 0
+        let latitude = Double(beachDetails?.locations?.latitude ?? "") ?? 0
         
-        let longitude = Double("-95.5878280") ?? 0
-        let latitude = Double("23.9900130") ?? 0
+//        let longitude = Double("-95.5878280") ?? 0
+//        let latitude = Double("23.9900130") ?? 0
         print("\(latitude), \(longitude)")
         
         centerMapOnLocation(latitude: latitude, longitude: longitude)
@@ -173,10 +146,8 @@ class BeachDetailsView: BaseViewControllerPlain {
         aboutHostLabel.text = beachDetails?.aboutOwner
         hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
         ratingLabel.text = "\(beachDetails?.rating ?? 0)"
-        let totalGuests = (beachDetails?.noOfAdults ?? 0) + (beachDetails?.noOfChildren ?? 0)
-        roomAndGuestsLabel.text = "\(totalGuests) guests, \(beachDetails?.rooms?.count ?? 0) rooms"
-        print("no of adults: \(beachDetails?.noOfAdults)")
-        print("no of children: \(beachDetails?.noOfChildren)")
+        roomAndGuestsLabel.text = "\(beachDetails?.rooms?.first?.noOfOccupant ?? "") guests, \(beachDetails?.rooms?.count ?? 0) room(s)"
+
         
         amenities = beachDetails?.amenities ?? []
         comments = beachDetails?.reviews ?? []
@@ -188,17 +159,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
         
     }
-    
-//    func setupMap(){
-//        locationView.showsUserLocation = true // Show user location on the map
-//        locationView.userTrackingMode = .follow // Keep map centered on user
-//
-////        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.requestWhenInUseAuthorization() // Request location access
-//        locationManager.startUpdatingLocation() // Start location updates
-//               
-//    }
+
     
     @objc func viewImages(){
         
@@ -307,7 +268,7 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating ?? 0
+            view.model.rating = cellAt.rating ?? ""
             view.model.comment = cellAt.note ?? ""
             
             cell.applyView(view: view)
@@ -360,23 +321,3 @@ extension BeachDetailsView {
     }
 
 }
-
-//extension BeachDetailsView: CLLocationManagerDelegate{
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let userLocation = locations.last else { return }
-//        
-//        let region = MKCoordinateRegion(
-//            center: userLocation.coordinate,
-//            latitudinalMeters: 500, longitudinalMeters: 500
-//        )
-//        
-//        locationView.setRegion(region, animated: true)
-//    }
-//
-//    // Handle permission denial
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        if status == .denied || status == .restricted {
-//            print("Location access denied. Please enable it in Settings.")
-//        }
-//    }
-//}

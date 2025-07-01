@@ -10,14 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadButtonField" customModule="BeachesAndBoats" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadButtonField" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iLJ-jv-8Kv" id="uoN-aq-93L"/>
+                <outlet property="error" destination="DND-UL-on4" id="Iql-wv-Nfe"/>
+                <outlet property="errorStack" destination="bE6-ae-DCd" id="eBu-jr-QUT"/>
+                <outlet property="uploadButton" destination="MVh-7C-CHq" id="y50-CA-Iqb"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="172"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="187"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLJ-jv-8Kv">
-                    <rect key="frame" x="0.0" y="59" width="393" height="79"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="94"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bE6-ae-DCd">
                             <rect key="frame" x="20" y="57" width="353" height="14"/>
@@ -30,7 +37,7 @@
                                         <constraint firstAttribute="height" constant="14" id="R1U-1k-v0R"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DND-UL-on4" customClass="RegularLabel" customModule="AlatFramework" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DND-UL-on4" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
                                     <rect key="frame" x="19" y="0.0" width="334" height="14"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" name="Error"/>
@@ -63,6 +70,9 @@
                                     <integer key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="uploadTapped:" destination="-1" eventType="touchUpInside" id="S8l-uM-a3X"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -85,7 +95,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iLJ-jv-8Kv" secondAttribute="trailing" id="is4-oz-xrZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="139.69465648854961" y="-219.71830985915494"/>
+            <point key="canvasLocation" x="139.69465648854961" y="-214.43661971830986"/>
         </view>
     </objects>
     <designables>

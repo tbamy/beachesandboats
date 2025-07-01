@@ -22,7 +22,7 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
     var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setup()
     }
     

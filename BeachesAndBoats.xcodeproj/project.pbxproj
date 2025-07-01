@@ -25,6 +25,8 @@
 		A60580F72CDD43E900B17505 /* BoatNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580F52CDD43E900B17505 /* BoatNameView.swift */; };
 		A60580F82CDD43E900B17505 /* BoatNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A60580F62CDD43E900B17505 /* BoatNameView.xib */; };
 		A60580FA2CDE874400B17505 /* ListBoatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60580F92CDE874400B17505 /* ListBoatViewModel.swift */; };
+		A606D55D2E087B8800CAA07A /* ContactCustomerSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A606D55B2E087B8800CAA07A /* ContactCustomerSupportView.swift */; };
+		A606D55E2E087B8800CAA07A /* ContactCustomerSupportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A606D55C2E087B8800CAA07A /* ContactCustomerSupportView.xib */; };
 		A61499292C5E97DB00E0CDFC /* FullModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61499272C5E97DB00E0CDFC /* FullModal.swift */; };
 		A614992A2C5E97DB00E0CDFC /* FullModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61499282C5E97DB00E0CDFC /* FullModal.xib */; };
 		A614992D2C5E98A100E0CDFC /* LoadingModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614992B2C5E98A100E0CDFC /* LoadingModal.swift */; };
@@ -406,6 +408,10 @@
 		A6B415B32D0B794E00717CE9 /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B415B22D0B794E00717CE9 /* UserDevice.swift */; };
 		A6B415B52D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */; };
 		A6B415B82D0E98E900717CE9 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = A6B415B72D0E98E900717CE9 /* DeviceKit */; };
+		A6B99D402DBB361D0069E505 /* EditBoatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B99D3F2DBB361D0069E505 /* EditBoatVM.swift */; };
+		A6B99D422DBB36280069E505 /* EditBeachVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B99D412DBB36280069E505 /* EditBeachVM.swift */; };
+		A6B99D452DBB88D50069E505 /* EditPropertiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B99D432DBB88D50069E505 /* EditPropertiesListView.swift */; };
+		A6B99D462DBB88D50069E505 /* EditPropertiesListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B99D442DBB88D50069E505 /* EditPropertiesListView.xib */; };
 		A6BC757C2D52C38A001B128A /* BankDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */; };
 		A6C1530D2D511439004078A3 /* GetAllDishesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1530C2D511439004078A3 /* GetAllDishesResponse.swift */; };
 		A6C1C4162CBA6E6C001CD27D /* DateRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */; };
@@ -504,6 +510,7 @@
 		A6CA3D752CB9CFB8009307B2 /* BouncerUploadImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D732CB9CFB8009307B2 /* BouncerUploadImagesView.xib */; };
 		A6CA3D782CBA4F88009307B2 /* CalendarTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CA3D762CBA4F88009307B2 /* CalendarTestView.swift */; };
 		A6CA3D792CBA4F88009307B2 /* CalendarTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CA3D772CBA4F88009307B2 /* CalendarTestView.xib */; };
+		A6DF415E2DF0D14100319A78 /* IQKeyboardToolbar in Frameworks */ = {isa = PBXBuildFile; productRef = A6DF415D2DF0D14100319A78 /* IQKeyboardToolbar */; };
 		A6E050422CEE05E900F0211C /* ServiceDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E050412CEE05E900F0211C /* ServiceDashboard.swift */; };
 		A6E050492CEF428800F0211C /* BeachHostingHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E050472CEF428800F0211C /* BeachHostingHomeView.swift */; };
 		A6E0504A2CEF428800F0211C /* BeachHostingHomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E050482CEF428800F0211C /* BeachHostingHomeView.xib */; };
@@ -605,6 +612,8 @@
 		A60580F52CDD43E900B17505 /* BoatNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatNameView.swift; sourceTree = "<group>"; };
 		A60580F62CDD43E900B17505 /* BoatNameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatNameView.xib; sourceTree = "<group>"; };
 		A60580F92CDE874400B17505 /* ListBoatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBoatViewModel.swift; sourceTree = "<group>"; };
+		A606D55B2E087B8800CAA07A /* ContactCustomerSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCustomerSupportView.swift; sourceTree = "<group>"; };
+		A606D55C2E087B8800CAA07A /* ContactCustomerSupportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCustomerSupportView.xib; sourceTree = "<group>"; };
 		A61499272C5E97DB00E0CDFC /* FullModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullModal.swift; sourceTree = "<group>"; };
 		A61499282C5E97DB00E0CDFC /* FullModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FullModal.xib; sourceTree = "<group>"; };
 		A614992B2C5E98A100E0CDFC /* LoadingModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModal.swift; sourceTree = "<group>"; };
@@ -978,6 +987,10 @@
 		A6AF51312D48EB4D009AEB00 /* HostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostType.swift; sourceTree = "<group>"; };
 		A6B415B22D0B794E00717CE9 /* UserDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDevice.swift; sourceTree = "<group>"; };
 		A6B415B42D0B7A1D00717CE9 /* VerifyLoginOtpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyLoginOtpRequest.swift; sourceTree = "<group>"; };
+		A6B99D3F2DBB361D0069E505 /* EditBoatVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatVM.swift; sourceTree = "<group>"; };
+		A6B99D412DBB36280069E505 /* EditBeachVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeachVM.swift; sourceTree = "<group>"; };
+		A6B99D432DBB88D50069E505 /* EditPropertiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertiesListView.swift; sourceTree = "<group>"; };
+		A6B99D442DBB88D50069E505 /* EditPropertiesListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPropertiesListView.xib; sourceTree = "<group>"; };
 		A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsVM.swift; sourceTree = "<group>"; };
 		A6C1530C2D511439004078A3 /* GetAllDishesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllDishesResponse.swift; sourceTree = "<group>"; };
 		A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeIndicatorView.swift; sourceTree = "<group>"; };
@@ -1173,6 +1186,7 @@
 				A61627742C7DBC2700F6B452 /* RxMoya in Frameworks */,
 				A675D9FD2D2D1084003E297B /* PaystackUI in Frameworks */,
 				A61627722C7DBC2700F6B452 /* ReactiveMoya in Frameworks */,
+				A6DF415E2DF0D14100319A78 /* IQKeyboardToolbar in Frameworks */,
 				605D77A0EBA7572A1D685DEC /* Pods_BeachesAndBoats.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1443,6 +1457,7 @@
 		A633574B2BF0D7D9008AF034 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A6B99D3D2DBB291C0069E505 /* EditProperties */,
 				A66F3FA62D29631800902E43 /* MenuTab */,
 				A68A6EB72D244644000A67E1 /* Earning */,
 				A675D9AA2D16CA67003E297B /* Earnings */,
@@ -2076,6 +2091,8 @@
 				A66F3FB62D29E64900902E43 /* ContactSupportView.swift */,
 				A66F3FB72D29E64900902E43 /* ContactSupportView.xib */,
 				A6F490FD2D723284002F8F5B /* ContactSupportVM.swift */,
+				A606D55B2E087B8800CAA07A /* ContactCustomerSupportView.swift */,
+				A606D55C2E087B8800CAA07A /* ContactCustomerSupportView.xib */,
 			);
 			path = MenuTab;
 			sourceTree = "<group>";
@@ -2259,6 +2276,25 @@
 				A6A8578C2D4BE5A2008BC9A0 /* SelectServiceModal.xib */,
 			);
 			path = ExtraViews;
+			sourceTree = "<group>";
+		};
+		A6B99D3D2DBB291C0069E505 /* EditProperties */ = {
+			isa = PBXGroup;
+			children = (
+				A6B99D3E2DBB360A0069E505 /* VM */,
+				A6B99D432DBB88D50069E505 /* EditPropertiesListView.swift */,
+				A6B99D442DBB88D50069E505 /* EditPropertiesListView.xib */,
+			);
+			path = EditProperties;
+			sourceTree = "<group>";
+		};
+		A6B99D3E2DBB360A0069E505 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				A6B99D3F2DBB361D0069E505 /* EditBoatVM.swift */,
+				A6B99D412DBB36280069E505 /* EditBeachVM.swift */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		A6C1C4142CBA6DBD001CD27D /* HorizonDate */ = {
@@ -2601,6 +2637,7 @@
 				A675D9FA2D2D1084003E297B /* PaystackPusherWrapper */,
 				A675D9FC2D2D1084003E297B /* PaystackUI */,
 				A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */,
+				A6DF415D2DF0D14100319A78 /* IQKeyboardToolbar */,
 			);
 			productName = BeachesAndBoats;
 			productReference = A6015B0A2BEA223400545164 /* BeachesAndBoats.app */;
@@ -2637,6 +2674,7 @@
 				A6B415B62D0E98E900717CE9 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 				A675D9F72D2D1084003E297B /* XCRemoteSwiftPackageReference "paystack-sdk-ios" */,
 				A6FA71652D6CB35B00BB5E44 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				A6DF415C2DF0D14000319A78 /* XCRemoteSwiftPackageReference "IQKeyboardToolbar" */,
 			);
 			productRefGroup = A6015B0B2BEA223400545164 /* Products */;
 			projectDirPath = "";
@@ -2840,6 +2878,7 @@
 				A6F406A72C02D3A800973BD7 /* Montserrat-LightItalic.ttf in Resources */,
 				A669F7BF2D2409D700230E0A /* MessageViewCell.xib in Resources */,
 				A6E0504A2CEF428800F0211C /* BeachHostingHomeView.xib in Resources */,
+				A606D55E2E087B8800CAA07A /* ContactCustomerSupportView.xib in Resources */,
 				A6A8579A2D4BF1FD008BC9A0 /* FindDJView.xib in Resources */,
 				A66F136D2D725FF300D4D533 /* HouseAndGroundRulesView.xib in Resources */,
 				A642F9232D54E1D00089F593 /* ConfirmBoatBookingView.xib in Resources */,
@@ -2849,6 +2888,7 @@
 				A614993A2C5E9A3C00E0CDFC /* FilterModal.xib in Resources */,
 				A669F7BB2D23F91600230E0A /* ServiceHostingDetailsView.xib in Resources */,
 				A61B3C292CB6EF6600C89C14 /* RoomsListView.xib in Resources */,
+				A6B99D462DBB88D50069E505 /* EditPropertiesListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2863,9 +2903,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BeachesAndBoats/Pods-BeachesAndBoats-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BeachesAndBoats/Pods-BeachesAndBoats-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2901,6 +2945,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A606D55D2E087B8800CAA07A /* ContactCustomerSupportView.swift in Sources */,
 				A6FB74482C134EC700A26806 /* SignupView.swift in Sources */,
 				A6CA3D542CB9CD8E009307B2 /* DJInformationVIew.swift in Sources */,
 				A675DA032D2FC1CB003E297B /* ListBeachViewModel.swift in Sources */,
@@ -2918,6 +2963,7 @@
 				A642F93C2D554AB30089F593 /* GetMessageHistoryResponse.swift in Sources */,
 				A63F31282CB07D4100D402F4 /* ListingService.swift in Sources */,
 				A65C51052CAA82A40027E5F1 /* SelectorModal.swift in Sources */,
+				A6B99D422DBB36280069E505 /* EditBeachVM.swift in Sources */,
 				A6CA3D2B2CB9BDE2009307B2 /* DestinationCheckboxView.swift in Sources */,
 				A650AAE12CB867E600A70CF4 /* VerificationFormView.swift in Sources */,
 				A61B3C2C2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift in Sources */,
@@ -3035,6 +3081,7 @@
 				A642F96C2D58D2720089F593 /* GetUserBookingsResponse.swift in Sources */,
 				A6A2E84C2CBFB65E004E58EB /* ProfileServiceMock.swift in Sources */,
 				A65155B32D5E95000018C6DB /* BoatBookingDetailsView.swift in Sources */,
+				A6B99D452DBB88D50069E505 /* EditPropertiesListView.swift in Sources */,
 				A6A2E84A2CBFB650004E58EB /* ProfileServiceImplementation.swift in Sources */,
 				A6EF00E22D283FE200893C05 /* CreateWithdrawalResponse.swift in Sources */,
 				A6E050552CF0CAF300F0211C /* DashboardViewCell.swift in Sources */,
@@ -3199,6 +3246,7 @@
 				A642F9722D59165E0089F593 /* SavedFavouritesVM.swift in Sources */,
 				A675D9B72D18C5FC003E297B /* TopRatedCollectionCell.swift in Sources */,
 				A6E3A1312D7181D1007BB665 /* ResetPasswordRequest.swift in Sources */,
+				A6B99D402DBB361D0069E505 /* EditBoatVM.swift in Sources */,
 				A68A6EC62D256BD9000A67E1 /* TopEarningResponse.swift in Sources */,
 				A642F96A2D58D25F0089F593 /* GetSavedFavouritesResponse.swift in Sources */,
 				A6A2E8742CD4E955004E58EB /* ChefDishesResponse.swift in Sources */,
@@ -3410,13 +3458,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2P8F2N2L2;
+				DEVELOPMENT_TEAM = C5ZBWXCSV4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Beaches and Boats";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide accurate map features.";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -3445,13 +3495,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2P8F2N2L2;
+				DEVELOPMENT_TEAM = C5ZBWXCSV4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeachesAndBoats/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Beaches and Boats";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide accurate map features.";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -3538,6 +3590,14 @@
 				kind = branch;
 			};
 		};
+		A6DF415C2DF0D14000319A78 /* XCRemoteSwiftPackageReference "IQKeyboardToolbar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardToolbar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 		A6FA71652D6CB35B00BB5E44 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -3598,6 +3658,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A6C20FFF2C874D980045C670 /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
 			productName = HorizonCalendar;
+		};
+		A6DF415D2DF0D14100319A78 /* IQKeyboardToolbar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A6DF415C2DF0D14000319A78 /* XCRemoteSwiftPackageReference "IQKeyboardToolbar" */;
+			productName = IQKeyboardToolbar;
 		};
 		A6FA71662D6CB35B00BB5E44 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

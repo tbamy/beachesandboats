@@ -54,58 +54,55 @@ class BoatAddressView: BaseViewControllerPlain {
         titleLabel.text = "What is the main location of your \(boatType ?? "")?"
         subtitleLabel.text = "Provide the starting location of your \(boatType ?? "")"
         
-        stateField.textChanged = { [weak self] _, _, _ in
-            self?.validate()
+        stateField.itemChanged = { [weak self] item in
+            self?.validateState()
+            self?.stateName = self?.stateField.text
+            self?.zoomToState()
         }
-
+        
         streetField.textChanged = { [weak self] _, _, _ in
-            self?.validate()
+            self?.validateStreet()
         }
-
+        
         cityField.textChanged = { [weak self] _, _, _ in
-            self?.validate()
+            self?.validateCity()
         }
+        
+        mapView.isUserInteractionEnabled = true
+        mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMapTap)))
+
 
         nextBtn.isEnabled = false
     }
 
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField == cityField || textField == stateField {
-//            stateName = stateField.text
-//            cityName = cityField.text
-//            searchLocation()
-//        }
-//    }
-    
-    func searchLocation() {
-        guard let city = cityName, !city.isEmpty,
-              let state = stateName, !state.isEmpty else {
-            print("No state or City")
-            // Handle empty input (e.g., show an alert)
-            return
+    func zoomToState() {
+        guard let state = stateName, !state.isEmpty else { return }
+        geocoder.geocodeAddressString(state) { [weak self] placemarks, error in
+            if let coordinate = placemarks?.first?.location?.coordinate {
+                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 20000, longitudinalMeters: 20000)
+                self?.mapView.setRegion(region, animated: true)
+            }
         }
-        
-        let address = "\(city), \(state)"
-        
-        geocoder.geocodeAddressString(address) { [weak self] (placemarks, error) in
-            if let error = error {
-                print("Geocoding error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let placemark = placemarks?.first, let location = placemark.location else {
-                print("No location found")
-                return
-            }
-            
-            let coordinate = location.coordinate
-            self?.mapView.setRegion(MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000), animated: true)
+    }
 
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(city), \(state)"
-            self?.mapView.addAnnotation(annotation)
-        }
+    @objc func handleMapTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        let locationInView = gestureRecognizer.location(in: mapView)
+        let coordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+        
+        // Remove existing annotations
+        mapView.removeAnnotations(mapView.annotations)
+        
+        // Add new annotation
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = "Selected Location"
+        mapView.addAnnotation(annotation)
+        
+        // Save to model
+//        createBoatListing?.latitude = coordinate.latitude
+//        createBoatListing?.longitude = coordinate.longitude
+        
+        print("Selected Coordinates: \(coordinate.latitude), \(coordinate.longitude)")
     }
             
 
@@ -144,12 +141,18 @@ class BoatAddressView: BaseViewControllerPlain {
 
 
 extension BoatAddressView{
-    func validate(){
-        let validateState = stateField.validate(rules: [Rule(.isEmpty, "Select a state")])
-        let validateStreet = streetField.validate(rules: [Rule(.isEmpty, "Enter your street address")])
-        let validateCity = cityField.validate(rules: [Rule(.isEmpty, "Enter your City")])
+    func validateState(){
+        let _ = stateField.validate(rules: [Rule(.isEmpty, "Select a state")])
+    }
+    
+    func validateStreet(){
+        let validateStreet = streetField.validate(rules: [Rule(.isEmpty, "Enter street address")])
         
-        nextBtn.isEnabled = validateCity && validateState && validateStreet
+        nextBtn.isEnabled = validateStreet
+    }
+    
+    func validateCity(){
+        let _ = cityField.validate(rules: [Rule(.isEmpty, "Enter City")])
     }
     
     func statesData(){

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -31,10 +32,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qln-iA-0pf">
-                            <rect key="frame" x="60" y="50" width="172" height="2"/>
+                            <rect key="frame" x="60" y="45.666666666666671" width="172" height="1"/>
                             <color key="backgroundColor" name="B&amp;B"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="2" id="dMs-BS-SgT"/>
+                                <constraint firstAttribute="height" constant="1" id="dMs-BS-SgT"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -42,7 +43,7 @@
                     <constraints>
                         <constraint firstItem="Rro-dP-ErD" firstAttribute="centerX" secondItem="SDp-pH-FiP" secondAttribute="centerX" id="H8f-lD-R26"/>
                         <constraint firstItem="qln-iA-0pf" firstAttribute="leading" secondItem="SDp-pH-FiP" secondAttribute="leading" constant="60" id="KAD-4X-xYe"/>
-                        <constraint firstAttribute="bottom" secondItem="qln-iA-0pf" secondAttribute="bottom" constant="2" id="dWb-Y4-VO7"/>
+                        <constraint firstItem="qln-iA-0pf" firstAttribute="top" secondItem="Rro-dP-ErD" secondAttribute="bottom" constant="10" id="cDx-HI-3Rg"/>
                         <constraint firstAttribute="trailing" secondItem="qln-iA-0pf" secondAttribute="trailing" constant="60" id="qzO-8u-SbV"/>
                         <constraint firstItem="Rro-dP-ErD" firstAttribute="centerY" secondItem="SDp-pH-FiP" secondAttribute="centerY" id="rWj-H3-cp7"/>
                     </constraints>
@@ -60,6 +61,11 @@
             <point key="canvasLocation" x="-33.587786259541986" y="-228.52112676056339"/>
         </view>
     </objects>
+    <designables>
+        <designable name="Rro-dP-ErD">
+            <size key="intrinsicContentSize" width="35.333333333333336" height="17"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="B&amp;B">
             <color red="0.0" green="0.30980392156862746" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

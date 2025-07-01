@@ -66,6 +66,12 @@ class UploadButtonField: BaseXib {
 //        uploadImage.contentMode = .center
 //    }
     
+    func showFileAddedState() {
+        uploadButton.setTitle("✓ File Added", for: .normal)
+        uploadButton.setTitleColor(.systemGreen, for: .normal)
+    }
+
+    
     func updateError() {
         errorStack.isHidden = errorText.isEmpty
         error.text = errorText
@@ -112,8 +118,11 @@ extension UploadButtonField: UIImagePickerControllerDelegate, UINavigationContro
             let fileSize = Double(imageData.count) / 1000000.0
             if fileSize <= 1.0 {
                 onSelected(imageData, ".jpg")
+                showFileAddedState()
             } else {
-                MiddleModal.show(title: "Image should not be more than 1mb")
+                errorText = "Image should not be more than 1mb"
+                updateError()
+//                MiddleModal.show(title: "Image should not be more than 1mb", type: .caution)
             }
         }
 
@@ -138,8 +147,11 @@ extension UploadButtonField: UIImagePickerControllerDelegate, UINavigationContro
                     if fileSize <= 1.0 {
                         setPdfImage(pdfDocument: pdfDocument)
                         onSelected(pdfData, ".pdf")
+                        showFileAddedState()
                     } else {
-                        MiddleModal.show(title: "Image should not be more than 1mb", type: .error)
+                        errorText = "File should not be more than 1mb"
+                        updateError()
+//                        MiddleModal.show(title: "Image should not be more than 1mb", type: .caution)
                     }
                 }
 

@@ -33,7 +33,7 @@ class TwoFASecurityView: BaseViewControllerPlain {
     }
 
     @objc func gmailTapped(_ sender: UITapGestureRecognizer){
-        AddEmailAddressModal.show { userEmail in
+        AddEmailAddressModal.show(on: view) { userEmail in
             print(userEmail ?? "")
             self.email = userEmail
             LoadingModal.show(title: "Loading...")
@@ -43,7 +43,7 @@ class TwoFASecurityView: BaseViewControllerPlain {
     }
     
     @objc func phoneTapped(_ sender: UITapGestureRecognizer){
-        AddPhoneNumberModal.show { userPhoneNumber in
+        AddPhoneNumberModal.show(on: view) { userPhoneNumber in
             print(userPhoneNumber ?? "")
             self.phoneNumber = userPhoneNumber
             LoadingModal.show(title: "Loading...")
@@ -75,20 +75,20 @@ extension TwoFASecurityView {
             switch output {
             case .emailSecuritySuccess(let response):
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
-                    ConfirmPhoneNumberModal.show(callBack: { otp in
+                    ConfirmPhoneNumberModal.show(on: self?.view ?? UIView(), callBack: { otp in
                         print(otp)
                         self?.completeVerificationForEmail(otp ?? "")
-                    }, isPhoneNumber: false)
+                    }, isEmail: true)
                 })
                
             case .emailSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             case .phoneSecuritySuccess(let response):
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
-                    ConfirmPhoneNumberModal.show(callBack: { otp in
+                    ConfirmPhoneNumberModal.show(on: self?.view ?? UIView(), callBack: { otp in
                         print(otp)
                         self?.completeVerificationForPhoneNumber(otp ?? "")
-                    }, isPhoneNumber: true)
+                    }, isEmail: false)
                 })
             case .phoneSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

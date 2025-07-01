@@ -94,7 +94,7 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
         
         let nights = calculateNights(from: startDateString, to: endDateString)
         view.model.date = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights ?? 0) Nights)"
-        view.model.guests = "\(cellAt.noOfOccupant ?? 0) Guests"
+        view.model.guests = "\(cellAt.noOfOccupant ?? "") Guests"
         view.model.img = cellAt.images?.first?.url ?? ""
         view.model.amenities = listing?.amenities ?? []
         if let price = cellAt.pricePerNight {
