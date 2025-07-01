@@ -67,7 +67,8 @@ class ProfileView: UIViewController {
     }
     
     @objc func supportAction(){
-        coordinator?.gotoContactSupportView()
+        coordinator?.gotoLoginAndSecurityView()
+//        coordinator?.gotoContactSupportView()
     }
     
     @objc func guideBookAction(){

@@ -46,10 +46,12 @@ class ListingDashboard: UIViewController {
     var coordinator: HostingHouseAndBoatHomeCoordinator?
     
     let vm = ListingDashboardVM()
-    let earningsVM = EarningsVM()
+//    let earningsVM = EarningsVM()
+    let hostListingsVM = HostListingVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<ListingDashboardVM.Input>()
-    let earningsInput = PublishSubject<EarningsVM.Input>()
+//    let earningsInput = PublishSubject<EarningsVM.Input>()
+    let hostListingsInput = PublishSubject<HostListingVM.Input>()
 
     
     var currentHostingData: [BeachHouseReservationsCurrentReservation] = []
@@ -66,11 +68,10 @@ class ListingDashboard: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        hostListingsInput.onNext(.beachHouseListing)
         input.onNext(.beachHouseReservation)
         input.onNext(.boatReservation)
-        
-//        let earningsRequest = year: selectedYear, month: getSelectedMonth
-//        earningsInput.onNext(.topEarnings(earningsRequest))
         
         LoadingModal.show(title: "Loading...")
     }
@@ -123,14 +124,14 @@ class ListingDashboard: UIViewController {
 
     private func updateSegmentSelection() {
         if isBeachReservation {
-            beachReservation.isSelected = true
-            boatReservation.isSelected = false
+            beachReservation.isNotSelected = true
+            boatReservation.isNotSelected = false
             self.upcomingLbl.text = "Upcoming (\(self.upcomingReservationData.count))"
             self.currentHostingLbl.text = "Current hosting (\(self.currentHostingData.count))"
             self.cancelLbl.text = "Cancelled booking (\(self.cancelBookingData.count))"
         } else {
-            beachReservation.isSelected = false
-            boatReservation.isSelected = true
+            beachReservation.isNotSelected = false
+            boatReservation.isNotSelected = true
             self.upcomingLbl.text = "Upcoming boat (\(self.boatUpcomingReservationData.count))"
             self.currentHostingLbl.text = "Current hosting (\(self.boatHostingData.count))"
             self.cancelLbl.text = "Cancelled booking (\(self.boatCancelBookingData.count))"
@@ -242,14 +243,22 @@ class ListingDashboard: UIViewController {
         }
     }
     
+    func noLabelSetup(noLabel: UILabel, title: String){
+        noLabel.numberOfLines = 0
+        noLabel.textAlignment = .center
+        noLabel.text = title
+        noLabel.textColor = .darkGray
+    }
+    
     func checkOutNoData() {
         checkOutNoDataImg.subviews.forEach { $0.removeFromSuperview() }
         
         let noLabel = UILabel()
         let noImage = UIImageView()
-        
-        noLabel.text = "You don't have any check-outs soon"
+    
+        noLabelSetup(noLabel: noLabel, title: "You don't have any check-outs soon")
         noImage.image = UIImage(named: "noDataIcon")
+
         
         checkOutNoDataImg.addSubview(noLabel)
         checkOutNoDataImg.addSubview(noImage)
@@ -271,7 +280,7 @@ class ListingDashboard: UIViewController {
         let noLabel = UILabel()
         let noImage = UIImageView()
         
-        noLabel.text = "You don't have any current hostings"
+        noLabelSetup(noLabel: noLabel, title: "You don't have any current hostings")
         noImage.image = UIImage(named: "noDataIcon")
         
         currentHostingNoDataImg.addSubview(noLabel)
@@ -294,7 +303,7 @@ class ListingDashboard: UIViewController {
         let noLabel = UILabel()
         let noImage = UIImageView()
         
-        noLabel.text = "You don't have any upcoming bookings"
+        noLabelSetup(noLabel: noLabel, title: "You don't have any upcoming bookings")
         noImage.image = UIImage(named: "noDataIcon")
         
         upcomingNoDataImg.addSubview(noLabel)
@@ -317,7 +326,7 @@ class ListingDashboard: UIViewController {
         let noLabel = UILabel()
         let noImage = UIImageView()
         
-        noLabel.text = "You don't have any cancelled bookings"
+        noLabelSetup(noLabel: noLabel, title: "You don't have any cancelled bookings")
         noImage.image = UIImage(named: "noDataIcon")
         
         cancelBookingNoDataImg.addSubview(noLabel)
@@ -349,7 +358,7 @@ extension ListingDashboard {
                 self?.currentHostingCollectionView.reloadData()
                 self?.upcomingCollectionView.reloadData()
                 self?.cancelBookingCollectionView.reloadData()
-                self?.beachHouseCount = (self?.currentHostingData.count ?? 0) + (self?.upcomingReservationData.count ?? 0)
+//                self?.beachHouseCount = (self?.currentHostingData.count ?? 0) + (self?.upcomingReservationData.count ?? 0)
                 self?.setupUI()
                 
             case .beachHouseReservationFailure(let error):
@@ -361,22 +370,40 @@ extension ListingDashboard {
                 self?.currentHostingCollectionView.reloadData()
                 self?.upcomingCollectionView.reloadData()
                 self?.cancelBookingCollectionView.reloadData()
-                self?.boatHouseCount = (self?.boatHostingData.count ?? 0) + (self?.boatUpcomingReservationData.count ?? 0)
+//                self?.boatHouseCount = (self?.boatHostingData.count ?? 0) + (self?.boatUpcomingReservationData.count ?? 0)
                 self?.setupUI()
             case .boatReservationFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
         
-        earningsVM.transform(input: earningsInput)
-        earningsVM.output.subscribe(onNext: { [weak self] output in
+//        earningsVM.transform(input: earningsInput)
+//        earningsVM.output.subscribe(onNext: { [weak self] output in
+//            LoadingModal.dismiss()
+//            switch output {
+//            case .topEarningsSuccess(let response):
+//                // Handle earnings success
+//                self?.handleTopEarningsSuccess(response)
+//            case .topEarningsFailure(let error):
+//                MiddleModal.show(title: error.message ?? "", type: .error)
+//            }
+//        }).disposed(by: disposeBag)
+        
+        hostListingsVM.transform(input: hostListingsInput)
+        hostListingsVM.output.subscribe(onNext: { [weak self] output in
             LoadingModal.dismiss()
             switch output {
-            case .topEarningsSuccess(let response):
-                // Handle earnings success
-                self?.handleTopEarningsSuccess(response)
-            case .topEarningsFailure(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error)
+            case .beachHouseListingSuccess(let response):
+                if let listings = response.data?.beachHouseListings {
+                    self?.beachHouseCount = listings.count
+                }
+                if let boatListings = response.data?.boatListings {
+                    self?.boatHouseCount = boatListings.count
+                }
+                self?.setupUI()
+            case .beachHouseListingFailure(let error):
+                print(error)
+//                MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
     }

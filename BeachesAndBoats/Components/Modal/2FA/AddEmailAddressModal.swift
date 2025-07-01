@@ -68,9 +68,7 @@ class AddEmailAddressModal: BaseXib {
 
 extension AddEmailAddressModal{
     
-    public static func show(callBack: @escaping (String?) -> Void) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+    public static func show(on view: UIView, callBack: @escaping (String?) -> Void) {
         
         let modal = AddEmailAddressModal()
         modal.callback = callBack
@@ -78,12 +76,13 @@ extension AddEmailAddressModal{
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
+
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
-        let height = Helpers.screenHeight * 0.4
+        view.addSubview(backDrop)
+        
+        let height = Helpers.screenHeight * 0.5
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         

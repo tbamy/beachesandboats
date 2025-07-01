@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -29,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="txp-bU-xFJ">
-                    <rect key="frame" x="20" y="99" width="353" height="33"/>
+                    <rect key="frame" x="20" y="158" width="353" height="33"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vXH-b9-4Vh">
                             <rect key="frame" x="0.0" y="0.0" width="174" height="33"/>
@@ -76,7 +76,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
-                    <rect key="frame" x="20" y="172" width="353" height="43"/>
+                    <rect key="frame" x="20" y="231" width="353" height="43"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How much do you want to charge per day for this room?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="43"/>
@@ -87,7 +87,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="aEf-4U-Ete">
-                    <rect key="frame" x="20" y="738" width="353" height="50"/>
+                    <rect key="frame" x="20" y="704" width="353" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMt-qq-l73" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="50"/>
@@ -112,7 +112,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NQa-g1-IK9">
-                    <rect key="frame" x="20" y="245.00000000000003" width="353" height="44.333333333333343"/>
+                    <rect key="frame" x="20" y="304" width="353" height="44.333333333333314"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price per day" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jou-if-uar">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="19.333333333333332"/>
@@ -129,20 +129,20 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLt-VZ-yNk" customClass="BigMoneyInputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="314.33333333333331" width="273" height="70"/>
+                    <rect key="frame" x="20" y="373.33333333333331" width="273" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="Gzk-Ok-g0Z"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Including tax, commission and charges " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXO-iJ-Rku">
-                    <rect key="frame" x="24" y="399.33333333333331" width="349" height="17"/>
+                    <rect key="frame" x="24" y="458.33333333333331" width="349" height="17"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vgO-Pn-AQY">
-                    <rect key="frame" x="20" y="436.33333333333331" width="353" height="33.666666666666686"/>
+                    <rect key="frame" x="20" y="495.33333333333331" width="353" height="33.666666666666686"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="av3-Qs-n0t">
                             <rect key="frame" x="0.0" y="4.3333333333333712" width="24" height="25"/>
@@ -160,10 +160,10 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxT-lP-2Lf">
-                    <rect key="frame" x="96.666666666666686" y="612" width="200" height="38"/>
+                    <rect key="frame" x="96.666666666666686" y="671" width="200" height="38"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pe6-ed-JtT">
-                            <rect key="frame" x="99.999999999999986" y="19" width="0.0" height="0.0"/>
+                            <rect key="frame" x="10" y="19" width="180" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -173,8 +173,10 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="AQU-av-B3v"/>
                         <constraint firstItem="pe6-ed-JtT" firstAttribute="centerY" secondItem="hxT-lP-2Lf" secondAttribute="centerY" id="CiQ-jT-B9Y"/>
+                        <constraint firstAttribute="trailing" secondItem="pe6-ed-JtT" secondAttribute="trailing" constant="10" id="cUY-Uj-xzP"/>
                         <constraint firstAttribute="height" constant="38" id="eZM-3X-ffR"/>
                         <constraint firstItem="pe6-ed-JtT" firstAttribute="centerX" secondItem="hxT-lP-2Lf" secondAttribute="centerX" id="fWG-OA-Ffk"/>
+                        <constraint firstItem="pe6-ed-JtT" firstAttribute="leading" secondItem="hxT-lP-2Lf" secondAttribute="leading" constant="10" id="kp4-18-e2y"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -189,14 +191,14 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2BE-eX-NYW" customClass="DiscountField" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="490" width="173" height="70"/>
+                    <rect key="frame" x="20" y="549" width="173" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="X0h-Ac-Rzx"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount Percentage" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBD-QV-e2g">
-                    <rect key="frame" x="20" y="565" width="190" height="17"/>
+                    <rect key="frame" x="20" y="624" width="190" height="17"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -238,14 +240,6 @@
             <point key="canvasLocation" x="26.717557251908396" y="19.718309859154932"/>
         </view>
     </objects>
-    <designables>
-        <designable name="UMt-qq-l73">
-            <size key="intrinsicContentSize" width="109" height="34.333333333333336"/>
-        </designable>
-        <designable name="lWh-4v-bHX">
-            <size key="intrinsicContentSize" width="59.666666666666664" height="34.333333333333336"/>
-        </designable>
-    </designables>
     <resources>
         <namedColor name="Background">
             <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

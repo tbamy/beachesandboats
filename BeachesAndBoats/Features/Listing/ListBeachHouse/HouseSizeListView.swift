@@ -22,7 +22,7 @@ class HouseSizeListView: BaseViewControllerPlain {
     var selectedHouse: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setUp()
     }
     

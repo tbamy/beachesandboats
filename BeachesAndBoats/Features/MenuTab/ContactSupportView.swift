@@ -29,10 +29,10 @@ class ContactSupportView: BaseViewController {
         super.viewDidLoad()
         title = "Contact customer support"
 
-        bind()
-        addGestureRecognizers()
-        LoadingModal.show()
-        input.onNext(.getCustomerSupportInfo)
+//        bind()
+//        addGestureRecognizers()
+//        LoadingModal.show()
+//        input.onNext(.getCustomerSupportInfo)
     }
     
     func addGestureRecognizers(){
@@ -66,7 +66,7 @@ class ContactSupportView: BaseViewController {
             return
         }
         
-        let subject = "Customer Support Inquiry"
+        let subject = "Customer Support Enquiry"
         let body = "Hello,\n\nI need assistance with..."
         let emailString = "mailto:\(email)?subject=\(subject)&body=\(body)"
         

@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class VerificationFormView: BaseViewControllerPlain {
+class VerificationFormView: BaseViewController {
     
     var coordinator: AccountCoordinator?
     
@@ -36,9 +36,11 @@ class VerificationFormView: BaseViewControllerPlain {
         super.viewDidLoad()
         
         setup()
+        bind()
     }
     
     func setup(){
+        phoneField.keyboardType = .phonePad
         
         uploadIdField.onSelected = { [weak self] (data, ext) in
             self?.idDocument = data
@@ -51,15 +53,13 @@ class VerificationFormView: BaseViewControllerPlain {
     
     func validateFields() -> Bool{
         let validateFirstNameField = firstNameField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
-        let validatemiddleNameField = middleNameField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
-        let validatelastNameField = lastNameField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
-        let validateemailField = emailField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
-        let validatephoneField = phoneField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
+//        let validatemiddleNameField = middleNameField.validate(rules: [Rule(.isEmpty, "Enter Middle Name")])
+        let validateLastNameField = lastNameField.validate(rules: [Rule(.isEmpty, "Enter Last Name")])
+        let validateEmailField = emailField.validate(rules: [Rule(.isEmpty, "Enter Emaile")])
+        let validatePhoneField = phoneField.validate(rules: [Rule(.isEmpty, "Enter Phone Number")])
         
-//        let validateuploadIdField = uploadIdField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
-//        let validatecurrentPictureField = currentPictureField.validate(rules: [Rule(.isEmpty, "Enter First Name")])
-        
-        return true
+     
+        return validateFirstNameField && validateLastNameField && validateEmailField && validatePhoneField
     }
 
     

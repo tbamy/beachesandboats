@@ -5,21 +5,19 @@
 //  Created by Tolu Akintayo on 03/09/2024.
 //
 
+
 import UIKit
 import RxSwift
 
 class HomeView: BaseViewControllerPlain {
-
+    
+    // MARK: - Properties
     var coordinator: ExploreCoordinator?
     
     @IBOutlet weak var filterBtn: UIImageView!
     @IBOutlet weak var searchField: SearchField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var subcategoryCollectionView: UICollectionView!
-//    @IBOutlet weak var topRatedTableView: UITableView!
-
-//    @IBOutlet weak var subCategoryCollectionView: UICollectionView!
-
     @IBOutlet weak var beachHouseCollectionView: UICollectionView!
     @IBOutlet weak var boatCollectionView: UICollectionView!
     @IBOutlet weak var serviceCollectionVIew: UICollectionView!
@@ -39,101 +37,121 @@ class HomeView: BaseViewControllerPlain {
     @IBOutlet weak var topRatedBoatCollectionVIewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    private var refreshControl = UIRefreshControl()
     
-    var selectedView: UIView?
+    private lazy var refreshControl = UIRefreshControl()
     
-//    var allData: [PropertyCategory] = []
-    var categories: [PropertyCategory] = []
-    var subcategories: [SubCategory] = []
-    var boats: [Listing] = []
-    var beaches: [Listing] = []
-    var services: [BeachHouseBooking] = []
-    var topRatedBoats: [Listing] = []
-    var topRatedBeaches: [Listing] = []
+    // MARK: - Data Properties
+    private var categories: [PropertyCategory] = []
+    private var subcategories: [SubCategory] = []
+    private var boats: [Listing] = []
+    private var beaches: [Listing] = []
+    private var services: [BeachHouseBooking] = []
+    private var topRatedBoats: [Listing] = []
+    private var topRatedBeaches: [Listing] = []
     
-    var selectedBeachCat: [String] = []
-    var selectedBoatCat: String = ""
-    var selectedServiceCat: String = ""
+    private var selectedBeachCat: [String] = []
+    private var selectedBoatCat: String = ""
+    private var selectedServiceCat: String = ""
+    private var selectedCatIndex: Int = 0
     
-    var selectedCatIndex: Int? = 0
-//    var selectedServiceProvider: String = ""
+    // MARK: - Constants
+    private struct Constants {
+        static let topRatingThresholdBeach = 5
+        static let topRatingThresholdBoat = 5
+        static let categoryImageMapping: [String: String] = [
+            "Beach Houses": "beachCat",
+            "Boats": "boatsCat",
+            "Services": "serviceCat"
+        ]
+    }
     
-    var details: Listing?
+    private let vm = HomeViewVM()
+    private let disposeBag = DisposeBag()
+    private let input = PublishSubject<HomeViewVM.Input>()
     
-    let vm = HomeViewVM()
-    let disposeBag = DisposeBag()
-    let input = PublishSubject<HomeViewVM.Input>()
-
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
+        configureCollectionViews()
+        setupGestureRecognizers()
+        setupRefreshControl()
+        bindViewModel()
+        loadInitialData()
+    }
+    
+    // MARK: - Setup Methods
+    private func setupUI() {
         navigationItem.hidesBackButton = true
-        
-        setup()
-        configureAllCollectionViews()
-        setGestureRecognizers()
-        refreshControl.tintColor = UIColor.beachBlue
-        scrollView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        bind()
-        LoadingModal.show()
-        input.onNext(.getBookingCategories(page: "1"))
-        
+        hideAllStacks()
         addShadow(to: subcategoryCollectionView)
-        
+        setupSearchField()
     }
     
-    func setup(){
-        topRatedBoatStack.isHidden = true
-        boatStack.isHidden = true
-        serviceStack.isHidden = true
-        
+    private func hideAllStacks() {
+        [topRatedBoatStack, boatStack, serviceStack].forEach { $0?.isHidden = true }
+    }
+    
+    private func setupSearchField() {
         searchField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchTapped)))
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl.tintColor = UIColor.beachBlue
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        scrollView.addSubview(refreshControl)
+    }
+    
+    private func configureCollectionViews() {
+        let collectionViews: [(UICollectionView, CollectionViewType)] = [
+            (categoryCollectionView, .category),
+            (subcategoryCollectionView, .subcategory),
+            (beachHouseCollectionView, .beachHouse),
+            (boatCollectionView, .boat),
+            (topRatedBeachHouseCollectionView, .topRatedBeachHouse),
+            (topRatedBoatCollectionView, .topRatedBoat),
+            (serviceCollectionVIew, .service)
+        ]
         
+        collectionViews.forEach { collectionView, type in
+            configureCollectionView(collectionView, tag: type.rawValue)
+        }
     }
     
-    @objc func searchTapped(){
-        
-    }
-    
-    @objc func refresh(_ sender: UIRefreshControl) {
-        input.onNext(.getBookingCategories(page: "1"))
-    }
-    
-    func configureAllCollectionViews() {
-        configureCollectionView(categoryCollectionView, tag: CollectionViewType.category.rawValue)
-        configureCollectionView(subcategoryCollectionView, tag: CollectionViewType.subcategory.rawValue)
-        configureCollectionView(beachHouseCollectionView, tag: CollectionViewType.beachHouse.rawValue)
-        configureCollectionView(boatCollectionView, tag: CollectionViewType.boat.rawValue)
-        configureCollectionView(topRatedBeachHouseCollectionView, tag: CollectionViewType.topRatedBeachHouse.rawValue)
-        configureCollectionView(topRatedBoatCollectionView, tag: CollectionViewType.topRatedBoat.rawValue)
-        configureCollectionView(serviceCollectionVIew, tag: CollectionViewType.service.rawValue)
-    }
-
-    
-    func configureCollectionView(_ collectionView: UICollectionView, tag: Int) {
+    private func configureCollectionView(_ collectionView: UICollectionView, tag: Int) {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.tag = tag
         collectionView.backgroundColor = .clear
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
-
     
-    func setGestureRecognizers() {
-        
-        let filter = UITapGestureRecognizer(target: self, action: #selector(filterTapped))
+    private func setupGestureRecognizers() {
+        let filterTap = UITapGestureRecognizer(target: self, action: #selector(filterTapped))
         filterBtn.isUserInteractionEnabled = true
-        filterBtn.addGestureRecognizer(filter)
+        filterBtn.addGestureRecognizer(filterTap)
     }
     
-    @objc func filterTapped(){
-        
+    private func loadInitialData() {
+        LoadingModal.show()
+        input.onNext(.getBookingCategories(page: "1"))
     }
-
-    func addShadow(to view: UIView) {
+    
+    // MARK: - Actions
+    @objc private func searchTapped() {
+        // Implement search functionality
+    }
+    
+    @objc private func filterTapped() {
+        // Implement filter functionality
+    }
+    
+    @objc private func refresh(_ sender: UIRefreshControl) {
+        input.onNext(.getBookingCategories(page: "1"))
+    }
+    
+    // MARK: - UI Helper Methods
+    private func addShadow(to view: UIView) {
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.15
         view.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -141,428 +159,392 @@ class HomeView: BaseViewControllerPlain {
         view.layer.masksToBounds = false
     }
     
-    func updateCollectionViewHeight(_ CollectionView: UICollectionView, _ CollectionViewHeightConstraint: NSLayoutConstraint) {
-        CollectionView.layoutIfNeeded()
-        let contentHeight = CollectionView.contentSize.height
-        CollectionViewHeightConstraint.constant = contentHeight
-        
-        self.view.layoutIfNeeded()
+    private func updateCollectionViewHeight(_ collectionView: UICollectionView, _ heightConstraint: NSLayoutConstraint) {
+        collectionView.layoutIfNeeded()
+        heightConstraint.constant = collectionView.contentSize.height
+        view.layoutIfNeeded()
     }
-
+    
+    private func reloadAllCollectionViews() {
+        [categoryCollectionView, subcategoryCollectionView, beachHouseCollectionView,
+         topRatedBeachHouseCollectionView, topRatedBoatCollectionView,
+         boatCollectionView, serviceCollectionVIew].forEach { $0?.reloadData() }
+    }
+    
+    // MARK: - Data Processing
+    private func processBeachHouseSelection() {
+        selectedBeachCat = Array(categories.prefix(2).compactMap { $0.id })
+        let selectedCategories = categories.filter { selectedBeachCat.contains($0.id ?? "") }
+        
+        beaches = selectedCategories.flatMap { $0.listings ?? [] }
+        topRatedBeaches = beaches.filter { Int(($0.rating ?? 0)) >= Constants.topRatingThresholdBeach }
+        subcategories = selectedCategories.flatMap { $0.subCategories ?? [] }
+        
+        updateUIForBeachHouseSelection()
+    }
+    
+    private func processBoatSelection(at index: Int) {
+        selectedBoatCat = categories[index].id ?? ""
+        let selectedCategories = categories.filter { $0.id == selectedBoatCat }
+        
+        boats = selectedCategories.flatMap { $0.listings ?? [] }
+        topRatedBoats = boats.filter { Int(($0.rating ?? 0)) >= Constants.topRatingThresholdBoat }
+        subcategories = selectedCategories.flatMap { $0.subCategories ?? [] }
+        
+        updateUIForBoatSelection()
+    }
+    
+    private func processServiceSelection(at index: Int) {
+        selectedServiceCat = categories[index].id ?? ""
+        let selectedCategories = categories.filter { $0.id == selectedServiceCat }
+        
+        services = selectedCategories.flatMap { $0.beachHouseBookings ?? [] }
+        
+        updateUIForServiceSelection()
+    }
+    
+    // MARK: - UI State Updates
+    private func updateUIForBeachHouseSelection() {
+        subcategoryCollectionView.isHidden = false
+        topRatedBoatStack.isHidden = true
+        boatStack.isHidden = true
+        serviceStack.isHidden = true
+        
+        topRatedBeachHouseStack.isHidden = topRatedBeaches.isEmpty
+        beachHouseStack.isHidden = false
+        
+        updateCollectionViewHeight(beachHouseCollectionView, beachHouseCollectionViewHeightConstraint)
+        updateCollectionViewHeight(topRatedBeachHouseCollectionView, topRatedBeachHouseCollectionViewHeightConstraint)
+    }
+    
+    private func updateUIForBoatSelection() {
+        subcategoryCollectionView.isHidden = false
+        topRatedBeachHouseStack.isHidden = true
+        beachHouseStack.isHidden = true
+        serviceStack.isHidden = true
+        
+        topRatedBoatStack.isHidden = topRatedBoats.isEmpty
+        boatStack.isHidden = false
+        
+        updateCollectionViewHeight(boatCollectionView, boatCollectionViewHeightConstraint)
+        updateCollectionViewHeight(topRatedBoatCollectionView, topRatedBoatCollectionVIewHeightConstraint)
+    }
+    
+    private func updateUIForServiceSelection() {
+        subcategoryCollectionView.isHidden = true
+        topRatedBoatStack.isHidden = true
+        boatStack.isHidden = true
+        topRatedBeachHouseStack.isHidden = true
+        beachHouseStack.isHidden = true
+        serviceStack.isHidden = false
+        
+        updateCollectionViewHeight(serviceCollectionVIew, serviceCollectionVIewHeightConstraint)
+    }
 }
 
-extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+// MARK: - UICollectionView DataSource & Delegate
+extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.tag {
-            
-        case 1:
-            return categories.count
-        case 2:
-            return subcategories.count
-        case 3:
-            return topRatedBeaches.count
-        case 4:
-            print(beaches.count)
-            return beaches.count
-        case 5:
-            return topRatedBoats.count
-        case 6:
-            return boats.count
-        case 7:
-            return services.count
-        default:
-            return 0
+        guard let type = CollectionViewType(rawValue: collectionView.tag) else { return 0 }
+        
+        switch type {
+        case .category: return categories.count
+        case .subcategory: return subcategories.count
+        case .topRatedBeachHouse: return topRatedBeaches.count
+        case .beachHouse: return beaches.count
+        case .topRatedBoat: return topRatedBoats.count
+        case .boat: return boats.count
+        case .service: return services.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        switch collectionView.tag {
-        case 1:
-            let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            let cellAt = categories[indexPath.item]
-            cell.isUserInteractionEnabled = true
-            let view = CategoriesCell(frame: cell.bounds)
-            view.identifier = "Categories " + indexPath.description
-            view.model.image = cellAt.image ?? ""
-            view.model.title = cellAt.name ?? ""
-            switch cellAt.name {
-            case "Beach Houses":
-                view.model.dummyImage = "beachCat"
-            case "Boats":
-                view.model.dummyImage = "boatsCat"
-            case "Services":
-                view.model.dummyImage = "serviceCat"
-            default:
-                view.model.dummyImage = "dummy"
-            }
-            
-            
-//            view.model.tapped = { [weak self] in
-//                guard let self = self else { return }
-//                self.selectedCatIndex = indexPath.item
-//                self.categoryCollectionView.reloadData()
-//            }
-            view.model.state = (indexPath.item == selectedCatIndex)
-            
-            cell.applyView(view: view)
-            return cell
-            
-        case 2:
-            let cell = subcategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            let cellAt = subcategories[indexPath.item]
-            cell.isUserInteractionEnabled = false
-            let view = CategoriesCell(frame: cell.bounds)
-            view.identifier = "SubCategories " + indexPath.description
-            view.model.image = cellAt.image ?? ""
-            view.model.title = cellAt.name ?? ""
-            view.model.dummyImage = "luxuryIcon"
-            view.isSubcategory = true
-            view.isUserInteractionEnabled = false
-            cell.applyView(view: view)
-            return cell
-            
-        case 3:
-            let cell = topRatedBeachHouseCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            let beach = beaches[indexPath.item]
-            let view = GeneralViewCell(frame: cell.bounds)
-            view.identifier = "TopRated " + indexPath.description
-            view.isBeachHouseMode = true
-            view.model.titleLabel = beach.name ?? ""
-            view.model.infoOneLabel = "\(beach.locations?.city ?? ""), \(beach.locations?.state ?? "") \(beach.locations?.country ?? "")"
-            view.model.infoTwoLabel = "\(beach.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(beach.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
-            view.model.priceLabel = "₦ \(beach.pricePerNight ?? 0)"
-            view.model.ratingLabel = "\(beach.rating ?? 0)"
-            view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
-            
-            view.onSaveFavouriteTapped = { [weak self] in
-                if let beachId = beach.id{
-                    let request = AddFavouriteRequest(itemId: beachId, type: BookingType.BeachHouse.rawValue, note: "")
-                    self?.input.onNext(.addFavourite(request))
-                    Toast.show(message: "Saving Favourite")
-                }
-            }
-            
-            cell.applyView(view: view)
-            cell.layer.backgroundColor = UIColor.white.cgColor
-            cell.layer.cornerRadius = 15
-            return cell
-                
-            
-        case 4:
-            let cell = beachHouseCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            let beach = beaches[indexPath.item]
-            print("Beaches Data: \(beaches)")
-            let view = GeneralViewCell(frame: cell.bounds)
-            view.identifier = "BeachHouses " + indexPath.description
-            view.isBeachHouseMode = true
-            view.model.titleLabel = beach.name ?? ""
-            view.model.infoOneLabel = "\(beach.locations?.city ?? ""), \(beach.locations?.state ?? "") \(beach.locations?.country ?? "")"
-            view.model.infoTwoLabel = "\(beach.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(beach.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
-            view.model.priceLabel = "₦ \(beach.pricePerNight ?? 0)"
-            view.model.ratingLabel = "\(beach.rating ?? 0)"
-            view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
-            
-            view.onSaveFavouriteTapped = { [weak self] in
-                if let beachId = beach.id{
-                    let request = AddFavouriteRequest(itemId: beachId, type: BookingType.BeachHouse.rawValue, note: "")
-                    self?.input.onNext(.addFavourite(request))
-                    Toast.show(message: "Saving Favourite")
-                }
-            }
-
-            cell.applyView(view: view)
-            return cell
-            
-        case 5:
-            let cell = topRatedBoatCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            
-            let boat = boats[indexPath.item]
-            let view = GeneralViewCell(frame: cell.bounds)
-            view.identifier = "TopRated " + indexPath.description
-            view.isBoatMode = true
-            view.model.titleLabel = boat.name ?? ""
-            view.model.infoOneLabel = "Capacity of People: 1 - \((boat.noOfAdults ?? 0) + (boat.noOfChildren ?? 0)) "
-            view.model.infoTwoLabel = "\(boat.locations?.city ?? ""), \(boat.locations?.state ?? "") \(boat.locations?.country ?? "")"
-            view.model.ratingLabel = "\(boat.rating ?? 0)"
-            view.model.bannerImg = boat.images?.first?.url ?? ""
-            
-            view.onSaveFavouriteTapped = { [weak self] in
-                if let boatId = boat.id{
-                    let request = AddFavouriteRequest(itemId: boatId, type: BookingType.Boat.rawValue, note: "")
-                    self?.input.onNext(.addFavourite(request))
-                    Toast.show(message: "Saving Favourite")
-                }
-            }
-            
-            cell.applyView(view: view)
-            cell.layer.backgroundColor = UIColor.white.cgColor
-            cell.layer.cornerRadius = 15
-            
-            return cell
-            
-        case 6:
-            let cell = boatCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            
-            let boat = boats[indexPath.item]
-            print("Boat Data: \(boats)")
-            let view = GeneralViewCell(frame: cell.bounds)
-            view.identifier = "Boats " + indexPath.description
-            view.isBoatMode = true
-            view.model.titleLabel = boat.name ?? ""
-            view.model.infoOneLabel = "Capacity of People: 1 - \((boat.noOfAdults ?? 0) + (boat.noOfChildren ?? 0)) )"
-            view.model.infoTwoLabel = "\(boat.locations?.city ?? ""), \(boat.locations?.state ?? "") \(boat.locations?.country ?? "")"
-            view.model.ratingLabel = "\(boat.rating ?? 0)"
-            view.model.bannerImg = boat.images?.first?.url ?? ""
-            
-            view.onSaveFavouriteTapped = { [weak self] in
-                if let boatId = boat.id{
-                    let request = AddFavouriteRequest(itemId: boatId, type: BookingType.Boat.rawValue, note: "")
-                    self?.input.onNext(.addFavourite(request))
-                    Toast.show(message: "Saving Favourite")
-                }
-            }
-
-            cell.applyView(view: view)
-            
-            return cell
-            
-        case 7:
-            let cell = serviceCollectionVIew.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            
-            let service = services[indexPath.item]
-            
-            let view = BookingCell(frame: cell.bounds)
-            view.identifier = "Services " + indexPath.description
-            view.model.date = "\(service.checkingDate?.convertToShorterDateFormat() ?? "") - \(service.checkoutDate?.convertToShorterDateFormat() ?? "")"
-            view.model.image = service.beachHouse?.image ?? ""
-            view.model.location = "\(service.beachHouse?.locations?.city ?? ""), \(service.beachHouse?.locations?.state ?? "") \(service.beachHouse?.locations?.country ?? "")"
-            view.model.title = "\(service.beachHouse?.name ?? "")"
-            
-            cell.applyView(view: view)
-            
-            return cell
-            
-        default:
+        guard let type = CollectionViewType(rawValue: collectionView.tag) else {
             return UICollectionViewCell()
         }
-
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+        
+        switch type {
+        case .category:
+            return configureCategoryCell(cell, at: indexPath)
+        case .subcategory:
+            return configureSubcategoryCell(cell, at: indexPath)
+        case .topRatedBeachHouse:
+            return configureBeachHouseCell(cell, at: indexPath, data: topRatedBeaches)
+        case .beachHouse:
+            return configureBeachHouseCell(cell, at: indexPath, data: beaches)
+        case .topRatedBoat:
+            return configureBoatCell(cell, at: indexPath, data: topRatedBoats)
+        case .boat:
+            return configureBoatCell(cell, at: indexPath, data: boats)
+        case .service:
+            return configureServiceCell(cell, at: indexPath)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch collectionView.tag {
-            
-        case 1:
-            print("DO something")
-            self.selectedCatIndex = indexPath.item
-            self.categoryCollectionView.reloadData()
-            if indexPath.item == 0{
-                self.selectedBeachCat = categories.prefix(2).compactMap { $0.id }
-                let selectedCategories = self.categories.filter { category in
-                    let selectedBeachCat = self.selectedBeachCat
-                    let categoryId = category.id ?? ""
-                    return selectedBeachCat.contains(categoryId)
-                }
-                self.beaches = selectedCategories.compactMap { $0.listings }.flatMap { $0 }
-                self.topRatedBeaches = self.beaches.filter({$0.rating == 7})
-                self.topRatedBeachHouseStack.isHidden = self.topRatedBeaches.isEmpty
-                self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
-                self.reloadCollectionViews()
-//                print("Beaches Data: \(self.beaches)")
-//                print("TopRated Beaches: \(self.topRatedBeaches)")
-                subcategoryCollectionView.isHidden = false
-                topRatedBoatStack.isHidden = true
-                topRatedBeachHouseStack.isHidden = false
-                boatStack.isHidden = true
-                topRatedBeachHouseStack.isHidden = topRatedBeaches.isEmpty
-                beachHouseStack.isHidden = false
-                self.updateCollectionViewHeight(self.beachHouseCollectionView, self.beachHouseCollectionViewHeightConstraint)
-                self.updateCollectionViewHeight(self.topRatedBeachHouseCollectionView, self.topRatedBeachHouseCollectionViewHeightConstraint)
-                
- 
-            }else if indexPath.item == 1{
-                self.selectedBoatCat = categories[indexPath.item].id ?? ""
-                let selectedCategories = self.categories.filter { category in
-                    let selectedBoatCat = self.selectedBoatCat
-                    let categoryId = category.id ?? ""
-                    return selectedBoatCat.contains(categoryId)
-                }
-                self.boats = selectedCategories.compactMap { $0.listings}.flatMap{ $0 }
-                self.topRatedBoats = self.boats.filter({$0.rating == 5})
-                self.topRatedBoatStack.isHidden = self.topRatedBoats.isEmpty
-                self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 }
-                self.reloadCollectionViews()
-//                print("Boat Data: \(self.boats)")
-//                print("TopRated Boats: \(self.topRatedBoats)")
-                topRatedBoatStack.isHidden = topRatedBoats.isEmpty
-                subcategoryCollectionView.isHidden = false
-                boatStack.isHidden = false
-                topRatedBeachHouseStack.isHidden = true
-                beachHouseStack.isHidden = true
-                self.updateCollectionViewHeight(self.boatCollectionView, self.boatCollectionViewHeightConstraint)
-                self.updateCollectionViewHeight(self.topRatedBoatCollectionView, self.topRatedBoatCollectionVIewHeightConstraint)
-                
-            }else if indexPath.item == 2{
-                self.selectedServiceCat = categories[indexPath.item].id ?? ""
-                let selectedCategories = self.categories.filter { category in
-                    let selectedServiceCat = self.selectedServiceCat
-                    let categoryId = category.id ?? ""
-                    return selectedServiceCat.contains(categoryId)
-                }
-                self.services = selectedCategories.compactMap { $0.beachHouseBookings}.flatMap{ $0 }
-                self.reloadCollectionViews()
-//                print("Sselected service: \(self.selectedServiceCat)")
-//                print("Services Data: \(self.services)")
-                if services.isEmpty{
-                    
-                }
-                subcategoryCollectionView.isHidden = true
-                topRatedBoatStack.isHidden = true
-                boatStack.isHidden = true
-                topRatedBeachHouseStack.isHidden = true
-                beachHouseStack.isHidden = true
-                serviceStack.isHidden = false
-                self.updateCollectionViewHeight(self.serviceCollectionVIew, self.serviceCollectionVIewHeightConstraint)
-            }
-            
-        case 2:
-            print("Do Nothing")
-        case 3:
-            coordinator?.gotoBeachDetails(details: beaches[indexPath.item])
-        case 4:
-            coordinator?.gotoBeachDetails(details: beaches[indexPath.item])
-            
-        case 5:
-            coordinator?.gotoBoatDetails(details: boats[indexPath.item])
-        case 6:
-            coordinator?.gotoBoatDetails(details: boats[indexPath.item])
-        case 7:
-            print("Select a provider")
-            selectServiceProvider()
-
-        default:
-            print("DO something")
+    // MARK: - Cell Configuration Methods
+    private func configureCategoryCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath) -> UICollectionViewCell {
+        let category = categories[indexPath.item]
+        let view = CategoriesCell(frame: cell.bounds)
+        
+        view.identifier = "Categories \(indexPath.description)"
+        view.model.image = category.image ?? ""
+        view.model.title = category.name ?? ""
+        view.model.dummyImage = Constants.categoryImageMapping[category.name ?? ""] ?? "dummy"
+        view.model.state = (indexPath.item == selectedCatIndex)
+        
+        cell.applyView(view: view)
+        return cell
+    }
+    
+    private func configureSubcategoryCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath) -> UICollectionViewCell {
+        let subcategory = subcategories[indexPath.item]
+        let view = CategoriesCell(frame: cell.bounds)
+        
+        view.identifier = "SubCategories \(indexPath.description)"
+        view.model.image = subcategory.image ?? ""
+        view.model.title = subcategory.name ?? ""
+        view.model.dummyImage = "luxuryIcon"
+        view.isSubcategory = true
+        view.isUserInteractionEnabled = false
+        
+        cell.isUserInteractionEnabled = false
+        cell.applyView(view: view)
+        return cell
+    }
+    
+    private func configureBeachHouseCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath, data: [Listing]) -> UICollectionViewCell {
+        let beach = data[indexPath.item]
+        let view = GeneralViewCell(frame: cell.bounds)
+        
+        view.identifier = "BeachHouses \(indexPath.description)"
+        view.isBeachHouseMode = true
+        view.model.titleLabel = beach.name ?? ""
+        view.model.infoOneLabel = formatLocationString(beach.locations)
+        view.model.infoTwoLabel = formatDateRange(from: beach.availabilities?.availableFrom,
+                                                 to: beach.availabilities?.availableTo)
+        view.model.priceLabel = "₦ \(beach.listingPrice ?? 0)"
+        view.model.ratingLabel = "\(beach.rating ?? 0)"
+        view.model.bannerImg = beach.rooms?.first?.images?.first?.url ?? ""
+        
+        view.onSaveFavouriteTapped = { [weak self] in
+            self?.saveFavourite(itemId: beach.id, type: .BeachHouse)
         }
         
-       
+        cell.applyView(view: view)
+        cell.layer.backgroundColor = UIColor.white.cgColor
+        cell.layer.cornerRadius = 15
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView.tag {
-        case 1:
-            return CGSize(width: (collectionView.bounds.width / 3) - 8, height: 94)
-        case 2:
-            return CGSize(width: (collectionView.bounds.width / 4), height: 50)
-        case 3:
-            return CGSize(width: collectionView.bounds.width - 35, height: 400)
-        case 4:
-            return CGSize(width: collectionView.bounds.width - 10, height: 400)
-        case 5:
-            return CGSize(width: collectionView.bounds.width - 35, height: 400)
-        case 6:
-            return CGSize(width: collectionView.bounds.width - 10, height: 400)
-        case 7:
-            return CGSize(width: collectionView.bounds.width, height: 94)
-        default:
-            return CGSize()
+    private func configureBoatCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath, data: [Listing]) -> UICollectionViewCell {
+        let boat = data[indexPath.item]
+        let view = GeneralViewCell(frame: cell.bounds)
+        
+        view.identifier = "Boats \(indexPath.description)"
+        view.isBoatMode = true
+        view.model.titleLabel = boat.name ?? ""
+        view.model.infoOneLabel = "Capacity: 1 - \((boat.noOfAdults ?? 0) + (boat.noOfChildren ?? 0))"
+        view.model.infoTwoLabel = formatLocationString(boat.locations)
+        view.model.ratingLabel = "\(boat.rating ?? 0)"
+        view.model.bannerImg = boat.images?.first?.url ?? ""
+        
+        view.onSaveFavouriteTapped = { [weak self] in
+            self?.saveFavourite(itemId: boat.id, type: .Boat)
         }
-       
+        
+        cell.applyView(view: view)
+        cell.layer.backgroundColor = UIColor.white.cgColor
+        cell.layer.cornerRadius = 15
+        return cell
+    }
+    
+    private func configureServiceCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath) -> UICollectionViewCell {
+        let service = services[indexPath.item]
+        let view = BookingCell(frame: cell.bounds)
+        
+        view.identifier = "Services \(indexPath.description)"
+        view.model.date = formatDateRange(from: service.checkingDate, to: service.checkoutDate)
+        view.model.image = service.beachHouse?.image ?? ""
+        view.model.location = formatLocationString(service.beachHouse?.locations)
+        view.model.title = service.beachHouse?.name ?? ""
+        
+        cell.applyView(view: view)
+        return cell
+    }
+    
+    // MARK: - Selection Handling
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let type = CollectionViewType(rawValue: collectionView.tag) else { return }
+        
+        switch type {
+        case .category:
+            handleCategorySelection(at: indexPath.item)
+        case .subcategory:
+            break // No action needed
+        case .topRatedBeachHouse, .beachHouse:
+            coordinator?.gotoBeachDetails(details: beaches[indexPath.item])
+        case .topRatedBoat, .boat:
+            coordinator?.gotoBoatDetails(details: boats[indexPath.item])
+        case .service:
+            selectServiceProvider()
+        }
+    }
+    
+    private func handleCategorySelection(at index: Int) {
+        selectedCatIndex = index
+        categoryCollectionView.reloadData()
+        
+        switch index {
+        case 0:
+            processBeachHouseSelection()
+        case 1:
+            processBoatSelection(at: index)
+        case 2:
+            processServiceSelection(at: index)
+        default:
+            break
+        }
+        
+        reloadAllCollectionViews()
+    }
+    
+    // MARK: - Flow Layout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let type = CollectionViewType(rawValue: collectionView.tag) else {
+            return CGSize.zero
+        }
+        
+        switch type {
+        case .category:
+            return CGSize(width: (collectionView.bounds.width / 3) - 8, height: 94)
+        case .subcategory:
+            return CGSize(width: collectionView.bounds.width / 4, height: 50)
+        case .topRatedBeachHouse, .topRatedBoat:
+            return CGSize(width: collectionView.bounds.width - 35, height: 420)
+        case .beachHouse, .boat:
+            return CGSize(width: collectionView.bounds.width - 10, height: 420)
+        case .service:
+            return CGSize(width: collectionView.bounds.width, height: 94)
+        }
     }
 }
 
+// MARK: - Helper Methods
+private extension HomeView {
+    func formatLocationString(_ location: Location?) -> String {
+        guard let location = location else { return "" }
+        return "\(location.city ?? ""), \(location.state ?? "") \(location.country ?? "")"
+    }
+    
+    func formatDateRange(from: String?, to: String?) -> String {
+        let fromDate = from?.convertToShorterDateFormat() ?? ""
+        let toDate = to?.convertToShorterDateFormat() ?? ""
+        return "\(fromDate) - \(toDate)"
+    }
+    
+    func saveFavourite(itemId: String?, type: BookingType) {
+        guard let id = itemId else { return }
+        let request = AddFavouriteRequest(itemId: id, type: type.rawValue, note: "")
+        input.onNext(.addFavourite(request))
+        Toast.show(message: "Saving Favourite")
+    }
+}
 
-extension HomeView{
-    func bind(){
+// MARK: - ViewModel Binding
+extension HomeView {
+    private func bindViewModel() {
         vm.transform(input: input)
         
-        vm.output.subscribe(onNext: {[weak self] event in
+        vm.output.subscribe(onNext: { [weak self] event in
             guard let self = self else { return }
             LoadingModal.dismiss()
-            switch event {
-            case .getBookingCategoriesSuccess(let response):
-                print(response)
-                if let responseData = response.data {
-                    self.categories = responseData
-                    self.selectedBeachCat = categories.prefix(2).compactMap { $0.id }
-                    
-                    let selectedCategories = self.categories.filter { category in
-                        let selectedBeachCat = self.selectedBeachCat
-                        let categoryId = category.id ?? ""
-                        return selectedBeachCat.contains(categoryId)
-                    }
-                    self.categories = self.mergeFirstTwoCategories(categories: self.categories ) 
-                    self.beaches = selectedCategories.compactMap { $0.listings }.flatMap { $0 } 
-                    self.topRatedBeaches = self.beaches.filter({$0.rating == 0}) 
-                    self.topRatedBeachHouseStack.isHidden = self.topRatedBeaches.isEmpty
-                    self.subcategories = selectedCategories.compactMap { $0.subCategories }.flatMap { $0 } 
-//                    self.services = selectedCategories.compactMap{ $0.}
-                    self.reloadCollectionViews()
-                    print("Beaches Data: \(self.beaches)")
-                    self.updateCollectionViewHeight(self.beachHouseCollectionView, self.beachHouseCollectionViewHeightConstraint)
-                    self.updateCollectionViewHeight(self.topRatedBeachHouseCollectionView, self.topRatedBeachHouseCollectionViewHeightConstraint)
-                    
-                    
-                }
-                self.refreshControl.endRefreshing()
-            case .getBookingCategoriesFailed(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error)
-                self.refreshControl.endRefreshing()
-            case .addFavouriteSuccess(let response):
-                Toast.show(message: response.message ?? "Saved to Favourites")
-            case .addFavouriteFailed(let error):
-                Toast.show(message: error.message ?? "Error Saving to Favourites")
-            }
+            self.handleViewModelOutput(event)
         }).disposed(by: disposeBag)
     }
     
-    func reloadCollectionViews(){
-        categoryCollectionView.reloadData()
-        subcategoryCollectionView.reloadData()
-        beachHouseCollectionView.reloadData()
-        topRatedBeachHouseCollectionView.reloadData()
-        topRatedBoatCollectionView.reloadData()
-        boatCollectionView.reloadData()
-        serviceCollectionVIew.reloadData()
+    private func handleViewModelOutput(_ event: HomeViewVM.Output) {
+        switch event {
+        case .getBookingCategoriesSuccess(let response):
+            handleCategoriesSuccess(response)
+        case .getBookingCategoriesFailed(let error):
+            handleCategoriesError(error)
+        case .addFavouriteSuccess(let response):
+            Toast.show(message: response.message ?? "Saved to Favourites")
+        case .addFavouriteFailed(let error):
+            Toast.show(message: error.message ?? "Error Saving to Favourites")
+        }
     }
     
-    func mergeFirstTwoCategories(categories: [PropertyCategory]) -> [PropertyCategory] {
-        // Ensure there are at least two categories to merge
-        guard categories.count > 1 else { return categories }
+    private func handleCategoriesSuccess(_ response: GetBookingCategoryResponse) {
+        guard let responseData = response.data else { return }
         
-        // Get the first two categories
-        var updatedCategories = categories
-        let firstCategory = updatedCategories[0]
-        let secondCategory = updatedCategories[1]
+        categories = mapCategories(categories: responseData)
+        processBeachHouseSelection()
+        reloadAllCollectionViews()
         
-        // Merge listings
-        let mergedListings = (firstCategory.listings ?? []) + (secondCategory.listings ?? [])
+        updateCollectionViewHeight(beachHouseCollectionView, beachHouseCollectionViewHeightConstraint)
+        updateCollectionViewHeight(topRatedBeachHouseCollectionView, topRatedBeachHouseCollectionViewHeightConstraint)
         
-        // Merge subcategories (if needed)
-        let mergedSubCategories = (firstCategory.subCategories ?? []) + (secondCategory.subCategories ?? [])
+        refreshControl.endRefreshing()
+    }
+    
+    private func handleCategoriesError(_ error: ErrorResponse) {
+        MiddleModal.show(title: error.message ?? "", type: .error)
+        refreshControl.endRefreshing()
+    }
+    
+    private func mapCategories(categories: [PropertyCategory]) -> [PropertyCategory] {
+        let targetCategoryNames = Array(Constants.categoryImageMapping.keys) // ["Beach Houses", "Boats", "Services"]
         
-        // Create the merged category
-        let mergedCategory = PropertyCategory(
-            id: firstCategory.id,
-            name: firstCategory.name, // Use the name of the first category
-            propertyType: firstCategory.propertyType, // Optionally keep the property type of the first
-            description: firstCategory.description, // Optionally keep the description of the first
-            image: firstCategory.image, // Optionally keep the image of the first
+        // Filter categories to only include those with names in the mapping
+        let filteredCategories = categories.filter { category in
+            guard let categoryName = category.name else { return false }
+            return targetCategoryNames.contains(categoryName)
+        }
+        
+        print("Filtered Categories are: \(filteredCategories)")
+        
+        // Find Beach Houses and Boats categories specifically for merging
+        guard let beachHousesCategory = filteredCategories.first(where: { $0.name == "Beach Houses" }),
+              let boatsCategory = filteredCategories.first(where: { $0.name == "Boats" }) else {
+            return filteredCategories
+        }
+        
+        // Merge Beach Houses and Boats listings and subcategories
+        let mergedListings = (beachHousesCategory.listings ?? []) + (boatsCategory.listings ?? [])
+        let mergedSubCategories = (beachHousesCategory.subCategories ?? []) + (boatsCategory.subCategories ?? [])
+        
+        let mergedBeachHousesCategory = PropertyCategory(
+            id: beachHousesCategory.id,
+            name: beachHousesCategory.name,
+            propertyType: beachHousesCategory.propertyType,
+            description: beachHousesCategory.description,
+            image: beachHousesCategory.image,
             subCategories: mergedSubCategories,
             listings: mergedListings,
-            boatBookings: firstCategory.boatBookings,
-            beachHouseBookings: firstCategory.beachHouseBookings
+            boatBookings: beachHousesCategory.boatBookings,
+            beachHouseBookings: beachHousesCategory.beachHouseBookings
         )
         
-        // Update the array
-        updatedCategories[0] = mergedCategory // Replace the first category with the merged one
-        updatedCategories.remove(at: 1)       // Remove the second category
+        // Create final array with merged Beach Houses category, original Boats category, and Services category
+        var finalCategories: [PropertyCategory] = [mergedBeachHousesCategory]
         
-        return updatedCategories
+        // Add Boats category (unchanged)
+        finalCategories.append(boatsCategory)
+        
+        // Add Services category if it exists
+        if let servicesCategory = filteredCategories.first(where: { $0.name == "Services" }) {
+            finalCategories.append(servicesCategory)
+        }
+        
+        return finalCategories
     }
     
-    
-    func selectServiceProvider(){
-        SelectServiceModal.show(callBack: { [weak self] selected in
+    private func selectServiceProvider() {
+        SelectServiceModal.show { [weak self] selected in
             switch selected {
             case "CHEF":
                 self?.coordinator?.gotoFindChef()
@@ -571,13 +553,13 @@ extension HomeView{
             case "DJ":
                 self?.coordinator?.gotoFindDj()
             default:
-                print("Nothing")
+                break
             }
-        })
+        }
     }
-
 }
 
+// MARK: - Enums
 enum CollectionViewType: Int {
     case category = 1
     case subcategory = 2

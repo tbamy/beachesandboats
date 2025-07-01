@@ -71,7 +71,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
         endDate = booking?.checkoutDate ?? ""
         checkInTime = listing?.checkInFrom
         checkOutTime = listing?.checkOutTo
-        numberOfGuests = room?.noOfOccupant ?? 0
+        numberOfGuests = Int(room?.noOfOccupant ?? "")
         
         let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
         

@@ -102,16 +102,11 @@ class LoginView: BaseViewControllerPlain {
     }
     
     func validateFields() -> Bool{
-        if emailAddress.text.isEmpty {
-            emailAddress.error = "Please enter Email Address"
-            return false
-        }
-        else if password.text.isEmpty {
-            password.error = "Please enter your Password"
-            return false
-        }
+        let validEmail = emailAddress.validate(rules: [Rule(.isValidEmail, "Please enter a valid Email Address")])
+        let notEmptyEmail = emailAddress.validate(rules: [Rule(.isEmpty, "Please enter Email Address")])
+        let notEmptyPassword = password.validate(rules: [Rule(.isEmpty, "Please enter your Password")])
         
-        return true
+        return validEmail && notEmptyEmail && notEmptyPassword
     }
     
 }

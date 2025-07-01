@@ -11,8 +11,12 @@ import RxSwift
 
 class ListBeachViewModel{
     var disposeBag = DisposeBag()
-    let listingService: ListingService = ListingServiceImplementation()
+    let listingService: ListingService
     var output = PublishSubject<Output>()
+    
+    init(listingService: ListingService = ListingServiceImplementation()) {
+        self.listingService = listingService
+    }
     
     enum Output {
         case listBeachSuccessful(GeneralResponse)

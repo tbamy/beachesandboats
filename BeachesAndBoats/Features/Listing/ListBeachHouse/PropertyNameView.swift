@@ -21,7 +21,7 @@ class PropertyNameView: BaseViewControllerPlain {
     var createBeachListing: CreateBeachListingRequest?
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setUp()
     }
     

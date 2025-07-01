@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -25,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fuw-5I-paf">
-                    <rect key="frame" x="0.0" y="59" width="393" height="128"/>
+                    <rect key="frame" x="20" y="59" width="353" height="128"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-YB-SrW">
-                            <rect key="frame" x="20" y="42.666666666666671" width="157" height="42.666666666666671"/>
+                            <rect key="frame" x="20" y="42.666666666666671" width="117" height="42.666666666666671"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sofa Bed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjC-QZ-23Z" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="69" height="20.333333333333332"/>
@@ -45,7 +46,7 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdZ-YG-8i9" customClass="PlainButton" customModule="BeachesAndBoats">
-                            <rect key="frame" x="343" y="49" width="30" height="30"/>
+                            <rect key="frame" x="303" y="49" width="30" height="30"/>
                             <color key="backgroundColor" name="B&amp;B"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="+">
@@ -53,7 +54,7 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzO-zX-abA" customClass="PlainButton" customModule="BeachesAndBoats">
-                            <rect key="frame" x="227" y="49" width="30" height="30"/>
+                            <rect key="frame" x="187" y="49" width="30" height="30"/>
                             <color key="backgroundColor" name="B&amp;BLight"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="-">
@@ -61,7 +62,7 @@
                             </state>
                         </button>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="DAi-6W-VjW" customClass="InputField" customModule="BeachesAndBoats">
-                            <rect key="frame" x="277" y="40" width="46" height="48"/>
+                            <rect key="frame" x="237" y="40" width="46" height="48"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="56m-Bm-7SC"/>
@@ -89,10 +90,10 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fuw-5I-paf" secondAttribute="trailing" id="0nb-M0-Mr5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fuw-5I-paf" secondAttribute="trailing" constant="20" id="0nb-M0-Mr5"/>
                 <constraint firstItem="Fuw-5I-paf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="32u-gR-d8J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Fuw-5I-paf" secondAttribute="bottom" id="47V-OL-BFC"/>
-                <constraint firstItem="Fuw-5I-paf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HMV-EJ-H3c"/>
+                <constraint firstItem="Fuw-5I-paf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="HMV-EJ-H3c"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="136.64122137404578" y="-202.46478873239437"/>

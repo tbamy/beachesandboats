@@ -24,13 +24,13 @@ import UIKit
         }
     }
     
-    @IBInspectable public var isSelected: Bool = false {
+    @IBInspectable public var isNotSelected: Bool = false {
          didSet {
-             if isSelected {
+             if isNotSelected {
                  appearSelected()
              } else {
                  indicatorView.isHidden = true
-                 titleLbl.tintColor = .grey
+                 titleLbl.textColor = .grey
              }
          }
      }
@@ -53,7 +53,7 @@ import UIKit
     }
     
     @objc func selected(){
-        if(!isSelected){
+        if(!isNotSelected){
             appearSelected()
             onSelect()
         }
@@ -61,7 +61,7 @@ import UIKit
     
     public func appearSelected(){
         indicatorView.isHidden = false
-        titleLbl.tintColor = .beachBlue
+        titleLbl.textColor = .beachBlue
         indicatorView.backgroundColor = .beachBlue
     }
     

@@ -38,6 +38,7 @@ public class ConfirmAccountModal: BaseXib {
     private var countdownTimer: CountdownTimer!
     
     var purpose: ConfirmOtpPurpose = .createAccount
+    var keepSignedIn: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,10 +54,29 @@ public class ConfirmAccountModal: BaseXib {
         return nibName
     }
     
+
+    func setup() {
+        setupCheckbox()
+        otpField.keyboardType = .numberPad
+        resendCodeBtn.isHidden = true
+        timeStack.isHidden = true
+        resendCodeBtn.isUserInteractionEnabled = true
+        resendCodeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resendOtpTapped)))
+        close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
+    }
+
+    func setupCheckbox() {
+        checkboxBtn.isChecked = false
+        checkboxBtn.stateChanged = { [weak self] isSelected in
+            guard let self = self else { return }
+            self.keepSignedIn = isSelected
+        }
+    }
+    
     @IBAction func proceedTapped(_ sender: Any) {
         if validateOtpField(){
             
-            otpDelegate?.userOTP(otp: otpField.text, keepSignIn: false)
+            otpDelegate?.userOTP(otp: otpField.text, keepSignIn: keepSignedIn)
         }
         
     }
@@ -66,7 +86,7 @@ public class ConfirmAccountModal: BaseXib {
     }
     
     func setupCountdown(){
-        countdownTimer = CountdownTimer(minutes: 1)
+        countdownTimer = CountdownTimer(minutes: 4)
     
         countdownTimer.start(
             updateHandler: { [weak self] timeString in
@@ -116,22 +136,12 @@ public class ConfirmAccountModal: BaseXib {
     }
         
 
-            
-    
-    func setup() {
-        resendCodeBtn.isHidden = true
-        timeStack.isHidden = true
-        resendCodeBtn.isUserInteractionEnabled = true
-        checkboxBtn.isUserInteractionEnabled = true
-        resendCodeBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resendOtpTapped)))
-        close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeTapped)))
-
-    }
     
     @objc func resendOtpTapped(){
         otpDelegate?.resendOTP()
         timeStack.isHidden = false
         resendCodeBtn.isHidden = true
+        setupCountdown()
     }
     
     

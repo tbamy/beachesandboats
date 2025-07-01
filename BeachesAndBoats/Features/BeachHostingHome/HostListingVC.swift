@@ -67,46 +67,81 @@ class HostListingVC: BaseViewControllerPlain {
     }
     
     @objc func unfinishedStackTapped() {
-        self.showUnfinishedListingModal(
-            listingName: "Gil House",
-            listingLocation: "Ikoyi",
-            showDeleteStack: false,
-            buttonOneTitle: "Continue Listing",
-            buttonOneAction: { [self] in
-                print("Continue")
-            },
-            buttonTwoTitle: "Delete Listing",
-            buttonTwoAction: {
-                self.showDeleteModal()
-                print("Cancel button tapped!")
-            }
-        )
+        if let unfinishedBeachListing = AppStorage.beachListing{
+            self.showUnfinishedListingModal(
+                listingName: unfinishedBeachListing.name ?? "Unnamed",
+                listingLocation: "\(unfinishedBeachListing.streetName ?? ""), \(unfinishedBeachListing.state ?? "")",
+                showDeleteStack: false,
+                buttonOneTitle: "Continue Listing",
+                buttonOneAction: { [self] in
+                    print("Continue")
+                },
+                buttonTwoTitle: "Delete Listing",
+                buttonTwoAction: {
+                    self.showDeleteModal()
+                    print("Cancel button tapped!")
+                }
+            )
+        }else if let unfinishedBoatListing = AppStorage.boatListing{
+            self.showUnfinishedListingModal(
+                listingName: unfinishedBoatListing.name ?? "Unnamed",
+                listingLocation: "\(unfinishedBoatListing.streetName ?? ""), \(unfinishedBoatListing.state ?? "")",
+                showDeleteStack: false,
+                buttonOneTitle: "Continue Listing",
+                buttonOneAction: { [self] in
+                    print("Continue")
+                },
+                buttonTwoTitle: "Delete Listing",
+                buttonTwoAction: {
+                    self.showDeleteModal()
+                    print("Cancel button tapped!")
+                }
+            )
+        }
+        
     }
 
     func showDeleteModal() {
-        self.showUnfinishedListingModal(
-            listingName: "Gil House",
-            listingLocation: "Ikoyi",
-            showDeleteStack: true,
-            buttonOneTitle: "Yes, delete",
-            buttonOneAction: { [self] in
-                deleteListing()
-            },
-            buttonTwoTitle: "Cancel",
-            buttonTwoAction: {
-                self.dismiss(animated: true)
-                print("Cancel button tapped!")
-            }
-        )
+        if let unfinishedBeachListing = AppStorage.beachListing{
+            self.showUnfinishedListingModal(
+                listingName: unfinishedBeachListing.name ?? "Unnamed",
+                listingLocation: "\(unfinishedBeachListing.streetName ?? ""), \(unfinishedBeachListing.state ?? "")",
+                showDeleteStack: true,
+                buttonOneTitle: "Yes, delete",
+                buttonOneAction: { [self] in
+                    deleteListing()
+                },
+                buttonTwoTitle: "Cancel",
+                buttonTwoAction: {
+                    self.dismiss(animated: true)
+                    print("Cancel button tapped!")
+                }
+            )
+        } else if let unfinishedBoatListing = AppStorage.boatListing{
+            self.showUnfinishedListingModal(
+                listingName: unfinishedBoatListing.name ?? "Unnamed",
+                listingLocation: "\(unfinishedBoatListing.streetName ?? ""), \(unfinishedBoatListing.state ?? "")",
+                showDeleteStack: true,
+                buttonOneTitle: "Yes, delete",
+                buttonOneAction: { [self] in
+                    deleteListing()
+                },
+                buttonTwoTitle: "Cancel",
+                buttonTwoAction: {
+                    self.dismiss(animated: true)
+                    print("Cancel button tapped!")
+                }
+            )
+        }
     }
     
     func deleteListing() {
         if isShowingBeachHouses {
             AppStorage.beachListing = nil
-            showListingForBeaches()
+            MiddleModal.show(title: "Successfully Deleted!", type: .success, onConfirm: {self.showListingForBeaches()})
         } else {
             AppStorage.boatListing = nil
-            showListingForBoats()
+            MiddleModal.show(title: "Successfully Deleted!", type: .success, onConfirm: {self.showListingForBoats()})
         }
         self.dismiss(animated: true)
     }
@@ -125,7 +160,7 @@ class HostListingVC: BaseViewControllerPlain {
         if let unfinishedBeachListing = AppStorage.beachListing {
             unfinishedListingStack.isHidden = false
             unfinishedListingName.text = unfinishedBeachListing.name
-            unfinishedListingLocation.text = unfinishedBeachListing.streetName + ", " + unfinishedBeachListing.state + unfinishedBeachListing.country
+            unfinishedListingLocation.text = (unfinishedBeachListing.streetName ?? "") + ", " + (unfinishedBeachListing.state ?? "") + (unfinishedBeachListing.country ?? "")
         } else {
             unfinishedListingStack.isHidden = true
         }
@@ -135,7 +170,7 @@ class HostListingVC: BaseViewControllerPlain {
         if let unfinishedBoatListing = AppStorage.boatListing {
             unfinishedListingStack.isHidden = false
             unfinishedListingName.text = unfinishedBoatListing.name
-            unfinishedListingLocation.text = unfinishedBoatListing.streetName + ", " + unfinishedBoatListing.state + " " + unfinishedBoatListing.country
+            unfinishedListingLocation.text = (unfinishedBoatListing.streetName ?? "") + ", " + (unfinishedBoatListing.state ?? "") + (unfinishedBoatListing.country ?? "")
         } else {
             unfinishedListingStack.isHidden = true
         }
@@ -143,12 +178,12 @@ class HostListingVC: BaseViewControllerPlain {
     
     private func updateSelection() {
         if isShowingBeachHouses {
-            beachHouseListingSegment.isSelected = true
-            boatListingSegment.isSelected = false
+            beachHouseListingSegment.isNotSelected = true
+            boatListingSegment.isNotSelected = false
             showListingForBeaches()
         } else {
-            beachHouseListingSegment.isSelected = false
-            boatListingSegment.isSelected = true
+            beachHouseListingSegment.isNotSelected = false
+            boatListingSegment.isNotSelected = true
             showListingForBoats()
         }
         listingTableView.reloadData()

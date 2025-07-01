@@ -10,7 +10,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>benb.wqcdesigns.com</key>
+			<key>beachesnboats.azurewebsites.net</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>

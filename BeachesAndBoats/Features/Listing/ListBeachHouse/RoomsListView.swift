@@ -80,11 +80,11 @@ class RoomsListView: BaseViewControllerPlain {
     
     @objc func duplicateRoom(){
         if var createBeachListing = createBeachListing{
-            if let existingRoom = createBeachListing.rooms.first{
-                let roomDuplicate = Room(name: "\(existingRoom.name) Copy", description: existingRoom.description, quantity: existingRoom.quantity, roomAmenities: existingRoom.roomAmenities, pricePerNight: existingRoom.pricePerNight, discountPercent: existingRoom.discountPercent, pricePerDay: existingRoom.pricePerDay, dayDiscountPercent: existingRoom.dayDiscountPercent, bedTypes: existingRoom.bedTypes, hasPrivateBathroom: existingRoom.hasPrivateBathroom, noOfOccupant: existingRoom.noOfOccupant, images: existingRoom.images)
+            if let existingRoom = createBeachListing.rooms?.first{
+                let roomDuplicate = Room(name: "\(existingRoom.name ?? "") Copy", description: existingRoom.description, quantity: existingRoom.quantity, roomAmenities: existingRoom.roomAmenities, pricePerNight: existingRoom.pricePerNight, discountPercent: existingRoom.discountPercent, pricePerDay: existingRoom.pricePerDay, dayDiscountPercent: existingRoom.dayDiscountPercent, bedTypes: existingRoom.bedTypes, hasPrivateBathroom: existingRoom.hasPrivateBathroom, noOfOccupant: existingRoom.noOfOccupant, images: existingRoom.images)
                 
-                createBeachListing.rooms.append(roomDuplicate)
-                roomsList = createBeachListing.rooms
+                createBeachListing.rooms?.append(roomDuplicate)
+                roomsList = createBeachListing.rooms ?? []
                 collectionView.reloadData()
                 updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
                 
@@ -104,7 +104,7 @@ class RoomsListView: BaseViewControllerPlain {
     
     
     @IBAction func saveAndExit(_ sender: Any) {
-        if var createBeachListing = createBeachListing{
+        if let createBeachListing = createBeachListing{
             
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()
@@ -150,16 +150,16 @@ extension RoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, U
             view.model.image = UIImage(data: mainImage)
         }
         
-        view.model.numberOfBeds = item.quantity
-        view.model.numberOfGuests = item.noOfOccupant
-        view.model.numberOfRooms = item.quantity
-        view.model.roomName = item.name
-        view.model.roomPrice = "₦ \(item.pricePerNight)"
+        view.model.numberOfBeds = item.quantity ?? 0
+        view.model.numberOfGuests = item.noOfOccupant ?? 0
+        view.model.numberOfRooms = item.quantity ?? 0
+        view.model.roomName = item.name ?? ""
+        view.model.roomPrice = "₦ \(item.pricePerNight ?? 0)"
         view.model.deleteTapped = { [weak self] in
-            self?.deleteItem(roomName: item.name)
+            self?.deleteItem(roomName: item.name ?? "")
         }
         view.model.editTapped = { [weak self] in
-            self?.editItem(roomName: item.name)
+            self?.editItem(roomName: item.name ?? "")
         }
         view.isUserInteractionEnabled = true
         cell.applyView(view: view)

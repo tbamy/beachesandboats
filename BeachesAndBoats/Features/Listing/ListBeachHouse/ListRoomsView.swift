@@ -36,7 +36,7 @@ class ListRoomsView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setup()
     }
     

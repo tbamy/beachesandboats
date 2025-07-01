@@ -61,7 +61,7 @@ struct Listing: Codable {
     let houseRules: [BookingHouseRule]?
     let rooms: [BookingRoom]?
     let userReviewed: Bool?
-    let rating: Int?
+    let rating: Double?
     let userFavourite: Bool?
     let reviews: [Review]?
     let noOfAdults: Int?
@@ -231,8 +231,9 @@ struct BookingRoom: Codable {
     let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
     let images: [RoomImage]?
     let bedTypes: [BookingCatBedType]?
-    let noOfOccupant: Int?
-    let hasPrivateBathroom: Int?
+    let noOfOccupant: String?
+    let hasPrivateBathroom: String?
+    let quantity: String?
     
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -243,6 +244,7 @@ struct BookingRoom: Codable {
         case images, bedTypes
         case noOfOccupant = "no_of_occupant"
         case hasPrivateBathroom = "has_private_bathroom"
+        case quantity
     }
 }
 
@@ -251,7 +253,7 @@ struct BookingCatBedType: Codable {
     let id: String?
     let name: String?
     let description: String?
-    let quantity: Int?
+    let quantity: String?
 }
 
 struct RoomImage: Codable{
@@ -261,7 +263,7 @@ struct RoomImage: Codable{
 // MARK: - Review
 struct Review: Codable {
     let id, note, createdAt: String?
-    let rating: Int?
+    let rating: String?
     let user: User?
 
     enum CodingKeys: String, CodingKey {
@@ -295,7 +297,7 @@ struct BoatBooking: Codable {
     let status: String
     let cruiseLength: Int
     let bookingType: String
-    let noOfPeople: Int
+    let noOfPeople: String
     let bookingDate, bookingTime, hostID: String
     let boatDestination: BoatDestination
     let subCategory: BoatBookingSubCategory
@@ -325,10 +327,11 @@ struct BeachHouseBooking: Codable {
     let beachHouseRoom: BookingBeachHouseRoom?
     let beachHouse: BookingBeachHouse?
     let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
-    let noOfPeople: Int?
+    let noOfPeople: String?
     let status: String?
     let summary: String?
-    let units, total: Int?
+    let units: String?
+    let total: Int?
     let createdAt: String?
     let adminCharge: Int?
     let cleaningFee: String?
@@ -357,7 +360,8 @@ struct BookingBeachHouseRoom: Codable {
     let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
     let images: [Image]?
     let bedTypes: [BookingBedType]?
-    let noOfOccupant, hasPrivateBathroom: Int?
+    let noOfOccupant: String?
+    let hasPrivateBathroom: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -375,9 +379,9 @@ struct BookingBeachHouse: Codable {
     let id, name, description, aboutOwner: String
     let listingPrice, discountPercent: Float?
     let image: String?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
-    let rating: Int?
+    let rating: Double?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description

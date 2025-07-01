@@ -8,33 +8,33 @@
 import Foundation
 
 struct CreateBeachListingRequest: Codable {
-    var name: String
-    var description: String
-    var aboutOwner: String
-    var checkInFrom: String
-    var checkInTo: String
-    var checkOutFrom: String
-    var checkOutTo: String
-    var categoryId: String
-    var subCategoryId: String
+    var name: String?
+    var description: String?
+    var aboutOwner: String?
+    var checkInFrom: String?
+    var checkInTo: String?
+    var checkOutFrom: String?
+    var checkOutTo: String?
+    var categoryId: String?
+    var subCategoryId: String?
     var bookingType: String?
-    var country: String
-    var state: String
-    var streetName: String
-    var city: String
+    var country: String?
+    var state: String?
+    var streetName: String?
+    var city: String?
     var latitude: Double?
     var longitude: Double?
-    var availableFrom: String
-    var availableTo: String
-    var amenities: [String]
-    var languages: [String]
-    var houseRules: [String]
-    var rooms: [Room]
-    var roleType: String
-    var listingPrice: Float
-    var discountPercent: Int
-    var pricePerDay: Float
-    var dayDiscountPercent: Int
+    var availableFrom: String?
+    var availableTo: String?
+    var amenities: [String]?
+    var languages: [String]?
+    var houseRules: [String]?
+    var rooms: [Room]?
+    var roleType: String?
+    var listingPrice: Float?
+    var discountPercent: Int?
+    var pricePerDay: Float?
+    var dayDiscountPercent: Int?
 
     
     enum CodingKeys: String, CodingKey {
@@ -62,17 +62,17 @@ struct CreateBeachListingRequest: Codable {
 }
 
 struct Room: Codable {
-    var name: String
-    var description: String
-    var quantity: Int
-    var roomAmenities: [String]
-    var pricePerNight: Float
-    var discountPercent: Int
-    var pricePerDay: Float
-    var dayDiscountPercent: Int
-    var bedTypes: [BedType]
-    var hasPrivateBathroom: Int
-    var noOfOccupant: Int
+    var name: String?
+    var description: String?
+    var quantity: Int?
+    var roomAmenities: [String]?
+    var pricePerNight: Float?
+    var discountPercent: Int?
+    var pricePerDay: Float?
+    var dayDiscountPercent: Int?
+    var bedTypes: [BedType]?
+    var hasPrivateBathroom: Int?
+    var noOfOccupant: Int?
     var images: [Data]?
     
     enum CodingKeys: String, CodingKey {

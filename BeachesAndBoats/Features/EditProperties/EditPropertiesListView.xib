@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditPropertiesListView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="beachHouseListingSegment" destination="MIf-Vt-5es" id="p0u-R2-SHD"/>
+                <outlet property="boatListingSegment" destination="fO8-rK-vNk" id="Lfh-Nv-jjw"/>
+                <outlet property="listingTableView" destination="IUM-OL-RpV" id="nj7-Hh-tQP"/>
+                <outlet property="searchField" destination="sWc-PQ-Dgj" id="mIj-VB-fL0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="527" height="1462"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWc-PQ-Dgj" customClass="SearchField" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="79" width="487" height="44"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="PLE-nf-MkH"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A04-hf-wtZ">
+                    <rect key="frame" x="30" y="143" width="487" height="30"/>
+                    <subviews>
+                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="MIf-Vt-5es" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="238.66666666666666" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Beach Houses Listings"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="fO8-rK-vNk" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="248.66666666666669" y="0.0" width="238.33333333333331" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Boats Listings"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="ANg-fU-64V"/>
+                    </constraints>
+                </stackView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IUM-OL-RpV">
+                    <rect key="frame" x="0.0" y="203" width="527" height="1225"/>
+                    <color key="backgroundColor" name="back"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IUM-OL-RpV" secondAttribute="trailing" id="4rN-rC-WmT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sWc-PQ-Dgj" secondAttribute="trailing" constant="20" id="BxA-5a-ENv"/>
+                <constraint firstItem="IUM-OL-RpV" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="KnZ-qM-nCb"/>
+                <constraint firstItem="sWc-PQ-Dgj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="WLc-U4-hGR"/>
+                <constraint firstItem="IUM-OL-RpV" firstAttribute="top" secondItem="A04-hf-wtZ" secondAttribute="bottom" constant="30" id="gFw-fL-zWX"/>
+                <constraint firstItem="IUM-OL-RpV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mCH-2x-gUE"/>
+                <constraint firstItem="A04-hf-wtZ" firstAttribute="top" secondItem="sWc-PQ-Dgj" secondAttribute="bottom" constant="20" id="s9w-Ik-A4c"/>
+                <constraint firstItem="A04-hf-wtZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="sgh-Vv-kcV"/>
+                <constraint firstItem="sWc-PQ-Dgj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="yZa-hl-Dy1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="A04-hf-wtZ" secondAttribute="trailing" constant="10" id="zrf-jn-437"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="90.839694656488547" y="234.50704225352115"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="back">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -38,6 +38,10 @@ public class SelectableView: BaseXib, Sizeable {
     @IBInspectable var titleOnlyMode: Bool = false {
         didSet { setup() }
     }
+    
+    @IBInspectable var subtitleOnlyMode: Bool = false {
+        didSet { setup() }
+    }
      
     @IBInspectable var titleAndSubtitleOnlyMode: Bool = false {
         didSet { setup() }
@@ -115,7 +119,9 @@ public class SelectableView: BaseXib, Sizeable {
             setupTitleAndSubtitleOnlyMode()
         }else if titleAndSubtitleWithImageOnlyMode{
             setupTitleAndSubtitleWithImageOnlyMode()
-        } 
+        } else if subtitleOnlyMode{
+            setupSubtitleOnlyMode()
+        }
 //        else if noCheckBox {
 //            setUpForNoCheckBox()
 //        } 
@@ -167,6 +173,20 @@ public class SelectableView: BaseXib, Sizeable {
         imageHeight.constant = 18
         imageWidth.constant = 18
         title.size = 13
+//        topPaddingView.isHidden = true
+        mainStack.alignment = .center
+        mainStack.spacing = 15
+        top.constant = 13
+        left.constant = 16
+        bottom.constant = 13
+        right.constant = 16
+    }
+    
+    func setupSubtitleOnlyMode() {
+        image.isHidden = true
+        topImage.isHidden = true
+        title.isHidden = true
+        subtitle.size = 13
 //        topPaddingView.isHidden = true
         mainStack.alignment = .center
         mainStack.spacing = 15

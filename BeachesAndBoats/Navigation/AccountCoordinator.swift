@@ -539,6 +539,11 @@ class AccountCoordinator: Coordinator{
     }
     
     
+    //MARK: Edit Property
+    
+    
+    
+    
 //MARK: Profile Management
     
     func gotoManageAccountView(){
@@ -591,7 +596,8 @@ class AccountCoordinator: Coordinator{
     }
     
     func gotoContactSupportView(){
-        let vc: ContactSupportView = .fromNib()
+        
+        let vc: ContactCustomerSupportView = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
