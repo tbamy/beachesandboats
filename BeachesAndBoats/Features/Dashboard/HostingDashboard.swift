@@ -320,15 +320,21 @@ class HostingDashboard: UITabBarController {
         coordinator = AccountCoordinator(navigationController: navController)
         
         // Add button to view (not to tabBar)
-        tabBar.addSubview(middleButton)
+//        tabBar.addSubview(middleButton)
+        view.addSubview(middleButton)
         tabBar.bringSubviewToFront(middleButton)
     }
     
     private func positionMiddleButton() {
+        
         middleButton.center = CGPoint(
-            x: tabBar.bounds.midX,
-            y: tabBar.bounds.minY - 10 // Adjust to sit slightly above the tab bar
-        )
+                x: tabBar.center.x,
+                y: view.bounds.height - tabBar.frame.height / 2 - 30 // fine-tune this offset
+            )
+//        middleButton.center = CGPoint(
+//            x: tabBar.bounds.midX,
+//            y: tabBar.bounds.minY - 10 // Adjust to sit slightly above the tab bar
+//        )
     }
     
     @objc func hostBtnTapped() {

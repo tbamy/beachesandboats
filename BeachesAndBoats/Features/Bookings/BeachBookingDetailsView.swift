@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import Kingfisher
+import RxSwift
 
 class BeachBookingDetailsView: BaseViewControllerPlain {
     
@@ -43,12 +44,17 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var upcomingStack: UIStackView!
     @IBOutlet weak var pastBookingView: UIView!
     
+    var vm = BeachBookingDetailsVM()
+    var disposeBag = DisposeBag()
+    
     var isDayBooking: Bool = false
     
     var beachDetails: Listing?
     var amenities: [Amenity] = []
     var roomImages: [String] = []
     var comments: [Review] = []
+    var userComment: String?
+    var userRating: Int?
     
     var from_when: Date?
     var to_when: Date?
@@ -70,6 +76,7 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         checkinDateLabel.isUserInteractionEnabled = false
         checkoutDateLabel.isUserInteractionEnabled = false
         itemToShow()
+        bindNetwork()
     }
     
     func itemToShow() {
@@ -159,7 +166,8 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         ratingLabel.text = "\(booking?.beachHouse?.rating ?? 0)"
         totalAmountLabel.text = "₦ \(booking?.beachHouseRoom?.pricePerNight ?? 0)"
 //        let totalGuests = (booking?.beachHouse?.noOfAdults ?? 0) + (booking?.beachHouse?.noOfChildren ?? 0)
-        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? 0) guests · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedrooms · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? "") beds · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? 0) private baths"    //"\(totalGuests) guests, \(booking?.beachHouse?.rooms?.count ?? 0) rooms"
+
+        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? "0" /*0*/) guests · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedrooms · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? "") beds · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? "0" /*0*/) private baths"    //"\(totalGuests) guests, \(booking?.beachHouse?.rooms?.count ?? 0) rooms"
         checkinDateLabel.text = booking?.checkingDate ?? ""
         checkoutDateLabel.text = booking?.checkoutDate ?? ""
         
@@ -210,7 +218,7 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     
     @IBAction func writeReviewTapped(_ sender: Any) {
         
-        
+        RatingModal.show(userComment: "", delegate: self)
     }
     
     @IBAction func messageHostTapped(_ sender: Any) {
@@ -253,6 +261,45 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         
     }
     
+}
+
+extension BeachBookingDetailsView: SumbitBtnDelegate {
+    
+    func submitTapped(rating: Int, comment: String?) {
+        print("The rating is \(rating)")
+        print("The comment is \(comment ?? "")")
+        
+        userComment = comment
+        userRating = rating
+
+        LoadingModal.show(title: "Submitting review...")
+        let request = AddReviewRequest(itemId: booking?.beachHouse?.id ?? "", type: "BeachHouse", note: comment ?? "", rating: rating)
+        vm.saveReview(request)
+       
+    }
+    
+    
+}
+
+extension BeachBookingDetailsView {
+    func bindNetwork(){
+        vm.output.subscribe(onNext: { [weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .addReviewSuccess(let response):
+                MiddleModal.show(title: "Success", subtitle: response.message ?? "Review submitted", type: .success, primaryText: "Okay", dismissable: false, dismissOnConfirm: true, onConfirm: {
+                    self?.dismiss(animated: true)
+                })
+            case .addReviewFailure(let error):
+                MiddleModal.show(title: "Error", subtitle: error.message ?? "Something went wrong",  type: .error, primaryText: "Okay", dismissable: false, dismissOnConfirm: true, onConfirm: {
+                    self?.dismiss(animated: true)
+                })
+            }
+            
+            
+        }).disposed(by: disposeBag)
+    }
 }
 
 extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

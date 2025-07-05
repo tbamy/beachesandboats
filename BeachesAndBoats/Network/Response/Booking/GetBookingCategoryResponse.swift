@@ -402,4 +402,3 @@ struct Destination: Codable {
     let id, name: String?
     let price: String?
 }
-

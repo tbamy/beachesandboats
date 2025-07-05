@@ -3,7 +3,6 @@
    uuid = "896A6358-AFA5-4240-AAE2-FD1C9B4DCCD3"
    type = "1"
    version = "2.0">
-<<<<<<< HEAD
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -80,8 +79,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "76"
-                  endingLineNumber = "76"
-                  offsetFromSymbolStart = "2444">
+                  endingLineNumber = "76">
                </Location>
                <Location
                   uuid = "24FC3947-F1C2-4831-9C12-739F5EBD0EC9 - 214caa5d45b9f3dd"
@@ -95,8 +93,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "2408">
+                  endingLineNumber = "77">
                </Location>
                <Location
                   uuid = "24FC3947-F1C2-4831-9C12-739F5EBD0EC9 - 214caa5d45b9f85e"
@@ -110,8 +107,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "2408">
+                  endingLineNumber = "112">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -143,8 +139,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "1716">
+                  endingLineNumber = "150">
                </Location>
                <Location
                   uuid = "20C2D15E-D0A0-4A4D-846E-B2554D649660 - ea54011e9d25b9ae"
@@ -158,13 +153,10 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "3328">
+                  endingLineNumber = "151">
                </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
-=======
->>>>>>> HefepaNew
 </Bucket>
