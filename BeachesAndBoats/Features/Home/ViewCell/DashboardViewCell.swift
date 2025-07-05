@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DashboardViewCell: BaseXib {
     @IBOutlet var cellView: UIView!
@@ -72,9 +73,35 @@ class DashboardViewCell: BaseXib {
     }
     
     func setupServiceMode(){
-        infoOneIcon.image = Assets.people.image
-        infoTwoIcon.image = Assets.location.image
+//        infoOneIcon.image = Assets.people.image
+        infoOneIcon.image = Assets.location.image
+        infoTwoStack.isHidden = true
+        ratingIcon.image = Assets.calendar.image
+        
+//        infoTwoIcon.image = Assets.location.image
         priceStack.isHidden = true
+        
+//        if let url = URL(string: model.bannerImg.replacingOccurrences(of: "http://", with: "https://")) {
+//            bannerImg.kf.setImage(with: url)
+//        }
+        
+        if let url = URL(string: model.bannerImg) {
+            bannerImg.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "calendar"),
+                options: nil,
+                completionHandler: { result in
+                    switch result {
+                    case .success(let value):
+                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                        self.bannerImg.image = url//UIImage(named: "calendar")
+                    case .failure(let error):
+                        print("Failed to load image: \(error.localizedDescription)")
+                        self.bannerImg.image = UIImage(named: "calendar")
+                    }
+                }
+            )
+        }
     }
 
 }
@@ -86,6 +113,7 @@ struct DashboardViewCellModel{
     public var ratingLabel: String = ""
     public var infoOneLabel: String = ""
     public var infoTwoLabel: String = ""
-    public var bannerImg: UIImage = UIImage()
+    public var bannerImg: String = ""
+//    public var bannerImg: UIImage = UIImage()
     public var tapped: () -> Void = {}
 }

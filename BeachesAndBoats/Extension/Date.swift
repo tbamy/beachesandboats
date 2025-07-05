@@ -50,4 +50,11 @@ extension Date {
         readableDateFormatter.timeZone = TimeZone.current
         return readableDateFormatter.string(from: date)
     }
+    
+    public func toBackendTime() -> String {
+        let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            return dateFormatter.string(from: self)
+    }
 }

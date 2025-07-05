@@ -17,6 +17,7 @@ struct CreateBeachHouseBookingRequest: Codable {
     var numberOfPeople: Int
     var amount: Float
     var units: Int
+    var bookingType: String
 
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -28,6 +29,7 @@ struct CreateBeachHouseBookingRequest: Codable {
         case numberOfPeople = "no_of_people"
         case amount
         case units
+        case bookingType = "booking_type"
     }
 }
 

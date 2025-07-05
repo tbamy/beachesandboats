@@ -38,6 +38,10 @@ public class SelectableView: BaseXib, Sizeable {
     @IBInspectable var titleOnlyMode: Bool = false {
         didSet { setup() }
     }
+    
+    @IBInspectable var subtitleOnlyMode: Bool = false {
+        didSet { setup() }
+    }
      
     @IBInspectable var titleAndSubtitleOnlyMode: Bool = false {
         didSet { setup() }
@@ -54,6 +58,10 @@ public class SelectableView: BaseXib, Sizeable {
     @IBInspectable var imageTitleMode: Bool = false {
         didSet { setupImageTitleStyle() }
     }
+    
+//    @IBInspectable var noCheckBox: Bool = false {
+//        didSet { setUpForNoCheckBox() }
+//    }
     
     @IBInspectable var state: Bool = false {
         didSet { model.state = state }
@@ -96,6 +104,7 @@ public class SelectableView: BaseXib, Sizeable {
         subtitle.text = model.subtitle
         image.image = model.image
         topImage.image = model.image
+//        checkButton.isHidden = model.noCheckBox
         
         layer.borderWidth = 2
         layer.cornerRadius = 6.0
@@ -110,7 +119,13 @@ public class SelectableView: BaseXib, Sizeable {
             setupTitleAndSubtitleOnlyMode()
         }else if titleAndSubtitleWithImageOnlyMode{
             setupTitleAndSubtitleWithImageOnlyMode()
-        } else {
+        } else if subtitleOnlyMode{
+            setupSubtitleOnlyMode()
+        }
+//        else if noCheckBox {
+//            setUpForNoCheckBox()
+//        } 
+        else {
             setupSideImageStyle()
         }
         
@@ -167,6 +182,20 @@ public class SelectableView: BaseXib, Sizeable {
         right.constant = 16
     }
     
+    func setupSubtitleOnlyMode() {
+        image.isHidden = true
+        topImage.isHidden = true
+        title.isHidden = true
+        subtitle.size = 13
+//        topPaddingView.isHidden = true
+        mainStack.alignment = .center
+        mainStack.spacing = 15
+        top.constant = 13
+        left.constant = 16
+        bottom.constant = 13
+        right.constant = 16
+    }
+    
     func setupTitleOnlyMode() {
         image.isHidden = true
         topImage.isHidden = true
@@ -208,6 +237,21 @@ public class SelectableView: BaseXib, Sizeable {
          right.constant = 16
      }
     
+//    func setUpForNoCheckBox() {
+//        image.isHidden = true
+//        topImage.isHidden = true
+//        subtitle.isHidden = true
+//        checkButton.isHidden = true
+//        title.size = 13
+////        topPaddingView.isHidden = true
+//        mainStack.alignment = .center
+//        mainStack.spacing = 15
+//        top.constant = 13
+//        left.constant = 16
+//        bottom.constant = 13
+//        right.constant = 16
+//    }
+    
     public func getHeight() -> CGFloat {
         return title.bounds.height + 20
     }
@@ -237,5 +281,6 @@ public struct SelectableViewModel {
     public var image: UIImage = UIImage()
     public var state: Bool = false
     public var tapped: () -> Void = {}
+//    public var noCheckBox: Bool = false
 }
 

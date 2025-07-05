@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ManageAccountView: BaseViewControllerPlain {
     var coordinator: AccountCoordinator?
@@ -17,11 +18,16 @@ class ManageAccountView: BaseViewControllerPlain {
     
     let userData = UserSession.shared.loginRes?.data?.user
     
+    let vm = UpdateProfileVM()
+    let disposeBag = DisposeBag()
+    let input = PublishSubject<UpdateProfileVM.Input>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Manage Account"
         setupCustomNavigationButton()
+        setupDetails()
     }
     
     func setupDetails(){
@@ -37,10 +43,27 @@ class ManageAccountView: BaseViewControllerPlain {
     }
 
      @IBAction func saveTapped(_ sender: Any) {
-         
+         if validateFields(){
+             let request = UpdateProfileRequest(first_name: firstNameField.text, last_name: lastNameField.text)
+             input.onNext(.updateProfile(request))
+             LoadingModal.show()
+         }
      }
     
 
+    func validateFields() -> Bool{
+        if firstNameField.text.isEmpty {
+            firstNameField.error = "Please enter your first name"
+            return false
+        }
+        else
+        if lastNameField.text.isEmpty {
+            lastNameField.error = "Please enter your last name"
+            return false
+        }
+        
+        return true
+    }
 }
 
 extension ManageAccountView{
@@ -51,5 +74,24 @@ extension ManageAccountView{
         customButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         let customBarButtonItem = UIBarButtonItem(customView: customButton)
         navigationItem.rightBarButtonItem = customBarButtonItem
+    }
+    
+    func bind() {
+        vm.transform(input: input)
+        vm.output.subscribe(onNext: { [weak self] output in
+            LoadingModal.dismiss()
+            switch output {
+            case .updateProfileSuccess(let response):
+                self?.updateUserDetails(with: response)
+            case .updateProfileFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+
+    }
+    
+    func updateUserDetails(with: UpdateProfileResponse){
+        UserSession.shared.userDetails = with.data
+        Toast.show(message: with.message ?? "Profile Successfully Updated")
     }
 }

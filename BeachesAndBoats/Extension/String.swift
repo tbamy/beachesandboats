@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension String {
     public static func toReadableDate(date: Date) -> String {
@@ -162,8 +163,42 @@ extension String {
         }
         return nil // Return nil if the conversion fails
     }
+    
+    func toBackendTime() -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "HH:mm:ss"
+        inputDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        if let date = inputDateFormatter.date(from: self) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "HH:mm"
+            outputDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            return outputDateFormatter.string(from: date)
+        }
+        return nil
+    }
 
 
+    @MainActor public func loadImage(into imageView: UIImageView, placeholder: String = "dummy") {
+            guard let url = URL(string: self.replacingOccurrences(of: "http://", with: "https://")) else {
+                imageView.image = UIImage(named: placeholder)
+                return
+            }
+            imageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: placeholder),
+                options: nil,
+                completionHandler: { result in
+                    switch result {
+                    case .success(let value):
+                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Failed to load image: \(error.localizedDescription)")
+                        imageView.image = UIImage(named: placeholder)
+                    }
+                }
+            )
+        }
 
 
 }

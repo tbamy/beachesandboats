@@ -31,5 +31,8 @@ struct UserData: Codable{
     var roles: [String]?
     var isAccountVerified: Bool?
     var verificationStatus: String?
-    
+    var notificationSettings: [NotificationSetting]?
+    var mfa_enabled: Bool?
+    var mfa_email: String?
+    var mfa_phone_number: String?
 }

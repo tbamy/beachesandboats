@@ -13,6 +13,6 @@ struct SendKYCRequest: Codable{
     var middle_name: String
     var email: String
     var phone_number: String
-    var id_document: Data
-    var second_document: Data
+    var id_document: Data?
+    var second_document: Data?
 }

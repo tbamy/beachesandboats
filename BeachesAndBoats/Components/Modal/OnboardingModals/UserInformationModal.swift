@@ -99,13 +99,14 @@ public class UserInformationModal: BaseXib {
     }
     
     func setup() {
+        birthday.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())
         backBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backBtnTapped)))
     }
     
     
     public static func startUserInformationModal(on view: UIView, info: SignUpRequest, delegate infoDel: InfoDelegate, transitionDelegate transDel: ModalTransitionDelegate) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+//        let backDrop = UIView(frame: Helpers.screen)
+//        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         
         let modal = UserInformationModal()
         modal.transitionDelegate = transDel
@@ -120,11 +121,24 @@ public class UserInformationModal: BaseXib {
         modal.layer.cornerRadius = 20
         modal.backgroundColor = .white
         modal.clipsToBounds = true
+        
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
+        view.addSubview(backDrop)
+//        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: 800)
+//        view.layoutIfNeeded()
+//        
+//        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+//            modal.frame.origin.y = Helpers.screenHeight  - 800 + modal.layer.cornerRadius
+//            view.layoutIfNeeded()
+//        }, completion: nil)
+        
+//        backDrop.addSubview(modal)
+//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+//            keyWindow.addSubview(backDrop)
+//        }
         let height = Helpers.screenHeight * 0.9
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()

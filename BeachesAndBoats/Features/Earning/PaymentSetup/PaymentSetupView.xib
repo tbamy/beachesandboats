@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentSetupView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="countryDropdownField" destination="89o-U4-32l" id="DfJ-F9-yrl"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's set up how you will get paid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NES-z2-Hen">
+                    <rect key="frame" x="20" y="84" width="337" height="22"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's set up how you will get paid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsF-iK-Bi2">
+                    <rect key="frame" x="20" y="156" width="256" height="20"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's set up how you will get paid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVZ-7I-WP2">
+                    <rect key="frame" x="20" y="184" width="353" height="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89o-U4-32l" customClass="DropDown" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="216" width="353" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="rYv-Vt-ahQ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="pickerTitle" value="Countries"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHh-5s-o6y" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="336" width="353" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="TiO-lg-DtX"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Continue"/>
+                    <connections>
+                        <action selector="continueBtnTapped:" destination="-1" eventType="touchUpInside" id="Nrd-gK-BqT"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="back"/>
+            <constraints>
+                <constraint firstItem="yVZ-7I-WP2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3Vy-ws-UEd"/>
+                <constraint firstItem="GHh-5s-o6y" firstAttribute="top" secondItem="89o-U4-32l" secondAttribute="bottom" constant="70" id="49w-b5-wAM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GHh-5s-o6y" secondAttribute="trailing" constant="20" id="7W6-pJ-lGi"/>
+                <constraint firstItem="yVZ-7I-WP2" firstAttribute="top" secondItem="vsF-iK-Bi2" secondAttribute="bottom" constant="8" id="LP6-SK-P32"/>
+                <constraint firstItem="89o-U4-32l" firstAttribute="top" secondItem="yVZ-7I-WP2" secondAttribute="bottom" constant="15" id="OXQ-C7-OJI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="89o-U4-32l" secondAttribute="trailing" constant="20" id="R3l-L8-Bt5"/>
+                <constraint firstItem="NES-z2-Hen" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="25" id="Tyq-KY-GmV"/>
+                <constraint firstItem="vsF-iK-Bi2" firstAttribute="top" secondItem="NES-z2-Hen" secondAttribute="bottom" constant="50" id="ajN-QE-bkD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yVZ-7I-WP2" secondAttribute="trailing" constant="20" id="cBg-ah-hbz"/>
+                <constraint firstItem="NES-z2-Hen" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fZY-5b-P83"/>
+                <constraint firstItem="89o-U4-32l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="kUr-2K-3Xz"/>
+                <constraint firstItem="GHh-5s-o6y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="lUZ-gz-SAP"/>
+                <constraint firstAttribute="trailingMargin" secondItem="NES-z2-Hen" secondAttribute="trailing" constant="20" id="oPB-QY-PNI"/>
+                <constraint firstItem="vsF-iK-Bi2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="xpC-7t-ddU"/>
+            </constraints>
+            <point key="canvasLocation" x="67.938931297709928" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="GHh-5s-o6y">
+            <size key="intrinsicContentSize" width="92.666666666666671" height="34.333333333333336"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="back">
+            <color red="0.95686274770000002" green="0.95686274770000002" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

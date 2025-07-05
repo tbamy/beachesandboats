@@ -16,21 +16,29 @@ enum Urls: String {
     case verifyCode = "api/v1/verify-otp"
     case refreshToken = "api/v1/refresh-token"
     case verifyLoginOtp = "api/v1/verify-login-otp"
+    case forgotPassword = "api/v1/forgot-password"
+    case resetPassword = "api/v1/reset-password"
 
     case login = "api/v1/login"
     case logout = "api/v1/logout"
     case getPhoneCodes = "api/v1/phonecodes"
     
     //MARK: Profile Management
-    case resetPassword = "api/v1/reset-password"
+//    case resetPassword = "api/v1/reset-password"
     case checkCode = "api/v1/password/code/check"
-    case changePassword = "api/v1/change-password"
-    case enable2FAEmail = "api/v1/accounts/settings/2fa/enable/email"
-    case enable2FAPhone = "api/v1/accounts/settings/2fa/enable/sms"
-    case verify2FA = "api/v1/accounts/settings/2fa/verify"
-    case requestCode2FA = "api/v1/accounts/settings/2fa/request/email"
+    case changePassword = "api/v1/user/update-password"
+    case updateProfile = "api/v1/user/update-account"
+//    case enable2FAEmail = "api/v1/accounts/settings/2fa/enable/email"
+//    case enable2FAPhone = "api/v1/accounts/settings/2fa/enable/sms"
+//    case verify2FA = "api/v1/accounts/settings/2fa/verify"
+//    case requestCode2FA = "api/v1/accounts/settings/2fa/request/email"
     case getDashboardUser = "api/v1/hosting/dashboard/user"
     case sendKYC = "api/v1/kyc-request"
+    case updateNotificationSettings = "api/v1/user/update-notification-settings"
+    case customerSupport = "api/v1/user/support"
+    
+    case getUserBookings = "api/v1/user/bookings"
+    case getSavedFavourites = "api/v1/user/favourites"
     
     
     //MARK: Booking
@@ -47,6 +55,7 @@ enum Urls: String {
     case updateProviderBookingDate = "api/v1/booking/update-service-booking"
     case findBouncers = "api/v1/booking/find-bouncer"
     case findDj = "api/v1/booking/find-dj"
+    case paymentCallback = "api/v1/callback/paystack/booking"
     
     
     
@@ -54,14 +63,36 @@ enum Urls: String {
     
     case createBoat = "api/v1/boat/create"
     case propertiesData = "api/v1/property/data"
+    case editBoat = "api/v1/boat/edit/%@"
     
     //MARK: Beach
     
     case createBeach = "api/v1/beachhouse/create"
+    case editBeach = "api/v1/beachhouse/edit/%@"
     
     
     //MARK: Services
     
     case createService = "api/v1/provider/create"
+    
+    //MARK: -  Hosting
+    
+    case reservations = "api/v1/hosting/dashboard/reservations"
+    case getTopEarnings = "api/v1/hosting/dashboard/earnings"
+    case getWithdrawHistory = "api/v1/hosting/dashboard/withdrawal-history"
+    case makeWithdrawal = "api/v1/hosting/dashboard/create-withdrawal"
+    case bankList = "api/v1/hosting/dashboard/banks"
+    case twoFASecurity = "api/v1/user/send-mfa-otp"
+    case twoFACompleteVerification = "api/v1/user/update-mfa-security"
+    
+    //MARK: - Listing
+    case beachHouseAndBoatListing = "api/v1/hosting/dashboard/listings"
+    
+    
+    //MARK: - Chats
+    case startConversation = "api/v1/chat/start-conversation"
+    case sendChat = "api/v1/chat/send-chat"
+    case getConservations = "api/v1/chat/get-conversations"
+    case getMessageHistory = "api/v1/chat/get-messages/%@"
     
 }

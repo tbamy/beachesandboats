@@ -12,9 +12,19 @@ import UIKit
 class MessagesCoordinator: Coordinator{
     override func start() {
         let vc: MessagesView = .fromNib()
-        vc.tabBarItem = UITabBarItem(title: "Messages", image: Assets.messages_menu.image, tag: 3)
+        vc.tabBarItem = UITabBarItem(title: "Messages", image: Assets.messages_menu.image, tag: 2)
         vc.tabBarItem.accessibilityIdentifier = "message"
         vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoChat(otherUser: String, conversationId: String){
+        let vc: ChatView = .fromNib()
+        vc.coordinator = self
+//        vc.messages = data
+        vc.otherUser = otherUser
+        vc.conversationId = conversationId
+//        vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     

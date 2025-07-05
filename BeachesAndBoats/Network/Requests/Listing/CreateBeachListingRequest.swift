@@ -8,31 +8,33 @@
 import Foundation
 
 struct CreateBeachListingRequest: Codable {
-    var name: String
-    var description: String
-    var aboutOwner: String
-    var checkInFrom: String
-    var checkInTo: String
-    var checkOutFrom: String
-    var checkOutTo: String
-    var categoryId: String
-    var subCategoryId: String
+    var name: String?
+    var description: String?
+    var aboutOwner: String?
+    var checkInFrom: String?
+    var checkInTo: String?
+    var checkOutFrom: String?
+    var checkOutTo: String?
+    var categoryId: String?
+    var subCategoryId: String?
     var bookingType: String?
-    var country: String
-    var state: String
-    var streetName: String
-    var city: String
+    var country: String?
+    var state: String?
+    var streetName: String?
+    var city: String?
     var latitude: Double?
     var longitude: Double?
-    var availableFrom: String
-    var availableTo: String
-    var amenities: [String]
-    var languages: [String]
-    var houseRules: [String]
-    var rooms: [Room]
-    var roleType: String
-    var listingPrice: Float
-    var discountPercent: Int
+    var availableFrom: String?
+    var availableTo: String?
+    var amenities: [String]?
+    var languages: [String]?
+    var houseRules: [String]?
+    var rooms: [Room]?
+    var roleType: String?
+    var listingPrice: Float?
+    var discountPercent: Int?
+    var pricePerDay: Float?
+    var dayDiscountPercent: Int?
 
     
     enum CodingKeys: String, CodingKey {
@@ -54,19 +56,23 @@ struct CreateBeachListingRequest: Codable {
         case roleType = "role_type"
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
     }
 }
 
 struct Room: Codable {
-    var name: String
-    var description: String
-    var quantity: Int
-    var roomAmenities: [String]
-    var pricePerNight: Float
-    var discountPercent: Int
-    var bedTypes: [BedType]
-    var hasPrivateBathroom: Int
-    var noOfOccupant: Int
+    var name: String?
+    var description: String?
+    var quantity: Int?
+    var roomAmenities: [String]?
+    var pricePerNight: Float?
+    var discountPercent: Int?
+    var pricePerDay: Float?
+    var dayDiscountPercent: Int?
+    var bedTypes: [BedType]?
+    var hasPrivateBathroom: Int?
+    var noOfOccupant: Int?
     var images: [Data]?
     
     enum CodingKeys: String, CodingKey {
@@ -74,6 +80,8 @@ struct Room: Codable {
         case roomAmenities = "room_amenities"
         case pricePerNight = "price_per_night"
         case discountPercent = "discount_percent"
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
         case bedTypes = "bedTypes"
         case hasPrivateBathroom = "has_private_bathroom"
         case noOfOccupant = "no_of_occupant"

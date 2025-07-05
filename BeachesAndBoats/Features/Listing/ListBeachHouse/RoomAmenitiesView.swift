@@ -22,7 +22,7 @@ class RoomAmenitiesView: BaseViewControllerPlain {
     var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setup()
     }
     
@@ -39,6 +39,8 @@ class RoomAmenitiesView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
+        nextBtn.isEnabled = !selectedItems.isEmpty
     }
 
     @IBAction func nextTapped(_ sender: Any) {
@@ -46,21 +48,22 @@ class RoomAmenitiesView: BaseViewControllerPlain {
         guard let createBeachListing = createBeachListing else { return }
 
         // Get the last index of the rooms array
-        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
         print("Current room index is \(roomIndex)")
 
         // Safely get a mutable copy of the rooms array
         var updatedRoomInfo = createBeachListing.rooms
-        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
             // Update the room amenities at the current room index
-            var existingRoom = updatedRoomInfo[roomIndex]
-            existingRoom.roomAmenities = selectedItems
-            
-            // Reassign the updated room back to the array
-            updatedRoomInfo[roomIndex] = existingRoom
-            
-            print("Selected Items: \(selectedItems)")
-            print("Updated Room: \(existingRoom)")
+            if var existingRoom = updatedRoomInfo?[roomIndex]{
+                existingRoom.roomAmenities = selectedItems
+                
+                // Reassign the updated room back to the array
+                updatedRoomInfo?[roomIndex] = existingRoom
+                
+                print("Selected Items: \(selectedItems)")
+                print("Updated Room: \(existingRoom)")
+            }
         } else {
             print("Error: Room at index \(roomIndex) does not exist in room info.")
             return
@@ -81,21 +84,22 @@ class RoomAmenitiesView: BaseViewControllerPlain {
         guard let createBeachListing = createBeachListing else { return }
 
         // Get the last index of the rooms array
-        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
         print("Current room index is \(roomIndex)")
 
         // Safely get a mutable copy of the rooms array
         var updatedRoomInfo = createBeachListing.rooms
-        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
             // Update the room amenities at the current room index
-            var existingRoom = updatedRoomInfo[roomIndex]
-            existingRoom.roomAmenities = selectedItems
-            
-            // Reassign the updated room back to the array
-            updatedRoomInfo[roomIndex] = existingRoom
-            
-            print("Selected Items: \(selectedItems)")
-            print("Updated Room: \(existingRoom)")
+            if var existingRoom = updatedRoomInfo?[roomIndex]{
+                existingRoom.roomAmenities = selectedItems
+                
+                // Reassign the updated room back to the array
+                updatedRoomInfo?[roomIndex] = existingRoom
+                
+                print("Selected Items: \(selectedItems)")
+                print("Updated Room: \(existingRoom)")
+            }
         } else {
             print("Error: Room at index \(roomIndex) does not exist in room info.")
             return

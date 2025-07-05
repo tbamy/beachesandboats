@@ -19,7 +19,7 @@ class AboutYouDescriptionView: BaseViewControllerPlain {
     var createBeachListing: CreateBeachListingRequest?
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = "Beaches Houses"
+        title = "Beach Houses"
         setUp()
     }
     
@@ -34,6 +34,15 @@ class AboutYouDescriptionView: BaseViewControllerPlain {
 //        }else{
 //            nextBtn.isEnabled = true
 //        }
+        
+        descriptionLabel.textChanged = { [weak self] textField, range, replacementString in
+            guard let self = self else { return }
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
+            
+            nextBtn.isEnabled = updatedText.count >= 5
+        }
     }
 
     @IBAction func nextTapped(_ sender: Any) {

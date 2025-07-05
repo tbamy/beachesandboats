@@ -48,6 +48,10 @@ enum Assets: String {
     case calendar = "calendar"
     case location = "location"
     case people = "people"
+    case favorite = "favoriteIcon"
+    case share = "shareIcon"
+    case favoriteTwo = "FavouriteIcon"
+    case shareTwo = "ShareImg"
     
 
     

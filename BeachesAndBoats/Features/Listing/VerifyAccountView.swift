@@ -7,12 +7,16 @@
 
 import UIKit
 
-class VerifyAccountView: UIViewController {
+class VerifyAccountView: BaseViewControllerPlain {
 
+    var coordinator: AccountCoordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
+    @IBAction func verifyAccountTapped(_ sender: Any) {
+        coordinator?.gotoVerificationFormView()
+    }
 }

@@ -11,7 +11,7 @@ import RxSwift
 class SignupView: BaseViewControllerPlain{
 
     var coordinator: AppCoordinator?
-    @IBOutlet weak var phoneNumber: PhoneField!
+    @IBOutlet weak var phoneNumber: InputFieldWithLeftImg!
     @IBOutlet weak var emailAddress: InputField!
     @IBOutlet weak var loginBtn: UILabel!
     
@@ -28,6 +28,7 @@ class SignupView: BaseViewControllerPlain{
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         
+        phoneNumber.keyboardType = .numberPad
         let loginGesture = UITapGestureRecognizer(target: self, action: #selector(gotoLogin))
         loginBtn.isUserInteractionEnabled = true
         loginBtn.addGestureRecognizer(loginGesture)
@@ -87,7 +88,7 @@ class SignupView: BaseViewControllerPlain{
                 
                 //MARK: SignUp
             case .signUpSuccess(let response):
-                AppStorage.hasSignedUp = true
+                AppStorage.hasSignedIn = true
                 AppStorage.username = email
                 UserSession.shared.signupRes = response
                 MiddleModal.show(title: response.message ?? "Registration Successful", type: .success, onConfirm: navigateToHome)

@@ -9,25 +9,26 @@ import Foundation
 import Moya
 
 enum BookingTarget{
-    case GetBookingCategories(page: String)
-    case AddOrUpdateReview
-    case AddOrUpdateFavourite
+    case GetBookingCategories(filter: GetBookingCategorySearchRequest)
+    case AddOrUpdateReview(AddReviewRequest)
+    case AddOrUpdateFavourite(AddFavouriteRequest)
     case CreateBeachHouseBooking(CreateBeachHouseBookingRequest)
     case CreateBoatBooking(CreateBoatBookingRequest)
     case BookingConfiguration
     case AllDishes
-    case FindChefByDishes
+    case FindChefByDishes(dishIds: String)
     case BookServiceProvider
     case UpdateProviderBookingDate
-    case FindBouncers
+    case FindBouncers(gender: String)
     case FindDj
+    case PaymentCallback(reference: String)
 }
 
 extension BookingTarget: BaseTarget{
     var path: String {
         switch self {
         
-        case .GetBookingCategories(page: let page):
+        case .GetBookingCategories:
             return Urls.getBookingCategories.rawValue
         case .AddOrUpdateReview:
             return Urls.addOrUpdateReview.rawValue
@@ -51,13 +52,15 @@ extension BookingTarget: BaseTarget{
             return Urls.findBouncers.rawValue
         case .FindDj:
             return Urls.findDj.rawValue
+        case .PaymentCallback:
+            return Urls.paymentCallback.rawValue
         }
     }
     
     var method: Moya.Method {
         switch self {
         
-        case .GetBookingCategories(page: let page):
+        case .GetBookingCategories:
             return .get
         case .AddOrUpdateReview:
             return .post
@@ -81,21 +84,23 @@ extension BookingTarget: BaseTarget{
             return .get
         case .FindDj:
             return .get
+        case .PaymentCallback:
+            return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
         
-        case .GetBookingCategories(page: let page):
+        case .GetBookingCategories(let filter):
             return .requestParameters(
-                parameters: ["page": page],
+                parameters: filter.toParameters(),
                 encoding: URLEncoding.queryString
             )
-        case .AddOrUpdateReview:
-            return .requestPlain
-        case .AddOrUpdateFavourite:
-            return .requestPlain
+        case .AddOrUpdateReview(let request):
+            return .requestJSONEncodable(request)
+        case .AddOrUpdateFavourite(let request):
+            return .requestJSONEncodable(request)
         case .CreateBeachHouseBooking(let request):
             return .requestJSONEncodable(request)
         case .CreateBoatBooking(let request):
@@ -104,16 +109,27 @@ extension BookingTarget: BaseTarget{
             return .requestPlain
         case .AllDishes:
             return .requestPlain
-        case .FindChefByDishes:
-            return .requestPlain
+        case .FindChefByDishes(let dishIds):
+            return .requestParameters(
+                parameters: ["dish_ids": dishIds],
+                encoding: URLEncoding.queryString
+            )
         case .BookServiceProvider:
             return .requestPlain
         case .UpdateProviderBookingDate:
             return .requestPlain
-        case .FindBouncers:
-            return .requestPlain
+        case .FindBouncers(let gender):
+            return .requestParameters(
+                parameters: ["gender": gender],
+                encoding: URLEncoding.queryString
+            )
         case .FindDj:
             return .requestPlain
+        case .PaymentCallback(reference: let reference):
+            return .requestParameters(
+                parameters: ["reference": reference],
+                encoding: URLEncoding.queryString
+            )
         }
     }
     

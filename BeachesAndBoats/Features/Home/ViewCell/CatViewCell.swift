@@ -19,6 +19,12 @@ class CatViewCell: BaseXib {
     @IBInspectable public var identifier: String = "" { didSet {
         self.accessibilityIdentifier = identifier
     } }
+    
+    @IBInspectable public var hasImage: Bool = true {
+        didSet{
+            setup()
+        }
+    }
 
     public override init(frame: CGRect) {
         super .init(frame: frame)
@@ -42,6 +48,10 @@ class CatViewCell: BaseXib {
         
         title.text = model.title
         title.font.withSize(12)
+        
+        if !hasImage{
+            image.isHidden = true
+        }
         
         if let url = URL(string: model.image) {
             image.kf.setImage(

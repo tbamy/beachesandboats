@@ -8,25 +8,25 @@
 import Foundation
 
 struct CreateBoatListingRequest: Codable {
-    var name: String
-    var description: String
-    var aboutOwner: String
-    var noOfAdults: Int
-    var noOfChildren: Int
-    var noOfPets: Int
-    var categoryId: String
-    var subCategoryId: String
-    var country: String
-    var state: String
-    var streetName: String
-    var city: String
-    var availableFrom: String
-    var availableTo: String
-    var amenities: [String]
-    var languages: [String]
-    var houseRules: [String]
-    var destinations: [Destination]
-    var images: [Data]
+    var name: String?
+    var description: String?
+    var aboutOwner: String?
+    var noOfAdults: Int?
+    var noOfChildren: Int?
+    var noOfPets: Int?
+    var categoryId: String?
+    var subCategoryId: String?
+    var country: String?
+    var state: String?
+    var streetName: String?
+    var city: String?
+    var availableFrom: String?
+    var availableTo: String?
+    var amenities: [String]?
+    var languages: [String]?
+    var houseRules: [String]?
+    var destinations: [CreateDestination]?
+    var images: [Data]?
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -51,9 +51,9 @@ struct CreateBoatListingRequest: Codable {
     }
 }
 
-struct Destination: Codable {
-    var destinationId: String
-    var pricePerHour: Double
+struct CreateDestination: Codable {
+    var destinationId: String?
+    var pricePerHour: Float?
 
     enum CodingKeys: String, CodingKey {
         case destinationId = "destination_id"

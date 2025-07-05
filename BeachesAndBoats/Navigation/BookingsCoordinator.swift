@@ -18,6 +18,23 @@ class BookingsCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoBoatBookingDetails(booking: BoatBookingsPast, upcomingBookings: Bool = false){
+        let vc: BoatBookingDetailsView = .fromNib()
+        vc.coordinator = self
+        vc.booking = booking
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoBeachHouseBookingDetails(booking: BeachHouseBookingsPast, upcomingBookings: Bool = false){
+        let vc: BeachBookingDetailsView = .fromNib()
+        vc.coordinator = self
+        vc.booking = booking
+        vc.isupcomingBooking = upcomingBookings
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
     func backToDashboard() {
         navigationController = BaseNavigationController(rootViewController: Dashboard())
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

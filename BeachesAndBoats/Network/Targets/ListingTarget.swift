@@ -11,10 +11,12 @@ import Moya
 enum ListingTarget {
     case BeachData(propertyType: String = "beach")
     case BoatData(propertyType: String = "boat")
-    case CreateBeachListing(data: CreateBeachListingRequest)
+    case CreateBeachListing(data: CreateBeachListingRequest?)
     case CreateServiceListing(data: CreateServiceListingRequest)
-    case CreateBoatListing(data: CreateBoatListingRequest)
+    case CreateBoatListing(data: CreateBoatListingRequest?)
     case ChefDishes(propertyType: String = "services")
+    case EditBeach(data: CreateBeachListingRequest?)
+    case EditBoat(data: CreateBoatListingRequest?)
 }
 
 extension ListingTarget: BaseTarget {
@@ -32,6 +34,10 @@ extension ListingTarget: BaseTarget {
             return Urls.createService.rawValue
         case .CreateBoatListing:
             return Urls.createBoat.rawValue
+        case .EditBeach:
+            return Urls.editBeach.rawValue
+        case .EditBoat:
+            return Urls.editBoat.rawValue
         }
     }
     
@@ -40,6 +46,10 @@ extension ListingTarget: BaseTarget {
         case .BeachData, .ChefDishes, .BoatData:
             return .get
         case .CreateBeachListing, .CreateBoatListing, .CreateServiceListing:
+            return .post
+        case .EditBeach:
+            return .post
+        case .EditBoat:
             return .post
         }
     }
@@ -52,81 +62,7 @@ extension ListingTarget: BaseTarget {
                 encoding: URLEncoding.queryString
             )
         case .CreateBeachListing(let data):
-            var multipartData: [MultipartFormData] = []
-
-            // Append standard fields as form data
-            let fields: [String: Any?] = [
-                "name": data.name,
-                "description": data.description,
-                "about_owner": data.aboutOwner,
-                "check_in_from": data.checkInFrom,
-                "check_in_to": data.checkInTo,
-                "check_out_from": data.checkOutFrom,
-                "check_out_to": data.checkOutTo,
-                "category_id": data.categoryId,
-                "sub_category_id": data.subCategoryId,
-                "booking_type": data.bookingType,
-                "country": data.country,
-                "state": data.state,
-                "city": data.city,
-                "street_name": data.streetName,
-                "latitude": data.latitude,
-                "longitude": data.longitude,
-                "available_from": data.availableFrom,
-                "available_to": data.availableTo,
-                "role_type": data.roleType,
-                "listing_price": data.listingPrice,
-                "discount_percent": data.discountPercent
-            ]
-            
-            for (key, value) in fields {
-                if let value = value {
-                    if let stringValue = String(describing: value).data(using: .utf8) {
-                        multipartData.append(MultipartFormData(provider: .data(stringValue), name: key))
-                    }
-                }
-            }
-
-            // Handle array fields (amenities, languages, houseRules)
-            for (index, amenity) in data.amenities.enumerated() {
-                multipartData.append(MultipartFormData(provider: .data(amenity.data(using: .utf8)!), name: "amenities[\(index)]"))
-            }
-
-            for (index, language) in data.languages.enumerated() {
-                multipartData.append(MultipartFormData(provider: .data(language.data(using: .utf8)!), name: "languages[\(index)]"))
-            }
-
-            for (index, rule) in data.houseRules.enumerated() {
-                multipartData.append(MultipartFormData(provider: .data(rule.data(using: .utf8)!), name: "houserules[\(index)]"))
-            }
-
-            // Handle rooms array
-            for (roomIndex, room) in data.rooms.enumerated() {
-                multipartData.append(MultipartFormData(provider: .data(room.name.data(using: .utf8)!), name: "rooms[\(roomIndex)][name]"))
-                multipartData.append(MultipartFormData(provider: .data(room.description.data(using: .utf8)!), name: "rooms[\(roomIndex)][description]"))
-                multipartData.append(MultipartFormData(provider: .data(String(room.quantity).data(using: .utf8)!), name: "rooms[\(roomIndex)][quantity]"))
-                multipartData.append(MultipartFormData(provider: .data(String(room.pricePerNight).data(using: .utf8)!), name: "rooms[\(roomIndex)][price_per_night]"))
-                multipartData.append(MultipartFormData(provider: .data(String(room.discountPercent).data(using: .utf8)!), name: "rooms[\(roomIndex)][discount_percent]"))
-                multipartData.append(MultipartFormData(provider: .data(String(room.noOfOccupant).data(using: .utf8)!), name: "rooms[\(roomIndex)][no_of_occupant]"))
-                multipartData.append(MultipartFormData(provider: .data(String(room.hasPrivateBathroom).data(using: .utf8)!), name: "rooms[\(roomIndex)][has_private_bathroom]"))
-
-                // Handle room amenities
-                for (amenityIndex, roomAmenity) in room.roomAmenities.enumerated() {
-                    multipartData.append(MultipartFormData(provider: .data(roomAmenity.data(using: .utf8)!), name: "rooms[\(roomIndex)][room_amenities][\(amenityIndex)]"))
-                }
-
-                // Handle bed types
-                for (bedIndex, bedType) in room.bedTypes.enumerated() {
-                    multipartData.append(MultipartFormData(provider: .data(bedType.id.data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][id]"))
-                    multipartData.append(MultipartFormData(provider: .data(String(bedType.quantity).data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][quantity]"))
-                }
-
-                // Handle room images
-                for (imageIndex, imageData) in room.images?.enumerated() ?? [].enumerated() {
-                    multipartData.append(MultipartFormData(provider: .data(imageData), name: "rooms[\(roomIndex)][images][\(imageIndex)]", fileName: "room_image_\(roomIndex)_\(imageIndex).jpg", mimeType: "image/jpeg"))
-                }
-            }
-                print("Multipart Data: \(multipartData)")
+            let multipartData = beachListingRequest(data: data)
             return .uploadMultipart(multipartData)
 
             
@@ -198,92 +134,16 @@ extension ListingTarget: BaseTarget {
             return .uploadMultipart(multipartData)
             
         case .CreateBoatListing(data: let data):
-            var multipartData: [MultipartFormData] = []
-
-            // Append standard fields as form data
-            let fields: [String: Any] = [
-                "name": data.name,
-                "description": data.description,
-                "about_owner": data.aboutOwner,
-                "no_of_adults": data.noOfAdults,
-                "no_of_children": data.noOfChildren,
-                "no_of_pets": data.noOfPets,
-                "category_id": data.categoryId,
-                "sub_category_id": data.subCategoryId,
-                "country": data.country,
-                "state": data.state,
-                "street_name": data.streetName,
-                "city": data.city,
-                "available_from": data.availableFrom,
-                "available_to": data.availableTo
-            ]
-
-            for (key, value) in fields {
-                if let stringValue = String(describing: value).data(using: .utf8) {
-                    multipartData.append(MultipartFormData(provider: .data(stringValue), name: key))
-                }
-            }
-
-            // Append amenities array
-            for (index, amenity) in data.amenities.enumerated() {
-                multipartData.append(
-                    MultipartFormData(
-                        provider: .data(amenity.data(using: .utf8)!),
-                        name: "amenities[\(index)]"
-                    )
-                )
-            }
-
-            // Append languages array
-            for (index, language) in data.languages.enumerated() {
-                multipartData.append(
-                    MultipartFormData(
-                        provider: .data(language.data(using: .utf8)!),
-                        name: "languages[\(index)]"
-                    )
-                )
-            }
-
-            // Append house rules array
-            for (index, rule) in data.houseRules.enumerated() {
-                multipartData.append(
-                    MultipartFormData(
-                        provider: .data(rule.data(using: .utf8)!),
-                        name: "houserules[\(index)]"
-                    )
-                )
-            }
-
-            // Append destinations array with nested Destination objects
-            for (index, destination) in data.destinations.enumerated() {
-                multipartData.append(
-                    MultipartFormData(
-                        provider: .data(destination.destinationId.data(using: .utf8)!),
-                        name: "destinations[\(index)][destination_id]"
-                    )
-                )
-                multipartData.append(
-                    MultipartFormData(
-                        provider: .data(String(destination.pricePerHour).data(using: .utf8)!),
-                        name: "destinations[\(index)][price_per_hour]"
-                    )
-                )
-            }
-
-            // Append images array
-            for (index, imageData) in data.images.enumerated() {
-                multipartData.append(
-                    MultipartFormData(
-                        provider: .data(imageData),
-                        name: "images[\(index)]",
-                        fileName: "image_\(index).jpg",
-                        mimeType: "image/jpeg"
-                    )
-                )
-            }
-
+           let multipartData = boatListingRequest(data: data)
             return .uploadMultipart(multipartData)
 
+        case .EditBeach(data: let data):
+            let multipartData = beachListingRequest(data: data)
+             return .uploadMultipart(multipartData)
+            
+        case .EditBoat(data: let data):
+            let multipartData = boatListingRequest(data: data)
+             return .uploadMultipart(multipartData)
         }
     }
     
@@ -291,5 +151,191 @@ extension ListingTarget: BaseTarget {
         return .successAndRedirectCodes
     }
     
+    func boatListingRequest(data: CreateBoatListingRequest?) -> [MultipartFormData] {
+        var multipartData: [MultipartFormData] = []
+        
+        guard let data = data else { return multipartData }
+
+        // Append standard fields
+        let fields: [String: Any?] = [
+            "name": data.name,
+            "description": data.description,
+            "about_owner": data.aboutOwner,
+            "no_of_adults": data.noOfAdults,
+            "no_of_children": data.noOfChildren,
+            "no_of_pets": data.noOfPets,
+            "category_id": data.categoryId,
+            "sub_category_id": data.subCategoryId,
+            "country": data.country,
+            "state": data.state,
+            "street_name": data.streetName,
+            "city": data.city,
+            "available_from": data.availableFrom,
+            "available_to": data.availableTo
+        ]
+        
+        for (key, value) in fields {
+            if let value = value {
+                if let stringValue = "\(value)".data(using: .utf8) {
+                    multipartData.append(MultipartFormData(provider: .data(stringValue), name: key))
+                }
+            }
+        }
+
+        // Append amenities
+        data.amenities?.enumerated().forEach { index, amenity in
+            if let amenityData = amenity.data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(amenityData), name: "amenities[\(index)]"))
+            }
+        }
+
+        // Append languages
+        data.languages?.enumerated().forEach { index, language in
+            if let languageData = language.data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(languageData), name: "languages[\(index)]"))
+            }
+        }
+
+        // Append house rules
+        data.houseRules?.enumerated().forEach { index, rule in
+            if let ruleData = rule.data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(ruleData), name: "houserules[\(index)]"))
+            }
+        }
+
+        // Append destinations
+        data.destinations?.enumerated().forEach { index, destination in
+            if let idData = destination.destinationId?.data(using: .utf8),
+               let priceData = "\(destination.pricePerHour ?? 0)".data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(idData), name: "destinations[\(index)][destination_id]"))
+                multipartData.append(MultipartFormData(provider: .data(priceData), name: "destinations[\(index)][price_per_hour]"))
+            }
+        }
+
+        // Append images
+        data.images?.enumerated().forEach { index, imageData in
+            multipartData.append(
+                MultipartFormData(
+                    provider: .data(imageData),
+                    name: "images[\(index)]",
+                    fileName: "image_\(index).jpg",
+                    mimeType: "image/jpeg"
+                )
+            )
+        }
+
+        return multipartData
+    }
+
+    
+    func beachListingRequest(data: CreateBeachListingRequest?) -> [MultipartFormData]{
+        var multipartData: [MultipartFormData] = []
+        
+        guard let data = data else { return multipartData }
+
+        // Append standard fields as form data
+        let fields: [String: Any?] = [
+            "name": data.name,
+            "description": data.description,
+            "about_owner": data.aboutOwner,
+            "check_in_from": data.checkInFrom,
+            "check_in_to": data.checkInTo,
+            "check_out_from": data.checkOutFrom,
+            "check_out_to": data.checkOutTo,
+            "category_id": data.categoryId,
+            "sub_category_id": data.subCategoryId,
+            "booking_type": data.bookingType,
+            "country": data.country,
+            "state": data.state,
+            "city": data.city,
+            "street_name": data.streetName,
+            "latitude": data.latitude,
+            "longitude": data.longitude,
+            "available_from": data.availableFrom,
+            "available_to": data.availableTo,
+            "role_type": data.roleType,
+            "listing_price": data.listingPrice,
+            "discount_percent": data.discountPercent,
+            "price_per_day": data.pricePerDay,
+            "day_discount_percent": data.dayDiscountPercent
+        ]
+        
+        for (key, value) in fields {
+            if let value = value {
+                if let stringValue = String(describing: value).data(using: .utf8) {
+                    multipartData.append(MultipartFormData(provider: .data(stringValue), name: key))
+                }
+            }
+        }
+
+        // Handle array fields (amenities, languages, houseRules)
+        data.amenities?.enumerated().forEach { index, amenity in
+            if let amenityData = amenity.data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(amenityData), name: "amenities[\(index)]"))
+            }
+        }
+        
+        data.languages?.enumerated().forEach{ index, language in
+            if let languageData = language.data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(languageData), name: "languages[\(index)]"))
+            }
+        }
+        
+        data.houseRules?.enumerated().forEach{ index, rule in
+            if let ruleData = rule.data(using: .utf8) {
+                multipartData.append(MultipartFormData(provider: .data(ruleData), name: "houserules[\(index)]"))
+            }
+        }
+
+        // Handle rooms array
+        if let rooms = data.rooms {
+            for (roomIndex, room) in rooms.enumerated() {
+                if let nameData = room.name?.data(using: .utf8) {
+                    multipartData.append(MultipartFormData(provider: .data(nameData), name: "rooms[\(roomIndex)][name]"))
+                }
+                if let descriptionData = room.description?.data(using: .utf8) {
+                    multipartData.append(MultipartFormData(provider: .data(descriptionData), name: "rooms[\(roomIndex)][description]"))
+                }
+
+                multipartData.append(MultipartFormData(provider: .data(String(room.quantity ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][quantity]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.pricePerNight ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][price_per_night]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.discountPercent ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][discount_percent]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.pricePerDay ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][price_per_day]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.dayDiscountPercent ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][day_discount_percent]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.noOfOccupant ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][no_of_occupant]"))
+                multipartData.append(MultipartFormData(provider: .data(String(room.hasPrivateBathroom ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][has_private_bathroom]"))
+
+                // Room Amenities
+                room.roomAmenities?.enumerated().forEach { amenityIndex, roomAmenity in
+                    if let amenityData = roomAmenity.data(using: .utf8) {
+                        multipartData.append(MultipartFormData(provider: .data(amenityData), name: "rooms[\(roomIndex)][room_amenities][\(amenityIndex)]"))
+                    }
+                }
+
+                // Bed Types
+                room.bedTypes?.enumerated().forEach { bedIndex, bedType in
+                    if let idData = bedType.id.data(using: .utf8) {
+                        multipartData.append(MultipartFormData(provider: .data(idData), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][id]"))
+                    }
+                    multipartData.append(MultipartFormData(provider: .data(String(bedType.quantity).data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][quantity]"))
+                }
+
+                // Room Images
+                for (imageIndex, imageData) in room.images?.enumerated() ?? [].enumerated() {
+                    multipartData.append(
+                        MultipartFormData(
+                            provider: .data(imageData),
+                            name: "rooms[\(roomIndex)][images][\(imageIndex)]",
+                            fileName: "room_image_\(roomIndex)_\(imageIndex).jpg",
+                            mimeType: "image/jpeg"
+                        )
+                    )
+                }
+            }
+        }
+            print("Multipart Data: \(multipartData)")
+        
+        return multipartData
+    }
    
 }

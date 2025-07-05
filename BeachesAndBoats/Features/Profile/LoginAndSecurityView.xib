@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,9 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginAndSecurityView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="addAuthenticationView" destination="WEb-zL-HJS" id="tTE-G3-jES"/>
                 <outlet property="addBtn" destination="olt-7G-4Yu" id="YV8-NR-Fdw"/>
+                <outlet property="authenticationDetailsView" destination="eGN-K9-sD9" id="ACy-cO-ceB"/>
                 <outlet property="currentPasswordField" destination="1tc-VY-QcN" id="xEM-gg-XOg"/>
+                <outlet property="emailDetailsStack" destination="Uhe-GL-Rpe" id="zlI-if-hsV"/>
+                <outlet property="emailLbl" destination="Rfz-6m-mo8" id="qf9-8s-9gQ"/>
                 <outlet property="newPasswordField" destination="tvP-0u-cTZ" id="z9K-e6-Hrq"/>
+                <outlet property="phoneDetailsStack" destination="Inn-8O-yg3" id="iaR-TN-pKl"/>
+                <outlet property="phoneLbl" destination="rxV-LU-iln" id="Wjg-yu-uTC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -141,6 +148,9 @@
                                                     <color key="tintColor" name="B&amp;B"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                                    <connections>
+                                                        <action selector="editForPhoneNo:" destination="-1" eventType="touchUpInside" id="9ES-1z-J6D"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -161,6 +171,9 @@
                                                     <color key="tintColor" name="B&amp;B"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                                    <connections>
+                                                        <action selector="editForEmail:" destination="-1" eventType="touchUpInside" id="rjh-XK-8Ux"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

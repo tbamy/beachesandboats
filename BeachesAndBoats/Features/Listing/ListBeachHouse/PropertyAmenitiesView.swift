@@ -22,7 +22,7 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
     var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setup()
     }
     
@@ -38,6 +38,8 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
+        nextBtn.isEnabled = !selectedItems.isEmpty
     }
 
     @IBAction func nextTapped(_ sender: Any) {

@@ -26,8 +26,10 @@ class ListingSuccessView: BaseViewControllerPlain {
         switch type {
         case 1:
             image.image = UIImage(named: "boatListingSuccess")
+            AppStorage.boatListing = nil
         case 2:
             image.image = UIImage(named: "beachListingSuccess")
+            AppStorage.beachListing = nil
         default:
             image.image = UIImage(named: "beachListingSuccess")
         }

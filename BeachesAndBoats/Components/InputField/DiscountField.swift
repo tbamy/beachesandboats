@@ -11,6 +11,7 @@ import UIKit
 class DiscountField: InputField {
     
     private let percentageSymbol = "%"
+    public var amountChanged: () -> Void = {}
     
     override func setup() {
         super.setup()
@@ -18,8 +19,9 @@ class DiscountField: InputField {
         textField.font = UIFont.systemFont(ofSize: 40, weight: .medium)
         textField.textAlignment = .left
         textField.backgroundColor = .white
-        
+
     }
+
     
     override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""

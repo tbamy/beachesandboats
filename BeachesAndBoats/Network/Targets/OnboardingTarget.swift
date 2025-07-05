@@ -15,6 +15,8 @@ enum OnboardingTarget{
     case VerifyCode(VerifyCodeRequest)
     case Login(LoginRequest)
     case VerifyLoginOtp(VerifyLoginOtpRequest)
+    case ForgotPassword(ForgotPasswordRequest)
+    case ResetPassword(ResetPasswordRequest)
 }
 
 extension OnboardingTarget: BaseTarget{
@@ -32,6 +34,10 @@ extension OnboardingTarget: BaseTarget{
             return Urls.login.rawValue
         case .VerifyLoginOtp:
             return Urls.verifyLoginOtp.rawValue
+        case .ForgotPassword(_):
+            return Urls.forgotPassword.rawValue
+        case .ResetPassword(_):
+            return Urls.resetPassword.rawValue
         }
     }
     
@@ -40,6 +46,10 @@ extension OnboardingTarget: BaseTarget{
         case .RefreshToken, .SignUp, .ConfirmAccount, .VerifyCode, .Login:
             return .post
         case .VerifyLoginOtp(_):
+            return .post
+        case .ForgotPassword(_):
+            return .post
+        case .ResetPassword(_):
             return .post
         }
     }
@@ -57,6 +67,10 @@ extension OnboardingTarget: BaseTarget{
         case .Login(let request):
             return .requestJSONEncodable(request)
         case .VerifyLoginOtp(let request):
+            return .requestJSONEncodable(request)
+        case .ForgotPassword(let request):
+            return .requestJSONEncodable(request)
+        case .ResetPassword(let request):
             return .requestJSONEncodable(request)
         }
     }

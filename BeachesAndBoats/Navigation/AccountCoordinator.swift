@@ -192,6 +192,15 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoRoomPricePerDayView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+        let vc: RoomPricePerDayView = .fromNib()
+        vc.beachData = beachData
+        vc.coordinator = self
+        vc.createBeachListing = createBeachListingData
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
     func gotoUploadImageView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
         let vc: UploadImageView = .fromNib()
         vc.beachData = beachData
@@ -212,6 +221,15 @@ class AccountCoordinator: Coordinator{
     
     func gotoEntireApartmentPriceView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
         let vc: EntireApartmentPriceView = .fromNib()
+        vc.beachData = beachData
+        vc.coordinator = self
+        vc.createBeachListing = createBeachListingData
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoEntireApartmentPricePerDayView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+        let vc: EntireApartmentPricePerDayView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
@@ -505,6 +523,25 @@ class AccountCoordinator: Coordinator{
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
+
+    func gotoVerifyAccountView(){
+        let vc: VerifyAccountView = .fromNib()
+        vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoVerificationFormView(){
+        let vc: VerificationFormView = .fromNib()
+        vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    
+    //MARK: Edit Property
+    
+    
     
     
 //MARK: Profile Management
@@ -545,7 +582,7 @@ class AccountCoordinator: Coordinator{
     }
     
     func goto2FASecurityView(){
-        let vc: _FASecurityView = .fromNib()
+        let vc: TwoFASecurityView = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
@@ -553,6 +590,14 @@ class AccountCoordinator: Coordinator{
     
     func gotoNotificationSettings(){
         let vc: NotificationSettingsView = .fromNib()
+        vc.coordinator = self
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    
+    func gotoContactSupportView(){
+        
+        let vc: ContactCustomerSupportView = .fromNib()
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)

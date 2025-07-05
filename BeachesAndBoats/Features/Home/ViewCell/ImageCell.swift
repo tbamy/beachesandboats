@@ -39,5 +39,6 @@ class ImageCell: BaseXib {
         if let url = URL(string: img.replacingOccurrences(of: "http://", with: "https://")) {
             image.kf.setImage(with: url)
         }
+        image.layer.cornerRadius = 8
     }
 }

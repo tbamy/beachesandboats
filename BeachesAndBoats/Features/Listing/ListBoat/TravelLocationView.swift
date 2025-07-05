@@ -19,10 +19,10 @@ class TravelLocationView: BaseViewControllerPlain {
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
     
-    var selectedItems: [Destination] = []
+    var selectedItems: [CreateDestination] = []
 //    var moneyInput: MoneyEnteredModel?
     
-    var destinationList: [Destinations]?
+    var destinationList: [BoatDestinations]?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
@@ -128,8 +128,8 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
         if let index = selectedItems.firstIndex(where: { $0.destinationId == itemId }) {
             selectedItems.remove(at: index)
         } else {
-            let defaultAmount: Double = 0
-            let newMoneyEntered = Destination(destinationId: itemId, pricePerHour: defaultAmount)
+            let defaultAmount: Float = 0
+            let newMoneyEntered = CreateDestination(destinationId: itemId, pricePerHour: defaultAmount)
             selectedItems.append(newMoneyEntered)
         }
 

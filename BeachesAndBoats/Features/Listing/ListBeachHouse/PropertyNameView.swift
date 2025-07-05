@@ -21,7 +21,7 @@ class PropertyNameView: BaseViewControllerPlain {
     var createBeachListing: CreateBeachListingRequest?
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setUp()
     }
     
@@ -29,14 +29,22 @@ class PropertyNameView: BaseViewControllerPlain {
         stepOneProgress.setProgress(0.40, animated: true)
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
+//        nextBtn.isEnabled = false
         
-//        nameLabel.onTextChanged = { [weak self] text in
-//            self?.checkTextFields()
-//        }
-//        
+        descriptionLabel.textChanged = { [weak self] textField, range, replacementString in
+            guard let self = self else { return }
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
+            
+            nextBtn.isEnabled = updatedText.count >= 5
+        }
+        
 //        descriptionLabel.onTextChanged = { [weak self] text in
 //            self?.checkTextFields()
 //        }
+        
+        
 //                
 //        checkTextFields()
     }
@@ -48,21 +56,26 @@ class PropertyNameView: BaseViewControllerPlain {
         nextBtn.isEnabled = isNameFilled && isDescriptionFilled
     }
     
-    func validate(){
+    func validate() -> Bool{
+        let isNameFilled = nameLabel.validate(rules: [Rule(.isEmpty, "Name cannot be empty")])
+        let isDescriptionFilled = descriptionLabel.validate(rules: [Rule(.isEmpty, "Enter a description")])
         
+        return isNameFilled && isDescriptionFilled
     }
 
 
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            if var createBeachListing = createBeachListing{
-                createBeachListing.name = nameLabel.text
-                createBeachListing.description = descriptionLabel.text
-                print(createBeachListing)
+        if validate(){
+            if let beachData = beachData{
+                if var createBeachListing = createBeachListing{
+                    createBeachListing.name = nameLabel.text
+                    createBeachListing.description = descriptionLabel.text
+                    print(createBeachListing)
+                    
+                    coordinator?.gotoPropertyAddressView(beachData: beachData, createBeachListingData: createBeachListing)
+                }
                 
-                coordinator?.gotoPropertyAddressView(beachData: beachData, createBeachListingData: createBeachListing)
             }
-            
         }
     }
     

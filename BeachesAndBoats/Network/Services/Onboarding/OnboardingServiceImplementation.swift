@@ -9,6 +9,14 @@ import Foundation
 import Moya
 
 class OnboardingServiceImplementation: Provider<OnboardingTarget>, OnboardingService{
+    func resetPassword(request: ResetPasswordRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.ResetPassword(request)){ completion( self.handleResult(result: $0)) }
+    }
+    
+    func forgotPassword(request: ForgotPasswordRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.ForgotPassword(request)){ completion( self.handleResult(result: $0)) }
+    }
+    
     func verifyLoginOtp(request: VerifyLoginOtpRequest, completion: @escaping (Result<LoginResponse, ErrorResponse>) -> Void) {
         provider.request(.VerifyLoginOtp(request)){ completion( self.handleResult(result: $0)) }
     }

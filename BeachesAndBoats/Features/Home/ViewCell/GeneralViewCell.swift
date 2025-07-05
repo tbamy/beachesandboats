@@ -28,6 +28,8 @@ class GeneralViewCell: BaseXib {
     @IBOutlet weak var infoTwoStack: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    var onSaveFavouriteTapped: (() -> Void)?
+    
     @IBInspectable var isBeachHouseMode: Bool = false {
         didSet { setup() }
     }
@@ -35,6 +37,11 @@ class GeneralViewCell: BaseXib {
     @IBInspectable var isBoatMode: Bool = false {
         didSet { setup() }
     }
+    
+    var isSaved: Bool = false {
+        didSet { setup() }
+    }
+    
     public var model: GeneralViewCellModel = GeneralViewCellModel(){
         didSet {
             setup()
@@ -65,6 +72,8 @@ class GeneralViewCell: BaseXib {
         priceLabel.text = model.priceLabel
         ratingLabel.text = model.ratingLabel
 
+        saveBtn.isUserInteractionEnabled = true
+        saveBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(saveBtnTapped)))
         
         if let url = URL(string: model.bannerImg.replacingOccurrences(of: "http://", with: "https://")) {
             bannerImg.kf.setImage(
@@ -85,13 +94,15 @@ class GeneralViewCell: BaseXib {
             bannerImg.image = UIImage(named: "dummy")
         }
 
+        if isSaved{
+            saveBtn.image = UIImage(named: "saveIconFilled")
+        }
         
         if isBoatMode{
             setupBoatMode()
             
         }else if isBeachHouseMode{
             setupBeachHouseMode()
-            
         }
         
     }
@@ -106,6 +117,10 @@ class GeneralViewCell: BaseXib {
         infoOneIcon.image = Assets.people.image
         infoTwoIcon.image = Assets.location.image
         priceStack.isHidden = true
+    }
+    
+    @objc func saveBtnTapped(){
+        onSaveFavouriteTapped?()
     }
 
 }

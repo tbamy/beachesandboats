@@ -7,7 +7,20 @@
 
 import UIKit
 
-@IBDesignable public class PhoneField: InputField {
+@IBDesignable public class InputFieldWithLeftImg: InputField {
+    
+    @IBInspectable public var img: UIImage = Assets.NGnum.image {
+        didSet {
+            setPhoneImage()
+        }
+    }
+    
+    @IBInspectable public var imgWidth: Int = 100 {
+        didSet {
+            setPhoneImage()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -19,13 +32,13 @@ import UIKit
     
     override func setup() {
         super.setup()
-        setPhoneImage(for: true)
+        setPhoneImage()
     }
     
-    func setPhoneImage(for state: Bool) {
-        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 110, height: 30))
-        let imageView = UIImageView(frame: CGRect(x: 10, y: 5, width: 90, height: 25))
-        imageView.image = Assets.NGnum.image
+    func setPhoneImage() {
+        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: imgWidth + 10, height: 30))
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 5, width: imgWidth, height: 25))
+        imageView.image = img
         imageView.tintColor = .background
         imageView.contentMode = .scaleAspectFit
         iconContainer.addSubview(imageView)

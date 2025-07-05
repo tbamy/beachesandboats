@@ -26,9 +26,9 @@ class ProfilePaymentView: BaseViewControllerPlain {
     @objc func paymentMethodsTapped(_ sender: UITapGestureRecognizer){
         PaymentMethodModal.show(callBack: { [weak self] goto in
             if goto == "Card"{
-                self?.coordinator?.gotoinitialListingView()
+//                self?.coordinator?.gotoinitialListingView()
             }else{
-                self?.coordinator?.gotoinitialListingView()
+//                self?.coordinator?.gotoinitialListingView()
             }
         })
     }

@@ -46,6 +46,7 @@ class UploadImageView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
     }
     
     func setupDragAndDrop() {
@@ -65,6 +66,12 @@ class UploadImageView: BaseViewControllerPlain {
         guard let beachData = beachData else { return }
         guard let createBeachListing = createBeachListing else { return }
         
+        if images.count < 5 {
+            Toast.show(message: "Please upload at least 5 images")
+            return
+        }
+
+        
         for image in images {
             if let imageData = image.pngData() {
                 roomImages.append(imageData)
@@ -72,20 +79,21 @@ class UploadImageView: BaseViewControllerPlain {
         }
 
         // Get the last index of the rooms array
-        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
         print("Current room index is \(roomIndex)")
 
         // Safely get a mutable copy of the rooms array
         var updatedRoomInfo = createBeachListing.rooms
-        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
             // Update the room amenities at the current room index
-            var existingRoom = updatedRoomInfo[roomIndex]
-            existingRoom.images = roomImages
-            
-            // Reassign the updated room back to the array
-            updatedRoomInfo[roomIndex] = existingRoom
-            
-            print("Updated Room: \(existingRoom)")
+            if var existingRoom = updatedRoomInfo?[roomIndex]{
+                existingRoom.images = roomImages
+                
+                // Reassign the updated room back to the array
+                updatedRoomInfo?[roomIndex] = existingRoom
+                
+                print("Updated Room: \(existingRoom)")
+            }
         } else {
             print("Error: Room at index \(roomIndex) does not exist in room info.")
             return
@@ -110,20 +118,21 @@ class UploadImageView: BaseViewControllerPlain {
         }
 
         // Get the last index of the rooms array
-        let roomIndex = createBeachListing.rooms.indices.last ?? -1
+        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
         print("Current room index is \(roomIndex)")
 
         // Safely get a mutable copy of the rooms array
         var updatedRoomInfo = createBeachListing.rooms
-        if roomIndex >= 0 && roomIndex < updatedRoomInfo.count {
+        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
             // Update the room amenities at the current room index
-            var existingRoom = updatedRoomInfo[roomIndex]
-            existingRoom.images = roomImages
-            
-            // Reassign the updated room back to the array
-            updatedRoomInfo[roomIndex] = existingRoom
-            
-            print("Updated Room: \(existingRoom)")
+            if var existingRoom = updatedRoomInfo?[roomIndex] {
+                existingRoom.images = roomImages
+                
+                // Reassign the updated room back to the array
+                updatedRoomInfo?[roomIndex] = existingRoom
+                
+                print("Updated Room: \(existingRoom)")
+            }
         } else {
             print("Error: Room at index \(roomIndex) does not exist in room info.")
             return

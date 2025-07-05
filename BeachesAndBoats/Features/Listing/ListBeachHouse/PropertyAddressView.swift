@@ -31,7 +31,7 @@ class PropertyAddressView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "Beach Houses"
         setup()
         
     }
@@ -46,59 +46,56 @@ class PropertyAddressView: BaseViewControllerPlain {
         countryField.textField.isEnabled = false
         stateField.items = states ?? []
         
-//        stateField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//        
-//        streetField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//        
-//        cityField.textChanged = { [weak self] _, _, _ in
-//            self?.validate()
-//        }
-//                
-//        nextBtn.isEnabled = false
+        stateField.itemChanged = { [weak self] item in
+            self?.validateState()
+            self?.stateName = self?.stateField.text
+            self?.zoomToState()
+        }
+        
+        streetField.textChanged = { [weak self] _, _, _ in
+            self?.validateStreet()
+        }
+        
+        cityField.textChanged = { [weak self] _, _, _ in
+            self?.validateCity()
+        }
+        
+        mapView.isUserInteractionEnabled = true
+        mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMapTap)))
+
     }
 
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField == cityField || textField == stateField {
-//            stateName = stateField.text
-//            cityName = cityField.text
-//            searchLocation()
-//        }
-//    }
     
-    func searchLocation() {
-        guard let city = cityName, !city.isEmpty,
-              let state = stateName, !state.isEmpty else {
-            print("No state or City")
-            // Handle empty input (e.g., show an alert)
-            return
-        }
-        
-        let address = "\(city), \(state)"
-        
-        geocoder.geocodeAddressString(address) { [weak self] (placemarks, error) in
-            if let error = error {
-                print("Geocoding error: \(error.localizedDescription)")
-                return
+    func zoomToState() {
+        guard let state = stateName, !state.isEmpty else { return }
+        geocoder.geocodeAddressString(state) { [weak self] placemarks, error in
+            if let coordinate = placemarks?.first?.location?.coordinate {
+                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 20000, longitudinalMeters: 20000)
+                self?.mapView.setRegion(region, animated: true)
             }
-            
-            guard let placemark = placemarks?.first, let location = placemark.location else {
-                print("No location found")
-                return
-            }
-            
-            let coordinate = location.coordinate
-            self?.mapView.setRegion(MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000), animated: true)
-
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(city), \(state)"
-            self?.mapView.addAnnotation(annotation)
         }
     }
+
+    @objc func handleMapTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        let locationInView = gestureRecognizer.location(in: mapView)
+        let coordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
+        
+        // Remove existing annotations
+        mapView.removeAnnotations(mapView.annotations)
+        
+        // Add new annotation
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = "Selected Location"
+        mapView.addAnnotation(annotation)
+        
+        // Save to model
+        createBeachListing?.latitude = coordinate.latitude
+        createBeachListing?.longitude = coordinate.longitude
+        
+        print("Selected Coordinates: \(coordinate.latitude), \(coordinate.longitude)")
+    }
+
             
 
     
@@ -113,7 +110,7 @@ class PropertyAddressView: BaseViewControllerPlain {
                 
                 coordinator?.gotoPropertyAvailableDatesView(beachData: beachData, createBeachListingData: createBeachListing)
             }
-        
+         
             
             
         }
@@ -135,12 +132,18 @@ class PropertyAddressView: BaseViewControllerPlain {
 
 
 extension PropertyAddressView{
-    func validate(){
-        let validateState = stateField.validate(rules: [Rule(.isEmpty, "Select a state")])
-        let validateStreet = streetField.validate(rules: [Rule(.isEmpty, "Enter your street address")])
-        let validateCity = cityField.validate(rules: [Rule(.isEmpty, "Enter your City")])
+    func validateState(){
+        let _ = stateField.validate(rules: [Rule(.isEmpty, "Select a state")])
+    }
+    
+    func validateStreet(){
+        let validateStreet = streetField.validate(rules: [Rule(.isEmpty, "Enter street address")])
         
-        nextBtn.isEnabled = validateCity && validateState && validateStreet
+        nextBtn.isEnabled = validateStreet
+    }
+    
+    func validateCity(){
+        let _ = cityField.validate(rules: [Rule(.isEmpty, "Enter City")])
     }
     
     func statesData(){

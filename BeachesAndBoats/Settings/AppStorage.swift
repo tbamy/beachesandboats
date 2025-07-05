@@ -18,7 +18,7 @@ final class AppStorage {
     static var firebaseToken: String?
     
     @UserDefault("hasSignedUp")
-    static var hasSignedUp: Bool?
+    static var hasSignedIn: Bool?
     
     @UserDefault("username")
     static var username: String?
@@ -31,4 +31,7 @@ final class AppStorage {
     
     @UserDefault("serviceListing")
     static var serviceListing: CreateServiceListingRequest?
+    
+    @UserDefault("userToken")
+    static var userToken: String?
 }

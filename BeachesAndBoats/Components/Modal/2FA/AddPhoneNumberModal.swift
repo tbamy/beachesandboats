@@ -10,7 +10,7 @@ import UIKit
 class AddPhoneNumberModal: BaseXib {
 
     @IBOutlet weak var close: UIImageView!
-    @IBOutlet weak var phoneNumberField: PhoneField!
+    @IBOutlet weak var phoneNumberField: InputFieldWithLeftImg!
     @IBOutlet weak var sendBtn: PrimaryButton!
     
 
@@ -39,8 +39,10 @@ class AddPhoneNumberModal: BaseXib {
     }
     
     @objc func sendTapped(){
-        callback(phoneNumberField.text)
-        dismiss()
+        if validate() {
+            callback(phoneNumberField.text)
+            dismiss()
+        }
     }
     
     func validate() -> Bool{
@@ -56,9 +58,7 @@ class AddPhoneNumberModal: BaseXib {
 
 extension AddPhoneNumberModal{
     
-    public static func show(callBack: @escaping (String?) -> Void) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+    public static func show(on view: UIView, callBack: @escaping (String?) -> Void) {
         
         let modal = AddPhoneNumberModal()
         modal.callback = callBack
@@ -66,12 +66,13 @@ extension AddPhoneNumberModal{
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
+
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
-        let height = Helpers.screenHeight * 0.4
+        view.addSubview(backDrop)
+        
+        let height = Helpers.screenHeight * 0.5
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         
@@ -79,6 +80,7 @@ extension AddPhoneNumberModal{
             modal.frame.origin.y = Helpers.screenHeight - height
             backDrop.layoutIfNeeded()
         }, completion: nil)
+        
     }
     
     func dismiss() {

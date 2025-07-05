@@ -39,26 +39,36 @@ class AddEmailAddressModal: BaseXib {
     }
     
     @objc func sendTapped(){
-        callback(emailField.text)
-        dismiss()
+        if validate() {
+            callback(emailField.text)
+            dismiss()
+        }
+        
     }
     
     func validate() -> Bool{
-        if emailField.text.isEmpty {
+        if emailField.text.isEmpty  {
             emailField.error = "Please enter Email Address"
+            return false
+        } else if !isValidEmail(emailField.text) {
+            emailField.error = "Please enter a valid email"
             return false
         }
         
         return true
+    }
+    
+    public func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 
 }
 
 extension AddEmailAddressModal{
     
-    public static func show(callBack: @escaping (String?) -> Void) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+    public static func show(on view: UIView, callBack: @escaping (String?) -> Void) {
         
         let modal = AddEmailAddressModal()
         modal.callback = callBack
@@ -66,12 +76,13 @@ extension AddEmailAddressModal{
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
+
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
-        let height = Helpers.screenHeight * 0.4
+        view.addSubview(backDrop)
+        
+        let height = Helpers.screenHeight * 0.5
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         

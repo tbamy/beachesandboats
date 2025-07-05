@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="monthCollectionViewCell" customModule="BeachesAndBoats" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="95" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="95" height="40"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nU0-tE-CnL">
+                        <rect key="frame" x="0.0" y="0.0" width="95" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeD-MI-VPP" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="10" width="95" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AeD-MI-VPP" firstAttribute="leading" secondItem="nU0-tE-CnL" secondAttribute="leading" id="Sux-ON-0i6"/>
+                            <constraint firstItem="AeD-MI-VPP" firstAttribute="top" secondItem="nU0-tE-CnL" secondAttribute="top" constant="10" id="Zx5-Ut-pbQ"/>
+                            <constraint firstAttribute="trailing" secondItem="AeD-MI-VPP" secondAttribute="trailing" id="jct-r3-KaN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="nU0-tE-CnL" secondAttribute="trailing" id="3lP-rN-5fy"/>
+                <constraint firstAttribute="bottom" secondItem="nU0-tE-CnL" secondAttribute="bottom" id="WM4-xu-Xhe"/>
+                <constraint firstItem="nU0-tE-CnL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vG6-at-6QH"/>
+                <constraint firstItem="nU0-tE-CnL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xwV-ki-Wkr"/>
+            </constraints>
+            <size key="customSize" width="95" height="40"/>
+            <connections>
+                <outlet property="containerView" destination="nU0-tE-CnL" id="bqv-ti-L7S"/>
+                <outlet property="months" destination="AeD-MI-VPP" id="oox-b8-QBm"/>
+            </connections>
+            <point key="canvasLocation" x="171.75572519083968" y="2.1126760563380285"/>
+        </collectionViewCell>
+    </objects>
+</document>

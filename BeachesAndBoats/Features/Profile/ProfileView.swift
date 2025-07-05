@@ -67,11 +67,12 @@ class ProfileView: UIViewController {
     }
     
     @objc func supportAction(){
-        
+        coordinator?.gotoLoginAndSecurityView()
+//        coordinator?.gotoContactSupportView()
     }
     
     @objc func guideBookAction(){
-        
+        Toast.show(message: "Coming Soon")
     }
     
     @objc func listPropertyAction(){
@@ -79,24 +80,29 @@ class ProfileView: UIViewController {
     }
     
     @objc func switchAction(){
-        let userRoles = user?.roles ?? []
-        let hostRoleStrings = hostRoles.map { $0.rawValue }
-        let hasHostRole = userRoles.contains { hostRoleStrings.contains($0) }
-        
-        let serviceRoleStrings = serviceRoles.map { $0.rawValue }
-        let hasSeviceRole = userRoles.contains { serviceRoleStrings.contains($0)}
-        
-        if hasHostRole{
-            coordinator?.backToHostingDashboard()
-        }else if hasSeviceRole{
-            coordinator?.backToServiceDashboard()
-        }else{
-            Toast.show(message: "You have no Dashboard to switch to")
+        if let userRoles = user?.roles{
+            let hostRoleStrings = hostRoles.map { $0.rawValue }
+            let hasHostRole = userRoles.contains { hostRoleStrings.contains($0) }
+            
+            let serviceRoleStrings = serviceRoles.map { $0.rawValue }
+            let hasSeviceRole = userRoles.contains { serviceRoleStrings.contains($0)}
+            
+            if hasHostRole{
+                LoadingModal.show(title: "Switching to Hosting Dashboard...")
+                coordinator?.backToHostingDashboard()
+            }else if hasSeviceRole{
+                LoadingModal.show(title: "Switching to Service Dashboard...")
+                coordinator?.backToServiceDashboard()
+                //            coordinator?.backToHostingDashboard()
+                
+            }else{
+                Toast.show(message: "You have no Dashboard to switch to")
+            }
         }
     }
     
     @objc func logoutAction(){
-        
+        UserSession.shared.performLogout()
     }
     
     

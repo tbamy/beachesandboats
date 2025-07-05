@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -10,6 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookingsView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="collectionViewHeightConstraint" destination="3s0-bB-nX4" id="khM-yt-zaU"/>
+                <outlet property="emptyBooking" destination="uyM-hr-1qF" id="eCy-1e-jxj"/>
+                <outlet property="pastBookingSegment" destination="Liq-fe-Dq3" id="Brg-xG-uW3"/>
+                <outlet property="upcomingBookingSegment" destination="yCA-8t-DVE" id="6Op-gD-vIk"/>
+                <outlet property="upcomingCollectionView" destination="xvu-Pi-bpG" id="H31-Xz-5aB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,39 +33,84 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="6Ux-Me-kRi"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="YES"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Upcoming Booking"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Liq-fe-Dq3" customClass="SegmentOptionView" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="180" y="0.0" width="173" height="40"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Past Booking"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                 </stackView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xvu-Pi-bpG">
-                    <rect key="frame" x="20" y="149" width="353" height="629"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6o1-Hc-nYY">
-                        <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="moH-AZ-jUJ">
+                    <rect key="frame" x="20" y="149" width="353" height="649"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyM-hr-1qF">
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="327"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6bp-HM-pCU">
+                                    <rect key="frame" x="114.66666666666666" y="129.33333333333331" width="124" height="68.333333333333314"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Oi6-bB-MVW">
+                                            <rect key="frame" x="0.0" y="-0.33333333333333215" width="124" height="40.666666666666657"/>
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="JsF-be-AEX"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No bookings yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Bu-9C-dB7">
+                                            <rect key="frame" x="0.0" y="48" width="124" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="6bp-HM-pCU" firstAttribute="centerY" secondItem="uyM-hr-1qF" secondAttribute="centerY" id="K9F-ix-zKl"/>
+                                <constraint firstItem="6bp-HM-pCU" firstAttribute="centerX" secondItem="uyM-hr-1qF" secondAttribute="centerX" id="nrW-T2-cxO"/>
+                            </constraints>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xvu-Pi-bpG">
+                            <rect key="frame" x="0.0" y="349" width="353" height="300"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="300" id="3s0-bB-nX4"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6o1-Hc-nYY">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="xvu-Pi-bpG" firstAttribute="top" secondItem="5Ug-3r-yZn" secondAttribute="bottom" constant="20" id="4QC-8g-Q6D"/>
-                <constraint firstItem="xvu-Pi-bpG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7Kk-Gk-Z90"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xvu-Pi-bpG" secondAttribute="bottom" constant="40" id="LhX-4V-9D3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="moH-AZ-jUJ" secondAttribute="bottom" constant="20" id="QNa-fh-4up"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="moH-AZ-jUJ" secondAttribute="trailing" constant="20" id="Rao-cy-iAB"/>
                 <constraint firstItem="5Ug-3r-yZn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="UXF-pe-K63"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5Ug-3r-yZn" secondAttribute="trailing" constant="20" id="Xfb-m8-VTc"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xvu-Pi-bpG" secondAttribute="trailing" constant="20" id="gf3-JC-wb0"/>
+                <constraint firstItem="moH-AZ-jUJ" firstAttribute="top" secondItem="5Ug-3r-yZn" secondAttribute="bottom" constant="20" id="fHP-0I-gZs"/>
+                <constraint firstItem="moH-AZ-jUJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fSb-WK-kVr"/>
                 <constraint firstItem="5Ug-3r-yZn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="klO-Jz-YV3"/>
             </constraints>
-            <point key="canvasLocation" x="43.511450381679388" y="19.718309859154932"/>
+            <point key="canvasLocation" x="43.511450381679388" y="171.83098591549296"/>
         </view>
     </objects>
     <resources>
+        <image name="circle.slash" catalog="system" width="123" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

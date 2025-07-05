@@ -67,7 +67,7 @@ import MessageUI
     }
     
     func dismiss() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: { [weak self] in
             self?.frame.origin.y = Helpers.screenHeight
             self?.layoutIfNeeded()
         }, completion: { [weak self] _ in
@@ -184,7 +184,7 @@ import MessageUI
         modal.subtitleHeight.isActive = false
         backDrop.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
             modal.frame.origin.y = centerY
             backDrop.layoutIfNeeded()
         }, completion: nil)
@@ -216,7 +216,7 @@ import MessageUI
                 if view is MiddleModalView {
                     for v in view.subviews {
                         if v is MiddleModal {
-                            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
                                 v.frame.origin.y = Helpers.screenHeight
                                 view.layoutIfNeeded()
                             }, completion: { _ in

@@ -279,8 +279,6 @@ extension CreatePasswordModal{
     }
     
     public static func startCreatePasswordModal(on view: UIView, userInfo: SignUpRequest, delegate del: CreateAccountDelegate, transitionDelegate transDel: ModalTransitionDelegate) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         
         let modal = CreatePasswordModal()
         modal.createAccountDelegate = del
@@ -292,11 +290,13 @@ extension CreatePasswordModal{
         modal.layer.cornerRadius = 20
         modal.backgroundColor = .white
         modal.clipsToBounds = true
+
+        
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
+        view.addSubview(backDrop)
+
         let height = Helpers.screenHeight * 0.9
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()

@@ -2,7 +2,7 @@
 //  HostType.swift
 //  BeachesAndBoats
 //
-//  Created by Tolu Akintayo on 30/12/2024.
+//  Created by Tolu Akintayo on 28/01/2025.
 //
 
 import Foundation
@@ -20,4 +20,10 @@ enum HostType: String{
     case chef = "chef"
     case dj = "dj"
     case bouncer = "bouncer"
+}
+
+enum BookingType: String{
+    case Boat = "Boat"
+    case BeachHouse = "BeachHouse"
+    case Services = "Services"
 }

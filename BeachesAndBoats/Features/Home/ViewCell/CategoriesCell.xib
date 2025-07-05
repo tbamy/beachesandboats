@@ -2,14 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoriesCell" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
+                <outlet property="blurView" destination="5Ib-KM-e9b" id="c3t-K9-5hD"/>
                 <outlet property="image" destination="PCj-t8-rjF" id="1Bh-AJ-KxQ"/>
                 <outlet property="imageHeight" destination="HXM-4V-Ylk" id="OYp-eR-1zM"/>
                 <outlet property="title" destination="0b5-Hc-jtw" id="w0k-HN-iS6"/>
@@ -43,10 +44,16 @@
                         <constraint firstItem="PCj-t8-rjF" firstAttribute="leading" secondItem="qIr-P6-V9r" secondAttribute="leading" id="qnN-LL-UX4"/>
                     </constraints>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ib-KM-e9b">
+                    <rect key="frame" x="0.0" y="59" width="166" height="94"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="5Ib-KM-e9b" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Nmw-pH-2pn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="5Ib-KM-e9b" secondAttribute="leading" id="UEK-Bj-sjt"/>
+                <constraint firstItem="5Ib-KM-e9b" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="WwO-Ex-37g"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5Ib-KM-e9b" secondAttribute="trailing" id="XQp-bm-b7I"/>
                 <constraint firstItem="qIr-P6-V9r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ffA-sU-mvd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="qIr-P6-V9r" secondAttribute="top" id="mQz-nw-rX2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qIr-P6-V9r" secondAttribute="trailing" id="o2s-Eq-ja9"/>
@@ -56,9 +63,4 @@
             <point key="canvasLocation" x="-218.32061068702288" y="-873.59154929577471"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
