@@ -56,8 +56,8 @@ class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
         provider.request(.BookingConfiguration){ completion( self.handleResult(result: $0))}
     }
     
-    func getBookingCategories(page: String, completion: @escaping (Result<GetBookingCategoryResponse, ErrorResponse>) -> Void) {
-        provider.request(.GetBookingCategories(page: page)){ completion( self.handleResult(result: $0))}
+    func getBookingCategories(filter: GetBookingCategorySearchRequest, completion: @escaping (Result<GetBookingCategoryResponse, ErrorResponse>) -> Void) {
+        provider.request(.GetBookingCategories(filter: filter)){ completion( self.handleResult(result: $0))}
     }
     
     

@@ -11,7 +11,7 @@ import RxSwift
 class SignupView: BaseViewControllerPlain{
 
     var coordinator: AppCoordinator?
-    @IBOutlet weak var phoneNumber: PhoneField!
+    @IBOutlet weak var phoneNumber: InputFieldWithLeftImg!
     @IBOutlet weak var emailAddress: InputField!
     @IBOutlet weak var loginBtn: UILabel!
     

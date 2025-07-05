@@ -16,7 +16,7 @@ class VerificationFormView: BaseViewController {
     @IBOutlet weak var middleNameField: InputField!
     @IBOutlet weak var lastNameField: InputField!
     @IBOutlet weak var emailField: InputField!
-    @IBOutlet weak var phoneField: PhoneField!
+    @IBOutlet weak var phoneField: InputFieldWithLeftImg!
     @IBOutlet weak var uploadIdField: UploadButtonField!
     @IBOutlet weak var currentPictureField: UploadButtonField!
     

@@ -11,8 +11,9 @@ import UIKit
     
     
     @IBOutlet weak var view: UIView!
-    @IBOutlet weak var destination: UILabel!
-    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak public var searchInput: InputField!
+//    @IBOutlet weak var destination: UILabel!
+//    @IBOutlet weak var duration: UILabel!
     
     
     override init(frame: CGRect) {

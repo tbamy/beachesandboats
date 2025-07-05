@@ -37,7 +37,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="LFC-xZ-iS6">
                     <rect key="frame" x="20" y="192.33333333333337" width="353" height="140"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deZ-uv-Ynk" customClass="PhoneField" customModule="BeachesAndBoats" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deZ-uv-Ynk" customClass="InputFieldWithLeftImg" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>

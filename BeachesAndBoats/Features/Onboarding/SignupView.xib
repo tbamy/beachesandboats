@@ -32,7 +32,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-LB-Qbl">
                                     <rect key="frame" x="24" y="165.66666666666669" width="345" height="170"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJI-S6-e6K" customClass="PhoneField" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJI-S6-e6K" customClass="InputFieldWithLeftImg" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="75"/>
                                             <color key="backgroundColor" systemColor="systemGray6Color"/>
                                             <constraints>

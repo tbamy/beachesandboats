@@ -9,13 +9,14 @@
 import UIKit
 import RxSwift
 
-class HomeView: BaseViewControllerPlain {
+class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     
     // MARK: - Properties
     var coordinator: ExploreCoordinator?
     
     @IBOutlet weak var filterBtn: UIImageView!
-    @IBOutlet weak var searchField: SearchField!
+//    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchField: InputField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var subcategoryCollectionView: UICollectionView!
     @IBOutlet weak var beachHouseCollectionView: UICollectionView!
@@ -39,8 +40,10 @@ class HomeView: BaseViewControllerPlain {
     @IBOutlet weak var scrollView: UIScrollView!
     
     private lazy var refreshControl = UIRefreshControl()
+//    var searchFilter: GetBookingCategorySearchRequest?
     
     // MARK: - Data Properties
+    private var originalCategories: [PropertyCategory] = []
     private var categories: [PropertyCategory] = []
     private var subcategories: [SubCategory] = []
     private var boats: [Listing] = []
@@ -54,6 +57,16 @@ class HomeView: BaseViewControllerPlain {
     private var selectedServiceCat: String = ""
     private var selectedCatIndex: Int = 0
     
+    private var isShowingBeachHouses: Bool = true
+    private var isShowingBoats: Bool = false
+    private var isShowingServices: Bool = false
+    
+    
+    var boatFilterData: BoatDatas?
+    var beachFilterData: BeachDatas?
+    
+    var filterType = ""
+    
     // MARK: - Constants
     private struct Constants {
         static let topRatingThresholdBeach = 5
@@ -66,18 +79,28 @@ class HomeView: BaseViewControllerPlain {
     }
     
     private let vm = HomeViewVM()
+    private let beachVM = BeachDataViewModel()
+    private let boatVM = BoatDataViewModel()
     private let disposeBag = DisposeBag()
     private let input = PublishSubject<HomeViewVM.Input>()
+    
+    private var searchTimer: Timer?
+    private let searchDelay: TimeInterval = 0.5
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         configureCollectionViews()
-        setupGestureRecognizers()
         setupRefreshControl()
         bindViewModel()
         loadInitialData()
+    }
+    
+    // Make sure to invalidate timer when view disappears
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchTimer?.invalidate()
     }
     
     // MARK: - Setup Methods
@@ -85,16 +108,72 @@ class HomeView: BaseViewControllerPlain {
         navigationItem.hidesBackButton = true
         hideAllStacks()
         addShadow(to: subcategoryCollectionView)
+//        addShadow(to: searchView)
         setupSearchField()
+        setupFilterBtn()
+        searchField.textField.delegate = self
     }
     
     private func hideAllStacks() {
         [topRatedBoatStack, boatStack, serviceStack].forEach { $0?.isHidden = true }
     }
     
-    private func setupSearchField() {
-        searchField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchTapped)))
+    private func setupFilterBtn() {
+        filterBtn.isUserInteractionEnabled = true
+        filterBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterTapped)))
     }
+    
+    private func setupSearchField() {
+        
+        // Option 2b: Alternative - using the existing textChanged callback with debouncing
+        searchField.textChanged = { [weak self] textField, range, replacementString in
+            guard let self = self else { return }
+            
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
+            
+            // Cancel previous timer
+            self.searchTimer?.invalidate()
+            
+            // Schedule new search
+            self.searchTimer = Timer.scheduledTimer(withTimeInterval: self.searchDelay, repeats: false) { _ in
+                self.performSearch(with: updatedText)
+            }
+        }
+    }
+    
+    // Add this method to handle the search
+    private func performSearch(with query: String) {
+        if query.isEmpty {
+            // Reset to original data
+            categories = originalCategories
+            reloadAllCollectionViews()
+        } else {
+            // Perform search
+            loadDataWithSearch()
+        }
+    }
+    
+    // Update your existing textFieldShouldReturn method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        // Cancel any pending search timer since user pressed return
+        searchTimer?.invalidate()
+        
+        if let query = textField.text, !query.isEmpty {
+            loadDataWithSearch()
+        } else {
+            categories = originalCategories
+            reloadAllCollectionViews()
+        }
+        
+        return true
+    }
+
+
+
     
     private func setupRefreshControl() {
         refreshControl.tintColor = UIColor.beachBlue
@@ -126,28 +205,88 @@ class HomeView: BaseViewControllerPlain {
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
     
-    private func setupGestureRecognizers() {
-        let filterTap = UITapGestureRecognizer(target: self, action: #selector(filterTapped))
-        filterBtn.isUserInteractionEnabled = true
-        filterBtn.addGestureRecognizer(filterTap)
-    }
     
     private func loadInitialData() {
         LoadingModal.show()
-        input.onNext(.getBookingCategories(page: "1"))
+        input.onNext(.getBookingCategories(filter: GetBookingCategorySearchRequest()))
+        beachVM.getBeachData()
+        boatVM.getBoatData()
     }
     
-    // MARK: - Actions
-    @objc private func searchTapped() {
-        // Implement search functionality
+    private func loadDataWithSearch() {
+        LoadingModal.show()
+        let searchParam = searchField.text
+        
+        
+        if isShowingBeachHouses {
+            filterType = "BeachHouse"
+        }else if isShowingBoats {
+            filterType = "Boat"
+        }else if isShowingServices{
+            filterType = "Service"
+        }
+            
+        
+        let searchFilter = GetBookingCategorySearchRequest(filterType: filterType ,searchQuery: searchParam)
+            
+            print("searchFilter: \(searchFilter)")
+            
+            input.onNext(.getBookingCategories(filter: searchFilter ))
+        
     }
     
     @objc private func filterTapped() {
-        // Implement filter functionality
+        if isShowingBeachHouses {
+            filterType = "BeachHouse"
+        }else if isShowingBoats {
+            filterType = "Boat"
+        }else if isShowingServices{
+            filterType = "Service"
+        }
+        
+        var filterPropertyTypes: [FilterPropertyTypes]?
+        var amenities: [RoomAmenities]?
+        if filterType == "BeachHouse" {
+            amenities = beachFilterData?.amenities
+            filterPropertyTypes = (beachFilterData?.categories ?? []).compactMap { category in
+                guard let id = category.id, let name = category.name else {
+                    return nil
+                }
+                return FilterPropertyTypes(id: id, name: name)
+            }
+
+        }else if filterType == "Boat" {
+            amenities = boatFilterData?.amenities
+            filterPropertyTypes = (boatFilterData?.categories ?? []).compactMap { category in
+                guard let id = category.id, let name = category.name else {
+                    return nil
+                }
+                return FilterPropertyTypes(id: id, name: name)
+            }
+        }else{
+            amenities = beachFilterData?.amenities
+            filterPropertyTypes = (beachFilterData?.categories ?? []).compactMap { category in
+                guard let id = category.id, let name = category.name else {
+                    return nil
+                }
+                return FilterPropertyTypes(id: id, name: name)
+            }
+        }
+        
+        FilterModal.startFilterModal(propertyTypes: filterPropertyTypes ?? [], amenities: amenities ?? [], filterType: filterType, callBack: { [weak self] item in
+            LoadingModal.show()
+            print("Request: \(item)")
+            
+            self?.input.onNext(.getBookingCategories(filter: item ?? GetBookingCategorySearchRequest() ))
+        }, clearAll: { [weak self] in
+            self?.categories = self?.originalCategories ?? []
+            self?.reloadAllCollectionViews()
+        })
     }
     
     @objc private func refresh(_ sender: UIRefreshControl) {
-        input.onNext(.getBookingCategories(page: "1"))
+        let searchFilter = GetBookingCategorySearchRequest(page: 1)
+        input.onNext(.getBookingCategories(filter: searchFilter))
     }
     
     // MARK: - UI Helper Methods
@@ -400,10 +539,20 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         switch index {
         case 0:
             processBeachHouseSelection()
+            isShowingBeachHouses = true
+            isShowingBoats = false
+            isShowingServices = false
+            
         case 1:
             processBoatSelection(at: index)
+            isShowingBeachHouses = false
+            isShowingBoats = true
+            isShowingServices = false
         case 2:
             processServiceSelection(at: index)
+            isShowingBeachHouses = false
+            isShowingBoats = false
+            isShowingServices = true
         default:
             break
         }
@@ -463,6 +612,27 @@ extension HomeView {
             LoadingModal.dismiss()
             self.handleViewModelOutput(event)
         }).disposed(by: disposeBag)
+        
+        beachVM.output.subscribe(onNext: { [weak self] event in
+            switch event {
+            case .getBeachDataSuccess(let response):
+//                LoadingModal.dismiss()
+                self?.beachFilterData = response.data
+            case .getBeachDataError(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+        
+        
+        boatVM.output.subscribe(onNext: { [weak self] event in
+            switch event {
+            case .getBoatDataSuccess(let response):
+//                LoadingModal.dismiss()
+                self?.boatFilterData = response.data
+            case .getBoatDataError(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
     }
     
     private func handleViewModelOutput(_ event: HomeViewVM.Output) {
@@ -482,6 +652,7 @@ extension HomeView {
         guard let responseData = response.data else { return }
         
         categories = mapCategories(categories: responseData)
+        originalCategories = categories
         processBeachHouseSelection()
         reloadAllCollectionViews()
         
@@ -492,7 +663,7 @@ extension HomeView {
     }
     
     private func handleCategoriesError(_ error: ErrorResponse) {
-        MiddleModal.show(title: error.message ?? "", type: .error)
+        MiddleModal.show(title: error.message ?? "", type: .error, onConfirm: { self.loadInitialData() })
         refreshControl.endRefreshing()
     }
     

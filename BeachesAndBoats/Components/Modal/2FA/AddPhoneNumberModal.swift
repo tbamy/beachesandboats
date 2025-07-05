@@ -10,7 +10,7 @@ import UIKit
 class AddPhoneNumberModal: BaseXib {
 
     @IBOutlet weak var close: UIImageView!
-    @IBOutlet weak var phoneNumberField: PhoneField!
+    @IBOutlet weak var phoneNumberField: InputFieldWithLeftImg!
     @IBOutlet weak var sendBtn: PrimaryButton!
     
 

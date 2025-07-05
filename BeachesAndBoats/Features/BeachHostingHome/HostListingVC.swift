@@ -206,7 +206,7 @@ class HostListingVC: BaseViewControllerPlain {
         listingTableView.register(UINib(nibName: "HostListingTableView", bundle: nil), forCellReuseIdentifier: "HostListingTableView")
         listingTableView.separatorStyle = .none
  
-        searchField.duration.isHidden = true
+//        searchField.duration.isHidden = true
         
     }
     

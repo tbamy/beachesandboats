@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum BookingTarget{
-    case GetBookingCategories(page: String)
+    case GetBookingCategories(filter: GetBookingCategorySearchRequest)
     case AddOrUpdateReview(AddReviewRequest)
     case AddOrUpdateFavourite(AddFavouriteRequest)
     case CreateBeachHouseBooking(CreateBeachHouseBookingRequest)
@@ -28,7 +28,7 @@ extension BookingTarget: BaseTarget{
     var path: String {
         switch self {
         
-        case .GetBookingCategories(page: let page):
+        case .GetBookingCategories:
             return Urls.getBookingCategories.rawValue
         case .AddOrUpdateReview:
             return Urls.addOrUpdateReview.rawValue
@@ -52,7 +52,7 @@ extension BookingTarget: BaseTarget{
             return Urls.findBouncers.rawValue
         case .FindDj:
             return Urls.findDj.rawValue
-        case .PaymentCallback(reference: let reference):
+        case .PaymentCallback:
             return Urls.paymentCallback.rawValue
         }
     }
@@ -60,7 +60,7 @@ extension BookingTarget: BaseTarget{
     var method: Moya.Method {
         switch self {
         
-        case .GetBookingCategories(page: let page):
+        case .GetBookingCategories:
             return .get
         case .AddOrUpdateReview:
             return .post
@@ -84,7 +84,7 @@ extension BookingTarget: BaseTarget{
             return .get
         case .FindDj:
             return .get
-        case .PaymentCallback(reference: let reference):
+        case .PaymentCallback:
             return .get
         }
     }
@@ -92,9 +92,9 @@ extension BookingTarget: BaseTarget{
     var task: Moya.Task {
         switch self {
         
-        case .GetBookingCategories(page: let page):
+        case .GetBookingCategories(let filter):
             return .requestParameters(
-                parameters: ["page": page],
+                parameters: filter.toParameters(),
                 encoding: URLEncoding.queryString
             )
         case .AddOrUpdateReview(let request):

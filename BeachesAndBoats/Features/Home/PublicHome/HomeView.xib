@@ -21,7 +21,7 @@
                 <outlet property="categoryCollectionView" destination="KQd-cP-hjb" id="2ag-hs-sN3"/>
                 <outlet property="filterBtn" destination="0mX-Vk-yTm" id="sIc-Cp-Cz4"/>
                 <outlet property="scrollView" destination="xHN-Sy-TaN" id="nKg-wt-2SN"/>
-                <outlet property="searchField" destination="x2T-gE-55F" id="OOu-dX-ysN"/>
+                <outlet property="searchField" destination="lRS-VV-KGS" id="udT-yb-O37"/>
                 <outlet property="serviceCollectionVIew" destination="b5g-FD-kDp" id="PbP-dL-iPK"/>
                 <outlet property="serviceCollectionVIewHeightConstraint" destination="f1h-Zu-569" id="7xr-hn-3pm"/>
                 <outlet property="serviceStack" destination="1I4-Wa-88f" id="4Vs-LA-gQJ"/>
@@ -43,12 +43,16 @@
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="e3L-l9-B5u">
                     <rect key="frame" x="20" y="118" width="353" height="50"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2T-gE-55F" customClass="SearchField" customModule="BeachesAndBoats" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRS-VV-KGS" customClass="InputFieldWithLeftImg" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="292" height="50"/>
-                            <color key="backgroundColor" systemColor="systemGray6Color"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="RgQ-rC-gXH"/>
-                            </constraints>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="img" value="search_icon"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imgWidth">
+                                    <integer key="value" value="40"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Start typing to search..."/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter_icon" translatesAutoresizingMaskIntoConstraints="NO" id="0mX-Vk-yTm">
                             <rect key="frame" x="302" y="0.0" width="51" height="50"/>
@@ -279,14 +283,12 @@
     </objects>
     <resources>
         <image name="filter_icon" width="51" height="50"/>
+        <image name="search_icon" width="20" height="20"/>
         <namedColor name="GreyLight">
             <color red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

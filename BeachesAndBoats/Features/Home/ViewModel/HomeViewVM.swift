@@ -14,7 +14,7 @@ class HomeViewVM{
     let output = PublishSubject<Output>()
     
     enum Input {
-        case getBookingCategories(page: String)
+        case getBookingCategories(filter: GetBookingCategorySearchRequest)
         case addFavourite(AddFavouriteRequest)
     }
     
@@ -34,16 +34,16 @@ class HomeViewVM{
     func transform(input: PublishSubject<Input>) {
         input.subscribe(onNext: { [weak self] event in
             switch event {
-            case .getBookingCategories(let page):
-                self?.getBookingCategories(page: page)
+            case .getBookingCategories(let filter):
+                self?.getBookingCategories(filter: filter)
             case .addFavourite(let request):
                 self?.AddFavourite(request: request)
             }
         }).disposed(by: disposeBag)
     }
     
-    func getBookingCategories(page: String) {
-        bookingService.getBookingCategories(page: page, completion:  { [ weak self ] data in
+    func getBookingCategories(filter: GetBookingCategorySearchRequest) {
+        bookingService.getBookingCategories(filter: filter, completion:  { [ weak self ] data in
             switch data {
             case .success(let response):
                 self?.output.onNext(.getBookingCategoriesSuccess(response))
