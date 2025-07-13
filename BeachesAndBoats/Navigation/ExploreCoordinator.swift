@@ -18,23 +18,23 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoBeachDetails(details: Listing){
+    func gotoBeachDetails(id: String){
         let vc: BeachDetailsView = .fromNib()
         vc.coordinator = self
-        vc.beachDetails = details
+        vc.id = id
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoBoatDetails(details: Listing){
+    func gotoBoatDetails(id: String){
         let vc: BoatDetailsView = .fromNib()
         vc.coordinator = self
-        vc.boatDetails = details
+        vc.id = id
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoBookingRoomsListView(listing: Listing, booking: CreateBeachHouseBookingRequest){
+    func gotoBookingRoomsListView(listing: GetBeachData, booking: CreateBeachHouseBookingRequest){
         let vc: BookingRoomsListView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
@@ -43,27 +43,29 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoRoomDetailsView(listing: Listing, booking: CreateBeachHouseBookingRequest, room: BookingRoom){
+    func gotoRoomDetailsView(units: Int, listing: GetBeachData, booking: CreateBeachHouseBookingRequest, room: BeachRoom){
         let vc: RoomDetailsView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
         vc.booking = booking
         vc.room = room
+        vc.units = units
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoConfirmBookingView(listing: Listing, booking: CreateBeachHouseBookingRequest, roomId: String){
+    func gotoConfirmBookingView(units: Int, listing: GetBeachData, booking: CreateBeachHouseBookingRequest, roomId: String){
         let vc: ConfirmBookingView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
         vc.booking = booking
         vc.roomId = roomId
+        vc.units = units
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoConfirmBoatBookingView(listing: Listing, booking: CreateBoatBookingRequest, destination: Destination){
+    func gotoConfirmBoatBookingView(listing: GetBoatData, booking: CreateBoatBookingRequest, destination: Destination){
         let vc: ConfirmBoatBookingView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
@@ -157,8 +159,11 @@ class ExploreCoordinator: Coordinator{
     }
     
     func switchToBookingCoordinator(){
-        navigationController = BaseNavigationController(rootViewController: BookingsView())
-        let coordinator = BookingsCoordinator(navigationController: navigationController)
+//        navigationController = BaseNavigationController(rootViewController: BookingsView())
+//        let coordinator = BookingsCoordinator(navigationController: navigationController)
+//        coordinator.start()
+        
+        let coordinator = BookingsCoordinator(navigationController: self.navigationController)
         coordinator.start()
     }
     

@@ -25,9 +25,9 @@ class ConfirmBookingView: BaseViewControllerPlain {
     @IBOutlet weak var totalAmountLabel: UILabel!
     @IBOutlet weak var cancellationPolicyLabel: UILabel!
     
-    var room: BookingRoom?
+    var room: BeachRoom?
     var roomId: String?
-    var listing: Listing?
+    var listing: GetBeachData?
     var booking: CreateBeachHouseBookingRequest?
     var configuration: BookingConfigurationData?
     var checkInTime: String?
@@ -35,6 +35,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
     var numberOfGuests: Int?
     var startDate: String?
     var endDate: String?
+    var units: Int?
     
     
     let vm = BookingConfigurationVM()
@@ -73,15 +74,22 @@ class ConfirmBookingView: BaseViewControllerPlain {
         checkOutTime = listing?.checkOutTo
         numberOfGuests = Int(room?.noOfOccupant ?? "")
         
-        let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
+        let isDayBooking = booking?.bookingType == "DAY"
+        let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 1
         
-        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
+        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) \(isDayBooking ? "Days" : "Nights"))"
 //        timeLabel
-        if let price = room?.pricePerNight {
+        let thePrice = isDayBooking ? room?.pricePerDay : room?.pricePerNight
+        print("The Price: \(thePrice)")
+        
+        if let price = thePrice {
+            let actualPrice = price * Float(units ?? 1)
+            print("Actual Price: \(actualPrice)")
+            
             timeLabel.text = "\(checkInTime ?? "") - \(checkOutTime ?? "")"
             guestLabel.text = "\(numberOfGuests ?? 0) Guests"
-            costLabel.text = "₦\(price) x \(nights) Nights"
-            let totalCost = (price) * Float(nights)
+            costLabel.text = "₦\(actualPrice) x \(nights) \(isDayBooking ? "Days" : "Nights")"
+            let totalCost = (actualPrice) * Float(nights)
 //            let configurationCost = configuration?.roomCleaningFee ?? 0
             let serviceCost = configuration?.houseServiceFee ?? 0
             costAmountLabel.text = "₦ \(totalCost)"
@@ -107,7 +115,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
             bookingRequest.checkoutTime = checkOutTime?.toBackendTime() ?? ""
             bookingRequest.numberOfPeople = numberOfGuests ?? 1
             
-            bookingRequest.units = 1 //temporary, would update
+            bookingRequest.units = units ?? 1
             
             print(bookingRequest)
             

@@ -91,7 +91,7 @@ struct Room: Codable {
     
 }
 
-struct BedType: Codable {
-    var id: String
-    var quantity: Int
-}
+//struct BedType: Codable {
+//    var id: String
+//    var quantity: Int
+//}

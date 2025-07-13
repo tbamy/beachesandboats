@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,9 +30,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v0w-CU-eO4">
-                    <rect key="frame" x="0.0" y="59" width="363" height="173"/>
+                    <rect key="frame" x="0.0" y="118" width="363" height="145"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="173" id="mpv-fF-Yj0"/>
+                        <constraint firstAttribute="height" constant="145" id="5Sy-X2-5Jf"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xuB-80-7IN">
@@ -141,7 +142,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2v-05-Eix">
-                    <rect key="frame" x="20" y="237" width="323" height="52"/>
+                    <rect key="frame" x="20" y="268" width="323" height="21"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -174,14 +175,6 @@
             <point key="canvasLocation" x="113.74045801526717" y="-63.028169014084511"/>
         </view>
     </objects>
-    <designables>
-        <designable name="css-Sc-uTV">
-            <size key="intrinsicContentSize" width="72" height="34.333333333333336"/>
-        </designable>
-        <designable name="xTG-4R-sD7">
-            <size key="intrinsicContentSize" width="72" height="34.333333333333336"/>
-        </designable>
-    </designables>
     <resources>
         <image name="bed.double" catalog="system" width="128" height="82"/>
         <image name="calendar" width="14" height="14.333333015441895"/>

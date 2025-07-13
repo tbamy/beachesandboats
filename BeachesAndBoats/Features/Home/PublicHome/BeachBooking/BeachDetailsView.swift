@@ -38,10 +38,13 @@ class BeachDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var dayBookingBtn: CheckboxButton!
     @IBOutlet weak var nightBookingBtn: CheckboxButton!
     
+    private let beachVM = BeachHouseVM()
+    private let beachInput = PublishSubject<BeachHouseVM.Input>()
+    
     let locationManager = CLLocationManager()
     var isDayBooking: Bool = false
     
-    var beachDetails: Listing?
+    var beachDetails: GetBeachData?
     var amenities: [Amenity] = []
     var roomImages: [String] = []
     var comments: [Review] = []
@@ -55,6 +58,8 @@ class BeachDetailsView: BaseViewControllerPlain {
     let vm = StartConversationVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<StartConversationVM.Input>()
+    
+    var id: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +68,10 @@ class BeachDetailsView: BaseViewControllerPlain {
         configureAllCollectionViews()
         setupCustomNavigationButtons()
         bind()
+        
+        LoadingModal.show()
+//        print(id)
+        beachInput.onNext(.getBeachHouse(id: id ?? ""))
     }
     
     func setup(){
@@ -131,6 +140,49 @@ class BeachDetailsView: BaseViewControllerPlain {
             }
         }
         
+        checkinDateLabel.onDatesSelected = { (from, to) in
+            
+            self.from_when = from
+            self.to_when = to
+            
+            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
+                guard from >= backendFrom && to ?? Date() <= backendTo else {
+                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
+                    return
+                }
+                self.checkinDateLabel.text = "\(from.toFormattedDate())"
+                self.checkoutDateLabel.text = "\(to?.toFormattedDate() ?? "")"
+
+            } else {
+                print("Backend dates are not set.")
+                self.checkinDateLabel.text = "\(from.toFormattedDate())"
+                self.checkoutDateLabel.text = "\(to?.toFormattedDate() ?? "")"
+            }
+        }
+
+        
+        checkoutDateLabel.onDatesSelected = { (from, to) in
+            
+            self.from_when = from
+            self.to_when = to
+            
+            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
+                guard from >= backendFrom && to ?? Date() <= backendTo else {
+                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
+                    return
+                }
+                
+                
+                self.checkinDateLabel.text = "\(from.toFormattedDate())"
+                self.checkoutDateLabel.text = "\(to?.toFormattedDate() ?? "")"
+            
+            } else {
+                print("Backend dates are not set.")
+                self.checkinDateLabel.text = "\(from.toFormattedDate())"
+                self.checkoutDateLabel.text = "\(to?.toFormattedDate() ?? "")"
+            }
+        }
+        
         titleLabel.text = beachDetails?.name
         locationLabel.text = "\(beachDetails?.locations?.city ?? ""), \(beachDetails?.locations?.state ?? "") \(beachDetails?.locations?.country ?? "")"
         locationView.layer.cornerRadius = 8
@@ -152,6 +204,8 @@ class BeachDetailsView: BaseViewControllerPlain {
         amenities = beachDetails?.amenities ?? []
         comments = beachDetails?.reviews ?? []
         guestCommentsStack.isHidden = comments.isEmpty
+        categoriesCollectionView.reloadData()
+        guestCommentsCollectionView.reloadData()
     
         print("Amenities: \(amenities)")
         
@@ -194,6 +248,7 @@ class BeachDetailsView: BaseViewControllerPlain {
             if let beachDetails = beachDetails{
                 let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: fromWhen.toBackendDate() , checkoutDate: toWhen.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
                 print(beachBookingRequest)
+                print("Details: \(beachDetails)")
                 
                 coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
             }
@@ -206,7 +261,7 @@ class BeachDetailsView: BaseViewControllerPlain {
     @IBAction func sendPreBookingTapped(_ sender: Any) {
         //start conversation
         let personId = beachDetails?.owner?.id ?? ""
-        let conversationRequest = StartConversationRequest(personId: personId, bookingId: nil, propertyType: nil)
+        let conversationRequest = StartConversationRequest(personId: personId, bookingId: nil, propertyType: "BeachHouse")
         print(conversationRequest)
             input.onNext(.startConversation(conversationRequest))
             LoadingModal.show()
@@ -214,6 +269,7 @@ class BeachDetailsView: BaseViewControllerPlain {
     
     func bind(){
         vm.transform(input: input)
+        beachVM.transform(input: beachInput)
         
         vm.output.subscribe(onNext: { [weak self] data in
             LoadingModal.dismiss()
@@ -225,6 +281,19 @@ class BeachDetailsView: BaseViewControllerPlain {
                 }
             case .startConversationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+        
+        beachVM.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .getBeachHouseSuccess(let response):
+                self?.beachDetails = response.data
+//                print("Details: \(self?.beachDetails)")
+                self?.setup()
+                
+            case .getBeachHouseFailed(let error) :
+                MiddleModal.show(title: error.message ?? "", type: .error, dismissable: false, onConfirm: {self?.coordinator?.pop()})
             }
         }).disposed(by: disposeBag)
     }
@@ -254,7 +323,7 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
             let view = CategoriesCell(frame: cell.bounds)
             view.identifier = "Amenitiess " + indexPath.description
             view.model.image = cellAt.icon ?? ""
-            view.model.title = cellAt.name ?? ""
+            view.model.title = cellAt.name
             view.model.dummyImage = "luxuryIcon"
             view.isSubcategory = true
             
@@ -268,8 +337,8 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating ?? ""
-            view.model.comment = cellAt.note ?? ""
+            view.model.rating = cellAt.rating
+            view.model.comment = cellAt.note
             
             cell.applyView(view: view)
             return cell

@@ -28,6 +28,10 @@ class GeneralViewCell: BaseXib {
     @IBOutlet weak var infoTwoStack: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    
+    @IBOutlet weak var ribbonTagView: RibbonTagView!
+    @IBOutlet weak var ribbonTagLabel: UILabel!
+    
     var onSaveFavouriteTapped: (() -> Void)?
     
     @IBInspectable var isBeachHouseMode: Bool = false {
@@ -110,6 +114,7 @@ class GeneralViewCell: BaseXib {
     func setupBeachHouseMode(){
         infoOneIcon.image = Assets.location.image
         infoTwoIcon.image = Assets.calendar.image
+        ribbonTagView.isHidden = true
 
     }
     
@@ -117,6 +122,13 @@ class GeneralViewCell: BaseXib {
         infoOneIcon.image = Assets.people.image
         infoTwoIcon.image = Assets.location.image
         priceStack.isHidden = true
+        ribbonTagView.isHidden = false
+        ribbonTagLabel.text = model.ribbonTagLabel
+        ribbonTagLabel.textColor = .white
+        
+        if model.ribbonTagLabel == "Cruising" || model.ribbonTagLabel == "Travel destinations"{
+            ribbonTagView.applyGradient(color1: UIColor.black.withAlphaComponent(0.3), color2: UIColor.black)
+        }
     }
     
     @objc func saveBtnTapped(){
@@ -126,7 +138,7 @@ class GeneralViewCell: BaseXib {
 }
 
 struct GeneralViewCellModel{
-//    public var title: String = ""
+    public var ribbonTagLabel: String = ""
     public var titleLabel: String = ""
     public var priceLabel: String = ""
     public var ratingLabel: String = ""

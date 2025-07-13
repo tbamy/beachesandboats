@@ -57,9 +57,9 @@ class HostingCollectionViewCell: UICollectionViewCell {
         date.text = "\(data?.boat?.rating ?? 0)"
         amountPerNight.isHidden = true
 //        amountPerNight.text = "₦\(data?.boat?.pricePerNight ?? 0.00) / night"
-        beachHouseImage.image = UIImage(named: data?.boat?.images ?? "")
+        beachHouseImage.image = UIImage(named: data?.boat?.images?.first?.url ?? "")
         reservationCalendar.image = UIImage(named: "calendar")
-        loadImage(urlString: data?.boat?.images)
+        loadImage(urlString: data?.boat?.images?.first?.url)
     }
     
     func upcomingHostingCell(with data: BeachHouseReservationsCurrentReservation?) {

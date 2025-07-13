@@ -31,7 +31,7 @@ struct BeachCategory: Codable {
     let description: String?
     let image: String?
     let subCategories: [BeachSubCategory]?
-    let listings: [Listings]?
+    let listings: [Listing]?
 
 }
 
@@ -71,6 +71,6 @@ struct RoomAmenities: Codable {
 }
 
 
-struct Listings: Codable{
-    
-}
+//struct Listings: Codable{
+//    
+//}

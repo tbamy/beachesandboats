@@ -179,16 +179,25 @@ extension String {
     }
 
 
-    @MainActor public func loadImage(into imageView: UIImageView, placeholder: String = "dummy") {
-            guard let url = URL(string: self.replacingOccurrences(of: "http://", with: "https://")) else {
-                imageView.image = UIImage(named: placeholder)
-                return
-            }
-            imageView.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: placeholder),
-                options: nil,
-                completionHandler: { result in
+    @MainActor
+    public func loadImage(into imageView: UIImageView, placeholder: String = "dummy") {
+        guard !self.isEmpty,
+              let url = URL(string: self.replacingOccurrences(of: "http://", with: "https://")) else {
+            imageView.image = UIImage(named: placeholder)
+            return
+        }
+
+        let options: KingfisherOptionsInfo = [
+            .transition(.fade(0.3)),
+            .cacheOriginalImage
+        ]
+
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: placeholder),
+            options: options,
+            completionHandler: { result in
+                DispatchQueue.main.async {
                     switch result {
                     case .success(let value):
                         print("Image loaded: \(value.source.url?.absoluteString ?? "")")
@@ -197,8 +206,10 @@ extension String {
                         imageView.image = UIImage(named: placeholder)
                     }
                 }
-            )
-        }
+            }
+        )
+    }
+
 
 
 }

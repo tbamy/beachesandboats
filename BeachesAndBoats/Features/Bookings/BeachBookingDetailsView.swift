@@ -32,24 +32,30 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var continueBookingView: UIView!
     @IBOutlet weak var selectedRoomImage: UIImageView!
     @IBOutlet weak var selectedRoomTitleLabel: UILabel!
-    @IBOutlet weak var selectedRoomLocationLabel: UILabel!
+    @IBOutlet weak var selectedRoomGuestLabel: UILabel!
+    @IBOutlet weak var selectedRoomBedLabel: UILabel!
+    @IBOutlet weak var selectedRoomCostLabel: UILabel!
     @IBOutlet weak var selectedRoomDateLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var costAmountLabel: UILabel!
     @IBOutlet weak var cleaningFeeLabel: UILabel!
     @IBOutlet weak var serviceFeeLabel: UILabel!
     @IBOutlet weak var CostTotalAmountLabel: UILabel!
-    @IBOutlet weak var dayBookingBtn: CheckboxButton!
-    @IBOutlet weak var nightBookingBtn: CheckboxButton!
+//    @IBOutlet weak var dayBookingBtn: CheckboxButton!
+//    @IBOutlet weak var nightBookingBtn: CheckboxButton!
     @IBOutlet weak var upcomingStack: UIStackView!
-    @IBOutlet weak var pastBookingView: UIView!
+    
+    
+    @IBOutlet weak var reviewBtn: PlainOutlineButton!
+    @IBOutlet weak var tripStack: UIStackView!
+    @IBOutlet weak var roomStack: UIStackView!
     
     var vm = BeachBookingDetailsVM()
     var disposeBag = DisposeBag()
     
     var isDayBooking: Bool = false
     
-    var beachDetails: Listing?
+//    var beachDetails: GetBeachData?
     var amenities: [Amenity] = []
     var roomImages: [String] = []
     var comments: [Review] = []
@@ -59,8 +65,8 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     var from_when: Date?
     var to_when: Date?
     
-    var backendFrom_when: Date?
-    var backendTo_when: Date?
+//    var backendFrom_when: Date?
+//    var backendTo_when: Date?
     
     var isupcomingBooking: Bool = false
     
@@ -77,85 +83,40 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         checkoutDateLabel.isUserInteractionEnabled = false
         itemToShow()
         bindNetwork()
+//        tripStack.isHidden = true
     }
     
     func itemToShow() {
         if isupcomingBooking {
             continueBookingView.isHidden = true
             upcomingStack.isHidden = false
+            reviewBtn.isHidden = true
         } else {
             upcomingStack.isHidden = true
             continueBookingView.isHidden = false
+            reviewBtn.isHidden = false
         }
     }
     
     func setup(){
-        checkinDateLabel.placeholder = "Select Date"
-        checkoutDateLabel.placeholder = "Select Date"
-        
-//        topImage.image = UIImage(named: booking?.beachHouse?.image ?? "")
         
         if let url = URL(string: booking?.beachHouse?.image?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             topImage.kf.setImage(with: url)
         }
         
+        let roomDetails = booking?.beachHouseRoom
         
-        backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
-        backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
-        
-        nightBookingBtn.isChecked = true
-        dayBookingBtn.stateChanged = { [weak self] isSelected in
-            guard let self = self else { return }
-            self.isDayBooking = isSelected
-            self.nightBookingBtn.isChecked = false
+        if let roomImage = URL(string: roomDetails?.images.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
+            selectedRoomImage.kf.setImage(with: roomImage)
         }
-        
-        nightBookingBtn.stateChanged = { [weak self] isSelected in
-            guard let self = self else { return }
-            self.isDayBooking = isSelected
-            self.dayBookingBtn.isChecked = false
-        }
-        
-//        print("Available From: \(backendFrom_when) - Available To: \(backendTo_when)")
-        
-        checkinDateLabel.onDateSelected = { (date) in
-//            checkinDateLabel.onDateSelected = { (startDateString, endDateString) in
-//            let startDate = startDateString.toBackendDate()
-//            let endDate = endDateString?.toBackendDate()
-            
-            self.from_when = date
-            
-            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
-                guard date >= backendFrom && date <= backendTo else {
-                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
-                    return
-                }
-                self.checkinDateLabel.text = "\(date.toFormattedDate())"
+        selectedRoomTitleLabel.text = roomDetails?.name
+        selectedRoomGuestLabel.text = roomDetails?.noOfOccupant
+        selectedRoomDateLabel.text = formatDateRange(from: booking?.checkingDate,
+                                                     to: booking?.checkoutDate)
 
-            } else {
-                print("Backend dates are not set.")
-                self.checkinDateLabel.text = "\(date.toFormattedDate())"
-            }
-        }
+        selectedRoomBedLabel.text = "\(roomDetails?.bedTypes.first?.quantity ?? "") \(roomDetails?.bedTypes.first?.name ?? "")"
+        selectedRoomCostLabel.text = "₦ \(roomDetails?.pricePerNight ?? 0)"
 
-        
-        checkoutDateLabel.onDateSelected = { (date) in
-            
-            self.to_when = date
-            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
-                guard date >= backendFrom && date <= backendTo else {
-                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
-                    return
-                }
-                
-                
-                self.checkoutDateLabel.text = "\(date.toFormattedDate())"
-            
-            } else {
-                print("Backend dates are not set.")
-                self.checkoutDateLabel.text = "\(date.toFormattedDate())"
-            }
-        }
         
         titleLabel.text = booking?.beachHouse?.name
         locationLabel.text = "\(booking?.beachHouse?.locations?.city ?? ""), \(booking?.beachHouse?.locations?.state ?? "") \(booking?.beachHouse?.locations?.country ?? "")"
@@ -174,33 +135,34 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         
         if let latitude = Double(booking?.beachHouse?.locations?.latitude ?? ""),
            let longitude = Double(booking?.beachHouse?.locations?.longitude ?? "") {
-           
+
             let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let span = MKCoordinateSpan(latitudeDelta: latitude, longitudeDelta: longitude)
-            let region = MKCoordinateRegion(center: center, span: span)
             
-            locationView.region = region
+            // Use a fixed zoom level (span) — tweak for desired zoom
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            
+            let region = MKCoordinateRegion(center: center, span: span)
+            locationView.setRegion(region, animated: true)
         }
+
         
         
-        amenities = beachDetails?.amenities ?? []
-        comments = beachDetails?.reviews ?? []
+//        amenities = booking?.beachHouse.amenities ?? []
+//        comments = beachDetails?.reviews ?? []
         
 //        topImage.isUserInteractionEnabled = true
 //        topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
         
     }
     
-//    @objc func viewImages(){
-//        
-//        if let rooms = beachDetails?.rooms{
-//            roomImages = rooms.compactMap { $0.images }
-//                .flatMap { $0 }
-//                .compactMap { $0.url }
-//            coordinator?.gotoAllPhotos(images: roomImages)
-//        }
-//        
-//    }
+    @objc func viewImages(){
+        
+        if let roomImages = booking?.beachHouseRoom?.images{
+            let images = roomImages.compactMap { $0.url }
+            coordinator?.gotoAllPhotos(images: images)
+        }
+        
+    }
     
     func configureAllCollectionViews() {
         configureCollectionView(categoriesCollectionView, tag: 1)
@@ -222,6 +184,7 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     }
     
     @IBAction func messageHostTapped(_ sender: Any) {
+        
     }
     
     
@@ -240,12 +203,12 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBAction func continueBookingTapped(_ sender: Any) {
         print("Continue Tapped")
         
-        let houseRules = HouseAndGroundRulesView()
-        houseRules.modalPresentationStyle = .custom
-        houseRules.transitioningDelegate = self
-        currentModalHeight = UIScreen.main.bounds.height * 0.35
-
-        present(houseRules, animated: true, completion: nil)
+//        let houseRules = HouseAndGroundRulesView()
+//        houseRules.modalPresentationStyle = .custom
+//        houseRules.transitioningDelegate = self
+//        currentModalHeight = UIScreen.main.bounds.height * 0.35
+//
+//        present(houseRules, animated: true, completion: nil)
 //        let bookingType = isDayBooking ? "DAY" : "NIGHT"
 //
 //        if let fromWhen = from_when, let toWhen = to_when{
@@ -376,19 +339,25 @@ extension BeachBookingDetailsView: UIViewControllerTransitioningDelegate {
 
 
 extension BeachBookingDetailsView {
+    func formatDateRange(from: String?, to: String?) -> String {
+        let fromDate = from?.convertToShorterDateFormat() ?? ""
+        let toDate = to?.convertToShorterDateFormat() ?? ""
+        return "\(fromDate) - \(toDate)"
+    }
+    
     func setupCustomNavigationButtons() {
         
         let addButton = UIButton(type: .custom)
         addButton.setImage(Assets.favoriteTwo.image, for: .normal)
-        addButton.addTarget(self, action: #selector(addNewBtnTapped), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
         let addBarButtonItem = UIBarButtonItem(customView: addButton)
 
         let settingsButton = UIButton(type: .custom)
         settingsButton.setImage(Assets.shareTwo.image, for: .normal)
-        settingsButton.addTarget(self, action: #selector(settingsBtnTapped), for: .touchUpInside)
+        settingsButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
         let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
 
-        navigationItem.rightBarButtonItems = [addBarButtonItem, settingsBarButtonItem]
+        navigationItem.rightBarButtonItems = [settingsBarButtonItem]
     }
 
     // Actions for the buttons

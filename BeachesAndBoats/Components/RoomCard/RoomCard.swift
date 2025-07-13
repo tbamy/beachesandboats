@@ -56,6 +56,8 @@ class RoomCard: BaseXib {
         bedsNum.text = "\(model.numberOfBeds)"
         roomPrice.text = model.roomPrice
         
+//        editBtn.isHidden = true
+        
         deleteBtn.setImage(UIImage(systemName: "trash"), for: .normal)
         deleteBtn.setTitle("", for: .normal)
         deleteBtn.setTitleColor(.red, for: .normal)

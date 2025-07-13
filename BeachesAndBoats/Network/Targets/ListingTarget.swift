@@ -317,7 +317,7 @@ extension ListingTarget: BaseTarget {
                     if let idData = bedType.id.data(using: .utf8) {
                         multipartData.append(MultipartFormData(provider: .data(idData), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][id]"))
                     }
-                    multipartData.append(MultipartFormData(provider: .data(String(bedType.quantity).data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][quantity]"))
+                    multipartData.append(MultipartFormData(provider: .data(String(bedType.quantity ?? "").data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][quantity]"))
                 }
 
                 // Room Images

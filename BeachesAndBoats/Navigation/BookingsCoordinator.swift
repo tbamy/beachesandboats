@@ -22,6 +22,8 @@ class BookingsCoordinator: Coordinator{
         let vc: BoatBookingDetailsView = .fromNib()
         vc.coordinator = self
         vc.booking = booking
+//        vc.boatDetails = boatDetails
+        vc.isupcomingBooking = upcomingBookings
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
@@ -30,6 +32,7 @@ class BookingsCoordinator: Coordinator{
         let vc: BeachBookingDetailsView = .fromNib()
         vc.coordinator = self
         vc.booking = booking
+//        vc.beachDetails = beachDetails
         vc.isupcomingBooking = upcomingBookings
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
@@ -43,5 +46,12 @@ class BookingsCoordinator: Coordinator{
         }
 
     }
+    
+    func gotoAllPhotos(images: [String]){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoAllPhotos(images: images, )
+    }
+    
+    
 }
 

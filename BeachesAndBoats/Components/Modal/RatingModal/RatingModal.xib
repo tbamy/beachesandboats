@@ -53,6 +53,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="qwI-77-NOy"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="gray" image="emptyStar" imagePlacement="trailing" title="1" imagePadding="8" titleAlignment="trailing">
                                 <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -66,6 +67,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="13Z-jh-mUQ"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="gray" image="emptyStar" imagePlacement="trailing" title="2" imagePadding="7" titleAlignment="trailing"/>
                             <connections>
@@ -77,6 +79,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Kwj-hY-boG"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="gray" image="emptyStar" imagePlacement="trailing" title="3" imagePadding="7" titleAlignment="trailing"/>
                             <connections>
@@ -88,6 +91,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="w6C-JP-EQg"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="gray" image="emptyStar" imagePlacement="trailing" title="4" imagePadding="7" titleAlignment="trailing"/>
                             <connections>
@@ -99,6 +103,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="2pZ-R7-n84"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="gray" image="emptyStar" imagePlacement="trailing" title="5" imagePadding="7" titleAlignment="trailing"/>
                             <connections>

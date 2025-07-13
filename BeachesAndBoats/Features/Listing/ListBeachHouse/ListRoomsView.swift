@@ -164,13 +164,13 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
                 guard let self = self else { return }
                 if let index = self.selectedBedTypes.firstIndex(where: { $0.id == updatedModel.id }) {
                     // Update existing entry
-                    self.selectedBedTypes[index].quantity = updatedModel.count
+                    self.selectedBedTypes[index].quantity = "\(updatedModel.count)"
                 } else if updatedModel.count > 0 {
                     // Add new entry
-                    self.selectedBedTypes.append(BedType(id: updatedModel.id, quantity: updatedModel.count))
+                    self.selectedBedTypes.append(BedType(id: updatedModel.id, name: updatedModel.type, description: updatedModel.subtitle, quantity: "\(updatedModel.count)"))
                 }
                 // Remove entries with zero count
-                self.selectedBedTypes.removeAll { $0.quantity == 0 }
+                self.selectedBedTypes.removeAll { $0.quantity == "0" }
             }
 
             cell.applyView(view: increaseDecreaseField)
@@ -182,6 +182,6 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let widthOfScreen: CGFloat = collectionView.bounds.width
-        return CGSize(width: widthOfScreen - 20, height: 56)
+        return CGSize(width: widthOfScreen, height: 56)
     }
 }

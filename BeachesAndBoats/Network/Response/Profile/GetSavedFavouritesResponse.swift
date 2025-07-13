@@ -50,7 +50,7 @@ struct FavouriteBoat: Codable {
     let locations: Locations?
     let availabilities: Availabilities?
     let images: [Image]?
-    let destinations: [DestinationDetails]?
+    let destinations: [Destination]?
     let rating: Int?
 }
 

@@ -377,6 +377,12 @@
 		A68A6EDC2D26C6C6000A67E1 /* WithdrawHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EDA2D26C6C6000A67E1 /* WithdrawHistoryView.xib */; };
 		A68A6EDF2D26C755000A67E1 /* WithdrawHistoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */; };
 		A68A6EE02D26C755000A67E1 /* WithdrawHistoryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */; };
+		A68D74292E2048CD008226D7 /* BeachHouseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68D74282E2048C3008226D7 /* BeachHouseVM.swift */; };
+		A68D742B2E2048D7008226D7 /* BoatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68D742A2E2048D2008226D7 /* BoatVM.swift */; };
+		A68D742D2E20E1AB008226D7 /* RibbonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68D742C2E20E1A2008226D7 /* RibbonTagView.swift */; };
+		A68D742F2E20F715008226D7 /* GetBoatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68D742E2E20F70F008226D7 /* GetBoatResponse.swift */; };
+		A68D74312E20F721008226D7 /* GetBeachResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68D74302E20F71C008226D7 /* GetBeachResponse.swift */; };
+		A68D74332E2291A6008226D7 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68D74322E22919F008226D7 /* SecondaryButton.swift */; };
 		A68F3DC62E1480F700B6B1C7 /* GetBookingCategorySearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68F3DC52E1480E700B6B1C7 /* GetBookingCategorySearchRequest.swift */; };
 		A68F3DC92E14963500B6B1C7 /* SelectableViewWithBg.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68F3DC82E14963500B6B1C7 /* SelectableViewWithBg.xib */; };
 		A68F3DCA2E14963500B6B1C7 /* SelectableViewWithBg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68F3DC72E14963500B6B1C7 /* SelectableViewWithBg.swift */; };
@@ -965,6 +971,12 @@
 		A68A6EDA2D26C6C6000A67E1 /* WithdrawHistoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawHistoryView.xib; sourceTree = "<group>"; };
 		A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHistoryViewCell.swift; sourceTree = "<group>"; };
 		A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawHistoryViewCell.xib; sourceTree = "<group>"; };
+		A68D74282E2048C3008226D7 /* BeachHouseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachHouseVM.swift; sourceTree = "<group>"; };
+		A68D742A2E2048D2008226D7 /* BoatVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatVM.swift; sourceTree = "<group>"; };
+		A68D742C2E20E1A2008226D7 /* RibbonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RibbonTagView.swift; sourceTree = "<group>"; };
+		A68D742E2E20F70F008226D7 /* GetBoatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBoatResponse.swift; sourceTree = "<group>"; };
+		A68D74302E20F71C008226D7 /* GetBeachResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBeachResponse.swift; sourceTree = "<group>"; };
+		A68D74322E22919F008226D7 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		A68F3DC52E1480E700B6B1C7 /* GetBookingCategorySearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBookingCategorySearchRequest.swift; sourceTree = "<group>"; };
 		A68F3DC72E14963500B6B1C7 /* SelectableViewWithBg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableViewWithBg.swift; sourceTree = "<group>"; };
 		A68F3DC82E14963500B6B1C7 /* SelectableViewWithBg.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableViewWithBg.xib; sourceTree = "<group>"; };
@@ -1586,6 +1598,7 @@
 		A633576C2BF156E5008AF034 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
+				A68D742C2E20E1A2008226D7 /* RibbonTagView.swift */,
 				A633576D2BF156F9008AF034 /* Labels.swift */,
 				A633576F2BF15707008AF034 /* PaddedLabel.swift */,
 				A66F3FB32D29DA4F00902E43 /* ColorTextLabel.swift */,
@@ -1596,6 +1609,7 @@
 		A63858282BF9215000040677 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				A68D74322E22919F008226D7 /* SecondaryButton.swift */,
 				A6F406AF2C02DB3800973BD7 /* PrimaryButton.swift */,
 				A6F406B12C02DB7F00973BD7 /* PlainOutlineButton.swift */,
 				A6FB74562C13573500A26806 /* CheckboxButton.swift */,
@@ -2182,6 +2196,8 @@
 		A675D9B22D172DD0003E297B /* Booking */ = {
 			isa = PBXGroup;
 			children = (
+				A68D74302E20F71C008226D7 /* GetBeachResponse.swift */,
+				A68D742E2E20F70F008226D7 /* GetBoatResponse.swift */,
 				A675D9B32D172E07003E297B /* GetBookingCategoryResponse.swift */,
 				A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */,
 				A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */,
@@ -2289,6 +2305,15 @@
 				A6EF00E32D28421D00893C05 /* MakeWithdrawVM.swift */,
 			);
 			path = Withdrawals;
+			sourceTree = "<group>";
+		};
+		A68D74272E2048B9008226D7 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				A68D742A2E2048D2008226D7 /* BoatVM.swift */,
+				A68D74282E2048C3008226D7 /* BeachHouseVM.swift */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		A6A2E8422CBE8561004E58EB /* Profile */ = {
@@ -2563,6 +2588,7 @@
 		A6E050442CEF423100F0211C /* PublicHome */ = {
 			isa = PBXGroup;
 			children = (
+				A68D74272E2048B9008226D7 /* VM */,
 				A642F9492D55E71C0089F593 /* ServiceBooking */,
 				A642F9482D55E7130089F593 /* BeachBooking */,
 				A642F9472D55E7080089F593 /* BoatBooking */,
@@ -3156,6 +3182,7 @@
 				A675D9F62D2BE186003E297B /* CollectionView.swift in Sources */,
 				A6F490FC2D722C6F002F8F5B /* UpdateProfileVM.swift in Sources */,
 				A6617A4B2CAF555700514576 /* MessagesView.swift in Sources */,
+				A68D742D2E20E1AB008226D7 /* RibbonTagView.swift in Sources */,
 				A6F406862C02D1A300973BD7 /* GeneralFormatter.swift in Sources */,
 				A61627782C7DBD3700F6B452 /* UserDefault.swift in Sources */,
 				A6CA3D642CB9CE24009307B2 /* BouncerInformationView.swift in Sources */,
@@ -3267,12 +3294,14 @@
 				A669F7B42D23DAB800230E0A /* HostingCollectionViewCell.swift in Sources */,
 				A6AF51322D48EB4D009AEB00 /* HostType.swift in Sources */,
 				A63357532BF0D991008AF034 /* ViewControllerExtension.swift in Sources */,
+				A68D74312E20F721008226D7 /* GetBeachResponse.swift in Sources */,
 				A675D9E72D26A2A3003E297B /* CatViewCell.swift in Sources */,
 				A642F9702D59164D0089F593 /* BookingsVM.swift in Sources */,
 				A61499392C5E9A3C00E0CDFC /* FilterModal.swift in Sources */,
 				A6CA3D6C2CB9CF4E009307B2 /* BouncerUploadProfileImageView.swift in Sources */,
 				A6F406B42C02DBDA00973BD7 /* UIButton.swift in Sources */,
 				A66F3FBF2D2C733F00902E43 /* TwoFASecurityResponse.swift in Sources */,
+				A68D742F2E20F715008226D7 /* GetBoatResponse.swift in Sources */,
 				A66F3FBD2D2C729800902E43 /* TwoFAEmailSecurityRequest.swift in Sources */,
 				A65E83922D3B0F14009F2B89 /* UnfinishedListingModal.swift in Sources */,
 				A68A6EBA2D245072000A67E1 /* monthCollectionViewCell.swift in Sources */,
@@ -3293,6 +3322,7 @@
 				A6F406B22C02DB7F00973BD7 /* PlainOutlineButton.swift in Sources */,
 				A63357692BF15406008AF034 /* InputField.swift in Sources */,
 				A6A857992D4BF1FD008BC9A0 /* FindDJView.swift in Sources */,
+				A68D74332E2291A6008226D7 /* SecondaryButton.swift in Sources */,
 				A669F7AC2D22F43300230E0A /* HostingServiceImplementation.swift in Sources */,
 				A675D9BF2D19AE15003E297B /* BeachDetailsView.swift in Sources */,
 				A63F31212CAF7D7F00D402F4 /* ListingNotif.swift in Sources */,
@@ -3306,6 +3336,7 @@
 				A6F490FE2D723284002F8F5B /* ContactSupportVM.swift in Sources */,
 				A642F9652D588D780089F593 /* SavedListView.swift in Sources */,
 				A6C20FDE2C859E520045C670 /* ErrorResponse.swift in Sources */,
+				A68D742B2E2048D7008226D7 /* BoatVM.swift in Sources */,
 				A675D9EB2D26AB46003E297B /* ConfirmBookingView.swift in Sources */,
 				A6A857912D4BF1D8008BC9A0 /* FindChefView.swift in Sources */,
 				A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */,
@@ -3350,6 +3381,7 @@
 				A642F9592D57939C0089F593 /* EntireApartmentPricePerDayView.swift in Sources */,
 				A65C51082CAA86660027E5F1 /* Dropdown.swift in Sources */,
 				A6E3A1292D70F09B007BB665 /* NotificationSettingsRequest.swift in Sources */,
+				A68D74292E2048CD008226D7 /* BeachHouseVM.swift in Sources */,
 				A675D9EF2D272FB4003E297B /* MakePaymentView.swift in Sources */,
 				A675D9AF2D171DD6003E297B /* CreateBeachHouseBookingRequest.swift in Sources */,
 				A6CA3D442CB9CCD1009307B2 /* ChefUploadProfileImageView.swift in Sources */,

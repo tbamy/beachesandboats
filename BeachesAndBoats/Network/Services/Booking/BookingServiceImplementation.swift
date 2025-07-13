@@ -60,5 +60,14 @@ class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
         provider.request(.GetBookingCategories(filter: filter)){ completion( self.handleResult(result: $0))}
     }
     
+    func getBeachHouse(id: String, completion: @escaping (Result<GetBeachResponse, ErrorResponse>) -> Void) {
+        provider.request(.getBeachHouse(id: id)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func getBoat(id: String, completion: @escaping (Result<GetBoatResponse, ErrorResponse>) -> Void) {
+        provider.request(.getBoat(id: id)){ completion( self.handleResult(result: $0))}
+    }
+    
+    
     
 }

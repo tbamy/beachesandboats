@@ -24,7 +24,8 @@ struct GetMessageHistoryData: Codable {
     let path: String
     let perPage: Int
     let prevPageURL: String?
-    let to, total: Int
+    let to: Int
+    let total: Float
 
     enum CodingKeys: String, CodingKey {
         case currentPage = "current_page"
@@ -76,7 +77,7 @@ struct Payload: Codable {
 struct ProviderBookingDetail: Codable {
     let hostInfo, serviceProvider: HostInfo
     let bookingDate: String
-    let amount, total: Int
+    let amount, total: Float
     let status: String?
     let agreementDescription: String
     let boatBooking: BoatBooking?

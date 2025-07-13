@@ -58,7 +58,7 @@ class HostListingTableView: UITableViewCell {
         }
         
         if let listingPrice = data.destinations?.first {
-            pricePerNightLbl.text = "₦\(listingPrice.price ?? "") /night"
+            pricePerNightLbl.text = "₦\(listingPrice.price ?? "0") /night"
         }
         
         if let rating = data.rating {

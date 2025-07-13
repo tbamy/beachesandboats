@@ -22,6 +22,8 @@ enum BookingTarget{
     case FindBouncers(gender: String)
     case FindDj
     case PaymentCallback(reference: String)
+    case getBeachHouse(id: String)
+    case getBoat(id: String)
 }
 
 extension BookingTarget: BaseTarget{
@@ -54,6 +56,10 @@ extension BookingTarget: BaseTarget{
             return Urls.findDj.rawValue
         case .PaymentCallback:
             return Urls.paymentCallback.rawValue
+        case .getBeachHouse(let id):
+            return String(format: Urls.getBeachHouse.rawValue, id)
+        case .getBoat(let id):
+            return String(format: Urls.getBoat.rawValue, id)
         }
     }
     
@@ -85,6 +91,10 @@ extension BookingTarget: BaseTarget{
         case .FindDj:
             return .get
         case .PaymentCallback:
+            return .get
+        case .getBeachHouse:
+            return .get
+        case .getBoat:
             return .get
         }
     }
@@ -130,6 +140,10 @@ extension BookingTarget: BaseTarget{
                 parameters: ["reference": reference],
                 encoding: URLEncoding.queryString
             )
+        case .getBeachHouse:
+            return .requestPlain
+        case .getBoat:
+            return .requestPlain
         }
     }
     

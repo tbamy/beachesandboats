@@ -97,7 +97,7 @@ class NumberField: InputField{
 //    }
     
     func setRightImage() {
-        textField.text = "0"
+        textField.text = "1"
         textField.keyboardType = .numberPad
         
         let iconContainer = UIView()
@@ -166,7 +166,7 @@ class NumberField: InputField{
         if let currentText = textField.text, let currentValue = Int(currentText), currentValue > 0 {
             textField.text = "\(currentValue - 1)"
         } else {
-            textField.text = "0"
+            textField.text = "1"
         }
     }
 
