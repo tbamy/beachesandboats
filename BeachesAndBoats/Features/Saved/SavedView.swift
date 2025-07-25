@@ -119,6 +119,17 @@ extension SavedView: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let savedFavourites = savedFavourites[indexPath.item]
+        
+        if savedFavourites.favouritableType == "Boat" {
+            coordinator?.gotoBoatDetails(id: savedFavourites.boat?.id ?? "")
+        }else{
+            coordinator?.gotoBeachDetails(id: savedFavourites.beachHouse?.id ?? "")
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.bounds.width - 10, height: 400)

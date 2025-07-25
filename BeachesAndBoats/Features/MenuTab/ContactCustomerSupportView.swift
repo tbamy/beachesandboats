@@ -48,7 +48,7 @@ class ContactCustomerSupportView: BaseViewControllerPlain {
            return
        }
        
-       let phoneURLString = "tel://\(phoneCode)\(phoneNumber)"
+       let phoneURLString = "tel://\(phoneNumber)"
        if let phoneURL = URL(string: phoneURLString), UIApplication.shared.canOpenURL(phoneURL) {
            UIApplication.shared.open(phoneURL)
        } else {

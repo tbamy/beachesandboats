@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 class RecommendationsViewCell: BaseXib {
 
@@ -54,20 +55,22 @@ class RecommendationsViewCell: BaseXib {
         
         image.layer.cornerRadius = 10
         if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
-            image.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        self.image.image = UIImage(named: "dummy")
-                    }
-                }
-            )
+            image.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+            
+//            image.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "dummy"),
+//                options: nil,
+//                completionHandler: { result in
+//                    switch result {
+//                    case .success(let value):
+//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                    case .failure(let error):
+//                        print("Failed to load image: \(error.localizedDescription)")
+//                        self.image.image = UIImage(named: "dummy")
+//                    }
+//                }
+//            )
         } else {
             image.image = UIImage(named: "dummy")
         }

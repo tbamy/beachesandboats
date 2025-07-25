@@ -33,7 +33,7 @@ class DJUploadInstrumentsView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "DJs"
         setupCollectionView()
         setupDragAndDrop()
         
@@ -82,6 +82,12 @@ class DJUploadInstrumentsView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         djInstruments.removeAll()
+        
+        if images.count < 5 {
+            Toast.show(message: "Please upload at least 5 images")
+            return
+        }
+        
         for image in images {
             if let imageData = image.pngData() {
                 djInstruments.append(imageData)
@@ -102,6 +108,7 @@ class DJUploadInstrumentsView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         djInstruments.removeAll()
+        
         for image in images {
             if let imageData = image.pngData() {
                 djInstruments.append(imageData)

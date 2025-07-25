@@ -21,6 +21,8 @@ class FindBouncerView: BaseViewControllerPlain {
     var selectedGender: String = ""
     var isArmed: Bool = false
     var findBouncerResponse: FindServiceProviderResponse?
+    var propertyType: String?
+    var bookingId: String?
     
     let vm = FindServiceProviderVM()
     let disposeBag = DisposeBag()
@@ -106,7 +108,7 @@ class FindBouncerView: BaseViewControllerPlain {
                 self.findBouncerResponse = response
                 if let bouncerResponse = findBouncerResponse{
                     if let bouncerData = bouncerResponse.data, !bouncerData.isEmpty{
-                        self.coordinator?.gotoRecommentdations(data: bouncerResponse, provider: "Bouncer")
+                        self.coordinator?.gotoRecommentdations(propertyType: propertyType ?? "", bookingId: bookingId ?? "", data: bouncerResponse, provider: "Bouncer")
                     }else{
                         MiddleModal.show(title: "Oops!", subtitle: "No Data returned for your search, try another", type: .error)
                     }

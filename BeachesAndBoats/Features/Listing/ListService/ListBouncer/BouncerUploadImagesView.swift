@@ -68,11 +68,18 @@ class BouncerUploadImagesView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         bouncerImages.removeAll()
-            for image in images {
-                if let imageData = image.pngData() {
-                    bouncerImages.append(imageData)
-                }
+        
+        if images.count < 5 {
+            Toast.show(message: "Please upload at least 5 images")
+            return
+        }
+
+        
+        for image in images {
+            if let imageData = image.pngData() {
+                bouncerImages.append(imageData)
             }
+        }
         let images = createServiceListing?.images ?? []
         if var createServiceListing = createServiceListing{
             createServiceListing.images = images + bouncerImages

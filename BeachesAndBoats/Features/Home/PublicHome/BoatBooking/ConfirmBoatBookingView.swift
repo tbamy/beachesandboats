@@ -105,10 +105,12 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
             serviceCost = configuration?.boatServiceFee ?? 0
             costAmountLabel.text = "₦ \(totalCost)"
 //            cleaningFeeLabel.text = "₦ \(configurationCost)"
-            serviceFeeLabel.text = "₦ \(serviceCost)"
             cancellationPolicyLabel.text = configuration?.cancellationPolicy
-            let finalTotal = totalCost + serviceCost
-            totalAmountLabel.text = "₦ \(finalTotal)"
+            let serviceFee = (totalCost * serviceCost) / 100 
+            let finalTotal = totalCost + serviceFee
+            
+            serviceFeeLabel.text = "₦ \(serviceFee.toAmount() ?? "0")"
+            totalAmountLabel.text = "₦ \(finalTotal.toAmount() ?? "0")"
             amount = finalTotal
         }
         

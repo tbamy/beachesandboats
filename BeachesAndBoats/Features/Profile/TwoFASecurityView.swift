@@ -21,6 +21,7 @@ class TwoFASecurityView: BaseViewControllerPlain {
     
     var email: String? = ""
     var phoneNumber: String? = ""
+    var isEmail = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class TwoFASecurityView: BaseViewControllerPlain {
             LoadingModal.show(title: "Loading...")
             let request = TwoFAEmailSecurityRequest(email: userEmail ?? "")
             self.input.onNext(.emailSecurity(request))
+            self.isEmail = true
         }
     }
     
@@ -49,6 +51,7 @@ class TwoFASecurityView: BaseViewControllerPlain {
             LoadingModal.show(title: "Loading...")
             let request = TwoFAPhoneSecurityRequest(phoneNumber: userPhoneNumber ?? "")
             self.input.onNext(.phoneSecurity(request))
+            self.isEmail = false
         }
     }
     
@@ -74,24 +77,36 @@ extension TwoFASecurityView {
             LoadingModal.dismiss()
             switch output {
             case .emailSecuritySuccess(let response):
+                print(self?.isEmail)
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
                     ConfirmPhoneNumberModal.show(on: self?.view ?? UIView(), callBack: { otp in
                         print(otp)
                         self?.completeVerificationForEmail(otp ?? "")
-                    }, isEmail: true)
+                    }, isEmail: self?.isEmail ?? true)
                 })
                
             case .emailSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             case .phoneSecuritySuccess(let response):
+                print(self?.isEmail)
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
                     ConfirmPhoneNumberModal.show(on: self?.view ?? UIView(), callBack: { otp in
                         print(otp)
                         self?.completeVerificationForPhoneNumber(otp ?? "")
-                    }, isEmail: false)
+                    }, isEmail: self?.isEmail ?? false)
                 })
             case .phoneSecurityFailure(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error)
+                MiddleModal.show(title: error.message ?? "", type: .error, onConfirm: {
+                    ConfirmPhoneNumberModal.show(on: self?.view ?? UIView(), callBack: { otp in
+                        print(otp)
+                        print(self?.isEmail)
+                        if self?.isEmail ?? true {
+                            self?.completeVerificationForEmail(otp ?? "")
+                        }else{
+                            self?.completeVerificationForPhoneNumber(otp ?? "")
+                        }
+                    }, isEmail: self?.isEmail ?? false)
+                })
             case .completeTwoFASuccess(let response):
                 let loginSecurity = LoginAndSecurityView()
                 MiddleModal.show(title: "Double authentication added successful", subtitle: response.message ?? "", type: .success, primaryText: "Done", onConfirm: {

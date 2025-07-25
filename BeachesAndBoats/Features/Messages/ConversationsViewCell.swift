@@ -41,7 +41,7 @@ class ConversationsViewCell: UITableViewCell {
 //        }
         
         userName.text = with.otherUser.firstName
-        locationLbl.text = with.propertyType
+        locationLbl.text = ""
         messageLbl.text = with.lastMessage
     }
     

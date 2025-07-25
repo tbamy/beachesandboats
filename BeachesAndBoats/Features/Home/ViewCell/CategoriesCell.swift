@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 class CategoriesCell: BaseXib, Sizeable {
 
@@ -63,22 +64,25 @@ class CategoriesCell: BaseXib, Sizeable {
         
 //        let imageUrl = model.image
 //        imageUrl.loadImage(into: image, placeholder: model.dummyImage)
+        print("Image Url is: \(model.image)")
         
         if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
-            image.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: model.dummyImage),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        self.image.image = UIImage(named: self.model.dummyImage)
-                    }
-                }
-            )
+            image.sd_setImage(with: url, placeholderImage: UIImage(named: model.dummyImage))
+            
+//            image.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: model.dummyImage),
+//                options: nil,
+//                completionHandler: { result in
+//                    switch result {
+//                    case .success(let value):
+//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                    case .failure(let error):
+//                        print("Failed to load image: \(error.localizedDescription)")
+//                        self.image.image = UIImage(named: self.model.dummyImage)
+//                    }
+//                }
+//            )
         } else {
             image.image = UIImage(named: "luxuryIcon")
         }

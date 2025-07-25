@@ -66,9 +66,9 @@ struct MessagesData: Codable {
 struct Payload: Codable {
     let paymentData: PaymentData
     let propertyType: String
-    let providerBookingDetail: ProviderBookingDetail
-    let beachHouseBookingDetail: BeachHouseBooking?
-//    let boatBookingDetail: JSONNull?
+    let providerBookingDetail: ProviderBookingDetail?
+//    let beachHouseBookingDetail: BeachHouseBooking?
+//    let boatBookingDetail: BoatBookingDetail?
 }
 
 

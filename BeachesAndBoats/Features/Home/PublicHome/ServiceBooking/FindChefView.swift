@@ -20,6 +20,8 @@ class FindChefView: BaseViewControllerPlain {
     var selectedNumber: String?
     var dishesData: [PickerItem]?
     var day: Date?
+    var propertyType: String?
+    var bookingId: String?
     
     let vm = FindServiceProviderVM()
     let disposeBag = DisposeBag()
@@ -85,7 +87,7 @@ class FindChefView: BaseViewControllerPlain {
                 self.findChefResponse = response
                 if let chefResponse = findChefResponse{
                     if let chefData = chefResponse.data, !chefData.isEmpty{
-                        self.coordinator?.gotoRecommentdations(data: chefResponse, provider: "Chef")
+                        self.coordinator?.gotoRecommentdations(propertyType: propertyType ?? "", bookingId: bookingId ?? "", data: chefResponse, provider: "Chef")
                     }else{
                         MiddleModal.show(title: "Oops!", subtitle: "No Data returned for your search, try another", type: .error)
                     }
@@ -123,10 +125,14 @@ extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let cell = numberOfPeopleCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
         let name = numberOfPeople?[indexPath.item]
         
-        let view = CatViewCell(frame: cell.bounds)
-        view.identifier = "Amenitiess " + indexPath.description
-        view.hasImage = false
+        let cellWidth = calculateItemWidth(for: name ?? "")
+        
+        let view = SelectableViewWithBg(frame: CGRect(x: 0, y: 0, width: cellWidth, height: 40))
+        view.identifier = "Chefs " + indexPath.description
+        view.titleOnlyMode = true
         view.model.title = name ?? ""
+        view.model.state = (indexPath.item == Int(selectedNumber ?? "0"))
+        view.setState()
         
         cell.applyView(view: view)
         return cell
@@ -138,7 +144,23 @@ extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.width / 4) - 5, height: 20)
+        return CGSize(width: (collectionView.bounds.width / 3) - 5, height: 40)
     }
     
+    
+    
+    private func calculateItemWidth(for text: String) -> CGFloat {
+        
+        let font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        let textSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
+        
+        let horizontalPadding: CGFloat = 20 // Adjust this based on your SelectableViewWithBg padding
+        let minimumWidth: CGFloat = 60
+        
+        // Add some extra buffer to prevent truncation
+        let buffer: CGFloat = 8
+        let calculatedWidth = textSize.width + horizontalPadding + buffer
+        
+        return max(calculatedWidth, minimumWidth)
+    }
 }

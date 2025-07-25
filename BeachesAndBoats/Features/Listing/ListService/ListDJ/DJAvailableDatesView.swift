@@ -24,7 +24,7 @@ class DJAvailableDatesView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "DJs"
         setup()
     }
     

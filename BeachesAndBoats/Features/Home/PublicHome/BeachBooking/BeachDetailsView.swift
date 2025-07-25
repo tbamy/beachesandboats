@@ -7,7 +7,8 @@
 
 import UIKit
 import MapKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 import RxSwift
 import CoreLocation
 
@@ -40,6 +41,8 @@ class BeachDetailsView: BaseViewControllerPlain {
     
     private let beachVM = BeachHouseVM()
     private let beachInput = PublishSubject<BeachHouseVM.Input>()
+    
+    private var currentModalHeight: CGFloat = UIScreen.main.bounds.height * 0.5
     
     let locationManager = CLLocationManager()
     var isDayBooking: Bool = false
@@ -79,13 +82,20 @@ class BeachDetailsView: BaseViewControllerPlain {
         checkinDateLabel.placeholder = "Select Date"
         checkoutDateLabel.placeholder = "Select Date"
         
+        
         let imgUrl = beachDetails?.rooms?.first?.images?.first?.url
         imgUrl?.loadImage(into: topImage, placeholder: "dummy")
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
         
+//        if let from = backendFrom_when , let to = backendTo_when{
+//            checkinDateLabel.text = "\(from.toFormattedDate())"
+//            checkoutDateLabel.text = "\(to.toFormattedDate())"
+//        }
+        
+        
         nightBookingBtn.isChecked = true
-        totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
+        totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
         
         
         dayBookingBtn.stateChanged = { [weak self] isSelected in
@@ -93,7 +103,7 @@ class BeachDetailsView: BaseViewControllerPlain {
             self.isDayBooking = true
             self.nightBookingBtn.isChecked = false
             
-            totalAmountLabel.text = "₦ \(beachDetails?.pricePerDay ?? 0)"
+            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0")"
         }
         
         nightBookingBtn.stateChanged = { [weak self] isSelected in
@@ -101,7 +111,7 @@ class BeachDetailsView: BaseViewControllerPlain {
             self.isDayBooking = false
             self.dayBookingBtn.isChecked = false
             
-            totalAmountLabel.text = "₦ \(beachDetails?.pricePerNight ?? 0)"
+            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
         }
         
         checkinDateLabel.onDateSelected = { (date) in
@@ -250,7 +260,17 @@ class BeachDetailsView: BaseViewControllerPlain {
                 print(beachBookingRequest)
                 print("Details: \(beachDetails)")
                 
-                coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+                let rules = beachDetails.houseRules?.compactMap { rule -> String? in
+                    return rule.name?.trimmingCharacters(in: .whitespacesAndNewlines)
+                }
+
+                let bulletRules = rules?.map { "• \($0)" }.joined(separator: "\n") ?? ""
+                
+                HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
+                    self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+                })
+                
+                
             }
         }else{
             MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
@@ -277,7 +297,8 @@ class BeachDetailsView: BaseViewControllerPlain {
             case .startConversationSuccess(let response):
 //                self?.conversationResponse = response
                 if let res = response.data{
-                    self?.coordinator?.gotoChat(otherUser: self?.beachDetails?.owner?.firstName ?? "", conversationId: res.id)
+                    self?.coordinator?.gotoChat(bookingId: "", otherUser: self?.beachDetails?.owner?.firstName ?? "", conversationId: res.id, propertyType: "BeachHouse")
+//                    self?.coordinator?.gotoChat(otherUser: self?.beachDetails?.owner?.firstName ?? "", conversationId: res.id)
                 }
             case .startConversationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
@@ -337,7 +358,7 @@ extension BeachDetailsView: UICollectionViewDelegate, UICollectionViewDataSource
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating
+            view.model.rating = "\(cellAt.rating)"
             view.model.comment = cellAt.note
             
             cell.applyView(view: view)

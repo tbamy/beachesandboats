@@ -54,12 +54,7 @@ class HostingServiceMenuCoordinator: Coordinator {
         let coordinator = AccountCoordinator(navigationController: self.navigationController)
         coordinator.gotoContactSupportView()
     }
-    
-//    func gotoContactSupport() {
-//        let vc: ContactSupportView = .fromNib()
-//        vc.coordinator = self
-//        push(viewController: vc)
-//    }
+
     
     func gotoEarningView() {
         if isComingFromHostingSideHouseAndBoat {
@@ -93,31 +88,176 @@ class HostingServiceMenuCoordinator: Coordinator {
         }
     }
 
+
+    //MARK: - Edit Property
     
-//    func gotoEarningView() {
-//        guard let tabBarController = self.navigationController?.tabBarController,
-//              let tabs = tabBarController.viewControllers else {
-//            print("TabBarController or its view controllers are nil")
-//            return
-//        }
-//        
-//        // Find the navigation controller for the "Earnings" tab
-//        if let earningNavController = tabs.first(where: {
-//            $0.tabBarItem.accessibilityIdentifier == "Earnings"
-//        }) as? UINavigationController {
-//            
-//            // Create and push the EarningsView
-//            let vc: EarningsView = .fromNib()
-//            vc.tabBarItem.accessibilityIdentifier = "Earnings"
-////            vc.coordinator = self
-//            earningNavController.pushViewController(vc, animated: true)
-//            
-//            // Switch the tab to "Earnings"
-//            tabBarController.selectedIndex = tabs.firstIndex(of: earningNavController) ?? 0
-//        } else {
-//            print("Earnings tab navigation controller not found")
-//        }
-//    }
-
-
+    
+    func gotoEditPropertiesListView() {
+        let vc: EditPropertiesListView = .fromNib()
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditBeachHouseOptionsView(id: String?) {
+        let vc: EditBeachHouseOptionsView = .fromNib()
+        vc.coordinator = self
+        vc.id = id
+        push(viewController: vc)
+    }
+    
+    func gotoEditPropertyNameView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditPropertyNameView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditPropertyAddressView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditPropertyAddressView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditPropertyAvailableDatesView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditPropertyAvailableDatesView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditPropertyAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditPropertyAmenitiesView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditPropertyAdditionalAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditPropertyAdditionalAmenitiesView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditAboutYouLanguageView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditAboutYouLanguageView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditAboutYouDescriptionView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditAboutYouDescriptionView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditHouseRulesView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditHouseRulesView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditCheckInAndOutRulesView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditCheckInAndOutRulesView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditRoomsListView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditRoomsListView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditListRoomsView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?) {
+        let vc: EditListRoomsView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.room = room
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditRoomAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?) {
+        let vc: EditRoomAmenitiesView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.room = room
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditRoomPriceView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?) {
+        let vc: EditRoomPriceView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.room = room
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditRoomPricePerDayView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?) {
+        let vc: EditRoomPricePerDayView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.room = room
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditEntireApartmentPriceView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditEntireApartmentPriceView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditEntireApartmentPricePerDayView(beachData: BeachDatas?, request: CreateBeachListingRequest?) {
+        let vc: EditEntireApartmentPricePerDayView = .fromNib()
+        vc.createBeachListing = request
+        vc.beachData = beachData
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    
+    func popToOptionsScreen() {
+        if let navigationController = navigationController {
+            for viewController in navigationController.viewControllers.reversed() {
+                if viewController is EditBeachHouseOptionsView {
+                    navigationController.popToViewController(viewController, animated: true)
+                    break
+                }
+            }
+        }
+    }
+    
+    func popToRoomsListScreen() {
+        if let navigationController = navigationController {
+            for viewController in navigationController.viewControllers.reversed() {
+                if viewController is EditRoomsListView {
+                    navigationController.popToViewController(viewController, animated: true)
+                    break
+                }
+            }
+        }
+    }
+ 
 }

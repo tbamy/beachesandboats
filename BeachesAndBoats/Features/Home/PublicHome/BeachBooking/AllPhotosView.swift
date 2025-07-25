@@ -19,7 +19,7 @@ class AllPhotosView: BaseViewControllerPlain {
         super.viewDidLoad()
 
         title = "Photos"
-        setupCustomNavigationButtons()
+//        setupCustomNavigationButtons()
         setup()
         print("Total Images: \(images.count)")
     }

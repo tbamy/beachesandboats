@@ -44,8 +44,8 @@ class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
         provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
     }
     
-    func bookServiceProvider(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
-        provider.request(.CreateBeachHouseBooking(request)){ completion( self.handleResult(result: $0))}
+    func bookServiceProvider(request: CreateInvoiceRequest, completion: @escaping (Result<CreateInvoiceResponse, ErrorResponse>) -> Void) {
+        provider.request(.BookServiceProvider(request)){ completion( self.handleResult(result: $0))}
     }
     
     func createBeachHouseBooking(request: CreateBeachHouseBookingRequest, completion: @escaping (Result<BeachHouseBookingResponse, ErrorResponse>) -> Void) {
@@ -66,6 +66,10 @@ class BookingServiceImplementation: Provider<BookingTarget>, BookingService{
     
     func getBoat(id: String, completion: @escaping (Result<GetBoatResponse, ErrorResponse>) -> Void) {
         provider.request(.getBoat(id: id)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func cancelBooking(request: CancelBookingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.cancelBooking(request)){ completion( self.handleResult(result: $0))}
     }
     
     

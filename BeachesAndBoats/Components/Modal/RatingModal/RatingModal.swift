@@ -72,13 +72,12 @@ class RatingModal: BaseXib {
     }
     
     @IBAction func submitBtnTapped(_ sender: Any) {
+        dismiss()
         submitBtnDelegate?.submitTapped(rating: selectedRating, comment: commentField.text)
     }
     
     
-    public static func show(userComment: String, delegate: SumbitBtnDelegate?) {
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+    public static func show(on view: UIView, userComment: String, delegate: SumbitBtnDelegate?) {
         
         let modal = RatingModal()
         modal.submitBtnDelegate = delegate 
@@ -88,20 +87,20 @@ class RatingModal: BaseXib {
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
+        
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.7)
         backDrop.addSubview(modal)
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.addSubview(backDrop)
-        }
-        
+        view.addSubview(backDrop)
         let height = Helpers.screenHeight * 0.7
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
-        backDrop.layoutIfNeeded()
+        view.layoutIfNeeded()
+        
+
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            modal.frame.origin.y = Helpers.screenHeight - height
-            backDrop.layoutIfNeeded()
+            modal.frame.origin.y = Helpers.screenHeight  - height + modal.layer.cornerRadius
+            view.layoutIfNeeded()
         }, completion: nil)
     }
 }

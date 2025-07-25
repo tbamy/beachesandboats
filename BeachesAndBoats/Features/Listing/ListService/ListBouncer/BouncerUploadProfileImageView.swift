@@ -28,7 +28,7 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
         }
     }
     
-    var images: [Data] = []
+//    var images: [Data] = []
     
     var profileImage: Data?
     
@@ -75,11 +75,11 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let imageData = image?.pngData() {
-//            profileImage = imageData
-            images.append(imageData)
+            profileImage = imageData
+//            images.append(imageData)
             
             if var createServiceListing = createServiceListing{
-                createServiceListing.images = images
+                createServiceListing.profilePic = profileImage
                 
                 print(createServiceListing)
                 
@@ -93,7 +93,8 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createServiceListing = createServiceListing{
-            createServiceListing.images = images
+//            createServiceListing.images = images
+            
             
             print(createServiceListing)
             

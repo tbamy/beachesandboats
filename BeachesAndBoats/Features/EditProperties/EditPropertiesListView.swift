@@ -9,12 +9,13 @@ import UIKit
 import RxSwift
 
 class EditPropertiesListView: BaseViewControllerPlain {
+    var coordinator: HostingServiceMenuCoordinator?
     
-    @IBOutlet weak var searchField: SearchField!
+    @IBOutlet weak var searchField: InputFieldWithLeftImg!
     @IBOutlet weak var beachHouseListingSegment: SegmentOptionView!
     @IBOutlet weak var boatListingSegment: SegmentOptionView!
     @IBOutlet weak var listingTableView: UITableView!
-    var coordinator: HostingHouseAndBoatListingCoordinator?
+//    var coordinator: HostingHouseAndBoatListingCoordinator?
     
     let vm = HostListingVM()
     let disposeBag = DisposeBag()
@@ -38,7 +39,6 @@ class EditPropertiesListView: BaseViewControllerPlain {
         tableSetup()
         title = "Listings"
         bind()
-        setupRightNavigationBar()
         gestureRecognizers()
 //        isShowingBeachHouses = true
         beachHouseListingSegment.contentView.backgroundColor = .none
@@ -79,14 +79,6 @@ class EditPropertiesListView: BaseViewControllerPlain {
         self.updateTableHeight()
     }
     
-    func setupRightNavigationBar() {
-        let rightButton = UIBarButtonItem(image: UIImage(named: "sort_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(sortTapped))
-        self.navigationItem.rightBarButtonItem = rightButton
-    }
-    
-    @objc func sortTapped() {
-        coordinator?.presentSortView()
-    }
     
     
     func tableSetup() {
@@ -116,13 +108,13 @@ extension EditPropertiesListView {
             case .beachHouseListingSuccess(let response):
                 if let listings = response.data?.beachHouseListings {
                     self?.beachHouseListingData = listings
-                    self?.beachHouseListingSegment.title = "Beach Houses Reservation (\(self?.beachHouseListingData.count ?? 0))"
+                    self?.beachHouseListingSegment.title = "Beach House Listings (\(self?.beachHouseListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
                     self?.updateTableHeight()
                 }
                 if let boatListings = response.data?.boatListings {
                     self?.boatListingData = boatListings
-                    self?.boatListingSegment.title = "Boats Reservation (\(self?.boatListingData.count ?? 0))"
+                    self?.boatListingSegment.title = "Boat Listings (\(self?.boatListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
                     self?.updateTableHeight()
                 }
@@ -156,7 +148,7 @@ extension EditPropertiesListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isShowingBeachHouses {
             let cellAt = beachHouseListingData[indexPath.row]
-            
+            coordinator?.gotoEditBeachHouseOptionsView(id: cellAt.id)
         } else {
             let cellAt = boatListingData[indexPath.row]
             

@@ -91,7 +91,7 @@
                     <rect key="frame" x="0.0" y="426" width="393" height="2050"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahw-21-Wvr">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="1134"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="911"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="F0H-Qd-tNX">
                                     <rect key="frame" x="0.0" y="20" width="393" height="60"/>
@@ -224,12 +224,6 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What guests have to say" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvC-tf-2qh">
-                                    <rect key="frame" x="20" y="722.66666666666674" width="353" height="18"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xc-q1-D7L">
                                     <rect key="frame" x="20" y="497.66666666666663" width="353" height="200"/>
                                     <constraints>
@@ -237,42 +231,62 @@
                                     </constraints>
                                     <standardMapConfiguration key="preferredConfiguration"/>
                                 </mapView>
-                                <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BDA-5g-Q0R">
-                                    <rect key="frame" x="20" y="760.66666666666674" width="373" height="150"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="150" id="Ob9-5g-Wcw"/>
-                                    </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dj4-1H-hpJ">
-                                        <size key="itemSize" width="128" height="128"/>
-                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </collectionViewFlowLayout>
-                                </collectionView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fv-KE-nFe">
-                                    <rect key="frame" x="0.0" y="940.66666666666674" width="393" height="73.333333333333371"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-8i-ooL">
+                                    <rect key="frame" x="20" y="717.66666666666674" width="353" height="73.333333333333371"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPA-5g-8mY" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="32" y="10" width="341" height="50"/>
+                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CfZ-4f-wzB">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="170"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What guests have to say" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvC-tf-2qh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BDA-5g-Q0R">
+                                                    <rect key="frame" x="0.0" y="20" width="353" height="150"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="150" id="Ob9-5g-Wcw"/>
+                                                    </constraints>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dj4-1H-hpJ">
+                                                        <size key="itemSize" width="128" height="128"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                </collectionView>
+                                            </subviews>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fv-KE-nFe">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="73.333333333333329"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPA-5g-8mY" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="10" width="313" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="V2a-LD-zz3"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Write a review"/>
+                                                    <connections>
+                                                        <action selector="writeReviewTapped:" destination="-1" eventType="touchUpInside" id="9Zo-yj-uhu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="V2a-LD-zz3"/>
+                                                <constraint firstAttribute="trailing" secondItem="SPA-5g-8mY" secondAttribute="trailing" constant="20" id="50w-wJ-azD"/>
+                                                <constraint firstAttribute="bottom" secondItem="SPA-5g-8mY" secondAttribute="bottom" constant="13.33333333333303" id="VQk-b2-UWj"/>
+                                                <constraint firstItem="SPA-5g-8mY" firstAttribute="leading" secondItem="5fv-KE-nFe" secondAttribute="leading" constant="20" id="odD-SO-Sew"/>
+                                                <constraint firstItem="SPA-5g-8mY" firstAttribute="top" secondItem="5fv-KE-nFe" secondAttribute="top" constant="10" id="vBG-ei-xoX"/>
                                             </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="Write a review"/>
-                                            <connections>
-                                                <action selector="writeReviewTapped:" destination="-1" eventType="touchUpInside" id="9Zo-yj-uhu"/>
-                                            </connections>
-                                        </button>
+                                        </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="SPA-5g-8mY" secondAttribute="trailing" constant="20" id="50w-wJ-azD"/>
-                                        <constraint firstAttribute="bottom" secondItem="SPA-5g-8mY" secondAttribute="bottom" constant="13.33333333333303" id="VQk-b2-UWj"/>
-                                        <constraint firstItem="SPA-5g-8mY" firstAttribute="leading" secondItem="5fv-KE-nFe" secondAttribute="leading" constant="32" id="odD-SO-Sew"/>
-                                        <constraint firstItem="SPA-5g-8mY" firstAttribute="top" secondItem="5fv-KE-nFe" secondAttribute="top" constant="10" id="vBG-ei-xoX"/>
+                                        <constraint firstAttribute="trailing" secondItem="5fv-KE-nFe" secondAttribute="trailing" id="BVe-j1-Xj2"/>
+                                        <constraint firstItem="5fv-KE-nFe" firstAttribute="leading" secondItem="gJi-8i-ooL" secondAttribute="leading" id="gbY-eH-gkF"/>
                                     </constraints>
-                                </view>
+                                </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5fw-CV-umz">
                                     <rect key="frame" x="20" y="398.66666666666663" width="353" height="41"/>
                                     <subviews>
@@ -301,7 +315,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="uXC-AU-7Nu">
-                                    <rect key="frame" x="20" y="1034" width="353" height="50"/>
+                                    <rect key="frame" x="20" y="811" width="353" height="50"/>
                                     <subviews>
                                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ffd-2A-4zl" userLabel="TripStack">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="160"/>
@@ -465,18 +479,16 @@
                                 <constraint firstItem="65U-Y8-a1S" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="04w-Wq-y9b"/>
                                 <constraint firstItem="0xc-q1-D7L" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="2hO-mC-anp"/>
                                 <constraint firstItem="oeT-WY-Gyx" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" id="35Y-dd-Omp"/>
+                                <constraint firstItem="gJi-8i-ooL" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="524-rr-9S1"/>
                                 <constraint firstItem="Mfe-h4-oar" firstAttribute="top" secondItem="5fw-CV-umz" secondAttribute="bottom" constant="20" id="6El-oH-kIM"/>
                                 <constraint firstAttribute="trailing" secondItem="0xc-q1-D7L" secondAttribute="trailing" constant="20" id="BVF-Ee-9VM"/>
                                 <constraint firstAttribute="trailing" secondItem="F0H-Qd-tNX" secondAttribute="trailing" id="BZa-ni-uKR"/>
-                                <constraint firstItem="5fv-KE-nFe" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" id="BjT-3A-cmq"/>
-                                <constraint firstItem="BDA-5g-Q0R" firstAttribute="top" secondItem="zvC-tf-2qh" secondAttribute="bottom" constant="20" id="Dwy-q0-IBU"/>
                                 <constraint firstItem="F0H-Qd-tNX" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" id="EQi-kN-byK"/>
                                 <constraint firstItem="d6W-M4-pPg" firstAttribute="top" secondItem="F0H-Qd-tNX" secondAttribute="bottom" constant="20" id="Hei-oX-rZD"/>
-                                <constraint firstAttribute="trailing" secondItem="zvC-tf-2qh" secondAttribute="trailing" constant="20" id="IM7-7Q-PEe"/>
-                                <constraint firstAttribute="trailing" secondItem="5fv-KE-nFe" secondAttribute="trailing" id="Mdw-jj-y0S"/>
+                                <constraint firstItem="Iid-Fu-VVC" firstAttribute="top" secondItem="gJi-8i-ooL" secondAttribute="bottom" constant="20" id="Hhl-Cl-HJ6"/>
                                 <constraint firstAttribute="trailing" secondItem="Mfe-h4-oar" secondAttribute="trailing" constant="20" id="N24-rS-qmL"/>
                                 <constraint firstItem="5fw-CV-umz" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" symbolic="YES" id="Nks-CT-1uj"/>
-                                <constraint firstItem="zvC-tf-2qh" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="OjP-xT-b8R"/>
+                                <constraint firstItem="gJi-8i-ooL" firstAttribute="top" secondItem="0xc-q1-D7L" secondAttribute="bottom" constant="20.000000000000114" id="Op9-py-0dB"/>
                                 <constraint firstItem="Mfe-h4-oar" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="Rpv-Pf-4dl"/>
                                 <constraint firstAttribute="trailing" secondItem="d6W-M4-pPg" secondAttribute="trailing" constant="20" id="S9g-2q-Fyh"/>
                                 <constraint firstAttribute="bottom" secondItem="uXC-AU-7Nu" secondAttribute="bottom" constant="50" id="SKy-4S-59O"/>
@@ -484,21 +496,17 @@
                                 <constraint firstAttribute="trailing" secondItem="uXC-AU-7Nu" secondAttribute="trailing" constant="20" id="VdO-xb-puh"/>
                                 <constraint firstItem="tRl-Bg-GUs" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="VtM-qE-2LS"/>
                                 <constraint firstItem="uXC-AU-7Nu" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="WEU-VT-JMP"/>
-                                <constraint firstAttribute="trailing" secondItem="BDA-5g-Q0R" secondAttribute="trailing" id="Yae-JX-PFK"/>
                                 <constraint firstItem="tRl-Bg-GUs" firstAttribute="top" secondItem="F0H-Qd-tNX" secondAttribute="bottom" constant="20" id="ZYb-Sc-Mgy"/>
                                 <constraint firstItem="65U-Y8-a1S" firstAttribute="top" secondItem="tRl-Bg-GUs" secondAttribute="bottom" constant="15" id="a1O-19-Bzu"/>
-                                <constraint firstItem="uXC-AU-7Nu" firstAttribute="top" secondItem="5fv-KE-nFe" secondAttribute="bottom" constant="20" id="diH-Pg-GzT"/>
                                 <constraint firstItem="Jhp-im-hdw" firstAttribute="top" secondItem="V88-9b-FLA" secondAttribute="bottom" constant="20" id="e6n-8N-JeB"/>
+                                <constraint firstAttribute="trailing" secondItem="gJi-8i-ooL" secondAttribute="trailing" constant="20" id="gXx-Yy-j6T"/>
                                 <constraint firstItem="0xc-q1-D7L" firstAttribute="top" secondItem="Mfe-h4-oar" secondAttribute="bottom" constant="20" id="hj5-tR-WjU"/>
-                                <constraint firstItem="BDA-5g-Q0R" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" constant="20" id="ikI-5x-bHW"/>
                                 <constraint firstItem="V88-9b-FLA" firstAttribute="leading" secondItem="ahw-21-Wvr" secondAttribute="leading" id="l3b-jQ-LMC"/>
                                 <constraint firstItem="F0H-Qd-tNX" firstAttribute="top" secondItem="ahw-21-Wvr" secondAttribute="top" constant="20" id="mBF-1L-2p0"/>
                                 <constraint firstAttribute="trailing" secondItem="5fw-CV-umz" secondAttribute="trailing" constant="20" symbolic="YES" id="obO-Kf-fas"/>
                                 <constraint firstItem="V88-9b-FLA" firstAttribute="top" secondItem="oeT-WY-Gyx" secondAttribute="bottom" constant="20" id="oz5-qs-cGM"/>
                                 <constraint firstAttribute="trailing" secondItem="V88-9b-FLA" secondAttribute="trailing" id="qua-k8-rEu"/>
-                                <constraint firstItem="5fv-KE-nFe" firstAttribute="top" secondItem="BDA-5g-Q0R" secondAttribute="bottom" constant="30" id="rUm-Dq-haB"/>
                                 <constraint firstAttribute="trailing" secondItem="oeT-WY-Gyx" secondAttribute="trailing" id="rbf-r2-Fds"/>
-                                <constraint firstItem="zvC-tf-2qh" firstAttribute="top" secondItem="0xc-q1-D7L" secondAttribute="bottom" constant="25" id="sIU-9s-D3P"/>
                             </constraints>
                         </view>
                     </subviews>

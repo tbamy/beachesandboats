@@ -97,6 +97,7 @@ struct HostInfo: Codable {
     let email: String
     let phoneCode: String
     let phoneNumber: String
+    let roles: [String]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -105,6 +106,7 @@ struct HostInfo: Codable {
         case email
         case phoneCode = "phone_code"
         case phoneNumber = "phone_number"
+        case roles
     }
 }
 //

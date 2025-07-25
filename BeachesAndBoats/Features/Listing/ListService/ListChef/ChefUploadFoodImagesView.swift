@@ -83,6 +83,12 @@ class ChefUploadFoodImagesView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         chefImages.removeAll()
+        
+        if images.count < 5 {
+            Toast.show(message: "Please upload at least 5 images")
+            return
+        }
+        
         for image in images {
             if let imageData = image.pngData() {
                 chefImages.append(imageData)

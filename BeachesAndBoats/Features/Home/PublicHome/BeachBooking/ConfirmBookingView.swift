@@ -77,27 +77,28 @@ class ConfirmBookingView: BaseViewControllerPlain {
         let isDayBooking = booking?.bookingType == "DAY"
         let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 1
         
-        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) \(isDayBooking ? "Days" : "Nights"))"
+        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) \(isDayBooking ? "Day(s)" : "Night(s)"))"
 //        timeLabel
         let thePrice = isDayBooking ? room?.pricePerDay : room?.pricePerNight
-        print("The Price: \(thePrice)")
+//        print("The Price: \(thePrice)")
         
         if let price = thePrice {
             let actualPrice = price * Float(units ?? 1)
-            print("Actual Price: \(actualPrice)")
+//            print("Actual Price: \(actualPrice)")
             
             timeLabel.text = "\(checkInTime ?? "") - \(checkOutTime ?? "")"
-            guestLabel.text = "\(numberOfGuests ?? 0) Guests"
-            costLabel.text = "₦\(actualPrice) x \(nights) \(isDayBooking ? "Days" : "Nights")"
+            guestLabel.text = "\(numberOfGuests ?? 0) Guest(s)"
+            costLabel.text = "₦\(actualPrice.toAmount() ?? "0") x \(nights) \(isDayBooking ? "Day(s)" : "Night(s)")"
             let totalCost = (actualPrice) * Float(nights)
 //            let configurationCost = configuration?.roomCleaningFee ?? 0
             let serviceCost = configuration?.houseServiceFee ?? 0
-            costAmountLabel.text = "₦ \(totalCost)"
+            costAmountLabel.text = "₦ \(totalCost.toAmount() ?? "0")"
 //            cleaningFeeLabel.text = "₦ \(configurationCost)"
-            serviceFeeLabel.text = "₦ \(serviceCost)"
             cancellationPolicyLabel.text = configuration?.cancellationPolicy
-            let finalTotal = totalCost + serviceCost
-            totalAmountLabel.text = "₦ \(finalTotal)"
+            let serviceFee = (totalCost * serviceCost) / 100
+            let finalTotal = totalCost + serviceFee
+            serviceFeeLabel.text = "₦ \(serviceFee.toAmount() ?? "0")"
+            totalAmountLabel.text = "₦ \(finalTotal.toAmount() ?? "0")"
             amount = finalTotal
         }
         
@@ -149,7 +150,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
                     self.startDate = startDatee.toFormattedDate()
                     self.endDate = startDatee.toFormattedDate()
                     let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
-                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
+                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Night(s))"
                 }
             }else{
                 if let startDatee = startDatee, let endDatee = endDatee{
@@ -157,7 +158,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
                     self.startDate = startDatee.toFormattedDate()
                     self.endDate = endDatee.toFormattedDate()
                     let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 0
-                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Nights)"
+                    datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Night(s))"
                 }
             }
         }

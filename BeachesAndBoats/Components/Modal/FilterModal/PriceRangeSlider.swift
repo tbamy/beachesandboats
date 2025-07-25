@@ -11,10 +11,9 @@ import UIKit
 public class PriceRangeSlider: UIView {
 
     private let track = UIView()
+    private let selectedRangeTrack = UIView() // New view for the selected range
     private let minThumb = UIView()
     private let maxThumb = UIView()
-//    private let minLabel = UILabel()
-//    private let maxLabel = UILabel()
 
     var minValue: CGFloat = 100
     var maxValue: CGFloat = 200000
@@ -39,10 +38,17 @@ public class PriceRangeSlider: UIView {
     }
 
     private func setupViews() {
-        // Track
-        track.backgroundColor = .beachBlue
+        // Main track (white background)
+        track.backgroundColor = .white
         track.layer.cornerRadius = 2
+        track.layer.borderWidth = 0.5
+        track.layer.borderColor = UIColor.lightGray.cgColor
         addSubview(track)
+        
+        // Selected range track (beachBlue background)
+        selectedRangeTrack.backgroundColor = .beachBlue
+        selectedRangeTrack.layer.cornerRadius = 2
+        addSubview(selectedRangeTrack)
 
         // Thumbs
         [minThumb, maxThumb].forEach {
@@ -53,13 +59,6 @@ public class PriceRangeSlider: UIView {
             $0.isUserInteractionEnabled = true
             addSubview($0)
         }
-
-        // Labels
-//        [minLabel, maxLabel].forEach {
-//            $0.font = .systemFont(ofSize: 12)
-//            $0.textColor = .black
-//            addSubview($0)
-//        }
 
         // Gestures
         let minPan = UIPanGestureRecognizer(target: self, action: #selector(handleMinPan(_:)))
@@ -72,6 +71,7 @@ public class PriceRangeSlider: UIView {
         super.layoutSubviews()
         track.frame = CGRect(x: thumbWidth / 2, y: bounds.height / 2 - 2, width: bounds.width - thumbWidth, height: 4)
         layoutThumbs()
+        updateSelectedRangeTrack()
     }
 
     private func layoutThumbs() {
@@ -84,15 +84,24 @@ public class PriceRangeSlider: UIView {
         minThumb.frame = CGRect(x: minX - thumbWidth / 2, y: track.center.y - thumbWidth / 2, width: thumbWidth, height: thumbWidth)
         maxThumb.frame = CGRect(x: maxX - thumbWidth / 2, y: track.center.y - thumbWidth / 2, width: thumbWidth, height: thumbWidth)
 
-//        minLabel.text = "₦\(Int(selectedMin))"
-//        maxLabel.text = "₦\(Int(selectedMax))"
-//        minLabel.sizeToFit()
-//        maxLabel.sizeToFit()
-//        minLabel.center = CGPoint(x: minThumb.center.x, y: minThumb.frame.minY - 10)
-//        maxLabel.center = CGPoint(x: maxThumb.center.x, y: maxThumb.frame.minY - 10)
+        // Update the selected range track whenever thumbs move
+        updateSelectedRangeTrack()
 
         // Fire callback
         onValueChanged?(selectedMin, selectedMax)
+    }
+    
+    private func updateSelectedRangeTrack() {
+        let leftX = minThumb.center.x
+        let rightX = maxThumb.center.x
+        let width = rightX - leftX
+        
+        selectedRangeTrack.frame = CGRect(
+            x: leftX,
+            y: track.frame.origin.y,
+            width: width,
+            height: track.frame.height
+        )
     }
 
     @objc private func handleMinPan(_ gesture: UIPanGestureRecognizer) {
@@ -107,7 +116,10 @@ public class PriceRangeSlider: UIView {
         minThumb.center.x = newCenterX
 
         selectedMin = valueForPosition(newCenterX)
-        layoutThumbs()
+        updateSelectedRangeTrack()
+        
+        // Fire callback
+        onValueChanged?(selectedMin, selectedMax)
     }
 
     @objc private func handleMaxPan(_ gesture: UIPanGestureRecognizer) {
@@ -122,7 +134,10 @@ public class PriceRangeSlider: UIView {
         maxThumb.center.x = newCenterX
 
         selectedMax = valueForPosition(newCenterX)
-        layoutThumbs()
+        updateSelectedRangeTrack()
+        
+        // Fire callback
+        onValueChanged?(selectedMin, selectedMax)
     }
 
     private func valueForPosition(_ x: CGFloat) -> CGFloat {

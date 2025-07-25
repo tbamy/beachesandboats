@@ -19,6 +19,7 @@ class EarningsView: BaseViewControllerPlain {
     @IBOutlet weak var paymentName: RegularLabel!
     @IBOutlet weak var paymentImg: UIImageView!
     @IBOutlet weak var accountNumber: RegularLabel!
+    @IBOutlet weak var bankName: RegularLabel!
     @IBOutlet weak var noInfoLabel: RegularLabel!
     @IBOutlet weak var editBtn: UIButton!
     
@@ -68,6 +69,10 @@ class EarningsView: BaseViewControllerPlain {
         attributedStringForWitdraw.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: underlineValueForWithdraw)
         attributedStringForWitdraw.addAttribute(.foregroundColor, value: UIColor.black, range: underlineValueForWithdraw)
         withdrawalsLbl.attributedText = attributedStringForWitdraw
+        
+        paymentName.text = AppStorage.accountName ?? ""
+        accountNumber.text = AppStorage.accountNumber ?? ""
+        bankName.text = AppStorage.bankName ?? ""
     }
     
     func makeRequest() {

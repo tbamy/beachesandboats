@@ -24,7 +24,7 @@ class DJPriceView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beaches Houses"
+        title = "DJs"
         setup()
         
     }
@@ -40,9 +40,12 @@ class DJPriceView: BaseViewControllerPlain {
         moneyField.onTextChanged = { [weak self] enteredText in
             self?.updateCommission(with: enteredText)
         }
-//        moneyField.amountChanged = { [weak self] in
-//            self?.updateCommission(with: self?.moneyField.text ?? "")
-//        }
+        moneyField.amountChanged = { [weak self] in
+            if let amount = self?.moneyField.getDoubleValue() {
+                self?.updateCommission(with: String(amount))
+            }
+        }
+            
         
         commissionView.layer.borderWidth = 1
         commissionView.layer.borderColor = UIColor.background.cgColor

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+import SDWebImageSVGCoder
 
 @IBDesignable public class SelectableViewWithBg: BaseXib, Sizeable {
     
@@ -78,20 +80,22 @@ import UIKit
        iconImg.isHidden = false
        
        if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
-           iconImg.kf.setImage(
-               with: url,
-               placeholder: UIImage(named: model.dummyImage),
-               options: nil,
-               completionHandler: { result in
-                   switch result {
-                   case .success(let value):
-                       print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                   case .failure(let error):
-                       print("Failed to load image: \(error.localizedDescription)")
-                       self.iconImg.image = UIImage(named: self.model.dummyImage)
-                   }
-               }
-           )
+           iconImg.sd_setImage(with: url, placeholderImage: UIImage(named: "luxuryIcon"))
+           
+//           iconImg.kf.setImage(
+//               with: url,
+//               placeholder: UIImage(named: model.dummyImage),
+//               options: nil,
+//               completionHandler: { result in
+//                   switch result {
+//                   case .success(let value):
+//                       print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                   case .failure(let error):
+//                       print("Failed to load image: \(error.localizedDescription)")
+//                       self.iconImg.image = UIImage(named: self.model.dummyImage)
+//                   }
+//               }
+//           )
        } else {
            iconImg.image = UIImage(named: "luxuryIcon")
        }

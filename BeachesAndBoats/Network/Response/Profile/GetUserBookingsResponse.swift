@@ -77,6 +77,7 @@ struct BoatBookings: Codable {
 
 // MARK: - BoatBookingsPast
 struct BoatBookingsPast: Codable {
+    let bookingId: String
     let boat: FavouriteBoat
     let total: Float
     let summary: String?
@@ -85,11 +86,12 @@ struct BoatBookingsPast: Codable {
     let bookingType: String
     let noOfPeople: String//Int
     let bookingDate, bookingTime, hostID: String
-    let boatDestination: Destination?
+    let boatDestination: Destinations?
     let subCategory: SubCategory
 
     enum CodingKeys: String, CodingKey {
         case boat, total, summary, status
+        case bookingId = "booking_id"
         case cruiseLength = "cruise_length"
         case bookingType = "booking_type"
         case noOfPeople = "no_of_people"

@@ -8,6 +8,8 @@
 import UIKit
 import MapKit
 import RxSwift
+import SDWebImage
+import SDWebImageSVGCoder
 
 class BoatDetailsView: BaseViewControllerPlain {
     
@@ -84,20 +86,21 @@ class BoatDetailsView: BaseViewControllerPlain {
     func setup(){
         
         if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
-            topImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { [self] result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        topImage.image = UIImage(named: "dummy")
-                    }
-                }
-            )
+            topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+//            topImage.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "dummy"),
+//                options: nil,
+//                completionHandler: { [self] result in
+//                    switch result {
+//                    case .success(let value):
+//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                    case .failure(let error):
+//                        print("Failed to load image: \(error.localizedDescription)")
+//                        topImage.image = UIImage(named: "dummy")
+//                    }
+//                }
+//            )
         } else {
             topImage.image = UIImage(named: "dummy")
         }
@@ -143,7 +146,7 @@ class BoatDetailsView: BaseViewControllerPlain {
             let price = destination.price ?? "0"
             
             destinationMapping[id] = destination
-            return PickerItem(name: "\(name) - ₦\(price) / trip", value: id)
+            return PickerItem(name: "\(name) - ₦\(price.toAmount() ?? "0") / trip", value: id)
         }
         
         myDestinationDropdown.items = pickerItems
@@ -152,7 +155,7 @@ class BoatDetailsView: BaseViewControllerPlain {
             proceedView.isHidden = false
             let selectedPrice = destination.price ?? "0"
             selectedDestination = destination
-            totalAmountLabel.text = "₦\(selectedPrice)"
+            totalAmountLabel.text = "₦\(selectedPrice.toAmount() ?? "0")"
         }
         print("Cap: \(boatCapacity)")
         
@@ -257,7 +260,8 @@ class BoatDetailsView: BaseViewControllerPlain {
             case .startConversationSuccess(let response):
 //                self?.conversationResponse = response
                 if let res = response.data{
-                    self?.coordinator?.gotoChat(otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id)
+                    self?.coordinator?.gotoChat(bookingId: "", otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id, propertyType: "Boat")
+//                    self?.coordinator?.gotoChat(otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id)
                 }
             case .startConversationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
@@ -324,7 +328,7 @@ extension BoatDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating
+            view.model.rating = "\(cellAt.rating)"
             view.model.comment = cellAt.note
             
             cell.applyView(view: view)

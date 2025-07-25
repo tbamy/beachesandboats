@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+import SDWebImageSVGCoder
 
 class RoomDetailsView: BaseViewControllerPlain {
     var coordinator: ExploreCoordinator?
@@ -41,63 +43,7 @@ class RoomDetailsView: BaseViewControllerPlain {
         setup()
         
     }
-    
-//    func setup(){
-//        
-//        selectedBtn.isHidden = true
-//        continueBookingView.isHidden = true
-//        selectedBtn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-//        selectedBtn.semanticContentAttribute = .forceRightToLeft
-//        selectedBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
-//        
-//        if let url = URL(string: room?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-//            print("Image Url is: \(url)")
-//            topImage.kf.setImage(with: url)
-//        }
-//        
-//        titleLabel.text = room?.name
-//        let descriptions = room?.bedTypes?.compactMap { bedType -> String? in
-//            guard let name = bedType.name, let quantity = bedType.quantity else { return nil }
-//            return "\(quantity): \(name)"
-//        }
-//        bedLabel.text = descriptions?.joined(separator: ", ") ?? ""
-//        
-//        let startDateString = booking?.checkingDate ?? ""
-//        let endDateString = booking?.checkoutDate ?? ""
-//        let nights = calculateNights(from: startDateString, to: endDateString)
-//        dateLabel.text = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") \(nights ?? 0) Nights"
-//        guestsLabel.text = "\(room?.noOfOccupant ?? "") Guests"
-//        descriptionLabel.text = room?.description
-//        accessibilityContentLabel.text = "Easy accessibility"
-//        if let price = listing?.pricePerNight {
-//            totalAmountLabel.text = "₦ \(price)"
-//        }
-//        
-//        func configureAllCollectionViews() {
-//            configureCollectionView(facilitiesCollectionView, tag: 1)
-//            configureCollectionView(guestCommentsCollectionView, tag: 2)
-//        }
-//
-//        
-//        func configureCollectionView(_ collectionView: UICollectionView, tag: Int) {
-//            collectionView.delegate = self
-//            collectionView.dataSource = self
-//            collectionView.tag = tag
-//            collectionView.backgroundColor = .clear
-//            collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
-//        }
-//        
-//        continueBookingView.isHidden = true
-//        if let price = room?.pricePerNight{
-//            BookingBtn.setTitle("Reserve for ₦ \(price)", for: .normal)
-//        }
-//        
-//        
-//        amenities = listing?.amenities ?? []
-//        facilitiesCollectionView.reloadData()
-//        
-//    }
-    
+        
     func setup(){
         
         selectedBtn.isHidden = true
@@ -108,7 +54,8 @@ class RoomDetailsView: BaseViewControllerPlain {
         
         if let url = URL(string: room?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             print("Image Url is: \(url)")
-            topImage.kf.setImage(with: url)
+//            topImage.kf.setImage(with: url)
+            topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         }
         
         titleLabel.text = room?.name
@@ -126,7 +73,7 @@ class RoomDetailsView: BaseViewControllerPlain {
         descriptionLabel.text = room?.description
         accessibilityContentLabel.text = "Easy accessibility"
         if let price = listing?.pricePerNight {
-            totalAmountLabel.text = "₦ \(price)"
+            totalAmountLabel.text = "₦ \(price.toAmount() ?? "0")"
         }
         
         func configureAllCollectionViews() {
@@ -148,7 +95,7 @@ class RoomDetailsView: BaseViewControllerPlain {
         
         continueBookingView.isHidden = true
         if let price = room?.pricePerNight{
-            BookingBtn.setTitle("Reserve for ₦ \(price)", for: .normal)
+            BookingBtn.setTitle("Reserve for ₦ \(price.toAmount() ?? "0")", for: .normal)
         }
         
         amenities = listing?.amenities ?? []
@@ -286,7 +233,7 @@ class RoomDetailsView: BaseViewControllerPlain {
             
             if let price = self?.room?.pricePerNight {
                 let totalPrice = price * (Float(self?.selectedQuantity ?? 1))
-                self?.BookingBtn.setTitle("Reserve for ₦ \(totalPrice)", for: .normal)
+                self?.BookingBtn.setTitle("Reserve for ₦ \(totalPrice.toAmount() ?? "0")", for: .normal)
             }
         }
         
@@ -336,7 +283,7 @@ extension RoomDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating
+            view.model.rating = "\(cellAt.rating)"
             view.model.comment = cellAt.note
             
             cell.applyView(view: view)

@@ -115,26 +115,7 @@ extension HouseRulesView: UICollectionViewDelegate, UICollectionViewDataSource, 
         return CGSize(width: widthOfScreen, height: 60)
        
     }
-    
-//    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! DynamicCollectionViewCell
-//        let view = ToggleSwitch(frame: cell.bounds)
-//        guard let item = houseRulesList?[indexPath.row] else { return }
-//        
-//        let itemId = item.id ?? ""
-//        view.toggleSwitch.isUserInteractionEnabled = true
-//        if selectedItems.contains(itemId) {
-//            selectedItems.removeAll { $0 == itemId }
-//            view.model.state = false
-//        } else {
-//            selectedItems.append(itemId)
-//            view.model.state = true
-//        }
-//        
-//        collectionView.reloadItems(at: [indexPath])
-//            
-//        nextBtn.isEnabled = true
-//    }
+
 
     
 }

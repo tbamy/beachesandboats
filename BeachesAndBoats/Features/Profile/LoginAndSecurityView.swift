@@ -35,6 +35,7 @@ class LoginAndSecurityView: BaseViewControllerPlain {
        
         setup()
         bind()
+        setupCustomNavigationButton()
     }
     
     func setup(){
@@ -45,7 +46,9 @@ class LoginAndSecurityView: BaseViewControllerPlain {
             emailLbl.text = email
             phoneLbl.text = phoneNumber
             addAuthenticationView.isHidden = true
+            authenticationDetailsView.isHidden = false
         }else{
+            addAuthenticationView.isHidden = false
             authenticationDetailsView.isHidden = true
         }
     }

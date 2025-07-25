@@ -8,6 +8,8 @@
 import UIKit
 import MapKit
 import RxSwift
+import SDWebImage
+import SDWebImageSVGCoder
 
 class BoatBookingDetailsView: BaseViewControllerPlain {
     
@@ -58,6 +60,8 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     let user = UserSession.shared.userDetails?.id
     
     var vm = BeachBookingDetailsVM()
+    let chatVm = StartConversationVM()
+    let chatInput = PublishSubject<StartConversationVM.Input>()
     var disposeBag = DisposeBag()
     
     var destinationMapping: [String: Destination] = [:]
@@ -75,26 +79,10 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     }
     
     func setup(){
-//        if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-//            print("Image Url is: \(url)")
-//            topImage.kf.setImage(with: url)
-//        }
         
         if let url = URL(string: booking?.boat.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
-            topImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { [self] result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        topImage.image = UIImage(named: "dummy")
-                    }
-                }
-            )
+            topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+
         } else {
             topImage.image = UIImage(named: "dummy")
         }
@@ -106,18 +94,12 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
 //        aboutHostLabel.text = booking?.boat.aboutOwner
 //        hostNameLabel.text = "\(booking?.boat.owner?.firstName ?? "") \(booking?.boat?.owner?.lastName ?? "")"
         ratingLabel.text = "\(booking?.boat.rating ?? 0)"
-//        totalAmountLabel.text = "₦ \(boatDetails?.pricePerNight ?? 0)"
+        totalAmountLabel.text = "₦ \(booking?.total ?? 0)"
 //        proceedView.isHidden = true
         peopleCapacityLabel.text = "\(booking?.noOfPeople ?? "")"
         
 //        amenities = booking?.boat.amenities ?? []
         destinationLabel.text = booking?.boatDestination?.name
-        
-//        costLabel.text = "₦ \(booking?.total ?? 0)"
-//        costAmountLabel.text = "₦ \(booking?.total ?? 0)"
-//        cleaningFeeLabel.text =
-//        serviceFeeLabel.text =
-//        CostTotalAmountLabel.text =
 
         
         topImage.isUserInteractionEnabled = true
@@ -151,17 +133,23 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     
     @IBAction func writeReviewTapped(_ sender: Any) {
         
-        RatingModal.show(userComment: "", delegate: self)
+        RatingModal.show(on: self.view, userComment: "", delegate: self)
     }
     
     @IBAction func messageHostTapped(_ sender: Any) {
-        
+//        let personId = booking?.hostID ?? ""
+//        let conversationRequest = StartConversationRequest(personId: personId, bookingId: booking?.id, propertyType: "BeachHouse")
+//        print(conversationRequest)
+//            chatInput.onNext(.startConversation(conversationRequest))
+//            LoadingModal.show()
     }
     
     
     
     @IBAction func cancelBookingTapped(_ sender: Any) {
         let cancelBookingView = CancelBookingView()
+        cancelBookingView.bookingId = booking?.bookingId ?? ""
+        cancelBookingView.bookingType = "Boat"
         cancelBookingView.modalPresentationStyle = .custom
         cancelBookingView.transitioningDelegate = self
         currentModalHeight = UIScreen.main.bounds.height * 0.75
@@ -174,29 +162,13 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     @IBAction func continueBookingTapped(_ sender: Any) {
         print("Continue Tapped")
         
-        let houseRules = HouseAndGroundRulesView()
-        houseRules.modalPresentationStyle = .custom
-        houseRules.transitioningDelegate = self
-        currentModalHeight = UIScreen.main.bounds.height * 0.35
-
-        present(houseRules, animated: true, completion: nil)
-//        let bookingType = isDayBooking ? "DAY" : "NIGHT"
-//
-//        if let fromWhen = from_when, let toWhen = to_when{
-//            if let beachDetails = beachDetails{
-//                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: from_when?.toBackendDate() ?? "", checkoutDate: to_when?.toBackendDate() ?? "", checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
-//                print(beachBookingRequest)
-//
-//                coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
-//            }
-//        }else{
-//            MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
-//        }
-        
+        coordinator?.gotoBoatDetails(id: booking?.boat.id ?? "")
     }
     
     
     func bind(){
+//        chatVm.transform(input: chatInput)
+        
         vm.output.subscribe(onNext: { [weak self] response in
             LoadingModal.dismiss()
             
@@ -213,6 +185,19 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
             
             
         }).disposed(by: disposeBag)
+        
+//        chatVm.output.subscribe(onNext: { [weak self] data in
+//            LoadingModal.dismiss()
+//            switch data {
+//            case .startConversationSuccess(let response):
+//                if let res = response.data{
+//                    self?.coordinator?.gotoChat(otherUser: "", conversationId: res.id)
+//                }
+//            case .startConversationFailed(let error) :
+//                MiddleModal.show(title: error.message ?? "", type: .error)
+//            }
+//        }).disposed(by: disposeBag)
+
     }
 
 
@@ -228,7 +213,7 @@ extension BoatBookingDetailsView: SumbitBtnDelegate {
         userRating = rating
 
         LoadingModal.show(title: "Submitting review...")
-        let request = AddReviewRequest(itemId: booking?.boat.id ?? "", type: "BeachHouse", note: comment ?? "", rating: rating)
+        let request = AddReviewRequest(itemId: booking?.boat.id ?? "", type: "Boat", note: comment ?? "", rating: rating)
         vm.saveReview(request)
        
     }
@@ -268,7 +253,7 @@ extension BoatBookingDetailsView: UICollectionViewDelegate, UICollectionViewData
             let view = CategoriesCell(frame: cell.bounds)
             view.identifier = "Amenitiess " + indexPath.description
             view.model.image = cellAt.icon ?? ""
-            view.model.title = cellAt.name ?? ""
+            view.model.title = cellAt.name
             view.isSubcategory = true
             
             cell.applyView(view: view)
@@ -281,8 +266,8 @@ extension BoatBookingDetailsView: UICollectionViewDelegate, UICollectionViewData
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = cellAt.rating ?? ""
-            view.model.comment = cellAt.note ?? ""
+            view.model.rating = "\(cellAt.rating)"
+            view.model.comment = cellAt.note
             
             cell.applyView(view: view)
             return cell

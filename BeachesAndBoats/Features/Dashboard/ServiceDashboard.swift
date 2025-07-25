@@ -6,15 +6,29 @@
 //
 
 import Foundation
-
 import UIKit
 
 class ServiceDashboard: UITabBarController {
     
     private let middleButton = UIButton()
-//    private let transparentButton = UIButton()
     private var coordinator: AccountCoordinator?
-
+    
+    // ADDED: KVO observer for tab bar visibility changes
+    private var tabBarObserver: NSKeyValueObservation?
+    
+    private func setupTabBarObserver() {
+        // Observe tab bar hidden property changes
+        tabBarObserver = tabBar.observe(\.isHidden, options: [.new, .old]) { [weak self] _, change in
+            DispatchQueue.main.async {
+                self?.updateMiddleButtonVisibility()
+                self?.positionMiddleButton()
+            }
+        }
+    }
+    
+    deinit {
+        tabBarObserver?.invalidate()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +36,43 @@ class ServiceDashboard: UITabBarController {
         
         setupTabBar()
         setupMiddleButton()
+        setupTabBarObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Add small delay to ensure tab bar state is properly updated
+        DispatchQueue.main.async {
+            self.updateMiddleButtonVisibility()
+            self.positionMiddleButton()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Double-check visibility after view appears
+        updateMiddleButtonVisibility()
         positionMiddleButton()
+    }
+    
+    // ADDED: Override viewWillDisappear to ensure proper cleanup
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Hide button when tab bar controller is about to disappear
+        middleButton.isHidden = true
+    }
+    
+    // ADDED: Check for tab bar visibility changes in viewWillTransition
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            // Animation block
+        }) { _ in
+            // Completion block
+            self.updateMiddleButtonVisibility()
+            self.positionMiddleButton()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,24 +88,19 @@ class ServiceDashboard: UITabBarController {
         tabBar.unselectedItemTintColor = .gray // For unselected items
         tabBar.isTranslucent = false
         
-//        // Set up each tab item
-//        let homeVC = ServiceHostingHomeView()
-//        let homeNavController = UINavigationController(rootViewController: homeVC)
-//        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeIcon"), tag: 0)
-//        
-//        let messagesVC = MessagesView()
-//        let messagesNavController = UINavigationController(rootViewController: messagesVC)
-//        messagesVC.tabBarItem = UITabBarItem(title: "Messages", image: UIImage(named: "messagesIcon"), tag: 1)
-//        
-//        let earningsVC = UIViewController()
-//        earningsVC.tabBarItem = UITabBarItem(title: "Earnings", image: UIImage(named: "earningsIcon"), tag: 2)
-//        
-//        let menuVC = UIViewController()
-//        menuVC.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.horizontal.3"), tag: 3)
-        
-//        viewControllers = [homeVC, messagesVC, UIViewController(), earningsVC, menuVC]
         viewControllers = [ServiceHomeController(), MessageController(), UIViewController(), EarningController(), MenuController()]
-
+        
+        // ADDED: Set up all navigation controllers as delegates
+        setupNavigationDelegates()
+    }
+    
+    // ADDED: Set up navigation controller delegates for all tabs
+    private func setupNavigationDelegates() {
+        for viewController in viewControllers ?? [] {
+            if let navController = viewController as? UINavigationController {
+                navController.delegate = self
+            }
+        }
     }
     
     func wrapInNavigationController(_ viewController: UIViewController) -> BaseNavigationController {
@@ -95,14 +136,12 @@ class ServiceDashboard: UITabBarController {
     }
     
     private func setupMiddleButton() {
-        
         // Configure button appearance
         middleButton.frame.size = CGSize(width: 64, height: 64)
         middleButton.layer.cornerRadius = 32
         middleButton.backgroundColor = .B_B
-        
-//        transparentButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//        transparentButton.backgroundColor = .clear
+        middleButton.isUserInteractionEnabled = true
+        middleButton.isEnabled = true
         
         if let user = UserSession.shared.userDetails, let userRoles = user.roles {
             let hostRoles: [HostType] = [.primaryHost, .secondaryHost]
@@ -117,12 +156,9 @@ class ServiceDashboard: UITabBarController {
             if hasHostRole {
                 middleButton.setImage(UIImage(named: "plusTab"), for: .normal)
                 middleButton.addTarget(self, action: #selector(hostBtnTapped), for: .touchUpInside)
-//                transparentButton.addTarget(self, action: #selector(hostBtnTapped), for: .touchUpInside)
-                
             } else if hasServiceRole {
                 middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
                 middleButton.addTarget(self, action: #selector(serviceBtnTapped), for: .touchUpInside)
-//                transparentButton.addTarget(self, action: #selector(serviceBtnTapped), for: .touchUpInside)
             }
         }
         
@@ -138,77 +174,120 @@ class ServiceDashboard: UITabBarController {
         let navController = BaseNavigationController()
         coordinator = AccountCoordinator(navigationController: navController)
         
-        // Add button to view (not to tabBar)
-        tabBar.addSubview(middleButton)
-        tabBar.bringSubviewToFront(middleButton)
+        // Add button to the main view, not tabBar
+        view.addSubview(middleButton)
+        view.bringSubviewToFront(middleButton)
     }
     
-
     private func positionMiddleButton() {
-        let centerX = tabBar.bounds.midX
-        let centerY = tabBar.bounds.minY - 10
+        // Check tab bar visibility more thoroughly
+        let tabBarIsVisible = !tabBar.isHidden && tabBar.alpha > 0
         
-        middleButton.center = CGPoint(x: centerX, y: centerY)
-//        transparentButton.center = middleButton.center
+        guard tabBarIsVisible else {
+            middleButton.isHidden = true
+            return
+        }
+        
+        // Calculate position relative to tab bar bounds
+        let tabBarFrame = tabBar.frame
+        middleButton.center = CGPoint(
+            x: view.bounds.midX,
+            y: tabBarFrame.minY - 10 // Position slightly above tab bar
+        )
+        
+        // Ensure button stays on top after positioning
+        view.bringSubviewToFront(middleButton)
+    }
+    
+    // IMPROVED: Method to update button visibility based on tab bar state
+    private func updateMiddleButtonVisibility() {
+        // Check multiple conditions for tab bar visibility
+        let tabBarIsVisible = !tabBar.isHidden && tabBar.alpha > 0
+        let isRootLevel = isRootViewControllerVisible()
+        
+        let shouldShowButton = tabBarIsVisible && isRootLevel
+        
+        print("Tab bar visible: \(tabBarIsVisible), Root level: \(isRootLevel), Should show: \(shouldShowButton)")
+        
+        if shouldShowButton {
+            middleButton.isHidden = false
+            view.bringSubviewToFront(middleButton)
+        } else {
+            middleButton.isHidden = true
+        }
+    }
+    
+    // Helper method to check if we're on a root view controller
+    private func isRootViewControllerVisible() -> Bool {
+        guard let selectedNav = selectedViewController as? UINavigationController else {
+            return true // If not a nav controller, assume it's root level
+        }
+        return selectedNav.viewControllers.count == 1
+    }
+    
+    // ADDED: Override selectedViewController to detect tab changes
+    override var selectedViewController: UIViewController? {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateMiddleButtonVisibility()
+                self.positionMiddleButton()
+            }
+        }
+    }
+    
+    // ADDED: Override selectedIndex to detect tab changes
+    override var selectedIndex: Int {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateMiddleButtonVisibility()
+                self.positionMiddleButton()
+            }
+        }
     }
     
     @objc func hostBtnTapped() {
         print("Host button tapped")
-        guard let navController = selectedViewController as? UINavigationController else {
-            print("No navigation controller found for selected tab")
+        
+        if middleButton.isHidden {
+            print("Button is hidden, ignoring tap")
             return
         }
-        navController.delegate = self
         
+        guard let navController = selectedViewController as? UINavigationController else {
+            print("No navigation controller found")
+            let newNavController = BaseNavigationController()
+            let coordinator = AccountCoordinator(navigationController: newNavController)
+            coordinator.gotoSelectPropertyTypePrimaryHost(tag: 1, type: .primaryHost)
+            present(newNavController, animated: true)
+            return
+        }
+        
+        navController.delegate = self
         let coordinator = AccountCoordinator(navigationController: navController)
         coordinator.gotoSelectPropertyTypePrimaryHost(tag: 1, type: .primaryHost)
     }
 
     @objc func serviceBtnTapped() {
         print("Service button tapped")
-        guard let navController = selectedViewController as? UINavigationController else {
-            print("No navigation controller found for selected tab")
+        
+        if middleButton.isHidden {
+            print("Button is hidden, ignoring tap")
             return
         }
-        navController.delegate = self
+        
+        guard let navController = selectedViewController as? UINavigationController else {
+            print("No navigation controller found")
+            let newNavController = BaseNavigationController()
+            let coordinator = AccountCoordinator(navigationController: newNavController)
+            coordinator.gotoSelectServiceType()
+            present(newNavController, animated: true)
+            return
+        }
 
+        navController.delegate = self
         let coordinator = AccountCoordinator(navigationController: navController)
         coordinator.gotoSelectServiceType()
     }
-
-//    private func setupMiddleButton() {
-//        // Configure the middle button
-//        middleButton.frame.size = CGSize(width: 64, height: 64)
-//        middleButton.layer.cornerRadius = 32
-//        middleButton.backgroundColor = .B_B
-//        middleButton.setImage(UIImage(named: "editIcon"), for: .normal)
-//        middleButton.tintColor = .white
-//        
-//        // Add shadow
-//        middleButton.layer.shadowColor = UIColor.black.cgColor
-//        middleButton.layer.shadowOpacity = 0.3
-//        middleButton.layer.shadowOffset = CGSize(width: 0, height: 5)
-//        middleButton.layer.shadowRadius = 10
-//        
-//        middleButton.addTarget(self, action: #selector(middleButtonTapped), for: .touchUpInside)
-//        
-//        // Add the button to the main view (not the tabBar)
-//        view.addSubview(middleButton)
-//        
-//        // Position the button in the center of the tab bar
-//        middleButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            middleButton.centerXAnchor.constraint(equalTo: tabBar.centerXAnchor),
-//            middleButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: -15), // Adjust position if needed
-//            middleButton.widthAnchor.constraint(equalToConstant: 64),  // Set width
-//            middleButton.heightAnchor.constraint(equalToConstant: 64)  // Set height
-//        ])
-//                    
-//    }
-//
-//    @objc private func middleButtonTapped() {
-//        // Handle middle button action
-//    }
 }
 
 extension ServiceDashboard: UINavigationControllerDelegate {
@@ -216,14 +295,43 @@ extension ServiceDashboard: UINavigationControllerDelegate {
                               willShow viewController: UIViewController,
                               animated: Bool) {
         let isRootViewController = navigationController.viewControllers.count == 1
-        middleButton.isHidden = !isRootViewController
-
+        
+        print("Navigation will show controller, stack count: \(navigationController.viewControllers.count), isRoot: \(isRootViewController)")
+        
+        // IMPROVED: Only update if this is the currently selected navigation controller
+        guard navigationController == selectedViewController else {
+            return
+        }
+        
+        // Set button visibility immediately based on navigation stack
         if isRootViewController {
+            // When going back to root, show the button
             DispatchQueue.main.async {
+                self.updateMiddleButtonVisibility()
                 self.positionMiddleButton()
             }
+        } else {
+            // When navigating away from root, hide the button
+            middleButton.isHidden = true
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              didShow viewController: UIViewController,
+                              animated: Bool) {
+        let isRootViewController = navigationController.viewControllers.count == 1
+        
+        print("Navigation did show controller, stack count: \(navigationController.viewControllers.count), isRoot: \(isRootViewController)")
+        
+        // IMPROVED: Only update if this is the currently selected navigation controller
+        guard navigationController == selectedViewController else {
+            return
+        }
+        
+        // Double-check visibility after navigation completes
+        DispatchQueue.main.async {
+            self.updateMiddleButtonVisibility()
+            self.positionMiddleButton()
         }
     }
 }
-
-

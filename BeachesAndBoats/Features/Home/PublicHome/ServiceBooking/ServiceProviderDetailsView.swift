@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 import RxSwift
 
 class ServiceProviderDetailsView: BaseViewControllerPlain {
@@ -28,7 +29,7 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var genderLabel2: UILabel!
     @IBOutlet weak var picturesCollectionView: UICollectionView!
     @IBOutlet weak var commentsCollectionView: UICollectionView!
-    @IBOutlet weak var contactBtn: PlainOutlineButton!
+    @IBOutlet weak var contactBtn: SecondaryButton!
     
 //    var conversationRequest: StartConversationRequest?
 //    var conversationResponse: StartConversationResponse?
@@ -42,6 +43,8 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
         super.viewDidLoad()
 
         title = "\(data?.name ?? "")"
+        
+        bind()
         setup()
     }
     
@@ -66,20 +69,8 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
         image.layer.cornerRadius = image.frame.height / 2
         nameLabel.text = data?.name
         if let url = URL(string: data?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-            image.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        self.image.image = UIImage(named: "dummy")
-                    }
-                }
-            )
+            image.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+            
         } else {
             image.image = UIImage(named: "dummy")
         }
@@ -108,7 +99,7 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
     @IBAction func contactMeTapped(_ sender: Any) {
         //start conversation
         let personId = data?.chefInfo?.id ?? ""
-        let conversationRequest = StartConversationRequest(personId: personId , bookingId: nil, propertyType: nil)
+        let conversationRequest = StartConversationRequest(personId: personId , bookingId: bookingId, propertyType: propertyType)
         print(conversationRequest)
             input.onNext(.startConversation(conversationRequest))
             LoadingModal.show()
@@ -124,7 +115,8 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
             case .startConversationSuccess(let response):
 //                self?.conversationResponse = response
                 if let res = response.data{
-                    self?.coordinator?.gotoChat(otherUser: self?.data?.chefInfo?.firstName ?? "", conversationId: res.id)
+                    self?.coordinator?.gotoChat(bookingId: self?.bookingId ?? "", otherUser: self?.data?.chefInfo?.firstName ?? "", conversationId: res.id, propertyType: "")
+//                    self?.coordinator?.gotoChat(otherUser: self?.data?.chefInfo?.firstName ?? "", conversationId: res.id)
                 }
             case .startConversationFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)

@@ -18,6 +18,16 @@ class SavedCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+    func gotoBeachDetails(id: String){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoBeachDetails(id: id)
+    }
+    
+    func gotoBoatDetails(id: String){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoBoatDetails(id: id)
+    }
+    
     func backToDashboard() {
         navigationController = BaseNavigationController(rootViewController: Dashboard())
         UIApplication.shared.windows.first?.rootViewController = Dashboard()

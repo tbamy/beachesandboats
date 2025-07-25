@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 class HostingCollectionViewCell: UICollectionViewCell {
     
@@ -143,26 +144,28 @@ class HostingCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let processor = DownsamplingImageProcessor(size: beachHouseImage.bounds.size)
-                     |> RoundCornerImageProcessor(cornerRadius: 20)
+        beachHouseImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         
-        beachHouseImage.kf.indicatorType = .activity
-        beachHouseImage.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "placeholderImage"),
-            options: [
-                .processor(processor),
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(1)),
-                .cacheOriginalImage
-            ]
-        ) { result in
-            switch result {
-            case .success(let value):
-                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-            case .failure(let error):
-                print("Job failed: \(error.localizedDescription)")
-            }
-        }
+//        let processor = DownsamplingImageProcessor(size: beachHouseImage.bounds.size)
+//                     |> RoundCornerImageProcessor(cornerRadius: 20)
+//        
+//        beachHouseImage.kf.indicatorType = .activity
+//        beachHouseImage.kf.setImage(
+//            with: url,
+//            placeholder: UIImage(named: "placeholderImage"),
+//            options: [
+//                .processor(processor),
+//                .scaleFactor(UIScreen.main.scale),
+//                .transition(.fade(1)),
+//                .cacheOriginalImage
+//            ]
+//        ) { result in
+//            switch result {
+//            case .success(let value):
+//                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+//            case .failure(let error):
+//                print("Job failed: \(error.localizedDescription)")
+//            }
+//        }
     }
 }

@@ -171,7 +171,7 @@ struct BoatReservationsCurrentReservation: Codable {
 //}
 
 struct ServiceReservations: Codable {
-    let upcomingBookings: [String]?
+    let upcomingBookings: [PastBookingDetails]?
     let pastBookings: [PastBookingDetails]?
 
     enum CodingKeys: String, CodingKey {

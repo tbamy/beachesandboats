@@ -26,19 +26,19 @@ class UserSession {
         }
     }
     
-    var signupRes: SignUpResponse? {
-        didSet {
-            token = signupRes?.data?.accessToken
-            userDetails = signupRes?.data?.user
-            print("User token is : \(token)")
-        }
-    }
+//    var signupRes: SignUpResponse? {
+//        didSet {
+//            token = signupRes?.data?.accessToken
+//            userDetails = signupRes?.data?.user
+//            print("User token is : \(token)")
+//        }
+//    }
     
     var token: String?
     var startSession: Bool = false {
         didSet {
             if let window = UIApplication.shared.windows.first as? AppWindow {
-                window.start()
+                window.startSessionTimer()
             }
         }
     }
@@ -46,15 +46,15 @@ class UserSession {
     
     
     func performLogout() {
+        if let window = UIApplication.shared.windows.first as? AppWindow {
+            window.stopAllTimers()
+        }
         startSession = false
+        userDetails = nil
         let navigationController = BaseNavigationController()
         let coordinator = AppCoordinator(navigationController: navigationController, completion: nil)
         coordinator.start()
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            keyWindow.rootViewController = navigationController
-        }
-
+        UIApplication.shared.windows.first?.rootViewController = navigationController
     }
 }
 

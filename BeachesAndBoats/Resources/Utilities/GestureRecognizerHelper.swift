@@ -15,4 +15,10 @@ class GestureRecognizerHelper {
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+    static func addTapGestureToLabel(to view: UILabel, target: Any, action: Selector) {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: target, action: action)
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
 }

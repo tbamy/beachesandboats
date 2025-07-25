@@ -18,14 +18,20 @@ class MessagesCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoChat(otherUser: String, conversationId: String){
+    func gotoChat(bookingId: String, otherUser: String, conversationId: String, propertyType: String){
         let vc: ChatView = .fromNib()
         vc.coordinator = self
-//        vc.messages = data
+        vc.bookingId = bookingId
+        vc.propertyType = propertyType
         vc.otherUser = otherUser
         vc.conversationId = conversationId
 //        vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
+    }
+    
+    func gotoConfirmServiceBookingView(paymentData: PaymentData, bookingDetail: InvoiceBookingDetails){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoConfirmServiceBookingView(paymentData: paymentData, bookingDetail: bookingDetail)
     }
     
     func backToDashboard() {

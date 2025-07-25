@@ -443,7 +443,7 @@ struct Listing: Codable {
     let minRoomPricePerNight: String?
     let userReviewed: Bool
     let rooms: [BookingRoom]?
-    let rating: Int
+    let rating: Double
     let userFavourite: Bool
     let owner: Owner?
     let amenities: [Amenity]?
@@ -624,6 +624,7 @@ struct ReviewUser: Codable {
 
 // MARK: - Boat Booking
 struct BoatBooking: Codable {
+    let bookingId: String
     let boat: Boat
     let total: Double
     let summary: String?
@@ -645,6 +646,7 @@ struct BoatBooking: Codable {
     
     enum CodingKeys: String, CodingKey {
         case boat, total, summary, status
+        case bookingId = "booking_id"
         case cruiseLength = "cruise_length"
         case bookingType = "booking_type"
         case noOfPeople = "no_of_people"
@@ -671,7 +673,7 @@ struct Boat: Codable {
     let availabilities: Availability?
     let images: [ImageURL]?
     let destinations: [Destination]?
-    let rating: Int?
+    let rating: Double?
 }
 
 // MARK: - Beach House Booking
@@ -769,7 +771,7 @@ struct BeachHouse: Codable {
     let image: String
     let locations: Location?
     let availabilities: Availability
-    let rating: Int
+    let rating: Double
     
     enum CodingKeys: String, CodingKey {
         case id, name, description, image, locations, availabilities, rating

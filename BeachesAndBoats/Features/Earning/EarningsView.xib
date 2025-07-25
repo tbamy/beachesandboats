@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EarningsView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="accountNumber" destination="JtW-aS-4Gw" id="s7g-kd-hqs"/>
+                <outlet property="bankName" destination="uG2-Zl-gVR" id="jU4-S8-n7D"/>
+                <outlet property="editBtn" destination="I2y-aY-hNC" id="9xs-rh-FyH"/>
                 <outlet property="monthCollectionView" destination="qqJ-uB-czY" id="J9U-Lc-PAn"/>
                 <outlet property="noInfoLabel" destination="odH-QT-uys" id="1mQ-dg-wgW"/>
                 <outlet property="paymentImg" destination="OnN-Ir-dzd" id="Tv6-fL-WaP"/>
@@ -190,7 +192,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oW-zu-XOE">
-                                    <rect key="frame" x="0.0" y="706.33333333333337" width="344" height="200"/>
+                                    <rect key="frame" x="0.0" y="706.33333333333337" width="344" height="273.66666666666663"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyJ-yh-KO1">
                                             <rect key="frame" x="20" y="20" width="66.333333333333329" height="20.333333333333329"/>
@@ -212,54 +214,67 @@
                                                 <action selector="editBtnTapped:" destination="-1" eventType="touchUpInside" id="7MZ-0O-Egd"/>
                                             </connections>
                                         </button>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OnN-Ir-dzd">
-                                            <rect key="frame" x="20" y="98.666666666666629" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="CbF-vj-oXu"/>
-                                                <constraint firstAttribute="height" constant="50" id="tzY-Pk-8Nc"/>
-                                            </constraints>
-                                        </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="B6L-1g-A1Y">
-                                            <rect key="frame" x="80" y="98" width="50" height="51.333333333333343"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RCA-nj-hSa">
+                                            <rect key="frame" x="20" y="98.666666666666629" width="304" height="156"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="And-4T-wtB" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="24.333333333333332"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="size">
-                                                            <real key="value" value="13"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtW-aS-4Gw" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="27.333333333333258" width="50" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="size">
-                                                            <real key="value" value="13"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bankIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OnN-Ir-dzd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="156"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="CbF-vj-oXu"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="B6L-1g-A1Y">
+                                                    <rect key="frame" x="60" y="0.0" width="244" height="156"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="And-4T-wtB" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="244" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                                                    <real key="value" value="13"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtW-aS-4Gw" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="53" width="244" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                                                    <real key="value" value="13"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uG2-Zl-gVR" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="106" width="244" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                                                    <real key="value" value="13"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstItem="B6L-1g-A1Y" firstAttribute="centerY" secondItem="OnN-Ir-dzd" secondAttribute="centerY" id="6Sh-40-ghp"/>
-                                        <constraint firstItem="OnN-Ir-dzd" firstAttribute="top" secondItem="pI4-Kd-y7f" secondAttribute="bottom" constant="30" id="8La-kp-wIX"/>
+                                        <constraint firstItem="RCA-nj-hSa" firstAttribute="top" secondItem="pI4-Kd-y7f" secondAttribute="bottom" constant="30.000000000000057" id="1yW-wy-AlA"/>
                                         <constraint firstItem="PyJ-yh-KO1" firstAttribute="leading" secondItem="6oW-zu-XOE" secondAttribute="leading" constant="20" id="CoB-VQ-6Ql"/>
                                         <constraint firstItem="pI4-Kd-y7f" firstAttribute="top" secondItem="PyJ-yh-KO1" secondAttribute="bottom" constant="8" id="DRZ-lm-6DS"/>
                                         <constraint firstItem="I2y-aY-hNC" firstAttribute="centerY" secondItem="PyJ-yh-KO1" secondAttribute="centerY" id="L23-ZS-YH4"/>
-                                        <constraint firstAttribute="height" constant="200" id="N7d-S0-vrP"/>
-                                        <constraint firstItem="B6L-1g-A1Y" firstAttribute="top" secondItem="pI4-Kd-y7f" secondAttribute="bottom" constant="29.333333333333414" id="U0M-Xx-k0O"/>
+                                        <constraint firstItem="RCA-nj-hSa" firstAttribute="leading" secondItem="6oW-zu-XOE" secondAttribute="leading" constant="20" id="UnL-ij-gVf"/>
                                         <constraint firstItem="PyJ-yh-KO1" firstAttribute="top" secondItem="6oW-zu-XOE" secondAttribute="top" constant="20" id="Unh-vi-fVV"/>
                                         <constraint firstAttribute="trailing" secondItem="I2y-aY-hNC" secondAttribute="trailing" constant="20" id="gYP-WR-R1D"/>
-                                        <constraint firstItem="B6L-1g-A1Y" firstAttribute="leading" secondItem="OnN-Ir-dzd" secondAttribute="trailing" constant="10" id="jE5-vl-2Jq"/>
-                                        <constraint firstItem="OnN-Ir-dzd" firstAttribute="leading" secondItem="6oW-zu-XOE" secondAttribute="leading" constant="20" id="wtK-k0-jSL"/>
+                                        <constraint firstItem="I2y-aY-hNC" firstAttribute="top" secondItem="6oW-zu-XOE" secondAttribute="top" constant="13" id="k7a-mS-B3b"/>
+                                        <constraint firstAttribute="trailing" secondItem="RCA-nj-hSa" secondAttribute="trailing" constant="20" id="x9n-YF-E1L"/>
                                         <constraint firstItem="pI4-Kd-y7f" firstAttribute="leading" secondItem="6oW-zu-XOE" secondAttribute="leading" constant="20" id="zSg-7C-PjK"/>
                                     </constraints>
                                 </view>
@@ -275,6 +290,7 @@
                                 <constraint firstAttribute="trailing" secondItem="6oW-zu-XOE" secondAttribute="trailing" id="CTg-Op-718"/>
                                 <constraint firstAttribute="trailing" secondItem="Y9p-5F-7gh" secondAttribute="trailing" constant="10" id="CwS-h9-eUV"/>
                                 <constraint firstItem="Y9p-5F-7gh" firstAttribute="leading" secondItem="DWu-QA-tAb" secondAttribute="leading" constant="10" id="LDY-IA-1N7"/>
+                                <constraint firstAttribute="bottom" secondItem="6oW-zu-XOE" secondAttribute="bottom" constant="20" id="Ldu-el-avo"/>
                                 <constraint firstAttribute="height" constant="1000" id="SGr-Pe-YH5"/>
                                 <constraint firstItem="YW6-U1-xVx" firstAttribute="leading" secondItem="DWu-QA-tAb" secondAttribute="leading" constant="20" id="aOr-GP-ujd"/>
                                 <constraint firstItem="YW6-U1-xVx" firstAttribute="top" secondItem="Y9p-5F-7gh" secondAttribute="bottom" constant="25" id="i1z-gQ-Fft"/>
@@ -308,6 +324,7 @@
     </objects>
     <resources>
         <image name="B&amp;BLogo2" width="90" height="54"/>
+        <image name="bankIcon" width="19.666666030883789" height="17.666666030883789"/>
         <image name="dropdown_icon" width="13.666666984558105" height="8"/>
         <namedColor name="Background">
             <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
