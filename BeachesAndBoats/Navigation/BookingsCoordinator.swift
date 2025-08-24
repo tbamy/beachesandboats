@@ -22,6 +22,8 @@ class BookingsCoordinator: Coordinator{
         let vc: BoatBookingDetailsView = .fromNib()
         vc.coordinator = self
         vc.booking = booking
+//        vc.boatDetails = boatDetails
+        vc.isupcomingBooking = upcomingBookings
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
@@ -30,6 +32,7 @@ class BookingsCoordinator: Coordinator{
         let vc: BeachBookingDetailsView = .fromNib()
         vc.coordinator = self
         vc.booking = booking
+//        vc.beachDetails = beachDetails
         vc.isupcomingBooking = upcomingBookings
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
@@ -43,5 +46,32 @@ class BookingsCoordinator: Coordinator{
         }
 
     }
+    
+    func gotoAllPhotos(images: [String]){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoAllPhotos(images: images)
+    }
+    
+    func gotoBeachDetails(id: String){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoBeachDetails(id: id)
+    }
+    
+    func gotoBoatDetails(id: String){
+        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+        coordinator.gotoBoatDetails(id: id)
+    }
+    
+//    func gotoChat(otherUser: String, conversationId: String){
+//        let coordinator = ExploreCoordinator(navigationController: self.navigationController)
+//        coordinator.gotoChat(otherUser: otherUser, conversationId: conversationId)
+//    }
+    
+    func gotoChat(bookingId: String,otherUser: String, conversationId: String, propertyType:String){
+        let coordinator = MessagesCoordinator(navigationController: self.navigationController)
+//        coordinator.gotoChat(otherUser: otherUser, conversationId: conversationId)
+        coordinator.gotoChat(bookingId: bookingId, otherUser: otherUser, conversationId: conversationId, propertyType: propertyType)
+    }
+    
 }
 

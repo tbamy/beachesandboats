@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 class DashboardViewCell: BaseXib {
     @IBOutlet var cellView: UIView!
@@ -86,21 +87,23 @@ class DashboardViewCell: BaseXib {
 //        }
         
         if let url = URL(string: model.bannerImg) {
-            bannerImg.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "calendar"),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-//                        self.bannerImg.image = url//UIImage(named: "calendar")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        self.bannerImg.image = UIImage(named: "calendar")
-                    }
-                }
-            )
+            bannerImg.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+            
+//            bannerImg.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "calendar"),
+//                options: nil,
+//                completionHandler: { result in
+//                    switch result {
+//                    case .success(let value):
+//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+////                        self.bannerImg.image = url//UIImage(named: "calendar")
+//                    case .failure(let error):
+//                        print("Failed to load image: \(error.localizedDescription)")
+//                        self.bannerImg.image = UIImage(named: "calendar")
+//                    }
+//                }
+//            )
         }
     }
 

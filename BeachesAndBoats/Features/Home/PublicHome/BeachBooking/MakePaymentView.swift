@@ -36,9 +36,13 @@ class MakePaymentView: UIViewController {
     }
     
     @IBAction func payTapped(_ sender: Any) {
+        guard let publicKey = Bundle.main.infoDictionary?["PAYSTACK_PUBLIC_KEY"] as? String else {
+            return
+        }
+           
         let paystack = try? PaystackBuilder
                .newInstance
-               .setKey("pk_test_f8ec4b3cf27be399640fa068978ae06561567d0d")
+               .setKey(publicKey)
                .build()
         
         if let accessCode = bookingResponse?.data?.paymentData?.accessCode{
@@ -67,6 +71,7 @@ class MakePaymentView: UIViewController {
     }
     
     func gotoViewBooking(){
+        MiddleModal.dismiss()
         coordinator?.switchToBookingCoordinator()
     }
     

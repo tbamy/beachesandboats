@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 class CatViewCell: BaseXib {
     
@@ -45,6 +46,7 @@ class CatViewCell: BaseXib {
     
     func setup(){
         image.contentMode = .scaleAspectFit
+        image.tintColor = .beachBlue
         
         title.text = model.title
         title.font.withSize(12)
@@ -53,21 +55,9 @@ class CatViewCell: BaseXib {
             image.isHidden = true
         }
         
-        if let url = URL(string: model.image) {
-            image.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "calendar"),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        self.image.image = UIImage(named: "calendar")
-                    }
-                }
-            )
+        if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
+            image.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+//            image.kf.setImage(with: url)
         } else {
             image.image = UIImage(named: "calendar")
         }

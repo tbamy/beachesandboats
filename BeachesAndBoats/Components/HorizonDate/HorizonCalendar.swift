@@ -131,12 +131,20 @@ class HorizonCalendar: BaseXib {
                 day: day.day
             ))!
             
-            let availableDateRange = model.availableDateRange
-            
-            guard availableDateRange.contains(selectedDate) else {
-                MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
+//            let availableDateRange = model.availableDateRange
+            // In the selection handler, replace the guard statement with:
+            let today = Calendar.current.startOfDay(for: Date())
+            let normalizedSelected = Calendar.current.startOfDay(for: selectedDate)
+
+            guard normalizedSelected >= today else {
+                MiddleModal.show(title: "You cannot select past dates.", type: .error)
                 return
             }
+            
+//            guard availableDateRange.contains(selectedDate) else {
+//                MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
+//                return
+//            }
             
             if self.isSingleDate {
                 // Handle single date selection

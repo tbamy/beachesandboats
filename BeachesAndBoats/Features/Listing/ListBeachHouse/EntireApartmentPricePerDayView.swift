@@ -28,8 +28,8 @@ class EntireApartmentPricePerDayView: UIViewController {
     var createBeachListing: CreateBeachListingRequest?
     
     var isDiscountChecked: Bool = false
-    var finalDiscountPercent: Double = 0.1 // This will store the final discount percentage
-    var finalEarnings: Double = 0 // This will store what the user actually earns
+    var finalDiscountPercent: Float = 0.1 // This will store the final discount percentage
+    var finalEarnings: Float = 0 // This will store what the user actually earns
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,13 +74,13 @@ class EntireApartmentPricePerDayView: UIViewController {
         discountField.isHidden = !isDiscountChecked
         
         // Recalculate commission when discount check state changes
-        if let amount = moneyField.getDoubleValue() {
+        if let amount = moneyField.getFloatValue() {
             updateCommission(with: String(amount))
         }
     }
     
     func updateCommission(with enteredText: String) {
-        guard let enteredAmount = moneyField.getDoubleValue(), enteredAmount > 0 else {
+        guard let enteredAmount = moneyField.getFloatValue(), enteredAmount > 0 else {
             print("Invalid or zero amount entered.")
             commissionField.text = ""
             commissionView.isHidden = true
@@ -93,7 +93,7 @@ class EntireApartmentPricePerDayView: UIViewController {
         
         if isDiscountChecked {
             // If discount is checked, apply additional discount on top of the base 10%
-            let additionalDiscountPercent = (discountField.getDoubleValue() ?? 0) / 100
+            let additionalDiscountPercent = (discountField.getFloatValue() ?? 0) / 100
             
             // First apply the base 10% commission
             let amountAfterBaseCommission = enteredAmount * 0.9 // User gets 90% after base commission
@@ -131,7 +131,7 @@ class EntireApartmentPricePerDayView: UIViewController {
         if var createBeachListing = createBeachListing{
             createBeachListing.pricePerDay = moneyField.getFloatValue() ?? 0
             // Store the final discount percentage (converted to percentage for storage)
-            createBeachListing.dayDiscountPercent = Int(finalDiscountPercent * 100)
+            createBeachListing.dayDiscountPercent = finalDiscountPercent * 100
             
             if createBeachListing.bookingType?.isEmpty ?? true {
                 createBeachListing.bookingType = "FULL"
@@ -148,7 +148,7 @@ class EntireApartmentPricePerDayView: UIViewController {
         if var createBeachListing = createBeachListing{
             createBeachListing.pricePerDay = moneyField.getFloatValue() ?? 0
             // Store the final discount percentage (converted to percentage for storage)
-            createBeachListing.dayDiscountPercent = Int(finalDiscountPercent * 100)
+            createBeachListing.dayDiscountPercent = finalDiscountPercent * 100
             
             if createBeachListing.bookingType?.isEmpty ?? true {
                 createBeachListing.bookingType = "FULL"

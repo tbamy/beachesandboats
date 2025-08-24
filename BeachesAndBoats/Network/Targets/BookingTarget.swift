@@ -17,11 +17,15 @@ enum BookingTarget{
     case BookingConfiguration
     case AllDishes
     case FindChefByDishes(dishIds: String)
-    case BookServiceProvider
+    case BookServiceProvider(CreateInvoiceRequest)
     case UpdateProviderBookingDate
     case FindBouncers(gender: String)
     case FindDj
     case PaymentCallback(reference: String)
+    case getBeachHouse(id: String)
+    case getBoat(id: String)
+    case cancelBooking(CancelBookingRequest)
+//    case createInvoice
 }
 
 extension BookingTarget: BaseTarget{
@@ -54,6 +58,12 @@ extension BookingTarget: BaseTarget{
             return Urls.findDj.rawValue
         case .PaymentCallback:
             return Urls.paymentCallback.rawValue
+        case .getBeachHouse(let id):
+            return String(format: Urls.getBeachHouse.rawValue, id)
+        case .getBoat(let id):
+            return String(format: Urls.getBoat.rawValue, id)
+        case .cancelBooking(_):
+            return Urls.cancelBooking.rawValue
         }
     }
     
@@ -86,6 +96,12 @@ extension BookingTarget: BaseTarget{
             return .get
         case .PaymentCallback:
             return .get
+        case .getBeachHouse:
+            return .get
+        case .getBoat:
+            return .get
+        case .cancelBooking(_):
+            return .post
         }
     }
     
@@ -114,8 +130,8 @@ extension BookingTarget: BaseTarget{
                 parameters: ["dish_ids": dishIds],
                 encoding: URLEncoding.queryString
             )
-        case .BookServiceProvider:
-            return .requestPlain
+        case .BookServiceProvider(let request):
+            return .requestJSONEncodable(request)
         case .UpdateProviderBookingDate:
             return .requestPlain
         case .FindBouncers(let gender):
@@ -130,6 +146,12 @@ extension BookingTarget: BaseTarget{
                 parameters: ["reference": reference],
                 encoding: URLEncoding.queryString
             )
+        case .getBeachHouse:
+            return .requestPlain
+        case .getBoat:
+            return .requestPlain
+        case .cancelBooking(_):
+            return .requestPlain
         }
     }
     

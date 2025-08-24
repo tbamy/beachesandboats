@@ -97,7 +97,7 @@ extension SavedView: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             view.model.titleLabel = savedFavourites.boat?.name ?? ""
             view.model.infoOneLabel = "\(savedFavourites.boat?.locations?.city ?? ""), \(savedFavourites.boat?.locations?.state ?? "") \(savedFavourites.boat?.locations?.country ?? "")"
             view.model.infoTwoLabel = "\(savedFavourites.boat?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(savedFavourites.boat?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
-            view.model.priceLabel = "₦ \(savedFavourites.boat?.destinations?.first?.price ?? "")"
+            view.model.priceLabel = "₦ \(savedFavourites.boat?.destinations?.first?.price ?? "0")"
             view.model.ratingLabel = "\(savedFavourites.boat?.rating ?? 0)"
             view.model.bannerImg = savedFavourites.boat?.images?.first?.url ?? ""
             
@@ -117,6 +117,17 @@ extension SavedView: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.cornerRadius = 15
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let savedFavourites = savedFavourites[indexPath.item]
+        
+        if savedFavourites.favouritableType == "Boat" {
+            coordinator?.gotoBoatDetails(id: savedFavourites.boat?.id ?? "")
+        }else{
+            coordinator?.gotoBeachDetails(id: savedFavourites.beachHouse?.id ?? "")
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

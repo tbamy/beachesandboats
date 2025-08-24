@@ -373,7 +373,7 @@ class AccountCoordinator: Coordinator{
     }
     
     func gotoDJPriceViewView(createServiceListingData: CreateServiceListingRequest){
-        let vc: ChefUploadFoodImagesView = .fromNib()
+        let vc: DJPriceView = .fromNib()
         vc.coordinator = self
         vc.createServiceListing = createServiceListingData
         vc.hidesBottomBarWhenPushed = true

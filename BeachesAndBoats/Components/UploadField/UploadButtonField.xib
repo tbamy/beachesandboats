@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLJ-jv-8Kv">
-                    <rect key="frame" x="0.0" y="59" width="393" height="94"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="35"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bE6-ae-DCd">
                             <rect key="frame" x="20" y="57" width="353" height="14"/>
@@ -51,7 +51,7 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-7C-CHq">
-                            <rect key="frame" x="20" y="8" width="353" height="40"/>
+                            <rect key="frame" x="0.0" y="8" width="393" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="FgT-Cq-cpX"/>
                             </constraints>
@@ -77,8 +77,8 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="MVh-7C-CHq" firstAttribute="leading" secondItem="iLJ-jv-8Kv" secondAttribute="leading" constant="20" id="Rl9-Xn-MGV"/>
-                        <constraint firstAttribute="trailing" secondItem="MVh-7C-CHq" secondAttribute="trailing" constant="20" id="T89-a3-t2i"/>
+                        <constraint firstItem="MVh-7C-CHq" firstAttribute="leading" secondItem="iLJ-jv-8Kv" secondAttribute="leading" id="Rl9-Xn-MGV"/>
+                        <constraint firstAttribute="trailing" secondItem="MVh-7C-CHq" secondAttribute="trailing" id="T89-a3-t2i"/>
                         <constraint firstItem="bE6-ae-DCd" firstAttribute="top" secondItem="MVh-7C-CHq" secondAttribute="bottom" constant="9" id="dal-Wi-CZL"/>
                         <constraint firstAttribute="trailing" secondItem="bE6-ae-DCd" secondAttribute="trailing" constant="20" id="er7-iB-Pol"/>
                         <constraint firstItem="bE6-ae-DCd" firstAttribute="leading" secondItem="iLJ-jv-8Kv" secondAttribute="leading" constant="20" id="hKX-Zi-R28"/>
@@ -98,14 +98,9 @@
             <point key="canvasLocation" x="139.69465648854961" y="-214.43661971830986"/>
         </view>
     </objects>
-    <designables>
-        <designable name="DND-UL-on4">
-            <size key="intrinsicContentSize" width="41.333333333333336" height="20.333333333333332"/>
-        </designable>
-    </designables>
     <resources>
         <image name="error_icon" width="19" height="19"/>
-        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
         <namedColor name="171717">
             <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

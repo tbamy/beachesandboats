@@ -26,7 +26,7 @@ class DJInformationVIew: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Boats"
+        title = "DJs"
         setUp()
         LoadingModal.show()
         vm.getChefDishes()
@@ -38,15 +38,14 @@ class DJInformationVIew: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-//        nameLabel.onTextChanged = { [weak self] text in
-//            self?.checkTextFields()
-//        }
-//
-//        descriptionLabel.onTextChanged = { [weak self] text in
-//            self?.checkTextFields()
-//        }
-//
-//        checkTextFields()
+        descriptionLabel.textChanged = { [weak self] textField, range, replacementString in
+            guard let self = self else { return }
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
+            
+            nextBtn.isEnabled = updatedText.count >= 5
+        }
     }
     
     func checkTextFields() {
@@ -71,14 +70,14 @@ class DJInformationVIew: BaseViewControllerPlain {
         }).disposed(by: disposeBag)
     }
     
-    func validate(){
-        
-    }
+//    func validate(){
+//        
+//    }
 
 
     @IBAction func nextTapped(_ sender: Any) {
         
-        let request = CreateServiceListingRequest(roleType: HostType.chef.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: cat, availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
+        let request = CreateServiceListingRequest(roleType: HostType.dj.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: cat, availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
         
         print(request)
         
@@ -86,7 +85,7 @@ class DJInformationVIew: BaseViewControllerPlain {
     }
     
     @IBAction func saveAndExit(_ sender: Any) {
-        let request = CreateServiceListingRequest(roleType: HostType.chef.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: "", availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
+        let request = CreateServiceListingRequest(roleType: HostType.dj.rawValue, name: nameLabel.text, description: descriptionLabel.text, categoryId: cat, availableFrom: "", availableTo: "", images: [], startingPrice: 0, dishes: [], gender: "")
         
         AppStorage.serviceListing = request
         coordinator?.backToDashboard()

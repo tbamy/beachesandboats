@@ -37,9 +37,11 @@ class ChefPriceView: BaseViewControllerPlain {
         
         nextBtn.isEnabled = true
         moneyField.updateHeight(to: 70)
-//        moneyField.onTextChanged = { [weak self] enteredText in
-//            self?.updateCommission(with: enteredText)
-//        }
+        moneyField.amountChanged = { [weak self] in
+            if let amount = self?.moneyField.getDoubleValue() {
+                self?.updateCommission(with: String(amount))
+            }
+        }
         moneyField.amountChanged = { [weak self] in
             self?.updateCommission(with: self?.moneyField.text ?? "")
         }

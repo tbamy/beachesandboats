@@ -176,7 +176,7 @@ struct BeachHouseListingResponse: Codable {
 
 // MARK: - DataClass
 struct BeachHouseListingResponseData: Codable {
-    let totalListings: Int
+    let totalListings: Float
     let beachHouseListings: [BeachHouseListing]?
     let boatListings: [BoatListing]?
 }
@@ -231,11 +231,11 @@ struct BoatListing: Codable {
     let locations: Locations?
     let availabilities: Availabilities?
     let images: [Image]?
-    let destinations: [DestinationData]?
+    let destinations: [Destination]?
     let rating: Int?
 }
 
 // MARK: - Destination
-struct DestinationData: Codable {
-    let id, name, price: String?
-}
+//struct DestinationData: Codable {
+//    let id, name, price: String?
+//}

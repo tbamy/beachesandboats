@@ -31,7 +31,7 @@ class PusherManager {
         )
         
         pusher = Pusher(
-            key: "191ed815258281529fbf",
+            key: "798ee60511bc0993018e",
             options: options
         )
         

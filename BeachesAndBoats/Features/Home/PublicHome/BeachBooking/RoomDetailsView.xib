@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,6 +18,7 @@
                 <outlet property="dateLabel" destination="f7c-S5-1ni" id="zOc-xE-Xwy"/>
                 <outlet property="descriptionLabel" destination="kRQ-0e-1w7" id="JUx-B1-aEz"/>
                 <outlet property="facilitiesCollectionView" destination="Abs-CQ-dLn" id="7Cx-Oz-uhD"/>
+                <outlet property="facilitiesHeightConstraint" destination="4bo-Sv-b6E" id="usV-ov-bXR"/>
                 <outlet property="guestCommentsCollectionView" destination="BDA-5g-Q0R" id="irC-ZR-a8B"/>
                 <outlet property="guestsLabel" destination="Rb6-kn-Mls" id="o59-OY-Dpg"/>
                 <outlet property="selectBtn" destination="Ohs-Lr-Evf" id="2d4-fM-lvN"/>
@@ -40,7 +41,7 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iiP-Gt-uEQ">
-                    <rect key="frame" x="0.0" y="2064" width="393" height="80"/>
+                    <rect key="frame" x="0.0" y="2030" width="393" height="80"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wX6-9w-R6P" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="20" y="20" width="353" height="50"/>
@@ -49,6 +50,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Continue Booking"/>
+                            <connections>
+                                <action selector="reserveBtnTapped:" destination="-1" eventType="touchUpInside" id="aUP-wi-65y"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
@@ -59,7 +63,7 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVH-x0-7bN">
-                    <rect key="frame" x="0.0" y="348" width="393" height="1716"/>
+                    <rect key="frame" x="0.0" y="348" width="393" height="1682"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahw-21-Wvr">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="936"/>
@@ -222,21 +226,27 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7ZH-WC-Usw">
                                     <rect key="frame" x="20" y="153" width="353" height="108"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohs-Lr-Evf" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohs-Lr-Evf" customClass="SecondaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="m5S-r2-0Sp"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Select"/>
+                                            <connections>
+                                                <action selector="selectBtnTapped:" destination="-1" eventType="touchUpInside" id="5ap-K3-Rng"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68G-hg-yvk" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68G-hg-yvk" customClass="SecondaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="58" width="353" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="ryw-GT-hVb"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="Select"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="1 unit"/>
+                                            <connections>
+                                                <action selector="selectedBtnTapped:" destination="-1" eventType="touchUpInside" id="5Ku-Wv-EYX"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -334,17 +344,6 @@
             <point key="canvasLocation" x="23.664122137404579" y="486.61971830985919"/>
         </view>
     </objects>
-    <designables>
-        <designable name="68G-hg-yvk">
-            <size key="intrinsicContentSize" width="72" height="34.333333333333336"/>
-        </designable>
-        <designable name="Ohs-Lr-Evf">
-            <size key="intrinsicContentSize" width="72" height="34.333333333333336"/>
-        </designable>
-        <designable name="wX6-9w-R6P">
-            <size key="intrinsicContentSize" width="159" height="34.333333333333336"/>
-        </designable>
-    </designables>
     <resources>
         <image name="bed.double" catalog="system" width="128" height="82"/>
         <image name="calendar" width="14" height="14.333333015441895"/>

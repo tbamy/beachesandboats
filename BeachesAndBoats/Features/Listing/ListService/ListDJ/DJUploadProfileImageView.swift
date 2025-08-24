@@ -35,7 +35,7 @@ class DJUploadProfileImageView: BaseViewControllerPlain {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "DJs"
         setupView()
         setupDragAndDrop()
     }
@@ -78,14 +78,14 @@ class DJUploadProfileImageView: BaseViewControllerPlain {
         if let imageData = image?.pngData() {
             profileImage = imageData
             
-            images.append(imageData)
+//            images.append(imageData)
             
             if var createServiceListing = createServiceListing{
-                createServiceListing.images = images
+                createServiceListing.profilePic = profileImage
                 
                 print(createServiceListing)
                 
-                coordinator?.gotoChefAvailableDatesView(createServiceListingData: createServiceListing)
+                coordinator?.gotoDJAvailableDatesView(createServiceListingData: createServiceListing)
             }
         
         }
@@ -95,8 +95,8 @@ class DJUploadProfileImageView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if let imageData = image?.pngData() {
-//            profileImage = imageData
-            images.append(imageData)
+            profileImage = imageData
+//            images.append(imageData)
             
             if var createServiceListing = createServiceListing{
                 createServiceListing.images = images

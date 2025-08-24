@@ -18,7 +18,7 @@ class SelectPropertyTypePrimaryHost: BaseViewControllerPlain {
     var hostType: HostType?
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
+//        navigationItem.hidesBackButton = true
         
         switch tag {
         case 0:

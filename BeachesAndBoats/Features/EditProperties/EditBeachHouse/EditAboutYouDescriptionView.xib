@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditAboutYouDescriptionView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="Z3s-TI-Ap7" id="EME-GD-67U"/>
+                <outlet property="nextBtn" destination="lWh-4v-bHX" id="ql3-n9-NAZ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
+                    <rect key="frame" x="20" y="148" width="353" height="130"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell us about you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="21.666666666666668"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-fL-Ens">
+                            <rect key="frame" x="0.0" y="29.66666666666665" width="353" height="100.33333333333331"/>
+                            <string key="text">Enhance your listing's appeal by providing potential guests with insights about your background, the property's unique features, and the surrounding neighborhood. These details will be prominently displayed on your property's dedicated page, allowing guests to better envision their stay.</string>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="aEf-4U-Ete">
+                    <rect key="frame" x="278.66666666666669" y="704" width="94.333333333333314" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWh-4v-bHX" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="94.333333333333329" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="kmo-Ze-gss"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Save Edit"/>
+                            <connections>
+                                <action selector="nextTapped:" destination="-1" eventType="touchUpInside" id="4yv-YT-bOM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A brief description about you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0e-nC-5LU">
+                    <rect key="frame" x="20" y="308" width="353" height="21.666666666666686"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3s-TI-Ap7" customClass="TextViewField" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="349.66666666666669" width="353" height="253.00000000000006"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="253" id="M4k-vv-nOK"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="numberOfCharacters">
+                            <integer key="value" value="10000000"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="A0e-nC-5LU" secondAttribute="trailing" constant="20" id="1wV-vy-kDw"/>
+                <constraint firstItem="A0e-nC-5LU" firstAttribute="top" secondItem="Wkl-5C-22f" secondAttribute="bottom" constant="30" id="6bn-3M-Wta"/>
+                <constraint firstItem="Wkl-5C-22f" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="C3X-Bs-mhg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aEf-4U-Ete" secondAttribute="trailing" constant="20" id="Ktv-WW-5W8"/>
+                <constraint firstItem="Z3s-TI-Ap7" firstAttribute="top" secondItem="A0e-nC-5LU" secondAttribute="bottom" constant="20" id="R8J-5C-FKR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Z3s-TI-Ap7" secondAttribute="trailing" constant="20" id="RJf-U9-ckX"/>
+                <constraint firstItem="Wkl-5C-22f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="TwF-yr-SEA"/>
+                <constraint firstItem="A0e-nC-5LU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fu7-AY-OKv"/>
+                <constraint firstItem="Z3s-TI-Ap7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="mOU-BB-lHx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wkl-5C-22f" secondAttribute="trailing" constant="20" id="wST-fK-1br"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aEf-4U-Ete" secondAttribute="bottom" constant="30" id="zAx-JI-EZU"/>
+            </constraints>
+            <point key="canvasLocation" x="27" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

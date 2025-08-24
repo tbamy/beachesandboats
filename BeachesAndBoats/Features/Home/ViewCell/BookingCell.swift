@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+import SDWebImageSVGCoder
 
 class BookingCell: BaseXib {
     
@@ -46,20 +48,7 @@ class BookingCell: BaseXib {
         
         
         if let url = URL(string: model.image.replacingOccurrences(of: "http://", with: "https://")) {
-            img.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        self.img.image = UIImage(named: "dummy")
-                    }
-                }
-            )
+            img.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         } else {
             img.image = UIImage(named: "dummy")
         }
@@ -73,6 +62,7 @@ class BookingCell: BaseXib {
 
 
 struct BookingCellModel{
+    public var id: String = ""
     public var title: String = ""
     public var image: String = ""
     public var location: String = ""

@@ -78,6 +78,12 @@ class ListRoomsView: BaseViewControllerPlain {
         bedTypes = beachData?.bed_types ?? []
         collectionView.reloadData()
         updateCollectionViewHeight(collectionView, collectionViewHeight)
+        
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 40, bottom: 10, right: 20)
+            flowLayout.minimumLineSpacing = 10
+            flowLayout.minimumInteritemSpacing = 10
+        }
     }
 
     func updateCollectionViewHeight(_ collectionView: UICollectionView, _ collectionViewHeightConstraint: NSLayoutConstraint) {
@@ -90,7 +96,10 @@ class ListRoomsView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData {
-            
+            guard selectedBedTypes.count > 0 else {
+                Toast.show(message: "Please select at least one bed type.")
+                return
+            }
             let newRoomData = Room(
                 name: roomName.text,
                 description: roomDescription.text,
@@ -156,7 +165,7 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
         // Ensure index is within bounds
         if indexPath.row >= 0 && indexPath.row < bedTypes.count {
             let bedTypeModel = bedTypes[indexPath.row]
-            let increaseDecreaseField = IncreaseDecreaseField(frame: cell.bounds)
+            let increaseDecreaseField = IncreaseDecreaseField()
             increaseDecreaseField.model = IncreaseDecreaseModel(id: bedTypeModel.id ?? "", type: bedTypeModel.name ?? "", subtitle: bedTypeModel.description ?? "", count: 0)
 
             // Handle updates using the closure
@@ -164,13 +173,13 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
                 guard let self = self else { return }
                 if let index = self.selectedBedTypes.firstIndex(where: { $0.id == updatedModel.id }) {
                     // Update existing entry
-                    self.selectedBedTypes[index].quantity = updatedModel.count
+                    self.selectedBedTypes[index].quantity = "\(updatedModel.count)"
                 } else if updatedModel.count > 0 {
                     // Add new entry
-                    self.selectedBedTypes.append(BedType(id: updatedModel.id, quantity: updatedModel.count))
+                    self.selectedBedTypes.append(BedType(id: updatedModel.id, name: updatedModel.type, description: updatedModel.subtitle, quantity: "\(updatedModel.count)"))
                 }
                 // Remove entries with zero count
-                self.selectedBedTypes.removeAll { $0.quantity == 0 }
+                self.selectedBedTypes.removeAll { $0.quantity == "0" }
             }
 
             cell.applyView(view: increaseDecreaseField)
@@ -181,7 +190,9 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let widthOfScreen: CGFloat = collectionView.bounds.width
-        return CGSize(width: widthOfScreen - 20, height: 56)
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let totalHorizontalInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+        let widthOfScreen: CGFloat = collectionView.bounds.width - totalHorizontalInsets
+        return CGSize(width: widthOfScreen, height: 56)
     }
 }

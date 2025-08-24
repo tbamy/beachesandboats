@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditPropertyAvailableDatesView" customModule="BeachesAndBoats" customModuleProvider="target">
+            <connections>
+                <outlet property="calendarView" destination="MhK-gm-bRw" id="uwH-jq-Ehb"/>
+                <outlet property="nextBtn" destination="lWh-4v-bHX" id="ql3-n9-NAZ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
+                    <rect key="frame" x="20" y="148" width="353" height="68"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When will your house be available for guests to book?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="43"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can change this date whenever you want." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-fL-Ens">
+                            <rect key="frame" x="0.0" y="51" width="353" height="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="aEf-4U-Ete">
+                    <rect key="frame" x="264" y="704" width="109" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWh-4v-bHX" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="109" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="Lmd-h4-jI5"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
+                            <connections>
+                                <action selector="nextTapped:" destination="-1" eventType="touchUpInside" id="1zg-tf-TnJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhK-gm-bRw" customClass="HorizonCalendar" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="236" width="353" height="448"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="aEf-4U-Ete" firstAttribute="top" secondItem="MhK-gm-bRw" secondAttribute="bottom" constant="20" id="3lI-dE-uBu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aEf-4U-Ete" secondAttribute="trailing" constant="20" id="Ktv-WW-5W8"/>
+                <constraint firstItem="Wkl-5C-22f" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="Qpb-6T-5dg"/>
+                <constraint firstItem="Wkl-5C-22f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="TwF-yr-SEA"/>
+                <constraint firstItem="MhK-gm-bRw" firstAttribute="top" secondItem="Wkl-5C-22f" secondAttribute="bottom" constant="20" id="rhX-mS-sWN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wkl-5C-22f" secondAttribute="trailing" constant="20" id="wST-fK-1br"/>
+                <constraint firstItem="MhK-gm-bRw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="x6L-CX-c5i"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MhK-gm-bRw" secondAttribute="trailing" constant="20" id="y5O-Qo-GVv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aEf-4U-Ete" secondAttribute="bottom" constant="30" id="zAx-JI-EZU"/>
+            </constraints>
+            <point key="canvasLocation" x="27" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

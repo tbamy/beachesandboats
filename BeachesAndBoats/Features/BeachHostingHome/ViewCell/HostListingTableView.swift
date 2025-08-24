@@ -42,7 +42,8 @@ class HostListingTableView: UITableViewCell {
         }
         
         if let imageUrl = data.image, let url = URL(string: imageUrl) {
-            beachHouseImage.kf.setImage(with: url)
+//            beachHouseImage.kf.setImage(with: url)
+            beachHouseImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         }
     }
     
@@ -58,7 +59,7 @@ class HostListingTableView: UITableViewCell {
         }
         
         if let listingPrice = data.destinations?.first {
-            pricePerNightLbl.text = "₦\(listingPrice.price ?? "") /night"
+            pricePerNightLbl.text = "₦\(listingPrice.price ?? "0")"
         }
         
         if let rating = data.rating {
@@ -66,7 +67,8 @@ class HostListingTableView: UITableViewCell {
         }
         
         if let images = data.images, let firstImage = images.first, let imageUrlString = firstImage.url, let url = URL(string: imageUrlString) {
-            beachHouseImage.kf.setImage(with: url)
+//            beachHouseImage.kf.setImage(with: url)
+            beachHouseImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         }
 
     }

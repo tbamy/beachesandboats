@@ -17,6 +17,8 @@ class RecommendationsView: BaseViewControllerPlain {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var recommendationCollectionView: UICollectionView!
     
+    var propertyType: String?
+    var bookingId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +76,7 @@ extension RecommendationsView: UICollectionViewDelegate, UICollectionViewDataSou
         
         view.onViewBtnTapped = { [weak self] in
             guard let self = self, let name = name, let provider = self.provider else { return }
-            self.coordinator?.gotoServiceProviderDetails(data: name, provider: provider)
+            self.coordinator?.gotoServiceProviderDetails(propertyType: propertyType ?? "", bookingId: bookingId ?? "", data: name, provider: provider)
         }
         
         cell.applyView(view: view)
@@ -84,7 +86,7 @@ extension RecommendationsView: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = data?.data?[indexPath.item]
         if let item = item, let provider = provider{
-            coordinator?.gotoServiceProviderDetails(data: item, provider: provider)
+            coordinator?.gotoServiceProviderDetails(propertyType: propertyType ?? "", bookingId: bookingId ?? "", data: item, provider: provider)
         }
         
     }

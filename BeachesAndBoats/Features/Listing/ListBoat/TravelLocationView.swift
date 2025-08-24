@@ -95,7 +95,7 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
         if let selectedItem = selectedItems.first(where: { $0.destinationId == itemId }) {
             view.model.state = true
             view.model.title = item?.name ?? ""
-            view.moneyInput.text = "\(selectedItem.pricePerHour)"
+            view.moneyInput.text = "\(selectedItem.pricePerHour ?? 0)"
         } else {
             view.model.state = false
             view.model.title = item?.name ?? ""
@@ -120,8 +120,7 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-        let view = DestinationCheckboxView(frame: cell.bounds)
+
         guard let item = destinationList?[indexPath.row] else { return }
         let itemId = item.id ?? ""
 

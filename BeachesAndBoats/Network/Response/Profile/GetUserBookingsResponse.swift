@@ -28,10 +28,11 @@ struct BeachHouseBookingsPast: Codable {
     let beachHouseRoom: BookingsBeachHouseRoom?
     let beachHouse: FavouriteBeachHouse?
     let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
-    let noOfPeople: Int?
+    let noOfPeople: String?//Int?
     let status: String?
     let summary: String?
-    let units, total: Int?
+    let units: String?
+    let total: Float? //Int?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -53,11 +54,11 @@ struct BeachHouseBookingsPast: Codable {
 // MARK: - BeachHouseRoom
 struct BookingsBeachHouseRoom: Codable {
     let id, name, description: String
-    let pricePerNight: Float
-    let discountPercent: Int
+    let pricePerNight:  Float
+    let discountPercent: Float
     let images: [Image]
     let bedTypes: [BookingBedType]
-    let noOfOccupant, hasPrivateBathroom: Int
+    let noOfOccupant, hasPrivateBathroom: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -76,19 +77,21 @@ struct BoatBookings: Codable {
 
 // MARK: - BoatBookingsPast
 struct BoatBookingsPast: Codable {
+    let bookingId: String
     let boat: FavouriteBoat
-    let total: Int
+    let total: Float
     let summary: String?
     let status: String
-    let cruiseLength: Int
+    let cruiseLength: String
     let bookingType: String
-    let noOfPeople: Int
+    let noOfPeople: String//Int
     let bookingDate, bookingTime, hostID: String
-    let boatDestination: String?
+    let boatDestination: Destinations?
     let subCategory: SubCategory
 
     enum CodingKeys: String, CodingKey {
         case boat, total, summary, status
+        case bookingId = "booking_id"
         case cruiseLength = "cruise_length"
         case bookingType = "booking_type"
         case noOfPeople = "no_of_people"

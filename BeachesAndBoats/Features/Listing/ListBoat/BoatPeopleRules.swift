@@ -51,6 +51,10 @@ class BoatPeopleRules: BaseViewControllerPlain {
                 createBoatListing.noOfChildren = numberOfChildren.count
                 createBoatListing.noOfPets = numberOfPets.count
                 print(createBoatListing)
+                guard numberOfAdults.count > 0 || numberOfChildren.count > 0 || numberOfPets.count > 0 else {
+                    Toast.show(message: "Please select at least one rule.")
+                    return
+                }
                 
                 
                 coordinator?.gotoBoatAddressView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")

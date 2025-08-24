@@ -147,7 +147,7 @@ class FilterModal: BaseXib {
     private func getText(for type: FilterCollectionViewType, at indexPath: IndexPath) -> String {
         switch type {
         case .propertyType:
-            return indexPath.item < propertyType.count ? propertyType[indexPath.item].name ?? "" : ""
+            return indexPath.item < propertyType.count ? propertyType[indexPath.item].name : ""
         case .noOfBedroom:
             return indexPath.item < noOfBedroom.count ? noOfBedroom[indexPath.item] : ""
         case .noOfAdult:

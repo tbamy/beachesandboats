@@ -8,6 +8,8 @@
 import UIKit
 import MapKit
 import RxSwift
+import SDWebImage
+import SDWebImageSVGCoder
 
 class BoatDetailsView: BaseViewControllerPlain {
     
@@ -27,6 +29,7 @@ class BoatDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var guestCommentsCollectionView: UICollectionView!
+    @IBOutlet weak var guestCommentsStack: UIStackView!
     @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var hostNameLabel: UILabel!
     @IBOutlet weak var aboutHostLabel: UILabel!
@@ -38,13 +41,19 @@ class BoatDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var myDestinationDropdown: DropDown!
     
     
+    @IBOutlet weak var boatOptionsStack: UIStackView!
+    @IBOutlet weak var cruiseOptionStack: UIStackView!
     
-    var boatDetails: Listing?
+    private let boatVM = BoatVM()
+    private let boatInput = PublishSubject<BoatVM.Input>()
+    
+    var boatDetails: GetBoatData?
     
     var amenities: [Amenity] = []
     var roomImages: [String] = []
     var destinations: [Destination] = []
     var pickerItems: [PickerItem] = []
+    var comments: [Review] = []
     
     var numberOfPeoplePickerItems: [PickerItem] = []
     var cruiseLengthPickerItems: [PickerItem] = []
@@ -55,6 +64,9 @@ class BoatDetailsView: BaseViewControllerPlain {
     let vm = StartConversationVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<StartConversationVM.Input>()
+    var boatCapacity = 1
+    
+    var id: String?
     
     var destinationMapping: [String: Destination] = [:]
     var selectedDestination: Destination?
@@ -62,33 +74,33 @@ class BoatDetailsView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+//        setup()
         configureAllCollectionViews()
         setupCustomNavigationButtons()
         bind()
+        
+        LoadingModal.show()
+        boatInput.onNext(.getBoat(id: id ?? ""))
     }
     
     func setup(){
-//        if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-//            print("Image Url is: \(url)")
-//            topImage.kf.setImage(with: url)
-//        }
         
         if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
-            topImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "dummy"),
-                options: nil,
-                completionHandler: { [self] result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        topImage.image = UIImage(named: "dummy")
-                    }
-                }
-            )
+            topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+//            topImage.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "dummy"),
+//                options: nil,
+//                completionHandler: { [self] result in
+//                    switch result {
+//                    case .success(let value):
+//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
+//                    case .failure(let error):
+//                        print("Failed to load image: \(error.localizedDescription)")
+//                        topImage.image = UIImage(named: "dummy")
+//                    }
+//                }
+//            )
         } else {
             topImage.image = UIImage(named: "dummy")
         }
@@ -102,29 +114,52 @@ class BoatDetailsView: BaseViewControllerPlain {
         ratingLabel.text = "\(boatDetails?.rating ?? 0)"
 //        totalAmountLabel.text = "₦ \(boatDetails?.pricePerNight ?? 0)"
         proceedView.isHidden = true
-        peopleCapacityLabel.text = "1 - \((boatDetails?.noOfAdults ?? 0) + (boatDetails?.noOfChildren ?? 0)) "
+        print("Adults: \(boatDetails?.noOfAdults ?? "")")
+        print("Children: \(boatDetails?.noOfChildren ?? "")")
         
-        amenities = boatDetails?.amenities ?? []
+        print("Int Adults: \((Int(boatDetails?.noOfAdults ?? "0") ?? 0))")
+        print("Int Children: \((Int(boatDetails?.noOfChildren ?? "0") ?? 1))")
+        
+        boatCapacity = (Int(boatDetails?.noOfAdults ?? "0") ?? 0) + (Int(boatDetails?.noOfChildren ?? "0") ?? 1)
+        
+        print("Cap: \(boatCapacity)")
+        
+        peopleCapacityLabel.text = "1 - \(boatCapacity) "
+        startingLocationLabel.text = "\(boatDetails?.locations?.city ?? ""), \(boatDetails?.locations?.state ?? "") \(boatDetails?.locations?.country ?? "")"
+        
         destinations = boatDetails?.destinations ?? []
+        if destinations.contains(where: { $0.name == "Cruising"}) && destinations.count == 1{
+            boatOptionsStack.isHidden = true
+            myDestinationStack.isHidden = true
+            
+        }else if destinations.contains(where: { $0.name == "Cruising"}) && destinations.count > 1{
+            boatOptionsStack.isHidden = false
+            myDestinationStack.isHidden = false
+            cruiseOptionStack.isHidden = false
+        }else{
+            cruiseOptionStack.isHidden = true
+        }
+        
         pickerItems = destinations.compactMap{ destination in
-            let id = destination.id ?? ""
-            let name = destination.name ?? "Unknown"
-            let price = destination.price ?? ""
+            let id = destination.id
+            let name = destination.name
+            let price = destination.price ?? "0"
             
             destinationMapping[id] = destination
-            return PickerItem(name: "\(name) - ₦\(price) / trip", value: id)
+            return PickerItem(name: "\(name) - ₦\(price.toAmount() ?? "0") / trip", value: id)
         }
         
         myDestinationDropdown.items = pickerItems
         myDestinationDropdown.itemChanged = { [weak self] item in
             guard let self = self, let destination = destinationMapping[item.value] else { return }
             proceedView.isHidden = false
-            let selectedPrice = destination.price ?? ""
+            let selectedPrice = destination.price ?? "0"
             selectedDestination = destination
-            totalAmountLabel.text = "₦\(selectedPrice)"
+            totalAmountLabel.text = "₦\(selectedPrice.toAmount() ?? "0")"
         }
+        print("Cap: \(boatCapacity)")
         
-        numberOfPeoplePickerItems = (1...10).map { PickerItem(name: "\($0)", value: "\($0)") }
+        numberOfPeoplePickerItems = (1...Int(boatCapacity)).map { PickerItem(name: "\($0)", value: "\($0)") }
         cruiseLengthPickerItems = (1...10).map { PickerItem(name: "\($0) hours", value: "\($0)") }
         
         numberOfPeopleLabel.items = numberOfPeoplePickerItems
@@ -143,7 +178,13 @@ class BoatDetailsView: BaseViewControllerPlain {
             self.isCruising = isSelected
             updateTravel()
         }
-
+        
+        amenities = boatDetails?.amenities ?? []
+        comments = boatDetails?.reviews ?? []
+        guestCommentsStack.isHidden = comments.isEmpty
+        
+        guestCommentsCollectionView.reloadData()
+        categoriesCollectionView.reloadData()
         
         topImage.isUserInteractionEnabled = true
         topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
@@ -192,7 +233,7 @@ class BoatDetailsView: BaseViewControllerPlain {
         
         if validateRequest(){
             if let boatDetails = boatDetails, let selectedDestination = selectedDestination, let bookingDate = bookingDateLabel.selectedDate, let bookingTime = bookingTimeLabel.selectedTime, let numberOfPeople = numberOfPeopleLabel.selectedItem{
-                let request = CreateBoatBookingRequest(boatId: boatDetails.id ?? "", userId: user ?? "", bookingDate: bookingDate.toBackendDate(), bookingTime: bookingTime.toBackendTime(), bookingType: bookingType, numberOfPeople: Int(numberOfPeople.value) ?? 1, destinationId: myDestinationDropdown.selectedItem?.value ?? "", cruiseLength: Int(cruiseLengthLabel.selectedItem?.value ?? "") ?? 0)
+                let request = CreateBoatBookingRequest(boatId: boatDetails.id, userId: user ?? "", bookingDate: bookingDate.toBackendDate(), bookingTime: bookingTime.toBackendTime(), bookingType: bookingType, numberOfPeople: Int(numberOfPeople.value) ?? 1, destinationId: myDestinationDropdown.selectedItem?.value ?? "", cruiseLength: Int(cruiseLengthLabel.selectedItem?.value ?? "") ?? 0)
                 print(request)
                 coordinator?.gotoConfirmBoatBookingView(listing: boatDetails, booking: request, destination: selectedDestination)
             }
@@ -203,7 +244,7 @@ class BoatDetailsView: BaseViewControllerPlain {
     @IBAction func sendPreBookingTapped(_ sender: Any) {
         //start conversation
         let personId = boatDetails?.owner?.id ?? ""
-        let conversationRequest = StartConversationRequest(personId: personId, bookingId: nil, propertyType: nil)
+        let conversationRequest = StartConversationRequest(personId: personId, bookingId: nil, propertyType: "Boat")
         print(conversationRequest)
             input.onNext(.startConversation(conversationRequest))
             LoadingModal.show()
@@ -211,6 +252,7 @@ class BoatDetailsView: BaseViewControllerPlain {
     
     func bind(){
         vm.transform(input: input)
+        boatVM.transform(input: boatInput)
         
         vm.output.subscribe(onNext: { [weak self] data in
             LoadingModal.dismiss()
@@ -218,9 +260,22 @@ class BoatDetailsView: BaseViewControllerPlain {
             case .startConversationSuccess(let response):
 //                self?.conversationResponse = response
                 if let res = response.data{
-                    self?.coordinator?.gotoChat(otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id)
+                    self?.coordinator?.gotoChat(bookingId: "", otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id, propertyType: "Boat")
+//                    self?.coordinator?.gotoChat(otherUser: self?.boatDetails?.owner?.firstName ?? "", conversationId: res.id)
                 }
             case .startConversationFailed(let error) :
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+        
+        
+        boatVM.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .getBoatSuccess(let response):
+                self?.boatDetails = response.data
+                self?.setup()
+            case .getBoatFailed(let error) :
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
@@ -244,7 +299,7 @@ extension BoatDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
         case 1:
             return amenities.count
         case 2:
-            return amenities.count
+            return comments.count
         default:
             return 0
         }
@@ -254,29 +309,31 @@ extension BoatDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.tag {
         case 1:
-            let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
             let cellAt = amenities[indexPath.item]
             
             let view = CategoriesCell(frame: cell.bounds)
             view.identifier = "Amenitiess " + indexPath.description
             view.model.image = cellAt.icon ?? ""
-            view.model.title = cellAt.name ?? ""
+            view.model.title = cellAt.name
             view.isSubcategory = true
             
             cell.applyView(view: view)
             return cell
+            
         case 2:
-            let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-            let cellAt = amenities[indexPath.item]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+            let cellAt = comments[indexPath.item]
             
-            let view = CategoriesCell(frame: cell.bounds)
-            view.identifier = "Amenitiess " + indexPath.description
-            view.model.image = cellAt.icon ?? ""
-            view.model.title = cellAt.name ?? ""
-            view.isSubcategory = true
+            let view = CommentsViewCell(frame: cell.bounds)
+            view.identifier = "GuestComments " + indexPath.description
+            view.model.name = cellAt.user?.firstName ?? ""
+            view.model.rating = "\(cellAt.rating)"
+            view.model.comment = cellAt.note
             
             cell.applyView(view: view)
             return cell
+            
         default:
             return UICollectionViewCell()
         }

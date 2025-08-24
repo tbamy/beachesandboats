@@ -31,6 +31,9 @@ class HorizonCalendarModal: BaseXib {
     }
     
     func setup(){
+        close.isUserInteractionEnabled = true
+        clearBtn.isUserInteractionEnabled = true
+        
         clearBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clearDates)))
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
         
@@ -51,7 +54,10 @@ class HorizonCalendarModal: BaseXib {
     }
     
     @objc func clearDates(_ sender: UITapGestureRecognizer) {
+        self.selectedItem = ""
+        self.startDate = nil
         
+        dismiss()
     }
     
     @IBAction func saveTapped(_ sender: Any) {

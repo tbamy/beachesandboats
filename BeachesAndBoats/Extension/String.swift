@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 extension String {
     public static func toReadableDate(date: Date) -> String {
@@ -178,27 +179,57 @@ extension String {
         return nil
     }
 
+    func fromBackendTime() -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter.date(from: self)
+    }
 
-    @MainActor public func loadImage(into imageView: UIImageView, placeholder: String = "dummy") {
-            guard let url = URL(string: self.replacingOccurrences(of: "http://", with: "https://")) else {
-                imageView.image = UIImage(named: placeholder)
-                return
-            }
-            imageView.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: placeholder),
-                options: nil,
-                completionHandler: { result in
-                    switch result {
-                    case .success(let value):
-                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Failed to load image: \(error.localizedDescription)")
-                        imageView.image = UIImage(named: placeholder)
-                    }
-                }
-            )
+
+    @MainActor
+    public func loadImage(into imageView: UIImageView, placeholder: String = "dummy") {
+        guard !self.isEmpty,
+              let url = URL(string: self.replacingOccurrences(of: "http://", with: "https://")) else {
+            imageView.image = UIImage(named: placeholder)
+            return
         }
+        
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: placeholder))
+    }
+
+    func toAmount() -> String? {
+        // Try to convert the string to a Double
+        guard let value = Double(self) else { return nil }
+
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale.current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        // Uncomment this if you want a custom grouping separator
+        // formatter.groupingSeparator = ","
+
+        return formatter.string(from: NSNumber(value: value))
+    }
+    
+    public func separateDateAndTime() -> (date: String, time: String)? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
+
+        guard let date = formatter.date(from: self) else {
+            return nil
+        }
+
+        formatter.dateFormat = "MM/dd/yyyy"
+        let dateString = formatter.string(from: date)
+
+        formatter.dateFormat = "hh:mm a"
+        let timeString = formatter.string(from: date)
+
+        return (date: dateString, time: timeString)
+    }
 
 
 }

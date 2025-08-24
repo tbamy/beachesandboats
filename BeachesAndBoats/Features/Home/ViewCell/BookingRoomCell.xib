@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,15 +30,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v0w-CU-eO4">
-                    <rect key="frame" x="0.0" y="59" width="363" height="173"/>
+                    <rect key="frame" x="0.0" y="118" width="363" height="145"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="173" id="mpv-fF-Yj0"/>
+                        <constraint firstAttribute="height" constant="145" id="5Sy-X2-5Jf"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xuB-80-7IN">
-                    <rect key="frame" x="20" y="465" width="323" height="108"/>
+                    <rect key="frame" x="20" y="463.33333333333326" width="323" height="108"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTG-4R-sD7" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTG-4R-sD7" customClass="SecondaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="323" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="mDQ-JA-gvB"/>
@@ -45,8 +46,8 @@
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Select"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="css-Sc-uTV" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="58" width="323" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="css-Sc-uTV" customClass="SecondaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="58.000000000000057" width="323" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="LwF-lu-QFS"/>
                             </constraints>
@@ -56,7 +57,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8eX-RZ-N6h">
-                    <rect key="frame" x="20" y="299" width="323" height="18"/>
+                    <rect key="frame" x="20" y="297.33333333333331" width="323" height="18"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ndh-jm-DLh">
                             <rect key="frame" x="0.0" y="0.0" width="144.33333333333334" height="18"/>
@@ -99,7 +100,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7gk-VQ-4W4">
-                    <rect key="frame" x="20" y="437" width="323" height="18"/>
+                    <rect key="frame" x="20" y="435.33333333333331" width="323" height="18"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="D9O-qi-dMm">
                             <rect key="frame" x="0.0" y="0.0" width="178" height="18"/>
@@ -128,7 +129,7 @@
                     </subviews>
                 </stackView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="U3z-65-cfW">
-                    <rect key="frame" x="20" y="327" width="323" height="100"/>
+                    <rect key="frame" x="20" y="325.33333333333331" width="323" height="100"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="n6O-JZ-6sl"/>
@@ -141,7 +142,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2v-05-Eix">
-                    <rect key="frame" x="20" y="237" width="323" height="52"/>
+                    <rect key="frame" x="20" y="268" width="323" height="19.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -152,7 +153,6 @@
             <constraints>
                 <constraint firstItem="f2v-05-Eix" firstAttribute="top" secondItem="v0w-CU-eO4" secondAttribute="bottom" constant="5" id="5c7-De-jgs"/>
                 <constraint firstItem="xuB-80-7IN" firstAttribute="top" secondItem="7gk-VQ-4W4" secondAttribute="bottom" constant="10" id="A6s-jK-j8A"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xuB-80-7IN" secondAttribute="bottom" constant="10" id="EdX-L5-gWT"/>
                 <constraint firstItem="7gk-VQ-4W4" firstAttribute="top" secondItem="U3z-65-cfW" secondAttribute="bottom" constant="10" id="Id6-rk-iuv"/>
                 <constraint firstItem="v0w-CU-eO4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ihy-pS-YMN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuB-80-7IN" secondAttribute="trailing" constant="20" id="Mqj-dS-9z5"/>
@@ -174,14 +174,6 @@
             <point key="canvasLocation" x="113.74045801526717" y="-63.028169014084511"/>
         </view>
     </objects>
-    <designables>
-        <designable name="css-Sc-uTV">
-            <size key="intrinsicContentSize" width="72" height="34.333333333333336"/>
-        </designable>
-        <designable name="xTG-4R-sD7">
-            <size key="intrinsicContentSize" width="72" height="34.333333333333336"/>
-        </designable>
-    </designables>
     <resources>
         <image name="bed.double" catalog="system" width="128" height="82"/>
         <image name="calendar" width="14" height="14.333333015441895"/>

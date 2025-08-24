@@ -49,7 +49,6 @@ class BoatRulesView: BaseViewControllerPlain {
                 
                 print(createBoatListing)
                 print("selected rules: \(selectedRules)")
-                
                 coordinator?.gotoBoatPeopleRules(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
             }
         }

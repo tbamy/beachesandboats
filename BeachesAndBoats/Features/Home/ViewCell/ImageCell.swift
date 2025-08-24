@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+import SDWebImageSVGCoder
 
 class ImageCell: BaseXib {
 
@@ -37,7 +39,8 @@ class ImageCell: BaseXib {
     
     func setup(){
         if let url = URL(string: img.replacingOccurrences(of: "http://", with: "https://")) {
-            image.kf.setImage(with: url)
+//            image.kf.setImage(with: url)
+            image.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         }
         image.layer.cornerRadius = 8
     }

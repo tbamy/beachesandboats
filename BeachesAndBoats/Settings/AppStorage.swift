@@ -34,4 +34,13 @@ final class AppStorage {
     
     @UserDefault("userToken")
     static var userToken: String?
+    
+    @UserDefault("accountName")
+    static var accountName: String?
+    
+    @UserDefault("accountNumber")
+    static var accountNumber: String?
+    
+    @UserDefault("bankName")
+    static var bankName: String?
 }

@@ -24,8 +24,8 @@ class RoomPriceView: BaseViewControllerPlain {
     var createBeachListing: CreateBeachListingRequest?
     
     var isDiscountChecked: Bool = false
-    var finalDiscountPercent: Double = 0.1 // This will store the final discount percentage
-    var finalEarnings: Double = 0 // This will store what the user actually earns
+    var finalDiscountPercent: Float = 0.1 // This will store the final discount percentage
+    var finalEarnings: Float = 0 // This will store what the user actually earns
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class RoomPriceView: BaseViewControllerPlain {
     }
     
     func updateCommission(with enteredText: String) {
-        guard let enteredAmount = moneyField.getDoubleValue(), enteredAmount > 0 else {
+        guard let enteredAmount = moneyField.getFloatValue(), enteredAmount > 0 else {
             commissionField.text = ""
             commissionView.isHidden = true
             finalEarnings = 0
@@ -87,7 +87,7 @@ class RoomPriceView: BaseViewControllerPlain {
         
         if isDiscountChecked {
             // If discount is checked, apply additional discount on top of the base 10%
-            let additionalDiscountPercent = (discountField.getDoubleValue() ?? 0) / 100
+            let additionalDiscountPercent = (discountField.getFloatValue() ?? 0) / 100
             
             // First apply the base 10% commission
             let amountAfterBaseCommission = enteredAmount * 0.9 // User gets 90% after base commission
@@ -136,7 +136,7 @@ class RoomPriceView: BaseViewControllerPlain {
             if var existingRoom = updatedRoomInfo?[roomIndex]{
                 existingRoom.pricePerNight = moneyField.getFloatValue() ?? 0
                 // Store the final discount percentage (converted to percentage for storage)
-                existingRoom.discountPercent = Int(finalDiscountPercent * 100)
+                existingRoom.discountPercent = finalDiscountPercent * 100
                 
                 // Reassign the updated room back to the array
                 updatedRoomInfo?[roomIndex] = existingRoom
@@ -171,7 +171,7 @@ class RoomPriceView: BaseViewControllerPlain {
             if var existingRoom = updatedRoomInfo?[roomIndex]{
                 existingRoom.pricePerNight = moneyField.getFloatValue() ?? 0
                 // Store the final discount percentage (converted to percentage for storage)
-                existingRoom.discountPercent = Int(finalDiscountPercent * 100)
+                existingRoom.discountPercent = finalDiscountPercent * 100
                 
                 // Reassign the updated room back to the array
                 updatedRoomInfo?[roomIndex] = existingRoom

@@ -38,9 +38,11 @@ class BouncerPriceVIew: BaseViewControllerPlain {
         
         nextBtn.isEnabled = true
         moneyField.updateHeight(to: 70)
-//        moneyField.amountChanged = { [weak self] in
-//            self?.updateCommission(with: self?.moneyField.text ?? "")
-//        }
+        moneyField.amountChanged = { [weak self] in
+            if let amount = self?.moneyField.getDoubleValue() {
+                self?.updateCommission(with: String(amount))
+            }
+        }
         moneyField.onTextChanged = { [weak self] enteredText in
             self?.updateCommission(with: enteredText)
         }

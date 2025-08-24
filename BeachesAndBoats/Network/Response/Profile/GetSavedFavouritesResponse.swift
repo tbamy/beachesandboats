@@ -34,7 +34,7 @@ struct FavouriteBeachHouse: Codable {
     let image: String?
     let locations: Locations?
     let availabilities: Availabilities
-    let rating: Int?
+    let rating: Double?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -50,7 +50,7 @@ struct FavouriteBoat: Codable {
     let locations: Locations?
     let availabilities: Availabilities?
     let images: [Image]?
-    let destinations: [DestinationDetails]?
-    let rating: Int?
+    let destinations: [Destination]?
+    let rating: Double?
 }
 

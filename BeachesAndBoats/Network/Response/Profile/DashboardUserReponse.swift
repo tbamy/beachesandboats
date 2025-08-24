@@ -97,6 +97,7 @@ struct HostInfo: Codable {
     let email: String
     let phoneCode: String
     let phoneNumber: String
+    let roles: [String]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -105,6 +106,7 @@ struct HostInfo: Codable {
         case email
         case phoneCode = "phone_code"
         case phoneNumber = "phone_number"
+        case roles
     }
 }
 //
@@ -174,29 +176,29 @@ struct User: Codable {
     }
 }
 //
-struct BeachHouseRoom: Codable {
-    let id: String
-    let name: String
-    let description: String
-    let pricePerNight: Double //String
-    let discountPercent: Double//String
-    let images: [Image]
-    let bedTypes: [BookingBedType]?
-    let noOfOccupant: Int
-    let hasPrivateBathroom: Int //Bool
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case description
-        case pricePerNight = "price_per_night"
-        case discountPercent = "discount_percent"
-        case images
-        case bedTypes = "bed_types"
-        case noOfOccupant = "no_of_occupant"
-        case hasPrivateBathroom = "has_private_bathroom"
-    }
-}
+//struct BeachHouseRoom: Codable {
+//    let id: String
+//    let name: String
+//    let description: String
+//    let pricePerNight: Double //String
+//    let discountPercent: Double//String
+//    let images: [Image]
+//    let bedTypes: [BookingBedType]?
+//    let noOfOccupant: Int
+//    let hasPrivateBathroom: Int //Bool
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case name
+//        case description
+//        case pricePerNight = "price_per_night"
+//        case discountPercent = "discount_percent"
+//        case images
+//        case bedTypes = "bed_types"
+//        case noOfOccupant = "no_of_occupant"
+//        case hasPrivateBathroom = "has_private_bathroom"
+//    }
+//}
 //
 struct BookingBedType: Codable {
     let id: String

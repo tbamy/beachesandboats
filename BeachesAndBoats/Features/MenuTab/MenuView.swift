@@ -24,6 +24,9 @@ class MenuView: UIViewController {
     @IBOutlet weak var verificationStatusView: UIView!
     @IBOutlet weak var verificationStatusLabel: UILabel!
     
+    let userRoles = UserSession.shared.userDetails?.roles
+    let serviceRoles: [HostType] = [.chef, .dj, .bouncer]
+    
     let verificationStatus = UserSession.shared.userDetails?.verificationStatus
     let isAccountVerified = UserSession.shared.userDetails?.isAccountVerified
     
@@ -36,6 +39,9 @@ class MenuView: UIViewController {
         
         verificationStatusView.layer.cornerRadius = 8
         verificationStatusLabel.textColor = .white
+        
+        editPropertiesBtn.isHidden = validateServiceRole()
+        
         switch verificationStatus {
         case "pending":
             verificationStatusLabel.text = "Under verification"
@@ -53,6 +59,13 @@ class MenuView: UIViewController {
         }
     }
     
+    func validateServiceRole() -> Bool {
+        guard let userRoles = userRoles else { return false }
+        
+        let serviceRoleStrings = serviceRoles.map { $0.rawValue }
+        return userRoles.contains { serviceRoleStrings.contains($0) }
+    }
+    
     func gestureRecognizers() {
         let gestures: [(UIStackView, Selector)] = [
             (editPropertiesBtn, #selector(editPropertiesTapped)),
@@ -64,6 +77,7 @@ class MenuView: UIViewController {
             (loginSecurityBtn, #selector(loginSecurityTapped)),
             (verifyAccBtn, #selector(verifyAccTapped)),
             (cxSupportBtn, #selector(cxSupportTapped)),
+            (logOutBtn, #selector(logoutTapped)),
         ]
         
         for (stackView, selector) in gestures {
@@ -72,7 +86,7 @@ class MenuView: UIViewController {
     }
     
     @objc func editPropertiesTapped() {
-        
+        coordinator?.gotoEditPropertiesListView()
     }
     
     @objc func earningTapped() {
@@ -100,11 +114,16 @@ class MenuView: UIViewController {
     }
     
     @objc func verifyAccTapped() {
+        guard verificationStatus != "pending", verificationStatus != "approved" else { return }
         coordinator?.gotoVerifyAccountView()
     }
     
     @objc func cxSupportTapped() {
         coordinator?.gotoContactSupport()
+    }
+    
+    @objc func logoutTapped() {
+        UserSession.shared.performLogout()
     }
     
 

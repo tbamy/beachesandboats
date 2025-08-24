@@ -9,15 +9,23 @@ import UIKit
 import PaystackCore
 import IQKeyboardManagerSwift
 import IQKeyboardToolbarManager
-//import PusherSwift
+//import PusherSwiftimport SDWebImage
+import SDWebImageSVGCoder
+
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var coordinator: AppCoordinator?
     var window: UIWindow?
+    
 //    var pusher: Pusher!
 
+    func setupSDWebImage() {
+        let svgCoder = SDImageSVGCoder.shared
+        SDImageCodersManager.shared.addCoder(svgCoder)
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.isEnabled = true
         IQKeyboardToolbarManager.shared.isEnabled = true
+        
+        setupSDWebImage()
         
         return true
     }

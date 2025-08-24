@@ -360,7 +360,7 @@ enum BookingItem{
     var id: String{
         switch self {
         case .boat(let booking):
-            return booking.boat.id ?? ""
+            return booking.bookingId
         case .beachHouse(let booking):
             return booking.id
         }

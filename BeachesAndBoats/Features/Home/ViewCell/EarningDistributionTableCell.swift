@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
+import SDWebImageSVGCoder
 
 class EarningDistributionTableCell: UITableViewCell {
     
@@ -32,27 +33,29 @@ class EarningDistributionTableCell: UITableViewCell {
         if let beachImage = data?.data?.topEarners.first?.value, let roomImage = beachImage.beachHouse?.category.image {
             
             let url = URL(string: roomImage)
-            let processor = DownsamplingImageProcessor(size: beachImg.bounds.size)
-            |> RoundCornerImageProcessor(cornerRadius: 20)
-            beachImg.kf.indicatorType = .activity
-            beachImg.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "placeholderImage"),
-                options: [
-                    .processor(processor),
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1)),
-                    .cacheOriginalImage
-                ])
-            {
-                result in
-                switch result {
-                case .success(let value):
-                    print("Task done for: \(value.source.url?.absoluteString ?? "")")
-                case .failure(let error):
-                    print("Job failed: \(error.localizedDescription)")
-                }
-            }
+            beachImg.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
+            
+//            let processor = DownsamplingImageProcessor(size: beachImg.bounds.size)
+//            |> RoundCornerImageProcessor(cornerRadius: 20)
+//            beachImg.kf.indicatorType = .activity
+//            beachImg.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "placeholderImage"),
+//                options: [
+//                    .processor(processor),
+//                    .scaleFactor(UIScreen.main.scale),
+//                    .transition(.fade(1)),
+//                    .cacheOriginalImage
+//                ])
+//            {
+//                result in
+//                switch result {
+//                case .success(let value):
+//                    print("Task done for: \(value.source.url?.absoluteString ?? "")")
+//                case .failure(let error):
+//                    print("Job failed: \(error.localizedDescription)")
+//                }
+//            }
         }
         
         if let beachName = data?.data?.topEarners.first?.value {

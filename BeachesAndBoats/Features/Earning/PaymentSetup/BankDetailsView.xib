@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,24 +24,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter bank details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-nR-WkN">
-                    <rect key="frame" x="44" y="89" width="151" height="22"/>
+                    <rect key="frame" x="44" y="148" width="151" height="22"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAC-tb-fMX" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="181" width="353" height="50"/>
+                    <rect key="frame" x="20" y="240" width="353" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="0j1-1f-cX9"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Bank name"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type bank account number"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Bank account name"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type bank account name"/>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWu-GR-ham" customClass="InputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="281" width="353" height="50"/>
+                    <rect key="frame" x="20" y="340" width="353" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="pjq-z1-7Us"/>
@@ -51,7 +52,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCm-lJ-Yl9" customClass="DropDown" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="381" width="353" height="50"/>
+                    <rect key="frame" x="20" y="440" width="353" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="IUL-Mg-xNr"/>
@@ -62,7 +63,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3f-Nq-pN2" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="481" width="353" height="50"/>
+                    <rect key="frame" x="20" y="540" width="353" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="QPS-eE-kcA"/>
                     </constraints>
@@ -94,11 +95,6 @@
             <point key="canvasLocation" x="-25.190839694656489" y="19.718309859154932"/>
         </view>
     </objects>
-    <designables>
-        <designable name="D3f-Nq-pN2">
-            <size key="intrinsicContentSize" width="61" height="34.333333333333336"/>
-        </designable>
-    </designables>
     <resources>
         <namedColor name="back">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

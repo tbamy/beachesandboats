@@ -40,7 +40,8 @@ struct BeachHouseReservationsCurrentReservation: Codable {
     let noOfPeople: Int?
     let status: String?
     let summary: String?
-    let units, total: Int?
+    let units: Int?
+    let total: Float?
 
     enum CodingKeys: String, CodingKey {
         case id, user
@@ -132,10 +133,10 @@ struct BoatReservations: Codable {
 
 struct BoatReservationsCurrentReservation: Codable {
     let boat: Boat?
-    let total: Int?
+    let total: Float?
     let summary: String?
     let status: String?
-    let cruiseLength: Int?
+    let cruiseLength: String?
     let bookingType: String?
     let noOfPeople: Int?
     let bookingDate, bookingTime: String?
@@ -156,21 +157,21 @@ struct BoatReservationsCurrentReservation: Codable {
     }
 }
 
-struct Boat: Codable {
-    let id, name, description: String?
-    let locations: Locations?
-    let availabilities: Availabilities?
-    let images: String? //[Image]?
-    let destinations: [DestinationDetails]?
-    let rating: Int?
-}
+//struct Boat: Codable {
+//    let id, name, description: String?
+//    let locations: Locations?
+//    let availabilities: Availabilities?
+//    let images: String? //[Image]?
+//    let destinations: [DestinationDetails]?
+//    let rating: Int?
+//}
 
-struct DestinationDetails: Codable {
-    let id, name, price: String?
-}
+//struct DestinationDetails: Codable {
+//    let id, name, price: String?
+//}
 
 struct ServiceReservations: Codable {
-    let upcomingBookings: [String]?
+    let upcomingBookings: [PastBookingDetails]?
     let pastBookings: [PastBookingDetails]?
 
     enum CodingKeys: String, CodingKey {

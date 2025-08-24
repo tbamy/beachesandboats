@@ -16,7 +16,7 @@ class TextView : UITextView, UITextViewDelegate {
         }
     }
     
-    @IBInspectable public var max: Int = 100
+    @IBInspectable public var max: Int = 1000000000
     
     var hasPlaceHolder: Bool = false
     

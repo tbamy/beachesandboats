@@ -31,7 +31,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
     
 //    var room: BookingRoom?
     var boatId: String?
-    var listing: Listing?
+    var listing: GetBoatData?
     var booking: CreateBoatBookingRequest?
     var configuration: BookingConfigurationData?
     var bookingTime: String?
@@ -52,6 +52,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
     
     var totalCost: Float = 0
     var serviceCost: Float = 0
+    var boatCapacity = 1
     
     var picker = UIDatePicker()
     
@@ -74,13 +75,20 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
         bookingDate = booking?.bookingDate ?? ""
         bookingTime = booking?.bookingTime ?? ""
         cruiseLength = booking?.cruiseLength ?? 0
-        numberOfGuests = booking?.numberOfPeople ?? 0
+        numberOfGuests = booking?.numberOfPeople ?? 1
+        
+        if let adults = listing?.noOfAdults, let children = listing?.noOfChildren {
+            boatCapacity = (Int(adults) ?? 0) + (Int(children) ?? 0)
+        } else {
+            boatCapacity = 1
+        }
+
         
         
         datesLabel.text = "\(bookingDate?.convertToShorterDateFormat() ?? "")"
         if let price = selectedDestination?.price {
             timeLabel.text = bookingTime ?? ""
-            guestLabel.text = "\(numberOfGuests ?? 0)"
+            guestLabel.text = "\(numberOfGuests ?? 1)"
             
             if booking?.bookingType == "TRIP"{
                 cruiseLengthStack.isHidden = true
@@ -97,10 +105,12 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
             serviceCost = configuration?.boatServiceFee ?? 0
             costAmountLabel.text = "₦ \(totalCost)"
 //            cleaningFeeLabel.text = "₦ \(configurationCost)"
-            serviceFeeLabel.text = "₦ \(serviceCost)"
             cancellationPolicyLabel.text = configuration?.cancellationPolicy
-            let finalTotal = totalCost + serviceCost
-            totalAmountLabel.text = "₦ \(finalTotal)"
+            let serviceFee = (totalCost * serviceCost) / 100 
+            let finalTotal = totalCost + serviceFee
+            
+            serviceFeeLabel.text = "₦ \(serviceFee.toAmount() ?? "0")"
+            totalAmountLabel.text = "₦ \(finalTotal.toAmount() ?? "0")"
             amount = finalTotal
         }
         
@@ -128,6 +138,7 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
         showTimePicker(title: "Select Check-in Time") { [weak self] selectedTime in
             guard let self = self else { return }
             self.bookingTime = selectedTime.toBackendTime()
+            timeLabel.text = bookingTime ?? ""
         }
     }
     
@@ -142,7 +153,8 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
             if endDate == nil{
                 if let startDate = startDate{
                     print("\(startDate)")
-                    self.bookingDate = startDate.toFormattedDate()
+                    self.bookingDate = startDate.toBackendDate()
+                    print("\(bookingDate)")
                     self.datesLabel.text = bookingDate?.convertToShorterDateFormat()
                 }
             }
@@ -306,10 +318,10 @@ extension ConfirmBoatBookingView: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10 // Maximum number of guests
+        return boatCapacity > 0 ? boatCapacity : 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(row + 1) Guests"
+        return "\(row + 1)"
     }
 }

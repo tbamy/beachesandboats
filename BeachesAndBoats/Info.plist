@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>PAYSTACK_PUBLIC_KEY</key>
+	<string>pk_test_f8ec4b3cf27be399640fa068978ae06561567d0d</string>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
 	<key>NSAppTransportSecurity</key>

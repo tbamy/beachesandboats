@@ -26,8 +26,13 @@ protocol BookingService{
     
     func updateProviderBookingDate(request: CreateBeachHouseBookingRequest, completion: @escaping(Result<BeachHouseBookingResponse, ErrorResponse>) -> Void)
     
-    func bookServiceProvider(request: CreateBeachHouseBookingRequest, completion: @escaping(Result<BeachHouseBookingResponse, ErrorResponse>) -> Void)
+    func bookServiceProvider(request: CreateInvoiceRequest, completion: @escaping(Result<CreateInvoiceResponse, ErrorResponse>) -> Void)
     
     func getAllDishes(completion: @escaping(Result<GetAllDishesResponse, ErrorResponse>) -> Void)
     func paymentCallback(reference: String, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    
+    func getBeachHouse(id: String, completion: @escaping(Result<GetBeachResponse, ErrorResponse>) -> Void)
+    func getBoat(id: String, completion: @escaping(Result<GetBoatResponse, ErrorResponse>) -> Void)
+    
+    func cancelBooking(request: CancelBookingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
 }

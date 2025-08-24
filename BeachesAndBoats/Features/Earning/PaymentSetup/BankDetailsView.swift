@@ -38,7 +38,11 @@ class BankDetailsView: BaseViewControllerPlain {
     
     @IBAction func saveBtnTapped(_ sender: Any) {
         if validateFields() {
+            AppStorage.accountName = bankNameField.text
+            AppStorage.accountNumber = accountNumberField.text
+            AppStorage.bankName = bankDropDownField.selectedItem?.name
             
+            MiddleModal.show(title: "Payment details saved successfully", type: .success, onConfirm: { self.coordinator?.popToRoot()})
         }
     }
     
