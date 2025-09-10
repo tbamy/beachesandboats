@@ -46,7 +46,7 @@ public class UserInformationModal: BaseXib {
         if valiidateFields(){
             
             let userInfo = SignUpRequest(first_name: firstname.text, last_name: lastname.text, email: emailAddress, birthday: birthday.text, password: "", password_confirmation: "", keep_signed_in: userInfo?.keep_signed_in, phone_number: phoneNumber, device_id: UserDevice().imei)
-           
+            
             infoDelegate?.userInfo(info: userInfo)
             print("user info sent: \(userInfo)")
         }
@@ -54,7 +54,10 @@ public class UserInformationModal: BaseXib {
     
     @objc func backBtnTapped(_ sender: Any) {
         UserInformationModal.dismiss()
-        transitionDelegate?.presentConfirmAccountModal()
+        if let signupView = transitionDelegate as? SignupView {
+            signupView.currentModalState = .confirmAccount
+            signupView.presentConfirmAccountModal()
+        }
     }
     
     func valiidateFields() -> Bool{
@@ -69,44 +72,67 @@ public class UserInformationModal: BaseXib {
     }
     
     
-//    func dismiss() {
-//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-//            self?.frame.origin.y = Helpers.screenHeight
-//            self?.layoutIfNeeded()
-//        }, completion: { [weak self] _ in
-//            self?.superview?.removeFromSuperview()
-//        })
-//    }
-    
     public static func dismiss() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             
-            let subviews = keyWindow.subviews
-            for view in subviews {
-                for v in view.subviews {
-                    if v is UserInformationModal {
-                        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                            v.frame.origin.y = Helpers.screenHeight
-                            view.layoutIfNeeded()
-                        }, completion: { _ in
-                            view.removeFromSuperview()
-                        })
+            print("Key window subviews before dismissal: \(keyWindow.subviews)")
+            let allViews = keyWindow.subviews
+            for view in allViews {
+                if view.tag == 1001 || view.backgroundColor == .gray.withAlphaComponent(0.5) {
+                    for subview in view.subviews {
+                        if subview is UserInformationModal {
+                            print("Found UserInformationModal in view hierarchy")
+                            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                                subview.frame.origin.y = Helpers.screenHeight
+                                view.layoutIfNeeded()
+                            }, completion: { _ in
+                                print("Removing backdrop: \(view)")
+                                view.removeFromSuperview()
+                            })
+                            return
+                        }
                     }
+                    // Remove orphaned backdrop
+                    print("Removing orphaned backdrop: \(view)")
+                    view.removeFromSuperview()
                 }
             }
+            print("No UserInformationModal found in key window")
+        } else {
+            print("No key window found")
         }
     }
+    
+    //    public static func dismiss() {
+    //        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+    //           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+    //            
+    //            let subviews = keyWindow.subviews
+    //            for view in subviews {
+    //                for v in view.subviews {
+    ////                    if v is UserInformationModal {
+    //                        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+    //                            v.frame.origin.y = Helpers.screenHeight
+    //                            view.layoutIfNeeded()
+    //                        }, completion: { _ in
+    //                            view.removeFromSuperview()
+    //                        })
+    ////                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     func setup() {
         birthday.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())
         backBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backBtnTapped)))
     }
     
-    
     public static func startUserInformationModal(on view: UIView, info: SignUpRequest, delegate infoDel: InfoDelegate, transitionDelegate transDel: ModalTransitionDelegate) {
-//        let backDrop = UIView(frame: Helpers.screen)
-//        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+        let backDrop = UIView(frame: Helpers.screen)
+        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+        backDrop.tag = 1001 // Unique tag for UserInformationModal backdrop
         
         let modal = UserInformationModal()
         modal.transitionDelegate = transDel
@@ -122,31 +148,70 @@ public class UserInformationModal: BaseXib {
         modal.backgroundColor = .white
         modal.clipsToBounds = true
         
-        let backDrop = UIView(frame: Helpers.screen)
-        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         backDrop.addSubview(modal)
-        view.addSubview(backDrop)
-//        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: 800)
-//        view.layoutIfNeeded()
-//        
-//        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-//            modal.frame.origin.y = Helpers.screenHeight  - 800 + modal.layer.cornerRadius
-//            view.layoutIfNeeded()
-//        }, completion: nil)
+        // Add to key window for consistency
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            keyWindow.addSubview(backDrop)
+        } else {
+            view.addSubview(backDrop) // Fallback to parent view if key window is unavailable
+        }
         
-//        backDrop.addSubview(modal)
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-//            keyWindow.addSubview(backDrop)
-//        }
         let height = Helpers.screenHeight * 0.9
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             modal.frame.origin.y = Helpers.screenHeight - height
             backDrop.layoutIfNeeded()
         }, completion: nil)
     }
+    
 }
+    
+//    public static func startUserInformationModal(on view: UIView, info: SignUpRequest, delegate infoDel: InfoDelegate, transitionDelegate transDel: ModalTransitionDelegate) {
+////        let backDrop = UIView(frame: Helpers.screen)
+////        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+//        
+//        let modal = UserInformationModal()
+//        modal.transitionDelegate = transDel
+//        modal.infoDelegate = infoDel
+//        modal.email.text = info.email ?? ""
+//        modal.firstname.text = info.first_name ?? ""
+//        modal.lastname.text = info.last_name ?? ""
+//        modal.birthday.selectedDate = info.birthday?.convertFromBackendDate(from: info.birthday ?? "")
+//        modal.emailAddress = info.email
+//        modal.phoneNumber = info.phone_number
+//        
+//        modal.layer.cornerRadius = 20
+//        modal.backgroundColor = .white
+//        modal.clipsToBounds = true
+//        
+//        let backDrop = UIView(frame: Helpers.screen)
+//        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
+//        backDrop.addSubview(modal)
+//        view.addSubview(backDrop)
+////        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: 800)
+////        view.layoutIfNeeded()
+////        
+////        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+////            modal.frame.origin.y = Helpers.screenHeight  - 800 + modal.layer.cornerRadius
+////            view.layoutIfNeeded()
+////        }, completion: nil)
+//        
+////        backDrop.addSubview(modal)
+////        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+////           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+////            keyWindow.addSubview(backDrop)
+////        }
+//        let height = Helpers.screenHeight * 0.9
+//        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
+//        backDrop.layoutIfNeeded()
+//        
+//        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
+//            modal.frame.origin.y = Helpers.screenHeight - height
+//            backDrop.layoutIfNeeded()
+//        }, completion: nil)
+//    }
+//}
 

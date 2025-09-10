@@ -16,12 +16,15 @@ struct GetBeachData: Codable {
     let pricePerNight: Float?
     let checkOutTo, bookingType: String?
     let category, subCategory: Category?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
     let minRoomPricePerDay, minRoomPricePerNight: String?
     let userReviewed: Bool?
     let rating: Int?
     let userFavourite: Bool?
+    let images: [Image]?
+    let isPrivateStay: Bool?
+    let additionalHouseRules: String?
     let owner: Owner?
     let amenities: [Amenity]?
     let languages: [Language]?
@@ -44,7 +47,9 @@ struct GetBeachData: Codable {
         case bookingType = "booking_type"
         case category
         case subCategory = "sub_category"
-        case locations, availabilities, minRoomPricePerDay, minRoomPricePerNight, userReviewed, rating, userFavourite, owner, amenities, languages, houseRules, rooms, reviews
+        case locations, availabilities, minRoomPricePerDay, minRoomPricePerNight, userReviewed, rating, userFavourite, owner, amenities, languages, houseRules, rooms, reviews, images
+        case isPrivateStay = "is_private_stay"
+        case additionalHouseRules = "additional_house_rules"
     }
 }
 

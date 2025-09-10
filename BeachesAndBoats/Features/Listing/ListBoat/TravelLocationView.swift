@@ -23,10 +23,53 @@ class TravelLocationView: BaseViewControllerPlain {
 //    var moneyInput: MoneyEnteredModel?
     
     var destinationList: [BoatDestinations]?
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        title = "Boats"
+//        setup()
+//    }
+//    
+//    func setup(){
+//        stepOneProgress.setProgress(1, animated: false)
+//        stepOneProgress.tintColor = .success
+//        stepTwoProgress.setProgress(0.55, animated: true)
+//        stepTwoProgress.tintColor = .B_B
+//        
+//        destinationList = boatData?.destinations
+//        nextBtn.isEnabled = true
+//        
+//        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+//        collectionView.allowsMultipleSelection = true
+//        collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
+        
+        checkAndLoadSavedListing()
         setup()
+    }
+    
+    private func checkAndLoadSavedListing() {
+        if let savedListing = AppStorage.boatListing {
+            print("=== LOADING SAVED BOAT LISTING ===")
+            print("Destinations count: \(savedListing.destinations?.count ?? 0)")
+            
+            // Use the saved listing
+//            createBoatListing = savedListing
+            
+            // Load saved destinations
+            selectedItems = savedListing.destinations ?? []
+            
+            print("Loaded saved boat listing successfully")
+            print("===============================")
+        } else {
+            print("No saved boat listing found, starting fresh")
+        }
     }
     
     func setup(){
@@ -36,7 +79,9 @@ class TravelLocationView: BaseViewControllerPlain {
         stepTwoProgress.tintColor = .B_B
         
         destinationList = boatData?.destinations
-        nextBtn.isEnabled = true
+        
+        // Enable next button if we have saved destinations
+        nextBtn.isEnabled = !selectedItems.isEmpty
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -44,6 +89,7 @@ class TravelLocationView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
+
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditPropertyAvailableDatesView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
@@ -17,15 +18,21 @@ class EditPropertyAvailableDatesView: BaseViewControllerPlain {
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var selectedItems: [String] = []
+    var id: String?
     
     var from_when: Date?
     var to_when: Date?
     
     var currentDate = Date()
     
+    var disposeBag = DisposeBag()
+    var vm = EditBeachViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Property"
+        
+        bindNetwork()
         setup()
     }
     
@@ -41,7 +48,10 @@ class EditPropertyAvailableDatesView: BaseViewControllerPlain {
             }
         }
         
-        if (from_when ?? Date() < currentDate) || (to_when ?? Date() < currentDate){
+        print("From: \(from_when) to: \(to_when)")
+        print("Self From: \(self.from_when) self to: \(self.to_when)")
+        
+        if (self.from_when ?? Date() < currentDate) || (self.to_when ?? Date() < currentDate){
             nextBtn.isEnabled = false
         }else{
             nextBtn.isEnabled = true
@@ -50,21 +60,35 @@ class EditPropertyAvailableDatesView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            if var createBeachListing = createBeachListing{
-                createBeachListing.availableFrom = from_when?.toBackendDate() ?? ""
-                createBeachListing.availableTo = to_when?.toBackendDate() ?? ""
-                
-                self.createBeachListing = createBeachListing
-                print(createBeachListing)
-                
-                coordinator?.pop()
-                
-            }
+        guard let id = id else { return }
+        if var createBeachListing = createBeachListing{
+            createBeachListing.availableFrom = from_when?.toBackendDate() ?? ""
+            createBeachListing.availableTo = to_when?.toBackendDate() ?? ""
+            
+            self.createBeachListing = createBeachListing
+            print(createBeachListing)
+            
+            LoadingModal.show(title: "Updating Record...")
+            vm.editBeach(createBeachListing, id: id)
             
         }
     }
     
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .editBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToOptionsScreen() })
+                
+            case .editBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
+    }
     
 
 }

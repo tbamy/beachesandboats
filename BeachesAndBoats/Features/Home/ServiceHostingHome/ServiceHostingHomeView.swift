@@ -19,6 +19,15 @@ class ServiceHostingHomeView: UIViewController {
     @IBOutlet weak var noOfUpcomingBooking: UILabel!
     @IBOutlet weak var noOfPastBooking: UILabel!
     
+    
+    @IBOutlet weak var verificationView: UIView!
+    @IBOutlet weak var verificationTitle: UILabel!
+    @IBOutlet weak var verificationSubtitle: UILabel!
+    @IBOutlet weak var verificationBtn: UILabel!
+    
+    let verificationStatus = UserSession.shared.userDetails?.verificationStatus
+    let isAccountVerified = UserSession.shared.userDetails?.isAccountVerified
+    
     let vm = ServiceHostingHomeViewVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<ServiceHostingHomeViewVM.Input>()
@@ -49,6 +58,28 @@ class ServiceHostingHomeView: UIViewController {
     
     func setupUI() {
         welcomeLabel.text = "Welcome \(userDetails?.first_name ?? "")"
+        
+        verificationView.isHidden = isAccountVerified ?? false
+        verificationBtn.isUserInteractionEnabled = true
+        verificationBtn.attributedText = verificationBtn.underlinedText("Verify now", color: .beachBlue)
+        verificationBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(verifySelected)))
+        
+        switch verificationStatus {
+        case "pending":
+            verificationView.isHidden = false
+            verificationTitle.text = "Account verification in progress"
+            verificationSubtitle.text = "Your account is under verification. This will take 2-3 business days for the verification process to be complete."
+            verificationBtn.isHidden = true
+        case "rejected":
+            verificationView.isHidden = true
+        case "approved":
+            verificationView.isHidden = true
+        default:
+            verificationView.isHidden = false
+            verificationTitle.text = "Verify your account"
+            verificationSubtitle.text = "Your listings have been saved. Verify your account so that your listings can go live."
+            verificationBtn.isHidden = false
+        }
     }
 
     func setupCollectionView() {
@@ -64,6 +95,10 @@ class ServiceHostingHomeView: UIViewController {
         pastBookingCollectionView.tag = 2
         pastBookingCollectionView.register(UINib(nibName: "HostingCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HostingCollectionViewCell")
 
+    }
+    
+    @objc func verifySelected() {
+        coordinator?.gotoVerifyAccountView()
     }
 }
 

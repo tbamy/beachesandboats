@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MapKit
 import SDWebImage
 import SDWebImageSVGCoder
 import RxSwift
@@ -26,10 +25,8 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var checkoutDateLabel: HorizonDateField!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var guestCommentsCollectionView: UICollectionView!
-    @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var hostNameLabel: UILabel!
     @IBOutlet weak var aboutHostLabel: UILabel!
-    @IBOutlet weak var totalAmountLabel: UILabel!
     @IBOutlet weak var continueBookingView: UIView!
     @IBOutlet weak var selectedRoomImage: UIImageView!
     @IBOutlet weak var selectedRoomTitleLabel: UILabel!
@@ -42,52 +39,46 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var cleaningFeeLabel: UILabel!
     @IBOutlet weak var serviceFeeLabel: UILabel!
     @IBOutlet weak var CostTotalAmountLabel: UILabel!
-//    @IBOutlet weak var dayBookingBtn: CheckboxButton!
-//    @IBOutlet weak var nightBookingBtn: CheckboxButton!
     @IBOutlet weak var upcomingStack: UIStackView!
-    
-    
-    @IBOutlet weak var reviewBtn: PlainOutlineButton!
+    @IBOutlet weak var reviewBtn: SecondaryButton!
     @IBOutlet weak var tripStack: UIStackView!
     @IBOutlet weak var commentsStack: UIStackView!
     @IBOutlet weak var roomStack: UIStackView!
+    
+    @IBOutlet weak var selectedRoomView: UIView!
+    @IBOutlet weak var bookingTypeLabel: UILabel!
     
     var vm = BeachBookingDetailsVM()
     let chatVm = StartConversationVM()
     let chatInput = PublishSubject<StartConversationVM.Input>()
     var disposeBag = DisposeBag()
     
-    var isDayBooking: Bool = false
+    private let beachVM = BeachHouseVM()
+    private let beachInput = PublishSubject<BeachHouseVM.Input>()
     
-//    var beachDetails: GetBeachData?
+    var beachDetails: GetBeachData?
     var amenities: [Amenity] = []
     var roomImages: [String] = []
     var comments: [Review] = []
     var userComment: String?
     var userRating: Int?
-    
     var from_when: Date?
     var to_when: Date?
-    
-//    var backendFrom_when: Date?
-//    var backendTo_when: Date?
-    
     var isupcomingBooking: Bool = false
-    
     private var currentModalHeight: CGFloat = UIScreen.main.bounds.height * 0.5
-
+    var isDayBooking: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setup()
-        configureAllCollectionViews()
         setupCustomNavigationButtons()
         checkinDateLabel.isUserInteractionEnabled = false
         checkoutDateLabel.isUserInteractionEnabled = false
         itemToShow()
         bindNetwork()
-//        tripStack.isHidden = true
+        configureAllCollectionViews()
+        LoadingModal.show()
+        beachInput.onNext(.getBeachHouse(id: booking?.beachHouse?.id ?? ""))
     }
     
     func itemToShow() {
@@ -102,80 +93,74 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         }
     }
     
-    func setup(){
-        
+    func setup() {
+        isDayBooking = booking?.bookingType == "DAY"
         if let url = URL(string: booking?.beachHouse?.image?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-//            topImage.kf.setImage(with: url)
             topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         }
-        
         let roomDetails = booking?.beachHouseRoom
+        selectedRoomView.isHidden = roomDetails == nil
+        let price = isDayBooking ? booking?.beachHouseRoom?.pricePerDay ?? 0 : booking?.beachHouseRoom?.pricePerNight ?? 0
+        let priceAndUnit = price * (Float(booking?.units ?? "1") ?? 1)
+        let totalPrice = priceAndUnit * (Float(booking?.noOfNights ?? 1))
         
         if let roomImage = URL(string: roomDetails?.images.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
-//            selectedRoomImage.kf.setImage(with: roomImage)
             selectedRoomImage.sd_setImage(with: roomImage, placeholderImage: UIImage(named: "dummy"))
         }
+        
+        switch booking?.bookingType {
+        case "ANY":
+            bookingTypeLabel.text = "Entire house or a private room"
+        case "SINGLE":
+            bookingTypeLabel.text = "Private room in a beach house"
+        case "FULL":
+            bookingTypeLabel.text = "Entire beach house"
+        default:
+            bookingTypeLabel.text = "Entire house or a private room"
+        }
+        
         selectedRoomTitleLabel.text = roomDetails?.name
-        selectedRoomGuestLabel.text = roomDetails?.noOfOccupant
-        selectedRoomDateLabel.text = formatDateRange(from: booking?.checkingDate,
-                                                     to: booking?.checkoutDate)
-
+        selectedRoomGuestLabel.text = "\(roomDetails?.noOfOccupant ?? "1") Guest(s)"
+        selectedRoomDateLabel.text = formatDateRange(from: booking?.checkingDate, to: booking?.checkoutDate)
         selectedRoomBedLabel.text = "\(roomDetails?.bedTypes.first?.quantity ?? "") \(roomDetails?.bedTypes.first?.name ?? "")"
-        selectedRoomCostLabel.text = "₦ \(roomDetails?.pricePerNight ?? 0)"
-
+        selectedRoomCostLabel.text = isDayBooking ? "₦ \(roomDetails?.pricePerDay ?? 0)" : "₦ \(roomDetails?.pricePerNight ?? 0)"
         
         titleLabel.text = booking?.beachHouse?.name
-        locationLabel.text = "\(booking?.beachHouse?.locations?.city ?? ""), \(booking?.beachHouse?.locations?.state ?? "") \(booking?.beachHouse?.locations?.country ?? "")"
-        locationView.layer.cornerRadius = 8
+        locationLabel.text = "\(booking?.beachHouse?.locations?.jettyLocation ?? ""), \(booking?.beachHouse?.locations?.name ?? "")"
         descriptionLabel.text = booking?.beachHouse?.description
         aboutHostLabel.text = booking?.beachHouse?.aboutOwner
-//        hostNameLabel.text = "\(booking?.beachHouse?.owner?.firstName ?? "") \(booking?.beachHouse?.owner?.lastName ?? "")"
+        hostNameLabel.text = "\(booking?.hostFirstName ?? "") \(booking?.hostLastName ?? "")"
         ratingLabel.text = "\(booking?.beachHouse?.rating ?? 0)"
-        totalAmountLabel.text = "₦ \(booking?.beachHouseRoom?.pricePerNight ?? 0)"
-//        let totalGuests = (booking?.beachHouse?.noOfAdults ?? 0) + (booking?.beachHouse?.noOfChildren ?? 0)
-
-        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? "0" /*0*/) guests · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedrooms · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? "") beds · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? "0" /*0*/) private baths"    //"\(totalGuests) guests, \(booking?.beachHouse?.rooms?.count ?? 0) rooms"
+        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? "0") guest(s) · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedroom(s) · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? "") bed(s) · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? "0") private bath(s)"
         checkinDateLabel.text = booking?.checkingDate ?? ""
         checkoutDateLabel.text = booking?.checkoutDate ?? ""
-        
-        costAmountLabel.text = "\(booking?.checkingDate ?? "") - \(booking?.checkoutDate ?? "")"
+        costLabel.text = isDayBooking ? "₦ \(priceAndUnit) (Day booking)" : "₦ \(priceAndUnit) X \(booking?.noOfNights ?? 1) night(s)"
+        costAmountLabel.text = isDayBooking ? "₦ \(priceAndUnit)" : "₦ \(totalPrice)"
+        serviceFeeLabel.text = "₦ \(booking?.adminCharge ?? 0)"
         CostTotalAmountLabel.text = "₦ \(booking?.total ?? 0)"
         
+        // Initial setup with empty data (will be updated in bindNetwork)
+        amenities = beachDetails?.amenities ?? []
+        comments = beachDetails?.reviews ?? []
+        commentsStack.isHidden = comments.count < 1
         
-        if let latitude = Double(booking?.beachHouse?.locations?.latitude ?? ""),
-           let longitude = Double(booking?.beachHouse?.locations?.longitude ?? "") {
-            
-            let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            
-            // Use a fixed zoom level (span) — tweak for desired zoom
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            
-            let region = MKCoordinateRegion(center: center, span: span)
-            locationView.setRegion(region, animated: true)
-        }
-        
-//        amenities = booking?.beachHouse.amenities ?? []
-//        comments = booking?.reviews ?? []
-        
-//        topImage.isUserInteractionEnabled = true
-//        topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
-        
+        topImage.isUserInteractionEnabled = true
+        topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
     }
     
-    @objc func viewImages(){
-        
-        if let roomImages = booking?.beachHouseRoom?.images{
-            let images = roomImages.compactMap { $0.url }
-            coordinator?.gotoAllPhotos(images: images)
+    @objc func viewImages() {
+        if let rooms = beachDetails?.rooms {
+            roomImages = rooms.compactMap { $0.images }
+                .flatMap { $0 }
+                .compactMap { $0.url }
+            coordinator?.gotoAllPhotos(images: roomImages)
         }
-        
     }
     
     func configureAllCollectionViews() {
-        configureCollectionView(categoriesCollectionView, tag: 1)
-        configureCollectionView(guestCommentsCollectionView, tag: 2)
+        configureCollectionView(categoriesCollectionView, tag: 0) // Tag 0 for amenities
+        configureCollectionView(guestCommentsCollectionView, tag: 1) // Tag 1 for comments
     }
-
     
     func configureCollectionView(_ collectionView: UICollectionView, tag: Int) {
         collectionView.delegate = self
@@ -186,19 +171,15 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     }
     
     @IBAction func writeReviewTapped(_ sender: Any) {
-        
         RatingModal.show(on: self.view, userComment: "", delegate: self)
     }
     
     @IBAction func messageHostTapped(_ sender: Any) {
         let personId = booking?.hostID ?? ""
         let conversationRequest = StartConversationRequest(personId: personId, bookingId: booking?.id, propertyType: "BeachHouse")
-        print(conversationRequest)
-            chatInput.onNext(.startConversation(conversationRequest))
-            LoadingModal.show()
+        chatInput.onNext(.startConversation(conversationRequest))
+        LoadingModal.show()
     }
-    
-    
     
     @IBAction func cancelBookingTapped(_ sender: Any) {
         let cancelBookingView = CancelBookingView()
@@ -207,75 +188,73 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         cancelBookingView.modalPresentationStyle = .custom
         cancelBookingView.transitioningDelegate = self
         currentModalHeight = UIScreen.main.bounds.height * 0.75
-        cancelBookingView.transitioningDelegate = self
-
         present(cancelBookingView, animated: true, completion: nil)
     }
     
-
     @IBAction func continueBookingTapped(_ sender: Any) {
-        print("Continue Tapped")
-        
         coordinator?.gotoBeachDetails(id: booking?.beachHouse?.id ?? "")
-        
     }
-    
 }
 
 extension BeachBookingDetailsView: SumbitBtnDelegate {
-    
     func submitTapped(rating: Int, comment: String?) {
-        print("The rating is \(rating)")
-        print("The comment is \(comment ?? "")")
-        
         userComment = comment
         userRating = rating
-
         LoadingModal.show(title: "Submitting review...")
         let request = AddReviewRequest(itemId: booking?.beachHouse?.id ?? "", type: "BeachHouse", note: comment ?? "", rating: rating)
         vm.saveReview(request)
-       
     }
-    
-    
 }
 
 extension BeachBookingDetailsView {
-    func bindNetwork(){
+    func bindNetwork() {
         chatVm.transform(input: chatInput)
+        beachVM.transform(input: beachInput)
         
         vm.output.subscribe(onNext: { [weak self] response in
             LoadingModal.dismiss()
-            
             switch response {
             case .addReviewSuccess(let response):
                 MiddleModal.show(title: "Success", subtitle: response.message ?? "Review submitted", type: .success, primaryText: "Okay", dismissable: false, dismissOnConfirm: true, onConfirm: {
                     self?.dismiss(animated: true)
                 })
             case .addReviewFailure(let error):
-                MiddleModal.show(title: "Error", subtitle: error.message ?? "Something went wrong",  type: .error, primaryText: "Okay", dismissable: false, dismissOnConfirm: true, onConfirm: {
+                MiddleModal.show(title: "Error", subtitle: error.message ?? "Something went wrong", type: .error, primaryText: "Okay", dismissable: false, dismissOnConfirm: true, onConfirm: {
                     self?.dismiss(animated: true)
                 })
             }
-            
         }).disposed(by: disposeBag)
         
         chatVm.output.subscribe(onNext: { [weak self] data in
             LoadingModal.dismiss()
             switch data {
             case .startConversationSuccess(let response):
-                if let res = response.data{
+                if let res = response.data {
                     self?.coordinator?.gotoChat(bookingId: "", otherUser: "", conversationId: res.id, propertyType: "BeachHouse")
-//                    self?.coordinator?.gotoChat(otherUser: "", conversationId: res.id)
                 }
-            case .startConversationFailed(let error) :
+            case .startConversationFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+        
+        beachVM.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .getBeachHouseSuccess(let response):
+                self?.beachDetails = response.data
+                self?.amenities = self?.beachDetails?.amenities ?? []
+                self?.comments = self?.beachDetails?.reviews ?? []
+                self?.setup() // Update UI with new data
+                self?.categoriesCollectionView.reloadData() // Reload amenities
+                self?.guestCommentsCollectionView.reloadData() // Reload comments
+            case .getBeachHouseFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error, dismissable: false, onConfirm: { self?.coordinator?.pop() })
             }
         }).disposed(by: disposeBag)
     }
 }
 
-extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
@@ -285,18 +264,16 @@ extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDat
         default:
             return 0
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch collectionView.tag {
         case 0:
             let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
             let cellAt = amenities[indexPath.item]
             
             let view = CategoriesCell(frame: cell.bounds)
-            view.identifier = "Amenitiess " + indexPath.description
+            view.identifier = "Amenities " + indexPath.description
             view.model.image = cellAt.icon ?? ""
             view.model.title = cellAt.name
             view.isSubcategory = true
@@ -332,8 +309,6 @@ extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDat
             return CGSize()
         }
     }
-    
-    
 }
 
 extension BeachBookingDetailsView: UIViewControllerTransitioningDelegate {
@@ -347,7 +322,6 @@ extension BeachBookingDetailsView: UIViewControllerTransitioningDelegate {
     }
 }
 
-
 extension BeachBookingDetailsView {
     func formatDateRange(from: String?, to: String?) -> String {
         let fromDate = from?.convertToShorterDateFormat() ?? ""
@@ -356,7 +330,6 @@ extension BeachBookingDetailsView {
     }
     
     func setupCustomNavigationButtons() {
-        
         let addButton = UIButton(type: .custom)
         addButton.setImage(Assets.favoriteTwo.image, for: .normal)
         addButton.addTarget(self, action: #selector(viewImages), for: .touchUpInside)
@@ -370,7 +343,6 @@ extension BeachBookingDetailsView {
         navigationItem.rightBarButtonItems = [settingsBarButtonItem]
     }
 
-    // Actions for the buttons
     @objc func addNewBtnTapped() {
         print("Add button tapped")
     }
@@ -378,7 +350,4 @@ extension BeachBookingDetailsView {
     @objc func settingsBtnTapped() {
         print("Settings button tapped")
     }
-
-
 }
-

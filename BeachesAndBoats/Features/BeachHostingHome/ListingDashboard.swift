@@ -183,7 +183,6 @@ class ListingDashboard: UIViewController {
             listingLbl.text  = "My Listings (0)"
             boatListing.isHidden = true
         } else if beachHouseCount <= 0 && boatHouseCount > 0 {
-            boatListing.isHidden = false
             listingLbl.text = "My House Listings (\(beachHouseCount))"
             boatListing.text = "My Boat Listings (\(boatHouseCount))"
             boatListing.isHidden = false
@@ -195,6 +194,7 @@ class ListingDashboard: UIViewController {
             listingLbl.text = "My House Listings (\(beachHouseCount))"
             boatListing.text = "My Boat Listings (\(boatHouseCount))"
             houseListing.isHidden = false
+            boatListing.isHidden = false
         }
     }
     

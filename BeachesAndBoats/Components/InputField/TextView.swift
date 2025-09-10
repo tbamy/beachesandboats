@@ -39,7 +39,7 @@ class TextView : UITextView, UITextViewDelegate {
             textColor = .titleGrey
         }
         guard layer.borderColor != UIColor.error.cgColor else { return  }
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderColor = UIColor.beachBlue.cgColor
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

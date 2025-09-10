@@ -13,8 +13,8 @@
             <connections>
                 <outlet property="amountField" destination="mKo-jw-ibx" id="3Ss-vc-L3Z"/>
                 <outlet property="closeIcon" destination="4QS-Xc-ZFR" id="3Dj-ZL-iL3"/>
-                <outlet property="submitBtn" destination="7qj-U5-biQ" id="d7j-wF-bMD"/>
-                <outlet property="summaryField" destination="d2D-4Y-FSE" id="J5l-Sk-tJm"/>
+                <outlet property="submitBtn" destination="Hvh-Lv-jv8" id="yHo-Yj-LnL"/>
+                <outlet property="summaryField" destination="mS0-bu-n1Y" id="EbC-NA-QIb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -36,39 +36,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s the final agreement on price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPX-MG-Q5X">
-                    <rect key="frame" x="20" y="495.33333333333331" width="246" height="16.999999999999943"/>
+                    <rect key="frame" x="20" y="472.33333333333331" width="246" height="17"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type here" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="d2D-4Y-FSE">
-                    <rect key="frame" x="20" y="252.33333333333337" width="526" height="213"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="213" id="50f-Wv-VIU"/>
-                    </constraints>
-                    <color key="textColor" systemColor="labelColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
-                            <integer key="value" value="5"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qj-U5-biQ" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="20" y="671" width="526" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="p3W-1t-tRk"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Send payment Invoice"/>
-                    <connections>
-                        <action selector="submitBtnTapped:" destination="-1" eventType="touchUpInside" id="JPn-uA-gJI"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKo-jw-ibx" customClass="BigMoneyInputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                    <rect key="frame" x="183" y="561.33333333333337" width="200" height="70"/>
+                    <rect key="frame" x="183" y="538.33333333333337" width="200" height="70"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="DtO-4a-YvY"/>
@@ -81,26 +55,44 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvh-Lv-jv8" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="638.33333333333337" width="526" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="gA5-a9-VTS"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Send Payment Invoice"/>
+                    <connections>
+                        <action selector="submitBtnTapped:" destination="-1" eventType="touchUpInside" id="8ah-WE-i3h"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mS0-bu-n1Y" customClass="TextViewField" customModule="BeachesAndBoats" customModuleProvider="target">
+                    <rect key="frame" x="20" y="252.33333333333337" width="526" height="200"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="4o6-ft-FJC"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="d2D-4Y-FSE" firstAttribute="top" secondItem="Q7h-Qz-ZxK" secondAttribute="bottom" constant="20" id="4ac-sn-jsP"/>
                 <constraint firstItem="4QS-Xc-ZFR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="5bE-VL-aaj"/>
                 <constraint firstItem="mKo-jw-ibx" firstAttribute="top" secondItem="zPX-MG-Q5X" secondAttribute="bottom" constant="49" id="6tJ-sC-2gp"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="d2D-4Y-FSE" secondAttribute="trailing" constant="20" id="8GX-Ob-D7F"/>
                 <constraint firstItem="mKo-jw-ibx" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="BvL-yG-V8n"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Q7h-Qz-ZxK" secondAttribute="trailing" constant="20" id="FO4-Ff-9p1"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7qj-U5-biQ" secondAttribute="trailing" constant="20" id="GMc-Cr-Vy1"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="7qj-U5-biQ" secondAttribute="bottom" constant="20" id="KEO-sb-kWn"/>
-                <constraint firstItem="zPX-MG-Q5X" firstAttribute="top" secondItem="d2D-4Y-FSE" secondAttribute="bottom" constant="30" id="LaW-sc-3na"/>
-                <constraint firstItem="7qj-U5-biQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="PCe-Lv-ArO"/>
+                <constraint firstItem="zPX-MG-Q5X" firstAttribute="top" secondItem="mS0-bu-n1Y" secondAttribute="bottom" constant="20" id="GPV-gZ-PEM"/>
+                <constraint firstItem="mS0-bu-n1Y" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="LCd-zH-MyL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Hvh-Lv-jv8" secondAttribute="trailing" constant="20" id="QXs-fU-5Px"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mS0-bu-n1Y" secondAttribute="trailing" constant="20" id="UBB-9l-biL"/>
                 <constraint firstItem="Q7h-Qz-ZxK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="UuF-gq-J01"/>
                 <constraint firstItem="qPj-eW-7IJ" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="X2q-C9-lna"/>
                 <constraint firstItem="qPj-eW-7IJ" firstAttribute="centerY" secondItem="4QS-Xc-ZFR" secondAttribute="centerY" id="av3-zj-a5U"/>
                 <constraint firstItem="Q7h-Qz-ZxK" firstAttribute="top" secondItem="qPj-eW-7IJ" secondAttribute="bottom" constant="50" id="bP8-kA-wJa"/>
-                <constraint firstItem="d2D-4Y-FSE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="k7l-k8-3NW"/>
+                <constraint firstItem="Hvh-Lv-jv8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="byX-NY-8zh"/>
+                <constraint firstItem="Hvh-Lv-jv8" firstAttribute="top" secondItem="mKo-jw-ibx" secondAttribute="bottom" constant="30" id="foA-4Y-KYm"/>
                 <constraint firstItem="4QS-Xc-ZFR" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="qXM-Wb-zZ9"/>
+                <constraint firstItem="mS0-bu-n1Y" firstAttribute="top" secondItem="Q7h-Qz-ZxK" secondAttribute="bottom" constant="20" id="xCg-it-oEi"/>
                 <constraint firstItem="zPX-MG-Q5X" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="zIA-7H-7aa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -109,9 +101,6 @@
     </objects>
     <resources>
         <image name="cancelIcon" width="30" height="30"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

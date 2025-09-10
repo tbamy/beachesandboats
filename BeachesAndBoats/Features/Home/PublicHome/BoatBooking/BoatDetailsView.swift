@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MapKit
 import RxSwift
 import SDWebImage
 import SDWebImageSVGCoder
@@ -30,7 +29,6 @@ class BoatDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var guestCommentsCollectionView: UICollectionView!
     @IBOutlet weak var guestCommentsStack: UIStackView!
-    @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var hostNameLabel: UILabel!
     @IBOutlet weak var aboutHostLabel: UILabel!
     @IBOutlet weak var proceedView: UIView!
@@ -87,45 +85,30 @@ class BoatDetailsView: BaseViewControllerPlain {
         
         if let url = URL(string: boatDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? ""){
             topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
-//            topImage.kf.setImage(
-//                with: url,
-//                placeholder: UIImage(named: "dummy"),
-//                options: nil,
-//                completionHandler: { [self] result in
-//                    switch result {
-//                    case .success(let value):
-//                        print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-//                    case .failure(let error):
-//                        print("Failed to load image: \(error.localizedDescription)")
-//                        topImage.image = UIImage(named: "dummy")
-//                    }
-//                }
-//            )
         } else {
             topImage.image = UIImage(named: "dummy")
         }
         
         titleLabel.text = boatDetails?.name
-        locationLabel.text = "\(boatDetails?.locations?.city ?? ""), \(boatDetails?.locations?.state ?? "") \(boatDetails?.locations?.country ?? "")"
-        locationView.layer.cornerRadius = 8
+        locationLabel.text = "\(boatDetails?.locations?.jettyLocation ?? ""), \(boatDetails?.locations?.name ?? "")"
         descriptionLabel.text = boatDetails?.description
         aboutHostLabel.text = boatDetails?.aboutOwner
         hostNameLabel.text = "\(boatDetails?.owner?.firstName ?? "") \(boatDetails?.owner?.lastName ?? "")"
         ratingLabel.text = "\(boatDetails?.rating ?? 0)"
+        let maxDate = boatDetails?.availabilities?.availableTo
+        print(maxDate)
+//        11\/27\/2025
+        bookingDateLabel.minimumDate = Date()
+        bookingDateLabel.maximumDate = maxDate?.convertFromBackendDateString()
 //        totalAmountLabel.text = "₦ \(boatDetails?.pricePerNight ?? 0)"
         proceedView.isHidden = true
-        print("Adults: \(boatDetails?.noOfAdults ?? "")")
-        print("Children: \(boatDetails?.noOfChildren ?? "")")
         
-        print("Int Adults: \((Int(boatDetails?.noOfAdults ?? "0") ?? 0))")
-        print("Int Children: \((Int(boatDetails?.noOfChildren ?? "0") ?? 1))")
-        
-        boatCapacity = (Int(boatDetails?.noOfAdults ?? "0") ?? 0) + (Int(boatDetails?.noOfChildren ?? "0") ?? 1)
+        boatCapacity = (Int(boatDetails?.noOfPassengers ?? "1") ?? 1)
         
         print("Cap: \(boatCapacity)")
         
         peopleCapacityLabel.text = "1 - \(boatCapacity) "
-        startingLocationLabel.text = "\(boatDetails?.locations?.city ?? ""), \(boatDetails?.locations?.state ?? "") \(boatDetails?.locations?.country ?? "")"
+        startingLocationLabel.text = "\(boatDetails?.locations?.jettyLocation ?? ""), \(boatDetails?.locations?.name ?? "")"
         
         destinations = boatDetails?.destinations ?? []
         if destinations.contains(where: { $0.name == "Cruising"}) && destinations.count == 1{
@@ -192,12 +175,14 @@ class BoatDetailsView: BaseViewControllerPlain {
     }
     
     func updateCruising(){
+        self.isCruising = true
         self.travelDestinationOption.isChecked = false
         cruiseLengthStack.isHidden = false
         myDestinationStack.isHidden = true
     }
     
     func updateTravel(){
+        self.isCruising = false
         self.cruisingOption.isChecked = false
         myDestinationStack.isHidden = false
         cruiseLengthStack.isHidden = true

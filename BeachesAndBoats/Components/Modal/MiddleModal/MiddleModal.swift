@@ -10,17 +10,8 @@ import MessageUI
 
 @IBDesignable public class MiddleModal: BaseXib {
 
-    @IBOutlet weak var extraViewSpacer: UIView!
-    @IBOutlet weak var tetiaryStack: UIStackView!
-    @IBOutlet weak var extraViewTrailing: NSLayoutConstraint!
-    @IBOutlet weak var etraViewLeading: NSLayoutConstraint!
-    @IBOutlet weak var extraViewStack: UIStackView!
-    @IBOutlet weak var tetiaryText: PaddedLabel!
-    @IBOutlet weak var extraViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var subtitleHeight: NSLayoutConstraint!
     @IBOutlet weak var cancelButton: PlainOutlineButton!
     @IBOutlet weak var confirmButton: PrimaryButton!
-    @IBOutlet weak var extraView: UIView!
     @IBOutlet weak var subtitle: RegularLabel!
     @IBOutlet weak var title: BoldLabel!
     @IBOutlet weak var icon: UIImageView!
@@ -44,20 +35,89 @@ import MessageUI
     }
     
     func setup(_ model: MiddleModalModel) {
-       // subtitle.textAlignment = .justified
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown))
         swipeDown.direction = .down
         addGestureRecognizer(swipeDown)
+        
+        // Hide/show elements based on content
         cancelButton.isHidden = model.secondaryText.isEmpty
+        subtitle.isHidden = model.modalSubtitle.isEmpty
+        title.isHidden = model.modalTitle.isEmpty
+        
+        // Set content
         title.text = model.modalTitle
+        
+        // Clean up subtitle text and configure for multiline
+//        let cleanSubtitle = model.modalSubtitle.replacingOccurrences(of: "\u00a0", with: " ")
         subtitle.text = model.modalSubtitle
-        tetiaryText.text = model.tetiaryTitle
-        tetiaryStack.isHidden = model.tetiaryTitle.isEmpty
+        subtitle.numberOfLines = 0 // Allow multiple lines
+        subtitle.lineBreakMode = .byWordWrapping
+        subtitle.preferredMaxLayoutWidth = Helpers.screenWidth - 40 // Adjust for modal padding
+        
         cancelButton.setTitle(model.secondaryText, for: .normal)
         confirmButton.setTitle(model.primaryText, for: .normal)
         icon.image = model.modalType.getImage()
-        extraViewStack.isHidden = true
+        
+        // Force layout update after setting text
+        subtitle.setNeedsLayout()
+        subtitle.layoutIfNeeded()
     }
+
+    func getHeight() -> CGFloat {
+        // Force layout to ensure all subviews have correct sizes
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        var contentHeight: CGFloat = 60.0 // Base padding
+        
+        // Add icon height if visible and has content
+        if !icon.isHidden && icon.image != nil {
+            let iconSize = icon.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            contentHeight += iconSize.height + 10.0
+        }
+        
+        // Add title height if visible and has text
+        if !title.isHidden && !(title.text?.isEmpty ?? true) {
+            // Set preferred max width for accurate height calculation
+            title.preferredMaxLayoutWidth = Helpers.screenWidth - 40
+            let titleSize = title.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            contentHeight += titleSize.height + 10.0
+        }
+        
+        // Add subtitle height if visible and has text
+        if !subtitle.isHidden && !(subtitle.text?.isEmpty ?? true) {
+            // Ensure preferred max width is set for multiline calculation
+            subtitle.preferredMaxLayoutWidth = Helpers.screenWidth - 40
+            let subtitleSize = subtitle.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            contentHeight += subtitleSize.height + 10.0
+        }
+        
+        // Add confirm button height if visible
+        if !confirmButton.isHidden {
+            let confirmSize = confirmButton.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            contentHeight += confirmSize.height + 20.0
+        }
+        
+        // Add cancel button height if visible and has text
+        if !cancelButton.isHidden && !(cancelButton.titleLabel?.text?.isEmpty ?? true) {
+            let cancelSize = cancelButton.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            contentHeight += cancelSize.height + 20.0
+        }
+        
+        return contentHeight
+    }
+    
+//    func setup(_ model: MiddleModalModel) {
+//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown))
+//        swipeDown.direction = .down
+//        addGestureRecognizer(swipeDown)
+//        cancelButton.isHidden = model.secondaryText.isEmpty
+//        title.text = model.modalTitle
+//        subtitle.text = model.modalSubtitle
+//        cancelButton.setTitle(model.secondaryText, for: .normal)
+//        confirmButton.setTitle(model.primaryText, for: .normal)
+//        icon.image = model.modalType.getImage()
+//    }
     
     @objc func handleSwipeDown() {
         if model.dismissable {
@@ -75,18 +135,18 @@ import MessageUI
         })
     }
     
-    func getHeight() -> CGFloat {
-        var contentHeight = 60.0
-        contentHeight += !icon.isHidden ? icon.bounds.height + 10.0 : 0
-        contentHeight += !title.isHidden ? title.bounds.height + 10.0 : 0
-        contentHeight += !subtitle.isHidden ? subtitle.bounds.height + 10.0 : 0
-        contentHeight += !extraViewStack.isHidden ? extraViewStack.bounds.height + 10.0 : 0
-        contentHeight += !confirmButton.isHidden ? confirmButton.bounds.height + 20.0 : 0
-        contentHeight += !cancelButton.isHidden ? cancelButton.bounds.height + 20.0 : 0
-        contentHeight += !tetiaryStack.isHidden ? tetiaryStack.bounds.height + 12.0 : 0
-        
-        return contentHeight
-    }
+//    func getHeight() -> CGFloat {
+//        var contentHeight = 60.0
+//        contentHeight += !icon.isHidden ? icon.bounds.height + 10.0 : 0
+//        contentHeight += !title.isHidden ? title.bounds.height + 10.0 : 0
+//        contentHeight += !subtitle.isHidden ? subtitle.bounds.height + 10.0 : 0
+////        contentHeight += !extraViewStack.isHidden ? extraViewStack.bounds.height + 10.0 : 0
+//        contentHeight += !confirmButton.isHidden ? confirmButton.bounds.height + 20.0 : 0
+//        contentHeight += !cancelButton.isHidden ? cancelButton.bounds.height + 20.0 : 0
+////        contentHeight += !tetiaryStack.isHidden ? tetiaryStack.bounds.height + 12.0 : 0
+//        
+//        return contentHeight
+//    }
     
     
     @IBAction func onConfirmTapped(_ sender: Any) {
@@ -117,22 +177,6 @@ import MessageUI
     {
         _ = handleShow(title: title, subtitle: subtitle, tetiaryTitle: tetiaryTitle, extraView: extraView, type: type, icon: icon, primaryText: primaryText, secondaryText: secondaryText, dismissable: dismissable, dismissOnConfirm: dismissOnConfirm, onConfirm: onConfirm, onCancel: onCancel)
     }
-    
-    public static func showV2 (
-        title: String = "",
-        subtitle: String = "",
-        type: ModalType = .caution,
-        icon: UIImage = UIImage(),
-        primaryText: String = "Okay",
-        secondaryText: String = "",
-        dismissable: Bool = true,
-        dismissOnConfirm: Bool = true,
-        onConfirm: @escaping () -> Void = {},
-        onCancel: @escaping () -> Void = {})  -> UIView
-    {
-        return handleShow(title: title, subtitle: subtitle, type: type, icon: icon, primaryText: primaryText, secondaryText: secondaryText, dismissable: dismissable, dismissOnConfirm: dismissOnConfirm, onConfirm: onConfirm, onCancel: onCancel)
-    }
-    
     
     public static func handleShow (
         title: String = "",
@@ -170,6 +214,9 @@ import MessageUI
         modal.backgroundColor = .white
         modal.clipsToBounds = true
         
+        modal.setNeedsLayout()
+        modal.layoutIfNeeded()
+        
         backDrop.addSubview(modal)
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
@@ -181,30 +228,14 @@ import MessageUI
         let centerY = (Helpers.screenHeight - modalHeight) / 2
         
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: modalHeight)
-        modal.subtitleHeight.isActive = false
         backDrop.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             modal.frame.origin.y = centerY
             backDrop.layoutIfNeeded()
         }, completion: nil)
         
         return backDrop
-    }
-
-   
-    
-    public static func showProcessing(
-        title: String = "Thank you",
-        subtitle: String = "Your transaction is being processed",
-        tetiaryText: String = "If you are not redirected in 30 seconds, use the refresh button below to manually check your transaction status",
-        dismissable: Bool = false,
-        confirmText: String = "Refresh",
-        cancelText: String = "",
-        onConfirm: @escaping () -> Void = {},
-        onCancel: @escaping () -> Void = {})
-    {
-        MiddleModal.show(title: title, subtitle: subtitle, tetiaryTitle: tetiaryText, type: .pending, primaryText: confirmText, secondaryText: cancelText, dismissable: dismissable, dismissOnConfirm: false, onConfirm: onConfirm, onCancel: onCancel)
     }
     
     public static func dismiss() {

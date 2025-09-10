@@ -166,10 +166,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I94-KE-6VI" customClass="RegularLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                    <rect key="frame" x="349" y="0.0" width="50" height="20.333333333333332"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="50" id="nst-dJ-YQs"/>
-                                    </constraints>
+                                    <rect key="frame" x="357.66666666666669" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" name="Grey"/>
                                     <nil key="highlightedColor"/>

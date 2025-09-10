@@ -9,25 +9,27 @@ import Foundation
 
 struct CreateBeachHouseBookingRequest: Codable {
     var userId: String
-    var beachHouseRoomId: String
+    var beachHouseRoomId: String?
+    var beachHouseId: String?
     var checkingDate: String
     var checkoutDate: String
     var checkingTime: String
     var checkoutTime: String
     var numberOfPeople: Int
-    var amount: Float
-    var units: Int
+//    var amount: Float
+    var units: Int?
     var bookingType: String
 
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case beachHouseRoomId = "beach_house_room_id"
+        case beachHouseId = "beach_house_id"
         case checkingDate = "checking_date"
         case checkoutDate = "checkout_date"
         case checkingTime = "checking_time"
         case checkoutTime = "checkout_time"
         case numberOfPeople = "no_of_people"
-        case amount
+//        case amount
         case units
         case bookingType = "booking_type"
     }

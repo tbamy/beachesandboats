@@ -396,9 +396,9 @@ enum BookingItem{
     var location: String{
         switch self {
         case .boat(let booking):
-            return "\(booking.boat.locations?.city ?? ""), \(booking.boat.locations?.state ?? "") \(booking.boat.locations?.country ?? "")"
+            return "\(booking.boat.locations?.jettyLocation ?? ""), \(booking.boat.locations?.name ?? "")"
         case .beachHouse(let booking):
-            return "\(booking.beachHouse?.locations?.city ?? ""), \(booking.beachHouse?.locations?.state ?? "") \(booking.beachHouse?.locations?.country ?? "")"
+            return "\(booking.beachHouse?.locations?.jettyLocation ?? ""), \(booking.beachHouse?.locations?.name ?? "")"
         }
     }
 }

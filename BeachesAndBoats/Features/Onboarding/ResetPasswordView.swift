@@ -33,7 +33,7 @@ class ResetPasswordView: BaseViewControllerPlain {
     
     
     var userEmail: String?
-    var userFullName: String?
+//    var userFullName: String?
     
     let vm = ResetPasswordVM()
     let disposeBag = DisposeBag()
@@ -42,6 +42,7 @@ class ResetPasswordView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bind()
         setup()
     }
     
@@ -78,17 +79,17 @@ class ResetPasswordView: BaseViewControllerPlain {
         }
         
         
-        if let email = userEmail, let name = userFullName {
+        if let email = userEmail{
             validator = .containsSubstring
             let lowercasedPassword = password.lowercased()
             var containsNameOrEmail = false
             
-            for namePart in name.lowercased().split(separator: " ") {
-                if validator.execute(lowercasedPassword, String(namePart)) {
-                    containsNameOrEmail = true
-                    break
-                }
-            }
+//            for namePart in name.lowercased().split(separator: " ") {
+//                if validator.execute(lowercasedPassword, String(namePart)) {
+//                    containsNameOrEmail = true
+//                    break
+//                }
+//            }
             
             if validator.execute(lowercasedPassword, email.lowercased()) {
                 containsNameOrEmail = true
@@ -128,9 +129,9 @@ class ResetPasswordView: BaseViewControllerPlain {
         passAllChecks = true
         
         validator = .containsSubstring
-        if let email = userEmail, let name = userFullName {
+        if let email = userEmail {
             let lowercasedPassword = newPasswordField.text.lowercased()
-            let nameComponents = name.lowercased().split(separator: " ")
+//            let nameComponents = name.lowercased().split(separator: " ")
             
             var containsNameOrEmail = false
             

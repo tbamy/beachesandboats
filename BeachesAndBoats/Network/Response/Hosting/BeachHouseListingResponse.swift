@@ -186,9 +186,9 @@ struct BeachHouseListing: Codable {
     let id, name: String?
     let description: String?
     let aboutOwner: String?  // Changed from AboutOwner to String
-    let listingPrice, discountPercent: Decimal?
+    let listingPrice, discountPercent: Float?
     let image: String?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
     let rating: Int?
 
@@ -228,7 +228,7 @@ struct BeachHouseListing: Codable {
 // MARK: - BoatListing
 struct BoatListing: Codable {
     let id, name, description: String?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
     let images: [Image]?
     let destinations: [Destination]?

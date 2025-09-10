@@ -19,6 +19,7 @@ class EditAboutYouLanguageView: BaseViewControllerPlain {
     
     var languageList: [Languages]?
     var selectedItems: [String] = []
+    var id: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +37,20 @@ class EditAboutYouLanguageView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
+        selectedItems = createBeachListing?.languages ?? []
+        collectionView.reloadData()
+        
         nextBtn.isEnabled = !selectedItems.isEmpty
     }
 
     @IBAction func nextTapped(_ sender: Any) {
+        guard let id = id else { return }
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
                 createBeachListing.languages = selectedItems
                 print(createBeachListing)
                 
-                coordinator?.gotoEditAboutYouDescriptionView(beachData: beachData, request: createBeachListing)
+                coordinator?.gotoEditAboutYouDescriptionView(beachData: beachData, request: createBeachListing, id: id)
             }
         
         }

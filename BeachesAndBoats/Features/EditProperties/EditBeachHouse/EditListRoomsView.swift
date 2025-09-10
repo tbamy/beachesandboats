@@ -24,6 +24,7 @@ class EditListRoomsView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var id: String?
     
     var bedTypes: [BedTypes] = []
     var selectedBedTypes: [BedType] = []
@@ -90,11 +91,12 @@ class EditListRoomsView: BaseViewControllerPlain {
         collectionView.reloadData()
         updateCollectionViewHeight(collectionView, collectionViewHeight)
         
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 40, bottom: 10, right: 20)
-            flowLayout.minimumLineSpacing = 10
-            flowLayout.minimumInteritemSpacing = 10
-        }
+        
+//        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 40, bottom: 10, right: 20)
+//            flowLayout.minimumLineSpacing = 10
+//            flowLayout.minimumInteritemSpacing = 10
+//        }
     }
 
     func updateCollectionViewHeight(_ collectionView: UICollectionView, _ collectionViewHeightConstraint: NSLayoutConstraint) {
@@ -103,69 +105,147 @@ class EditListRoomsView: BaseViewControllerPlain {
         collectionViewHeightConstraint.constant = contentHeight
         self.view.layoutIfNeeded()
     }
-
     
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData {
-            guard selectedBedTypes.count > 0 else {
-                Toast.show(message: "Please select at least one bed type.")
-                return
-            }
-            let newRoomData = Room(
-                name: roomName.text,
-                description: roomDescription.text,
-                quantity: Int(roomCount.text) ?? 0,
-                roomAmenities: [],
-                pricePerNight: 0,
-                discountPercent: 0,
-                pricePerDay: 0,
-                dayDiscountPercent: 0,
-                bedTypes: selectedBedTypes,
-                hasPrivateBathroom: privateStatus ?? 0,
-                noOfOccupant: Int(peopleCount.text) ?? 0,
-                images: []
-            )
-            
-            allRoomData.append(newRoomData)
-            
-            if var createBeachListing = createBeachListing {
-                createBeachListing.rooms = allRoomData
-                print(createBeachListing)
-                
-                coordinator?.gotoEditRoomAmenitiesView(beachData: beachData, request: createBeachListing, room: room)
-            }
+        guard let id = id, let beachData = beachData, let createBeachListing = createBeachListing,
+              let roomNameToFind = room, let rooms = createBeachListing.rooms,
+              let roomIndex = rooms.firstIndex(where: { $0.name == roomNameToFind }) else {
+            print("Error: Invalid data or room not found")
+            return
         }
+        
+        guard selectedBedTypes.count > 0 else {
+            Toast.show(message: "Please select at least one bed type.")
+            return
+        }
+        
+        // Get the existing room to preserve its data
+        var existingRoom = rooms[roomIndex]
+        
+        // Update only the fields that are edited in this view
+        existingRoom.name = roomName.text
+        existingRoom.description = roomDescription.text
+        existingRoom.quantity = Int(roomCount.text) ?? 0
+        existingRoom.noOfOccupant = Int(peopleCount.text) ?? 0
+        existingRoom.hasPrivateBathroom = privateStatus ?? 0
+        existingRoom.bedTypes = selectedBedTypes
+        
+        // Update the rooms array
+        var updatedRoomInfo = rooms
+        updatedRoomInfo[roomIndex] = existingRoom
+        
+        // Update createBeachListing with the modified rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+        
+        print("Updated Room: \(existingRoom)")
+        print("Updated CreateBeachListing: \(updatedBeachListing)")
+        
+        coordinator?.gotoEditRoomAmenitiesView(beachData: beachData, request: updatedBeachListing, room: room, id: id)
     }
-    
-    @IBAction func saveAndExit(_ sender: Any) {
-        let newRoomData = Room(
-            name: roomName.text,
-            description: roomDescription.text,
-            quantity: Int(roomCount.text) ?? 0,
-            roomAmenities: [],
-            pricePerNight: 0,
-            discountPercent: 0,
-            pricePerDay: 0,
-            dayDiscountPercent: 0,
-            bedTypes: selectedBedTypes,
-            hasPrivateBathroom: privateStatus ?? 0,
-            noOfOccupant: Int(peopleCount.text) ?? 0,
-            images: []
-        )
-        
-        allRoomData.append(newRoomData)
-        
-        if var createBeachListing = createBeachListing {
-            createBeachListing.rooms = allRoomData
-            
-            self.createBeachListing = createBeachListing
-            
-            print(createBeachListing)
-            
-            coordinator?.popToRoomsListScreen()
-        }
 
+    @IBAction func saveAndExit(_ sender: Any) {
+        guard let createBeachListing = createBeachListing,
+              let roomNameToFind = room, let rooms = createBeachListing.rooms,
+              let roomIndex = rooms.firstIndex(where: { $0.name == roomNameToFind }) else {
+            print("Error: Invalid data or room not found")
+            return
+        }
+        
+        guard selectedBedTypes.count > 0 else {
+            Toast.show(message: "Please select at least one bed type.")
+            return
+        }
+        
+        // Get the existing room to preserve its data
+        var existingRoom = rooms[roomIndex]
+        
+        // Update only the fields that are edited in this view
+        existingRoom.name = roomName.text
+        existingRoom.description = roomDescription.text
+        existingRoom.quantity = Int(roomCount.text) ?? 0
+        existingRoom.noOfOccupant = Int(peopleCount.text) ?? 0
+        existingRoom.hasPrivateBathroom = privateStatus ?? 0
+        existingRoom.bedTypes = selectedBedTypes
+        
+        // Update the rooms array
+        var updatedRoomInfo = rooms
+        updatedRoomInfo[roomIndex] = existingRoom
+        
+        // Update createBeachListing with the modified rooms
+        var updatedBeachListing = createBeachListing
+        updatedBeachListing.rooms = updatedRoomInfo
+        self.createBeachListing = updatedBeachListing
+        
+        print("Updated Room: \(existingRoom)")
+        print("Updated CreateBeachListing: \(updatedBeachListing)")
+        
+        coordinator?.popToRoomsListScreen()
     }
+
+    
+//    @IBAction func nextTapped(_ sender: Any) {
+//        guard let id = id else { return }
+//        if let beachData = beachData {
+//            guard selectedBedTypes.count > 0 else {
+//                Toast.show(message: "Please select at least one bed type.")
+//                return
+//            }
+//            let newRoomData = Room(
+//                name: roomName.text,
+//                description: roomDescription.text,
+//                quantity: Int(roomCount.text) ?? 0,
+//                roomAmenities: [],
+//                pricePerNight: 0,
+//                discountPercent: 0,
+//                pricePerDay: 0,
+//                dayDiscountPercent: 0,
+//                bedTypes: selectedBedTypes,
+//                hasPrivateBathroom: privateStatus ?? 0,
+//                noOfOccupant: Int(peopleCount.text) ?? 0,
+//                images: []
+//            )
+//            
+//            allRoomData.append(newRoomData)
+//            
+//            if var createBeachListing = createBeachListing {
+//                createBeachListing.rooms = allRoomData
+//                print(createBeachListing)
+//                
+//                coordinator?.gotoEditRoomAmenitiesView(beachData: beachData, request: createBeachListing, room: room, id: id)
+//            }
+//        }
+//    }
+//    
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        let newRoomData = Room(
+//            name: roomName.text,
+//            description: roomDescription.text,
+//            quantity: Int(roomCount.text) ?? 0,
+//            roomAmenities: [],
+//            pricePerNight: 0,
+//            discountPercent: 0,
+//            pricePerDay: 0,
+//            dayDiscountPercent: 0,
+//            bedTypes: selectedBedTypes,
+//            hasPrivateBathroom: privateStatus ?? 0,
+//            noOfOccupant: Int(peopleCount.text) ?? 0,
+//            images: []
+//        )
+//        
+//        allRoomData.append(newRoomData)
+//        
+//        if var createBeachListing = createBeachListing {
+//            createBeachListing.rooms = allRoomData
+//            
+//            self.createBeachListing = createBeachListing
+//            
+//            print(createBeachListing)
+//            
+//            coordinator?.popToRoomsListScreen()
+//        }
+//
+//    }
 }
 
 extension EditListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -207,6 +287,6 @@ extension EditListRoomsView: UICollectionViewDelegate, UICollectionViewDataSourc
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
         let totalHorizontalInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right
         let widthOfScreen: CGFloat = collectionView.bounds.width - totalHorizontalInsets
-        return CGSize(width: widthOfScreen, height: 56)
+        return CGSize(width: widthOfScreen - 40, height: 56)
     }
 }

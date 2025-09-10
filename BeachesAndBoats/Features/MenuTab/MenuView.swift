@@ -40,7 +40,7 @@ class MenuView: UIViewController {
         verificationStatusView.layer.cornerRadius = 8
         verificationStatusLabel.textColor = .white
         
-        editPropertiesBtn.isHidden = validateServiceRole()
+//        editPropertiesBtn.isHidden = validateServiceRole()
         
         switch verificationStatus {
         case "pending":

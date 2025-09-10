@@ -13,13 +13,16 @@ class HouseSizeListView: BaseViewControllerPlain {
     
     @IBOutlet weak var stepOneProgress: UIProgressView!
     @IBOutlet weak var stepTwoProgress: UIProgressView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nextBtn: PrimaryButton!
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var houseSizeLists: [HouseListModel] = []
-    var selectedHouse: String = ""
+    var selectedHouse: HouseBookingType = .any
+    var selectedName: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beach Houses"
@@ -31,10 +34,12 @@ class HouseSizeListView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
+        titleLabel.text = "What are guests allowed to book in your \(selectedName ?? "Property")?"
+        
         houseSizeLists = [
-            .init(name: "Entire beach house", image: "", description: "Guest enjoy exclusive access to the entire premises, without the need to share the space with the host or any other guests.", type: .full),
-            .init(name: "A private room", image: "", description: "Guests can book private individual rooms, with common areas like sitting room and kitchen shared by the host and other guests.", type: .single),
-            .init(name: "Entire house or a private room", image: "", description: "Guest can book either the whole house to themselves or book private room with shared areas with other guests or host.", type: .any)
+            .init(name: "Entire beach house", image: "entireHouse", description: "Guest enjoy exclusive access to the entire premises, without the need to share the space with the host or any other guests.", type: .full),
+            .init(name: "A private room", image: "privateRoom", description: "Guests can book private individual rooms, with common areas like sitting room and kitchen shared by the host and other guests.", type: .single),
+            .init(name: "Entire house or a private room", image: "entireHouse", description: "Guest can book either the whole house to themselves or book private room with shared areas with other guests or host.", type: .any)
                         ]
 
         nextBtn.isEnabled = false
@@ -48,10 +53,9 @@ class HouseSizeListView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
-                createBeachListing.bookingType = selectedHouse
+                createBeachListing.bookingType = selectedHouse.rawValue
                 
                 print(createBeachListing)
-                
                 coordinator?.gotoPropertyNameView(beachData: beachData, createBeachListingData: createBeachListing)
             }
             
@@ -61,7 +65,7 @@ class HouseSizeListView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBeachListing = createBeachListing{
-            createBeachListing.bookingType = selectedHouse
+            createBeachListing.bookingType = selectedHouse.rawValue
             
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()
@@ -82,11 +86,11 @@ extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSourc
         let view = SelectableView(frame: cell.bounds)
         view.identifier = "House Size Cell " + indexPath.description
         view.titleAndSubtitleWithImageOnlyMode = true
-        view.displayImage = .property
         view.backgroundColor = .white
         let item = houseSizeLists[indexPath.row]
         view.model.title = item.name ?? ""
         view.model.subtitle = item.description ?? ""
+        view.displayImage = UIImage(named: item.image ?? "entireHouse") ?? UIImage()
         view.isUserInteractionEnabled = false
         cell.applyView(view: view)
         return cell
@@ -109,7 +113,7 @@ extension HouseSizeListView: UICollectionViewDelegate, UICollectionViewDataSourc
                 v.model.state = true
             }
         }
-        selectedHouse = houseSizeLists[indexPath.row].type?.rawValue ?? ""
+        selectedHouse = houseSizeLists[indexPath.row].type ?? .any
         nextBtn.isEnabled = true
     }
 

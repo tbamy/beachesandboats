@@ -46,6 +46,8 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
             self.nextBtn.isEnabled = true
         }
         
+//        loadSavedDates()
+        
 //        if (from_when ?? Date() < currentDate) || (to_when ?? Date() < currentDate){
 //            nextBtn.isEnabled = false
 //        }else{
@@ -54,6 +56,39 @@ class BoatAvailableDatesView: BaseViewControllerPlain {
             
         
     }
+    
+//    private func checkAndLoadSavedListing() {
+//        if let savedListing = AppStorage.boatListing {
+//            print("=== LOADING SAVED BOAT LISTING ===")
+//            print("Available from: \(savedListing.availableFrom ?? "No start date")")
+//            print("Available to: \(savedListing.availableTo ?? "No end date")")
+//            
+//            // Use the saved listing
+//            createBoatListing = savedListing
+//            
+//            // Convert saved dates back to Date objects
+//            if let fromDateString = savedListing.availableFrom, !fromDateString.isEmpty {
+//                from_when = Date.fromBackendDate(fromDateString)
+//            }
+//            if let toDateString = savedListing.availableTo, !toDateString.isEmpty {
+//                to_when = Date.fromBackendDate(toDateString)
+//            }
+//            
+//            print("Loaded saved boat listing successfully")
+//            print("===============================")
+//        } else {
+//            print("No saved boat listing found, starting fresh")
+//        }
+//    }
+//    
+//    private func loadSavedDates() {
+//        // Set calendar with saved dates if available
+//        if let fromDate = from_when, let toDate = to_when {
+//            calendarView.setSelectedDates(startDate: fromDate, endDate: toDate)
+//            nextBtn.isEnabled = true
+//        }
+//    }
+
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{

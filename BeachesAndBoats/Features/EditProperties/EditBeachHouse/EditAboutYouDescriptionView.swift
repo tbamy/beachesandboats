@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditAboutYouDescriptionView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
@@ -16,9 +17,16 @@ class EditAboutYouDescriptionView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var id: String?
+    
+    var disposeBag = DisposeBag()
+    var vm = EditBeachViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Property"
+        
+        bindNetwork()
         setUp()
     }
     
@@ -37,18 +45,34 @@ class EditAboutYouDescriptionView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData{
-            if var createBeachListing = createBeachListing{
-                createBeachListing.aboutOwner = descriptionLabel.text
-                
-                self.createBeachListing = createBeachListing
-                print(createBeachListing)
-                
-                coordinator?.popToOptionsScreen()
-    
-            }
+        guard let id = id else { return }
+        if var createBeachListing = createBeachListing{
+            createBeachListing.aboutOwner = descriptionLabel.text
+            
+            self.createBeachListing = createBeachListing
+            print(createBeachListing)
+            
+            LoadingModal.show(title: "Updating Record...")
+            vm.editBeach(createBeachListing, id: id)
+
         }
     }
 
+    
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .editBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToOptionsScreen() })
+                
+            case .editBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
+    }
 
 }

@@ -286,9 +286,21 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     }
     
     @objc private func refresh(_ sender: UIRefreshControl) {
+        // Reset selection to Beach Houses
+        selectedCatIndex = 0
+        isShowingBeachHouses = true
+        isShowingBoats = false
+        isShowingServices = false
+        
+        // Trigger data fetch with default filter
         let searchFilter = GetBookingCategorySearchRequest(page: 1)
         input.onNext(.getBookingCategories(filter: searchFilter))
     }
+    
+//    @objc private func refresh(_ sender: UIRefreshControl) {
+//        let searchFilter = GetBookingCategorySearchRequest(page: 1)
+//        input.onNext(.getBookingCategories(filter: searchFilter))
+//    }
     
     // MARK: - UI Helper Methods
     private func addShadow(to view: UIView) {
@@ -313,12 +325,14 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     
     // MARK: - Data Processing
     private func processBeachHouseSelection() {
-        selectedBeachCat = Array(categories.prefix(2).compactMap { $0.id })
-        let selectedCategories = categories.filter { selectedBeachCat.contains($0.id ?? "") }
-        
+//        selectedBeachCat = Array(categories.prefix(2).compactMap { $0.id })
+//        let selectedCategories = categories.filter { selectedBeachCat.contains($0.id ?? "") }
+        let selectedCategories = categories.filter { $0.propertyType == "BeachHouse" }
         beaches = selectedCategories.flatMap { $0.listings ?? [] }
         topRatedBeaches = beaches.filter { Int(($0.rating)) >= Constants.topRatingThresholdBeach }
         subcategories = selectedCategories.flatMap { $0.subCategories ?? [] }
+        
+        print("Beaches data: \(beaches)")
         
         DispatchQueue.main.async {
             self.updateUIForBeachHouseSelection()
@@ -326,32 +340,21 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     }
     
     private func processBoatSelection(at index: Int) {
-        selectedBoatCat = categories[index].id ?? ""
-        let selectedCategories = categories.filter { $0.id == selectedBoatCat }
+//        selectedBoatCat = categories[index].id ?? ""
+//        let selectedCategories = categories.filter { $0.id == selectedBoatCat }
+        let selectedCategories = categories.filter { $0.propertyType == "Boat" }
         
         boats = selectedCategories.flatMap { $0.listings ?? [] }
         topRatedBoats = boats.filter { Int(($0.rating)) >= Constants.topRatingThresholdBoat }
         subcategories = selectedCategories.flatMap { $0.subCategories ?? [] }
         
+        print("Boats data: \(boats)")
+        
         DispatchQueue.main.async {
             self.updateUIForBoatSelection()
         }
     }
-    
-//    private func processServiceSelection(at index: Int) {
-//        selectedServiceCat = categories[index].id ?? ""
-//        let selectedCategories = categories.filter { $0.id == selectedServiceCat }
-//        
-//        services = selectedCategories.flatMap { $0.beachHouseBookings ?? [] }
-//        print("Selected service: \(selectedServiceCat)")
-////        print("services: \(services)")
-//        print("services: \(services)")
-////        print(services)
-//        DispatchQueue.main.async {
-//            self.updateUIForServiceSelection()
-//        }
-//        
-//    }
+
     
     private func processServiceSelection(at index: Int) {
         selectedServiceCat = categories[index].id ?? ""
@@ -370,7 +373,7 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
 
 
         
-        if hasBoatBookings || hasBeachBookings {
+//        if hasBoatBookings || hasBeachBookings {
             var bookingsArray = [ServiceBookingItem]()
             
             if hasBoatBookings{
@@ -387,7 +390,7 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
             DispatchQueue.main.async {
                 self.updateUIForServiceSelection()
             }
-        }
+//        }
     }
     
     // MARK: - UI State Updates
@@ -508,6 +511,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     // Updated cell configuration methods in HomeView
     private func configureBeachHouseCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath, data: [Listing]) {
         let beach = data[indexPath.item]
+        var isEntireHouse: Bool = beach.bookingType == "FULL"
         
         // Create fresh view for each cell
         let view = GeneralViewCell()
@@ -523,7 +527,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         view.model = GeneralViewCellModel(
             ribbonTagLabel: "",
             titleLabel: beach.name,
-            priceLabel: "₦ \(beach.minRoomPricePerNight?.toAmount() ?? "0")",
+            priceLabel: isEntireHouse ? "₦ \(beach.pricePerNight?.toAmount() ?? "0")" : "₦ \(beach.minRoomPricePerNight?.toAmount() ?? "0")",
             ratingLabel: "\(beach.rating)",
             infoOneLabel: formatLocationString(beach.locations),
             infoTwoLabel: formatDateRange(from: beach.availabilities?.availableFrom,
@@ -575,7 +579,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             titleLabel: boat.name,
             priceLabel: "", // Hidden in boat mode
             ratingLabel: "\(boat.rating)",
-            infoOneLabel: "Capacity: 1 - \((Int(boat.noOfAdults ?? "0") ?? 0) + (Int(boat.noOfChildren ?? "0") ?? 1))",
+            infoOneLabel: "Capacity: 1 - \(Int(boat.noOfPassengers ?? "1") ?? 1)",
             infoTwoLabel: formatLocationString(boat.locations),
             bannerImg: boat.images?.first?.url ?? ""
         )
@@ -677,9 +681,9 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case .subcategory:
             return CGSize(width: collectionView.bounds.width / 4, height: 50)
         case .topRatedBeachHouse, .topRatedBoat:
-            return CGSize(width: collectionView.bounds.width - 35, height: 420)
+            return CGSize(width: collectionView.bounds.width - 35, height: 400)
         case .beachHouse, .boat:
-            return CGSize(width: collectionView.bounds.width - 10, height: 420)
+            return CGSize(width: collectionView.bounds.width - 10, height: 400)
         case .service:
             return CGSize(width: collectionView.bounds.width, height: 94)
         }
@@ -690,7 +694,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 private extension HomeView {
     func formatLocationString(_ location: Location?) -> String {
         guard let location = location else { return "" }
-        return "\(location.city ?? ""), \(location.state ?? "") \(location.country ?? "")"
+        return "\(location.jettyLocation ?? ""), \(location.name ?? "")"
     }
     
     func formatDateRange(from: String?, to: String?) -> String {
@@ -755,7 +759,7 @@ extension HomeView {
     
     private func handleCategoriesSuccess(_ response: GetBookingCategoryResponse) {
         guard let responseData = response.data else { return }
-        
+        isShowingBeachHouses = true
         categories = mapCategories(categories: responseData)
         originalCategories = categories
         processBeachHouseSelection()
@@ -783,40 +787,8 @@ extension HomeView {
         
         print("Filtered Categories are: \(filteredCategories)")
         
-        // Find Beach Houses and Boats categories specifically for merging
-        guard let beachHousesCategory = filteredCategories.first(where: { $0.name == "Beach Houses" }),
-              let boatsCategory = filteredCategories.first(where: { $0.name == "Boats" }) else {
-            return filteredCategories
-        }
-        
-        // Merge Beach Houses and Boats listings and subcategories
-        let mergedListings = (beachHousesCategory.listings ?? []) + (boatsCategory.listings ?? [])
-        let mergedSubCategories = (beachHousesCategory.subCategories ?? []) + (boatsCategory.subCategories ?? [])
-        
-        let mergedBeachHousesCategory = PropertyCategory(
-            id: beachHousesCategory.id,
-            name: beachHousesCategory.name,
-            propertyType: beachHousesCategory.propertyType,
-            description: beachHousesCategory.description,
-            image: beachHousesCategory.image,
-            subCategories: mergedSubCategories,
-            listings: mergedListings,
-            boatBookings: beachHousesCategory.boatBookings,
-            beachHouseBookings: beachHousesCategory.beachHouseBookings
-        )
-        
-        // Create final array with merged Beach Houses category, original Boats category, and Services category
-        var finalCategories: [PropertyCategory] = [mergedBeachHousesCategory]
-        
-        // Add Boats category (unchanged)
-        finalCategories.append(boatsCategory)
-        
-        // Add Services category if it exists
-        if let servicesCategory = filteredCategories.first(where: { $0.name == "Services" }) {
-            finalCategories.append(servicesCategory)
-        }
-        
-        return finalCategories
+        // Return the filtered categories without merging
+        return filteredCategories.sorted { $0.name ?? "" < $1.name ?? "" } // Optional: sort to ensure consistent order
     }
     
     private func selectServiceProvider(propertyType: String, bookingId: String) {
@@ -853,7 +825,7 @@ enum ServiceBookingItem{
     var id: String{
         switch self {
         case .boat(let booking):
-            return booking.bookingId
+            return booking.bookingId ?? ""
         case .beachHouse(let booking):
             return booking.id
         }
@@ -871,7 +843,7 @@ enum ServiceBookingItem{
     var name: String{
         switch self {
         case .boat(let booking):
-            return booking.boat.name
+            return booking.boat?.name ?? ""
         case .beachHouse(let booking):
             return booking.beachHouse?.name ?? ""
         }
@@ -880,7 +852,7 @@ enum ServiceBookingItem{
     var image: String{
         switch self {
         case .boat(let booking):
-            return booking.boat.images?.first?.url ?? ""
+            return booking.boat?.images?.first?.url ?? ""
         case .beachHouse(let booking):
             return booking.beachHouse?.image ?? ""
         }
@@ -889,7 +861,7 @@ enum ServiceBookingItem{
     var date: String{
         switch self {
         case .boat(let booking):
-            return booking.bookingDate
+            return booking.bookingDate ?? ""
         case .beachHouse(let booking):
             return "\(booking.checkingDate.convertToShorterDateFormat() ?? "") - \(booking.checkoutDate.convertToShorterDateFormat() ?? "")"
         }
@@ -898,9 +870,9 @@ enum ServiceBookingItem{
     var location: String{
         switch self {
         case .boat(let booking):
-            return "\(booking.boat.locations?.city ?? ""), \(booking.boat.locations?.state ?? "") \(booking.boat.locations?.country ?? "")"
+            return "\(booking.boat?.locations?.jettyLocation ?? ""), \(booking.boat?.locations?.name ?? "")"
         case .beachHouse(let booking):
-            return "\(booking.beachHouse?.locations?.city ?? ""), \(booking.beachHouse?.locations?.state ?? "") \(booking.beachHouse?.locations?.country ?? "")"
+            return "\(booking.beachHouse?.locations?.jettyLocation ?? ""), \(booking.beachHouse?.locations?.name ?? "")"
         }
     }
 }

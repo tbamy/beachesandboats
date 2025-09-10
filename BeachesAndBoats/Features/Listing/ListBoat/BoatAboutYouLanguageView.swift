@@ -22,10 +22,77 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
     var languageList: [Languages]?
     var selectedLanguages: [String] = []
     
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        title = "Boats"
+//        setup()
+//    }
+//    
+//    func setup(){
+//        stepOneProgress.setProgress(0.75, animated: true)
+//        stepOneProgress.tintColor = .B_B
+//        stepTwoProgress.setProgress(0, animated: false)
+//        
+//        languageList = boatData?.languages
+//        
+//        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+//        collectionView.allowsMultipleSelection = true
+//        collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+//    }
+//
+//    @IBAction func nextTapped(_ sender: Any) {
+// 
+//        if let boatData = boatData{
+//            if var createBoatListing = createBoatListing{
+//                createBoatListing.languages = selectedLanguages
+//                
+//                print(createBoatListing)
+//                
+//                coordinator?.gotoBoatAboutYouDescriptionView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+//            }
+//            
+//        }
+//    }
+//    
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        if var createBoatListing = createBoatListing{
+//            createBoatListing.languages = selectedLanguages
+//            
+//            AppStorage.boatListing = createBoatListing
+//            coordinator?.backToDashboard()
+//        }
+//        
+//    }
+//
+//
+//}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
+        
+        checkAndLoadSavedListing()
         setup()
+    }
+    
+    private func checkAndLoadSavedListing() {
+        if let savedListing = AppStorage.boatListing {
+            print("=== LOADING SAVED BOAT LISTING ===")
+            print("Languages count: \(savedListing.languages?.count ?? 0)")
+            
+            // Use the saved listing
+//            createBoatListing = savedListing
+            
+            // Load saved languages
+            selectedLanguages = savedListing.languages ?? []
+            
+            print("Loaded saved boat listing successfully")
+            print("===============================")
+        } else {
+            print("No saved boat listing found, starting fresh")
+        }
     }
     
     func setup(){
@@ -35,6 +102,9 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
         
         languageList = boatData?.languages
         
+        // Enable next button if we have saved languages
+        nextBtn.isEnabled = !selectedLanguages.isEmpty
+        
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -43,7 +113,6 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
- 
         if let boatData = boatData{
             if var createBoatListing = createBoatListing{
                 createBoatListing.languages = selectedLanguages
@@ -52,7 +121,6 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
                 
                 coordinator?.gotoBoatAboutYouDescriptionView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
             }
-            
         }
     }
     
@@ -63,11 +131,9 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
             AppStorage.boatListing = createBoatListing
             coordinator?.backToDashboard()
         }
-        
     }
-
-
 }
+
 
 extension BoatAboutYouLanguageView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -120,7 +186,7 @@ extension BoatAboutYouLanguageView: UICollectionViewDelegate, UICollectionViewDa
         
         collectionView.reloadItems(at: [indexPath])
             
-        nextBtn.isEnabled = true
+        nextBtn.isEnabled = !selectedLanguages.isEmpty
     }
 
     

@@ -71,6 +71,7 @@ class MakeBoatPaymentView: UIViewController {
     }
     
     func gotoViewBooking(){
+        MiddleModal.dismiss()
         coordinator?.switchToBookingCoordinator()
     }
     

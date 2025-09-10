@@ -29,21 +29,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="aEf-4U-Ete">
-                    <rect key="frame" x="20" y="1422" width="432" height="50"/>
+                    <rect key="frame" x="392.33333333333331" y="1422" width="59.666666666666686" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMt-qq-l73" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="191" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="rqI-N7-mfa"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
-                            <connections>
-                                <action selector="saveAndExit:" destination="-1" eventType="touchUpInside" id="K23-Zt-8nl"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWh-4v-bHX" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="241" y="0.0" width="191" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="59.666666666666664" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="tya-Kt-yKd"/>
+                            </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Next"/>
                             <connections>
@@ -239,7 +231,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BTC-bG-SM9">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BTC-bG-SM9">
                                             <rect key="frame" x="0.0" y="29.333333333333371" width="432" height="250"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
@@ -300,7 +292,6 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4zi-tc-aRb" secondAttribute="trailing" id="87t-54-9X4"/>
-                <constraint firstItem="aEf-4U-Ete" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Hul-1Z-ovQ"/>
                 <constraint firstItem="aEf-4U-Ete" firstAttribute="top" secondItem="4zi-tc-aRb" secondAttribute="bottom" constant="20" id="Iqf-s6-qWI"/>
                 <constraint firstItem="4zi-tc-aRb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="Muq-IV-PqY"/>
                 <constraint firstItem="4zi-tc-aRb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NCN-u8-Jso"/>

@@ -8,110 +8,62 @@
 import UIKit
 import MapKit
 import CoreLocation
+import RxSwift
 
 class EditPropertyAddressView: BaseViewControllerPlain {
 
     var coordinator: HostingServiceMenuCoordinator?
     
-    @IBOutlet weak var countryField: InputField!
-    @IBOutlet weak var stateField: DropDown!
-    @IBOutlet weak var streetField: InputField!
-    @IBOutlet weak var cityField: InputField!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var stepOneProgress: UIProgressView!
+    @IBOutlet weak var stepTwoProgress: UIProgressView!
+    @IBOutlet weak var locationField: InputField!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var nextBtn: PrimaryButton!
     
-    let geocoder = CLGeocoder()
-    var property: BeachHouseListing?
     var beachData: BeachDatas?
-    var states: [PickerItem]?
+    var locations: [PropertyLocation]?
     var createBeachListing: CreateBeachListingRequest?
-    var cityName: String?
-    var stateName: String?
+    private var selectedIndex: Int? = nil
+    var beachLocation: String?
+    var selectBeachLocation: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Edit Property"
+        title = "Beach Houses"
         setup()
         
     }
     
     func setup(){
-        
-        statesData()
-        countryField.text = "Nigeria"
-        countryField.textField.isEnabled = false
-        
-        stateField.text = createBeachListing?.state ?? ""
-        streetField.text = createBeachListing?.streetName ?? ""
-        cityField.text = createBeachListing?.city ?? ""
-        
-        stateField.items = states ?? []
-        
-        stateField.itemChanged = { [weak self] item in
-            self?.validateState()
-            self?.stateName = self?.stateField.text
-            self?.zoomToState()
-        }
-        
-        streetField.textChanged = { [weak self] _, _, _ in
-            self?.validateStreet()
-        }
-        
-        cityField.textChanged = { [weak self] _, _, _ in
-            self?.validateCity()
-        }
-        
-        mapView.isUserInteractionEnabled = true
-        mapView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMapTap)))
+        stepOneProgress.setProgress(0.50, animated: true)
+        stepOneProgress.tintColor = .B_B
+        stepTwoProgress.setProgress(0, animated: false)
 
-    }
-
-    
-    func zoomToState() {
-        guard let state = stateName, !state.isEmpty else { return }
-        geocoder.geocodeAddressString(state) { [weak self] placemarks, error in
-            if let coordinate = placemarks?.first?.location?.coordinate {
-                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 20000, longitudinalMeters: 20000)
-                self?.mapView.setRegion(region, animated: true)
-            }
+        locations = beachData?.property_location
+        
+        locationField.textChanged = { [weak self] textField, range, replacementString in
+            guard let self = self else { return }
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
+            
+            nextBtn.isEnabled = updatedText.count >= 5
         }
-    }
-
-    @objc func handleMapTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        let locationInView = gestureRecognizer.location(in: mapView)
-        let coordinate = mapView.convert(locationInView, toCoordinateFrom: mapView)
-        
-        // Remove existing annotations
-        mapView.removeAnnotations(mapView.annotations)
-        
-        // Add new annotation
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = "Selected Location"
-        mapView.addAnnotation(annotation)
-        
-        // Save to model
-        createBeachListing?.latitude = coordinate.latitude
-        createBeachListing?.longitude = coordinate.longitude
-        
-        print("Selected Coordinates: \(coordinate.latitude), \(coordinate.longitude)")
     }
 
             
 
     
     @IBAction func nextTapped(_ sender: Any) {
+        guard validateJettyLocation() else { return }
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
-                createBeachListing.country = countryField.text
-                createBeachListing.state = stateField.text
-                createBeachListing.city = cityField.text
-                createBeachListing.streetName = streetField.text
-                
-                self.createBeachListing = createBeachListing
+                createBeachListing.locationName = selectBeachLocation
+                createBeachListing.jettyLocation = locationField.text
                 print(createBeachListing)
                 
-                coordinator?.pop()
             }
          
             
@@ -119,64 +71,97 @@ class EditPropertyAddressView: BaseViewControllerPlain {
         }
     }
     
+    @IBAction func saveAndExit(_ sender: Any) {
+        if var createBeachListing = createBeachListing{
+
+            createBeachListing.locationName = selectBeachLocation
+            createBeachListing.jettyLocation = locationField.text
+            
+            AppStorage.beachListing = createBeachListing
+        }
+
+    }
 }
 
 
 extension EditPropertyAddressView{
-    func validateState(){
-        let _ = stateField.validate(rules: [Rule(.isEmpty, "Select a state")])
-    }
-    
-    func validateStreet(){
-        let validateStreet = streetField.validate(rules: [Rule(.isEmpty, "Enter street address")])
+    func validateJettyLocation() -> Bool{
+        let validate = locationField.validate(rules: [Rule(.isEmpty, "Enter your jetty location")])
         
-        nextBtn.isEnabled = validateStreet
+        return validate
     }
-    
-    func validateCity(){
-        let _ = cityField.validate(rules: [Rule(.isEmpty, "Enter City")])
-    }
-    
-    func statesData(){
-        states = [
-            PickerItem(name: "Abia", value: "Abia"),
-            PickerItem(name: "Adamawa", value: "Adamawa"),
-            PickerItem(name: "Akwa Ibom", value: "Akwa Ibom"),
-            PickerItem(name: "Anambra", value: "Anambra"),
-            PickerItem(name: "Bauchi", value: "Bauchi"),
-            PickerItem(name: "Bayelsa", value: "Bayelsa"),
-            PickerItem(name: "Benue", value: "Benue"),
-            PickerItem(name: "Borno", value: "Borno"),
-            PickerItem(name: "Cross River", value: "Cross River"),
-            PickerItem(name: "Delta", value: "Delta"),
-            PickerItem(name: "Ebonyi", value: "Ebonyi"),
-            PickerItem(name: "Edo", value: "Edo"),
-            PickerItem(name: "Ekiti", value: "Ekiti"),
-            PickerItem(name: "Enugu", value: "Enugu"),
-            PickerItem(name: "FCT - Abuja", value: "FCT - Abuja"),
-            PickerItem(name: "Gombe", value: "Gombe"),
-            PickerItem(name: "Imo", value: "Imo"),
-            PickerItem(name: "Jigawa", value: "Jigawa"),
-            PickerItem(name: "Kaduna", value: "Kaduna"),
-            PickerItem(name: "Kano", value: "Kano"),
-            PickerItem(name: "Katsina", value: "Katsina"),
-            PickerItem(name: "Kebbi", value: "Kebbi"),
-            PickerItem(name: "Kogi", value: "Kogi"),
-            PickerItem(name: "Kwara", value: "Kwara"),
-            PickerItem(name: "Lagos", value: "Lagos"),
-            PickerItem(name: "Nasarawa", value: "Nasarawa"),
-            PickerItem(name: "Niger", value: "Niger"),
-            PickerItem(name: "Ogun", value: "Ogun"),
-            PickerItem(name: "Ondo", value: "Ondo"),
-            PickerItem(name: "Osun", value: "Osun"),
-            PickerItem(name: "Oyo", value: "Oyo"),
-            PickerItem(name: "Plateau", value: "Plateau"),
-            PickerItem(name: "Rivers", value: "Rivers"),
-            PickerItem(name: "Sokoto", value: "Sokoto"),
-            PickerItem(name: "Taraba", value: "Taraba"),
-            PickerItem(name: "Yobe", value: "Yobe"),
-            PickerItem(name: "Zamfara", value: "Zamfara")
-        ]
 
-    }
+    
 }
+
+extension EditPropertyAddressView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return locations?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+
+        cell.isUserInteractionEnabled = true
+        let view = SelectableCheckbox(frame: cell.bounds)
+        view.checkButton.btnType = "radio"
+        view.identifier = "BeachLocations Cell " + indexPath.description
+        
+        guard let item = locations?[indexPath.row] else {
+            return cell
+        }
+        
+        view.model.subtitle = item.name ?? ""
+        
+        // Set the state based on whether this item is selected
+        view.model.state = (selectedIndex == indexPath.item)
+        
+        view.isUserInteractionEnabled = false
+        cell.applyView(view: view)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let widthOfScreen: CGFloat = collectionView.bounds.width
+//        let heightOfScreen = collectionView.bounds.height
+        return CGSize(width: widthOfScreen, height: 35)
+       
+    }
+    
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let previousIndex = selectedIndex
+        
+        // Update selection
+        if selectedIndex == indexPath.item {
+            selectedIndex = nil
+            selectBeachLocation = nil
+            beachLocation = nil
+            nextBtn.isEnabled = false
+        } else {
+            selectedIndex = indexPath.item
+            selectBeachLocation = locations?[indexPath.item].id
+            beachLocation = locations?[indexPath.item].name
+            nextBtn.isEnabled = true
+        }
+        
+        // Update the previously selected cell (if any)
+        if let previous = previousIndex,
+           let previousCell = collectionView.cellForItem(at: IndexPath(item: previous, section: 0)) as? DynamicCollectionViewCell,
+           let previousView = previousCell.subviews.first(where: { $0 is SelectableCheckbox }) as? SelectableCheckbox {
+            previousView.model.state = false
+        }
+        
+        // Update the currently selected cell
+        if let currentCell = collectionView.cellForItem(at: indexPath) as? DynamicCollectionViewCell,
+           let currentView = currentCell.subviews.first(where: { $0 is SelectableCheckbox }) as? SelectableCheckbox {
+            currentView.model.state = (selectedIndex == indexPath.item)
+        }
+        
+        print("Selected Index: \(selectedIndex ?? -1)")
+    }
+    
+}
+

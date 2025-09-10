@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditPropertyNameView: BaseViewControllerPlain {
 
@@ -17,9 +18,16 @@ class EditPropertyNameView: BaseViewControllerPlain {
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var id: String?
+    
+    var disposeBag = DisposeBag()
+    var vm = EditBeachViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Property"
+        
+        bindNetwork()
         setUp()
     }
     
@@ -57,21 +65,37 @@ class EditPropertyNameView: BaseViewControllerPlain {
 
 
     @IBAction func nextTapped(_ sender: Any) {
+        guard let id = id else { return }
         if validate(){
-            if let beachData = beachData{
-                if var createBeachListing = createBeachListing{
-                    createBeachListing.name = nameLabel.text
-                    createBeachListing.description = descriptionLabel.text
-                    
-                    self.createBeachListing = createBeachListing
-                    print(createBeachListing)
-                    
-                    coordinator?.pop()
-                    
-                }
+            if var createBeachListing = createBeachListing{
+                createBeachListing.name = nameLabel.text
+                createBeachListing.description = descriptionLabel.text
+                
+                self.createBeachListing = createBeachListing
+                print(createBeachListing)
+                
+                LoadingModal.show(title: "Updating Record...")
+                vm.editBeach(createBeachListing, id: id)
+                
                 
             }
         }
+    }
+    
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .editBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.pop() })
+                
+            case .editBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
     }
     
 }

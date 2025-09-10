@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0XF-Xg-wPc">
-                    <rect key="frame" x="20" y="138" width="353" height="633"/>
+                    <rect key="frame" x="0.0" y="138" width="393" height="633"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fl1-z1-ddE">
                         <size key="itemSize" width="128" height="128"/>
@@ -60,12 +60,12 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="0XF-Xg-wPc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="14z-CJ-fMA"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0XF-Xg-wPc" secondAttribute="trailing" constant="20" id="1y6-Rv-BGD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0XF-Xg-wPc" secondAttribute="trailing" id="1y6-Rv-BGD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="R4T-eN-xdM" secondAttribute="trailing" id="8Qf-bn-WE1"/>
                 <constraint firstItem="R4T-eN-xdM" firstAttribute="top" secondItem="0XF-Xg-wPc" secondAttribute="bottom" constant="20" id="8iL-Ad-SaQ"/>
                 <constraint firstItem="R4T-eN-xdM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Nbl-Cl-dzS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="R4T-eN-xdM" secondAttribute="bottom" id="hBU-fj-Gal"/>
-                <constraint firstItem="0XF-Xg-wPc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ooA-UA-1hN"/>
+                <constraint firstItem="0XF-Xg-wPc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ooA-UA-1hN"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="145.80152671755724" y="-102.8169014084507"/>

@@ -40,7 +40,7 @@ class ConversationsViewCell: UITableViewCell {
 //            userImg.image = UIImage(named: "dummy")
 //        }
         
-        userName.text = with.otherUser.firstName
+        userName.text = with.otherUser?.firstName
         locationLbl.text = ""
         messageLbl.text = with.lastMessage
     }

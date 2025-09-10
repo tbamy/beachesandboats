@@ -35,7 +35,7 @@ public struct PickerItem {
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
 
     
-    @IBInspectable public var numberOfCharacters: Int = 1000
+    @IBInspectable public var numberOfCharacters: Int = 255
     @IBInspectable public var identifier: String = "" { didSet {
         textField.accessibilityIdentifier = identifier
         textArea.accessibilityIdentifier = identifier
@@ -233,7 +233,7 @@ public struct PickerItem {
 extension InputField: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         guard textField.layer.borderColor != UIColor.error.cgColor else { return }
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderColor = UIColor.beachBlue.cgColor
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {

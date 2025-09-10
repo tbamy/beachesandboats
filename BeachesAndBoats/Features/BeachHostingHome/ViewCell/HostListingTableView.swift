@@ -16,6 +16,7 @@ class HostListingTableView: UITableViewCell {
     @IBOutlet weak var ratingLbl: UILabel!
     @IBOutlet weak var pricePerNightLbl: UILabel!
     
+    var isPrivateRoom: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,16 +26,18 @@ class HostListingTableView: UITableViewCell {
     func beachHouseListingCell(with data: BeachHouseListing) {
         beachName.text = data.name ?? "No name available"
         
+//        if data.bookingType
+        
         if let location = data.locations {
-            locationLbl.text = "\(location.city ?? ""), \(location.state ?? "") \(location.country ?? "")"
+            locationLbl.text = "\(location.jettyLocation ?? ""), \(location.name ?? "")"
         }
         
         if let availability = data.availabilities {
-            availabilitDate.text = "\(availability.availableFrom ?? "") - \(availability.availableTo ?? "")"
+            availabilitDate.text = "\(availability.availableFrom?.convertToShorterDateFormat() ?? "") - \(availability.availableTo?.convertToShorterDateFormat() ?? "")"
         }
         
         if let listingPrice = data.listingPrice {
-            pricePerNightLbl.text = "₦\(listingPrice) /night"
+            pricePerNightLbl.text = "₦\(listingPrice.toAmount() ?? "0")"
         }
         
         if let rating = data.rating {
@@ -51,15 +54,15 @@ class HostListingTableView: UITableViewCell {
         beachName.text = data.name
         
         if let location = data.locations {
-            locationLbl.text = "\(location.city ?? ""), \(location.state ?? "") \(location.country ?? "")"
+            locationLbl.text = "\(location.jettyLocation ?? ""), \(location.name ?? "")"
         }
         
         if let availability = data.availabilities {
-            availabilitDate.text = "\(availability.availableFrom ?? "") - \(availability.availableTo ?? "")"
+            availabilitDate.text = "\(availability.availableFrom?.convertToShorterDateFormat() ?? "") - \(availability.availableTo?.convertToShorterDateFormat() ?? "")"
         }
         
         if let listingPrice = data.destinations?.first {
-            pricePerNightLbl.text = "₦\(listingPrice.price ?? "0")"
+            pricePerNightLbl.text = "₦\(listingPrice.price?.toAmount() ?? "0")"
         }
         
         if let rating = data.rating {

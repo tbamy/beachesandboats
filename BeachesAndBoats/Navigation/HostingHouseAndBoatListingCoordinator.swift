@@ -24,4 +24,14 @@ class HostingHouseAndBoatListingCoordinator: Coordinator {
         navigationVC.modalPresentationStyle = .fullScreen
         present(viewController: navigationVC)
     }
+    
+    func gotoEditBeachHouseOptionsView(id: String?) {
+        let coordinator = HostingServiceMenuCoordinator(navigationController: self.navigationController)
+        coordinator.gotoEditBeachHouseOptionsView(id: id)
+    }
+    
+//    func gotoLoginAndSecurity() {
+//        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+//        coordinator.gotoLoginAndSecurityView()
+//    }
 }

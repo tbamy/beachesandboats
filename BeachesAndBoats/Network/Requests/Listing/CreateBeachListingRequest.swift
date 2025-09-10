@@ -18,12 +18,12 @@ struct CreateBeachListingRequest: Codable {
     var categoryId: String?
     var subCategoryId: String?
     var bookingType: String?
-    var country: String?
-    var state: String?
-    var streetName: String?
-    var city: String?
-    var latitude: Double?
-    var longitude: Double?
+    
+    var locationName: String?
+    var jettyLocation: String?
+    var additionalHouseRules: String?
+    var isPrivateStay: Int
+    
     var availableFrom: String?
     var availableTo: String?
     var amenities: [String]?
@@ -32,9 +32,16 @@ struct CreateBeachListingRequest: Codable {
     var rooms: [Room]?
     var roleType: String?
     var listingPrice: Float?
-    var discountPercent: Float?
+    var discountPercent: Int?
     var pricePerDay: Float?
-    var dayDiscountPercent: Float?
+    var dayDiscountPercent: Int?
+    
+    var noOfRooms : Int?
+    var noOfGuests : Int?
+    var noOfBeds : Int?
+    var noOfBathrooms : Int?
+    var images: [Data]?
+    
 
     
     enum CodingKeys: String, CodingKey {
@@ -47,7 +54,10 @@ struct CreateBeachListingRequest: Codable {
         case categoryId = "category_id"
         case subCategoryId = "sub_category_id"
         case bookingType = "booking_type"
-        case country, state, streetName, city, latitude, longitude
+        case locationName = "location_name"
+        case jettyLocation = "jetty_location"
+        case additionalHouseRules = "additional_house_rules"
+        case isPrivateStay = "is_private_stay"
         case availableFrom = "available_from"
         case availableTo = "available_to"
         case amenities, languages
@@ -58,18 +68,23 @@ struct CreateBeachListingRequest: Codable {
         case discountPercent = "discount_percent"
         case pricePerDay = "price_per_day"
         case dayDiscountPercent = "day_discount_percent"
+        case noOfRooms = "no_of_rooms"
+        case noOfGuests = "no_of_guests"
+        case noOfBeds = "no_of_beds"
+        case noOfBathrooms = "no_of_bathrooms"
     }
 }
 
 struct Room: Codable {
+    var id: String?
     var name: String?
     var description: String?
     var quantity: Int?
     var roomAmenities: [String]?
     var pricePerNight: Float?
-    var discountPercent: Float?
+    var discountPercent: Int?
     var pricePerDay: Float?
-    var dayDiscountPercent: Float?
+    var dayDiscountPercent: Int?
     var bedTypes: [BedType]?
     var hasPrivateBathroom: Int?
     var noOfOccupant: Int?

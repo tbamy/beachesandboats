@@ -14,6 +14,7 @@ protocol ListingService{
     func ListService(request: CreateServiceListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     func ListBoat(request: CreateBoatListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     func ListBeach(request: CreateBeachListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
-    func EditBoat(request: CreateBoatListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
-    func EditBeach(request: CreateBeachListingRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    func EditBoat(request: CreateBoatListingRequest, id: String, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    func EditBeach(request: CreateBeachListingRequest, id: String, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
+    func deleteBeachRoom(id: String, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
 }

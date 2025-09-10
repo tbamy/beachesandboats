@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditCheckInAndOutRulesView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
@@ -19,11 +20,16 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var id: String?
+    
+    var disposeBag = DisposeBag()
+    var vm = EditBeachViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Property"
         
+        bindNetwork()
         setup()
     }
 
@@ -88,7 +94,9 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
         }
 
         // All checks passed
-        if let beachData = beachData, var createBeachListing = createBeachListing {
+        if var createBeachListing = createBeachListing {
+            guard let id = id else { return }
+            
             createBeachListing.checkInFrom = checkInFrom.text
             createBeachListing.checkInTo = checkInUntil.text
             createBeachListing.checkOutFrom = checkOutFrom.text
@@ -97,9 +105,28 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
             self.createBeachListing = createBeachListing
             print(createBeachListing)
             
-            coordinator?.popToOptionsScreen()
+            LoadingModal.show(title: "Updating Record...")
+            vm.editBeach(createBeachListing, id: id)
+
         }
     }
 
+    
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .editBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.pop() })
+                
+            case .editBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
+    }
+    
 
 }

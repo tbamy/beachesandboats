@@ -19,6 +19,7 @@ class SelectHouseTypeView: BaseViewControllerPlain {
     var beachDataR: BeachDatas?
     var houseTypes: [BeachCategory]?
     var hostType: HostType?
+    var selectedHouse: String?
     
     var vm = BeachDataViewModel()
     var disposeBag = DisposeBag()
@@ -75,7 +76,7 @@ extension SelectHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSou
         cell.onSelect = { [weak self] in
             let cat = self?.houseTypes?[indexPath.item].id ?? ""
             if let beachDataR = self?.beachDataR{
-                self?.coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat, type: self?.hostType ?? .primaryHost)
+                self?.coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat, type: self?.hostType ?? .primaryHost, selectedName: self?.houseTypes?[indexPath.item].name ?? "Property")
             }
         }
         
@@ -86,7 +87,7 @@ extension SelectHouseTypeView: UICollectionViewDelegate, UICollectionViewDataSou
         print("Go to next screen")
         let cat = houseTypes?[indexPath.item].id ?? ""
         if let beachDataR = beachDataR{
-            coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat, type: hostType ?? .primaryHost)
+            coordinator?.gotoHouseTypeListView(beachData: beachDataR, cat: cat, type: hostType ?? .primaryHost, selectedName: self.houseTypes?[indexPath.item].name ?? "Property")
         }
     }
     

@@ -6,11 +6,9 @@
 //
 
 import UIKit
-import MapKit
 import SDWebImage
 import SDWebImageSVGCoder
 import RxSwift
-import CoreLocation
 
 class BeachDetailsView: BaseViewControllerPlain {
     
@@ -27,11 +25,15 @@ class BeachDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var checkoutDateLabel: HorizonDateField!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var guestCommentsCollectionView: UICollectionView!
-    @IBOutlet weak var locationView: MKMapView!
     @IBOutlet weak var hostNameLabel: UILabel!
     @IBOutlet weak var aboutHostLabel: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
     @IBOutlet weak var continueBookingView: UIView!
+    @IBOutlet weak var bookingTypeLabel: UILabel!
+    
+    @IBOutlet weak var nightBookingDateStack: UIStackView!
+    @IBOutlet weak var dayBookingDateStack: UIStackView!
+    @IBOutlet weak var dayBookingDateLabel: HorizonDateField!
     
     @IBOutlet weak var guestCommentsStack: UIStackView!
     
@@ -44,7 +46,6 @@ class BeachDetailsView: BaseViewControllerPlain {
     
     private var currentModalHeight: CGFloat = UIScreen.main.bounds.height * 0.5
     
-    let locationManager = CLLocationManager()
     var isDayBooking: Bool = false
     
     var beachDetails: GetBeachData?
@@ -55,12 +56,15 @@ class BeachDetailsView: BaseViewControllerPlain {
     var from_when: Date?
     var to_when: Date?
     
+    var booking_date: Date?
+    
     var backendFrom_when: Date?
     var backendTo_when: Date?
     
     let vm = StartConversationVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<StartConversationVM.Input>()
+    var isEntireHouse: Bool = false
     
     var id: String?
 
@@ -81,12 +85,35 @@ class BeachDetailsView: BaseViewControllerPlain {
 //        setupMap()
         checkinDateLabel.placeholder = "Select Date"
         checkoutDateLabel.placeholder = "Select Date"
+        dayBookingDateLabel.placeholder = "Select Date"
         
+        switch beachDetails?.bookingType {
+        case "ANY":
+            bookingTypeLabel.text = "Entire house or a private room"
+        case "SINGLE":
+            bookingTypeLabel.text = "Private room in a beach house"
+        case "FULL":
+            bookingTypeLabel.text = "Entire beach house"
+        default:
+            bookingTypeLabel.text = "Entire house or a private room"
+        }
+        
+        isEntireHouse = beachDetails?.bookingType == "FULL"
         
         let imgUrl = beachDetails?.rooms?.first?.images?.first?.url
         imgUrl?.loadImage(into: topImage, placeholder: "dummy")
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
+        
+        if let backendFrom_when = backendFrom_when, let backendTo_when = backendTo_when{
+            checkinDateLabel.startDate = backendFrom_when
+            checkoutDateLabel.startDate = backendFrom_when
+            dayBookingDateLabel.startDate = backendFrom_when
+            
+            checkinDateLabel.endDate = backendTo_when
+            checkoutDateLabel.endDate = backendTo_when
+            dayBookingDateLabel.endDate = backendTo_when
+        }
         
 //        if let from = backendFrom_when , let to = backendTo_when{
 //            checkinDateLabel.text = "\(from.toFormattedDate())"
@@ -95,23 +122,46 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         
         nightBookingBtn.isChecked = true
-        totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
+        totalAmountLabel.text = isEntireHouse ? "From ₦ \(beachDetails?.pricePerNight?.toAmount() ?? "0")" : "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
         
         
         dayBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
             self.isDayBooking = true
             self.nightBookingBtn.isChecked = false
+            self.nightBookingDateStack.isHidden = true
+            self.dayBookingDateStack.isHidden = false
             
-            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0")"
+//            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0") /day"
+            totalAmountLabel.text = isEntireHouse ? "From ₦ \(beachDetails?.pricePerDay?.toAmount() ?? "0") /day" : "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0") /day"
         }
         
         nightBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
             self.isDayBooking = false
             self.dayBookingBtn.isChecked = false
+            self.nightBookingDateStack.isHidden = false
+            self.dayBookingDateStack.isHidden = true
             
-            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
+//            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0") /night"
+            totalAmountLabel.text = isEntireHouse ? "From ₦ \(beachDetails?.pricePerNight?.toAmount() ?? "0") /night" : "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0") /night"
+        }
+        
+        dayBookingDateLabel.onDateSelected = { (date) in
+            
+            self.booking_date = date
+            
+            if let backendFrom = self.backendFrom_when, let backendTo = self.backendTo_when {
+                guard date >= backendFrom && date <= backendTo else {
+                    MiddleModal.show(title: "Invalid Date", subtitle: "Please pick between (\(backendFrom.toFormattedDate()) and \(backendTo.toFormattedDate()))", type: .error, dismissable: true, dismissOnConfirm: true)
+                    return
+                }
+                self.dayBookingDateLabel.text = "\(date.toFormattedDate())"
+
+            } else {
+                print("Backend dates are not set.")
+                self.dayBookingDateLabel.text = "\(date.toFormattedDate())"
+            }
         }
         
         checkinDateLabel.onDateSelected = { (date) in
@@ -194,16 +244,8 @@ class BeachDetailsView: BaseViewControllerPlain {
         }
         
         titleLabel.text = beachDetails?.name
-        locationLabel.text = "\(beachDetails?.locations?.city ?? ""), \(beachDetails?.locations?.state ?? "") \(beachDetails?.locations?.country ?? "")"
-        locationView.layer.cornerRadius = 8
-        let longitude = Double(beachDetails?.locations?.longitude ?? "") ?? 0
-        let latitude = Double(beachDetails?.locations?.latitude ?? "") ?? 0
-        
-//        let longitude = Double("-95.5878280") ?? 0
-//        let latitude = Double("23.9900130") ?? 0
-        print("\(latitude), \(longitude)")
-        
-        centerMapOnLocation(latitude: latitude, longitude: longitude)
+        locationLabel.text = "\(beachDetails?.locations?.jettyLocation ?? ""), \(beachDetails?.locations?.name ?? "")"
+
         descriptionLabel.text = beachDetails?.description
         aboutHostLabel.text = beachDetails?.aboutOwner
         hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
@@ -252,29 +294,86 @@ class BeachDetailsView: BaseViewControllerPlain {
 
     @IBAction func continueBookingTapped(_ sender: Any) {
         print("Continue Tapped")
+        guard let beachDetails = beachDetails else { return }
+        print("Details: \(beachDetails)")
+        
+        let rules = beachDetails.houseRules?.compactMap { rule -> String? in
+            return rule.description?.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
+//        let bulletRules = rules?.map { "• \($0)" }.joined(separator: "\n") ?? ""
+        let bulletRules = (rules?.map { "• \($0)" }.joined(separator: "\n") ?? "")
+        + "\n\n\(beachDetails.additionalHouseRules ?? "")"
+
+        
         let bookingType = isDayBooking ? "DAY" : "NIGHT"
-
-        if let fromWhen = from_when, let toWhen = to_when{
-            if let beachDetails = beachDetails{
-                let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: fromWhen.toBackendDate() , checkoutDate: toWhen.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
-                print(beachBookingRequest)
-                print("Details: \(beachDetails)")
-                
-                let rules = beachDetails.houseRules?.compactMap { rule -> String? in
-                    return rule.name?.trimmingCharacters(in: .whitespacesAndNewlines)
-                }
-
-                let bulletRules = rules?.map { "• \($0)" }.joined(separator: "\n") ?? ""
-                
-                HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
-                    self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
-                })
-                
-                
-            }
+        var beachBookingRequest: CreateBeachHouseBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", beachHouseId: "", checkingDate: "", checkoutDate: "" , checkingTime: "", checkoutTime: "", numberOfPeople: 0, units: 0, bookingType: bookingType)
+        
+        if isDayBooking, let bookingDate = booking_date{
+            beachBookingRequest.checkingDate = bookingDate.toBackendDate()
+            beachBookingRequest.checkoutDate = bookingDate.toBackendDate()
+            
+            print(beachBookingRequest)
+            
+        } else if let fromWhen = from_when, let toWhen = to_when{
+            beachBookingRequest.checkingDate = fromWhen.toBackendDate()
+            beachBookingRequest.checkoutDate = toWhen.toBackendDate()
+            
+            print(beachBookingRequest)
         }else{
             MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
+            return
         }
+        
+        switch beachDetails.bookingType {
+        case "ANY":
+            BookingActionModal.show(on: self.view, callBack: { [weak self] type in
+                HouseRulesModal.show(on: self?.view ?? UIView(), rules: bulletRules, callBack: { [weak self] in
+                    if type == 1 {
+                        //goto confirm booking
+                        //entire apartment
+                        self?.coordinator?.gotoConfirmBookingView(listing: beachDetails, booking: beachBookingRequest, isEntireApartment: true)
+                    }else{
+                        //rooms
+                        self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+                    }
+                    
+                })
+            })
+        case "SINGLE":
+            HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
+                self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+            })
+            
+        case "FULL":
+            HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
+                //goto confirm booking
+                self?.coordinator?.gotoConfirmBookingView(listing: beachDetails, booking: beachBookingRequest, isEntireApartment: true)
+            })
+            
+        default:
+           break
+        }
+        
+//        if isDayBooking, let bookingDate = booking_date{
+//            let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: bookingDate.toBackendDate() , checkoutDate: bookingDate.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
+//            
+//            print(beachBookingRequest)
+//            HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
+//                self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+//            })
+//            
+//        } else if let fromWhen = from_when, let toWhen = to_when{
+//            let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: fromWhen.toBackendDate() , checkoutDate: toWhen.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
+//            
+//            print(beachBookingRequest)
+//            HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
+//                self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+//            })
+//            
+//        }else{
+//            MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
+//        }
         
     }
     
@@ -398,16 +497,6 @@ extension BeachDetailsView {
         let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
 
         navigationItem.rightBarButtonItems = [addBarButtonItem, settingsBarButtonItem]
-    }
-    
-    func centerMapOnLocation(latitude: Double, longitude: Double, radius: Double = 500) {
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let region = MKCoordinateRegion(
-            center: location,
-            latitudinalMeters: radius,
-            longitudinalMeters: radius
-        )
-        locationView.setRegion(region, animated: true)
     }
 
 }

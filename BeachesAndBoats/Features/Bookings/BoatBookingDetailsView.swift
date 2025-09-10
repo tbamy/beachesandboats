@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MapKit
 import RxSwift
 import SDWebImage
 import SDWebImageSVGCoder
@@ -24,20 +23,19 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var guestCommentsCollectionView: UICollectionView!
-    @IBOutlet weak var locationView: MKMapView!
-//    @IBOutlet weak var hostNameLabel: UILabel!
-//    @IBOutlet weak var aboutHostLabel: UILabel!
+    @IBOutlet weak var hostNameLabel: UILabel!
+    @IBOutlet weak var aboutHostLabel: UILabel!
     @IBOutlet weak var proceedView: UIView!
-    @IBOutlet weak var totalAmountLabel: UILabel!
+    @IBOutlet weak var commentsStack: UIStackView!
+    @IBOutlet weak var upcomingStack: UIStackView!
     @IBOutlet weak var myDestinationStack: UIStackView!
     
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var costAmountLabel: UILabel!
-    @IBOutlet weak var cleaningFeeLabel: UILabel!
     @IBOutlet weak var serviceFeeLabel: UILabel!
     @IBOutlet weak var CostTotalAmountLabel: UILabel!
-    @IBOutlet weak var reviewBtn: PlainOutlineButton!
+    @IBOutlet weak var reviewBtn: SecondaryButton!
     
     var booking: BoatBookingsPast?
     var isupcomingBooking: Bool = false
@@ -63,6 +61,10 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     let chatVm = StartConversationVM()
     let chatInput = PublishSubject<StartConversationVM.Input>()
     var disposeBag = DisposeBag()
+    private let boatVM = BoatVM()
+    private let boatInput = PublishSubject<BoatVM.Input>()
+    
+    var boatDetails: GetBoatData?
     
     var destinationMapping: [String: Destination] = [:]
     var selectedDestination: Destination?
@@ -72,10 +74,26 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setup()
         configureAllCollectionViews()
 //        setupCustomNavigationButtons()
-        bind()
+        itemToShow()
+        
+        LoadingModal.show()
+        boatInput.onNext(.getBoat(id: booking?.boat.id ?? ""))
+    }
+    
+    func itemToShow() {
+        if isupcomingBooking {
+            proceedView.isHidden = true
+            upcomingStack.isHidden = false
+            reviewBtn.isHidden = true
+        } else {
+            upcomingStack.isHidden = true
+            proceedView.isHidden = false
+            reviewBtn.isHidden = false
+        }
     }
     
     func setup(){
@@ -88,17 +106,22 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
         }
         
         titleLabel.text = booking?.boat.name
-        locationLabel.text = "\(booking?.boat.locations?.city ?? ""), \(booking?.boat.locations?.state ?? "") \(booking?.boat.locations?.country ?? "")"
-        locationView.layer.cornerRadius = 8
+        locationLabel.text = "\(booking?.boat.locations?.jettyLocation ?? ""), \(booking?.boat.locations?.name ?? "")"
         descriptionLabel.text = booking?.boat.description
-//        aboutHostLabel.text = booking?.boat.aboutOwner
-//        hostNameLabel.text = "\(booking?.boat.owner?.firstName ?? "") \(booking?.boat?.owner?.lastName ?? "")"
+        aboutHostLabel.text = boatDetails?.aboutOwner
+        hostNameLabel.text = "\(boatDetails?.owner?.firstName ?? "") \(boatDetails?.owner?.lastName ?? "")"
         ratingLabel.text = "\(booking?.boat.rating ?? 0)"
-        totalAmountLabel.text = "₦ \(booking?.total ?? 0)"
-//        proceedView.isHidden = true
+        
+//        costLabel.text = "₦ \(booking) (Day booking)" : "₦ \(priceAndUnit) X \(booking?.noOfNights ?? 1) night(s)"
+//        costAmountLabel.text = isDayBooking ? "₦ \(priceAndUnit)" : "₦ \(totalPrice)"
+//        serviceFeeLabel.text = "₦ \(booking?.adminCharge ?? 0)"
+        CostTotalAmountLabel.text = "₦ \(booking?.total ?? 0)"
+        
         peopleCapacityLabel.text = "\(booking?.noOfPeople ?? "")"
         
-//        amenities = booking?.boat.amenities ?? []
+        amenities = boatDetails?.amenities ?? []
+        comments = boatDetails?.reviews ?? []
+        commentsStack.isHidden = comments.count < 1
         destinationLabel.text = booking?.boatDestination?.name
 
         
@@ -137,11 +160,10 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     }
     
     @IBAction func messageHostTapped(_ sender: Any) {
-//        let personId = booking?.hostID ?? ""
-//        let conversationRequest = StartConversationRequest(personId: personId, bookingId: booking?.id, propertyType: "BeachHouse")
-//        print(conversationRequest)
-//            chatInput.onNext(.startConversation(conversationRequest))
-//            LoadingModal.show()
+        let personId = booking?.hostID ?? ""
+        let conversationRequest = StartConversationRequest(personId: personId, bookingId: booking?.bookingId, propertyType: "Boat")
+        chatInput.onNext(.startConversation(conversationRequest))
+        LoadingModal.show()
     }
     
     
@@ -167,7 +189,8 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
     
     
     func bind(){
-//        chatVm.transform(input: chatInput)
+        chatVm.transform(input: chatInput)
+        boatVM.transform(input: boatInput)
         
         vm.output.subscribe(onNext: { [weak self] response in
             LoadingModal.dismiss()
@@ -186,17 +209,29 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
             
         }).disposed(by: disposeBag)
         
-//        chatVm.output.subscribe(onNext: { [weak self] data in
-//            LoadingModal.dismiss()
-//            switch data {
-//            case .startConversationSuccess(let response):
-//                if let res = response.data{
-//                    self?.coordinator?.gotoChat(otherUser: "", conversationId: res.id)
-//                }
-//            case .startConversationFailed(let error) :
-//                MiddleModal.show(title: error.message ?? "", type: .error)
-//            }
-//        }).disposed(by: disposeBag)
+        chatVm.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .startConversationSuccess(let response):
+                if let res = response.data {
+                    self?.coordinator?.gotoChat(bookingId: "", otherUser: "", conversationId: res.id, propertyType: "Boat")
+                }
+            case .startConversationFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+        
+        boatVM.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .getBoatSuccess(let response):
+                self?.boatDetails = response.data
+                self?.setup()
+                self?.categoriesCollectionView.reloadData()
+            case .getBoatFailed(let error) :
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
 
     }
 

@@ -125,6 +125,9 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Name"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type name of property"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="numberOfCharacters">
+                                    <integer key="value" value="255"/>
+                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVR-wV-6f1" customClass="TextViewField" customModule="BeachesAndBoats" customModuleProvider="target">
@@ -137,9 +140,9 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Description"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Type here "/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="numberOfCharacters">
-                                    <integer key="value" value="100000000"/>
+                                    <integer key="value" value="255"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isCounterVisible" value="NO"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isCounterVisible" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>

@@ -8,12 +8,16 @@
 import Foundation
 
 class ListingServiceImplementation: Provider<ListingTarget>, ListingService{
-    func EditBoat(request: CreateBoatListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
-        provider.request(.EditBoat(data: request)){ completion( self.handleResult(result: $0))}
+    func deleteBeachRoom(id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.deleteBeachRoom(id: id)){ completion( self.handleResult(result: $0))}
     }
     
-    func EditBeach(request: CreateBeachListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
-        provider.request(.EditBeach(data: request)){ completion( self.handleResult(result: $0))}
+    func EditBoat(request: CreateBoatListingRequest, id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.EditBoat(data: request, id: id)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func EditBeach(request: CreateBeachListingRequest, id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.EditBeach(data: request, id: id)){ completion( self.handleResult(result: $0))}
     }
     
     func ListService(request: CreateServiceListingRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {

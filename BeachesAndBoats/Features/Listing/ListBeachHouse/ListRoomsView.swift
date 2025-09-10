@@ -34,6 +34,8 @@ class ListRoomsView: BaseViewControllerPlain {
     var allRoomData : [Room] = []
     var currentRoomIndex: Int = 0
     
+    var room: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beach Houses"
@@ -45,6 +47,23 @@ class ListRoomsView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .success
         stepTwoProgress.setProgress(0.1, animated: true)
         stepTwoProgress.tintColor = .B_B
+        
+        if let index = room,
+           index >= 0,
+           let rooms = createBeachListing?.rooms {
+            
+            let room = rooms[index]
+            
+            roomName.text = room.name ?? ""
+            roomDescription.text = room.description ?? ""
+            roomCount.text = "\(room.quantity ?? 1)"
+            peopleCount.text = "\(room.noOfOccupant ?? 1)"
+            privateRoomYes.isChecked = (room.hasPrivateBathroom ?? 0) == 1
+            privateRoomNo.isChecked = (room.hasPrivateBathroom ?? 0) == 0
+            selectedBedTypes = room.bedTypes ?? []
+        }
+
+
         
         privateRoomNo.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
@@ -92,7 +111,6 @@ class ListRoomsView: BaseViewControllerPlain {
         collectionViewHeightConstraint.constant = contentHeight
         self.view.layoutIfNeeded()
     }
-
     
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData {
@@ -100,58 +118,255 @@ class ListRoomsView: BaseViewControllerPlain {
                 Toast.show(message: "Please select at least one bed type.")
                 return
             }
-            let newRoomData = Room(
-                name: roomName.text,
-                description: roomDescription.text,
-                quantity: Int(roomCount.text) ?? 0,
-                roomAmenities: [],
-                pricePerNight: 0,
-                discountPercent: 0,
-                pricePerDay: 0,
-                dayDiscountPercent: 0,
-                bedTypes: selectedBedTypes,
-                hasPrivateBathroom: privateStatus ?? 0,
-                noOfOccupant: Int(peopleCount.text) ?? 0,
-                images: []
-            )
-            
-            allRoomData.append(newRoomData)
             
             if var createBeachListing = createBeachListing {
-                createBeachListing.rooms = allRoomData
-                print(createBeachListing)
+                // Check if we're editing an existing room or creating a new one
+                if let roomIndex = room, roomIndex >= 0, roomIndex < (createBeachListing.rooms?.count ?? 0) {
+                    // EDITING MODE: Update only the fields modified on this screen
+                    // Get the existing room data
+                    var existingRoom = createBeachListing.rooms![roomIndex]
+                    
+                    // Update only the fields that are modified on this screen
+                    existingRoom.name = roomName.text
+                    existingRoom.description = roomDescription.text
+                    existingRoom.quantity = Int(roomCount.text) ?? 0
+                    existingRoom.bedTypes = selectedBedTypes
+                    existingRoom.hasPrivateBathroom = privateStatus ?? 0
+                    existingRoom.noOfOccupant = Int(peopleCount.text) ?? 0
+                    
+                    // PRESERVE all other existing data:
+                    // - roomAmenities (set in RoomAmenitiesView)
+                    // - pricePerNight (set in RoomPriceView)
+                    // - discountPercent (set in RoomPriceView)
+                    // - pricePerDay (set in RoomPricePerDayView)
+                    // - dayDiscountPercent (set in RoomPricePerDayView)
+                    // - images (set in UploadImageView)
+                    
+                    // Replace the room in the array
+                    createBeachListing.rooms![roomIndex] = existingRoom
+                    
+                    print("EDITING MODE - Updated existing room at index \(roomIndex)")
+                    print("Preserved amenities: \(existingRoom.roomAmenities?.count ?? 0)")
+                    print("Preserved price per night: \(existingRoom.pricePerNight ?? 0)")
+                    print("Preserved images: \(existingRoom.images?.count ?? 0)")
+                } else {
+                    // CREATING MODE: Create a new room with default values for unset fields
+                    let newRoomData = Room(
+                        name: roomName.text,
+                        description: roomDescription.text,
+                        quantity: Int(roomCount.text) ?? 0,
+                        roomAmenities: [], // Will be set in next screens
+                        pricePerNight: 0, // Will be set in RoomPriceView
+                        discountPercent: 0, // Will be set in RoomPriceView
+                        pricePerDay: 0, // Will be set in RoomPricePerDayView
+                        dayDiscountPercent: 0, // Will be set in RoomPricePerDayView
+                        bedTypes: selectedBedTypes,
+                        hasPrivateBathroom: privateStatus ?? 0,
+                        noOfOccupant: Int(peopleCount.text) ?? 0,
+                        images: [] // Will be set in UploadImageView
+                    )
+                    
+                    // Creating new room - append it
+                    if createBeachListing.rooms == nil {
+                        createBeachListing.rooms = []
+                    }
+                    createBeachListing.rooms?.append(newRoomData)
+                    print("CREATING MODE - Added new room to list")
+                }
                 
-                coordinator?.gotoRoomAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing)
+                print("Total rooms: \(createBeachListing.rooms?.count ?? 0)")
+                coordinator?.gotoRoomAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing, room: room)
             }
         }
     }
-    
+
+    // MARK: - Also fix the saveAndExit method with the same logic
     @IBAction func saveAndExit(_ sender: Any) {
-        let newRoomData = Room(
-            name: roomName.text,
-            description: roomDescription.text,
-            quantity: Int(roomCount.text) ?? 0,
-            roomAmenities: [],
-            pricePerNight: 0,
-            discountPercent: 0,
-            pricePerDay: 0,
-            dayDiscountPercent: 0,
-            bedTypes: selectedBedTypes,
-            hasPrivateBathroom: privateStatus ?? 0,
-            noOfOccupant: Int(peopleCount.text) ?? 0,
-            images: []
-        )
-        
-        allRoomData.append(newRoomData)
-        
         if var createBeachListing = createBeachListing {
-            createBeachListing.rooms = allRoomData
+            // Check if we're editing an existing room or creating a new one
+            if let roomIndex = room, roomIndex >= 0, roomIndex < (createBeachListing.rooms?.count ?? 0) {
+                // EDITING MODE: Update only the fields modified on this screen
+                var existingRoom = createBeachListing.rooms![roomIndex]
+                
+                // Update only the fields that are modified on this screen
+                existingRoom.name = roomName.text
+                existingRoom.description = roomDescription.text
+                existingRoom.quantity = Int(roomCount.text) ?? 0
+                existingRoom.bedTypes = selectedBedTypes
+                existingRoom.hasPrivateBathroom = privateStatus ?? 0
+                existingRoom.noOfOccupant = Int(peopleCount.text) ?? 0
+                
+                // Replace the room in the array (preserving all other fields)
+                createBeachListing.rooms![roomIndex] = existingRoom
+                
+                print("EDITING MODE - Saved existing room at index \(roomIndex)")
+            } else {
+                // CREATING MODE: Create a new room
+                let newRoomData = Room(
+                    name: roomName.text,
+                    description: roomDescription.text,
+                    quantity: Int(roomCount.text) ?? 0,
+                    roomAmenities: [],
+                    pricePerNight: 0,
+                    discountPercent: 0,
+                    pricePerDay: 0,
+                    dayDiscountPercent: 0,
+                    bedTypes: selectedBedTypes,
+                    hasPrivateBathroom: privateStatus ?? 0,
+                    noOfOccupant: Int(peopleCount.text) ?? 0,
+                    images: []
+                )
+                
+                if createBeachListing.rooms == nil {
+                    createBeachListing.rooms = []
+                }
+                createBeachListing.rooms?.append(newRoomData)
+                print("CREATING MODE - Saved new room")
+            }
             
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()
         }
-
     }
+    
+//    @IBAction func nextTapped(_ sender: Any) {
+//        if let beachData = beachData {
+//            guard selectedBedTypes.count > 0 else {
+//                Toast.show(message: "Please select at least one bed type.")
+//                return
+//            }
+//            
+//            let newRoomData = Room(
+//                name: roomName.text,
+//                description: roomDescription.text,
+//                quantity: Int(roomCount.text) ?? 0,
+//                roomAmenities: [],
+//                pricePerNight: 0,
+//                discountPercent: 0,
+//                pricePerDay: 0,
+//                dayDiscountPercent: 0,
+//                bedTypes: selectedBedTypes,
+//                hasPrivateBathroom: privateStatus ?? 0,
+//                noOfOccupant: Int(peopleCount.text) ?? 0,
+//                images: []
+//            )
+//            
+//            if var createBeachListing = createBeachListing {
+//                // Check if we're editing an existing room or creating a new one
+//                if let roomIndex = room, roomIndex >= 0, roomIndex < (createBeachListing.rooms?.count ?? 0) {
+//                    // Editing existing room - replace it
+//                    createBeachListing.rooms?[roomIndex] = newRoomData
+//                    print("Updated existing room at index \(roomIndex)")
+//                } else {
+//                    // Creating new room - append it
+//                    if createBeachListing.rooms == nil {
+//                        createBeachListing.rooms = []
+//                    }
+//                    createBeachListing.rooms?.append(newRoomData)
+//                    print("Added new room to list")
+//                }
+//                
+//                print(createBeachListing)
+//                coordinator?.gotoRoomAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing, room: room)
+//            }
+//        }
+//    }
+//
+//    // Also update the saveAndExit function:
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        let newRoomData = Room(
+//            name: roomName.text,
+//            description: roomDescription.text,
+//            quantity: Int(roomCount.text) ?? 0,
+//            roomAmenities: [],
+//            pricePerNight: 0,
+//            discountPercent: 0,
+//            pricePerDay: 0,
+//            dayDiscountPercent: 0,
+//            bedTypes: selectedBedTypes,
+//            hasPrivateBathroom: privateStatus ?? 0,
+//            noOfOccupant: Int(peopleCount.text) ?? 0,
+//            images: []
+//        )
+//        
+//        if var createBeachListing = createBeachListing {
+//            // Check if we're editing an existing room or creating a new one
+//            if let roomIndex = room, roomIndex >= 0, roomIndex < (createBeachListing.rooms?.count ?? 0) {
+//                // Editing existing room - replace it
+//                createBeachListing.rooms?[roomIndex] = newRoomData
+//            } else {
+//                // Creating new room - append it
+//                if createBeachListing.rooms == nil {
+//                    createBeachListing.rooms = []
+//                }
+//                createBeachListing.rooms?.append(newRoomData)
+//            }
+//            
+//            AppStorage.beachListing = createBeachListing
+//            coordinator?.backToDashboard()
+//        }
+//    }
+
+
+    
+//    @IBAction func nextTapped(_ sender: Any) {
+//        if let beachData = beachData {
+//            guard selectedBedTypes.count > 0 else {
+//                Toast.show(message: "Please select at least one bed type.")
+//                return
+//            }
+//            let newRoomData = Room(
+//                name: roomName.text,
+//                description: roomDescription.text,
+//                quantity: Int(roomCount.text) ?? 0,
+//                roomAmenities: [],
+//                pricePerNight: 0,
+//                discountPercent: 0,
+//                pricePerDay: 0,
+//                dayDiscountPercent: 0,
+//                bedTypes: selectedBedTypes,
+//                hasPrivateBathroom: privateStatus ?? 0,
+//                noOfOccupant: Int(peopleCount.text) ?? 0,
+//                images: []
+//            )
+//            
+//            allRoomData.append(newRoomData)
+//            
+//            if var createBeachListing = createBeachListing {
+//                createBeachListing.rooms = allRoomData
+//                print(createBeachListing)
+//                
+//                coordinator?.gotoRoomAmenitiesView(beachData: beachData, createBeachListingData: createBeachListing, room: room)
+//            }
+//        }
+//    }
+//    
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        let newRoomData = Room(
+//            name: roomName.text,
+//            description: roomDescription.text,
+//            quantity: Int(roomCount.text) ?? 0,
+//            roomAmenities: [],
+//            pricePerNight: 0,
+//            discountPercent: 0,
+//            pricePerDay: 0,
+//            dayDiscountPercent: 0,
+//            bedTypes: selectedBedTypes,
+//            hasPrivateBathroom: privateStatus ?? 0,
+//            noOfOccupant: Int(peopleCount.text) ?? 0,
+//            images: []
+//        )
+//        
+//        allRoomData.append(newRoomData)
+//        
+//        if var createBeachListing = createBeachListing {
+//            createBeachListing.rooms = allRoomData
+//            
+//            AppStorage.beachListing = createBeachListing
+//            coordinator?.backToDashboard()
+//        }
+//
+//    }
 }
 
 extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

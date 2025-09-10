@@ -12,6 +12,7 @@ class DestinationCheckboxView: BaseXib {
     @IBOutlet weak public var checkBox: CheckboxButton!
     @IBOutlet weak public var titleLabel: UILabel!
     @IBOutlet weak public var moneyInput: BigMoneyInputField!
+    @IBOutlet weak public var priceTitle: UILabel!
     @IBOutlet weak public var moneyStack: UIStackView!
 
     public var model: DestinationCheckboxModel = DestinationCheckboxModel() {
@@ -53,6 +54,13 @@ class DestinationCheckboxView: BaseXib {
         moneyInput.textField.font = UIFont.systemFont(ofSize: 20, weight: .regular)
 
         titleLabel.text = model.title
+        print(model.title)
+        if model.title == "Cruising" {
+            priceTitle.text = "Add price per hour"
+        }else{
+            priceTitle.text = "Add price per trip"
+        }
+        
         checkBox.isChecked = model.state
         moneyStack.isHidden = !checkBox.isChecked
 
@@ -93,6 +101,7 @@ class DestinationCheckboxView: BaseXib {
 struct DestinationCheckboxModel{
     public var title: String = ""
     public var state: Bool = false
+    public var priceTitle: String = ""
     public var tapped: () -> Void = {}
     public var amount: Float = 0
     public var onMoneyEntered: (Float) -> Void = {_ in }

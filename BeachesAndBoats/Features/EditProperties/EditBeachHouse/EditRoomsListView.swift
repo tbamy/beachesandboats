@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditRoomsListView: BaseViewControllerPlain {
     
@@ -13,19 +14,22 @@ class EditRoomsListView: BaseViewControllerPlain {
     
     @IBOutlet weak var nextBtn: PrimaryButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var addNewBtn: UIButton!
-    @IBOutlet weak var duplicateBtn: UIButton!
-    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var id: String?
     
     var roomsList: [Room] = []
+    
+    var disposeBag = DisposeBag()
+    var vm = EditBeachViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Property"
+        
+        bindNetwork()
         setup()
         
     }
@@ -40,21 +44,6 @@ class EditRoomsListView: BaseViewControllerPlain {
         
         roomsList = createBeachListing?.rooms ?? []
         collectionView.reloadData()
-        updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
-        
-//        addNewBtn.isHidden = true
-        duplicateBtn.isHidden = true
-        
-        addNewBtn.configureButtonTitle(title: "Add another room")
-        addNewBtn.setTitleColor(.B_B, for: .normal)
-        
-        duplicateBtn.configureButtonTitle(title: "Duplicate room")
-        duplicateBtn.setTitleColor(.B_B, for: .normal)
-        
-        duplicateBtn.isHidden = roomsList.count > 3
-        
-        addNewBtn.addTarget(self, action: #selector(addNewRoom), for: .touchUpInside)
-        duplicateBtn.addTarget(self, action: #selector(duplicateRoom), for: .touchUpInside)
         
         nextBtn.isEnabled = !roomsList.isEmpty
     }
@@ -67,53 +56,89 @@ class EditRoomsListView: BaseViewControllerPlain {
         self.view.layoutIfNeeded()
     }
     
-    @objc func addNewRoom(){
-        if let beachData = beachData, var createBeachListing = createBeachListing{
-            createBeachListing.rooms = roomsList
-//            coordinator?.EditgotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
-        }
-    }
-    
-    @objc func duplicateRoom(){
-        if var createBeachListing = createBeachListing{
-            if let existingRoom = createBeachListing.rooms?.last{
-                let roomDuplicate = Room(name: "\(existingRoom.name ?? "") Copy", description: existingRoom.description, quantity: existingRoom.quantity, roomAmenities: existingRoom.roomAmenities, pricePerNight: existingRoom.pricePerNight, discountPercent: existingRoom.discountPercent, pricePerDay: existingRoom.pricePerDay, dayDiscountPercent: existingRoom.dayDiscountPercent, bedTypes: existingRoom.bedTypes, hasPrivateBathroom: existingRoom.hasPrivateBathroom, noOfOccupant: existingRoom.noOfOccupant, images: existingRoom.images)
-                
-                createBeachListing.rooms?.append(roomDuplicate)
-                roomsList = createBeachListing.rooms ?? []
-                collectionView.reloadData()
-                updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
-                
-                duplicateBtn.isHidden = roomsList.count > 3
-            }
-        }
-    }
 
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData, let createBeachListing = createBeachListing{
+        guard let id = id else { return }
+        if let createBeachListing = createBeachListing{
             self.createBeachListing = createBeachListing
             print(createBeachListing)
             
-            coordinator?.popToOptionsScreen()
-            }
-            
-    }
+            LoadingModal.show(title: "Updating Record...")
+            vm.editBeach(createBeachListing, id: id )
 
-    
-    func deleteItem(roomName: String) {
-        if let index = roomsList.firstIndex(where: { $0.name == roomName }) {
-            roomsList.remove(at: index)
-            createBeachListing?.rooms = roomsList
-            collectionView.reloadData()
-            updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
         }
     }
 
+    
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .editBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.pop() })
+                
+            case .editBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
+        
+//        vm.deleteOutput.subscribe(onNext: {[weak self] response in
+//            LoadingModal.dismiss()
+//            
+//            switch response {
+//            case .deleteBeachRoomSuccessful(let response):
+//                print(response)
+//                Toast.show(message: response.message ?? "")
+//                
+//            case .deleteBeachRoomFailed(let error):
+//                Toast.show(message: error.message ?? "")
+//            }
+//            
+//        }).disposed(by: disposeBag)
+    }
+
+    
+//    func deleteItem(roomName: String) {
+//        if let index = roomsList.firstIndex(where: { $0.name == roomName }) {
+//            roomsList.remove(at: index)
+//            createBeachListing?.rooms = roomsList
+//            collectionView.reloadData()
+////            updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
+//        }
+//    }
+
+    func deleteRoom(id: String) {
+        LoadingModal.show()
+        vm.deleteBeachRoom(id: id)
+
+        // Listen to deleteOutput (already in bindNetwork)
+        vm.deleteOutput.subscribe(onNext: { [weak self] response in
+            LoadingModal.dismiss()
+            switch response {
+            case .deleteBeachRoomSuccessful(let response):
+                Toast.show(message: response.message ?? "")
+                
+                if let index = self?.roomsList.firstIndex(where: { $0.id == id }) {
+                    self?.roomsList.remove(at: index)
+                    self?.createBeachListing?.rooms = self?.roomsList
+                    self?.collectionView.reloadData()
+                }
+                
+            case .deleteBeachRoomFailed(let error):
+                Toast.show(message: error.message ?? "")
+            }
+        }).disposed(by: disposeBag)
+    }
+
+    
     func editItem(roomName: String) {
-        if let index = roomsList.firstIndex(where: { $0.name == roomName }) {
+        if roomsList.firstIndex(where: { $0.name == roomName }) != nil {
             if let beachData = beachData, var createBeachListing = createBeachListing {
                 createBeachListing.rooms = roomsList
-                coordinator?.gotoEditListRoomsView(beachData: beachData, request: createBeachListing, room: roomName)
+                coordinator?.gotoEditListRoomsView(beachData: beachData, request: createBeachListing, room: roomName, id: id)
             }
         }
     }
@@ -144,7 +169,10 @@ extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSourc
         view.model.roomName = item.name ?? ""
         view.model.roomPrice = "₦ \(item.pricePerNight ?? 0)"
         view.model.deleteTapped = { [weak self] in
-            self?.deleteItem(roomName: item.name ?? "")
+            guard let self = self else { return }
+            if let id = item.id {
+                self.deleteRoom(id: id)
+            }
         }
         view.model.editTapped = { [weak self] in
             self?.editItem(roomName: item.name ?? "")
@@ -161,7 +189,5 @@ extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSourc
         return CGSize(width: widthOfScreen, height: 170)
        
     }
-
-
     
 }

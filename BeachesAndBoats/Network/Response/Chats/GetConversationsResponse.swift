@@ -16,7 +16,7 @@ struct GetConversationsData: Codable {
     let id, user1_ID, user2_ID: String
     let bookingID, propertyType: String?
     let lastMessage: String?
-    let otherUser: OtherUser
+    let otherUser: OtherUser?
     let unreadMessages: Int
 
     enum CodingKeys: String, CodingKey {

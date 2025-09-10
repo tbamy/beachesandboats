@@ -41,6 +41,8 @@ class VerificationFormView: BaseViewController {
     
     func setup(){
         phoneField.keyboardType = .phonePad
+        uploadIdField.isOnlyImage = true
+        currentPictureField.isOnlyImage = true
         
         uploadIdField.onSelected = { [weak self] (data, ext) in
             self?.idDocument = data
@@ -84,23 +86,36 @@ class VerificationFormView: BaseViewController {
             switch event {
             case .kycVerificationSuccess(let response):
                 UserSession.shared.userDetails?.verificationStatus = "pending"
-                if let userRoles = user?.roles{
-                    let hostRoleStrings = hostRoles.map { $0.rawValue }
-                    let hasHostRole = userRoles.contains { hostRoleStrings.contains($0) }
-                    
-                    let serviceRoleStrings = serviceRoles.map { $0.rawValue }
-                    let hasSeviceRole = userRoles.contains { serviceRoleStrings.contains($0)}
-                    
-                    if hasHostRole{
-                        coordinator?.backToHostingDashboard()
-                    }else if hasSeviceRole{
-                        coordinator?.backToServiceDashboard()
-                    }
-                }
+                
+                MiddleModal.show(title: "Success" , subtitle: response.message ?? "", type: .success, onConfirm: { self.navigateUser() } )
+
                 
             case .kycVerificationFailed(let error):
                 MiddleModal.show(title: error.message ?? "Error ocurred", type: .error)
             }
         }).disposed(by: disposeBag)
+    }
+    
+    
+    func navigateUser(){
+        if let userRoles = user?.roles {
+            let lowercasedUserRoles = userRoles.map { $0.lowercased() }
+            
+            let hostRoleStrings = hostRoles.map { $0.rawValue.lowercased() }
+            let hasHostRole = lowercasedUserRoles.contains { hostRoleStrings.contains($0) }
+            
+            let serviceRoleStrings = serviceRoles.map { $0.rawValue.lowercased() }
+            let hasServiceRole = lowercasedUserRoles.contains { serviceRoleStrings.contains($0) }
+            
+            if hasHostRole {
+                coordinator?.backToHostingDashboard()
+            } else if hasServiceRole {
+                coordinator?.backToServiceDashboard()
+            }else{
+                coordinator?.backToDashboard()
+            }
+        }else{
+            coordinator?.backToDashboard()
+        }
     }
 }

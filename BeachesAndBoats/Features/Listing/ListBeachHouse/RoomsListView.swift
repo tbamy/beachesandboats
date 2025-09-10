@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class RoomsListView: BaseViewControllerPlain {
     
@@ -19,6 +20,8 @@ class RoomsListView: BaseViewControllerPlain {
     @IBOutlet weak var duplicateBtn: UIButton!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
+    var disposeBag = DisposeBag()
+    var vm = ListBeachViewModel()
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
@@ -30,6 +33,20 @@ class RoomsListView: BaseViewControllerPlain {
         title = "Beaches Houses"
         setup()
         
+        bindNetwork()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("RoomsListView will appear - refreshing data")
+        refreshRoomsData()
+    }
+    
+    // IMPORTANT: Add this method to refresh data when returning from editing
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("RoomsListView did appear - refreshing data")
+        refreshRoomsData()
     }
     
     func setup(){
@@ -45,9 +62,10 @@ class RoomsListView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
-        roomsList = createBeachListing?.rooms ?? []
-        collectionView.reloadData()
-        updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
+        refreshRoomsData()
+//        roomsList = createBeachListing?.rooms ?? []
+//        collectionView.reloadData()
+//        updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
         
         addNewBtn.configureButtonTitle(title: "Add another room")
         addNewBtn.setTitleColor(.B_B, for: .normal)
@@ -55,7 +73,7 @@ class RoomsListView: BaseViewControllerPlain {
         duplicateBtn.configureButtonTitle(title: "Duplicate room")
         duplicateBtn.setTitleColor(.B_B, for: .normal)
         
-        duplicateBtn.isHidden = roomsList.count > 1
+//        duplicateBtn.isHidden = roomsList.count > 1
         
         addNewBtn.addTarget(self, action: #selector(addNewRoom), for: .touchUpInside)
         duplicateBtn.addTarget(self, action: #selector(duplicateRoom), for: .touchUpInside)
@@ -74,60 +92,150 @@ class RoomsListView: BaseViewControllerPlain {
     @objc func addNewRoom(){
         if let beachData = beachData, var createBeachListing = createBeachListing{
             createBeachListing.rooms = roomsList
+            self.createBeachListing = createBeachListing
             coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
         }
     }
     
+    
     @objc func duplicateRoom(){
-        if var createBeachListing = createBeachListing{
-            if let existingRoom = createBeachListing.rooms?.first{
-                let roomDuplicate = Room(name: "\(existingRoom.name ?? "") Copy", description: existingRoom.description, quantity: existingRoom.quantity, roomAmenities: existingRoom.roomAmenities, pricePerNight: existingRoom.pricePerNight, discountPercent: existingRoom.discountPercent, pricePerDay: existingRoom.pricePerDay, dayDiscountPercent: existingRoom.dayDiscountPercent, bedTypes: existingRoom.bedTypes, hasPrivateBathroom: existingRoom.hasPrivateBathroom, noOfOccupant: existingRoom.noOfOccupant, images: existingRoom.images)
-                
-                createBeachListing.rooms?.append(roomDuplicate)
-                roomsList = createBeachListing.rooms ?? []
-                collectionView.reloadData()
-                updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
-                
-                duplicateBtn.isHidden = roomsList.count > 1
-            }
+        guard var createBeachListing = createBeachListing,
+              let roomsToDuplicate = createBeachListing.rooms,
+              !roomsToDuplicate.isEmpty else {
+            return
         }
+        
+        // Use the first room (be consistent with your choice)
+        let existingRoom = roomsToDuplicate.first!
+        
+        // Create a unique name for the duplicated room
+        let duplicatedRoomName = generateUniqueName(baseName: existingRoom.name ?? "Room", existingRooms: roomsToDuplicate)
+        
+        let roomDuplicate = Room(
+            name: duplicatedRoomName,
+            description: existingRoom.description,
+            quantity: existingRoom.quantity,
+            roomAmenities: existingRoom.roomAmenities,
+            pricePerNight: existingRoom.pricePerNight,
+            discountPercent: existingRoom.discountPercent,
+            pricePerDay: existingRoom.pricePerDay,
+            dayDiscountPercent: existingRoom.dayDiscountPercent,
+            bedTypes: existingRoom.bedTypes,
+            hasPrivateBathroom: existingRoom.hasPrivateBathroom,
+            noOfOccupant: existingRoom.noOfOccupant,
+            images: existingRoom.images
+        )
+        
+        // Update both arrays
+        roomsList.append(roomDuplicate)
+        createBeachListing.rooms = roomsList
+        
+        // Update the main createBeachListing property
+        self.createBeachListing = createBeachListing
+        
+        print("Duplicated room: \(duplicatedRoomName)")
+        
+        // Refresh the UI
+        refreshRoomsData()
     }
 
+    
+    private func refreshRoomsData() {
+        print("=== REFRESHING ROOMS DATA ===")
+        
+        // Get the latest data from createBeachListing
+        roomsList = createBeachListing?.rooms ?? []
+        
+        print("Number of rooms loaded: \(roomsList.count)")
+        for (index, room) in roomsList.enumerated() {
+            print("Room \(index): \(room.name ?? "Unnamed") - ₦\(room.pricePerNight ?? 0)")
+        }
+        
+        // Update UI elements
+        collectionView.reloadData()
+        updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
+        
+        duplicateBtn.isHidden = roomsList.count > 1
+        nextBtn.isEnabled = !roomsList.isEmpty
+        
+        print("UI updated with latest room data")
+        print("============================")
+    }
+    
     @IBAction func nextTapped(_ sender: Any) {
-        if let beachData = beachData, let createBeachListing = createBeachListing{
-                print(createBeachListing)
-                
+        if let beachData = beachData, var createBeachListing = createBeachListing{
+            // Make sure we're passing the latest room data
+            createBeachListing.rooms = roomsList
+            self.createBeachListing = createBeachListing
+            
+            print("Proceeding to next step with \(roomsList.count) rooms")
+            if createBeachListing.bookingType == "SINGLE" {
+                LoadingModal.show(title: "Hold on while we list your Property")
+                vm.createBeach(createBeachListing)
+            }else {
                 coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: createBeachListing)
             }
             
+        }
     }
     
-    
     @IBAction func saveAndExit(_ sender: Any) {
-        if let createBeachListing = createBeachListing{
+        if var createBeachListing = createBeachListing{
+            // Make sure we're saving the latest room data
+            createBeachListing.rooms = roomsList
             
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()
         }
-
     }
+
+    
+    
     
     func deleteItem(roomName: String) {
         if let index = roomsList.firstIndex(where: { $0.name == roomName }) {
             roomsList.remove(at: index)
+            
+            // Update the main createBeachListing
             createBeachListing?.rooms = roomsList
-            collectionView.reloadData()
-            updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
+            
+            print("Deleted room: \(roomName)")
+            
+            // Refresh the UI
+            refreshRoomsData()
+        }
+    }
+    
+    func editItem(roomIndex: Int) {
+        guard roomIndex >= 0, roomIndex < roomsList.count else {
+            print("Invalid room index: \(roomIndex)")
+            return
+        }
+        
+        print("Editing room at index \(roomIndex): \(roomsList[roomIndex].name ?? "Unnamed")")
+        
+        if let beachData = beachData, var createBeachListing = createBeachListing {
+            // Make sure we're passing the latest room data
+            createBeachListing.rooms = roomsList
+            self.createBeachListing = createBeachListing
+            
+            coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing, room: roomIndex)
         }
     }
 
-    func editItem(roomName: String) {
-//        if let index = roomsList.firstIndex(where: { $0.name == roomName }) {
-//            if let beachData = beachData, var createBeachListing = createBeachListing {
-//                createBeachListing.rooms = roomsList
-//                coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
-//            }
-//        }
+    
+    func bindNetwork() {
+        vm.output.subscribe(onNext: { [weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .listBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: "Success!", subtitle: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.gotoListingSuccessView(type: 2) })
+            case .listBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
     }
 
 
@@ -159,7 +267,7 @@ extension RoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, U
             self?.deleteItem(roomName: item.name ?? "")
         }
         view.model.editTapped = { [weak self] in
-            self?.editItem(roomName: item.name ?? "")
+            self?.editItem(roomIndex: indexPath.item)
         }
         view.isUserInteractionEnabled = true
         cell.applyView(view: view)
@@ -170,10 +278,26 @@ extension RoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, U
         
         let widthOfScreen: CGFloat = collectionView.bounds.width
 //        let heightOfScreen = collectionView.bounds.height
-        return CGSize(width: widthOfScreen, height: 170)
+        return CGSize(width: widthOfScreen, height: 175)
        
     }
 
-
+    private func generateUniqueName(baseName: String, existingRooms: [Room]) -> String {
+        let existingNames = Set(existingRooms.compactMap { $0.name })
+        
+        // If the base name with " Copy" doesn't exist, use it
+        let firstCopyName = "\(baseName) Copy"
+        if !existingNames.contains(firstCopyName) {
+            return firstCopyName
+        }
+        
+        // Otherwise, find the next available number
+        var counter = 2
+        while existingNames.contains("\(baseName) Copy \(counter)") {
+            counter += 1
+        }
+        
+        return "\(baseName) Copy \(counter)"
+    }
     
 }

@@ -21,8 +21,8 @@ struct BeachHouseBookingResponseData: Codable {
 
 // MARK: - BookingDetail
 struct BookingDetail: Codable {
-    let userID, hostID, beachHouseRoomID, beachHouseID: String
-    let checkingDate, checkoutDate, checkingTime, checkoutTime: String
+    let userID, hostID, beachHouseRoomID, beachHouseID: String?
+    let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
     let noOfPeople: Int
     let units: Int
     let adminCharge, total: Float

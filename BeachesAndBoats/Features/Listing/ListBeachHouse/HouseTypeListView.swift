@@ -13,12 +13,14 @@ class HouseTypeListView: BaseViewControllerPlain {
     
     @IBOutlet weak var stepOneProgress: UIProgressView!
     @IBOutlet weak var stepTwoProgress: UIProgressView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nextBtn: PrimaryButton!
     
     var houseLists: [BeachSubCategory] = []
     var beachData: BeachDatas?
     var cat: String?
+    var selectedName: String?
     var hostType: HostType?
     
     var createBeachListing: CreateBeachListingRequest?
@@ -37,14 +39,17 @@ class HouseTypeListView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
+        titleLabel.text = "What category best describes your \(selectedName ?? "Property")?"
+        
         if let categories = beachData?.categories {
-            let matchingSubCategories = categories.compactMap { category in
-                category.id == cat ? category.subCategories : nil
-            }
-            .flatMap { $0 }
-
-            houseLists = matchingSubCategories
+            houseLists = categories.first?.sub_categories ?? []
+            print(categories)
+            
+            print(categories.first?.sub_categories)
         }
+        
+        print(houseLists)
+        
         nextBtn.isEnabled = false
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -54,18 +59,16 @@ class HouseTypeListView: BaseViewControllerPlain {
     
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
-            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
+            let isPrivateStay = cat == "" ? 1 : 0
+            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", isPrivateStay: isPrivateStay, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
             
-            if cat == "06d196a0-56aa-4914-9f63-2fbd801ca39e"{
-                coordinator?.gotoPropertyNameView(beachData: beachData, createBeachListingData: request)
-            }else{
-                coordinator?.gotoHouseSizeListView(beachData: beachData, createBeachListingData: request)
-            }
+            coordinator?.gotoHouseSizeListView(beachData: beachData, createBeachListingData: request, selectedName: selectedName ?? "Property")
         }
     }
     
     @IBAction func saveAndExit(_ sender: Any) {
-        let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", country: "", state: "", streetName: "", city: "", latitude: 0, longitude: 0, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
+        let isPrivateStay = cat == "" ? 1 : 0
+        let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", isPrivateStay: isPrivateStay, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
             
             AppStorage.beachListing = request
             coordinator?.backToDashboard()

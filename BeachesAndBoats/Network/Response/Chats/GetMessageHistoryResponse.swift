@@ -17,14 +17,14 @@ struct GetMessageHistoryData: Codable {
     let currentPage: Int
     let data: [MessagesData]
     let firstPageURL: String
-    let from, lastPage: Int
+    let from, lastPage: Int?
     let lastPageURL: String
     let links: [Link]
     let nextPageURL: String?
     let path: String
     let perPage: Int
     let prevPageURL: String?
-    let to: Int
+    let to: Int?
     let total: Float
 
     enum CodingKeys: String, CodingKey {

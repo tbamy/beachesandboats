@@ -60,7 +60,7 @@ class EarningDistributionTableCell: UITableViewCell {
         
         if let beachName = data?.data?.topEarners.first?.value {
             beachNameLbl.text = beachName.beachHouse?.name
-            locationLbl.text = "\(beachName.beachHouse?.locations.city ?? ""), \(beachName.beachHouse?.locations.state ?? ""), \(beachName.beachHouse?.locations.country ?? "")"
+            locationLbl.text = "\(beachName.beachHouse?.locations.jettyLocation ?? ""), \(beachName.beachHouse?.locations.name ?? "")"
             amountLbl.text = "+₦ \(GeneralFormatter.decimalToString(((beachName.beachHouse?.listingPrice ?? 0))))"
         }
     }

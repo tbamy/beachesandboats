@@ -13,6 +13,8 @@ class HouseRulesView: BaseViewControllerPlain {
     @IBOutlet weak var stepOneProgress: UIProgressView!
     @IBOutlet weak var stepTwoProgress: UIProgressView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var additionalRulesField: TextViewField!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var nextBtn: PrimaryButton!
     
     var beachData: BeachDatas?
@@ -28,25 +30,45 @@ class HouseRulesView: BaseViewControllerPlain {
     }
     
     func setup(){
+        additionalRulesField.numberOfCharacters = 255
         stepOneProgress.setProgress(0.90, animated: true)
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
         houseRulesList = beachData?.house_rules
+        print(houseRulesList)
         
-        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
+        collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        updateCollectionViewHeight(collectionView, collectionViewHeight)
+        collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
+                
+//        additionalRulesField.textChanged = { [weak self] textField, range, replacementString in
+//            guard let self = self else { return }
+//            let currentText = textField.text ?? ""
+//            guard let stringRange = Range(range, in: currentText) else { return }
+//            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
+//            
+//            nextBtn.isEnabled = !selectedItems.isEmpty && additionalRulesField.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+//        }
+    }
+    
+    private func updateCollectionViewHeight(_ collectionView: UICollectionView, _ heightConstraint: NSLayoutConstraint) {
+        collectionView.layoutIfNeeded()
+        heightConstraint.constant = collectionView.contentSize.height
+        view.layoutIfNeeded()
     }
 
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
                 createBeachListing.houseRules = selectedItems
+                createBeachListing.additionalHouseRules = additionalRulesField.text
                 print(createBeachListing)
                 
                 coordinator?.gotoCheckInAndOutRulesView(beachData: beachData, createBeachListingData: createBeachListing)
@@ -58,6 +80,7 @@ class HouseRulesView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBeachListing = createBeachListing{
             createBeachListing.houseRules = selectedItems
+            createBeachListing.additionalHouseRules = additionalRulesField.text
             
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()

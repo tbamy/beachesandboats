@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=Failed, Property 2=error.png",
+      "filename" : "icon-error-24-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Property 1=Failed, Property 2=error@2x.png",
+      "filename" : "icon-error-24-1 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Property 1=Failed, Property 2=error@3x.png",
+      "filename" : "icon-error-24-1 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

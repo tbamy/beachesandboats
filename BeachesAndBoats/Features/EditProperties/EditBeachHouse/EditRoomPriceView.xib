@@ -38,21 +38,13 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="aEf-4U-Ete">
-                    <rect key="frame" x="20" y="704" width="353" height="50"/>
+                    <rect key="frame" x="313.33333333333331" y="704" width="59.666666666666686" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMt-qq-l73" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="IfV-oi-ZRq"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Save &amp; Exit"/>
-                            <connections>
-                                <action selector="saveAndExit:" destination="-1" eventType="touchUpInside" id="rso-Sw-ilJ"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWh-4v-bHX" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="201.66666666666663" y="0.0" width="151.33333333333337" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="59.666666666666664" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="OAX-2a-ABq"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Next"/>
@@ -176,7 +168,6 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NQa-g1-IK9" secondAttribute="trailing" constant="20" id="dVB-so-aLT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2BE-eX-NYW" secondAttribute="trailing" constant="200" id="ffE-We-ghG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vgO-Pn-AQY" secondAttribute="trailing" constant="20" id="iJv-z2-gL1"/>
-                <constraint firstItem="aEf-4U-Ete" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="psE-kV-I8h"/>
                 <constraint firstItem="hxT-lP-2Lf" firstAttribute="top" secondItem="QBD-QV-e2g" secondAttribute="bottom" constant="30" id="r7Z-kC-mog"/>
                 <constraint firstItem="hxT-lP-2Lf" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="tE9-EV-XhZ"/>
                 <constraint firstItem="Wkl-5C-22f" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="vRr-JL-1o6"/>

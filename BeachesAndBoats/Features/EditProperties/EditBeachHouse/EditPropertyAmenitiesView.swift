@@ -17,6 +17,7 @@ class EditPropertyAmenitiesView: BaseViewControllerPlain {
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var selectedItems: [String] = []
+    var id: String?
     
     var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
@@ -46,7 +47,7 @@ class EditPropertyAmenitiesView: BaseViewControllerPlain {
                 createBeachListing.amenities = selectedItems
                 print(createBeachListing)
                 
-                coordinator?.gotoEditPropertyAdditionalAmenitiesView(beachData: beachData, request: createBeachListing)
+                coordinator?.gotoEditPropertyAdditionalAmenitiesView(beachData: beachData, request: createBeachListing, id: id)
             }
         }
     }

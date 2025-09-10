@@ -8,12 +8,13 @@
 import UIKit
 import RxSwift
 
-class SignupView: BaseViewControllerPlain{
+class SignupView: BaseViewControllerPlain, AttributedLabelDelegate{
 
     var coordinator: AppCoordinator?
     @IBOutlet weak var phoneNumber: InputFieldWithLeftImg!
     @IBOutlet weak var emailAddress: InputField!
     @IBOutlet weak var loginBtn: UILabel!
+    @IBOutlet weak var terms: AttributedLabel!
     
     
     var vm = ConfirmAccountViewModel()
@@ -24,6 +25,15 @@ class SignupView: BaseViewControllerPlain{
     var resendOtp: Bool = false
     var keepSignedIn: Bool = false
     
+    enum ModalState {
+        case none
+        case confirmAccount
+        case userInformation
+        case createPassword
+    }
+    var currentModalState: ModalState = .none
+            
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -32,16 +42,29 @@ class SignupView: BaseViewControllerPlain{
         let loginGesture = UITapGestureRecognizer(target: self, action: #selector(gotoLogin))
         loginBtn.isUserInteractionEnabled = true
         loginBtn.addGestureRecognizer(loginGesture)
+        setupTerms()
         
         bindNetwork()
         
     }
+    
+    func setupTerms() {
+        let text = "By continuing, you have read and agreed to our Terms and Conditions, Privacy Statement and Nondiscrimination Policy."
+        terms.configure(text: text, links: [
+            "Terms and Conditions, Privacy Statement": URL(string: "https://google.com")!,
+            "Nondiscrimination Policy": URL(string: "https://google.com")!
+        ])
+        
+        terms.delegate = self
+                
+    }
+    
+    
+    func didTapOnLink(_ url: URL) {
+        UIApplication.shared.open(url)
+    }
 
     @IBAction func continueTapped(_ sender: Any) {
-//        userInfo = SignUpRequest(first_name: "Earl", last_name: "Tbam", dob: "", phone_code: "", phone: "", email: "", password: "", password_confirmation: "ch")
-//        if let userInfo = userInfo{
-//            CreatePasswordModal.startCreatePasswordModal(on: view, userInfo: userInfo, delegate: self, transitionDelegate: self)
-//        }
         if validateFields(){
             email = emailAddress.text
             phone = "+234\(phoneNumber.text)"
@@ -155,23 +178,33 @@ extension SignupView: CreateAccountDelegate{
     }
 }
 
-extension SignupView: ModalTransitionDelegate{
-    func presentCreatePasswordModal() {
-        UserInformationModal.dismiss()
-        if let userInfo = userInfo{
-            CreatePasswordModal.startCreatePasswordModal(on: view, userInfo: userInfo, delegate: self, transitionDelegate: self)
+extension SignupView: ModalTransitionDelegate {
+    func presentConfirmAccountModal() {
+        if currentModalState != .confirmAccount {
+            currentModalState = .confirmAccount
+            UserInformationModal.dismiss() // Clean up any existing UserInformationModal
+            ConfirmAccountModal.dismiss() // Clean up any existing ConfirmAccountModal
+            ConfirmAccountModal.startConfirmModal(on: view, delegate: self, transitionDelegate: self, purpose: .createAccount)
         }
     }
 
-    func presentConfirmAccountModal() {
-        ConfirmAccountModal.startConfirmModal(on: view, delegate: self, transitionDelegate: self, purpose: .createAccount)
+    func presentUserInformationModal(userInfo: SignUpRequest) {
+        if currentModalState != .userInformation {
+            currentModalState = .userInformation
+            ConfirmAccountModal.dismiss()
+            UserInformationModal.dismiss()
+            UserInformationModal.startUserInformationModal(on: view, info: userInfo, delegate: self, transitionDelegate: self)
+        }
     }
 
-    func presentUserInformationModal(userInfo: SignUpRequest) {
-        ConfirmAccountModal.dismiss()
-        UserInformationModal.startUserInformationModal(on: view, info: userInfo, delegate: self, transitionDelegate: self)
+    func presentCreatePasswordModal() {
+        if currentModalState != .createPassword {
+            currentModalState = .createPassword
+            UserInformationModal.dismiss()
+            ConfirmAccountModal.dismiss()
+            if let userInfo = userInfo {
+                CreatePasswordModal.startCreatePasswordModal(on: view, userInfo: userInfo, delegate: self, transitionDelegate: self)
+            }
+        }
     }
-            
-    
-    
 }

@@ -20,6 +20,7 @@ struct BoatDatas: Codable{
     let house_rules: [HouseRule]?
     let languages: [Languages]?
     let destinations: [BoatDestinations]?
+    let property_location: [PropertyLocation]?
 }
 struct BoatCategory: Codable{
     let id: String?
@@ -27,7 +28,7 @@ struct BoatCategory: Codable{
     let propertyType: String?
     let description: String?
     let image: String?
-    let subCategories: [BoatTypes]?
+    let sub_categories: [BoatTypes]?
 }
 
 struct BoatTypes: Codable{

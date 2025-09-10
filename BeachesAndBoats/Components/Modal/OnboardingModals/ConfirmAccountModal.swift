@@ -83,6 +83,10 @@ public class ConfirmAccountModal: BaseXib {
     
     @objc func closeTapped(_ sender: Any) {
         ConfirmAccountModal.dismiss()
+        if let signupView = transitionDelegate as? SignupView {
+            signupView.currentModalState = .none
+        }
+               
     }
     
     func setupCountdown(){
@@ -114,25 +118,51 @@ public class ConfirmAccountModal: BaseXib {
     }
 
     
-    public static func dismiss() {        
+//    public static func dismiss() {        
+//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+//            
+//            let subviews = keyWindow.subviews
+//            for view in subviews {
+//                for v in view.subviews {
+//                    if v is ConfirmAccountModal {
+//                        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+//                            v.frame.origin.y = Helpers.screenHeight
+//                            view.layoutIfNeeded()
+//                        }, completion: { _ in
+//                            view.removeFromSuperview()
+//                        })
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
+    
+    public static func dismiss() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             
             let subviews = keyWindow.subviews
             for view in subviews {
-                for v in view.subviews {
-                    if v is ConfirmAccountModal {
-                        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                            v.frame.origin.y = Helpers.screenHeight
-                            view.layoutIfNeeded()
-                        }, completion: { _ in
-                            view.removeFromSuperview()
-                        })
+                // Check if the view is the backdrop (identified by its background color or tag, if set)
+                if view.backgroundColor == .gray.withAlphaComponent(0.5) {
+                    for subview in view.subviews {
+                        if subview is ConfirmAccountModal {
+                            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                                subview.frame.origin.y = Helpers.screenHeight
+                                view.layoutIfNeeded()
+                            }, completion: { _ in
+                                view.removeFromSuperview() // Remove the backdrop
+                            })
+                            return
+                        }
                     }
+                    // If no ConfirmAccountModal is found, remove the backdrop anyway
+                    view.removeFromSuperview()
                 }
             }
         }
-
     }
         
 

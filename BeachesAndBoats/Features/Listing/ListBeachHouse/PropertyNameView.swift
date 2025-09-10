@@ -30,6 +30,7 @@ class PropertyNameView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
 //        nextBtn.isEnabled = false
+        descriptionLabel.numberOfCharacters = 255
         
         descriptionLabel.textChanged = { [weak self] textField, range, replacementString in
             guard let self = self else { return }

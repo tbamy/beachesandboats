@@ -66,16 +66,16 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
         }
 
         // Validation 2: Check-out cannot start before check-in ends
-        if checkOutFromTime <= checkInUntilTime {
-            MiddleModal.show(
-                title: "Check-Out Too Early",
-                subtitle: "Check-out should start after check-in ends. Please adjust the times accordingly.",
-                type: .error,
-                dismissable: true,
-                dismissOnConfirm: true
-            )
-            return
-        }
+//        if checkOutFromTime <= checkInUntilTime {
+//            MiddleModal.show(
+//                title: "Check-Out Too Early",
+//                subtitle: "Check-out should start after check-in ends. Please adjust the times accordingly.",
+//                type: .error,
+//                dismissable: true,
+//                dismissOnConfirm: true
+//            )
+//            return
+//        }
 
         // Validation 3: Check-out range
         if checkOutUntilTime <= checkOutFromTime {
@@ -97,7 +97,11 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
             createBeachListing.checkOutTo = checkOutUntil.text
 
             print(createBeachListing)
-            coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
+            if createBeachListing.bookingType == "FULL" {
+                coordinator?.gotoPropertyDetailsView(beachData: beachData, createBeachListingData: createBeachListing)
+            }else {
+                coordinator?.gotoListRoomsView(beachData: beachData, createBeachListingData: createBeachListing)
+            }
         }
     }
 

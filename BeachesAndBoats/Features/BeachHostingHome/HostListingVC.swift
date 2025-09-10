@@ -70,7 +70,7 @@ class HostListingVC: BaseViewControllerPlain {
         if let unfinishedBeachListing = AppStorage.beachListing{
             self.showUnfinishedListingModal(
                 listingName: unfinishedBeachListing.name ?? "Unnamed",
-                listingLocation: "\(unfinishedBeachListing.streetName ?? ""), \(unfinishedBeachListing.state ?? "")",
+                listingLocation: "\(unfinishedBeachListing.jettyLocation ?? ""), \(unfinishedBeachListing.locationName ?? "")",
                 showDeleteStack: false,
                 buttonOneTitle: "Continue Listing",
                 buttonOneAction: { [self] in
@@ -85,7 +85,7 @@ class HostListingVC: BaseViewControllerPlain {
         }else if let unfinishedBoatListing = AppStorage.boatListing{
             self.showUnfinishedListingModal(
                 listingName: unfinishedBoatListing.name ?? "Unnamed",
-                listingLocation: "\(unfinishedBoatListing.streetName ?? ""), \(unfinishedBoatListing.state ?? "")",
+                listingLocation: "\(unfinishedBoatListing.jettyLocation ?? ""), \(unfinishedBoatListing.locationName ?? "")",
                 showDeleteStack: false,
                 buttonOneTitle: "Continue Listing",
                 buttonOneAction: { [self] in
@@ -105,7 +105,7 @@ class HostListingVC: BaseViewControllerPlain {
         if let unfinishedBeachListing = AppStorage.beachListing{
             self.showUnfinishedListingModal(
                 listingName: unfinishedBeachListing.name ?? "Unnamed",
-                listingLocation: "\(unfinishedBeachListing.streetName ?? ""), \(unfinishedBeachListing.state ?? "")",
+                listingLocation: "\(unfinishedBeachListing.jettyLocation ?? ""), \(unfinishedBeachListing.locationName ?? "")",
                 showDeleteStack: true,
                 buttonOneTitle: "Yes, delete",
                 buttonOneAction: { [self] in
@@ -120,7 +120,7 @@ class HostListingVC: BaseViewControllerPlain {
         } else if let unfinishedBoatListing = AppStorage.boatListing{
             self.showUnfinishedListingModal(
                 listingName: unfinishedBoatListing.name ?? "Unnamed",
-                listingLocation: "\(unfinishedBoatListing.streetName ?? ""), \(unfinishedBoatListing.state ?? "")",
+                listingLocation: "\(unfinishedBoatListing.jettyLocation ?? ""), \(unfinishedBoatListing.locationName ?? "")",
                 showDeleteStack: true,
                 buttonOneTitle: "Yes, delete",
                 buttonOneAction: { [self] in
@@ -160,7 +160,7 @@ class HostListingVC: BaseViewControllerPlain {
         if let unfinishedBeachListing = AppStorage.beachListing {
             unfinishedListingStack.isHidden = false
             unfinishedListingName.text = unfinishedBeachListing.name
-            unfinishedListingLocation.text = (unfinishedBeachListing.streetName ?? "") + ", " + (unfinishedBeachListing.state ?? "") + (unfinishedBeachListing.country ?? "")
+            unfinishedListingLocation.text = (unfinishedBeachListing.jettyLocation ?? "") + ", " + (unfinishedBeachListing.locationName ?? "")
         } else {
             unfinishedListingStack.isHidden = true
         }
@@ -170,7 +170,7 @@ class HostListingVC: BaseViewControllerPlain {
         if let unfinishedBoatListing = AppStorage.boatListing {
             unfinishedListingStack.isHidden = false
             unfinishedListingName.text = unfinishedBoatListing.name
-            unfinishedListingLocation.text = (unfinishedBoatListing.streetName ?? "") + ", " + (unfinishedBoatListing.state ?? "") + (unfinishedBoatListing.country ?? "")
+            unfinishedListingLocation.text = (unfinishedBoatListing.jettyLocation ?? "") + ", " + (unfinishedBoatListing.locationName ?? "")
         } else {
             unfinishedListingStack.isHidden = true
         }
@@ -228,13 +228,13 @@ extension HostListingVC {
             case .beachHouseListingSuccess(let response):
                 if let listings = response.data?.beachHouseListings {
                     self?.beachHouseListingData = listings
-                    self?.beachHouseListingSegment.title = "Beach Houses Reservation (\(self?.beachHouseListingData.count ?? 0))"
+                    self?.beachHouseListingSegment.title = "Beach House Listings (\(self?.beachHouseListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
                     self?.updateTableHeight()
                 }
                 if let boatListings = response.data?.boatListings {
                     self?.boatListingData = boatListings
-                    self?.boatListingSegment.title = "Boats Reservation (\(self?.boatListingData.count ?? 0))"
+                    self?.boatListingSegment.title = "Boats Listings (\(self?.boatListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
                     self?.updateTableHeight()
                 }
@@ -276,6 +276,16 @@ extension HostListingVC: UITableViewDelegate, UITableViewDataSource {
             
             viewContainerHeightConstraint.constant = totalHeight
             view.layoutIfNeeded()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isShowingBeachHouses {
+            let cellAt = beachHouseListingData[indexPath.row]
+            coordinator?.gotoEditBeachHouseOptionsView(id: cellAt.id)
+        } else {
+            let cellAt = boatListingData[indexPath.row]
+            
         }
     }
     

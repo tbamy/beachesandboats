@@ -54,15 +54,23 @@ class HorizonCalendar: BaseXib {
         
         let currentDate = Date()
         let calendar = Calendar.current
-//        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
-//        let startDate = calendar.date(from: components)!
-//        let endDate = calendar.date(byAdding: .month, value: 6, to: startDate)!
-        let startDate = model.startDate
+        let today = Calendar.current.startOfDay(for: currentDate)
+        let normalizedStartDate = Calendar.current.startOfDay(for: model.startDate)
+        
+        // Determine the actual visible date range
+        let visibleStartDate: Date
+        if normalizedStartDate < today {
+            // If start date is in the past, start from the current month
+            visibleStartDate = calendar.dateInterval(of: .month, for: currentDate)?.start ?? currentDate
+        } else {
+            visibleStartDate = model.startDate
+        }
+        
         let endDate = model.endDate
 
         calendarContent = CalendarViewContent(
             calendar: calendar,
-            visibleDateRange: startDate...endDate,
+            visibleDateRange: visibleStartDate...endDate,
             monthsLayout: .vertical(options: VerticalMonthsLayoutOptions())
         )
 
@@ -70,18 +78,45 @@ class HorizonCalendar: BaseXib {
             guard let self = self else { return DayLabel.calendarItemModel(
                     invariantViewProperties: .init(
                         font: .systemFont(ofSize: 18),
-                        textColor: .label, backgroundColor: .clear),
+                        textColor: .label,
+                        backgroundColor: .clear,
+                        isEnabled: true),
                     content: .init(day: day))
             }
 
             let date = calendar.date(from: day.components)
             
-            // Default textColor and borderColor for all other days
+            // Check if date is valid
+            let today = Calendar.current.startOfDay(for: Date())
+            let normalizedDate = date.map { Calendar.current.startOfDay(for: $0) }
+            let normalizedEndDate = Calendar.current.startOfDay(for: model.endDate)
+            let normalizedStartDate = Calendar.current.startOfDay(for: model.startDate)
+            
+            let isValidDate = normalizedDate.map { normalizedDate in
+                // If start date is in the past, only check against today and end date
+                if normalizedStartDate < today {
+                    return normalizedDate >= today && normalizedDate <= normalizedEndDate
+                } else {
+                    // Normal validation: between start date and end date, not in the past
+                    return normalizedDate >= today &&
+                           normalizedDate >= normalizedStartDate &&
+                           normalizedDate <= normalizedEndDate
+                }
+            } ?? false
+            
+            // Default textColor and backgroundColor for all other days
             var textColor: UIColor = .label
             var backgroundColor: UIColor = .clear
+            var isEnabled = true
             
+            // Disable invalid dates
+            if !isValidDate {
+                textColor = .systemGray4
+                backgroundColor = .clear
+                isEnabled = false
+            }
             // Customize for start and end dates
-            if date == self.selectedStartDate {
+            else if date == self.selectedStartDate {
                 textColor = .white
                 backgroundColor = .beachBlue
             } else if date == self.selectedEndDate {
@@ -93,13 +128,14 @@ class HorizonCalendar: BaseXib {
                 // Highlight for dates in between the range
                 textColor = .label
                 backgroundColor = .bBLight
-                
             }
 
             return DayLabel.calendarItemModel(
                 invariantViewProperties: .init(
                     font: .systemFont(ofSize: 18),
-                    textColor: textColor, backgroundColor: backgroundColor),
+                    textColor: textColor,
+                    backgroundColor: backgroundColor,
+                    isEnabled: isEnabled),
                 content: .init(day: day)
             )
         }
@@ -131,8 +167,7 @@ class HorizonCalendar: BaseXib {
                 day: day.day
             ))!
             
-//            let availableDateRange = model.availableDateRange
-            // In the selection handler, replace the guard statement with:
+            // Check if the selected date is valid
             let today = Calendar.current.startOfDay(for: Date())
             let normalizedSelected = Calendar.current.startOfDay(for: selectedDate)
 
@@ -141,10 +176,25 @@ class HorizonCalendar: BaseXib {
                 return
             }
             
-//            guard availableDateRange.contains(selectedDate) else {
-//                MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
-//                return
-//            }
+            // Validate selection based on whether start date is in the past
+            let normalizedStartDate = Calendar.current.startOfDay(for: model.startDate)
+//            let today = Calendar.current.startOfDay(for: Date())
+            
+            if normalizedStartDate < today {
+                // If start date is in the past, only validate against today and end date
+                guard normalizedSelected >= today &&
+                      normalizedSelected <= Calendar.current.startOfDay(for: model.endDate) else {
+                    MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
+                    return
+                }
+            } else {
+                // Normal validation: check against available range and end date
+                guard model.availableDateRange.contains(selectedDate) &&
+                      Calendar.current.startOfDay(for: selectedDate) <= Calendar.current.startOfDay(for: model.endDate) else {
+                    MiddleModal.show(title: "Selected date is not within the available range.", type: .error)
+                    return
+                }
+            }
             
             if self.isSingleDate {
                 // Handle single date selection
@@ -208,7 +258,6 @@ class HorizonCalendar: BaseXib {
             calendarView.setContent(content)
         }
                     
-
         // Refresh calendar content to apply new highlights immediately
         calendarView.setContent(calendarContent!)
     }
@@ -218,8 +267,6 @@ class HorizonCalendar: BaseXib {
             dateFormatter.dateStyle = .medium
             return dateFormatter.string(from: date)
         }
-        
-    
 }
     
 // Custom DayView class to represent individual days in the calendar
@@ -230,6 +277,7 @@ struct DayLabel: CalendarItemViewRepresentable {
         let font: UIFont
         let textColor: UIColor
         let backgroundColor: UIColor
+        let isEnabled: Bool
     }
     
     /// Properties that will vary depending on the particular date being displayed.
@@ -243,16 +291,21 @@ struct DayLabel: CalendarItemViewRepresentable {
     {
         let label = UILabel()
         
-        label.isUserInteractionEnabled = true
+        label.isUserInteractionEnabled = invariantViewProperties.isEnabled
         label.layer.cornerRadius = .zero
-        //    label.layer.borderColor = invariantViewProperties.borderColor.cgColor
         label.font = invariantViewProperties.font
         label.textColor = invariantViewProperties.textColor
         label.backgroundColor = invariantViewProperties.backgroundColor
         
         label.textAlignment = .center
         label.clipsToBounds = true
-//        label.layer.cornerRadius = 12
+        
+        // Visual indication for disabled state
+        if !invariantViewProperties.isEnabled {
+            label.alpha = 0.9
+        } else {
+            label.alpha = 1.0
+        }
         
         return label
     }
@@ -260,14 +313,7 @@ struct DayLabel: CalendarItemViewRepresentable {
     static func setContent(_ content: Content, on view: UILabel) {
         view.text = "\(content.day.day)"
     }
-    
 }
-
-//struct HorizonCalendarModel{
-//    var startDate: Date = Date()
-//    var endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
-//    var availableDateRange: ClosedRange<Date> = Date()...Calendar.current.date(byAdding: .month, value: 6, to: Date())!
-//}
 
 struct HorizonCalendarModel {
     var startDate: Date
@@ -280,4 +326,3 @@ struct HorizonCalendarModel {
         self.availableDateRange = startDate...endDate
     }
 }
-

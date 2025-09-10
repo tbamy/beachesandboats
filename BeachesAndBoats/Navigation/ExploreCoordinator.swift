@@ -8,8 +8,14 @@
 import Foundation
 import UIKit
 
-
-class ExploreCoordinator: Coordinator{
+class ExploreCoordinator: Coordinator {
+    
+    // MARK: - Initialization
+    override init(navigationController: UINavigationController?, completion: (() -> Void)? = nil) {
+        super.init(navigationController: navigationController, completion: completion)
+    }
+    
+    // MARK: - Coordinator Methods
     override func start() {
         let vc: HomeView = .fromNib()
         vc.tabBarItem = UITabBarItem(title: "Explore", image: Assets.explore_menu.image, tag: 0)
@@ -18,7 +24,8 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoBeachDetails(id: String){
+    // MARK: - Navigation Methods
+    func gotoBeachDetails(id: String) {
         let vc: BeachDetailsView = .fromNib()
         vc.coordinator = self
         vc.id = id
@@ -26,7 +33,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoBoatDetails(id: String){
+    func gotoBoatDetails(id: String) {
         let vc: BoatDetailsView = .fromNib()
         vc.coordinator = self
         vc.id = id
@@ -34,7 +41,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoBookingRoomsListView(listing: GetBeachData, booking: CreateBeachHouseBookingRequest){
+    func gotoBookingRoomsListView(listing: GetBeachData, booking: CreateBeachHouseBookingRequest) {
         let vc: BookingRoomsListView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
@@ -43,7 +50,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoRoomDetailsView(units: Int, listing: GetBeachData, booking: CreateBeachHouseBookingRequest, room: BeachRoom){
+    func gotoRoomDetailsView(units: Int, listing: GetBeachData, booking: CreateBeachHouseBookingRequest, room: BeachRoom) {
         let vc: RoomDetailsView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
@@ -54,18 +61,34 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoConfirmBookingView(units: Int, listing: GetBeachData, booking: CreateBeachHouseBookingRequest, roomId: String){
+    func gotoConfirmBookingView(units: Int? = nil, listing: GetBeachData, booking: CreateBeachHouseBookingRequest, roomId: String? = nil, isEntireApartment: Bool = false) {
+        // Add safety checks
+        guard let navController = navigationController else {
+            print("❌ NavigationController is nil in ExploreCoordinator")
+            return
+        }
+        
+        print("✅ Creating ConfirmBookingView - NavigationController exists: \(navController)")
+        
         let vc: ConfirmBookingView = .fromNib()
-        vc.coordinator = self
+        
+        // Set properties before coordinator assignment
         vc.listing = listing
         vc.booking = booking
         vc.roomId = roomId
         vc.units = units
+        vc.isEntireApartment = isEntireApartment
         vc.hidesBottomBarWhenPushed = true
+        
+        // Assign coordinator last and with safety check
+        print("✅ About to assign coordinator to ConfirmBookingView")
+        vc.coordinator = self
+        print("✅ Coordinator assigned successfully")
+        
         push(viewController: vc)
     }
     
-    func gotoConfirmBoatBookingView(listing: GetBoatData, booking: CreateBoatBookingRequest, destination: Destination){
+    func gotoConfirmBoatBookingView(listing: GetBoatData, booking: CreateBoatBookingRequest, destination: Destination) {
         let vc: ConfirmBoatBookingView = .fromNib()
         vc.coordinator = self
         vc.listing = listing
@@ -75,7 +98,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoConfirmServiceBookingView(paymentData: PaymentData, bookingDetail: InvoiceBookingDetails){
+    func gotoConfirmServiceBookingView(paymentData: PaymentData, bookingDetail: InvoiceBookingDetails) {
         let vc: ConfirmServiceBookingView = .fromNib()
         vc.coordinator = self
         vc.paymentData = paymentData
@@ -84,35 +107,32 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoMakePayment(bookingResponse: BeachHouseBookingResponse){
+    func gotoMakePayment(bookingResponse: BeachHouseBookingResponse) {
         let vc: MakePaymentView = .fromNib()
         vc.coordinator = self
-//        vc.accessCode = accessCode
         vc.bookingResponse = bookingResponse
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoMakeBoatPayment(bookingResponse: BoatBookingResponse){
+    func gotoMakeBoatPayment(bookingResponse: BoatBookingResponse) {
         let vc: MakeBoatPaymentView = .fromNib()
         vc.coordinator = self
-//        vc.accessCode = accessCode
         vc.bookingResponse = bookingResponse
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoMakeServicePayment(paymentData: PaymentData?, bookingDetail: InvoiceBookingDetails?){
+    func gotoMakeServicePayment(paymentData: PaymentData?, bookingDetail: InvoiceBookingDetails?) {
         let vc: MakeServicePaymentView = .fromNib()
         vc.coordinator = self
-//        vc.accessCode = accessCode
         vc.paymentData = paymentData
         vc.bookingDetail = bookingDetail
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoAllPhotos(images: [String]){
+    func gotoAllPhotos(images: [String]) {
         let vc: AllPhotosView = .fromNib()
         vc.coordinator = self
         vc.images = images
@@ -120,7 +140,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoFindChef(propertyType: String, bookingId: String){
+    func gotoFindChef(propertyType: String, bookingId: String) {
         let vc: FindChefView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
@@ -129,7 +149,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoFindBouncer(propertyType: String, bookingId: String){
+    func gotoFindBouncer(propertyType: String, bookingId: String) {
         let vc: FindBouncerView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
@@ -138,7 +158,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoFindDj(propertyType: String, bookingId: String){
+    func gotoFindDj(propertyType: String, bookingId: String) {
         let vc: FindDJView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
@@ -147,7 +167,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoRecommentdations(propertyType: String, bookingId: String, data: FindServiceProviderResponse, provider: String ){
+    func gotoRecommentdations(propertyType: String, bookingId: String, data: FindServiceProviderResponse, provider: String) {
         let vc: RecommendationsView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
@@ -158,7 +178,7 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoServiceProviderDetails(propertyType: String, bookingId: String, data: FindProviderResponseData, provider: String ){
+    func gotoServiceProviderDetails(propertyType: String, bookingId: String, data: FindProviderResponseData, provider: String) {
         let vc: ServiceProviderDetailsView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
@@ -169,19 +189,8 @@ class ExploreCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-//    func gotoChat(otherUser: String, conversationId: String){
-//        let vc: ChatView = .fromNib()
-//        vc.coordinator = self
-////        vc.messages = data
-//        vc.otherUser = otherUser
-//        vc.conversationId = conversationId
-////        vc.hidesBottomBarWhenPushed = true
-//        push(viewController: vc)
-//    }
-    
-    func gotoChat(bookingId: String,otherUser: String, conversationId: String, propertyType:String){
+    func gotoChat(bookingId: String, otherUser: String, conversationId: String, propertyType: String) {
         let coordinator = MessagesCoordinator(navigationController: self.navigationController)
-//        coordinator.gotoChat(otherUser: otherUser, conversationId: conversationId)
         coordinator.gotoChat(bookingId: bookingId, otherUser: otherUser, conversationId: conversationId, propertyType: propertyType)
     }
     
@@ -200,6 +209,9 @@ class ExploreCoordinator: Coordinator{
             tabBarController.selectedIndex = 2
         }
     }
-
+    
+    // MARK: - Deinitializer
+    deinit {
+        print("--- ExploreCoordinator deinit")
+    }
 }
-

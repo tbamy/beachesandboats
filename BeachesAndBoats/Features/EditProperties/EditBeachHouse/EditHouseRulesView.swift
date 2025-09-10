@@ -16,6 +16,7 @@ class EditHouseRulesView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var id: String?
     
     var houseRulesList: [HouseRule]?
     var selectedItems: [String] = []
@@ -27,6 +28,7 @@ class EditHouseRulesView: BaseViewControllerPlain {
     }
     
     func setup(){
+        print(id)
         
         houseRulesList = beachData?.house_rules
         
@@ -43,12 +45,14 @@ class EditHouseRulesView: BaseViewControllerPlain {
     }
 
     @IBAction func nextTapped(_ sender: Any) {
+        guard let id = id else { return }
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
                 createBeachListing.houseRules = selectedItems
                 print(createBeachListing)
+                print(id)
                 
-                coordinator?.gotoEditCheckInAndOutRulesView(beachData: beachData, request: createBeachListing)
+                coordinator?.gotoEditCheckInAndOutRulesView(beachData: beachData, request: createBeachListing, id: id)
             }
         }
     }

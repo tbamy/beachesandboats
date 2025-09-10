@@ -26,6 +26,8 @@ class BoatNameView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
+        
+        checkAndLoadSavedListing()
         setUp()
     }
     
@@ -44,6 +46,26 @@ class BoatNameView: BaseViewControllerPlain {
 //        descriptionLabel.onTextChanged = { [weak self] _ in
 //            self?.checkTextFields()
 //        }
+    }
+    
+    private func checkAndLoadSavedListing() {
+        if let savedListing = AppStorage.boatListing {
+            print("=== LOADING SAVED BOAT LISTING ===")
+            print("Boat name: \(savedListing.name ?? "No name")")
+            print("Boat description: \(savedListing.description ?? "No description")")
+            
+            // Use the saved listing
+//            createBoatListing = savedListing
+            
+            // Populate fields with saved data
+            nameLabel.text = savedListing.name ?? ""
+            descriptionLabel.text = savedListing.description ?? ""
+            
+            print("Loaded saved boat listing successfully")
+            print("===============================")
+        } else {
+            print("No saved boat listing found, starting fresh")
+        }
     }
     
     func checkTextFields() {

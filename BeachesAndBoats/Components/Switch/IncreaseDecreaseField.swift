@@ -68,8 +68,8 @@ import UIKit
     }
     
     func setup() {
-//        minusBtn.cornerRadius = minusBtn.frame.width / 2
-//        plusBtn.cornerRadius = plusBtn.frame.width / 2
+        minusBtn.cornerRadius = minusBtn.frame.width / 2
+        plusBtn.cornerRadius = plusBtn.frame.width / 2
 //        contentView.layer.cornerRadius = 8
         contentView.backgroundColor = .clear
 //        contentView.layer.borderWidth = 1

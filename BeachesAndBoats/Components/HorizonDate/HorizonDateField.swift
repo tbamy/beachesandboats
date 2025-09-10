@@ -17,6 +17,9 @@ public class HorizonDateField: UIView {
     // Callback to handle date selection
     public var onDateSelected: ((Date) -> Void)?
     public var onDatesSelected: ((Date, Date?) -> Void)?
+    
+    public var startDate: Date = Date()
+    public var endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date()
 
     // MARK: - Properties
     public var titleText: String = "" {
@@ -109,7 +112,7 @@ public class HorizonDateField: UIView {
 
     // MARK: - Actions
     @objc private func showCalendarModal() {
-        HorizonCalendarModal.show { [weak self] startDate, endDate in
+        HorizonCalendarModal.show (start: startDate, end: endDate){ [weak self] startDate, endDate in
             guard let self = self else { return }
             if endDate == nil{
                 if let startDate = startDate{

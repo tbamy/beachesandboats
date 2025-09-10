@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MapKit
 
 class ServiceHostingDetailsView: UIViewController {
     
@@ -16,7 +15,6 @@ class ServiceHostingDetailsView: UIViewController {
     @IBOutlet weak var decriptionContainer: UIView!
     @IBOutlet weak var containerHeight: NSLayoutConstraint!
     @IBOutlet weak var readMoreBtn: UIButton!
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var guestName: UILabel!
     @IBOutlet weak var guesImg: UIImageView!
     @IBOutlet weak var sendMsgBtn: UIButton!
@@ -51,20 +49,9 @@ class ServiceHostingDetailsView: UIViewController {
         beachHouseNameLbl.text = bookingServiceDetails?.beachHouse?.name
         descriptionLbl.text = bookingServiceDetails?.beachHouse?.description
         guestName.text = guestFirstName?.first_name
-        
-        if let latitude = Double(bookingServiceDetails?.beachHouse?.locations?.latitude ?? ""),
-           let longitude = Double(bookingServiceDetails?.beachHouse?.locations?.longitude ?? "") {
-           
-            let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let span = MKCoordinateSpan(latitudeDelta: latitude, longitudeDelta: longitude)
-            let region = MKCoordinateRegion(center: center, span: span)
-            
-            mapView.region = region
-        }
 
-        locationLbl.text = "\(bookingServiceDetails?.beachHouse?.locations?.city ?? ""), \(bookingServiceDetails?.beachHouse?.locations?.state ?? ""), \(bookingServiceDetails?.beachHouse?.locations?.country ?? "")"
+        locationLbl.text = "\(bookingServiceDetails?.beachHouse?.locations?.jettyLocation ?? ""), \(bookingServiceDetails?.beachHouse?.locations?.name ?? "")"
         
-        mapView.layer.cornerRadius = 10
     }
     
     func gestureRecognizer() {

@@ -21,6 +21,7 @@ class UploadButtonField: BaseXib {
     @IBOutlet weak var errorStack: UIStackView!
     
     public var isOnlyPdf = false
+    public var isOnlyImage = false
     
     @IBInspectable public var errorText: String = "" {
         didSet { updateError() }
@@ -93,10 +94,13 @@ extension UploadButtonField: UIImagePickerControllerDelegate, UINavigationContro
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         if isOnlyPdf {
             actionSheet.addAction(pdfAction)
+        } else if isOnlyImage {
+            actionSheet.addAction(photoAction)
         } else {
             actionSheet.addAction(photoAction)
             actionSheet.addAction(pdfAction)
         }
+        
         actionSheet.addAction(cancelAction)
         vc?.present(actionSheet, animated: true, completion: nil)
     }

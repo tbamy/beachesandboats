@@ -39,4 +39,14 @@ class HostingServiceHomeCoordinator: Coordinator {
             tabBarController.selectedIndex = 1
         }
     }
+    
+    func gotoVerifyAccountView() {
+        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+        coordinator.gotoVerifyAccountView()
+    }
+    
+    func gotoVerificationFormView() {
+        let coordinator = AccountCoordinator(navigationController: self.navigationController)
+        coordinator.gotoVerificationFormView()
+    }
 }

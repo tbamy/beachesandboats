@@ -9,12 +9,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoatPeopleRules" customModule="BeachesAndBoats" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HouseDetailsView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="nextBtn" destination="lWh-4v-bHX" id="ql3-n9-NAZ"/>
-                <outlet property="numberOfAdults" destination="mjn-Ec-0La" id="AKJ-UR-KEH"/>
-                <outlet property="numberOfChildren" destination="vZf-Ex-kn3" id="UP6-dj-2Ow"/>
-                <outlet property="numberOfPets" destination="3j4-7q-Wlr" id="TLx-Xm-qLc"/>
+                <outlet property="noOfBathrooms" destination="n6w-D3-wJq" id="lDy-w9-paj"/>
+                <outlet property="noOfBeds" destination="3j4-7q-Wlr" id="hLR-5m-vX4"/>
+                <outlet property="noOfGuests" destination="vZf-Ex-kn3" id="eD3-yK-nhb"/>
+                <outlet property="noOfRooms" destination="mjn-Ec-0La" id="kmo-Rm-bKs"/>
                 <outlet property="stepOneProgress" destination="6Ww-rQ-8Sn" id="9uy-EJ-dHS"/>
                 <outlet property="stepTwoProgress" destination="JQH-FA-2f2" id="jk7-Fw-j84"/>
                 <outlet property="subtitleLabel" destination="lQZ-fL-Ens" id="h0N-K9-Ho9"/>
@@ -74,16 +75,16 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Wkl-5C-22f">
-                    <rect key="frame" x="20" y="231.00000000000003" width="353" height="63.333333333333343"/>
+                    <rect key="frame" x="20" y="231" width="353" height="46.666666666666686"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What are your boat rules?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="House details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-TP-LUl">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="21.666666666666668"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the maximum number people that can be in your mini yacht at once" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-fL-Ens">
-                            <rect key="frame" x="0.0" y="29.666666666666682" width="353" height="33.666666666666657"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us more details about your beach house" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-fL-Ens">
+                            <rect key="frame" x="0.0" y="29.666666666666686" width="353" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -115,7 +116,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WuG-W2-gSg">
-                    <rect key="frame" x="0.0" y="334.33333333333331" width="393" height="189.99999999999994"/>
+                    <rect key="frame" x="0.0" y="317.66666666666669" width="393" height="260.00000000000006"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mjn-Ec-0La" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
@@ -136,6 +137,13 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="RWj-G5-yDf"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6w-D3-wJq" customClass="IncreaseDecreaseField" customModule="BeachesAndBoats" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="209.99999999999994" width="393" height="50"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="wpA-cE-dab"/>
                             </constraints>
                         </view>
                     </subviews>

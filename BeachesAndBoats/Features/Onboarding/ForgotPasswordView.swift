@@ -52,7 +52,7 @@ class ForgotPasswordView: BaseViewControllerPlain {
             LoadingModal.dismiss()
             switch event {
             case .forgotPasswordSuccess(let response):
-                Toast.show(message: response.message ?? "An Otp has been sent to your email, Kindly provide the otp to reset your password")
+                Toast.show(message: response.message ?? "An Otp has been sent to your email, Kindly provide the otp to reset your password", duration: 5)
                 coordinator?.gotoResetPassword(userEmail: emailAddress.text)
                 
             case .forgotPasswordFailed(let error):

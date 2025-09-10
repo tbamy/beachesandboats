@@ -101,15 +101,15 @@ class ChatView: BaseViewControllerPlain {
     
     func showBoatProperty(with data: BoatBooking?){
         
-        let bookingImageData = data?.boat.images?.first?.url ?? ""
+        let bookingImageData = data?.boat?.images?.first?.url ?? ""
         if let url = URL(string: bookingImageData.replacingOccurrences(of: "http://", with: "https://")) {
             bookingImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         } else {
             bookingImage.image = UIImage(named: "dummy")
         }
         
-        bookingTitleLabel.text = data?.boat.name
-        bookingDateLabel.text = data?.bookingDate.convertToShorterDateFormat()
+        bookingTitleLabel.text = data?.boat?.name
+        bookingDateLabel.text = data?.bookingDate?.convertToShorterDateFormat()
     }
 
     func textFieldChanged() {

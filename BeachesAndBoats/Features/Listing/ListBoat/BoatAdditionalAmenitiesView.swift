@@ -24,10 +24,100 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
     var selectedAmenities: [String] = []
     
     var amenitiesList: [RoomAmenities]?
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        title = "Boats"
+//        setup()
+//    }
+//    
+//    func setup(){
+//        stepOneProgress.setProgress(0.60, animated: true)
+//        stepOneProgress.tintColor = .B_B
+//        stepTwoProgress.setProgress(0, animated: false)
+//        
+//        amenitiesList = boatData?.amenities?.filter{ $0.amenityType == "Safety"}
+//        
+////        titleLabel.text = "What are the features in your \(boatType ?? "")?"
+//        subtitleLabel.text = "Select the amenities available to guests in your \(boatType ?? "")."
+//        
+//        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+//        collectionView.allowsMultipleSelection = true
+//        collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+//    }
+//
+//    @IBAction func nextTapped(_ sender: Any) {
+//        if let boatData = boatData{
+//            
+//            
+//            if var createBoatListing = createBoatListing{
+//                let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
+//                createBoatListing.amenities = additionalAmenities
+//                
+//                print("current amenities: \(createBoatListing.amenities ?? [])")
+//                print("additional amenities: \(selectedAmenities)")
+//                print(createBoatListing)
+//                
+//                coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+//            }
+//            
+//        }
+//    }
+//    
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        if var createBoatListing = createBoatListing{
+//            let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
+//            createBoatListing.amenities = additionalAmenities
+//            
+//            AppStorage.boatListing = createBoatListing
+//            coordinator?.backToDashboard()
+//        }
+//        
+//    }
+//    
+//
+//}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
+        
+        checkAndLoadSavedListing()
         setup()
+    }
+    
+    private func checkAndLoadSavedListing() {
+        if let savedListing = AppStorage.boatListing {
+            print("=== LOADING SAVED BOAT LISTING ===")
+            print("Total amenities count: \(savedListing.amenities?.count ?? 0)")
+            
+            // Use the saved listing
+//            createBoatListing = savedListing
+            
+            // Load saved amenities (will be filtered for Safety type in setup)
+            if let savedAmenities = savedListing.amenities {
+                selectedAmenities = savedAmenities
+            }
+            
+            print("Loaded saved boat listing successfully")
+            print("===============================")
+        } else {
+            print("No saved boat listing found, starting fresh")
+        }
+    }
+    
+    private func filterSavedAmenities() {
+        // Filter saved amenities to only include those that are "Safety" type
+        guard let amenitiesList = amenitiesList else { return }
+        
+        let safetyAmenityIds = amenitiesList.compactMap { $0.id }
+        selectedAmenities = selectedAmenities.filter { safetyAmenityIds.contains($0) }
+        
+        // Enable next button if we have any amenities (either from general or safety)
+        nextBtn.isEnabled = true
+        
+        print("Filtered safety amenities: \(selectedAmenities)")
     }
     
     func setup(){
@@ -36,9 +126,14 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0, animated: false)
         
         amenitiesList = boatData?.amenities?.filter{ $0.amenityType == "Safety"}
-        
-//        titleLabel.text = "What are the features in your \(boatType ?? "")?"
         subtitleLabel.text = "Select the amenities available to guests in your \(boatType ?? "")."
+        
+        // Filter saved amenities after amenitiesList is populated
+        if createBoatListing != nil {
+            filterSavedAmenities()
+        } else {
+            nextBtn.isEnabled = false
+        }
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -49,11 +144,16 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            
-            
             if var createBoatListing = createBoatListing{
-                let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
-                createBoatListing.amenities = additionalAmenities
+                // Get existing amenities and filter out Safety type
+                let existingAmenities = createBoatListing.amenities ?? []
+                let nonSafetyAmenities = existingAmenities.filter { amenityId in
+                    guard let amenitiesList = self.amenitiesList else { return true }
+                    return !amenitiesList.contains { $0.id == amenityId }
+                }
+                
+                // Combine non-safety amenities with current safety selection
+                createBoatListing.amenities = nonSafetyAmenities + selectedAmenities
                 
                 print("current amenities: \(createBoatListing.amenities ?? [])")
                 print("additional amenities: \(selectedAmenities)")
@@ -61,23 +161,26 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
                 
                 coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
             }
-            
         }
     }
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBoatListing = createBoatListing{
-            let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
-            createBoatListing.amenities = additionalAmenities
+            // Get existing amenities and filter out Safety type
+            let existingAmenities = createBoatListing.amenities ?? []
+            let nonSafetyAmenities = existingAmenities.filter { amenityId in
+                guard let amenitiesList = self.amenitiesList else { return true }
+                return !amenitiesList.contains { $0.id == amenityId }
+            }
+            
+            createBoatListing.amenities = nonSafetyAmenities + selectedAmenities
             
             AppStorage.boatListing = createBoatListing
             coordinator?.backToDashboard()
         }
-        
     }
-    
-
 }
+
 
 extension BoatAdditionalAmenitiesView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -132,7 +235,7 @@ extension BoatAdditionalAmenitiesView: UICollectionViewDelegate, UICollectionVie
         
         collectionView.reloadItems(at: [indexPath])
             
-        nextBtn.isEnabled = true
+        nextBtn.isEnabled = !selectedAmenities.isEmpty
     }
 
     

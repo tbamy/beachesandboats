@@ -23,8 +23,8 @@ class EditBoatViewModel{
         case editBoatFailed(ErrorResponse)
     }
     
-    func createBoat(_ request: CreateBoatListingRequest) {
-        listingService.EditBoat(request: request, completion:  { [ weak self ] data in
+    func editBoat(_ request: CreateBoatListingRequest, id: String) {
+        listingService.EditBoat(request: request, id: id, completion:  { [ weak self ] data in
             switch data {
             case .success(let response):
                 self?.output.onNext(.editBoatSuccessful(response))

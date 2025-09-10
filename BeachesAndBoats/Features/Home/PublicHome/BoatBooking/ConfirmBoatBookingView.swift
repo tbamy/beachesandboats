@@ -77,11 +77,11 @@ class ConfirmBoatBookingView: BaseViewControllerPlain {
         cruiseLength = booking?.cruiseLength ?? 0
         numberOfGuests = booking?.numberOfPeople ?? 1
         
-        if let adults = listing?.noOfAdults, let children = listing?.noOfChildren {
-            boatCapacity = (Int(adults) ?? 0) + (Int(children) ?? 0)
-        } else {
-            boatCapacity = 1
-        }
+//        if let adults = listing?.noOfAdults, let children = listing?.noOfChildren {
+//            boatCapacity = (Int(adults) ?? 0) + (Int(children) ?? 0)
+//        } else {
+            boatCapacity = Int(listing?.noOfPassengers ?? "1") ?? 1
+//        }
 
         
         

@@ -22,6 +22,7 @@ class BookingRoomsListView: BaseViewControllerPlain {
     var booking: CreateBeachHouseBookingRequest?
     var selectedIndex: Int? = nil
     var selectedQuantity: Int = 1 // Track selected quantity
+    var isDayBooking: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class BookingRoomsListView: BaseViewControllerPlain {
         titleLabel.textAlignment = .center
 
         let subtitleLabel = UILabel()
-        subtitleLabel.text = "S\(listing?.name ?? "")"
+        subtitleLabel.text = "\(listing?.name ?? "")"
         subtitleLabel.font = UIFont.systemFont(ofSize: 12)
         subtitleLabel.textColor = .gray
         subtitleLabel.textAlignment = .center
@@ -54,7 +55,7 @@ class BookingRoomsListView: BaseViewControllerPlain {
         roomsCollectionView.dataSource = self
         roomsCollectionView.backgroundColor = .clear
         roomsCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
-        
+        isDayBooking = booking?.bookingType == "DAY"
         rooms = listing?.rooms ?? []
         reserveBtnView.isHidden = true
     }
@@ -108,16 +109,17 @@ class BookingRoomsListView: BaseViewControllerPlain {
         ])
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
+            guard let self = self else { return }
             let selectedRow = picker.selectedRow(inComponent: 0)
-            self?.selectedQuantity = selectedRow + 1
-            self?.selectedIndex = roomIndex
-            self?.roomsCollectionView.reloadData()
-            self?.roomId = room.id
-            self?.reserveBtnView.isHidden = false
+            self.selectedQuantity = selectedRow + 1
+            self.selectedIndex = roomIndex
+            self.roomsCollectionView.reloadData()
+            self.roomId = room.id
+            self.reserveBtnView.isHidden = false
             
-            if let price = room.pricePerNight {
-                let totalPrice = price * (Float(self?.selectedQuantity ?? 1))
-                self?.reserveBtn.setTitle("Reserve for ₦ \(totalPrice.toAmount() ?? "0")", for: .normal)
+            if let price = self.isDayBooking ? room.pricePerDay : room.pricePerNight {
+                let totalPrice = price * (Float(self.selectedQuantity))
+                self.reserveBtn.setTitle("Reserve for ₦ \(totalPrice.toAmount() ?? "0")", for: .normal)
             }
         }
         
@@ -137,14 +139,14 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = roomsCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-        let cellAt = rooms[indexPath.item]
+        let room = rooms[indexPath.item]
         
         let view = BookingRoomCell(frame: cell.bounds)
         view.identifier = "Rooms " + indexPath.description
-        view.model.title = cellAt.name ?? ""
+        view.model.title = room.name ?? ""
         view.layer.cornerRadius = 8
         
-        let descriptions = cellAt.bedTypes?.compactMap { bedType -> String? in
+        let descriptions = room.bedTypes?.compactMap { bedType -> String? in
             guard let name = bedType.name, let quantity = bedType.quantity, Int(quantity) ?? 0 > 0 else { return nil }
             return "\(quantity): \(name)"
         }
@@ -152,37 +154,84 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
         
         let startDateString = booking?.checkingDate ?? ""
         let endDateString = booking?.checkoutDate ?? ""
-        
         let nights = calculateNights(from: startDateString, to: endDateString)
-        let isDayBooking = booking?.bookingType == "DAY"
-        view.model.date = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights ?? 0) \(isDayBooking ? "Days" : "Nights"))"
-        view.model.guests = "\(cellAt.noOfOccupant ?? "") Guests"
-        view.model.img = cellAt.images?.first?.url ?? ""
+//        let isDayBooking = booking?.bookingType == "DAY"
+        view.model.date = isDayBooking ? "\(startDateString.convertToShorterDateFormat() ?? "") (Day booking)"  : "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights ?? 0) Nights)"
+        view.model.guests = "\(room.noOfOccupant ?? "") Guests"
+        view.model.img = room.images?.first?.url ?? ""
         view.model.amenities = listing?.amenities ?? []
-        if let price = cellAt.pricePerNight {
+        
+        if let price = isDayBooking ? room.pricePerDay : room.pricePerNight {
             view.model.price = "₦ \(price.toAmount() ?? "0")"
         }
         
-        // Pass the room index and quantity to the cell
         view.model.roomIndex = indexPath.item
-        view.model.maxQuantity = cellAt.quantity ?? 1
+        view.model.maxQuantity = room.quantity ?? 1
         view.model.selectedQuantity = (indexPath.item == selectedIndex) ? selectedQuantity : 1
-        
         view.model.tapped = { [weak self] in
             guard let self = self else { return }
             self.showQuantityPicker(for: indexPath.item)
         }
-
-        // Update the state based on selection
+        
         view.model.state = (indexPath.item == selectedIndex)
         
         cell.applyView(view: view)
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 10, height: 480)
+        return CGSize(width: collectionView.bounds.width - 20, height: 455) // Adjust height as needed based on content
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = roomsCollectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
+//        let cellAt = rooms[indexPath.item]
+//        
+//        let view = BookingRoomCell(frame: cell.bounds)
+//        view.identifier = "Rooms " + indexPath.description
+//        view.model.title = cellAt.name ?? ""
+//        view.layer.cornerRadius = 8
+//        
+//        let descriptions = cellAt.bedTypes?.compactMap { bedType -> String? in
+//            guard let name = bedType.name, let quantity = bedType.quantity, Int(quantity) ?? 0 > 0 else { return nil }
+//            return "\(quantity): \(name)"
+//        }
+//        view.model.bedType = descriptions?.joined(separator: ", ") ?? ""
+//        
+//        let startDateString = booking?.checkingDate ?? ""
+//        let endDateString = booking?.checkoutDate ?? ""
+//        
+//        let nights = calculateNights(from: startDateString, to: endDateString)
+//        let isDayBooking = booking?.bookingType == "DAY"
+//        view.model.date = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights ?? 0) \(isDayBooking ? "Days" : "Nights"))"
+//        view.model.guests = "\(cellAt.noOfOccupant ?? "") Guests"
+//        view.model.img = cellAt.images?.first?.url ?? ""
+//        view.model.amenities = listing?.amenities ?? []
+//        
+//        if let price = isDayBooking ? cellAt.pricePerDay : cellAt.pricePerNight {
+//            view.model.price = "₦ \(price.toAmount() ?? "0")"
+//        }
+//        
+//        // Pass the room index and quantity to the cell
+//        view.model.roomIndex = indexPath.item
+//        view.model.maxQuantity = cellAt.quantity ?? 1
+//        view.model.selectedQuantity = (indexPath.item == selectedIndex) ? selectedQuantity : 1
+//        
+//        view.model.tapped = { [weak self] in
+//            guard let self = self else { return }
+//            self.showQuantityPicker(for: indexPath.item)
+//        }
+//
+//        // Update the state based on selection
+//        view.model.state = (indexPath.item == selectedIndex)
+//        
+//        cell.applyView(view: view)
+//        return cell
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: collectionView.bounds.width - 10, height: 480)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let listing = listing, let booking = booking{

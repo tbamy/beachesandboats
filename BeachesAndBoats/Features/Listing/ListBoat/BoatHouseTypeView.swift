@@ -32,6 +32,7 @@ class BoatHouseTypeView: BaseViewControllerPlain {
         super.viewDidLoad()
         title = "Boats"
     
+        checkAndLoadSavedListing()
         vm.getBoatData()
         LoadingModal.show()
         bindNetwork()
@@ -40,16 +41,61 @@ class BoatHouseTypeView: BaseViewControllerPlain {
         
     }
     
+    private func checkAndLoadSavedListing() {
+        if let savedListing = AppStorage.boatListing {
+            print("=== LOADING SAVED BOAT LISTING ===")
+            print("Boat name: \(savedListing.name ?? "No name")")
+            print("Subcategory ID: \(savedListing.subCategoryId ?? "No subcategory")")
+            print("Amenities count: \(savedListing.amenities?.count ?? 0)")
+            print("Images count: \(savedListing.images?.count ?? 0)")
+            
+            // Use the saved listing
+            createBoatListing = savedListing
+//            cat = savedListing.categoryId ?? ""
+            selectedBoatType = savedListing.subCategoryId
+            
+            // Enable next button since we have saved data
+            nextBtn.isEnabled = true
+            
+            print("Loaded saved boat listing successfully")
+            print("===============================")
+        } else {
+            print("No saved boat listing found, starting fresh")
+            nextBtn.isEnabled = false
+        }
+    }
+    
     func setup(){
         stepOneProgress.setProgress(0.60, animated: true)
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
+        collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+    }
+    
+    private func selectSavedBoatType() {
+        guard let savedSubCategoryId = selectedBoatType,
+              let boatTypes = boatTypes else { return }
+        
+        // Find the index of the saved subcategory
+        for (index, boatType) in boatTypes.enumerated() {
+            if boatType.id == savedSubCategoryId {
+                selectedIndex = index
+                self.boatType = boatType.name
+                
+                print("Found saved boat type: \(boatType.name ?? "") at index \(index)")
+                
+                // Reload collection view to show selection
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                break
+            }
+        }
     }
     
     func bindNetwork(){
@@ -57,28 +103,91 @@ class BoatHouseTypeView: BaseViewControllerPlain {
             
             switch response {
             case .getBoatDataSuccess(let response):
-                self?.boatTypes = response.data?.categories?.first?.subCategories
+                self?.boatTypes = response.data?.categories?.first?.sub_categories
                 self?.cat = response.data?.categories?.first?.id ?? ""
                 self?.boatData = response.data
 //                print(self?.boatTypes)
                 LoadingModal.dismiss()
                 self?.collectionView.reloadData()
+                
+                if self?.createBoatListing != nil {
+                    self?.selectSavedBoatType()
+                }
             case .getBoatDataError(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
     }
 
+    
     @IBAction func nextTapped(_ sender: Any) {
-        if let boatData = boatData{
-            let request = CreateBoatListingRequest(name: "", description: "", aboutOwner: "", noOfAdults: 0, noOfChildren: 0, noOfPets: 0, categoryId: cat, subCategoryId: selectedBoatType ?? "", country: "", state: "", streetName: "", city: "", availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], destinations: [], images: [])
+        guard let boatData = boatData else { return }
+        
+        let request: CreateBoatListingRequest
+        
+        if let existingListing = createBoatListing {
+            // We have a saved listing, update the subcategory selection
+            var updatedRequest = existingListing
+//            updatedRequest.categoryId = cat
+            updatedRequest.subCategoryId = selectedBoatType ?? ""
+            request = updatedRequest
             
-            coordinator?.gotoBoatNameView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
+            print("Continuing with saved listing: \(request.name ?? "Unnamed")")
+        } else {
+            // Starting fresh
+            request = CreateBoatListingRequest(
+                name: "",
+                description: "",
+                aboutOwner: "",
+                noOfPassengers: 0,
+//                categoryId: cat,
+                subCategoryId: selectedBoatType ?? "",
+                jettyLocation: "",
+                locationName: "",
+                availableFrom: "",
+                availableTo: "",
+                amenities: [],
+                languages: [],
+                houseRules: [],
+                destinations: [],
+                images: []
+            )
+            
+            print("Starting new listing")
         }
+        
+        coordinator?.gotoBoatNameView(boatData: boatData, createBoatListingData: request, boatType: boatType ?? "")
     }
     
     @IBAction func saveAndExit(_ sender: Any) {
-        let request = CreateBoatListingRequest(name: "", description: "", aboutOwner: "", noOfAdults: 0, noOfChildren: 0, noOfPets: 0, categoryId: cat, subCategoryId: selectedBoatType ?? "", country: "", state: "", streetName: "", city: "", availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], destinations: [], images: [])
+        let request: CreateBoatListingRequest
+        
+        if let existingListing = createBoatListing {
+            // Update existing listing with current selection
+            var updatedRequest = existingListing
+//            updatedRequest.categoryId = cat
+            updatedRequest.subCategoryId = selectedBoatType ?? ""
+            request = updatedRequest
+        } else {
+            // Create new listing
+            request = CreateBoatListingRequest(
+                name: "",
+                description: "",
+                aboutOwner: "",
+                noOfPassengers: 0,
+//                categoryId: cat,
+                subCategoryId: selectedBoatType ?? "",
+                jettyLocation: "",
+                locationName: "",
+                availableFrom: "",
+                availableTo: "",
+                amenities: [],
+                languages: [],
+                houseRules: [],
+                destinations: [],
+                images: []
+            )
+        }
         
         AppStorage.boatListing = request
         coordinator?.backToDashboard()

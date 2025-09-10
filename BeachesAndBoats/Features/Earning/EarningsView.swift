@@ -28,6 +28,7 @@ class EarningsView: BaseViewControllerPlain {
     var arrayOfMonths: [String] = ["All", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     var topEarningBookingData: [TopEarningResponse] = []
     var getSelectedMonth: String = "Jan"
+    var currentYear: String = "2025"
     
     let vm = EarningsVM()
     let disposeBag = DisposeBag()
@@ -40,7 +41,7 @@ class EarningsView: BaseViewControllerPlain {
         super.viewWillAppear(animated)
         
         LoadingModal.show(title: "Loading...")
-        let selectedYear = yearBtn.title(for: .normal) ?? "2024"
+        let selectedYear = yearBtn.title(for: .normal) ?? currentYear
         let request = TopEarningRequest(year: selectedYear, month: getSelectedMonth)
         input.onNext(.topEarnings(request))
     }
@@ -53,6 +54,7 @@ class EarningsView: BaseViewControllerPlain {
         bind()
         setupUI()
         gestureRecognizers()
+        currentYear = getCurrentYear()
     }
     
     func setupUI() {
@@ -90,7 +92,7 @@ class EarningsView: BaseViewControllerPlain {
             LoadingModal.show(title: "Loading")
             let selectedYear = year
             print("Selected Year is \(selectedYear)")
-            let request = TopEarningRequest(year: year, month: self?.getSelectedMonth ?? "All")
+            let request = TopEarningRequest(year: year, month: self?.getSelectedMonth ?? "")
             self?.input.onNext(.topEarnings(request))
         }
     }
@@ -116,7 +118,7 @@ class EarningsView: BaseViewControllerPlain {
     }
     
     func tableAndCollectionViewSetup() {
-        yearBtn.setTitle("2024", for: .normal)
+        yearBtn.setTitle(currentYear, for: .normal)
         
         topEarningTableView.delegate = self
         topEarningTableView.dataSource = self
@@ -131,7 +133,11 @@ class EarningsView: BaseViewControllerPlain {
         coordinator?.gotoCountryPaymentView()
     }
     
-    
+    func getCurrentYear() -> String {
+        let currentYear = Calendar.current.component(.year, from: Date())
+        return "\(currentYear)"
+    }
+
 }
 
 //MARK: - YearlyModalDelegate
@@ -217,8 +223,11 @@ extension EarningsView: UICollectionViewDelegate, UICollectionViewDataSource {
         getSelectedMonth = selectedMonth
         
         print("The selected month is \(getSelectedMonth)")
+        if getSelectedMonth == "All" {
+            getSelectedMonth = ""
+        }
         
-        let selectedYear = yearBtn.title(for: .normal) ?? "2024"
+        let selectedYear = yearBtn.title(for: .normal) ?? currentYear
         let request = TopEarningRequest(year: selectedYear, month: getSelectedMonth)
         input.onNext(.topEarnings(request))
         

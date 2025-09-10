@@ -33,6 +33,7 @@ class RoomDetailsView: BaseViewControllerPlain {
     var booking: CreateBeachHouseBookingRequest?
     var units: Int = 1
     var selectedQuantity: Int = 1
+    var isDayBooking: Bool = false
     
     private var amenities: [Amenity] = []
     var comments: [Review] = []
@@ -67,12 +68,15 @@ class RoomDetailsView: BaseViewControllerPlain {
         
         let startDateString = booking?.checkingDate ?? ""
         let endDateString = booking?.checkoutDate ?? ""
+        isDayBooking = booking?.bookingType == "DAY"
         let nights = calculateNights(from: startDateString, to: endDateString)
-        dateLabel.text = "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") \(nights ?? 0) Nights"
+        dateLabel.text = isDayBooking ? "\(startDateString.convertToShorterDateFormat() ?? "") (Day booking)"  : "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights ?? 0) Nights)"
+        
         guestsLabel.text = "\(room?.noOfOccupant ?? "") Guests"
         descriptionLabel.text = room?.description
         accessibilityContentLabel.text = "Easy accessibility"
-        if let price = listing?.pricePerNight {
+
+        if let price = isDayBooking ? room?.pricePerDay : room?.pricePerNight {
             totalAmountLabel.text = "₦ \(price.toAmount() ?? "0")"
         }
         
@@ -94,14 +98,18 @@ class RoomDetailsView: BaseViewControllerPlain {
         configureAllCollectionViews()
         
         continueBookingView.isHidden = true
-        if let price = room?.pricePerNight{
+        if let price = isDayBooking ? room?.pricePerDay : room?.pricePerNight{
             BookingBtn.setTitle("Reserve for ₦ \(price.toAmount() ?? "0")", for: .normal)
         }
         
         amenities = listing?.amenities ?? []
         facilitiesCollectionView.reloadData()
         
-        self.updateCollectionViewHeight(self.facilitiesCollectionView, heightConstraint: self.facilitiesHeightConstraint)
+        comments = listing?.reviews ?? []
+        guestCommentsCollectionView.reloadData()
+        
+//        self.updateCollectionViewHeight(self.facilitiesCollectionView, heightConstraint: self.facilitiesHeightConstraint)
+        self.updateCollectionViewHeight()
     }
     
     private func getText(at indexPath: IndexPath) -> String {
@@ -127,46 +135,57 @@ class RoomDetailsView: BaseViewControllerPlain {
         return amenities.count
     }
     
-    private func updateCollectionViewHeight(_ collectionView: UICollectionView, heightConstraint: NSLayoutConstraint) {
-        // Force layout to ensure we have correct bounds
-        collectionView.layoutIfNeeded()
+//    private func updateCollectionViewHeight(_ collectionView: UICollectionView, heightConstraint: NSLayoutConstraint) {
+//        // Force layout to ensure we have correct bounds
+//        collectionView.layoutIfNeeded()
+//        
+////        guard let type = FilterCollectionViewType(rawValue: collectionView.tag) else { return }
+//        
+//        let itemCount = getItemCount()
+//        guard itemCount > 0 else {
+//            heightConstraint.constant = 0
+//            return
+//        }
+//        
+//        let collectionViewWidth = collectionView.bounds.width
+//        let itemHeight: CGFloat = 40
+//        let horizontalSpacing: CGFloat = 10
+//        let verticalSpacing: CGFloat = 10
+//        let sectionInset: CGFloat = 0
+//        
+//        var currentRowWidth: CGFloat = sectionInset
+//        var numberOfRows: Int = 1
+//        
+//        // Calculate rows based on text width calculation
+//        for i in 0..<itemCount {
+//            let text = getText(at: IndexPath(item: i, section: 0))
+//            let itemWidth = calculateItemWidth(for: text)
+//            
+//            let requiredWidth = currentRowWidth + itemWidth + (currentRowWidth > sectionInset ? horizontalSpacing : 0)
+//            
+//            if requiredWidth <= collectionViewWidth - sectionInset {
+//                currentRowWidth = requiredWidth
+//            } else {
+//                // Start new row
+//                numberOfRows += 1
+//                currentRowWidth = sectionInset + itemWidth
+//            }
+//        }
+//        
+//        let totalHeight = (CGFloat(numberOfRows) * itemHeight) + (CGFloat(max(0, numberOfRows - 1)) * verticalSpacing)
+//        
+//        heightConstraint.constant = totalHeight
+//    }
+    
+    func updateCollectionViewHeight() {
+        let layout = facilitiesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        let itemsPerRow: CGFloat = 4
+        let totalRows = Int(ceil(Double(amenities.count) / Double(itemsPerRow)))
+        let itemHeight: CGFloat = 20 // Adjust based on icon + text height
+        let height = CGFloat(totalRows) * itemHeight + CGFloat(max(0, totalRows - 1)) * (layout?.minimumLineSpacing ?? 15)
+        print(height)
         
-//        guard let type = FilterCollectionViewType(rawValue: collectionView.tag) else { return }
-        
-        let itemCount = getItemCount()
-        guard itemCount > 0 else {
-            heightConstraint.constant = 0
-            return
-        }
-        
-        let collectionViewWidth = collectionView.bounds.width
-        let itemHeight: CGFloat = 40
-        let horizontalSpacing: CGFloat = 10
-        let verticalSpacing: CGFloat = 10
-        let sectionInset: CGFloat = 0
-        
-        var currentRowWidth: CGFloat = sectionInset
-        var numberOfRows: Int = 1
-        
-        // Calculate rows based on text width calculation
-        for i in 0..<itemCount {
-            let text = getText(at: IndexPath(item: i, section: 0))
-            let itemWidth = calculateItemWidth(for: text)
-            
-            let requiredWidth = currentRowWidth + itemWidth + (currentRowWidth > sectionInset ? horizontalSpacing : 0)
-            
-            if requiredWidth <= collectionViewWidth - sectionInset {
-                currentRowWidth = requiredWidth
-            } else {
-                // Start new row
-                numberOfRows += 1
-                currentRowWidth = sectionInset + itemWidth
-            }
-        }
-        
-        let totalHeight = (CGFloat(numberOfRows) * itemHeight) + (CGFloat(max(0, numberOfRows - 1)) * verticalSpacing)
-        
-        heightConstraint.constant = totalHeight
+        facilitiesHeightConstraint.constant = height
     }
 
     @IBAction func selectBtnTapped(_ sender: Any) {
@@ -223,17 +242,18 @@ class RoomDetailsView: BaseViewControllerPlain {
         ])
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
+            guard let self = self else { return }
             let selectedRow = picker.selectedRow(inComponent: 0)
-            self?.selectedQuantity = selectedRow + 1
+            self.selectedQuantity = selectedRow + 1
 //            self?.roomId = room.id
 //            self?.continueBookingView.isHidden = false
-            let title = "\(self?.selectedQuantity ?? 1) unit"
-            self?.selectedBtn.setTitle(title, for: .normal)
+            let title = "\(self.selectedQuantity) unit"
+            self.selectedBtn.setTitle(title, for: .normal)
 
             
-            if let price = self?.room?.pricePerNight {
-                let totalPrice = price * (Float(self?.selectedQuantity ?? 1))
-                self?.BookingBtn.setTitle("Reserve for ₦ \(totalPrice.toAmount() ?? "0")", for: .normal)
+            if let price = isDayBooking ? room?.pricePerDay : room?.pricePerNight{
+                let totalPrice = price * (Float(self.selectedQuantity))
+                self.BookingBtn.setTitle("Reserve for ₦ \(totalPrice.toAmount() ?? "0")", for: .normal)
             }
         }
         
@@ -297,12 +317,12 @@ extension RoomDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.tag {
         case 1: // Facilities collection view
-//            let text = getText(at: indexPath)
-//            let width = calculateItemWidth(for: text)
-//            return CGSize(width: width, height: 40)
-            return CGSize(width: (collectionView.bounds.width / 4) - 5, height: 20)
+            let itemsPerRow: CGFloat = 4
+            let padding: CGFloat = 10
+            let width = (collectionView.bounds.width - (itemsPerRow - 1) * padding) / itemsPerRow
+            return CGSize(width: width, height: 20)
         case 2: // Comments collection view
-            return CGSize(width: (collectionView.bounds.width / 4) - 5, height: 20)
+            return CGSize(width: (collectionView.bounds.width) - 20, height: 150)
         default:
             return CGSize(width: 100, height: 40)
         }

@@ -65,20 +65,22 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoHouseTypeListView(beachData: BeachDatas, cat: String, type: HostType){
+    func gotoHouseTypeListView(beachData: BeachDatas, cat: String, type: HostType, selectedName: String){
         let vc: HouseTypeListView = .fromNib()
         vc.cat = cat
         vc.beachData = beachData
         vc.hostType = type
+        vc.selectedName = selectedName
         vc.coordinator = self
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoHouseSizeListView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+    func gotoHouseSizeListView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, selectedName: String){
         let vc: HouseSizeListView = .fromNib()
         vc.coordinator = self
         vc.beachData = beachData
+        vc.selectedName = selectedName
         vc.createBeachListing = createBeachListingData
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
@@ -86,6 +88,14 @@ class AccountCoordinator: Coordinator{
     
     func gotoPropertyNameView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
         let vc: PropertyNameView = .fromNib()
+        vc.beachData = beachData
+        vc.coordinator = self
+        vc.createBeachListing = createBeachListingData
+        vc.hidesBottomBarWhenPushed = true
+        push(viewController: vc)
+    }
+    func gotoPropertyDetailsView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+        let vc: HouseDetailsView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
@@ -165,47 +175,52 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoListRoomsView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+    func gotoListRoomsView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil){
         let vc: ListRoomsView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
+        vc.room = room
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoRoomAmenitiesView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+    func gotoRoomAmenitiesView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil){
         let vc: RoomAmenitiesView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
+        vc.room = room
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoRoomPriceView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+    func gotoRoomPriceView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil){
         let vc: RoomPriceView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
+        vc.room = room
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoRoomPricePerDayView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+    func gotoRoomPricePerDayView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil){
         let vc: RoomPricePerDayView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
+        vc.room = room
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoUploadImageView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
+    func gotoUploadImageView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil){
         let vc: UploadImageView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
+        vc.room = room
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
@@ -237,6 +252,33 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
+//    func popToRoomsListScreen() {
+//        if let navigationController = navigationController {
+//            for viewController in navigationController.viewControllers.reversed() {
+//                if viewController is RoomsListView {
+//                    navigationController.popToViewController(viewController, animated: true)
+//                    break
+//                }
+//            }
+//        }
+//    }
+    
+    func popToRoomsListScreen() {
+        // Find the RoomsListView in the navigation stack
+        if let roomsListVC = navigationController?.viewControllers.first(where: { $0 is RoomsListView }) as? RoomsListView {
+            
+            // Update the data in RoomsListView before popping
+            if let currentVC = navigationController?.topViewController as? UploadImageView {
+                roomsListVC.createBeachListing = currentVC.createBeachListing
+            }
+            
+            print("Popping to RoomsListView with updated data")
+            navigationController?.popToViewController(roomsListVC, animated: true)
+        } else {
+            print("RoomsListView not found in navigation stack")
+            navigationController?.popViewController(animated: true)
+        }
+    }
 //    func gotoListBeachSuccessView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest){
 //        let vc: ListBeachSuccessView = .fromNib()
 //        vc.coordinator = self
@@ -476,16 +518,6 @@ class AccountCoordinator: Coordinator{
     
     func gotoBoatRulesView(boatData: BoatDatas, createBoatListingData: CreateBoatListingRequest, boatType: String){
         let vc: BoatRulesView = .fromNib()
-        vc.boatData = boatData
-        vc.boatType = boatType
-        vc.coordinator = self
-        vc.createBoatListing = createBoatListingData
-        vc.hidesBottomBarWhenPushed = true
-        push(viewController: vc)
-    }
-    
-    func gotoBoatPeopleRules(boatData: BoatDatas, createBoatListingData: CreateBoatListingRequest, boatType: String){
-        let vc: BoatPeopleRules = .fromNib()
         vc.boatData = boatData
         vc.boatType = boatType
         vc.coordinator = self

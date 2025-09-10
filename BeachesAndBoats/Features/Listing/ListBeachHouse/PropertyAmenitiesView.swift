@@ -102,6 +102,9 @@ extension PropertyAmenitiesView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? DynamicCollectionViewCell,
+//              let view = cell.contentView.subviews.first as? SelectableCheckbox,
+//              let item = amenitiesList?[indexPath.row] else { return }
         let cell = collectionView.cellForItem(at: indexPath) as! DynamicCollectionViewCell
         let view = SelectableCheckbox(frame: cell.bounds)
         guard let item = amenitiesList?[indexPath.row] else { return }
@@ -110,17 +113,14 @@ extension PropertyAmenitiesView: UICollectionViewDelegate, UICollectionViewDataS
         
         if selectedItems.contains(itemId) {
             selectedItems.removeAll { $0 == itemId }
-            view.model.state = true
-//            view.model.image = UIImage.uncheckIcon
+            view.model.state = false
         } else {
             selectedItems.append(itemId)
-            view.model.state = false
-//            view.model.image = UIImage.checkIcon
+            view.model.state = true
         }
         
+        nextBtn.isEnabled = !selectedItems.isEmpty
         collectionView.reloadItems(at: [indexPath])
-            
-        nextBtn.isEnabled = true
     }
 
     

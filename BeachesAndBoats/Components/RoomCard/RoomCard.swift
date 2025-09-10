@@ -57,7 +57,8 @@ class RoomCard: BaseXib {
         roomPrice.text = model.roomPrice
         
 //        editBtn.isHidden = true
-        
+        editBtn.configureButtonTitle(title: "Edit", fontSize: 12, underline: false)
+        deleteBtn.configureButtonTitle(title: "", fontSize: 12, underline: false)
         deleteBtn.setImage(UIImage(systemName: "trash"), for: .normal)
         deleteBtn.setTitle("", for: .normal)
         deleteBtn.setTitleColor(.red, for: .normal)

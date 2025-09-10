@@ -101,7 +101,7 @@ extension MessagesView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mes = messages[indexPath.row]
 //        let data = ChatMessage(message: mes.lastMessage, name: mes.otherUser.firstName, time: "")
-        coordinator?.gotoChat(bookingId: mes.bookingID ?? "", otherUser: mes.otherUser.firstName, conversationId: mes.id, propertyType: mes.propertyType ?? "")
+        coordinator?.gotoChat(bookingId: mes.bookingID ?? "", otherUser: mes.otherUser?.firstName ?? "", conversationId: mes.id, propertyType: mes.propertyType ?? "")
     }
     
 }

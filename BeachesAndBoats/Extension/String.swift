@@ -129,6 +129,20 @@ extension String {
         return nil
     }
     
+    func convertTo12HourFormat() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss" // 24-hour format
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "h:mm a" // 12-hour format
+            return dateFormatter.string(from: date)
+        } else {
+            return nil // Invalid time string
+        }
+    }
+
+    
     public func convertToShorterDateFormat(from inputFormat: String = "MM/dd/yy") -> String? {
         let inputDateFormatter = DateFormatter()
         inputDateFormatter.dateFormat = inputFormat

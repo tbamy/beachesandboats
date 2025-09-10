@@ -25,6 +25,7 @@ struct BeachHouseBookings: Codable {
 // MARK: - BeachHouseBookingsPast
 struct BeachHouseBookingsPast: Codable {
     let id, hostID: String
+    let hostFirstName, hostLastName: String?
     let beachHouseRoom: BookingsBeachHouseRoom?
     let beachHouse: FavouriteBeachHouse?
     let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
@@ -33,10 +34,15 @@ struct BeachHouseBookingsPast: Codable {
     let summary: String?
     let units: String?
     let total: Float? //Int?
+    let adminCharge: Float?
+    let noOfNights: Int?
+    let bookingType: String?
 
     enum CodingKeys: String, CodingKey {
         case id
         case hostID = "host_id"
+        case hostFirstName = "host_first_name"
+        case hostLastName = "host_last_name"
         case beachHouseRoom = "beach_house_room"
         case beachHouse = "beach_house"
         case checkingDate = "checking_date"
@@ -45,6 +51,9 @@ struct BeachHouseBookingsPast: Codable {
         case checkoutTime = "checkout_time"
         case noOfPeople = "no_of_people"
         case status, summary, units, total
+        case adminCharge = "admin_charge"
+        case noOfNights  = "no_of_nights"
+        case bookingType = "booking_type"
     }
 }
 
@@ -56,6 +65,8 @@ struct BookingsBeachHouseRoom: Codable {
     let id, name, description: String
     let pricePerNight:  Float
     let discountPercent: Float
+    let pricePerDay:  Float
+    let dayDiscountPercent: Float
     let images: [Image]
     let bedTypes: [BookingBedType]
     let noOfOccupant, hasPrivateBathroom: String
@@ -64,6 +75,8 @@ struct BookingsBeachHouseRoom: Codable {
         case id, name, description
         case pricePerNight = "price_per_night"
         case discountPercent = "discount_percent"
+        case pricePerDay = "price_per_day"
+        case dayDiscountPercent = "day_discount_percent"
         case images, bedTypes
         case noOfOccupant = "no_of_occupant"
         case hasPrivateBathroom = "has_private_bathroom"

@@ -32,7 +32,7 @@ struct FavouriteBeachHouse: Codable {
     let id, name, description, aboutOwner: String?
     let listingPrice, discountPercent: Float?
     let image: String?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities
     let rating: Double?
 
@@ -47,7 +47,7 @@ struct FavouriteBeachHouse: Codable {
 
 struct FavouriteBoat: Codable {
     let id, name, description: String?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
     let images: [Image]?
     let destinations: [Destination]?

@@ -20,18 +20,20 @@ struct BeachDatas: Codable {
     let languages: [Languages]?
     let bed_types: [BedTypes]?
     let room_amenities: [RoomAmenities]?
-//    let destinations: []?
+    let property_location: [PropertyLocation]?
 
 }
 
 struct BeachCategory: Codable {
     let id: String?
     let name: String?
-    let propertyType: String?
+//    let propertyType: String?
     let description: String?
     let image: String?
-    let subCategories: [BeachSubCategory]?
+    let sub_categories: [BeachSubCategory]?
     let listings: [Listing]?
+    
+    
 
 }
 
@@ -44,9 +46,9 @@ struct BedTypes: Codable{
 struct BeachSubCategory: Codable {
     let id: String?
     let name: String?
-    let icon: String?
     let description: String?
     let image: String?
+    let icon: String?
 }
 
 struct HouseRule: Codable {
@@ -71,6 +73,7 @@ struct RoomAmenities: Codable {
 }
 
 
-//struct Listings: Codable{
-//    
-//}
+struct PropertyLocation: Codable{
+    let id: String?
+    let name: String?
+}

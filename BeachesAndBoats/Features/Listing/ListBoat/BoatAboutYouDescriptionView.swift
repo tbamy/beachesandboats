@@ -19,10 +19,49 @@ class BoatAboutYouDescriptionView: BaseViewControllerPlain {
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
     
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        title = "Boats"
+//        setUp()
+//    }
+//    
+//    func setUp(){
+//        stepOneProgress.setProgress(0.80, animated: true)
+//        stepOneProgress.tintColor = .B_B
+//        stepTwoProgress.setProgress(0, animated: false)
+//        
+////        if descriptionLabel.text.isEmpty{
+////            descriptionLabel.error = "Enter a description"
+////            nextBtn.isEnabled = false
+////        }else{
+//            nextBtn.isEnabled = true
+////        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
+        
+        checkAndLoadSavedListing()
         setUp()
+    }
+    
+    private func checkAndLoadSavedListing() {
+        if let savedListing = AppStorage.boatListing {
+            print("=== LOADING SAVED BOAT LISTING ===")
+            print("About owner: \(savedListing.aboutOwner ?? "No description")")
+            
+            // Use the saved listing
+//            createBoatListing = savedListing
+            
+            // Populate field with saved data
+            descriptionLabel.text = savedListing.aboutOwner ?? ""
+            
+            print("Loaded saved boat listing successfully")
+            print("===============================")
+        } else {
+            print("No saved boat listing found, starting fresh")
+        }
     }
     
     func setUp(){
@@ -30,12 +69,16 @@ class BoatAboutYouDescriptionView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-//        if descriptionLabel.text.isEmpty{
-//            descriptionLabel.error = "Enter a description"
-//            nextBtn.isEnabled = false
-//        }else{
-            nextBtn.isEnabled = true
+        // Check initial state - enable button if we have saved data or current text
+        nextBtn.isEnabled = true
+        
+//        descriptionLabel.onTextChanged = { [weak self] _ in
+//            self?.checkTextField()
 //        }
+    }
+    
+    func checkTextField() {
+        nextBtn.isEnabled = !descriptionLabel.text.isEmpty
     }
 
     @IBAction func nextTapped(_ sender: Any) {

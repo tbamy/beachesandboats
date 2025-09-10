@@ -126,8 +126,9 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="numberOfCharacters">
-                            <integer key="value" value="10000000"/>
+                            <integer key="value" value="255"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isCounterVisible" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>

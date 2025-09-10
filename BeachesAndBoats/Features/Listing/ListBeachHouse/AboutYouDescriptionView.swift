@@ -44,8 +44,15 @@ class AboutYouDescriptionView: BaseViewControllerPlain {
             nextBtn.isEnabled = updatedText.count >= 5
         }
     }
+    
+    func validate() -> Bool{
+        let isDescriptionFilled = descriptionLabel.validate(rules: [Rule(.isEmpty, "Enter a description")])
+        
+        return isDescriptionFilled
+    }
 
     @IBAction func nextTapped(_ sender: Any) {
+        guard validate() else { return }
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
                 createBeachListing.aboutOwner = descriptionLabel.text

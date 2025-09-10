@@ -18,6 +18,7 @@ class RoomAmenitiesView: BaseViewControllerPlain {
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var selectedItems: [String] = []
+    var room: Int?
     
     var amenitiesList: [RoomAmenities]?
     override func viewDidLoad() {
@@ -32,6 +33,15 @@ class RoomAmenitiesView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0.25, animated: true)
         stepTwoProgress.tintColor = .B_B
         
+        if let index = room,
+           index >= 0,
+           let rooms = createBeachListing?.rooms {
+            
+            let theroom = rooms[index]
+            selectedItems = theroom.roomAmenities ?? []
+            print(selectedItems)
+        }
+        
         amenitiesList = beachData?.room_amenities
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
@@ -39,81 +49,198 @@ class RoomAmenitiesView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
     }
-
+    
     @IBAction func nextTapped(_ sender: Any) {
         guard let beachData = beachData else { return }
         guard let createBeachListing = createBeachListing else { return }
 
-        // Get the last index of the rooms array
-        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
-        print("Current room index is \(roomIndex)")
-
-        // Safely get a mutable copy of the rooms array
-        var updatedRoomInfo = createBeachListing.rooms
-        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
-            // Update the room amenities at the current room index
-            if var existingRoom = updatedRoomInfo?[roomIndex]{
-                existingRoom.roomAmenities = selectedItems
-                
-                // Reassign the updated room back to the array
-                updatedRoomInfo?[roomIndex] = existingRoom
-                
-                print("Selected Items: \(selectedItems)")
-                print("Updated Room: \(existingRoom)")
-            }
+        var updatedBeachListing = createBeachListing
+        
+        // Determine which room index to update
+        let roomIndex: Int
+        if let editingRoomIndex = room, editingRoomIndex >= 0 {
+            // We're editing a specific room
+            roomIndex = editingRoomIndex
+        } else {
+            // We're creating a new room, use the last index
+            roomIndex = (createBeachListing.rooms?.count ?? 1) - 1
+        }
+        
+        print("Updating room amenities at index: \(roomIndex)")
+        
+        // Safely update the room amenities
+        if roomIndex >= 0 && roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
+            // PRESERVE existing room data, only update amenities
+            var existingRoom = updatedBeachListing.rooms![roomIndex]
+            existingRoom.roomAmenities = selectedItems
+            updatedBeachListing.rooms![roomIndex] = existingRoom
+            
+            print("PRESERVED - Name: \(existingRoom.name ?? "")")
+            print("PRESERVED - Price: \(existingRoom.pricePerNight ?? 0)")
+            print("UPDATED - Amenities count: \(selectedItems.count)")
         } else {
             print("Error: Room at index \(roomIndex) does not exist in room info.")
             return
         }
-
-        // Create a mutable copy of the createBeachListing and update its rooms
-        var updatedBeachListing = createBeachListing
-        updatedBeachListing.rooms = updatedRoomInfo
         
-        print("Updated CreateBeachListing: \(updatedBeachListing)")
-        
-        coordinator?.gotoRoomPriceView(beachData: beachData, createBeachListingData: updatedBeachListing)
+        coordinator?.gotoRoomPriceView(beachData: beachData, createBeachListingData: updatedBeachListing, room: room)
     }
-    
-    
-    
+
     @IBAction func saveAndExit(_ sender: Any) {
         guard let createBeachListing = createBeachListing else { return }
 
-        // Get the last index of the rooms array
-        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
-        print("Current room index is \(roomIndex)")
-
-        // Safely get a mutable copy of the rooms array
-        var updatedRoomInfo = createBeachListing.rooms
-        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
-            // Update the room amenities at the current room index
-            if var existingRoom = updatedRoomInfo?[roomIndex]{
-                existingRoom.roomAmenities = selectedItems
-                
-                // Reassign the updated room back to the array
-                updatedRoomInfo?[roomIndex] = existingRoom
-                
-                print("Selected Items: \(selectedItems)")
-                print("Updated Room: \(existingRoom)")
-            }
-        } else {
-            print("Error: Room at index \(roomIndex) does not exist in room info.")
-            return
-        }
-
-        // Create a mutable copy of the createBeachListing and update its rooms
         var updatedBeachListing = createBeachListing
-        updatedBeachListing.rooms = updatedRoomInfo
-            
-            AppStorage.beachListing = updatedBeachListing
-            coordinator?.backToDashboard()
         
-
+        // Determine which room index to update
+        let roomIndex: Int
+        if let editingRoomIndex = room, editingRoomIndex >= 0 {
+            roomIndex = editingRoomIndex
+        } else {
+            roomIndex = (createBeachListing.rooms?.count ?? 1) - 1
+        }
+        
+        // Safely update the room amenities
+        if roomIndex >= 0 && roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
+            var existingRoom = updatedBeachListing.rooms![roomIndex]
+            existingRoom.roomAmenities = selectedItems
+            updatedBeachListing.rooms![roomIndex] = existingRoom
+        }
+        
+        AppStorage.beachListing = updatedBeachListing
+        coordinator?.backToDashboard()
     }
+    
+//    @IBAction func nextTapped(_ sender: Any) {
+//        guard let beachData = beachData else { return }
+//        guard let createBeachListing = createBeachListing else { return }
+//
+//        var updatedBeachListing = createBeachListing
+//        
+//        // Determine which room index to update
+//        let roomIndex: Int
+//        if let editingRoomIndex = room, editingRoomIndex >= 0 {
+//            // We're editing a specific room
+//            roomIndex = editingRoomIndex
+//        } else {
+//            // We're creating a new room, use the last index
+//            roomIndex = (createBeachListing.rooms?.count ?? 1) - 1
+//        }
+//        
+//        print("Updating room at index: \(roomIndex)")
+//        
+//        // Safely update the room amenities
+//        if roomIndex >= 0 && roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
+//            updatedBeachListing.rooms?[roomIndex].roomAmenities = selectedItems
+//            print("Selected Items: \(selectedItems)")
+//            print("Updated Room: \(updatedBeachListing.rooms?[roomIndex] ?? Room())")
+//        } else {
+//            print("Error: Room at index \(roomIndex) does not exist in room info.")
+//            return
+//        }
+//        
+//        coordinator?.gotoRoomPriceView(beachData: beachData, createBeachListingData: updatedBeachListing, room: room)
+//    }
+//
+//    // Also update saveAndExit in RoomAmenitiesView:
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        guard let createBeachListing = createBeachListing else { return }
+//
+//        var updatedBeachListing = createBeachListing
+//        
+//        // Determine which room index to update
+//        let roomIndex: Int
+//        if let editingRoomIndex = room, editingRoomIndex >= 0 {
+//            roomIndex = editingRoomIndex
+//        } else {
+//            roomIndex = (createBeachListing.rooms?.count ?? 1) - 1
+//        }
+//        
+//        // Safely update the room amenities
+//        if roomIndex >= 0 && roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
+//            updatedBeachListing.rooms?[roomIndex].roomAmenities = selectedItems
+//        }
+//        
+//        AppStorage.beachListing = updatedBeachListing
+//        coordinator?.backToDashboard()
+//    }
+    
+    
+
+//    @IBAction func nextTapped(_ sender: Any) {
+//        guard let beachData = beachData else { return }
+//        guard let createBeachListing = createBeachListing else { return }
+//
+//        // Get the last index of the rooms array
+//        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
+//        print("Current room index is \(roomIndex)")
+//
+//        // Safely get a mutable copy of the rooms array
+//        var updatedRoomInfo = createBeachListing.rooms
+//        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
+//            // Update the room amenities at the current room index
+//            if var existingRoom = updatedRoomInfo?[roomIndex]{
+//                existingRoom.roomAmenities = selectedItems
+//                
+//                // Reassign the updated room back to the array
+//                updatedRoomInfo?[roomIndex] = existingRoom
+//                
+//                print("Selected Items: \(selectedItems)")
+//                print("Updated Room: \(existingRoom)")
+//            }
+//        } else {
+//            print("Error: Room at index \(roomIndex) does not exist in room info.")
+//            return
+//        }
+//
+//        // Create a mutable copy of the createBeachListing and update its rooms
+//        var updatedBeachListing = createBeachListing
+//        updatedBeachListing.rooms = updatedRoomInfo
+//        
+//        print("Updated CreateBeachListing: \(updatedBeachListing)")
+//        
+//        coordinator?.gotoRoomPriceView(beachData: beachData, createBeachListingData: updatedBeachListing, room: room)
+//    }
+//    
+//    
+//    
+//    @IBAction func saveAndExit(_ sender: Any) {
+//        guard let createBeachListing = createBeachListing else { return }
+//
+//        // Get the last index of the rooms array
+//        let roomIndex = createBeachListing.rooms?.indices.last ?? -1
+//        print("Current room index is \(roomIndex)")
+//
+//        // Safely get a mutable copy of the rooms array
+//        var updatedRoomInfo = createBeachListing.rooms
+//        if roomIndex >= 0 && roomIndex < updatedRoomInfo?.count ?? 0 {
+//            // Update the room amenities at the current room index
+//            if var existingRoom = updatedRoomInfo?[roomIndex]{
+//                existingRoom.roomAmenities = selectedItems
+//                
+//                // Reassign the updated room back to the array
+//                updatedRoomInfo?[roomIndex] = existingRoom
+//                
+//                print("Selected Items: \(selectedItems)")
+//                print("Updated Room: \(existingRoom)")
+//            }
+//        } else {
+//            print("Error: Room at index \(roomIndex) does not exist in room info.")
+//            return
+//        }
+//
+//        // Create a mutable copy of the createBeachListing and update its rooms
+//        var updatedBeachListing = createBeachListing
+//        updatedBeachListing.rooms = updatedRoomInfo
+//            
+//            AppStorage.beachListing = updatedBeachListing
+//            coordinator?.backToDashboard()
+//        
+//
+//    }
 
     
 
@@ -171,8 +298,10 @@ extension RoomAmenitiesView: UICollectionViewDelegate, UICollectionViewDataSourc
         }
         
         collectionView.reloadItems(at: [indexPath])
-            
-        nextBtn.isEnabled = true
+        nextBtn.isEnabled = !selectedItems.isEmpty
+//        collectionView.reloadItems(at: [indexPath])
+//        nextBtn.isEnabled = true
+        print("Currently selected amenities: \(selectedItems.count)")
     }
 
     

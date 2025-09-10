@@ -169,8 +169,9 @@ extension PropertyAdditionalAmenitiesView: UICollectionViewDelegate, UICollectio
         }
         
         collectionView.reloadItems(at: [indexPath])
-            
-        nextBtn.isEnabled = true
+        nextBtn.isEnabled = !selectedItems.isEmpty
+//        collectionView.reloadItems(at: [indexPath])
+//        nextBtn.isEnabled = true
     }
 
     

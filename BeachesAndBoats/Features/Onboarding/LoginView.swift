@@ -8,14 +8,14 @@
 import UIKit
 import RxSwift
 
-class LoginView: BaseViewControllerPlain {
-
+class LoginView: BaseViewControllerPlain, AttributedLabelDelegate {
     
     var coordinator: AppCoordinator?
     @IBOutlet weak var password: PasswordField!
     @IBOutlet weak var emailAddress: InputField!
     @IBOutlet weak var signUpBtn: UILabel!
     @IBOutlet weak var forgotPassword: UILabel!
+    @IBOutlet weak var terms: AttributedLabel!
     
     var vm = LoginViewModel()
     var disposeBag = DisposeBag()
@@ -35,6 +35,7 @@ class LoginView: BaseViewControllerPlain {
         forgotPassword.isUserInteractionEnabled = true
         forgotPassword.addGestureRecognizer(forgotPasswordGesture)
         emailAddress.text = AppStorage.username ?? ""
+        setupTerms()
         
         bindNetwork()
     }
@@ -45,6 +46,22 @@ class LoginView: BaseViewControllerPlain {
     
     @objc func gotoForgotPassword(){
         coordinator?.gotoForgotPassword()
+    }
+    
+    func setupTerms() {
+        let text = "By continuing, you have read and agreed to our Terms and Conditions, Privacy Statement and Nondiscrimination Policy."
+        terms.configure(text: text, links: [
+            "Terms and Conditions, Privacy Statement": URL(string: "https://google.com")!,
+            "Nondiscrimination Policy": URL(string: "https://google.com")!
+        ])
+        
+        terms.delegate = self
+                
+    }
+    
+    
+    func didTapOnLink(_ url: URL) {
+        UIApplication.shared.open(url)
     }
     
 

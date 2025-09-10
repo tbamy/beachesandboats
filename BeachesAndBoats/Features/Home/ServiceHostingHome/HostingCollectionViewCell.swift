@@ -34,13 +34,17 @@ class HostingCollectionViewCell: UICollectionViewCell {
         containerView.layer.shadowOpacity = 0.04
         containerView.layer.shadowOffset = CGSize(width: 2, height: 2)
         containerView.layer.shadowRadius = 10
+        daysView.layer.cornerRadius = 20
+        daysView.layer.borderWidth = 1
+        daysView.layer.borderColor = UIColor.systemOrange.cgColor
+        
     }
     
     //For beach reservation
     func currentHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
         beachName.text = data?.beachHouse?.name
-        locationLbl.text = "\(data?.beachHouse?.locations?.city ?? ""), \(data?.beachHouse?.locations?.state ?? ""), \(data?.beachHouse?.locations?.country ?? "")"
-        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom ?? "") - \(data?.beachHouse?.availabilities?.availableTo ?? "")"
+        locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
+        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.beachHouse?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
         amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
@@ -52,8 +56,8 @@ class HostingCollectionViewCell: UICollectionViewCell {
     //For boat reservation
     func boatCurrentHostingCell(with data: BoatReservationsCurrentReservation?) {
         beachName.text = data?.boat?.name
-        locationLbl.text = "\(data?.boat?.locations?.city ?? ""), \(data?.boat?.locations?.state ?? ""), \(data?.boat?.locations?.country ?? "")"
-        availabilityDate.text = "\(data?.boat?.availabilities?.availableFrom ?? "") - \(data?.boat?.availabilities?.availableTo ?? "")"
+        locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
+        availabilityDate.text = "\(data?.boat?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.boat?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.boat?.rating ?? 0)"
         amountPerNight.isHidden = true
@@ -64,9 +68,27 @@ class HostingCollectionViewCell: UICollectionViewCell {
     }
     
     func upcomingHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyy"
+
+        if let futureDate = formatter.date(from: data?.checkingDate ?? "") {
+            if let days = daysBetween(from: today, to: futureDate) {
+                if days < 1 {
+                    daysLbl.text = "Less than 1 day"
+                } else if days == 1 {
+                    daysLbl.text = "Next 1 day"
+                } else {
+                    daysLbl.text = "Next \(days) days"
+                }
+            }
+
+        }
+        
+        
         beachName.text = data?.beachHouse?.name
-        locationLbl.text = "\(data?.beachHouse?.locations?.city ?? ""), \(data?.beachHouse?.locations?.state ?? ""), \(data?.beachHouse?.locations?.country ?? "")"
-        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom ?? "") - \(data?.beachHouse?.availabilities?.availableTo ?? "")"
+        locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
+        availabilityDate.text = "\(data?.checkingDate?.convertToShorterDateFormat() ?? "") - \(data?.checkoutDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
         amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
@@ -77,8 +99,8 @@ class HostingCollectionViewCell: UICollectionViewCell {
     
     func cancelledBookingCell(with data: BeachHouseReservationsCurrentReservation?) {
         beachName.text = data?.beachHouse?.name
-        locationLbl.text = "\(data?.beachHouse?.locations?.city ?? ""), \(data?.beachHouse?.locations?.state ?? ""), \(data?.beachHouse?.locations?.country ?? "")"
-        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom ?? "") - \(data?.beachHouse?.availabilities?.availableTo ?? "")"
+        locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
+        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.beachHouse?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
         amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
@@ -115,7 +137,7 @@ class HostingCollectionViewCell: UICollectionViewCell {
         //
         daysLbl.text = data.beachHouse?.availabilities?.availableFrom
         beachName.text = data.beachHouse?.name
-        locationLbl.text = "\(data.beachHouse?.locations?.city ?? ""), \(data.beachHouse?.locations?.state ?? ""), \(data.beachHouse?.locations?.country ?? "")"
+        locationLbl.text = "\(data.beachHouse?.locations?.jettyLocation ?? ""), \(data.beachHouse?.locations?.name ?? "")"
         date.text = data.checkingDate
         loadImage(urlString: data.beachHouse?.image)
     }
@@ -137,35 +159,19 @@ class HostingCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    func daysBetween(from startDate: Date, to endDate: Date) -> Int? {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+        return components.day
+    }
     
     private func loadImage(urlString: String?) {
         guard let urlString = urlString, let url = URL(string: urlString) else {
-            beachHouseImage.image = UIImage(named: "placeholderImage")
+            beachHouseImage.image = UIImage(named: "dummy")
             return
         }
         
         beachHouseImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
-        
-//        let processor = DownsamplingImageProcessor(size: beachHouseImage.bounds.size)
-//                     |> RoundCornerImageProcessor(cornerRadius: 20)
-//        
-//        beachHouseImage.kf.indicatorType = .activity
-//        beachHouseImage.kf.setImage(
-//            with: url,
-//            placeholder: UIImage(named: "placeholderImage"),
-//            options: [
-//                .processor(processor),
-//                .scaleFactor(UIScreen.main.scale),
-//                .transition(.fade(1)),
-//                .cacheOriginalImage
-//            ]
-//        ) { result in
-//            switch result {
-//            case .success(let value):
-//                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-//            case .failure(let error):
-//                print("Job failed: \(error.localizedDescription)")
-//            }
-//        }
+
     }
 }

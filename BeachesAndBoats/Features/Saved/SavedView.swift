@@ -95,7 +95,7 @@ extension SavedView: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         view.isSaved = true
         if savedFavourites.favouritableType == "Boat" {
             view.model.titleLabel = savedFavourites.boat?.name ?? ""
-            view.model.infoOneLabel = "\(savedFavourites.boat?.locations?.city ?? ""), \(savedFavourites.boat?.locations?.state ?? "") \(savedFavourites.boat?.locations?.country ?? "")"
+            view.model.infoOneLabel = "\(savedFavourites.boat?.locations?.jettyLocation ?? ""), \(savedFavourites.boat?.locations?.name ?? "")"
             view.model.infoTwoLabel = "\(savedFavourites.boat?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(savedFavourites.boat?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
             view.model.priceLabel = "₦ \(savedFavourites.boat?.destinations?.first?.price ?? "0")"
             view.model.ratingLabel = "\(savedFavourites.boat?.rating ?? 0)"
@@ -104,7 +104,7 @@ extension SavedView: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }else{
             view.isBeachHouseMode = true
             view.model.titleLabel = savedFavourites.beachHouse?.name ?? ""
-            view.model.infoOneLabel = "\(savedFavourites.beachHouse?.locations?.city ?? ""), \(savedFavourites.beachHouse?.locations?.state ?? "") \(savedFavourites.beachHouse?.locations?.country ?? "")"
+            view.model.infoOneLabel = "\(savedFavourites.beachHouse?.locations?.jettyLocation ?? ""), \(savedFavourites.beachHouse?.locations?.name ?? "")"
             view.model.infoTwoLabel = "\(savedFavourites.beachHouse?.availabilities.availableFrom?.convertToShorterDateFormat() ?? "") - \(savedFavourites.beachHouse?.availabilities.availableTo?.convertToShorterDateFormat() ?? "")"
             view.model.priceLabel = "₦ \(savedFavourites.beachHouse?.listingPrice ?? 0)"
             view.model.ratingLabel = "\(savedFavourites.beachHouse?.rating ?? 0)"

@@ -11,12 +11,13 @@ struct GetBoatResponse: Codable {
 
 struct GetBoatData: Codable {
     let id, name, description, aboutOwner: String
-    let noOfAdults, noOfChildren, noOfPets: String?
+//    let noOfAdults, noOfChildren, noOfPets: String?
+    let noOfPassengers: String?
     let category, subCategory: Category?
     let owner: Owner?
     let amenities: [Amenity]?
     let languages: [Language]?
-    let locations: Locations?
+    let locations: Location?
     let availabilities: Availabilities?
     let images: [Image]?
     let destinations: [Destination]?
@@ -29,9 +30,9 @@ struct GetBoatData: Codable {
     enum CodingKeys: String, CodingKey {
         case id, name, description
         case aboutOwner = "about_owner"
-        case noOfAdults = "no_of_adults"
-        case noOfChildren = "no_of_children"
-        case noOfPets = "no_of_pets"
+        case noOfPassengers = "no_of_passengers"
+//        case noOfChildren = "no_of_children"
+//        case noOfPets = "no_of_pets"
         case category
         case subCategory = "sub_category"
         case owner, amenities, languages, locations, availabilities, images, destinations, houseRules, userReviewed, rating, userFavourite, reviews
