@@ -141,7 +141,7 @@ struct BoatReservationsCurrentReservation: Codable {
     let noOfPeople: String?
     let bookingDate, bookingTime: String?
     let user: User?
-    let boatDestination: String?
+    let boatDestination: Destinations?
     let subCategory: SubCategory?
 
     enum CodingKeys: String, CodingKey {

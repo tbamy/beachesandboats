@@ -100,7 +100,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         isEntireHouse = beachDetails?.bookingType == "FULL"
         
-        let imgUrl = beachDetails?.rooms?.first?.images?.first?.url
+        let imgUrl = isEntireHouse ? beachDetails?.images?.first?.url : beachDetails?.rooms?.first?.images?.first?.url
         imgUrl?.loadImage(into: topImage, placeholder: "dummy")
         backendFrom_when = beachDetails?.availabilities?.availableFrom?.convertFromBackendDateString()
         backendTo_when = beachDetails?.availabilities?.availableTo?.convertFromBackendDateString()
@@ -250,7 +250,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         aboutHostLabel.text = beachDetails?.aboutOwner
         hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
         ratingLabel.text = "\(beachDetails?.rating ?? 0)"
-        roomAndGuestsLabel.text = "\(beachDetails?.rooms?.first?.noOfOccupant ?? "") guests, \(beachDetails?.rooms?.count ?? 0) room(s)"
+        roomAndGuestsLabel.text = isEntireHouse ? "\(beachDetails?.noOfGuests ?? 0) guest(s), \(beachDetails?.noOfRooms ?? 0) room(s)" : "\(beachDetails?.rooms?.first?.noOfOccupant ?? "") guest(s), \(beachDetails?.rooms?.count ?? 0) rooms"
 
         
         amenities = beachDetails?.amenities ?? []
@@ -268,14 +268,19 @@ class BeachDetailsView: BaseViewControllerPlain {
 
     
     @objc func viewImages(){
-        
-        if let rooms = beachDetails?.rooms{
-            roomImages = rooms.compactMap { $0.images }
-                .flatMap { $0 }
-                .compactMap { $0.url }
-            coordinator?.gotoAllPhotos(images: roomImages)
+        if isEntireHouse {
+            if let images = beachDetails?.images{
+                roomImages = images.compactMap { $0.url }
+            }
+        }else{
+            if let rooms = beachDetails?.rooms{
+                roomImages = rooms.compactMap { $0.images }
+                    .flatMap { $0 }
+                    .compactMap { $0.url }
+            }
         }
         
+        coordinator?.gotoAllPhotos(images: roomImages)
     }
     
     func configureAllCollectionViews() {
@@ -303,7 +308,7 @@ class BeachDetailsView: BaseViewControllerPlain {
 
 //        let bulletRules = rules?.map { "• \($0)" }.joined(separator: "\n") ?? ""
         let bulletRules = (rules?.map { "• \($0)" }.joined(separator: "\n") ?? "")
-        + "\n\n\(beachDetails.additionalHouseRules ?? "")"
+        + "\n• \(beachDetails.additionalHouseRules ?? "")"
 
         
         let bookingType = isDayBooking ? "DAY" : "NIGHT"

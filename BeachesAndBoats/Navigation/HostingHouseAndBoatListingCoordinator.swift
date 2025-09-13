@@ -30,6 +30,11 @@ class HostingHouseAndBoatListingCoordinator: Coordinator {
         coordinator.gotoEditBeachHouseOptionsView(id: id)
     }
     
+    func gotoEditBoatOptionsView(id: String?) {
+        let coordinator = HostingServiceMenuCoordinator(navigationController: self.navigationController)
+        coordinator.gotoEditBoatOptionsView(id: id)
+    }
+    
 //    func gotoLoginAndSecurity() {
 //        let coordinator = AccountCoordinator(navigationController: self.navigationController)
 //        coordinator.gotoLoginAndSecurityView()

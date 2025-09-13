@@ -8,6 +8,14 @@
 import Foundation
 
 class ListingServiceImplementation: Provider<ListingTarget>, ListingService{
+    func deleteBeach(id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.deleteBeach(id: id)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func deleteBoat(id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.deleteBoat(id: id)){ completion( self.handleResult(result: $0))}
+    }
+    
     func deleteBeachRoom(id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         provider.request(.deleteBeachRoom(id: id)){ completion( self.handleResult(result: $0))}
     }

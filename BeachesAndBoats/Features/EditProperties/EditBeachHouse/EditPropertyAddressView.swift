@@ -14,13 +14,10 @@ class EditPropertyAddressView: BaseViewControllerPlain {
 
     var coordinator: HostingServiceMenuCoordinator?
     
-    @IBOutlet weak var stepOneProgress: UIProgressView!
-    @IBOutlet weak var stepTwoProgress: UIProgressView!
     @IBOutlet weak var locationField: InputField!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var locationCollectionView: UICollectionView!
+    @IBOutlet weak var locationCollectionViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var nextBtn: PrimaryButton!
     
     var beachData: BeachDatas?
     var locations: [PropertyLocation]?
@@ -29,57 +26,108 @@ class EditPropertyAddressView: BaseViewControllerPlain {
     var beachLocation: String?
     var selectBeachLocation: String?
     
+    var id: String?
+    
+    var disposeBag = DisposeBag()
+    var vm = EditBeachViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Beach Houses"
+        title = "Edit Property"
+        
+        bindNetwork()
         setup()
         
     }
     
     func setup(){
-        stepOneProgress.setProgress(0.50, animated: true)
-        stepOneProgress.tintColor = .B_B
-        stepTwoProgress.setProgress(0, animated: false)
-
         locations = beachData?.property_location
+        selectBeachLocation = createBeachListing?.locationName
         
-        locationField.textChanged = { [weak self] textField, range, replacementString in
-            guard let self = self else { return }
-            let currentText = textField.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else { return }
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
-            
-            nextBtn.isEnabled = updatedText.count >= 5
-        }
+        locationField.text = createBeachListing?.jettyLocation ?? ""
+        
+        locationCollectionView.backgroundColor = .clear
+        locationCollectionView.delegate = self
+        locationCollectionView.dataSource = self
+        locationCollectionView.allowsMultipleSelection = true
+        locationCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
+        updateCollectionViewHeight(locationCollectionView, locationCollectionViewHeight)
+        locationCollectionView.reloadData()
+        
+        selectSavedBeachLocation()
+    }
+    
+    private func updateCollectionViewHeight(_ collectionView: UICollectionView, _ heightConstraint: NSLayoutConstraint) {
+        collectionView.layoutIfNeeded()
+        heightConstraint.constant = collectionView.contentSize.height
+        view.layoutIfNeeded()
     }
 
+    private func selectSavedBeachLocation() {
+        guard let savedLocationId = selectBeachLocation,
+              let locations = locations else { return }
+        
+        // Find the index of the saved location
+        for (index, location) in locations.enumerated() {
+            if location.id == savedLocationId {
+                selectedIndex = index
+                beachLocation = location.name
+                
+                print("Found saved beach location: \(location.name ?? "") at index \(index)")
+                
+                // Reload collection view to show selection
+                DispatchQueue.main.async {
+                    self.locationCollectionView.reloadData()
+                }
+                return // Exit early
+            }
+        }
+        
+        // Fallback: No match found, clear selection
+        print("No saved boat location match found.")
+        selectedIndex = nil
+        selectBeachLocation = nil
+        beachLocation = nil
+        DispatchQueue.main.async {
+            self.locationCollectionView.reloadData()
+        }
+    }
             
-
     
-    @IBAction func nextTapped(_ sender: Any) {
-        guard validateJettyLocation() else { return }
-        if let beachData = beachData{
+    @IBAction func saveAndExit(_ sender: Any) {
+        guard let id = id else { return }
+        if validateJettyLocation(){
             if var createBeachListing = createBeachListing{
                 createBeachListing.locationName = selectBeachLocation
                 createBeachListing.jettyLocation = locationField.text
+                
+                self.createBeachListing = createBeachListing
                 print(createBeachListing)
                 
+                LoadingModal.show(title: "Updating Record...")
+                vm.editBeach(createBeachListing, id: id)
+                
+                
             }
-         
-            
-            
         }
+
     }
     
-    @IBAction func saveAndExit(_ sender: Any) {
-        if var createBeachListing = createBeachListing{
-
-            createBeachListing.locationName = selectBeachLocation
-            createBeachListing.jettyLocation = locationField.text
+    func bindNetwork(){
+        vm.output.subscribe(onNext: {[weak self] response in
+            LoadingModal.dismiss()
             
-            AppStorage.beachListing = createBeachListing
-        }
-
+            switch response {
+            case .editBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToOptionsScreen() })
+                
+            case .editBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+            
+        }).disposed(by: disposeBag)
     }
 }
 
@@ -139,12 +187,10 @@ extension EditPropertyAddressView: UICollectionViewDelegate, UICollectionViewDat
             selectedIndex = nil
             selectBeachLocation = nil
             beachLocation = nil
-            nextBtn.isEnabled = false
         } else {
             selectedIndex = indexPath.item
             selectBeachLocation = locations?[indexPath.item].id
             beachLocation = locations?[indexPath.item].name
-            nextBtn.isEnabled = true
         }
         
         // Update the previously selected cell (if any)

@@ -31,10 +31,10 @@ class ConfirmBookingView: BaseViewControllerPlain {
     var listing: GetBeachData?
     var booking: CreateBeachHouseBookingRequest?
     var configuration: BookingConfigurationData?
-    var checkInTimeFrom: String?
-    var checkInTimeTo: String?
-    var checkOutTimeFrom: String?
-    var checkOutTimeTo: String?
+//    var checkInDate: String?
+    var checkInTime: String?
+//    var checkOutDate: String?
+    var checkOutTime: String?
     var numberOfGuests: Int?
     var startDate: String?
     var endDate: String?
@@ -55,6 +55,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
     var picker = UIDatePicker()
     
     var bookingResponse: BeachHouseBookingResponse?
+    var isDayBooking: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,18 +68,24 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     func setup(){
-        
+        checkoutTimeLabel.isHidden = true
         configureButtons()
         
         room = listing?.rooms?.first { $0.id == roomId }
 
         startDate = booking?.checkingDate ?? ""
         endDate = booking?.checkoutDate ?? ""
-        checkInTimeFrom = listing?.checkInFrom
-        checkInTimeTo = listing?.checkInTo
-        checkOutTimeFrom = listing?.checkOutFrom
-        checkOutTimeTo = listing?.checkOutTo
         numberOfGuests = Int(room?.noOfOccupant ?? "1")
+        
+        isDayBooking = booking?.bookingType == "DAY"
+        
+        if isDayBooking{
+            checkInTime = listing?.dayCheckIn
+            checkOutTime = listing?.dayCheckOut
+        }else {
+            checkInTime = listing?.overnightCheckIn
+            checkOutTime = listing?.overnightCheckOut
+        }
         
         updatePrice()
         
@@ -98,8 +105,8 @@ class ConfirmBookingView: BaseViewControllerPlain {
             }
             bookingRequest.checkingDate = startDate ?? ""
             bookingRequest.checkoutDate = endDate ?? ""
-            bookingRequest.checkingTime = checkInTimeFrom?.toBackendTime() ?? ""
-            bookingRequest.checkoutTime = checkOutTimeTo?.toBackendTime() ?? ""
+            bookingRequest.checkingTime = checkInTime?.toBackendTime() ?? ""
+            bookingRequest.checkoutTime = checkOutTime?.toBackendTime() ?? ""
             bookingRequest.numberOfPeople = numberOfGuests ?? 1
             
             bookingRequest.units = units ?? 1
@@ -153,7 +160,6 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     func updatePrice(){
-        let isDayBooking = booking?.bookingType == "DAY"
         let nights = calculateNights(from: startDate ?? "", to: endDate ?? "") ?? 1
         
 //        datesLabel.text = "\(startDate?.convertToShorterDateFormat() ?? "") - \(endDate?.convertToShorterDateFormat() ?? "") (\(nights) Night(s))"
@@ -188,8 +194,8 @@ class ConfirmBookingView: BaseViewControllerPlain {
             let actualPrice = price * Float(units ?? 1)
             //            print("Actual Price: \(actualPrice)")
             
-            checkinTimeLabel.text = "\(checkInTimeFrom?.convertTo12HourFormat() ?? "") - \(checkInTimeTo?.convertTo12HourFormat() ?? "")"
-            checkoutTimeLabel.text = "\(checkOutTimeFrom?.convertTo12HourFormat() ?? "") - \(checkOutTimeTo?.convertTo12HourFormat() ?? "")"
+            checkinTimeLabel.text = "\(checkInTime?.convertTo12HourFormat() ?? "")"
+//            checkoutTimeLabel.text = "\(checkOutTimeFrom?.convertTo12HourFormat() ?? "") - \(checkOutTimeTo?.convertTo12HourFormat() ?? "")"
             guestLabel.text = "\(numberOfGuests ?? 0) Guest(s)"
             costLabel.text = isDayBooking ? "₦ \(actualPrice.toAmount() ?? "1") X 1 Day Booking" : "₦\(actualPrice.toAmount() ?? "1") x \(nights) Night(s))"
             let totalCost = (actualPrice) * Float(nights)

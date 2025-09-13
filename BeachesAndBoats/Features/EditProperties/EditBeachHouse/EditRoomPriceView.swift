@@ -20,6 +20,7 @@ class EditRoomPriceView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     
     var isDiscountChecked: Bool = false
     var finalDiscountPercent: Float = 0.1 // Total effective discount percentage for display
@@ -192,7 +193,7 @@ class EditRoomPriceView: BaseViewControllerPlain {
         print("Updated Room: \(existingRoom)")
         print("Updated CreateBeachListing: \(updatedBeachListing)")
         
-        coordinator?.gotoEditRoomPricePerDayView(beachData: beachData, request: updatedBeachListing, room: room, id: id)
+        coordinator?.gotoEditRoomPricePerDayView(beachData: beachData, request: updatedBeachListing, room: room, id: id, details: details)
     }
 
     @IBAction func saveAndExit(_ sender: Any) {

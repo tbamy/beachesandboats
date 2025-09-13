@@ -13,10 +13,10 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
     @IBOutlet weak var stepOneProgress: UIProgressView!
     @IBOutlet weak var stepTwoProgress: UIProgressView!
     @IBOutlet weak var nextBtn: PrimaryButton!
-    @IBOutlet weak var checkInFrom: TimePicker!
-    @IBOutlet weak var checkInUntil: TimePicker!
-    @IBOutlet weak var checkOutFrom: TimePicker!
-    @IBOutlet weak var checkOutUntil: TimePicker!
+    @IBOutlet weak var overnightCheckIn: TimePicker!
+    @IBOutlet weak var overnightCheckOut: TimePicker!
+    @IBOutlet weak var dayCheckIn: TimePicker!
+    @IBOutlet weak var dayCheckOut: TimePicker!
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
@@ -38,10 +38,10 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         guard
-            let checkInFromTime = checkInFrom.selectedTime,
-            let checkInUntilTime = checkInUntil.selectedTime,
-            let checkOutFromTime = checkOutFrom.selectedTime,
-            let checkOutUntilTime = checkOutUntil.selectedTime
+            let overnightCheckInTime = overnightCheckIn.selectedTime,
+            let overnightCheckOutTime = overnightCheckOut.selectedTime,
+            let dayCheckInTime = dayCheckIn.selectedTime,
+            let dayCheckOutTime = dayCheckOut.selectedTime
         else {
             MiddleModal.show(
                 title: "Incomplete Times",
@@ -53,11 +53,10 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
             return
         }
 
-        // Validation 1: Check-in range
-        if checkInUntilTime <= checkInFromTime {
+        if overnightCheckOutTime <= overnightCheckInTime {
             MiddleModal.show(
-                title: "Check-In Time Mismatch",
-                subtitle: "The latest check-in time must be after the earliest check-in time.",
+                title: "Overnight Booking Time Mismatch",
+                subtitle: "The check-out time must be after the check-in time.",
                 type: .error,
                 dismissable: true,
                 dismissOnConfirm: true
@@ -65,23 +64,10 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
             return
         }
 
-        // Validation 2: Check-out cannot start before check-in ends
-//        if checkOutFromTime <= checkInUntilTime {
-//            MiddleModal.show(
-//                title: "Check-Out Too Early",
-//                subtitle: "Check-out should start after check-in ends. Please adjust the times accordingly.",
-//                type: .error,
-//                dismissable: true,
-//                dismissOnConfirm: true
-//            )
-//            return
-//        }
-
-        // Validation 3: Check-out range
-        if checkOutUntilTime <= checkOutFromTime {
+        if dayCheckOutTime <= dayCheckInTime {
             MiddleModal.show(
-                title: "Check-Out Time Mismatch",
-                subtitle: "The latest check-out time must be after the earliest check-out time.",
+                title: "Day Booking Time Mismatch",
+                subtitle: "The check-out time must be after the check-in time.",
                 type: .error,
                 dismissable: true,
                 dismissOnConfirm: true
@@ -91,10 +77,10 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
 
         // All checks passed
         if let beachData = beachData, var createBeachListing = createBeachListing {
-            createBeachListing.checkInFrom = checkInFrom.text
-            createBeachListing.checkInTo = checkInUntil.text
-            createBeachListing.checkOutFrom = checkOutFrom.text
-            createBeachListing.checkOutTo = checkOutUntil.text
+            createBeachListing.overnightCheckIn = overnightCheckIn.text
+            createBeachListing.overnightCheckOut = overnightCheckOut.text
+            createBeachListing.dayCheckIn = dayCheckIn.text
+            createBeachListing.dayCheckOut = dayCheckOut.text
 
             print(createBeachListing)
             if createBeachListing.bookingType == "FULL" {
@@ -109,10 +95,10 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBeachListing = createBeachListing{
-            createBeachListing.checkInFrom = checkInFrom.text
-            createBeachListing.checkInTo = checkInUntil.text
-            createBeachListing.checkOutFrom = checkOutFrom.text
-            createBeachListing.checkOutTo = checkOutUntil.text
+            createBeachListing.overnightCheckIn = overnightCheckIn.text
+            createBeachListing.overnightCheckOut = overnightCheckOut.text
+            createBeachListing.dayCheckIn = dayCheckIn.text
+            createBeachListing.dayCheckOut = dayCheckOut.text
             
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()

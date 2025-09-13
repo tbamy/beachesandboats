@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RxSwift
+//import RxSwift
 
 class EditRoomPricePerDayView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
@@ -21,9 +21,9 @@ class EditRoomPricePerDayView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
-    
-    var disposeBag = DisposeBag()
-    var vm = EditBeachViewModel()
+    var details: GetBeachData?
+//    var disposeBag = DisposeBag()
+//    var vm = EditBeachViewModel()
     
     var isDiscountChecked: Bool = false
     var finalDiscountPercent: Float = 0.1 // Total effective discount percentage for display
@@ -36,7 +36,6 @@ class EditRoomPricePerDayView: BaseViewControllerPlain {
         super.viewDidLoad()
         title = "Edit Property"
         setup()
-        bindNetwork()
     }
     
     func setup() {
@@ -196,25 +195,12 @@ class EditRoomPricePerDayView: BaseViewControllerPlain {
         print("Request Room: \(self.createBeachListing)")
         print("Stored additional day discount percent: \(existingRoom.dayDiscountPercent)%")
         
-        LoadingModal.show(title: "Updating Record...")
-        vm.editBeach(createBeachListing, id: id)
-}
-
-
-func bindNetwork(){
-    vm.output.subscribe(onNext: {[weak self] response in
-        LoadingModal.dismiss()
+        let roomImages = details?.rooms?
+            .first(where: { $0.name == room })?
+            .images?
+            .compactMap { $0.url } ?? []
         
-        switch response {
-        case .editBeachSuccessful(let response):
-            print(response)
-            MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToRoomsListScreen() })
-            
-        case .editBeachFailed(let error):
-            MiddleModal.show(title: error.message ?? "", type: .error)
-        }
-        
-    }).disposed(by: disposeBag)
+        coordinator?.gotoEditUploadImageView(beachData: beachData, request: createBeachListing, currentImages: roomImages, id: id)
 }
     
     

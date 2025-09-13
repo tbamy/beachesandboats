@@ -285,7 +285,7 @@ extension HostListingVC: UITableViewDelegate, UITableViewDataSource {
             coordinator?.gotoEditBeachHouseOptionsView(id: cellAt.id)
         } else {
             let cellAt = boatListingData[indexPath.row]
-            
+            coordinator?.gotoEditBoatOptionsView(id: cellAt.id)
         }
     }
     

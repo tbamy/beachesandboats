@@ -60,7 +60,7 @@ class HouseTypeListView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         if let beachData = beachData{
             let isPrivateStay = cat == "" ? 1 : 0
-            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", isPrivateStay: isPrivateStay, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
+            let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "",  categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", isPrivateStay: isPrivateStay, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
             
             coordinator?.gotoHouseSizeListView(beachData: beachData, createBeachListingData: request, selectedName: selectedName ?? "Property")
         }
@@ -68,7 +68,7 @@ class HouseTypeListView: BaseViewControllerPlain {
     
     @IBAction func saveAndExit(_ sender: Any) {
         let isPrivateStay = cat == "" ? 1 : 0
-        let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", checkInFrom: "", checkInTo: "", checkOutFrom: "", checkOutTo: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", isPrivateStay: isPrivateStay, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
+        let request = CreateBeachListingRequest(name: "", description: "", aboutOwner: "", categoryId: cat ?? "", subCategoryId: selectedHouse, bookingType: "", isPrivateStay: isPrivateStay, availableFrom: "", availableTo: "", amenities: [], languages: [], houseRules: [], rooms: [], roleType: hostType?.rawValue ?? "", listingPrice: 0, discountPercent: 0, pricePerDay: 0, dayDiscountPercent: 0)
             
             AppStorage.beachListing = request
             coordinator?.backToDashboard()

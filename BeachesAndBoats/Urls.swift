@@ -68,12 +68,14 @@ enum Urls: String {
     case createBoat = "api/v1/boat/create"
     case propertiesData = "api/v1/property/data"
     case editBoat = "api/v1/boat/edit/%@"
+    case deleteBoat = "api/v1/boat/delete-boat/%@"
     
     //MARK: Beach
     
     case createBeach = "api/v1/beachhouse/create"
     case editBeach = "api/v1/beachhouse/edit/%@"
     case deleteBeachRoom = "api/v1/beachhouse/delete-beach-room/%@"
+    case deleteBeachHouse = "api/v1/beachhouse/delete-beach-house/%@"
     
     
     //MARK: Services

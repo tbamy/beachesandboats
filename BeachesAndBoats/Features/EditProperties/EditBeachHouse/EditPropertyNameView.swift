@@ -89,7 +89,7 @@ class EditPropertyNameView: BaseViewControllerPlain {
             switch response {
             case .editBeachSuccessful(let response):
                 print(response)
-                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.pop() })
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToOptionsScreen() })
                 
             case .editBeachFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

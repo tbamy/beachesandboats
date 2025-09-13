@@ -424,11 +424,11 @@ struct Listing: Codable {
     let dayDiscountPercent: Float?
     let listingPrice: Float?
     let discountPercent: Float?
-    let checkInFrom: String?
-    let checkInTo: String?
-    let checkOutFrom: String?
+    var overnightCheckIn: String?
+    var overnightCheckOut: String?
+    var dayCheckIn: String?
+    var dayCheckOut: String?
     let pricePerNight: Float?
-    let checkOutTo: String?
     let bookingType: String?
     let noOfPassengers: String?
 //    let noOfChildren: String?
@@ -458,15 +458,13 @@ struct Listing: Codable {
         case dayDiscountPercent = "day_discount_percent"
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
-        case checkInFrom = "check_in_from"
-        case checkInTo = "check_in_to"
-        case checkOutFrom = "check_out_from"
+        case overnightCheckIn = "overnight_check_in"
+        case overnightCheckOut = "overnight_check_out"
+        case dayCheckIn = "day_check_in"
+        case dayCheckOut = "day_check_out"
         case pricePerNight = "price_per_night"
-        case checkOutTo = "check_out_to"
         case bookingType = "booking_type"
         case noOfPassengers = "no_of_passengers"
-//        case noOfChildren = "no_of_children"
-//        case noOfPets = "no_of_pets"
         case subCategory = "sub_category"
         case minRoomPricePerDay = "minRoomPricePerDay"
         case minRoomPricePerNight = "minRoomPricePerNight"

@@ -51,10 +51,10 @@ struct BeachHouseData: Codable {
     let aboutOwner: String?
     let listingPrice: Decimal?
     let discountPercent: Int
-    let checkInFrom: String
-    let checkInTo: String
-    let checkOutFrom: String
-    let checkOutTo: String
+    var overnightCheckIn: String?
+    var overnightCheckOut: String?
+    var dayCheckIn: String?
+    var dayCheckOut: String?
     let pricePerNight: Decimal
     let bookingType: String
     let category: Category
@@ -76,10 +76,10 @@ struct BeachHouseData: Codable {
         case aboutOwner = "about_owner"
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
-        case checkInFrom = "check_in_from"
-        case checkInTo = "check_in_to"
-        case checkOutFrom = "check_out_from"
-        case checkOutTo = "check_out_to"
+        case overnightCheckIn = "overnight_check_in"
+        case overnightCheckOut = "overnight_check_out"
+        case dayCheckIn = "day_check_in"
+        case dayCheckOut = "day_check_out"
         case pricePerNight = "price_per_night"
         case bookingType = "booking_type"
         case category, subCategory = "sub_category", owner, amenities, languages, locations, availabilities, houseRules, rooms

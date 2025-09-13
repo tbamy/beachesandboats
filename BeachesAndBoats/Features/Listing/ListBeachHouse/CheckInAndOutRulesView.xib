@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckInAndOutRulesView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
-                <outlet property="checkInFrom" destination="jQy-HS-D59" id="lLy-Mx-9sy"/>
-                <outlet property="checkInUntil" destination="QZv-WQ-Flo" id="c7w-BH-p6o"/>
-                <outlet property="checkOutFrom" destination="TDr-bk-VLH" id="XUK-p5-j80"/>
-                <outlet property="checkOutUntil" destination="1JN-IQ-Fyc" id="BOL-Re-39o"/>
+                <outlet property="dayCheckIn" destination="TDr-bk-VLH" id="k9Y-S4-MjF"/>
+                <outlet property="dayCheckOut" destination="1JN-IQ-Fyc" id="3wV-1v-AQO"/>
                 <outlet property="nextBtn" destination="lWh-4v-bHX" id="ql3-n9-NAZ"/>
+                <outlet property="overnightCheckIn" destination="jQy-HS-D59" id="5zy-hQ-uKr"/>
+                <outlet property="overnightCheckOut" destination="QZv-WQ-Flo" id="n1p-NH-JHQ"/>
                 <outlet property="stepOneProgress" destination="6Ww-rQ-8Sn" id="9uy-EJ-dHS"/>
                 <outlet property="stepTwoProgress" destination="JQH-FA-2f2" id="jk7-Fw-j84"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

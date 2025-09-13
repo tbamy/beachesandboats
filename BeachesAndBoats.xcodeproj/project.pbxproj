@@ -447,6 +447,34 @@
 		A6B99D452DBB88D50069E505 /* EditPropertiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B99D432DBB88D50069E505 /* EditPropertiesListView.swift */; };
 		A6B99D462DBB88D50069E505 /* EditPropertiesListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B99D442DBB88D50069E505 /* EditPropertiesListView.xib */; };
 		A6BC757C2D52C38A001B128A /* BankDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */; };
+		A6BCA3C52E736A4F00436BCE /* EditBoatOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3C42E736A4F00436BCE /* EditBoatOptionsView.xib */; };
+		A6BCA3C62E736A4F00436BCE /* EditBoatOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3C32E736A4F00436BCE /* EditBoatOptionsView.swift */; };
+		A6BCA3CB2E736CCC00436BCE /* EditBoatNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3CA2E736CCC00436BCE /* EditBoatNameView.xib */; };
+		A6BCA3CC2E736CCC00436BCE /* EditBoatNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3C92E736CCC00436BCE /* EditBoatNameView.swift */; };
+		A6BCA3CF2E736CE900436BCE /* EditBoatAvailableDatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3CE2E736CE900436BCE /* EditBoatAvailableDatesView.xib */; };
+		A6BCA3D02E736CE900436BCE /* EditBoatAvailableDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3CD2E736CE900436BCE /* EditBoatAvailableDatesView.swift */; };
+		A6BCA3D32E736D0400436BCE /* EditBoatFacilitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3D22E736D0400436BCE /* EditBoatFacilitiesView.xib */; };
+		A6BCA3D42E736D0400436BCE /* EditBoatFacilitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3D12E736D0400436BCE /* EditBoatFacilitiesView.swift */; };
+		A6BCA3D72E736E4600436BCE /* EditBoatAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3D62E736E4600436BCE /* EditBoatAddressView.xib */; };
+		A6BCA3D82E736E4600436BCE /* EditBoatAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3D52E736E4600436BCE /* EditBoatAddressView.swift */; };
+		A6BCA3DB2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3DA2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.xib */; };
+		A6BCA3DC2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3D92E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.swift */; };
+		A6BCA3DF2E736ED200436BCE /* EditBoatAboutYouLanguageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3DE2E736ED200436BCE /* EditBoatAboutYouLanguageView.xib */; };
+		A6BCA3E02E736ED200436BCE /* EditBoatAboutYouLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3DD2E736ED200436BCE /* EditBoatAboutYouLanguageView.swift */; };
+		A6BCA3E32E736EEA00436BCE /* EditBoatAboutYouDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3E22E736EEA00436BCE /* EditBoatAboutYouDescriptionView.xib */; };
+		A6BCA3E42E736EEA00436BCE /* EditBoatAboutYouDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3E12E736EEA00436BCE /* EditBoatAboutYouDescriptionView.swift */; };
+		A6BCA3E72E736F0700436BCE /* EditBoatRulesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3E62E736F0700436BCE /* EditBoatRulesView.xib */; };
+		A6BCA3E82E736F0700436BCE /* EditBoatRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3E52E736F0700436BCE /* EditBoatRulesView.swift */; };
+		A6BCA3EB2E736F3C00436BCE /* EditBoatTravelLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3EA2E736F3C00436BCE /* EditBoatTravelLocationView.xib */; };
+		A6BCA3EC2E736F3C00436BCE /* EditBoatTravelLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3E92E736F3C00436BCE /* EditBoatTravelLocationView.swift */; };
+		A6BCA3EF2E736F5E00436BCE /* EditBoatUploadImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3EE2E736F5E00436BCE /* EditBoatUploadImageView.xib */; };
+		A6BCA3F02E736F5E00436BCE /* EditBoatUploadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3ED2E736F5E00436BCE /* EditBoatUploadImageView.swift */; };
+		A6BCA3F32E73789C00436BCE /* EditHouseDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3F22E73789C00436BCE /* EditHouseDetailsView.xib */; };
+		A6BCA3F42E73789C00436BCE /* EditHouseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3F12E73789C00436BCE /* EditHouseDetailsView.swift */; };
+		A6BCA3F72E74100600436BCE /* EditBoatTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3F62E74100600436BCE /* EditBoatTypeView.xib */; };
+		A6BCA3F82E74100600436BCE /* EditBoatTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3F52E74100600436BCE /* EditBoatTypeView.swift */; };
+		A6BCA3FD2E75566500436BCE /* EditHouseUploadImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BCA3FC2E75566500436BCE /* EditHouseUploadImageView.xib */; };
+		A6BCA3FE2E75566500436BCE /* EditHouseUploadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BCA3FB2E75566500436BCE /* EditHouseUploadImageView.swift */; };
 		A6C1530D2D511439004078A3 /* GetAllDishesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1530C2D511439004078A3 /* GetAllDishesResponse.swift */; };
 		A6C1C4162CBA6E6C001CD27D /* DateRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */; };
 		A6C1C4192CBBC4F1001CD27D /* HorizonCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */; };
@@ -1097,6 +1125,34 @@
 		A6B99D432DBB88D50069E505 /* EditPropertiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPropertiesListView.swift; sourceTree = "<group>"; };
 		A6B99D442DBB88D50069E505 /* EditPropertiesListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPropertiesListView.xib; sourceTree = "<group>"; };
 		A6BC757B2D52C38A001B128A /* BankDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsVM.swift; sourceTree = "<group>"; };
+		A6BCA3C32E736A4F00436BCE /* EditBoatOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatOptionsView.swift; sourceTree = "<group>"; };
+		A6BCA3C42E736A4F00436BCE /* EditBoatOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatOptionsView.xib; sourceTree = "<group>"; };
+		A6BCA3C92E736CCC00436BCE /* EditBoatNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatNameView.swift; sourceTree = "<group>"; };
+		A6BCA3CA2E736CCC00436BCE /* EditBoatNameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatNameView.xib; sourceTree = "<group>"; };
+		A6BCA3CD2E736CE900436BCE /* EditBoatAvailableDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatAvailableDatesView.swift; sourceTree = "<group>"; };
+		A6BCA3CE2E736CE900436BCE /* EditBoatAvailableDatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatAvailableDatesView.xib; sourceTree = "<group>"; };
+		A6BCA3D12E736D0400436BCE /* EditBoatFacilitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatFacilitiesView.swift; sourceTree = "<group>"; };
+		A6BCA3D22E736D0400436BCE /* EditBoatFacilitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatFacilitiesView.xib; sourceTree = "<group>"; };
+		A6BCA3D52E736E4600436BCE /* EditBoatAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatAddressView.swift; sourceTree = "<group>"; };
+		A6BCA3D62E736E4600436BCE /* EditBoatAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatAddressView.xib; sourceTree = "<group>"; };
+		A6BCA3D92E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatAdditionalAmenitiesView.swift; sourceTree = "<group>"; };
+		A6BCA3DA2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatAdditionalAmenitiesView.xib; sourceTree = "<group>"; };
+		A6BCA3DD2E736ED200436BCE /* EditBoatAboutYouLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatAboutYouLanguageView.swift; sourceTree = "<group>"; };
+		A6BCA3DE2E736ED200436BCE /* EditBoatAboutYouLanguageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatAboutYouLanguageView.xib; sourceTree = "<group>"; };
+		A6BCA3E12E736EEA00436BCE /* EditBoatAboutYouDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatAboutYouDescriptionView.swift; sourceTree = "<group>"; };
+		A6BCA3E22E736EEA00436BCE /* EditBoatAboutYouDescriptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatAboutYouDescriptionView.xib; sourceTree = "<group>"; };
+		A6BCA3E52E736F0700436BCE /* EditBoatRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatRulesView.swift; sourceTree = "<group>"; };
+		A6BCA3E62E736F0700436BCE /* EditBoatRulesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatRulesView.xib; sourceTree = "<group>"; };
+		A6BCA3E92E736F3C00436BCE /* EditBoatTravelLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatTravelLocationView.swift; sourceTree = "<group>"; };
+		A6BCA3EA2E736F3C00436BCE /* EditBoatTravelLocationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatTravelLocationView.xib; sourceTree = "<group>"; };
+		A6BCA3ED2E736F5E00436BCE /* EditBoatUploadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatUploadImageView.swift; sourceTree = "<group>"; };
+		A6BCA3EE2E736F5E00436BCE /* EditBoatUploadImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatUploadImageView.xib; sourceTree = "<group>"; };
+		A6BCA3F12E73789C00436BCE /* EditHouseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseDetailsView.swift; sourceTree = "<group>"; };
+		A6BCA3F22E73789C00436BCE /* EditHouseDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditHouseDetailsView.xib; sourceTree = "<group>"; };
+		A6BCA3F52E74100600436BCE /* EditBoatTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBoatTypeView.swift; sourceTree = "<group>"; };
+		A6BCA3F62E74100600436BCE /* EditBoatTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditBoatTypeView.xib; sourceTree = "<group>"; };
+		A6BCA3FB2E75566500436BCE /* EditHouseUploadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHouseUploadImageView.swift; sourceTree = "<group>"; };
+		A6BCA3FC2E75566500436BCE /* EditHouseUploadImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditHouseUploadImageView.xib; sourceTree = "<group>"; };
 		A6C1530C2D511439004078A3 /* GetAllDishesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllDishesResponse.swift; sourceTree = "<group>"; };
 		A6C1C4152CBA6E6C001CD27D /* DateRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeIndicatorView.swift; sourceTree = "<group>"; };
 		A6C1C4172CBBC4F1001CD27D /* HorizonCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendar.swift; sourceTree = "<group>"; };
@@ -2495,6 +2551,7 @@
 		A6B99D3D2DBB291C0069E505 /* EditProperties */ = {
 			isa = PBXGroup;
 			children = (
+				A6BCA3C22E73684D00436BCE /* EditBoat */,
 				A6C9D2202E318629005D7F30 /* EditBeachHouse */,
 				A6B99D3E2DBB360A0069E505 /* VM */,
 				A6B99D432DBB88D50069E505 /* EditPropertiesListView.swift */,
@@ -2510,6 +2567,37 @@
 				A6B99D412DBB36280069E505 /* EditBeachVM.swift */,
 			);
 			path = VM;
+			sourceTree = "<group>";
+		};
+		A6BCA3C22E73684D00436BCE /* EditBoat */ = {
+			isa = PBXGroup;
+			children = (
+				A6BCA3C32E736A4F00436BCE /* EditBoatOptionsView.swift */,
+				A6BCA3C42E736A4F00436BCE /* EditBoatOptionsView.xib */,
+				A6BCA3F52E74100600436BCE /* EditBoatTypeView.swift */,
+				A6BCA3F62E74100600436BCE /* EditBoatTypeView.xib */,
+				A6BCA3C92E736CCC00436BCE /* EditBoatNameView.swift */,
+				A6BCA3CA2E736CCC00436BCE /* EditBoatNameView.xib */,
+				A6BCA3D52E736E4600436BCE /* EditBoatAddressView.swift */,
+				A6BCA3D62E736E4600436BCE /* EditBoatAddressView.xib */,
+				A6BCA3CD2E736CE900436BCE /* EditBoatAvailableDatesView.swift */,
+				A6BCA3CE2E736CE900436BCE /* EditBoatAvailableDatesView.xib */,
+				A6BCA3D12E736D0400436BCE /* EditBoatFacilitiesView.swift */,
+				A6BCA3D22E736D0400436BCE /* EditBoatFacilitiesView.xib */,
+				A6BCA3D92E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.swift */,
+				A6BCA3DA2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.xib */,
+				A6BCA3DD2E736ED200436BCE /* EditBoatAboutYouLanguageView.swift */,
+				A6BCA3DE2E736ED200436BCE /* EditBoatAboutYouLanguageView.xib */,
+				A6BCA3E12E736EEA00436BCE /* EditBoatAboutYouDescriptionView.swift */,
+				A6BCA3E22E736EEA00436BCE /* EditBoatAboutYouDescriptionView.xib */,
+				A6BCA3E52E736F0700436BCE /* EditBoatRulesView.swift */,
+				A6BCA3E62E736F0700436BCE /* EditBoatRulesView.xib */,
+				A6BCA3E92E736F3C00436BCE /* EditBoatTravelLocationView.swift */,
+				A6BCA3EA2E736F3C00436BCE /* EditBoatTravelLocationView.xib */,
+				A6BCA3ED2E736F5E00436BCE /* EditBoatUploadImageView.swift */,
+				A6BCA3EE2E736F5E00436BCE /* EditBoatUploadImageView.xib */,
+			);
+			path = EditBoat;
 			sourceTree = "<group>";
 		};
 		A6C1C4142CBA6DBD001CD27D /* HorizonDate */ = {
@@ -2681,6 +2769,8 @@
 				A6C9D2422E319124005D7F30 /* EditHouseRulesView.xib */,
 				A6C9D2452E3191C3005D7F30 /* EditCheckInAndOutRulesView.swift */,
 				A6C9D2462E3191C3005D7F30 /* EditCheckInAndOutRulesView.xib */,
+				A6BCA3F12E73789C00436BCE /* EditHouseDetailsView.swift */,
+				A6BCA3F22E73789C00436BCE /* EditHouseDetailsView.xib */,
 				A6C9D2592E319331005D7F30 /* EditRoomsListView.swift */,
 				A6C9D25A2E319331005D7F30 /* EditRoomsListView.xib */,
 				A6C9D2492E319206005D7F30 /* EditListRoomsView.swift */,
@@ -2691,6 +2781,8 @@
 				A6C9D2522E31928C005D7F30 /* EditRoomPriceView.xib */,
 				A6C9D2552E3192AA005D7F30 /* EditRoomPricePerDayView.swift */,
 				A6C9D2562E3192AA005D7F30 /* EditRoomPricePerDayView.xib */,
+				A6BCA3FB2E75566500436BCE /* EditHouseUploadImageView.swift */,
+				A6BCA3FC2E75566500436BCE /* EditHouseUploadImageView.xib */,
 				A6C9D25D2E31936F005D7F30 /* EditEntireApartmentPriceView.swift */,
 				A6C9D25E2E31936F005D7F30 /* EditEntireApartmentPriceView.xib */,
 				A6C9D2612E31938B005D7F30 /* EditEntireApartmentPricePerDayView.swift */,
@@ -2961,6 +3053,7 @@
 				A6C1C4242CBBFCAB001CD27D /* ProfilePaymentView.xib in Resources */,
 				A6CA3D312CB9C64C009307B2 /* TravelLocationView.xib in Resources */,
 				A6E0504E2CEF47DE00F0211C /* ServiceHostingHomeView.xib in Resources */,
+				A6BCA3D32E736D0400436BCE /* EditBoatFacilitiesView.xib in Resources */,
 				A65C51292CAC30F60027E5F1 /* HouseTypeListView.xib in Resources */,
 				A61499362C5E9A2A00E0CDFC /* SearchModal.xib in Resources */,
 				A642F9662D588D780089F593 /* SavedListView.xib in Resources */,
@@ -2990,6 +3083,7 @@
 				A6CA3D712CB9CF7B009307B2 /* BouncerPriceVIew.xib in Resources */,
 				A6CA3D652CB9CE24009307B2 /* BouncerInformationView.xib in Resources */,
 				A6F4069B2C02D3A800973BD7 /* Montserrat-SemiBoldItalic.ttf in Resources */,
+				A6BCA3D72E736E4600436BCE /* EditBoatAddressView.xib in Resources */,
 				A6CA3D752CB9CFB8009307B2 /* BouncerUploadImagesView.xib in Resources */,
 				A6CA3D5D2CB9CDD0009307B2 /* DJPriceView.xib in Resources */,
 				A65C51352CAC32C90027E5F1 /* PropertyAddressView.xib in Resources */,
@@ -3005,14 +3099,17 @@
 				A6F406A02C02D3A800973BD7 /* Montserrat-Regular.ttf in Resources */,
 				A65C514D2CAC35260027E5F1 /* HouseRulesView.xib in Resources */,
 				A65192982D26F15F0082C3C9 /* MakeWithdrawView.xib in Resources */,
+				A6BCA3EB2E736F3C00436BCE /* EditBoatTravelLocationView.xib in Resources */,
 				A65C511B2CAB22820027E5F1 /* PropertyListModal.xib in Resources */,
 				A6EF00E92D286CA300893C05 /* PaymentSetupView.xib in Resources */,
+				A6BCA3DF2E736ED200436BCE /* EditBoatAboutYouLanguageView.xib in Resources */,
 				A65C51452CAC34930027E5F1 /* AboutYouLanguageView.xib in Resources */,
 				A675D9E82D26A2A3003E297B /* CatViewCell.xib in Resources */,
 				A6E3A11D2D70A467007BB665 /* ResetPasswordView.xib in Resources */,
 				A6CA3D352CB9C8DD009307B2 /* BoatUploadImageView.xib in Resources */,
 				A675D9D42D2022EC003E297B /* SinglePhotoView.xib in Resources */,
 				A65628162CB3C62300947BA5 /* ToggleSwitch.xib in Resources */,
+				A6BCA3CB2E736CCC00436BCE /* EditBoatNameView.xib in Resources */,
 				A6C1C4202CBBF5BC001CD27D /* ManageAccountView.xib in Resources */,
 				A6C20FC92C85045F0045C670 /* MiddleModal.xib in Resources */,
 				A6617A4C2CAF555700514576 /* MessagesView.xib in Resources */,
@@ -3022,6 +3119,7 @@
 				A6F406AA2C02D3A800973BD7 /* Montserrat-Thin.ttf in Resources */,
 				A6CA3D2C2CB9BDE2009307B2 /* DestinationCheckboxView.xib in Resources */,
 				A675DA012D2E84E7003E297B /* TestView.xib in Resources */,
+				A6BCA3CF2E736CE900436BCE /* EditBoatAvailableDatesView.xib in Resources */,
 				A65C50F12CA664720027E5F1 /* SelectPropertyTypePrimaryHost.xib in Resources */,
 				A63D48BF2D4D4FFC002C48F7 /* ServiceProviderDetailsView.xib in Resources */,
 				A6C25CC02E631E1200F787CD /* HouseDetailsView.xib in Resources */,
@@ -3040,6 +3138,7 @@
 				A675D9D02D201F4C003E297B /* ImageCell.xib in Resources */,
 				A620A6652E15645400E832EA /* RatingModal.xib in Resources */,
 				A65125732CBC240200AFA0F9 /* TwoFASecurityView.xib in Resources */,
+				A6BCA3E32E736EEA00436BCE /* EditBoatAboutYouDescriptionView.xib in Resources */,
 				A6F406A62C02D3A800973BD7 /* Montserrat-ThinItalic.ttf in Resources */,
 				A65E838E2D3B0E33009F2B89 /* UnfinishedListingModal.xib in Resources */,
 				A633575B2BF0DCFF008AF034 /* WalkthroughCell.xib in Resources */,
@@ -3047,6 +3146,7 @@
 				A6FB74492C134EC700A26806 /* SignupView.xib in Resources */,
 				A656281C2CB48F5400947BA5 /* IncreaseDecreaseField.xib in Resources */,
 				A6F406A32C02D3A800973BD7 /* Montserrat-Black.ttf in Resources */,
+				A6BCA3F72E74100600436BCE /* EditBoatTypeView.xib in Resources */,
 				A63D48D32D4F9614002C48F7 /* RecommendationsViewCell.xib in Resources */,
 				A6A719C42D674399005FE3EE /* ConversationsViewCell.xib in Resources */,
 				A6CA3D412CB9CCB3009307B2 /* ChefInformationView.xib in Resources */,
@@ -3081,6 +3181,7 @@
 				A68F3DC92E14963500B6B1C7 /* SelectableViewWithBg.xib in Resources */,
 				A675D9F42D2BC193003E297B /* RoomDetailsView.xib in Resources */,
 				A6EF00F22D28754700893C05 /* BankDetailsView.xib in Resources */,
+				A6BCA3E72E736F0700436BCE /* EditBoatRulesView.xib in Resources */,
 				A651256F2CBC1FEB00AFA0F9 /* LoginAndSecurityView.xib in Resources */,
 				A6CA3D392CB9C990009307B2 /* ListingSuccessView.xib in Resources */,
 				A6C9D2502E31922F005D7F30 /* EditRoomAmenitiesView.xib in Resources */,
@@ -3091,7 +3192,9 @@
 				A675D9F02D272FB4003E297B /* MakePaymentView.xib in Resources */,
 				A65155B02D5E94E60018C6DB /* BeachBookingDetailsView.xib in Resources */,
 				A6CA3D552CB9CD8E009307B2 /* DJInformationVIew.xib in Resources */,
+				A6BCA3DB2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.xib in Resources */,
 				A65628242CB5230000947BA5 /* RoomPriceView.xib in Resources */,
+				A6BCA3FD2E75566500436BCE /* EditHouseUploadImageView.xib in Resources */,
 				A65C51512CAC35470027E5F1 /* CheckInAndOutRulesView.xib in Resources */,
 				A6C9D24C2E319206005D7F30 /* EditListRoomsView.xib in Resources */,
 				A6A2E8282CBCA3B6004E58EB /* BookingsCell.xib in Resources */,
@@ -3136,6 +3239,7 @@
 				A60580B52CDAAD0300B17505 /* ServiceListingSuccessView.xib in Resources */,
 				A65125802CBC293700AFA0F9 /* AddEmailAddressModal.xib in Resources */,
 				A65E83662D308E71009F2B89 /* HostListingVC.xib in Resources */,
+				A6BCA3C52E736A4F00436BCE /* EditBoatOptionsView.xib in Resources */,
 				A6CA3D592CB9CDAE009307B2 /* DJUploadProfileImageView.xib in Resources */,
 				A642F95E2D57B0060089F593 /* CommentsViewCell.xib in Resources */,
 				A65628202CB518B400947BA5 /* RoomAmenitiesView.xib in Resources */,
@@ -3159,11 +3263,13 @@
 				A6CA3D202CB9B89B009307B2 /* BoatRulesView.xib in Resources */,
 				A6F406A72C02D3A800973BD7 /* Montserrat-LightItalic.ttf in Resources */,
 				A669F7BF2D2409D700230E0A /* MessageViewCell.xib in Resources */,
+				A6BCA3EF2E736F5E00436BCE /* EditBoatUploadImageView.xib in Resources */,
 				A6E0504A2CEF428800F0211C /* BeachHostingHomeView.xib in Resources */,
 				A606D55E2E087B8800CAA07A /* ContactCustomerSupportView.xib in Resources */,
 				A6A8579A2D4BF1FD008BC9A0 /* FindDJView.xib in Resources */,
 				A66F136D2D725FF300D4D533 /* HouseAndGroundRulesView.xib in Resources */,
 				A642F9232D54E1D00089F593 /* ConfirmBoatBookingView.xib in Resources */,
+				A6BCA3F32E73789C00436BCE /* EditHouseDetailsView.xib in Resources */,
 				A669F7B32D23DAB800230E0A /* HostingCollectionViewCell.xib in Resources */,
 				A6C9D2242E31865A005D7F30 /* EditBeachHouseOptionsView.xib in Resources */,
 				A66F3FA92D29635500902E43 /* MenuView.xib in Resources */,
@@ -3242,6 +3348,7 @@
 				A63CE7BC2C8F3645008D91C5 /* GeneralViewCell.swift in Sources */,
 				A6F490F12D71D390002F8F5B /* UploadButtonField.swift in Sources */,
 				A616276B2C7DB0BB00F6B452 /* Environments.swift in Sources */,
+				A6BCA3D42E736D0400436BCE /* EditBoatFacilitiesView.swift in Sources */,
 				A60580B42CDAAD0300B17505 /* ServiceListingSuccessView.swift in Sources */,
 				A63F312A2CB07D5600D402F4 /* ListingServiceImplementation.swift in Sources */,
 				A68A6EC82D256F7C000A67E1 /* NetworkUtility.swift in Sources */,
@@ -3260,6 +3367,7 @@
 				A6A2E8442CBE8B8D004E58EB /* ProfileTarget.swift in Sources */,
 				A63D48D22D4F9614002C48F7 /* RecommendationsViewCell.swift in Sources */,
 				A6617A3B2CAD8BB000514576 /* MapViewModal.swift in Sources */,
+				A6BCA3F42E73789C00436BCE /* EditHouseDetailsView.swift in Sources */,
 				A642F94D2D56DB800089F593 /* ChatVM.swift in Sources */,
 				A6E3A11C2D70A467007BB665 /* ResetPasswordView.swift in Sources */,
 				A675D9A02D16C6C9003E297B /* SendKYCRequest.swift in Sources */,
@@ -3273,11 +3381,13 @@
 				A63F31252CB07A5100D402F4 /* BeachDataResponse.swift in Sources */,
 				A63357642BF15302008AF034 /* BaseXib.swift in Sources */,
 				A63357702BF15707008AF034 /* PaddedLabel.swift in Sources */,
+				A6BCA3FE2E75566500436BCE /* EditHouseUploadImageView.swift in Sources */,
 				A6C20FE22C85A5560045C670 /* Provider.swift in Sources */,
 				A65C510B2CAACB620027E5F1 /* SelectableView.swift in Sources */,
 				A6CA3D402CB9CCB3009307B2 /* ChefInformationView.swift in Sources */,
 				A6757D822C987A0F000D6302 /* ExploreCoordinator.swift in Sources */,
 				A675D9BB2D195F40003E297B /* CategoriesCell.swift in Sources */,
+				A6BCA3CC2E736CCC00436BCE /* EditBoatNameView.swift in Sources */,
 				A605809F2CD8B71C00B17505 /* ChefDishesViewModel.swift in Sources */,
 				A63357662BF153CD008AF034 /* PhoneField.swift in Sources */,
 				A65C51402CAC339F0027E5F1 /* PropertyAdditionalAmenitiesView.swift in Sources */,
@@ -3292,6 +3402,7 @@
 				A65C51382CAC32FA0027E5F1 /* PropertyAvailableDatesView.swift in Sources */,
 				A65628382CB5769A00947BA5 /* UploadImageField.swift in Sources */,
 				A675D9A52D16C8F1003E297B /* BookingServiceImplementation.swift in Sources */,
+				A6BCA3EC2E736F3C00436BCE /* EditBoatTravelLocationView.swift in Sources */,
 				A68C8CAC2E2A80F4008A6907 /* AuthInterceptor.swift in Sources */,
 				A6CA3D4C2CB9CD31009307B2 /* ChefPriceView.swift in Sources */,
 				A642F9402D55D2C60089F593 /* PusherManager.swift in Sources */,
@@ -3319,6 +3430,7 @@
 				A6C20FE02C85A10A0045C670 /* OnboardingTarget.swift in Sources */,
 				A6CA3D132CB9B5DF009307B2 /* BoatAdditionalAmenitiesView.swift in Sources */,
 				A63357432BF0D0C9008AF034 /* AppWindow.swift in Sources */,
+				A6BCA3D82E736E4600436BCE /* EditBoatAddressView.swift in Sources */,
 				A63357562BF0DA84008AF034 /* WalkthroughView.swift in Sources */,
 				A6C1C4232CBBFCAB001CD27D /* ProfilePaymentView.swift in Sources */,
 				A63D37612E689FD50012D634 /* BookingActionModal.swift in Sources */,
@@ -3339,6 +3451,7 @@
 				A6CA3D502CB9CD56009307B2 /* ChefUploadFoodImagesView.swift in Sources */,
 				A6CA3D602CB9CDF4009307B2 /* DJUploadInstrumentsView.swift in Sources */,
 				A6C20FCF2C859B940045C670 /* OnboardingServiceImplementation.swift in Sources */,
+				A6BCA3E02E736ED200436BCE /* EditBoatAboutYouLanguageView.swift in Sources */,
 				A63D48CE2D4F8CE1002C48F7 /* BookingCell.swift in Sources */,
 				A65C51342CAC32C90027E5F1 /* PropertyAddressView.swift in Sources */,
 				A68A6EC42D256B51000A67E1 /* TopEarningRequest.swift in Sources */,
@@ -3356,6 +3469,7 @@
 				A65C512C2CAC319A0027E5F1 /* HouseSizeListView.swift in Sources */,
 				A66F3FB42D29DA4F00902E43 /* ColorTextLabel.swift in Sources */,
 				A65155AF2D5E94E60018C6DB /* BeachBookingDetailsView.swift in Sources */,
+				A6BCA3E82E736F0700436BCE /* EditBoatRulesView.swift in Sources */,
 				A63D48C72D4E4C89002C48F7 /* FindServiceProviderResponse.swift in Sources */,
 				A6C9D23F2E3190DA005D7F30 /* EditAboutYouDescriptionView.swift in Sources */,
 				A6FB74572C13573500A26806 /* CheckboxButton.swift in Sources */,
@@ -3407,6 +3521,7 @@
 				A65C511A2CAB22820027E5F1 /* PropertyListModal.swift in Sources */,
 				A65C51282CAC30F60027E5F1 /* HouseTypeListView.swift in Sources */,
 				A65C50FC2CA93CE30027E5F1 /* BookingViewCell.swift in Sources */,
+				A6BCA3F02E736F5E00436BCE /* EditBoatUploadImageView.swift in Sources */,
 				A68F3DCA2E14963500B6B1C7 /* SelectableViewWithBg.swift in Sources */,
 				A63CE7B42C8EDECC008D91C5 /* LoginViewModel.swift in Sources */,
 				A6C9D24B2E319206005D7F30 /* EditListRoomsView.swift in Sources */,
@@ -3425,6 +3540,7 @@
 				A6C9D2472E3191C3005D7F30 /* EditCheckInAndOutRulesView.swift in Sources */,
 				A6F406862C02D1A300973BD7 /* GeneralFormatter.swift in Sources */,
 				A61627782C7DBD3700F6B452 /* UserDefault.swift in Sources */,
+				A6BCA3DC2E736E9C00436BCE /* EditBoatAdditionalAmenitiesView.swift in Sources */,
 				A6CA3D642CB9CE24009307B2 /* BouncerInformationView.swift in Sources */,
 				A669F7A52D22F2FA00230E0A /* HostingTarget.swift in Sources */,
 				A651257B2CBC292200AFA0F9 /* ConfirmPhoneNumberModal.swift in Sources */,
@@ -3535,6 +3651,7 @@
 				A6CA3D032CB96A21009307B2 /* SegmentOptionView.swift in Sources */,
 				A656280D2CB3C47800947BA5 /* SelectableCheckbox.swift in Sources */,
 				A65628182CB4744D00947BA5 /* TimePicker.swift in Sources */,
+				A6BCA3C62E736A4F00436BCE /* EditBoatOptionsView.swift in Sources */,
 				A669F7C22D241AE600230E0A /* HostingServiceHomeCoordinator.swift in Sources */,
 				A63D48CB2D4E5CAE002C48F7 /* FindServiceProviderVM.swift in Sources */,
 				A68F3DCC2E14984200B6B1C7 /* CustomView.swift in Sources */,
@@ -3553,6 +3670,7 @@
 				A66F3FBD2D2C729800902E43 /* TwoFAEmailSecurityRequest.swift in Sources */,
 				A6C9D2272E318FB5005D7F30 /* EditPropertyNameView.swift in Sources */,
 				A65E83922D3B0F14009F2B89 /* UnfinishedListingModal.swift in Sources */,
+				A6BCA3E42E736EEA00436BCE /* EditBoatAboutYouDescriptionView.swift in Sources */,
 				A68C8CCF2E2E281B008A6907 /* CreateInvoiceRequest.swift in Sources */,
 				A68A6EBA2D245072000A67E1 /* monthCollectionViewCell.swift in Sources */,
 				A65C51442CAC34930027E5F1 /* AboutYouLanguageView.swift in Sources */,
@@ -3591,6 +3709,7 @@
 				A6F490FE2D723284002F8F5B /* ContactSupportVM.swift in Sources */,
 				A642F9652D588D780089F593 /* SavedListView.swift in Sources */,
 				A6C20FDE2C859E520045C670 /* ErrorResponse.swift in Sources */,
+				A6BCA3F82E74100600436BCE /* EditBoatTypeView.swift in Sources */,
 				A68D742B2E2048D7008226D7 /* BoatVM.swift in Sources */,
 				A675D9EB2D26AB46003E297B /* ConfirmBookingView.swift in Sources */,
 				A6A857912D4BF1D8008BC9A0 /* FindChefView.swift in Sources */,
@@ -3632,6 +3751,7 @@
 				A6757D802C9746E8000D6302 /* Dashboard.swift in Sources */,
 				A6C9D25B2E319331005D7F30 /* EditRoomsListView.swift in Sources */,
 				A6A2E8692CD4C800004E58EB /* BouncerAvailableDatesView.swift in Sources */,
+				A6BCA3D02E736CE900436BCE /* EditBoatAvailableDatesView.swift in Sources */,
 				A68A6ECB2D2578E4000A67E1 /* EarningsVM.swift in Sources */,
 				A642F9622D58841D0089F593 /* AddReviewRequest.swift in Sources */,
 				A65192912D26CE060082C3C9 /* WithdrawalHistoryResponse.swift in Sources */,

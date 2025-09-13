@@ -13,7 +13,8 @@ class EditBeachViewModel{
     var disposeBag = DisposeBag()
     let listingService: ListingService
     var output = PublishSubject<Output>()
-    var deleteOutput = PublishSubject<DeleteOutput>()
+    var deleteRoomOutput = PublishSubject<DeleteRoomOutput>()
+    var deleteBeachOutput = PublishSubject<DeleteBeachOutput>()
     
     init(listingService: ListingService = ListingServiceImplementation()) {
         self.listingService = listingService
@@ -24,9 +25,14 @@ class EditBeachViewModel{
         case editBeachFailed(ErrorResponse)
     }
     
-    enum DeleteOutput {
+    enum DeleteRoomOutput {
         case deleteBeachRoomSuccessful(GeneralResponse)
         case deleteBeachRoomFailed(ErrorResponse)
+    }
+    
+    enum DeleteBeachOutput {
+        case deleteBeachSuccessful(GeneralResponse)
+        case deleteBeachFailed(ErrorResponse)
     }
     
     func editBeach(_ request: CreateBeachListingRequest, id: String) {
@@ -44,9 +50,20 @@ class EditBeachViewModel{
         listingService.deleteBeachRoom(id: id, completion:  { [ weak self ] data in
             switch data {
             case .success(let response):
-                self?.deleteOutput.onNext(.deleteBeachRoomSuccessful(response))
+                self?.deleteRoomOutput.onNext(.deleteBeachRoomSuccessful(response))
             case .failure(let error):
-                self?.deleteOutput.onNext(.deleteBeachRoomFailed(error))
+                self?.deleteRoomOutput.onNext(.deleteBeachRoomFailed(error))
+            }
+        })
+    }
+    
+    func deleteBeach(id: String) {
+        listingService.deleteBeach(id: id, completion:  { [ weak self ] data in
+            switch data {
+            case .success(let response):
+                self?.deleteBeachOutput.onNext(.deleteBeachSuccessful(response))
+            case .failure(let error):
+                self?.deleteBeachOutput.onNext(.deleteBeachFailed(error))
             }
         })
     }

@@ -9,19 +9,29 @@ import UIKit
 
 @IBDesignable public class TextViewField: InputField, NSTextStorageDelegate, UITextViewDelegate {
 
+    private var isSettingTextProgrammatically = false
+
     override public var text: String {
         get {
             // Return empty string only if text is placeholder and in placeholder style
             return textArea.text == placeHolder && textArea.textColor == .background ? "" : textArea.text ?? ""
         }
         set {
+            isSettingTextProgrammatically = true
             let truncatedText = String(newValue.prefix(numberOfCharacters))
-            textArea.textStorage.beginEditing()
+            
+            // Set text without using textStorage to avoid delegate conflicts
             textArea.text = truncatedText.isEmpty ? placeHolder : truncatedText
             textArea.textColor = truncatedText.isEmpty ? .background : .titleGrey
-            textArea.textStorage.endEditing()
+            
             updateCounterAndError()
-            onTextChanged?(truncatedText)
+            
+            // Only call onTextChanged if this isn't a placeholder
+            if !truncatedText.isEmpty {
+                onTextChanged?(truncatedText)
+            }
+            
+            isSettingTextProgrammatically = false
             print("TextViewField: text setter, value: \(truncatedText.prefix(50)), color: \(textArea.textColor?.description ?? "nil")")
         }
     }
@@ -44,7 +54,7 @@ import UIKit
     
     public override func awakeFromNib() {
         super.awakeFromNib()
-        textArea.delegate = self
+        // Don't set delegate here - it's already set in setupTextArea
         print("TextViewField: awakeFromNib, delegate: \(textArea.delegate)")
     }
     
@@ -54,14 +64,22 @@ import UIKit
     }
     
     func setupTextArea() {
-        textArea.textStorage.delegate = self
-        textArea.layoutManager.delegate = self
+        // Set delegates only once and in the right order
         textArea.delegate = self
+        textArea.textStorage.delegate = self
+        
         textArea.layer.borderColor = UIColor.background.cgColor
         textArea.layer.borderWidth = 1
         textArea.layer.cornerRadius = 8
-        textArea.textColor = textArea.text == placeHolder ? .background : .titleGrey
         textArea.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        
+        // Set initial placeholder state
+        if textArea.text?.isEmpty != false {
+            textArea.text = placeHolder
+            textArea.textColor = .background
+        } else {
+            textArea.textColor = .titleGrey
+        }
         
         infoStack.isHidden = false
         counter.isHidden = !isCounterVisible
@@ -96,7 +114,9 @@ import UIKit
     }
     
     public func textViewDidChange(_ textView: UITextView) {
-        // Avoid direct text modification here; rely on shouldChangeTextIn
+        // Skip if we're setting text programmatically
+        guard !isSettingTextProgrammatically else { return }
+        
         updateCounterAndError()
         let currentText = textView.text == placeHolder && textView.textColor == .background ? "" : textView.text ?? ""
         onTextChanged?(currentText)
@@ -104,10 +124,15 @@ import UIKit
     }
     
     public func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorage.EditActions, range editedRange: NSRange, changeInLength delta: Int) {
+        // Skip if we're setting text programmatically
+        guard !isSettingTextProgrammatically else { return }
         updateCounterAndError()
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // Skip validation if we're setting text programmatically
+        guard !isSettingTextProgrammatically else { return true }
+        
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else {
             print("TextViewField: Invalid range in shouldChangeTextIn")
@@ -151,12 +176,17 @@ import UIKit
     
     public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
+            isSettingTextProgrammatically = true
             textView.text = placeHolder
             textView.textColor = .background
+            isSettingTextProgrammatically = false
         }
+        
+        // Update border color when not focused (back to normal, unless there's an error)
         if textView.layer.borderColor != UIColor.error.cgColor {
             textView.layer.borderColor = UIColor.background.cgColor
         }
+        
         editingEnded()
         onTextChanged?(text)
         print("TextViewField: textViewDidEndEditing, text: \(textView.text?.prefix(50) ?? "nil"), color: \(textView.textColor?.description ?? "nil")")
@@ -165,10 +195,12 @@ import UIKit
     public override func paste(_ sender: Any?) {
         if let pastedText = UIPasteboard.general.string {
             let truncatedText = String(pastedText.prefix(numberOfCharacters))
-            textArea.textStorage.beginEditing()
+            
+            isSettingTextProgrammatically = true
             textArea.text = truncatedText.isEmpty ? placeHolder : truncatedText
             textArea.textColor = truncatedText.isEmpty ? .background : .titleGrey
-            textArea.textStorage.endEditing()
+            isSettingTextProgrammatically = false
+            
             updateCounterAndError()
             onTextChanged?(truncatedText)
             print("TextViewField: paste, truncated to \(truncatedText.count) characters, text: \(truncatedText.prefix(50))")
@@ -181,7 +213,6 @@ extension TextViewField: NSLayoutManagerDelegate {
         12
     }
 }
-
 
 //import UIKit
 //

@@ -11,10 +11,10 @@ struct CreateBeachListingRequest: Codable {
     var name: String?
     var description: String?
     var aboutOwner: String?
-    var checkInFrom: String?
-    var checkInTo: String?
-    var checkOutFrom: String?
-    var checkOutTo: String?
+    var overnightCheckIn: String?
+    var overnightCheckOut: String?
+    var dayCheckIn: String?
+    var dayCheckOut: String?
     var categoryId: String?
     var subCategoryId: String?
     var bookingType: String?
@@ -47,10 +47,10 @@ struct CreateBeachListingRequest: Codable {
     enum CodingKeys: String, CodingKey {
         case name, description
         case aboutOwner = "about_owner"
-        case checkInFrom = "check_in_from"
-        case checkInTo = "check_in_to"
-        case checkOutFrom = "check_out_from"
-        case checkOutTo = "check_out_to"
+        case overnightCheckIn = "overnight_check_in"
+        case overnightCheckOut = "overnight_check_out"
+        case dayCheckIn = "day_check_in"
+        case dayCheckOut = "day_check_out"
         case categoryId = "category_id"
         case subCategoryId = "sub_category_id"
         case bookingType = "booking_type"

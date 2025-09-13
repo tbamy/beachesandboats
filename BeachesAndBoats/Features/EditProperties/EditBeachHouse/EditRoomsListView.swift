@@ -19,6 +19,7 @@ class EditRoomsListView: BaseViewControllerPlain {
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var id: String?
+    var details: GetBeachData?
     
     var roomsList: [Room] = []
     
@@ -84,38 +85,14 @@ class EditRoomsListView: BaseViewControllerPlain {
             }
             
         }).disposed(by: disposeBag)
-        
-//        vm.deleteOutput.subscribe(onNext: {[weak self] response in
-//            LoadingModal.dismiss()
-//            
-//            switch response {
-//            case .deleteBeachRoomSuccessful(let response):
-//                print(response)
-//                Toast.show(message: response.message ?? "")
-//                
-//            case .deleteBeachRoomFailed(let error):
-//                Toast.show(message: error.message ?? "")
-//            }
-//            
-//        }).disposed(by: disposeBag)
     }
-
-    
-//    func deleteItem(roomName: String) {
-//        if let index = roomsList.firstIndex(where: { $0.name == roomName }) {
-//            roomsList.remove(at: index)
-//            createBeachListing?.rooms = roomsList
-//            collectionView.reloadData()
-////            updateCollectionViewHeight(collectionView, collectionViewHeightConstraint)
-//        }
-//    }
 
     func deleteRoom(id: String) {
         LoadingModal.show()
         vm.deleteBeachRoom(id: id)
 
         // Listen to deleteOutput (already in bindNetwork)
-        vm.deleteOutput.subscribe(onNext: { [weak self] response in
+        vm.deleteRoomOutput.subscribe(onNext: { [weak self] response in
             LoadingModal.dismiss()
             switch response {
             case .deleteBeachRoomSuccessful(let response):
@@ -138,7 +115,7 @@ class EditRoomsListView: BaseViewControllerPlain {
         if roomsList.firstIndex(where: { $0.name == roomName }) != nil {
             if let beachData = beachData, var createBeachListing = createBeachListing {
                 createBeachListing.rooms = roomsList
-                coordinator?.gotoEditListRoomsView(beachData: beachData, request: createBeachListing, room: roomName, id: id)
+                coordinator?.gotoEditListRoomsView(beachData: beachData, request: createBeachListing, room: roomName, id: id, details: details)
             }
         }
     }

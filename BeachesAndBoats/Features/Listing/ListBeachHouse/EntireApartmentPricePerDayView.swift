@@ -202,6 +202,7 @@ class EntireApartmentPricePerDayView: UIViewController {
             switch response {
             case .listBeachSuccessful(let response):
                 print(response)
+                AppStorage.beachListing = nil
                 MiddleModal.show(title: "Success!", subtitle: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.gotoListingSuccessView(type: 2) })
             case .listBeachFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

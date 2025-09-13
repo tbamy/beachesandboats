@@ -18,6 +18,7 @@ class EditRoomAmenitiesView: BaseViewControllerPlain {
     var createBeachListing: CreateBeachListingRequest?
     var selectedItems: [String] = []
     var id: String?
+    var details: GetBeachData?
     
     var room: String?
     
@@ -77,7 +78,7 @@ class EditRoomAmenitiesView: BaseViewControllerPlain {
         print("Updated Room: \(existingRoom)")
         print("Updated CreateBeachListing: \(updatedBeachListing)")
         
-        coordinator?.gotoEditRoomPriceView(beachData: beachData, request: updatedBeachListing, room: room, id: id)
+        coordinator?.gotoEditRoomPriceView(beachData: beachData, request: updatedBeachListing, room: room, id: id, details: details)
     }
 
     @IBAction func saveAndExit(_ sender: Any) {
