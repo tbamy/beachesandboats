@@ -70,7 +70,7 @@ class EditPropertyAddressView: BaseViewControllerPlain {
         
         // Find the index of the saved location
         for (index, location) in locations.enumerated() {
-            if location.id == savedLocationId {
+            if location.name == savedLocationId {
                 selectedIndex = index
                 beachLocation = location.name
                 
@@ -99,7 +99,7 @@ class EditPropertyAddressView: BaseViewControllerPlain {
         guard let id = id else { return }
         if validateJettyLocation(){
             if var createBeachListing = createBeachListing{
-                createBeachListing.locationName = selectBeachLocation
+                createBeachListing.locationName = beachLocation
                 createBeachListing.jettyLocation = locationField.text
                 
                 self.createBeachListing = createBeachListing

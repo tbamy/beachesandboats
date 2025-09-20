@@ -56,6 +56,8 @@ class HouseDetailsView: BaseViewControllerPlain {
         let hasValidCounts = roomsCount > 0 && guestsCount > 0 && bedsCount > 0 && bathroomsCount > 0
         nextBtn.isEnabled = hasValidCounts
         
+        loadSavedData()
+        
 //        // Setup count change handlers
 //        noOfRooms.onValueChange = { [weak self] _ in
 //            self?.validateCounts()
@@ -108,5 +110,28 @@ class HouseDetailsView: BaseViewControllerPlain {
             AppStorage.beachListing = createBeachListing
             coordinator?.backToDashboard()
         }
+    }
+}
+
+
+extension HouseDetailsView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Load house detail counts
+        let roomsCount = savedListing.noOfRooms ?? 1
+        let guestsCount = savedListing.noOfGuests ?? 1
+        let bedsCount = savedListing.noOfBeds ?? 1
+        let bathroomsCount = savedListing.noOfBathrooms ?? 1
+        
+        // Update the UI fields
+        noOfRooms.model = IncreaseDecreaseModel(id: "", type: "Number of rooms", subtitle: "", count: roomsCount)
+        noOfGuests.model = IncreaseDecreaseModel(id: "", type: "Number of guest allowed", subtitle: "", count: guestsCount)
+        noOfBeds.model = IncreaseDecreaseModel(id: "", type: "Number of beds", subtitle: "", count: bedsCount)
+        noOfBathrooms.model = IncreaseDecreaseModel(id: "", type: "Number of bathrooms", subtitle: "", count: bathroomsCount)
+        
+        // Enable next button if we have valid counts
+        let hasValidCounts = roomsCount > 0 && guestsCount > 0 && bedsCount > 0 && bathroomsCount > 0
+        nextBtn.isEnabled = hasValidCounts
     }
 }

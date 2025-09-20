@@ -27,14 +27,13 @@ class ListingNotif: BaseXib {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown))
         swipeDown.direction = .down
         addGestureRecognizer(swipeDown)
-
     }
     
-    @objc func handleSwipeDown() {
+    @objc private func handleSwipeDown() {
         if dismissable {
             dismiss()
         }
@@ -49,15 +48,17 @@ class ListingNotif: BaseXib {
         })
     }
     
-    func getHeight() -> CGFloat {
-        var contentHeight = 50.0
-        contentHeight += !title.isHidden ? title.bounds.height + 10.0 : 0
-        contentHeight += !contentStack.isHidden ? contentStack.bounds.height + 10.0 : 0
-        contentHeight += !continueBtn.isHidden ? continueBtn.bounds.height + 10.0 : 0
+    /// Ask Auto Layout for the correct height
+    func getHeight(for width: CGFloat) -> CGFloat {
+        setNeedsLayout()
+        layoutIfNeeded()
         
-        return contentHeight
+        return systemLayoutSizeFitting(
+            CGSize(width: width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        ).height
     }
-    
     
     @IBAction func onConfirmTapped(_ sender: Any) {
         onConfirm()
@@ -76,14 +77,22 @@ class ListingNotif: BaseXib {
         modal.backgroundColor = .white
         modal.clipsToBounds = true
         backDrop.addSubview(modal)
+        
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             keyWindow.addSubview(backDrop)
         }
-        let height = Helpers.screenHeight * 0.4
+        
+        // Start with zero height
+        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: 0)
+        
+        let height = modal.getHeight(for: Helpers.screenWidth)
+        
+        // Apply the height
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         
+        // Animate modal into view
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             modal.frame.origin.y = Helpers.screenHeight - height
             backDrop.layoutIfNeeded()
@@ -106,6 +115,4 @@ class ListingNotif: BaseXib {
             }
         }
     }
-
 }
-

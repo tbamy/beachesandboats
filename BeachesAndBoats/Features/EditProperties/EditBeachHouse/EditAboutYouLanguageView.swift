@@ -45,6 +45,10 @@ class EditAboutYouLanguageView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
+        guard !selectedItems.isEmpty else {
+            Toast.show(message: "Please select at least one language")
+            return
+        }
         if let beachData = beachData{
             if var createBeachListing = createBeachListing{
                 createBeachListing.languages = selectedItems

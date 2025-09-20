@@ -142,6 +142,7 @@
 		A642F96C2D58D2720089F593 /* GetUserBookingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F96B2D58D2720089F593 /* GetUserBookingsResponse.swift */; };
 		A642F9702D59164D0089F593 /* BookingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F96F2D59164D0089F593 /* BookingsVM.swift */; };
 		A642F9722D59165E0089F593 /* SavedFavouritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A642F9712D59165E0089F593 /* SavedFavouritesVM.swift */; };
+		A643E76F2E77745300F93E8F /* IntelligentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A643E76E2E77745300F93E8F /* IntelligentFlowLayout.swift */; };
 		A645D0402D3637C3005BFCD5 /* BookingConfigurationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */; };
 		A645D0432D363951005BFCD5 /* BookingConfigurationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */; };
 		A645D0452D3659FF005BFCD5 /* BeachHouseBookingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */; };
@@ -272,6 +273,8 @@
 		A6617A502CAF557900514576 /* BookingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A4E2CAF557900514576 /* BookingsView.xib */; };
 		A6617A532CAF559600514576 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6617A512CAF559600514576 /* SavedView.swift */; };
 		A6617A542CAF559600514576 /* SavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A522CAF559600514576 /* SavedView.xib */; };
+		A664BBDC2E7E9401000B02E1 /* DeleteImageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664BBDB2E7E93FB000B02E1 /* DeleteImageVM.swift */; };
+		A664BBDE2E7EB5D9000B02E1 /* DeleteImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664BBDD2E7EB5D2000B02E1 /* DeleteImagesRequest.swift */; };
 		A669F7A12D22E90800230E0A /* HostingBookingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */; };
 		A669F7A32D22F2B500230E0A /* ServiceHostingHomeViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A22D22F2B500230E0A /* ServiceHostingHomeViewVM.swift */; };
 		A669F7A52D22F2FA00230E0A /* HostingTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A42D22F2FA00230E0A /* HostingTarget.swift */; };
@@ -827,6 +830,7 @@
 		A642F96B2D58D2720089F593 /* GetUserBookingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserBookingsResponse.swift; sourceTree = "<group>"; };
 		A642F96F2D59164D0089F593 /* BookingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsVM.swift; sourceTree = "<group>"; };
 		A642F9712D59165E0089F593 /* SavedFavouritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFavouritesVM.swift; sourceTree = "<group>"; };
+		A643E76E2E77745300F93E8F /* IntelligentFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentFlowLayout.swift; sourceTree = "<group>"; };
 		A645D03F2D3637C3005BFCD5 /* BookingConfigurationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfigurationResponse.swift; sourceTree = "<group>"; };
 		A645D0422D363951005BFCD5 /* BookingConfigurationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfigurationVM.swift; sourceTree = "<group>"; };
 		A645D0442D3659FF005BFCD5 /* BeachHouseBookingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeachHouseBookingResponse.swift; sourceTree = "<group>"; };
@@ -957,6 +961,8 @@
 		A6617A4E2CAF557900514576 /* BookingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingsView.xib; sourceTree = "<group>"; };
 		A6617A512CAF559600514576 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		A6617A522CAF559600514576 /* SavedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedView.xib; sourceTree = "<group>"; };
+		A664BBDB2E7E93FB000B02E1 /* DeleteImageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageVM.swift; sourceTree = "<group>"; };
+		A664BBDD2E7EB5D2000B02E1 /* DeleteImagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImagesRequest.swift; sourceTree = "<group>"; };
 		A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingBookingResponse.swift; sourceTree = "<group>"; };
 		A669F7A22D22F2B500230E0A /* ServiceHostingHomeViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHostingHomeViewVM.swift; sourceTree = "<group>"; };
 		A669F7A42D22F2FA00230E0A /* HostingTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingTarget.swift; sourceTree = "<group>"; };
@@ -1726,6 +1732,7 @@
 		A63357622BF15208008AF034 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A643E76E2E77745300F93E8F /* IntelligentFlowLayout.swift */,
 				A68F3DCB2E14983700B6B1C7 /* CustomView.swift */,
 				A66F13682D7244E600D4D533 /* PresentationModal */,
 				A6EF00DA2D28316000893C05 /* TabBar */,
@@ -1877,6 +1884,7 @@
 		A63F31322CB0A9CC00D402F4 /* Listing */ = {
 			isa = PBXGroup;
 			children = (
+				A664BBDD2E7EB5D2000B02E1 /* DeleteImagesRequest.swift */,
 				A63F31332CB0A9EF00D402F4 /* CreateBeachListingRequest.swift */,
 				A6A2E8632CD4BBE8004E58EB /* CreateServiceListingRequest.swift */,
 				A60580A22CD8E80F00B17505 /* CreateBoatListingRequest.swift */,
@@ -2563,6 +2571,7 @@
 		A6B99D3E2DBB360A0069E505 /* VM */ = {
 			isa = PBXGroup;
 			children = (
+				A664BBDB2E7E93FB000B02E1 /* DeleteImageVM.swift */,
 				A6B99D3F2DBB361D0069E505 /* EditBoatVM.swift */,
 				A6B99D412DBB36280069E505 /* EditBeachVM.swift */,
 			);
@@ -3358,6 +3367,7 @@
 				A65C51052CAA82A40027E5F1 /* SelectorModal.swift in Sources */,
 				A6B99D422DBB36280069E505 /* EditBeachVM.swift in Sources */,
 				A6CA3D2B2CB9BDE2009307B2 /* DestinationCheckboxView.swift in Sources */,
+				A664BBDC2E7E9401000B02E1 /* DeleteImageVM.swift in Sources */,
 				A650AAE12CB867E600A70CF4 /* VerificationFormView.swift in Sources */,
 				A61B3C2C2CB6F3FC00C89C14 /* EntireApartmentPriceView.swift in Sources */,
 				A6CA3D272CB9BBE5009307B2 /* BoatAddressView.swift in Sources */,
@@ -3587,6 +3597,7 @@
 				A6617A432CAD95EA00514576 /* ListRoomsView.swift in Sources */,
 				A6EF00DC2D28318B00893C05 /* CustomTabBar.swift in Sources */,
 				A6E3A1332D718ABF007BB665 /* UpdateProfileRequest.swift in Sources */,
+				A643E76F2E77745300F93E8F /* IntelligentFlowLayout.swift in Sources */,
 				A642F9262D54ED050089F593 /* MakeBoatPaymentView.swift in Sources */,
 				A6E3A12F2D7181BA007BB665 /* ForgotPasswordRequest.swift in Sources */,
 				A642F9512D578B910089F593 /* RoomPricePerDayView.swift in Sources */,
@@ -3712,6 +3723,7 @@
 				A6BCA3F82E74100600436BCE /* EditBoatTypeView.swift in Sources */,
 				A68D742B2E2048D7008226D7 /* BoatVM.swift in Sources */,
 				A675D9EB2D26AB46003E297B /* ConfirmBookingView.swift in Sources */,
+				A664BBDE2E7EB5D9000B02E1 /* DeleteImagesRequest.swift in Sources */,
 				A6A857912D4BF1D8008BC9A0 /* FindChefView.swift in Sources */,
 				A60580B12CDAA93D00B17505 /* CreateServiceListingResponse.swift in Sources */,
 				A6A2E8272CBCA3B6004E58EB /* BookingsCell.swift in Sources */,

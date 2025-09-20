@@ -53,6 +53,10 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
         otherAmenitiesCollectionView.allowsMultipleSelection = true
         otherAmenitiesCollectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
+        loadSavedData()
+        safetyAmenitiesCollectionView.reloadData()
+        otherAmenitiesCollectionView.reloadData()
+        
         nextBtn.isEnabled = !selectedItems.isEmpty
     }
 
@@ -177,3 +181,24 @@ extension PropertyAdditionalAmenitiesView: UICollectionViewDelegate, UICollectio
     
 }
 
+extension PropertyAdditionalAmenitiesView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Get the general amenities that were already selected
+        let generalAmenities = savedListing.amenities
+        
+        // Filter out safety and other amenities from the saved list
+        let safetyIds = Set(safetyAmenitiesList?.compactMap { $0.id } ?? [])
+        let otherIds = Set(otherAmenitiesList?.compactMap { $0.id } ?? [])
+        
+        selectedItems = generalAmenities?.filter { safetyIds.contains($0) || otherIds.contains($0) } ?? []
+        nextBtn.isEnabled = !selectedItems.isEmpty
+        
+        // Reload both collection views to show selected states
+        DispatchQueue.main.async { [weak self] in
+            self?.safetyAmenitiesCollectionView.reloadData()
+            self?.otherAmenitiesCollectionView.reloadData()
+        }
+    }
+}

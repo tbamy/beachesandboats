@@ -44,6 +44,7 @@ class HouseRulesView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         updateCollectionViewHeight(collectionView, collectionViewHeight)
+        loadSavedData()
         collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
@@ -141,4 +142,26 @@ extension HouseRulesView: UICollectionViewDelegate, UICollectionViewDataSource, 
 
 
     
+}
+
+
+extension HouseRulesView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Load previously selected house rules
+        selectedItems = savedListing.houseRules ?? []
+        nextBtn.isEnabled = !selectedItems.isEmpty
+        
+        // Load additional house rules text
+        if let additionalRules = savedListing.additionalHouseRules, !additionalRules.isEmpty {
+            additionalRulesField.text = additionalRules
+        }
+        
+        // Reload collection view to show selected states and update switches
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+            self?.updateCollectionViewHeight(self?.collectionView ?? UICollectionView(), self?.collectionViewHeight ?? NSLayoutConstraint())
+        }
+    }
 }

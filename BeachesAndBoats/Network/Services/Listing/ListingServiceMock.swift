@@ -8,6 +8,10 @@
 import Foundation
 
 class ListingServiceMock: Provider<ListingTarget>, ListingService{
+    func deleteImages(request: DeleteImagesRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
     func deleteBeach(id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         
     }

@@ -550,6 +550,7 @@ extension FilterModal {
         modal.propertyType = propertyTypes
         modal.amenities = amenities
         modal.filterType = filterType ?? ""
+        modal.clearAll = clearAll
         
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12

@@ -44,7 +44,7 @@ class EditEntireApartmentPricePerDayView: UIViewController {
         
         // Set the price field
         moneyField.text = storedPrice.toAmount() ?? ""
-        
+        nextBtn.isEnabled = true
         // Check if additional discount was applied
         if storedDiscountPercent > 0 {
             isDiscountChecked = true
@@ -163,6 +163,10 @@ class EditEntireApartmentPricePerDayView: UIViewController {
     
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
+        guard let amount = moneyField.getFloatValue(), amount > 0 else {
+            Toast.show(message: "Price cannot be empty")
+            return
+        }
         if var createBeachListing = createBeachListing {
             createBeachListing.pricePerDay = moneyField.getFloatValue() ?? 0
             createBeachListing.dayDiscountPercent = isDiscountChecked ? Int((discountField.getFloatValue() ?? 0)) : 0
@@ -185,7 +189,7 @@ class EditEntireApartmentPricePerDayView: UIViewController {
             switch response {
             case .editBeachSuccessful(let response):
                 print(response)
-                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToRoomsListScreen() })
+                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.popToOptionsScreen() })
                 
             case .editBeachFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

@@ -34,7 +34,7 @@ enum Assets: String {
     case modal_success = "modal_success"
     case modal_error = "modal_error"
     case modal_pending = "modal_pending"
-    case modal_caution = "model_caution"
+    case modal_caution = "modal_caution"
     case account_menu = "account_menu"
     case explore_menu = "explore_menu"
     case messages_menu = "messages_menu"

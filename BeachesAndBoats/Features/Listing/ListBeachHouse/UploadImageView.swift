@@ -58,6 +58,8 @@ class UploadImageView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
+        loadSavedData()
         collectionView.reloadData()
         
     }
@@ -274,3 +276,43 @@ extension UploadImageView: UIImagePickerControllerDelegate, UINavigationControll
     }
 }
 
+
+
+
+extension UploadImageView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // For full apartment booking, load main listing images
+        if savedListing.bookingType == "FULL" {
+            if let imageDataArray = savedListing.images {
+                images.removeAll()
+                for imageData in imageDataArray {
+                    if let image = UIImage(data: imageData) {
+                        images.append(image)
+                    }
+                }
+                nextBtn.isEnabled = images.count >= 5
+            }
+        }
+        // For room-specific booking, load room images
+        else if let roomIndex = room, roomIndex >= 0, let rooms = savedListing.rooms, roomIndex < rooms.count {
+            let roomData = rooms[roomIndex]
+            
+            if let imageDataArray = roomData.images {
+                images.removeAll()
+                for imageData in imageDataArray {
+                    if let image = UIImage(data: imageData) {
+                        images.append(image)
+                    }
+                }
+                nextBtn.isEnabled = images.count >= 5
+            }
+        }
+        
+        // Refresh collection view
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
+}

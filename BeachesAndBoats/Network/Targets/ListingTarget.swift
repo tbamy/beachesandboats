@@ -20,6 +20,7 @@ enum ListingTarget {
     case deleteBeachRoom(id: String)
     case deleteBoat(id: String)
     case deleteBeach(id: String)
+    case deleteImages(request: DeleteImagesRequest)
     
 }
 
@@ -48,6 +49,8 @@ extension ListingTarget: BaseTarget {
             return String(format: Urls.deleteBoat.rawValue, id)
         case .deleteBeach(id: let id):
             return String(format: Urls.deleteBeachHouse.rawValue, id)
+        case .deleteImages(request: let request):
+            return Urls.deleteImages.rawValue
         }
     }
     
@@ -63,6 +66,8 @@ extension ListingTarget: BaseTarget {
             return .post
         case .deleteBeachRoom, .deleteBoat, .deleteBeach:
             return .delete
+        case .deleteImages:
+            return .post
         }
     }
     
@@ -162,6 +167,8 @@ extension ListingTarget: BaseTarget {
             return .requestPlain
         case .deleteBeach(id: let id):
             return .requestPlain
+        case .deleteImages(request: let request):
+            return .requestJSONEncodable(request)
         }
     }
     

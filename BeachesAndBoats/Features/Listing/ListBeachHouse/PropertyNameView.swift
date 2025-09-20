@@ -40,6 +40,7 @@ class PropertyNameView: BaseViewControllerPlain {
             
             nextBtn.isEnabled = updatedText.count >= 5
         }
+        loadSavedData()
         
 //        descriptionLabel.onTextChanged = { [weak self] text in
 //            self?.checkTextFields()
@@ -91,4 +92,23 @@ class PropertyNameView: BaseViewControllerPlain {
 
     }
     
+}
+
+extension PropertyNameView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Populate name field
+        if ((savedListing.name?.isEmpty) == nil) {
+            nameLabel.text = savedListing.name ?? ""
+        }
+        
+        // Populate description field
+        if ((savedListing.description?.isEmpty) == nil) {
+            descriptionLabel.text = savedListing.description ?? ""
+        }
+        
+        // Update button state
+        checkTextFields()
+    }
 }

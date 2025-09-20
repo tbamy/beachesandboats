@@ -94,6 +94,7 @@ enum Urls: String {
     
     //MARK: - Listing
     case beachHouseAndBoatListing = "api/v1/hosting/dashboard/listings"
+    case deleteImages = "api/v1/property-image/remove"
     
     
     //MARK: - Chats

@@ -49,6 +49,7 @@ class RoomAmenitiesView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        loadSavedData()
         collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
@@ -305,4 +306,22 @@ extension RoomAmenitiesView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 
     
+}
+
+
+extension RoomAmenitiesView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // If we're editing an existing room, load its amenities
+        if let roomIndex = room, roomIndex >= 0, let rooms = savedListing.rooms, roomIndex < rooms.count {
+            selectedItems = rooms[roomIndex].roomAmenities ?? []
+            nextBtn.isEnabled = !selectedItems.isEmpty
+            
+            // Reload collection view to show selected states
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
 }

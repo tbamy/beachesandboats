@@ -186,8 +186,8 @@ public class Provider<T: TargetType> {
         
         // Configure session with timeout intervals
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 80
-        configuration.timeoutIntervalForResource = 120
+        configuration.timeoutIntervalForRequest = 300
+        configuration.timeoutIntervalForResource = 300
         
         return Session(
             configuration: configuration,

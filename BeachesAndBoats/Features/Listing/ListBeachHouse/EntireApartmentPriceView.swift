@@ -31,6 +31,7 @@ class EntireApartmentPriceView: UIViewController {
         super.viewDidLoad()
         title = "Beaches Houses"
         setup()
+        loadSavedData()
     }
 
     func setup() {
@@ -152,6 +153,46 @@ class EntireApartmentPriceView: UIViewController {
     }
 }
 
+
+extension EntireApartmentPriceView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Load stored listing price
+        let storedPrice = savedListing.listingPrice ?? 0
+        let storedDiscountPercent = Float(savedListing.discountPercent ?? 0) / 100
+        
+        // Set price field
+        moneyField.text = storedPrice.toAmount() ?? ""
+        
+        // Set discount state
+        if storedDiscountPercent > 0 {
+            isDiscountChecked = true
+            discountField.text = String(format: "%.1f", storedDiscountPercent * 100)
+            discountCheck.image = UIImage(named: "check_icon")
+            discountField.isHidden = false
+            
+            // Calculate earnings
+            let amountAfterBaseCharge = storedPrice * 0.9
+            let additionalDiscountAmount = amountAfterBaseCharge * storedDiscountPercent
+            finalEarnings = amountAfterBaseCharge - additionalDiscountAmount
+            finalDiscountPercent = (storedPrice - finalEarnings) / storedPrice
+        } else {
+            isDiscountChecked = false
+            finalDiscountPercent = 0.1
+            finalEarnings = storedPrice * 0.9
+            discountCheck.image = UIImage(named: "uncheck_icon")
+            discountField.isHidden = true
+        }
+        
+        // Update commission display
+        if storedPrice > 0 {
+            commissionField.text = String(format: "You earn ₦%.2f", finalEarnings)
+            commissionView.isHidden = false
+            nextBtn.isEnabled = true
+        }
+    }
+}
 
 //import UIKit
 //

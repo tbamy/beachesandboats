@@ -102,34 +102,33 @@ class RoomDetailsView: BaseViewControllerPlain {
             BookingBtn.setTitle("Reserve for ₦ \(price.toAmount() ?? "0")", for: .normal)
         }
         
-        amenities = listing?.amenities ?? []
-        facilitiesCollectionView.reloadData()
+        setupFacilitiesWithIntelligentLayout()
         
         comments = listing?.reviews ?? []
         guestCommentsCollectionView.reloadData()
         
 //        self.updateCollectionViewHeight(self.facilitiesCollectionView, heightConstraint: self.facilitiesHeightConstraint)
-        self.updateCollectionViewHeight()
+//        self.updateCollectionViewHeight()
     }
     
     private func getText(at indexPath: IndexPath) -> String {
         return indexPath.item < amenities.count ? amenities[indexPath.item].name : ""
     }
     
-    private func calculateItemWidth(for text: String) -> CGFloat {
-        
-        let font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        let textSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
-        
-        let horizontalPadding: CGFloat = 32 // Adjust this based on your SelectableViewWithBg padding
-        let minimumWidth: CGFloat = 60
-        
-        // Add some extra buffer to prevent truncation
-        let buffer: CGFloat = 8
-        let calculatedWidth = textSize.width + horizontalPadding + buffer
-        
-        return max(calculatedWidth, minimumWidth)
-    }
+//    private func calculateItemWidth(for text: String) -> CGFloat {
+//        
+//        let font = UIFont.systemFont(ofSize: 16, weight: .medium)
+//        let textSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
+//        
+//        let horizontalPadding: CGFloat = 32 // Adjust this based on your SelectableViewWithBg padding
+//        let minimumWidth: CGFloat = 60
+//        
+//        // Add some extra buffer to prevent truncation
+//        let buffer: CGFloat = 8
+//        let calculatedWidth = textSize.width + horizontalPadding + buffer
+//        
+//        return max(calculatedWidth, minimumWidth)
+//    }
     
     private func getItemCount() -> Int {
         return amenities.count
@@ -316,18 +315,14 @@ extension RoomDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.tag {
-        case 1: // Facilities collection view
-            let itemsPerRow: CGFloat = 4
-            let padding: CGFloat = 10
-            let width = (collectionView.bounds.width - (itemsPerRow - 1) * padding) / itemsPerRow
-            return CGSize(width: width, height: 20)
+        case 1: // Facilities collection view - let the intelligent layout handle sizing
+            return CGSize.zero // This won't be used since IntelligentFlowLayout handles positioning
         case 2: // Comments collection view
             return CGSize(width: (collectionView.bounds.width) - 20, height: 150)
         default:
             return CGSize(width: 100, height: 40)
         }
     }
-    
     
 }
 
@@ -342,5 +337,69 @@ extension RoomDetailsView: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(row + 1) Unit"
+    }
+}
+
+// MARK: - Updated RoomDetailsView Methods
+extension RoomDetailsView {
+    
+    func setupIntelligentLayout() {
+        // Create and configure the intelligent layout
+        let intelligentLayout = IntelligentFlowLayout()
+        intelligentLayout.minimumLineSpacing = 8
+        intelligentLayout.minimumInteritemSpacing = 8
+        intelligentLayout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        
+        // Calculate item sizes based on amenity names
+        intelligentLayout.itemSizes = amenities.map { amenity in
+            let width = calculateItemWidth(for: amenity.name)
+            return CGSize(width: width, height: 36)
+        }
+        
+        facilitiesCollectionView.collectionViewLayout = intelligentLayout
+    }
+    
+    private func calculateItemWidth(for text: String) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: 12) // Match your CatViewCell font size
+        let textSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
+        
+        // Account for icon, padding, and spacing in your CatViewCell
+        let iconWidth: CGFloat = 16 // Your image view width
+        let horizontalPadding: CGFloat = 14 // Left and right padding
+        let iconTextSpacing: CGFloat = 8 // Space between icon and text
+        let minimumWidth: CGFloat = 60
+        let buffer: CGFloat = 4 // Small buffer to prevent truncation
+        
+        let calculatedWidth = textSize.width + iconWidth + iconTextSpacing + horizontalPadding + buffer
+        
+        return max(calculatedWidth, minimumWidth)
+    }
+    
+    func updateIntelligentCollectionViewHeight() {
+        // Force layout calculation
+        facilitiesCollectionView.layoutIfNeeded()
+        
+        let contentHeight = facilitiesCollectionView.collectionViewLayout.collectionViewContentSize.height
+        facilitiesHeightConstraint.constant = max(contentHeight, 44) // Minimum height
+        
+        // Animate the constraint change
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func setupFacilitiesWithIntelligentLayout() {
+        amenities = listing?.amenities ?? []
+        
+        // Setup the intelligent layout
+        setupIntelligentLayout()
+        
+        // Reload data
+        facilitiesCollectionView.reloadData()
+        
+        // Update height constraint
+        DispatchQueue.main.async {
+            self.updateIntelligentCollectionViewHeight()
+        }
     }
 }

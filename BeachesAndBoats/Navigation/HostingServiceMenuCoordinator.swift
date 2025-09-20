@@ -118,7 +118,7 @@ class HostingServiceMenuCoordinator: Coordinator {
         let vc: EditPropertyAddressView = .fromNib()
         vc.createBeachListing = request
         vc.beachData = beachData
-//        vc.id = id
+        vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
@@ -247,12 +247,13 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditUploadImageView(beachData: BeachDatas?, request: CreateBeachListingRequest?, currentImages: [String], id: String?) {
+    func gotoEditUploadImageView(beachData: BeachDatas?, request: CreateBeachListingRequest?, currentImages: [String], id: String?, roomId: String? = nil) {
         let vc: EditHouseUploadImageView = .fromNib()
         vc.createBeachListing = request
         vc.beachData = beachData
         vc.currentImages = currentImages
         vc.id = id
+        vc.roomId = roomId
         vc.coordinator = self
         push(viewController: vc)
     }

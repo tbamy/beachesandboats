@@ -48,7 +48,6 @@ class PropertyAvailableDatesView: BaseViewControllerPlain {
         }else{
             nextBtn.isEnabled = true
         }
-            
         
     }
 

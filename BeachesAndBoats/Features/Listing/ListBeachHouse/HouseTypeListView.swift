@@ -55,6 +55,8 @@ class HouseTypeListView: BaseViewControllerPlain {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        loadSavedData()
+        collectionView.reloadData()
     }
     
     @IBAction func nextTapped(_ sender: Any) {
@@ -135,6 +137,34 @@ extension HouseTypeListView: UICollectionViewDelegate, UICollectionViewDataSourc
     
 }
 
+extension HouseTypeListView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Find and select the previously selected house type
+        if ((savedListing.subCategoryId?.isEmpty) == nil),
+           let index = houseLists.firstIndex(where: { $0.id == savedListing.subCategoryId }) {
+            
+            selectedHouse = savedListing.subCategoryId ?? ""
+            nextBtn.isEnabled = true
+            
+            // Select the cell in collection view
+            let indexPath = IndexPath(row: index, section: 0)
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+            
+            // Update the visual state
+            DispatchQueue.main.async { [weak self] in
+                if let cell = self?.collectionView.cellForItem(at: indexPath) {
+                    for view in cell.subviews {
+                        if let selectableView = view as? SelectableView {
+                            selectableView.model.state = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 //struct houseLists{
 //    var title: String

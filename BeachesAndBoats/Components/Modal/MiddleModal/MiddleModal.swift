@@ -230,7 +230,7 @@ import MessageUI
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: modalHeight)
         backDrop.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
             modal.frame.origin.y = centerY
             backDrop.layoutIfNeeded()
         }, completion: nil)

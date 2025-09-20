@@ -52,7 +52,7 @@ class PropertyAddressView: BaseViewControllerPlain {
         
 //        locationCollectionViewHeight.constant = 200
         view.layoutIfNeeded()
-        
+        loadSavedData()
         DispatchQueue.main.async {
             self.locationCollectionView.reloadData()
             self.updateCollectionViewHeight(self.locationCollectionView, self.locationCollectionViewHeight)
@@ -189,3 +189,29 @@ extension PropertyAddressView: UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 
+extension PropertyAddressView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Populate jetty location field
+        if let jettyLocation = savedListing.jettyLocation, !jettyLocation.isEmpty {
+            locationField.text = jettyLocation
+        }
+        
+        // Find and select the previously selected location
+        if let locationName = savedListing.locationName,
+           !locationName.isEmpty,
+           let index = locations?.firstIndex(where: { $0.name == locationName }) {
+            
+            selectedIndex = index
+            beachLocation = locationName
+            selectBeachLocation = locations?[index].id
+            nextBtn.isEnabled = true
+            
+            // Reload collection view to show selected state
+            DispatchQueue.main.async { [weak self] in
+                self?.locationCollectionView.reloadData()
+            }
+        }
+    }
+}

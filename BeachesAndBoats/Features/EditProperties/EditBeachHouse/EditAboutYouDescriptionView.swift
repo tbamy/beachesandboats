@@ -46,6 +46,10 @@ class EditAboutYouDescriptionView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
+        guard !descriptionLabel.text.isEmpty else {
+            Toast.show(message: "Please enter a brief description")
+            return
+        }
         if var createBeachListing = createBeachListing{
             createBeachListing.aboutOwner = descriptionLabel.text
             

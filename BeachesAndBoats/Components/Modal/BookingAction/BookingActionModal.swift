@@ -69,7 +69,7 @@ extension BookingActionModal{
         backDrop.addSubview(modal)
         view.addSubview(backDrop)
         
-        let height = Helpers.screenHeight * 0.35
+        let height = Helpers.screenHeight * 0.3
         modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
         backDrop.layoutIfNeeded()
         

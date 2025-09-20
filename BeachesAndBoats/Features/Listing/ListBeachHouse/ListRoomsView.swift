@@ -95,6 +95,7 @@ class ListRoomsView: BaseViewControllerPlain {
         
         allRoomData = createBeachListing?.rooms ?? []
         bedTypes = beachData?.bed_types ?? []
+        loadSavedData()
         collectionView.reloadData()
         updateCollectionViewHeight(collectionView, collectionViewHeight)
         
@@ -409,5 +410,38 @@ extension ListRoomsView: UICollectionViewDelegate, UICollectionViewDataSource, U
         let totalHorizontalInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right
         let widthOfScreen: CGFloat = collectionView.bounds.width - totalHorizontalInsets
         return CGSize(width: widthOfScreen, height: 56)
+    }
+}
+
+
+extension ListRoomsView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // If we're editing an existing room, populate fields with that room's data
+        if let roomIndex = room, roomIndex >= 0, let rooms = savedListing.rooms, roomIndex < rooms.count {
+            let roomData = rooms[roomIndex]
+            
+            // Populate text fields
+            roomName.text = roomData.name ?? ""
+            roomDescription.text = roomData.description ?? ""
+            roomCount.text = "\(roomData.quantity ?? 1)"
+            peopleCount.text = "\(roomData.noOfOccupant ?? 1)"
+            
+            // Set private bathroom status
+            privateStatus = roomData.hasPrivateBathroom ?? 0
+            privateRoomYes.isChecked = (roomData.hasPrivateBathroom ?? 0) == 1
+            privateRoomNo.isChecked = (roomData.hasPrivateBathroom ?? 0) == 0
+            
+            // Load selected bed types
+            selectedBedTypes = roomData.bedTypes ?? []
+            
+            // Reload collection view to show selected bed types
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+                self?.updateCollectionViewHeight(self?.collectionView ?? UICollectionView(),
+                                               self?.collectionViewHeight ?? NSLayoutConstraint())
+            }
+        }
     }
 }

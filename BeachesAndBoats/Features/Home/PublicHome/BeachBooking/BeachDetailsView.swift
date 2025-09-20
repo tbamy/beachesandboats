@@ -127,6 +127,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         dayBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
+            self.dayBookingDateLabel
             self.isDayBooking = true
             self.nightBookingBtn.isChecked = false
             self.nightBookingDateStack.isHidden = true
@@ -330,6 +331,11 @@ class BeachDetailsView: BaseViewControllerPlain {
             return
         }
         
+        guard let from_when = from_when, let to_when = to_when, from_when < to_when else {
+            MiddleModal.show(title: "Invalid Date", subtitle: "Checkin must be before checkout", type: .error, dismissable: true, dismissOnConfirm: true)
+            return
+        }
+        
         switch beachDetails.bookingType {
         case "ANY":
             BookingActionModal.show(on: self.view, callBack: { [weak self] type in
@@ -360,25 +366,6 @@ class BeachDetailsView: BaseViewControllerPlain {
            break
         }
         
-//        if isDayBooking, let bookingDate = booking_date{
-//            let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: bookingDate.toBackendDate() , checkoutDate: bookingDate.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
-//            
-//            print(beachBookingRequest)
-//            HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
-//                self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
-//            })
-//            
-//        } else if let fromWhen = from_when, let toWhen = to_when{
-//            let beachBookingRequest = CreateBeachHouseBookingRequest(userId: "", beachHouseRoomId: "", checkingDate: fromWhen.toBackendDate() , checkoutDate: toWhen.toBackendDate() , checkingTime: "", checkoutTime: "", numberOfPeople: 0, amount: 0, units: 0, bookingType: bookingType)
-//            
-//            print(beachBookingRequest)
-//            HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
-//                self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
-//            })
-//            
-//        }else{
-//            MiddleModal.show(title: "Invalid Date", subtitle: "Please pick checkout and checkin dates", type: .error, dismissable: true, dismissOnConfirm: true)
-//        }
         
     }
     

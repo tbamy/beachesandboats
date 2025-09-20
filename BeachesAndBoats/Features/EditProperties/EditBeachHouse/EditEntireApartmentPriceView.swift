@@ -40,7 +40,7 @@ class EditEntireApartmentPriceView: UIViewController {
         
         // Set the price field
         moneyField.text = storedPrice.toAmount() ?? ""
-        
+        nextBtn.isEnabled = true
         // Determine if additional discount was applied
         if storedDiscountPercent > 0 {
             isDiscountChecked = true
@@ -86,7 +86,7 @@ class EditEntireApartmentPriceView: UIViewController {
             if let amount = self?.moneyField.getDoubleValue() {
                 self?.updateCommission(with: String(amount))
             }
-            self?.nextBtn.isEnabled = true
+            
         }
         
         discountField.textChanged = { [weak self] _,_,_ in
@@ -159,6 +159,10 @@ class EditEntireApartmentPriceView: UIViewController {
     
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
+        guard let amount = moneyField.getFloatValue(), amount > 0 else {
+            Toast.show(message: "Price cannot be empty")
+            return
+        }
         if var createBeachListing = createBeachListing, let beachData = beachData {
             createBeachListing.listingPrice = moneyField.getFloatValue() ?? 0
             // Store only the additional discount percentage

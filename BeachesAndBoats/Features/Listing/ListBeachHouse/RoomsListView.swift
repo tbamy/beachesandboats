@@ -31,9 +31,9 @@ class RoomsListView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beaches Houses"
-        setup()
         
         bindNetwork()
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +79,8 @@ class RoomsListView: BaseViewControllerPlain {
         duplicateBtn.addTarget(self, action: #selector(duplicateRoom), for: .touchUpInside)
         
         nextBtn.isEnabled = !roomsList.isEmpty
+        loadSavedData()
+        collectionView.reloadData()
     }
     
     func updateCollectionViewHeight(_ CollectionView: UICollectionView, _ CollectionViewHeightConstraint: NSLayoutConstraint) {
@@ -300,4 +302,26 @@ extension RoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, U
         return "\(baseName) Copy \(counter)"
     }
     
+}
+
+
+extension RoomsListView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Load existing rooms
+        roomsList = savedListing.rooms ?? []
+        
+        // Update UI
+        nextBtn.isEnabled = !roomsList.isEmpty
+        duplicateBtn.isHidden = roomsList.count > 1
+        
+        // Refresh collection view
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+            if let self = self {
+                self.updateCollectionViewHeight(self.collectionView, self.collectionViewHeightConstraint)
+            }
+        }
+    }
 }

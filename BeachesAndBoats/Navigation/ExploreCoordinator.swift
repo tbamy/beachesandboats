@@ -205,10 +205,17 @@ class ExploreCoordinator: Coordinator {
         coordinator.start()
 
         if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
+            
             tabBarController.viewControllers?[2] = newNavController
             tabBarController.selectedIndex = 2
+            
+            
+            if let dashboardNav = tabBarController.viewControllers?.first as? UINavigationController {
+                dashboardNav.popToRootViewController(animated: false)
+            }
         }
     }
+
     
     // MARK: - Deinitializer
     deinit {

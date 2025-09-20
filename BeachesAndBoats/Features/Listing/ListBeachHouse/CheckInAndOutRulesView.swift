@@ -33,7 +33,7 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
-        
+        loadSavedData()
     }
 
     @IBAction func nextTapped(_ sender: Any) {
@@ -107,4 +107,35 @@ class CheckInAndOutRulesView: BaseViewControllerPlain {
     }
 
 
+}
+
+
+extension CheckInAndOutRulesView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Populate check-in and check-out times
+        if let overnightCheckInTime = savedListing.overnightCheckIn, !overnightCheckInTime.isEmpty {
+            overnightCheckIn.text = overnightCheckInTime
+        }
+        
+        if let overnightCheckOutTime = savedListing.overnightCheckOut, !overnightCheckOutTime.isEmpty {
+            overnightCheckOut.text = overnightCheckOutTime
+        }
+        
+        if let dayCheckInTime = savedListing.dayCheckIn, !dayCheckInTime.isEmpty {
+            dayCheckIn.text = dayCheckInTime
+        }
+        
+        if let dayCheckOutTime = savedListing.dayCheckOut, !dayCheckOutTime.isEmpty {
+            dayCheckOut.text = dayCheckOutTime
+        }
+        
+        // Enable next button if all required times are set
+        let hasAllTimes = !overnightCheckIn.text.isEmpty &&
+                         !overnightCheckOut.text.isEmpty &&
+                         !dayCheckIn.text.isEmpty &&
+                         !dayCheckOut.text.isEmpty
+        nextBtn.isEnabled = hasAllTimes
+    }
 }

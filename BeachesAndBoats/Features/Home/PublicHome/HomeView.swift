@@ -42,6 +42,11 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     private lazy var refreshControl = UIRefreshControl()
 //    var searchFilter: GetBookingCategorySearchRequest?
     
+    private var currentPage = 1
+    private var isLoadingMore = false
+    private var canLoadMore = true
+    private var totalPages = 1
+    
     // MARK: - Data Properties
     private var originalCategories: [PropertyCategory] = []
     private var categories: [PropertyCategory] = []
@@ -144,34 +149,55 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
         }
     }
     
-    // Add this method to handle the search
     private func performSearch(with query: String) {
         if query.isEmpty {
-            // Reset to original data
-            categories = originalCategories
-            reloadAllCollectionViews()
+            // Reset pagination and fetch fresh data
+            currentPage = 1
+            canLoadMore = true
+            
+            let freshFilter = GetBookingCategorySearchRequest(page: 1)
+            input.onNext(.getBookingCategories(filter: freshFilter))
         } else {
-            // Perform search
+            // Perform search with pagination reset
             loadDataWithSearch()
         }
     }
+
     
-    // Update your existing textFieldShouldReturn method
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        // Cancel any pending search timer since user pressed return
+        // Cancel any pending search timer
         searchTimer?.invalidate()
         
         if let query = textField.text, !query.isEmpty {
             loadDataWithSearch()
         } else {
-            categories = originalCategories
-            reloadAllCollectionViews()
+            // Reset pagination and fetch fresh data
+            currentPage = 1
+            canLoadMore = true
+            
+            let freshFilter = GetBookingCategorySearchRequest(page: 1)
+            input.onNext(.getBookingCategories(filter: freshFilter))
         }
         
         return true
     }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        
+//        // Cancel any pending search timer since user pressed return
+//        searchTimer?.invalidate()
+//        
+//        if let query = textField.text, !query.isEmpty {
+//            loadDataWithSearch()
+//        } else {
+//            categories = originalCategories
+//            reloadAllCollectionViews()
+//        }
+//        
+//        return true
+//    }
 
 
 
@@ -209,80 +235,115 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     
     private func loadInitialData() {
         LoadingModal.show()
-        input.onNext(.getBookingCategories(filter: GetBookingCategorySearchRequest()))
+        currentPage = 1
+        canLoadMore = true
+        input.onNext(.getBookingCategories(filter: GetBookingCategorySearchRequest(page: currentPage)))
         beachVM.getBeachData()
         boatVM.getBoatData()
     }
     
+    private func loadMoreData() {
+        guard !isLoadingMore && canLoadMore && currentPage < totalPages else { return }
+        
+        isLoadingMore = true
+        currentPage += 1
+        
+        let searchParam = searchField.text
+        let searchFilter = GetBookingCategorySearchRequest(
+            page: currentPage, filterType: getFilterType(),
+            searchQuery: searchParam
+        )
+        
+        input.onNext(.getBookingCategories(filter: searchFilter))
+    }
+    
+    private func getFilterType() -> String {
+        if isShowingBeachHouses {
+            return "BeachHouse"
+        } else if isShowingBoats {
+            return "Boat"
+        } else if isShowingServices {
+            return "Service"
+        }
+        return ""
+    }
+
+    
     private func loadDataWithSearch() {
         LoadingModal.show()
+        currentPage = 1
+        canLoadMore = true
+        
         let searchParam = searchField.text
+        let filterType = getFilterType()
         
+        let searchFilter = GetBookingCategorySearchRequest(
+            page: currentPage, filterType: filterType,
+            searchQuery: searchParam
+        )
         
-        if isShowingBeachHouses {
-            filterType = "BeachHouse"
-        }else if isShowingBoats {
-            filterType = "Boat"
-        }else if isShowingServices{
-            filterType = "Service"
-        }
-            
-        
-        let searchFilter = GetBookingCategorySearchRequest(filterType: filterType ,searchQuery: searchParam)
-            
-            print("searchFilter: \(searchFilter)")
-            
-            input.onNext(.getBookingCategories(filter: searchFilter ))
-        
+        print("searchFilter: \(searchFilter)")
+        input.onNext(.getBookingCategories(filter: searchFilter))
     }
     
     @objc private func filterTapped() {
-        if isShowingBeachHouses {
-            filterType = "BeachHouse"
-        }else if isShowingBoats {
-            filterType = "Boat"
-        }else if isShowingServices{
-            filterType = "Service"
-        }
+        let filterType = getFilterType()
         
         var filterPropertyTypes: [FilterPropertyTypes]?
         var amenities: [RoomAmenities]?
+        
         if filterType == "BeachHouse" {
             amenities = beachFilterData?.amenities
             filterPropertyTypes = (beachFilterData?.categories ?? []).compactMap { category in
-                guard let id = category.id, let name = category.name else {
-                    return nil
-                }
+                guard let id = category.id, let name = category.name else { return nil }
                 return FilterPropertyTypes(id: id, name: name)
             }
-
-        }else if filterType == "Boat" {
+        } else if filterType == "Boat" {
             amenities = boatFilterData?.amenities
             filterPropertyTypes = (boatFilterData?.categories ?? []).compactMap { category in
-                guard let id = category.id, let name = category.name else {
-                    return nil
-                }
+                guard let id = category.id, let name = category.name else { return nil }
                 return FilterPropertyTypes(id: id, name: name)
             }
-        }else{
+        } else {
             amenities = beachFilterData?.amenities
             filterPropertyTypes = (beachFilterData?.categories ?? []).compactMap { category in
-                guard let id = category.id, let name = category.name else {
-                    return nil
-                }
+                guard let id = category.id, let name = category.name else { return nil }
                 return FilterPropertyTypes(id: id, name: name)
             }
         }
         
-        FilterModal.startFilterModal(propertyTypes: filterPropertyTypes ?? [], amenities: amenities ?? [], filterType: filterType, callBack: { [weak self] item in
-            LoadingModal.show()
-            print("Request: \(item)")
-            
-            self?.input.onNext(.getBookingCategories(filter: item ?? GetBookingCategorySearchRequest() ))
-        }, clearAll: { [weak self] in
-            self?.categories = self?.originalCategories ?? []
-            self?.reloadAllCollectionViews()
-        })
+        FilterModal.startFilterModal(
+            propertyTypes: filterPropertyTypes ?? [],
+            amenities: amenities ?? [],
+            filterType: filterType,
+            callBack: { [weak self] item in
+                LoadingModal.show()
+                print("Request: \(item)")
+                
+                // Reset pagination for filtered results
+                self?.currentPage = 1
+                self?.canLoadMore = true
+                
+                self?.input.onNext(.getBookingCategories(filter: item ?? GetBookingCategorySearchRequest(page: 1)))
+            },
+            clearAll: { [weak self] in
+                guard let self = self else { return }
+                
+                // Clear search field
+                self.searchField.textField.text = ""
+                
+                // Show loading
+                LoadingModal.show()
+                
+                // Reset pagination
+                self.currentPage = 1
+                self.canLoadMore = true
+                
+                // Fetch fresh data from API
+                let freshFilter = GetBookingCategorySearchRequest(page: 1)
+                self.input.onNext(.getBookingCategories(filter: freshFilter))
+            }
+        )
     }
     
     @objc private func refresh(_ sender: UIRefreshControl) {
@@ -291,6 +352,13 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
         isShowingBeachHouses = true
         isShowingBoats = false
         isShowingServices = false
+        
+        // Clear search field
+        searchField.textField.text = ""
+        
+        // Reset pagination
+        currentPage = 1
+        canLoadMore = true
         
         // Trigger data fetch with default filter
         let searchFilter = GetBookingCategorySearchRequest(page: 1)
@@ -757,19 +825,133 @@ extension HomeView {
         }
     }
     
+//    private func handleCategoriesSuccess(_ response: GetBookingCategoryResponse) {
+//        guard let responseData = response.data else { return }
+//        isShowingBeachHouses = true
+//        categories = mapCategories(categories: responseData)
+//        originalCategories = categories
+//        processBeachHouseSelection()
+//        reloadAllCollectionViews()
+//        
+//        updateCollectionViewHeight(beachHouseCollectionView, beachHouseCollectionViewHeightConstraint)
+//        updateCollectionViewHeight(topRatedBeachHouseCollectionView, topRatedBeachHouseCollectionViewHeightConstraint)
+//        
+//        refreshControl.endRefreshing()
+//    }
+    
     private func handleCategoriesSuccess(_ response: GetBookingCategoryResponse) {
-        guard let responseData = response.data else { return }
-        isShowingBeachHouses = true
-        categories = mapCategories(categories: responseData)
-        originalCategories = categories
-        processBeachHouseSelection()
+        guard let responseData = response.data else {
+            // If no data in response, we've reached the end
+            isLoadingMore = false
+            canLoadMore = false
+            refreshControl.endRefreshing()
+            return
+        }
+        
+        // Check if response is empty (no more data to load)
+        let hasNewData = !responseData.isEmpty && responseData.contains { category in
+            let hasListings = !(category.listings?.isEmpty ?? true)
+            let hasBoatBookings = !(category.boatBookings?.isEmpty ?? true)
+            let hasBeachBookings = !(category.beachHouseBookings?.isEmpty ?? true)
+            return hasListings || hasBoatBookings || hasBeachBookings
+        }
+        
+        if !hasNewData {
+            // No more data to load
+            print("No more data to load - reached end of pagination")
+            canLoadMore = false
+            isLoadingMore = false
+            refreshControl.endRefreshing()
+            return
+        }
+        
+        // For first page, replace data. For subsequent pages, append data
+        if currentPage == 1 {
+            isShowingBeachHouses = true
+            isShowingBoats = false
+            isShowingServices = false
+            selectedCatIndex = 0
+            
+            categories = mapCategories(categories: responseData)
+            originalCategories = categories
+            
+            print("Loaded first page with \(categories.count) categories")
+        } else {
+            // Append new data for pagination
+            let newCategories = mapCategories(categories: responseData)
+            
+            print("Loading page \(currentPage + 1) - New categories: \(newCategories.count)")
+            
+            // Merge the listings from new categories into existing categories
+            for newCategory in newCategories {
+                if let existingIndex = categories.firstIndex(where: { $0.id == newCategory.id }) {
+                    // Append new listings to existing category
+                    var existingCategory = categories[existingIndex]
+                    
+                    // Merge listings
+                    let existingListings = existingCategory.listings ?? []
+                    let newListings = newCategory.listings ?? []
+                    if !newListings.isEmpty {
+                        existingCategory.listings = existingListings + newListings
+                        print("Added \(newListings.count) new listings to category: \(existingCategory.name ?? "")")
+                    }
+                    
+                    // Merge boat bookings
+                    let existingBoatBookings = existingCategory.boatBookings ?? []
+                    let newBoatBookings = newCategory.boatBookings ?? []
+                    if !newBoatBookings.isEmpty {
+                        existingCategory.boatBookings = existingBoatBookings + newBoatBookings
+                        print("Added \(newBoatBookings.count) new boat bookings to category: \(existingCategory.name ?? "")")
+                    }
+                    
+                    // Merge beach house bookings
+                    let existingBeachBookings = existingCategory.beachHouseBookings ?? []
+                    let newBeachBookings = newCategory.beachHouseBookings ?? []
+                    if !newBeachBookings.isEmpty {
+                        existingCategory.beachHouseBookings = existingBeachBookings + newBeachBookings
+                        print("Added \(newBeachBookings.count) new beach bookings to category: \(existingCategory.name ?? "")")
+                    }
+                    
+                    categories[existingIndex] = existingCategory
+                } else {
+                    // New category not in existing list, add it
+                    categories.append(newCategory)
+                    print("Added new category: \(newCategory.name ?? "")")
+                }
+            }
+            
+            // Increment current page since we successfully loaded data
+            currentPage += 1
+        }
+        
+        // Process data based on current selection
+        if isShowingBeachHouses {
+            processBeachHouseSelection()
+        } else if isShowingBoats {
+            processBoatSelection(at: selectedCatIndex)
+        } else if isShowingServices {
+            processServiceSelection(at: selectedCatIndex)
+        }
+        
         reloadAllCollectionViews()
         
-        updateCollectionViewHeight(beachHouseCollectionView, beachHouseCollectionViewHeightConstraint)
-        updateCollectionViewHeight(topRatedBeachHouseCollectionView, topRatedBeachHouseCollectionViewHeightConstraint)
+        // Update collection view heights
+        DispatchQueue.main.async {
+            if self.isShowingBeachHouses {
+                self.updateCollectionViewHeight(self.beachHouseCollectionView, self.beachHouseCollectionViewHeightConstraint)
+                self.updateCollectionViewHeight(self.topRatedBeachHouseCollectionView, self.topRatedBeachHouseCollectionViewHeightConstraint)
+            } else if self.isShowingBoats {
+                self.updateCollectionViewHeight(self.boatCollectionView, self.boatCollectionViewHeightConstraint)
+                self.updateCollectionViewHeight(self.topRatedBoatCollectionView, self.topRatedBoatCollectionVIewHeightConstraint)
+            } else if self.isShowingServices {
+                self.updateCollectionViewHeight(self.serviceCollectionVIew, self.serviceCollectionVIewHeightConstraint)
+            }
+        }
         
+        isLoadingMore = false
         refreshControl.endRefreshing()
     }
+
     
     private func handleCategoriesError(_ error: ErrorResponse) {
         MiddleModal.show(title: error.message ?? "", type: .error, dismissable: false, onConfirm: { self.loadInitialData() })
@@ -873,6 +1055,22 @@ enum ServiceBookingItem{
             return "\(booking.boat?.locations?.jettyLocation ?? ""), \(booking.boat?.locations?.name ?? "")"
         case .beachHouse(let booking):
             return "\(booking.beachHouse?.locations?.jettyLocation ?? ""), \(booking.beachHouse?.locations?.name ?? "")"
+        }
+    }
+}
+
+extension HomeView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Check if this is the main scroll view (not collection view scroll)
+        guard scrollView == self.scrollView else { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        // Load more data when user scrolls near the bottom
+        if offsetY > contentHeight - height - 100 { // 100 points before reaching bottom
+            loadMoreData()
         }
     }
 }

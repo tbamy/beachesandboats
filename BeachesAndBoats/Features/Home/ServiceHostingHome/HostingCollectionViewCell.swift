@@ -42,6 +42,7 @@ class HostingCollectionViewCell: UICollectionViewCell {
     
     //For beach reservation
     func currentHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
+        daysView.isHidden = true
         beachName.text = data?.beachHouse?.name
         locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
         availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.beachHouse?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
@@ -55,6 +56,7 @@ class HostingCollectionViewCell: UICollectionViewCell {
     
     //For boat reservation
     func boatCurrentHostingCell(with data: BoatReservationsCurrentReservation?) {
+        daysView.isHidden = true
         beachName.text = data?.boat?.name
         locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
         availabilityDate.text = "\(data?.boat?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.boat?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
@@ -62,7 +64,7 @@ class HostingCollectionViewCell: UICollectionViewCell {
         date.text = "\(data?.boat?.rating ?? 0)"
         amountPerNight.isHidden = true
 //        amountPerNight.text = "₦\(data?.boat?.pricePerNight ?? 0.00) / night"
-        beachHouseImage.image = UIImage(named: data?.boat?.images?.first?.url ?? "")
+//        beachHouseImage.image = UIImage(named: data?.boat?.images?.first?.url ?? "")
         reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.boat?.images?.first?.url)
     }
@@ -97,6 +99,36 @@ class HostingCollectionViewCell: UICollectionViewCell {
         loadImage(urlString: data?.beachHouse?.image)
     }
     
+    func boatUpcomingHostingCell(with data: BoatReservationsCurrentReservation?) {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyy"
+
+        if let futureDate = formatter.date(from: data?.bookingDate ?? "") {
+            if let days = daysBetween(from: today, to: futureDate) {
+                if days < 1 {
+                    daysLbl.text = "Less than 1 day"
+                } else if days == 1 {
+                    daysLbl.text = "Next 1 day"
+                } else {
+                    daysLbl.text = "Next \(days) days"
+                }
+            }
+
+        }
+        
+        
+        beachName.text = data?.boat?.name
+        locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
+        availabilityDate.text = "\(data?.bookingDate?.convertToShorterDateFormat() ?? "")"
+        calendarImg.image = UIImage(named: "ratingIcon")
+        date.text = "\(data?.boat?.rating ?? 0)"
+        amountPerNight.text = "₦\(data?.total ?? 0.00)"
+//        beachHouseImage.image = UIImage(named: data?.boat?.images?.first?.url ?? "")
+        reservationCalendar.image = UIImage(named: "calendar")
+        loadImage(urlString: data?.boat?.images?.first?.url )
+    }
+    
     func cancelledBookingCell(with data: BeachHouseReservationsCurrentReservation?) {
         beachName.text = data?.beachHouse?.name
         locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
@@ -106,6 +138,18 @@ class HostingCollectionViewCell: UICollectionViewCell {
         amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
         reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.beachHouse?.image)
+
+    }
+    
+    func boatCancelledBookingCell(with data: BoatReservationsCurrentReservation?) {
+        beachName.text = data?.boat?.name
+        locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
+        availabilityDate.text = "\(data?.bookingDate?.convertToShorterDateFormat() ?? "")"
+        calendarImg.image = UIImage(named: "ratingIcon")
+        date.text = "\(data?.boat?.rating ?? 0)"
+        amountPerNight.text = "₦\(data?.total ?? 0.00)"
+        reservationCalendar.image = UIImage(named: "calendar")
+        loadImage(urlString: data?.boat?.images?.first?.url )
 
     }
     

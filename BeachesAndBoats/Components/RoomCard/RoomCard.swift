@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class RoomCard: BaseXib {
     
@@ -49,7 +50,24 @@ class RoomCard: BaseXib {
         mainImage.layer.cornerRadius = 10
         backgroundColor = .white
         
-        mainImage.image = model.image
+//        mainImage.image = model.image
+        if let imgData = model.image {
+            // Local image: Assign directly
+            mainImage.image = imgData
+        } else if let url = model.imageURL {
+            // Remote URL: Load with SDWebImage
+            let placeholder = UIImage(named: "placeholder")  // Ensure this asset exists
+            mainImage.sd_setImage(with: url, placeholderImage: placeholder) { [weak self] loadedImage, error, _, _ in
+                // Optional: Update model on success for consistency
+                if let strongSelf = self, error == nil, let loadedImage = loadedImage {
+                    strongSelf.model.image = loadedImage
+                }
+            }
+        } else {
+            // No image or URL: Clear it
+            mainImage.image = nil
+        }
+        
         roomName.text = model.roomName
         guestsNum.text = "\(model.numberOfGuests)"
         roomsNum.text = "\(model.numberOfRooms)"
@@ -84,6 +102,7 @@ public struct RoomCardModel{
     public var numberOfBeds: Int = 0
     public var roomPrice: String = ""
     public var image: UIImage? = nil
+    public var imageURL: URL? = nil
     public var editTapped: () -> Void = {}
     public var deleteTapped: () -> Void = {}
 }

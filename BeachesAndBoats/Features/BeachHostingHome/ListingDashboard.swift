@@ -490,7 +490,7 @@ extension ListingDashboard: UICollectionViewDataSource, UICollectionViewDelegate
         }
         
         switch collectionView.tag {
-        case 2:
+        case 2: // Current Hosting
             if isBeachReservation {
                 let cellData = currentHostingData[indexPath.item]
                 cell.currentHostingCell(with: cellData)
@@ -499,17 +499,58 @@ extension ListingDashboard: UICollectionViewDataSource, UICollectionViewDelegate
                 cell.boatCurrentHostingCell(with: cellData)
             }
            
-        case 3:
-            let cellData = upcomingReservationData[indexPath.item]
-            cell.upcomingHostingCell(with: cellData)
-        case 4:
-            let cellData = cancelBookingData[indexPath.item]
-            cell.cancelledBookingCell(with: cellData)
+        case 3: // Upcoming
+            if isBeachReservation {
+                let cellData = upcomingReservationData[indexPath.item]
+                cell.upcomingHostingCell(with: cellData)
+            } else {
+                let cellData = boatUpcomingReservationData[indexPath.item]
+                // You'll need to create a boat version of this method or modify the existing one
+                cell.boatUpcomingHostingCell(with: cellData) // This might need to be changed to a boat-specific method
+            }
+            
+        case 4: // Cancelled Bookings
+            if isBeachReservation {
+                let cellData = cancelBookingData[indexPath.item]
+                cell.cancelledBookingCell(with: cellData)
+            } else {
+                let cellData = boatCancelBookingData[indexPath.item]
+                // You'll need to create a boat version of this method or modify the existing one
+                cell.boatCancelledBookingCell(with: cellData) // This might need to be changed to a boat-specific method
+            }
+            
         default:
             break
         }
         return cell
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HostingCollectionViewCell", for: indexPath) as? HostingCollectionViewCell else {
+//            return UICollectionViewCell()
+//        }
+//        
+//        switch collectionView.tag {
+//        case 2:
+//            if isBeachReservation {
+//                let cellData = currentHostingData[indexPath.item]
+//                cell.currentHostingCell(with: cellData)
+//            } else {
+//                let cellData = boatHostingData[indexPath.item]
+//                cell.boatCurrentHostingCell(with: cellData)
+//            }
+//           
+//        case 3:
+//            let cellData = upcomingReservationData[indexPath.item]
+//            cell.upcomingHostingCell(with: cellData)
+//        case 4:
+//            let cellData = cancelBookingData[indexPath.item]
+//            cell.cancelledBookingCell(with: cellData)
+//        default:
+//            break
+//        }
+//        return cell
+//    }
 }
 
 extension ListingDashboard: UICollectionViewDelegateFlowLayout{

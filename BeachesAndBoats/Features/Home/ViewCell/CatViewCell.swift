@@ -46,10 +46,12 @@ class CatViewCell: BaseXib {
     
     func setup(){
         image.contentMode = .scaleAspectFit
-        image.tintColor = .beachBlue
+        image.tintColor = .blue
         
         title.text = model.title
         title.font.withSize(12)
+        title.setContentHuggingPriority(.required, for: .horizontal)
+        title.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         if !hasImage{
             image.isHidden = true

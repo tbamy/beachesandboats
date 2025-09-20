@@ -146,7 +146,10 @@ class BoatDetailsView: BaseViewControllerPlain {
         cruiseLengthPickerItems = (1...10).map { PickerItem(name: "\($0) hours", value: "\($0)") }
         
         numberOfPeopleLabel.items = numberOfPeoplePickerItems
+        numberOfPeopleLabel.pickerTitle = "Select number of people"
         cruiseLengthLabel.items = cruiseLengthPickerItems
+        cruiseLengthLabel.pickerTitle = "Select cruise length"
+        myDestinationDropdown.pickerTitle = "Select a destination"
                 
         travelDestinationOption.isChecked = true
         updateTravel()

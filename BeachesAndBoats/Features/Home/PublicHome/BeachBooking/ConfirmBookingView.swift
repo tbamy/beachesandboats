@@ -193,9 +193,9 @@ class ConfirmBookingView: BaseViewControllerPlain {
         if let price = thePrice {
             let actualPrice = price * Float(units ?? 1)
             //            print("Actual Price: \(actualPrice)")
-            
-            checkinTimeLabel.text = "\(checkInTime?.convertTo12HourFormat() ?? "")"
-//            checkoutTimeLabel.text = "\(checkOutTimeFrom?.convertTo12HourFormat() ?? "") - \(checkOutTimeTo?.convertTo12HourFormat() ?? "")"
+//            
+//            checkinTimeLabel.text = "\(checkInTime?.convertTo12HourFormat() ?? "")"
+            checkoutTimeLabel.text = "\(checkInTime?.convertTo12HourFormat() ?? "") - \(checkOutTime?.convertTo12HourFormat() ?? "")"
             guestLabel.text = "\(numberOfGuests ?? 0) Guest(s)"
             costLabel.text = isDayBooking ? "₦ \(actualPrice.toAmount() ?? "1") X 1 Day Booking" : "₦\(actualPrice.toAmount() ?? "1") x \(nights) Night(s))"
             let totalCost = (actualPrice) * Float(nights)
@@ -334,7 +334,7 @@ class ConfirmBookingView: BaseViewControllerPlain {
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
             let selectedRow = picker.selectedRow(inComponent: 0)
             self.numberOfGuests = selectedRow + 1
-            self.guestLabel.text = "\(self.numberOfGuests ?? 1) Guests"
+            self.guestLabel.text = "\(self.numberOfGuests ?? 1) Guest(s)"
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -357,7 +357,7 @@ extension ConfirmBookingView: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(row + 1) Guests"
+        return "\(row + 1) Guest(s)"
     }
 }
 

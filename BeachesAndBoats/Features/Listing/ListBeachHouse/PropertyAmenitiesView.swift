@@ -38,6 +38,8 @@ class PropertyAmenitiesView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        loadSavedData()
+        collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
     }
@@ -124,4 +126,19 @@ extension PropertyAmenitiesView: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     
+}
+
+extension PropertyAmenitiesView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Load previously selected amenities
+        selectedItems = savedListing.amenities ?? []
+        nextBtn.isEnabled = !selectedItems.isEmpty
+        
+        // Reload collection view to show selected states
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
 }

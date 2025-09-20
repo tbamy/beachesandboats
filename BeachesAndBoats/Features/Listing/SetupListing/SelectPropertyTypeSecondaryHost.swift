@@ -33,10 +33,12 @@ class SelectPropertyTypeSecondaryHost: BaseViewControllerPlain {
         switch selectedItem.value {
         case "1":
             print("Beach only")
-            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 0, type: .secondaryHost)
+//            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 0, type: .secondaryHost)
+            coordinator?.gotoSelectHouseTypeView(type: .secondaryHost)
         case "2":
             print("Boat only")
-            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 1, type: .secondaryHost)
+            coordinator?.gotoBoatHouseTypeView()
+//            coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 1, type: .secondaryHost)
         case "3":
             print("Beach and Boat")
             coordinator?.gotoSelectPropertyTypePrimaryHost(tag: 2, type: .secondaryHost)

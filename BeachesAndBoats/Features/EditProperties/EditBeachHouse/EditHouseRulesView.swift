@@ -11,7 +11,7 @@ class EditHouseRulesView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var nextBtn: PrimaryButton!
+//    @IBOutlet weak var nextBtn: PrimaryButton!
     
     var property: BeachHouseListing?
     var beachData: BeachDatas?
@@ -41,12 +41,17 @@ class EditHouseRulesView: BaseViewControllerPlain {
         selectedItems = createBeachListing?.houseRules ?? []
         collectionView.reloadData()
         
-        nextBtn.isEnabled = !selectedItems.isEmpty
+//        nextBtn.isEnabled = !selectedItems.isEmpty
     }
 
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
-        if let beachData = beachData{
+        guard !selectedItems.isEmpty else {
+            Toast.show(message: "Please select at least one rule")
+            return
+        }
+        
+        if let beachData = beachData {
             if var createBeachListing = createBeachListing{
                 createBeachListing.houseRules = selectedItems
                 print(createBeachListing)
@@ -97,7 +102,7 @@ extension EditHouseRulesView: UICollectionViewDelegate, UICollectionViewDataSour
             selectedItems.removeAll { $0 == itemId }
         }
         
-        nextBtn.isEnabled = !selectedItems.isEmpty
+//        nextBtn.isEnabled = !selectedItems.isEmpty
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

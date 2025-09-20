@@ -39,6 +39,8 @@ class AboutYouLanguageView: BaseViewControllerPlain {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        loadSavedData()
+        collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
     }
@@ -125,4 +127,19 @@ extension AboutYouLanguageView: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     
+}
+
+extension AboutYouLanguageView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Load previously selected languages
+        selectedItems = savedListing.languages ?? []
+        nextBtn.isEnabled = !selectedItems.isEmpty
+        
+        // Reload collection view to show selected states
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
 }

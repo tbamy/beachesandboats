@@ -200,7 +200,11 @@ class EditRoomPricePerDayView: BaseViewControllerPlain {
             .images?
             .compactMap { $0.url } ?? []
         
-        coordinator?.gotoEditUploadImageView(beachData: beachData, request: createBeachListing, currentImages: roomImages, id: id)
+        let roomId = details?.rooms?
+            .first(where: { $0.name == room })?
+            .id
+        
+        coordinator?.gotoEditUploadImageView(beachData: beachData, request: createBeachListing, currentImages: roomImages, id: id, roomId: roomId)
 }
     
     

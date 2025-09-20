@@ -8,6 +8,10 @@
 import Foundation
 
 class ListingServiceImplementation: Provider<ListingTarget>, ListingService{
+    func deleteImages(request: DeleteImagesRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
+        provider.request(.deleteImages(request: request)){ completion( self.handleResult(result: $0))}
+    }
+    
     func deleteBeach(id: String, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         provider.request(.deleteBeach(id: id)){ completion( self.handleResult(result: $0))}
     }

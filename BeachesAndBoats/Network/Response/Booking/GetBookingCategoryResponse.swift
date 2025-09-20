@@ -23,9 +23,9 @@ struct PropertyCategory: Codable {
     let description: String?
     let image: String?
     let subCategories: [SubCategory]?
-    let listings: [Listing]?
-    let boatBookings: [BoatBooking]?
-    let beachHouseBookings: [BeachHouseBooking]?
+    var listings: [Listing]?
+    var boatBookings: [BoatBooking]?
+    var beachHouseBookings: [BeachHouseBooking]?
     
 }
 

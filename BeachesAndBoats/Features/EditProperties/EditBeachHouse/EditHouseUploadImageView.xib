@@ -24,7 +24,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="uzl-qj-NPh">
                     <rect key="frame" x="308.66666666666669" y="894" width="64.333333333333314" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8b-y8-IJz" customClass="PlainOutlineButton" customModule="BeachesAndBoats" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8b-y8-IJz" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="64.333333333333329" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Chj-Ew-LSg"/>

@@ -43,6 +43,7 @@ class AboutYouDescriptionView: BaseViewControllerPlain {
             
             nextBtn.isEnabled = updatedText.count >= 5
         }
+        loadSavedData()
     }
     
     func validate() -> Bool{
@@ -75,4 +76,16 @@ class AboutYouDescriptionView: BaseViewControllerPlain {
     }
 
 
+}
+
+extension AboutYouDescriptionView {
+    func loadSavedData() {
+        guard let savedListing = AppStorage.beachListing else { return }
+        
+        // Populate description field
+        if ((savedListing.aboutOwner?.isEmpty) == nil) {
+            descriptionLabel.text = savedListing.aboutOwner ?? ""
+            nextBtn.isEnabled = savedListing.aboutOwner?.count ?? 0 >= 5
+        }
+    }
 }

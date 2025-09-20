@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectorModal" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="Ru7-fu-hYv" id="B5i-Jz-rZO"/>
+                <outlet property="collectionViewHeightConstraint" destination="Zq6-f6-32z" id="UrW-qY-NEw"/>
                 <outlet property="title" destination="ck2-je-CNo" id="AbW-pl-FLo"/>
             </connections>
         </placeholder>
@@ -41,7 +42,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-je-CNo" customClass="SemiLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="25" y="44" width="325" height="0.0"/>
+                            <rect key="frame" x="25" y="44" width="325" height="179"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                             <color key="textColor" name="Black"/>
                             <nil key="highlightedColor"/>
@@ -52,18 +53,21 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0Y-up-M7Q">
-                            <rect key="frame" x="0.0" y="55" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="234" width="375" height="1"/>
                             <color key="backgroundColor" name="Background"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="d69-aU-nTT"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7EG-2I-OUa">
-                            <rect key="frame" x="25" y="72" width="325" height="579"/>
+                            <rect key="frame" x="25" y="251" width="325" height="400"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ru7-fu-hYv">
-                                    <rect key="frame" x="0.0" y="0.0" width="325" height="579"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="325" height="400"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="400" id="Zq6-f6-32z"/>
+                                    </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="81A-y2-2so">
                                         <size key="itemSize" width="128" height="128"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -100,7 +104,7 @@
                 <constraint firstItem="Yz9-TG-4xi" firstAttribute="top" secondItem="yXN-92-7HO" secondAttribute="top" id="pTm-df-sbX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="139.69465648854961" y="32.74647887323944"/>
+            <point key="canvasLocation" x="2" y="-69"/>
         </view>
     </objects>
     <resources>
