@@ -26,8 +26,8 @@ class EarningsView: BaseViewControllerPlain {
     var coordinator: HostingServiceEarningCoordinator?
     
     var arrayOfMonths: [String] = ["All", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    var topEarningBookingData: [TopEarningResponse] = []
-    var getSelectedMonth: String = "Jan"
+    var topEarningBookingData: [TopEarner] = []
+    var getSelectedMonth: String = ""
     var currentYear: String = "2025"
     
     let vm = EarningsVM()
@@ -80,7 +80,7 @@ class EarningsView: BaseViewControllerPlain {
     func makeRequest() {
         
         // Automatically select "Jan" on view load
-        if let janIndex = arrayOfMonths.firstIndex(of: "Jan") {
+        if let janIndex = arrayOfMonths.firstIndex(of: "All") {
             selectedIndex = IndexPath(item: janIndex, section: 0)
             monthCollectionView.reloadData()  // Refresh collection view to highlight "Jan"
             
@@ -159,14 +159,43 @@ extension EarningsView {
             LoadingModal.dismiss()
             switch output {
             case .topEarningsSuccess(let response):
-                self?.topEarningBookingData = [response]
-                if let topEarner = response.data?.topEarners.values.first {
-                    let earningsText = "\(topEarner.totalEarnings ?? 0)"
-                    
-                    DispatchQueue.main.async {
-                        self?.totalEarning.text = "₦" + earningsText
+                // Extract top earners into the array
+                self?.topEarningBookingData = response.data?.topEarners?.values.map { $0 } ?? []
+                
+                // Calculate total earnings for display
+//                if let totalEarnings = response.data?.topEarners?.first?.value.totalEarnings {
+//                    DispatchQueue.main.async {
+//                        self?.totalEarning.text = "₦\(GeneralFormatter.decimalToString(totalEarnings))"
+//                    }
+//                } else {
+//                    DispatchQueue.main.async {
+//                        self?.totalEarning.text = "₦0"
+//                    }
+//                }
+                let selectedYear = self?.yearBtn.title(for: .normal) ?? self?.currentYear ?? ""
+                let selectedMonth = self?.getSelectedMonth == "All" ? nil : self?.getSelectedMonth
+                var totalEarnings: Decimal = 0
+                
+                if let userEarnings = response.data?.userEarnings, let yearData = userEarnings[selectedYear], !yearData.isEmpty {
+                    if let month = selectedMonth, let monthEarnings = yearData[month] {
+                        totalEarnings = monthEarnings
+                    } else {
+                        totalEarnings = yearData.values.reduce(0, +)
                     }
+                } else if let topEarners = response.data?.topEarners {
+                    totalEarnings = topEarners.values.compactMap { $0.totalEarnings }.reduce(0, +)
                 }
+                
+                DispatchQueue.main.async {
+                    self?.totalEarning.text = "₦\(GeneralFormatter.decimalToString(totalEarnings))"
+                }
+                
+                
+                // Reload table view
+                DispatchQueue.main.async {
+                    self?.topEarningTableView.reloadData()
+                }
+                
             case .topEarningsFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
@@ -177,30 +206,76 @@ extension EarningsView {
 // MARK: - Table Delegate
 extension EarningsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if topEarningBookingData.isEmpty {
             noInfoLabel.isHidden = false
             noInfoLabel.text = "No Information"
             topEarningTableView.isHidden = true
-            return topEarningBookingData.count
+            return 0
         } else {
             noInfoLabel.isHidden = true
             topEarningTableView.isHidden = false
             return topEarningBookingData.count
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EarningDistributionTableCell", for: indexPath) as! EarningDistributionTableCell
-        if topEarningBookingData.isEmpty {
-            cell.setup(with: nil)
-        } else {
-            let cellAt = topEarningBookingData[indexPath.item]
-            cell.setup(with: cellAt)
-        }
+        let topEarner = topEarningBookingData[indexPath.row]
+        cell.setup(with: topEarner)
         return cell
     }
+
+    // Set custom row height for cells
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75 // Adjust this value based on your cell's content
+    }
+
+    // Add spacing between cells using a transparent footer
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20 // Adjust this value to control spacing between cells
+    }
+
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView()
+//        footerView.backgroundColor = .clear
+//        return footerView
+//    }
 }
+
+
+//extension EarningsView: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        
+//        if topEarningBookingData.isEmpty {
+//            noInfoLabel.isHidden = false
+//            noInfoLabel.text = "No Information"
+//            topEarningTableView.isHidden = true
+//            return 0
+//        } else {
+//            noInfoLabel.isHidden = true
+//            topEarningTableView.isHidden = false
+//            return topEarningBookingData.count
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "EarningDistributionTableCell", for: indexPath) as! EarningDistributionTableCell
+//        let topEarner = topEarningBookingData[indexPath.row]
+//        
+//        // Create a TopEarningResponse to pass to the cell
+//        let response = TopEarningResponse(
+//            status: true,
+//            message: "Success!",
+//            data: EarningsData(
+//                userEarnings: nil,
+//                topEarners: [topEarner.beachHouse?.id ?? "": topEarner]
+//            ),
+//            errors: nil
+//        )
+//        cell.setup(with: response)
+//        return cell
+//    }
+//}
 
 // MARK: - Collection Delegate
 extension EarningsView: UICollectionViewDelegate, UICollectionViewDataSource {

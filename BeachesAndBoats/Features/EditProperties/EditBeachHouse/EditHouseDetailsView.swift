@@ -57,7 +57,7 @@ class EditHouseDetailsView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id else { return }
         
-        if let beachData = beachData{
+//        if let beachData = beachData{
             if var createBeachListing = createBeachListing{
                 createBeachListing.noOfRooms = noOfRooms.count
                 createBeachListing.noOfGuests = noOfGuests.count
@@ -76,7 +76,7 @@ class EditHouseDetailsView: BaseViewControllerPlain {
                 LoadingModal.show(title: "Updating Record...")
                 vm.editBeach(createBeachListing, id: id)
             }
-        }
+//        }
     }
     
     func bindNetwork(){

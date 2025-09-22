@@ -40,7 +40,7 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="imgWidth">
                             <integer key="value" value="40"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Start typing to search..."/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolder" value="Search by name or location"/>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A04-hf-wtZ">

@@ -80,50 +80,35 @@ class DJUploadInstrumentsView: BaseViewControllerPlain {
     }
 
     
+
     @IBAction func nextTapped(_ sender: Any) {
-        djInstruments.removeAll()
-        
         if images.count < 5 {
             Toast.show(message: "Please upload at least 5 images")
             return
         }
         
-        for image in images {
-            if let imageData = image.pngData() {
-                djInstruments.append(imageData)
-            }
-        }
-        
-        let images = createServiceListing?.images ?? []
-        if var createServiceListing = createServiceListing{
-            createServiceListing.images = images + djInstruments
+        let existingImages = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing {
+            createServiceListing.images = existingImages + djInstruments
             
             print(createServiceListing)
             
             LoadingModal.show(title: "Hold on while we list your service")
             vm.createService(createServiceListing)
         }
-
     }
-    
+
     @IBAction func saveAndExit(_ sender: Any) {
-        djInstruments.removeAll()
         
-        for image in images {
-            if let imageData = image.pngData() {
-                djInstruments.append(imageData)
-            }
-        }
-        
-        let images = createServiceListing?.images ?? []
-        if var createServiceListing = createServiceListing{
-            createServiceListing.images = images + djInstruments
+        let existingImages = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing {
+            createServiceListing.images = existingImages + djInstruments
             
             AppStorage.serviceListing = createServiceListing
             coordinator?.backToDashboard()
         }
-    
     }
+
             
     func deleteImage(image: UIImage) {
         if let index = images.firstIndex(where: { $0 == image }) {
@@ -183,27 +168,17 @@ extension DJUploadInstrumentsView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension DJUploadInstrumentsView: UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
-                if let image = object as? UIImage {
-                    DispatchQueue.main.async {
-                        self?.images.append(image)
-                        self?.collectionView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
+extension DJUploadInstrumentsView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
         var config = PHPickerConfiguration()
-        config.filter = .images  // Only images
-        config.selectionLimit = 0  // 0 means no limit (allows multiple selections)
+        config.filter = .images
+        config.selectionLimit = 5 - images.count // Limit to remaining allowed images
+        
+        if config.selectionLimit <= 0 {
+            Toast.show(message: "You can only have a maximum of 5 images")
+            return
+        }
         
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
@@ -222,3 +197,35 @@ extension DJUploadInstrumentsView: UIImagePickerControllerDelegate, UINavigation
     }
 }
 
+extension DJUploadInstrumentsView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        var newImages: [UIImage] = []
+        let group = DispatchGroup()
+        
+        for result in results {
+            group.enter()
+            result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
+                if let image = object as? UIImage {
+                    newImages.append(image)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            let (validated, hasInvalid) = ImageValidator.validateImages(newImages, allowCompression: true)
+
+            if hasInvalid {
+                Toast.show(message: "Some images exceed the 2MB limit and were not added")
+            }
+
+            if !validated.isEmpty {
+                self.images.append(contentsOf: validated.map { $0.image })   // for UI
+                self.djInstruments.append(contentsOf: validated.map { $0.data }) // for backend
+                self.collectionView.reloadData()
+            }
+        }
+    }
+}

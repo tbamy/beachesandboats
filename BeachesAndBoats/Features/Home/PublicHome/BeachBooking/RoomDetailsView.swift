@@ -181,7 +181,7 @@ class RoomDetailsView: BaseViewControllerPlain {
         let itemsPerRow: CGFloat = 4
         let totalRows = Int(ceil(Double(amenities.count) / Double(itemsPerRow)))
         let itemHeight: CGFloat = 20 // Adjust based on icon + text height
-        let height = CGFloat(totalRows) * itemHeight + CGFloat(max(0, totalRows - 1)) * (layout?.minimumLineSpacing ?? 15)
+        let height = CGFloat(totalRows) * itemHeight + CGFloat(max(0, totalRows - 1)) * (layout?.minimumLineSpacing ?? 15) + 10
         print(height)
         
         facilitiesHeightConstraint.constant = height

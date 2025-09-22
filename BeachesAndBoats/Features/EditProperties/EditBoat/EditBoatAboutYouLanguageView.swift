@@ -73,7 +73,7 @@ class EditBoatAboutYouLanguageView: BaseViewControllerPlain {
                 
                 print(createBoatListing)
                 
-                coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatData, request: createBoatListing, id: id)
+                coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatData, request: createBoatListing, id: id, boatType: boatType)
             }
         }
     }

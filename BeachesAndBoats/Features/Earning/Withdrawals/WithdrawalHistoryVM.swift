@@ -51,8 +51,8 @@ class WithdrawalHistoryVM {
         output.onNext(.withdrawalHistoryFailure(error))
     }
     
-    func useMockData() {
-        output.onNext(.withdrawalHistorySuccess(WithdrawalResponse.mockData))
-    }
+//    func useMockData() {
+//        output.onNext(.withdrawalHistorySuccess(WithdrawalResponse.mockData))
+//    }
 }
 

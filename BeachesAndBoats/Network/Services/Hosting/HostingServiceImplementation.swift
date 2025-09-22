@@ -48,7 +48,7 @@ class HostingServiceImplementation: Provider<HostingTarget>, HostingService {
         provider.request(.getBanks){ completion( self.handleResult(result: $0)) }
     }
     
-    func makeWithdrawal(request: CreateWithdrawalRequest, completion: @escaping (Result<CreateWithdrawalResponse, ErrorResponse>) -> Void) {
+    func makeWithdrawal(request: CreateWithdrawalRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         provider.request(.MakeWithdrawal(request)) {completion(self.handleResult(result: $0))}
     }
     

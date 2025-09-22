@@ -179,47 +179,47 @@ class EditBoatOptionsView: BaseViewControllerPlain {
         print(boatDataR)
         print(request)
         guard let id = id else { return }
-        coordinator?.gotoEditBoatTypeView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatTypeView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func boatNameEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatNameView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatNameView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func locationEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatAddressView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatAddressView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func availabilityEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatAvailableDatesView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatAvailableDatesView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func amenitiesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatFacilitiesView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatFacilitiesView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func aboutListerEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func houseRulesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatRulesView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatRulesView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func roomsAndPricingEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatTravelLocationView(boatData: boatDataR, request: request, id: id)
+        coordinator?.gotoEditBoatTravelLocationView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func boatImagesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatUploadImageView(boatData: boatDataR, request: request, id: id, details: boatDetails)
+        coordinator?.gotoEditBoatUploadImageView(boatData: boatDataR, request: request, id: id, details: boatDetails, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func deletePropertyBtnTapped(){

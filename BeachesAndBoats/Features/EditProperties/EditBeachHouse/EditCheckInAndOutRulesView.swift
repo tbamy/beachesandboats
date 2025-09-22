@@ -11,7 +11,7 @@ import RxSwift
 class EditCheckInAndOutRulesView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
     
-    @IBOutlet weak var nextBtn: PrimaryButton!
+//    @IBOutlet weak var nextBtn: PrimaryButton!
     @IBOutlet weak var overnightCheckIn: TimePicker!
     @IBOutlet weak var overnightCheckOut: TimePicker!
     @IBOutlet weak var dayCheckIn: TimePicker!
@@ -33,11 +33,33 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
         setup()
     }
 
-    func setup(){
-        overnightCheckIn.selectedTime = createBeachListing?.overnightCheckIn?.fromBackendTime()
-        overnightCheckOut.selectedTime = createBeachListing?.overnightCheckOut?.fromBackendTime()
-        dayCheckIn.selectedTime = createBeachListing?.dayCheckIn?.fromBackendTime()
-        dayCheckOut.selectedTime = createBeachListing?.dayCheckOut?.fromBackendTime()
+    func setup() {
+        guard let savedListing = createBeachListing else { return }
+        
+        // Populate check-in and check-out times
+        if let overnightCheckInTime = savedListing.overnightCheckIn, !overnightCheckInTime.isEmpty {
+            print(overnightCheckInTime)
+            overnightCheckIn.text = overnightCheckInTime
+            overnightCheckIn.selectedTime = overnightCheckInTime.fromBackendTime()
+        }
+        
+        if let overnightCheckOutTime = savedListing.overnightCheckOut, !overnightCheckOutTime.isEmpty {
+            print(overnightCheckOutTime)
+            overnightCheckOut.text = overnightCheckOutTime
+            overnightCheckOut.selectedTime = overnightCheckOutTime.fromBackendTime()
+        }
+        
+        if let dayCheckInTime = savedListing.dayCheckIn, !dayCheckInTime.isEmpty {
+            print(dayCheckInTime)
+            dayCheckIn.text = dayCheckInTime
+            dayCheckIn.selectedTime = dayCheckInTime.fromBackendTime()
+        }
+        
+        if let dayCheckOutTime = savedListing.dayCheckOut, !dayCheckOutTime.isEmpty {
+            print(dayCheckOutTime)
+            dayCheckOut.text = dayCheckOutTime
+            dayCheckOut.selectedTime = dayCheckOutTime.fromBackendTime()
+        }
     }
 
     @IBAction func nextTapped(_ sender: Any) {
@@ -47,6 +69,8 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
             let dayCheckInTime = dayCheckIn.selectedTime,
             let dayCheckOutTime = dayCheckOut.selectedTime
         else {
+            print("Missing selectedTime: overnightCheckIn=\(overnightCheckIn.selectedTime), overnightCheckOut=\(overnightCheckOut.selectedTime), dayCheckIn=\(dayCheckIn.selectedTime), dayCheckOut=\(dayCheckOut.selectedTime)")
+            
             MiddleModal.show(
                 title: "Incomplete Times",
                 subtitle: "Please make sure to select all check-in and check-out time slots before proceeding.",
@@ -93,7 +117,6 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
             
             LoadingModal.show(title: "Updating Record...")
             vm.editBeach(createBeachListing, id: id)
-
         }
     }
 

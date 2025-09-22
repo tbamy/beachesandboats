@@ -198,6 +198,7 @@
 		A65628392CB5769A00947BA5 /* UploadImageField.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65628372CB5769A00947BA5 /* UploadImageField.xib */; };
 		A656283C2CB57C8300947BA5 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A656283A2CB57C8300947BA5 /* ImageView.swift */; };
 		A656283D2CB57C8300947BA5 /* ImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A656283B2CB57C8300947BA5 /* ImageView.xib */; };
+		A6597B0E2E808E9400F8DA04 /* ImageValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6597B0D2E808E9400F8DA04 /* ImageValidator.swift */; };
 		A65C50E82CA663E60027E5F1 /* InitialListingPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50E62CA663E60027E5F1 /* InitialListingPromptView.swift */; };
 		A65C50E92CA663E60027E5F1 /* InitialListingPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A65C50E72CA663E60027E5F1 /* InitialListingPromptView.xib */; };
 		A65C50EC2CA6640E0027E5F1 /* WhatAreYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65C50EA2CA6640E0027E5F1 /* WhatAreYouView.swift */; };
@@ -275,6 +276,9 @@
 		A6617A542CAF559600514576 /* SavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6617A522CAF559600514576 /* SavedView.xib */; };
 		A664BBDC2E7E9401000B02E1 /* DeleteImageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664BBDB2E7E93FB000B02E1 /* DeleteImageVM.swift */; };
 		A664BBDE2E7EB5D9000B02E1 /* DeleteImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664BBDD2E7EB5D2000B02E1 /* DeleteImagesRequest.swift */; };
+		A664BBE32E7F92C7000B02E1 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = A664BBE22E7F92C7000B02E1 /* RxBlocking */; };
+		A664BBE72E7F92C7000B02E1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A664BBE62E7F92C7000B02E1 /* RxCocoa */; };
+		A664BBEB2E7F92C7000B02E1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = A664BBEA2E7F92C7000B02E1 /* RxRelay */; };
 		A669F7A12D22E90800230E0A /* HostingBookingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A02D22E90800230E0A /* HostingBookingResponse.swift */; };
 		A669F7A32D22F2B500230E0A /* ServiceHostingHomeViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A22D22F2B500230E0A /* ServiceHostingHomeViewVM.swift */; };
 		A669F7A52D22F2FA00230E0A /* HostingTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669F7A42D22F2FA00230E0A /* HostingTarget.swift */; };
@@ -492,7 +496,6 @@
 		A6C20FC22C84FA950045C670 /* BaseTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FC12C84FA950045C670 /* BaseTarget.swift */; };
 		A6C20FC42C84FCFB0045C670 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FC32C84FCFB0045C670 /* UserSession.swift */; };
 		A6C20FC82C85045F0045C670 /* MiddleModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FC62C85045F0045C670 /* MiddleModal.swift */; };
-		A6C20FC92C85045F0045C670 /* MiddleModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C20FC72C85045F0045C670 /* MiddleModal.xib */; };
 		A6C20FCB2C85053C0045C670 /* MiddleModalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FCA2C85053C0045C670 /* MiddleModalModel.swift */; };
 		A6C20FCD2C859B680045C670 /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FCC2C859B680045C670 /* OnboardingService.swift */; };
 		A6C20FCF2C859B940045C670 /* OnboardingServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C20FCE2C859B940045C670 /* OnboardingServiceImplementation.swift */; };
@@ -886,6 +889,7 @@
 		A65628372CB5769A00947BA5 /* UploadImageField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadImageField.xib; sourceTree = "<group>"; };
 		A656283A2CB57C8300947BA5 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		A656283B2CB57C8300947BA5 /* ImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageView.xib; sourceTree = "<group>"; };
+		A6597B0D2E808E9400F8DA04 /* ImageValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageValidator.swift; sourceTree = "<group>"; };
 		A65C50E62CA663E60027E5F1 /* InitialListingPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialListingPromptView.swift; sourceTree = "<group>"; };
 		A65C50E72CA663E60027E5F1 /* InitialListingPromptView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialListingPromptView.xib; sourceTree = "<group>"; };
 		A65C50EA2CA6640E0027E5F1 /* WhatAreYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatAreYouView.swift; sourceTree = "<group>"; };
@@ -1173,7 +1177,6 @@
 		A6C20FC12C84FA950045C670 /* BaseTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTarget.swift; sourceTree = "<group>"; };
 		A6C20FC32C84FCFB0045C670 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		A6C20FC62C85045F0045C670 /* MiddleModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleModal.swift; sourceTree = "<group>"; };
-		A6C20FC72C85045F0045C670 /* MiddleModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MiddleModal.xib; sourceTree = "<group>"; };
 		A6C20FCA2C85053C0045C670 /* MiddleModalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleModalModel.swift; sourceTree = "<group>"; };
 		A6C20FCC2C859B680045C670 /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
 		A6C20FCE2C859B940045C670 /* OnboardingServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingServiceImplementation.swift; sourceTree = "<group>"; };
@@ -1381,6 +1384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A664BBE72E7F92C7000B02E1 /* RxCocoa in Frameworks */,
 				A67FA3852E28E6AB00B6F28A /* SDWebImageMapKit in Frameworks */,
 				A61627702C7DBC2700F6B452 /* Moya in Frameworks */,
 				A616276E2C7DBC2700F6B452 /* CombineMoya in Frameworks */,
@@ -1389,11 +1393,13 @@
 				A6FA71672D6CB35B00BB5E44 /* IQKeyboardManagerSwift in Frameworks */,
 				A67FA3882E28E71800B6F28A /* SDWebImageSVGCoder in Frameworks */,
 				A6B415B82D0E98E900717CE9 /* DeviceKit in Frameworks */,
+				A664BBEB2E7F92C7000B02E1 /* RxRelay in Frameworks */,
 				A675D9F92D2D1084003E297B /* PaystackCore in Frameworks */,
 				A61627742C7DBC2700F6B452 /* RxMoya in Frameworks */,
 				A675D9FD2D2D1084003E297B /* PaystackUI in Frameworks */,
 				A67FA3832E28E6AB00B6F28A /* SDWebImage in Frameworks */,
 				A61627722C7DBC2700F6B452 /* ReactiveMoya in Frameworks */,
+				A664BBE32E7F92C7000B02E1 /* RxBlocking in Frameworks */,
 				A6DF415E2DF0D14100319A78 /* IQKeyboardToolbar in Frameworks */,
 				605D77A0EBA7572A1D685DEC /* Pods_BeachesAndBoats.framework in Frameworks */,
 			);
@@ -1732,6 +1738,7 @@
 		A63357622BF15208008AF034 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A6597B0D2E808E9400F8DA04 /* ImageValidator.swift */,
 				A643E76E2E77745300F93E8F /* IntelligentFlowLayout.swift */,
 				A68F3DCB2E14983700B6B1C7 /* CustomView.swift */,
 				A66F13682D7244E600D4D533 /* PresentationModal */,
@@ -1825,10 +1832,6 @@
 				A675D9DE2D202B98003E297B /* BookingRoomCell.xib */,
 				A675D9E52D26A2A3003E297B /* CatViewCell.swift */,
 				A675D9E62D26A2A3003E297B /* CatViewCell.xib */,
-				A68A6EBE2D256823000A67E1 /* EarningDistributionTableCell.swift */,
-				A68A6EBF2D256823000A67E1 /* EarningDistributionTableCell.xib */,
-				A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */,
-				A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */,
 				A63D48D02D4F9614002C48F7 /* RecommendationsViewCell.swift */,
 				A63D48D12D4F9614002C48F7 /* RecommendationsViewCell.xib */,
 				A642F95B2D57B0060089F593 /* CommentsViewCell.swift */,
@@ -2455,6 +2458,10 @@
 				A68A6EB42D244635000A67E1 /* EarningsView.xib */,
 				A68A6EB82D245072000A67E1 /* monthCollectionViewCell.swift */,
 				A68A6EB92D245072000A67E1 /* monthCollectionViewCell.xib */,
+				A68A6EBE2D256823000A67E1 /* EarningDistributionTableCell.swift */,
+				A68A6EBF2D256823000A67E1 /* EarningDistributionTableCell.xib */,
+				A68A6EDD2D26C755000A67E1 /* WithdrawHistoryViewCell.swift */,
+				A68A6EDE2D26C755000A67E1 /* WithdrawHistoryViewCell.xib */,
 			);
 			path = Earning;
 			sourceTree = "<group>";
@@ -2692,7 +2699,6 @@
 			children = (
 				A65E838C2D3B0E17009F2B89 /* UnfininshedListing */,
 				A6C20FC62C85045F0045C670 /* MiddleModal.swift */,
-				A6C20FC72C85045F0045C670 /* MiddleModal.xib */,
 				A6C20FCA2C85053C0045C670 /* MiddleModalModel.swift */,
 			);
 			path = MiddleModal;
@@ -2998,6 +3004,11 @@
 				A67FA3822E28E6AB00B6F28A /* SDWebImage */,
 				A67FA3842E28E6AB00B6F28A /* SDWebImageMapKit */,
 				A67FA3872E28E71800B6F28A /* SDWebImageSVGCoder */,
+				A664BBE22E7F92C7000B02E1 /* RxBlocking */,
+				A664BBE42E7F92C7000B02E1 /* RxBlocking-Dynamic */,
+				A664BBE62E7F92C7000B02E1 /* RxCocoa */,
+				A664BBE82E7F92C7000B02E1 /* RxCocoa-Dynamic */,
+				A664BBEA2E7F92C7000B02E1 /* RxRelay */,
 			);
 			productName = BeachesAndBoats;
 			productReference = A6015B0A2BEA223400545164 /* BeachesAndBoats.app */;
@@ -3036,6 +3047,7 @@
 				A6DF415C2DF0D14000319A78 /* XCRemoteSwiftPackageReference "IQKeyboardToolbar" */,
 				A67FA3812E28E6AB00B6F28A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				A67FA3862E28E71800B6F28A /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
+				A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = A6015B0B2BEA223400545164 /* Products */;
 			projectDirPath = "";
@@ -3120,7 +3132,6 @@
 				A65628162CB3C62300947BA5 /* ToggleSwitch.xib in Resources */,
 				A6BCA3CB2E736CCC00436BCE /* EditBoatNameView.xib in Resources */,
 				A6C1C4202CBBF5BC001CD27D /* ManageAccountView.xib in Resources */,
-				A6C20FC92C85045F0045C670 /* MiddleModal.xib in Resources */,
 				A6617A4C2CAF555700514576 /* MessagesView.xib in Resources */,
 				A6C210052C8B49650045C670 /* DateRangePage.xib in Resources */,
 				A675D9CC2D201DD0003E297B /* AllPhotosView.xib in Resources */,
@@ -3712,6 +3723,7 @@
 				A6C9D2532E31928C005D7F30 /* EditRoomPriceView.swift in Sources */,
 				A620A6672E15647600E832EA /* RatingModal.swift in Sources */,
 				A6757D862C987A49000D6302 /* BookingsCoordinator.swift in Sources */,
+				A6597B0E2E808E9400F8DA04 /* ImageValidator.swift in Sources */,
 				A6EF00EF2D28731400893C05 /* PaymentMethodView.swift in Sources */,
 				A6CA3D1B2CB9B780009307B2 /* BoatAboutYouDescriptionView.swift in Sources */,
 				A651257F2CBC293700AFA0F9 /* AddEmailAddressModal.swift in Sources */,
@@ -4021,6 +4033,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
 		A675D9F72D2D1084003E297B /* XCRemoteSwiftPackageReference "paystack-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/PaystackHQ/paystack-sdk-ios";
@@ -4099,6 +4119,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A616276C2C7DBC2700F6B452 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = RxMoya;
+		};
+		A664BBE22E7F92C7000B02E1 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		A664BBE42E7F92C7000B02E1 /* RxBlocking-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxBlocking-Dynamic";
+		};
+		A664BBE62E7F92C7000B02E1 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		A664BBE82E7F92C7000B02E1 /* RxCocoa-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxCocoa-Dynamic";
+		};
+		A664BBEA2E7F92C7000B02E1 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 		A675D9F82D2D1084003E297B /* PaystackCore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -86,6 +86,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         checkinDateLabel.placeholder = "Select Date"
         checkoutDateLabel.placeholder = "Select Date"
         dayBookingDateLabel.placeholder = "Select Date"
+        dayBookingDateLabel.isSingleDate = true
         
         switch beachDetails?.bookingType {
         case "ANY":
@@ -331,9 +332,11 @@ class BeachDetailsView: BaseViewControllerPlain {
             return
         }
         
-        guard let from_when = from_when, let to_when = to_when, from_when < to_when else {
-            MiddleModal.show(title: "Invalid Date", subtitle: "Checkin must be before checkout", type: .error, dismissable: true, dismissOnConfirm: true)
-            return
+        if !isDayBooking {
+            guard let from_when = from_when, let to_when = to_when, from_when < to_when else {
+                MiddleModal.show(title: "Invalid Date", subtitle: "Checkin must be before checkout", type: .error, dismissable: true, dismissOnConfirm: true)
+                return
+            }
         }
         
         switch beachDetails.bookingType {

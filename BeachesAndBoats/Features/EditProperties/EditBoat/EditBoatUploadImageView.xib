@@ -26,15 +26,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="uzl-qj-NPh">
-                    <rect key="frame" x="249.66666666666666" y="894" width="123.33333333333334" height="50"/>
+                    <rect key="frame" x="271" y="894" width="102" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKh-zW-Idt" customClass="PrimaryButton" customModule="BeachesAndBoats" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="123.33333333333333" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="102" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="KTr-KA-jAx"/>
                             </constraints>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Finish Listing"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Finish Edit"/>
                             <connections>
                                 <action selector="nextTapped:" destination="-1" eventType="touchUpInside" id="tWz-dM-F3l"/>
                             </connections>

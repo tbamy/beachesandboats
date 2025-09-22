@@ -8,12 +8,11 @@
 import UIKit
 import RxSwift
 
-class HostListingVC: BaseViewControllerPlain {
+class HostListingVC: BaseViewControllerPlain, UITextFieldDelegate {
     
-    @IBOutlet weak var searchField: SearchField!
+    @IBOutlet weak var searchField: InputField!
     @IBOutlet weak var beachHouseListingSegment: SegmentOptionView!
     @IBOutlet weak var boatListingSegment: SegmentOptionView!
-//    @IBOutlet weak var listingCollectionView: UICollectionView!
     @IBOutlet weak var listingTableView: UITableView!
     @IBOutlet weak var inProgressViewContainer: UIView!
     @IBOutlet weak var unfinishedListingName: UILabel!
@@ -29,9 +28,11 @@ class HostListingVC: BaseViewControllerPlain {
     var beachHouseListingData: [BeachHouseListing] = []
     var boatListingData: [BoatListing] = []
     
+    var filteredBeachHouseListingData: [BeachHouseListing] = []
+    var filteredBoatListingData: [BoatListing] = []
+    
     private var isShowingBeachHouses = true
-//    private var getUnfinishedResponse = String? = ""
-
+    private var searchTimer: Timer? // For debouncing
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,10 +47,39 @@ class HostListingVC: BaseViewControllerPlain {
         bind()
         setupRightNavigationBar()
         gestureRecognizers()
-//        isShowingBeachHouses = true
         beachHouseListingSegment.contentView.backgroundColor = .none
         boatListingSegment.contentView.backgroundColor = .none
         unfinishedListingStack.isHidden = true
+        
+        // Configure search field
+        searchField.placeHolder = "Search by name or location"
+        searchField.textField.clearButtonMode = .whileEditing
+        searchField.noSpecialCharacters = false // Allow special characters; adjust if needed
+        searchField.textField.delegate = self // Set delegate for text field
+        
+        // Initialize filtered data
+        filteredBeachHouseListingData = beachHouseListingData
+        filteredBoatListingData = boatListingData
+    }
+    
+    // MARK: - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Debounce search input (similar to RxCocoa's .debounce(.milliseconds(300)))
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] _ in
+            let query = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+            self?.filterListings(with: query)
+        }
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        // Handle clear button tap
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] _ in
+            self?.filterListings(with: "")
+        }
+        return true
     }
     
     func gestureRecognizers() {
@@ -67,7 +97,7 @@ class HostListingVC: BaseViewControllerPlain {
     }
     
     @objc func unfinishedStackTapped() {
-        if let unfinishedBeachListing = AppStorage.beachListing{
+        if let unfinishedBeachListing = AppStorage.beachListing {
             self.showUnfinishedListingModal(
                 listingName: unfinishedBeachListing.name ?? "Unnamed",
                 listingLocation: "\(unfinishedBeachListing.jettyLocation ?? ""), \(unfinishedBeachListing.locationName ?? "")",
@@ -82,7 +112,7 @@ class HostListingVC: BaseViewControllerPlain {
                     print("Cancel button tapped!")
                 }
             )
-        }else if let unfinishedBoatListing = AppStorage.boatListing{
+        } else if let unfinishedBoatListing = AppStorage.boatListing {
             self.showUnfinishedListingModal(
                 listingName: unfinishedBoatListing.name ?? "Unnamed",
                 listingLocation: "\(unfinishedBoatListing.jettyLocation ?? ""), \(unfinishedBoatListing.locationName ?? "")",
@@ -98,11 +128,10 @@ class HostListingVC: BaseViewControllerPlain {
                 }
             )
         }
-        
     }
 
     func showDeleteModal() {
-        if let unfinishedBeachListing = AppStorage.beachListing{
+        if let unfinishedBeachListing = AppStorage.beachListing {
             self.showUnfinishedListingModal(
                 listingName: unfinishedBeachListing.name ?? "Unnamed",
                 listingLocation: "\(unfinishedBeachListing.jettyLocation ?? ""), \(unfinishedBeachListing.locationName ?? "")",
@@ -117,7 +146,7 @@ class HostListingVC: BaseViewControllerPlain {
                     print("Cancel button tapped!")
                 }
             )
-        } else if let unfinishedBoatListing = AppStorage.boatListing{
+        } else if let unfinishedBoatListing = AppStorage.boatListing {
             self.showUnfinishedListingModal(
                 listingName: unfinishedBoatListing.name ?? "Unnamed",
                 listingLocation: "\(unfinishedBoatListing.jettyLocation ?? ""), \(unfinishedBoatListing.locationName ?? "")",
@@ -199,15 +228,11 @@ class HostListingVC: BaseViewControllerPlain {
         coordinator?.presentSortView()
     }
     
-    
     func tableSetup() {
         listingTableView.delegate = self
         listingTableView.dataSource = self
         listingTableView.register(UINib(nibName: "HostListingTableView", bundle: nil), forCellReuseIdentifier: "HostListingTableView")
         listingTableView.separatorStyle = .none
- 
-//        searchField.duration.isHidden = true
-        
     }
     
     private func updateTableHeight() {
@@ -215,10 +240,51 @@ class HostListingVC: BaseViewControllerPlain {
         let contentHeight = listingTableView.contentSize.height
         viewContainerHeightConstraint.constant = contentHeight + 350
         view.layoutIfNeeded()
+        
+        // Show empty state if no results
+        if (isShowingBeachHouses && filteredBeachHouseListingData.isEmpty) ||
+           (!isShowingBeachHouses && filteredBoatListingData.isEmpty) {
+            listingTableView.isHidden = true
+            // Optionally add a UILabel or UIView to show "No results found"
+        } else {
+            listingTableView.isHidden = false
+        }
+    }
+    
+    private func filterListings(with query: String) {
+        if query.isEmpty {
+            // Reset to full dataset if query is empty
+            filteredBeachHouseListingData = beachHouseListingData
+            filteredBoatListingData = boatListingData
+        } else {
+            // Filter beach houses based on name or location
+            filteredBeachHouseListingData = beachHouseListingData.filter { listing in
+                let nameMatch = listing.name?.lowercased().contains(query.lowercased()) ?? false
+                let locationMatch = listing.locations?.name?.lowercased().contains(query.lowercased()) ?? false
+                let jettyLocationMatch = listing.locations?.jettyLocation?.lowercased().contains(query.lowercased()) ?? false
+                return nameMatch || locationMatch || jettyLocationMatch
+            }
+            
+            // Filter boats based on name or location
+            filteredBoatListingData = boatListingData.filter { listing in
+                let nameMatch = listing.name?.lowercased().contains(query.lowercased()) ?? false
+                let locationMatch = listing.locations?.name?.lowercased().contains(query.lowercased()) ?? false
+                let jettyLocationMatch = listing.locations?.jettyLocation?.lowercased().contains(query.lowercased()) ?? false
+                return nameMatch || locationMatch || jettyLocationMatch
+            }
+        }
+
+        // Update segment titles with filtered counts
+        beachHouseListingSegment.title = "Beach House Listings (\(filteredBeachHouseListingData.count))"
+        boatListingSegment.title = "Boats Listings (\(filteredBoatListingData.count))"
+        
+        // Reload table view and update height
+        listingTableView.reloadData()
+        updateTableHeight()
     }
 }
 
-//MARK: - Binding
+// MARK: - Binding
 extension HostListingVC {
     func bind() {
         vm.transform(input: input)
@@ -228,12 +294,14 @@ extension HostListingVC {
             case .beachHouseListingSuccess(let response):
                 if let listings = response.data?.beachHouseListings {
                     self?.beachHouseListingData = listings
+                    self?.filteredBeachHouseListingData = listings // Update filtered data
                     self?.beachHouseListingSegment.title = "Beach House Listings (\(self?.beachHouseListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
                     self?.updateTableHeight()
                 }
                 if let boatListings = response.data?.boatListings {
                     self?.boatListingData = boatListings
+                    self?.filteredBoatListingData = boatListings // Update filtered data
                     self?.boatListingSegment.title = "Boats Listings (\(self?.boatListingData.count ?? 0))"
                     self?.listingTableView.reloadData()
                     self?.updateTableHeight()
@@ -246,45 +314,31 @@ extension HostListingVC {
     }
 }
 
-//MARK: - CollectionView Delegate
+// MARK: - TableView Delegate
 extension HostListingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isShowingBeachHouses ? beachHouseListingData.count : boatListingData.count
+        return isShowingBeachHouses ? filteredBeachHouseListingData.count : filteredBoatListingData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostListingTableView", for: indexPath) as! HostListingTableView
         if isShowingBeachHouses {
-            let cellAt = beachHouseListingData[indexPath.row]
+            let cellAt = filteredBeachHouseListingData[indexPath.row]
             cell.beachHouseListingCell(with: cellAt)
         } else {
-            let cellAt = boatListingData[indexPath.row]
+            let cellAt = filteredBoatListingData[indexPath.row]
             cell.boatListingCell(with: cellAt)
         }
         cell.selectionStyle = .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
-            // Get actual content height
-            tableView.layoutIfNeeded()
-            let contentHeight = tableView.contentSize.height
-            
-            // Add height of UIView (300) + margins (50)
-            let totalHeight = contentHeight + 350
-            
-            viewContainerHeightConstraint.constant = totalHeight
-            view.layoutIfNeeded()
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isShowingBeachHouses {
-            let cellAt = beachHouseListingData[indexPath.row]
+            let cellAt = filteredBeachHouseListingData[indexPath.row]
             coordinator?.gotoEditBeachHouseOptionsView(id: cellAt.id)
         } else {
-            let cellAt = boatListingData[indexPath.row]
+            let cellAt = filteredBoatListingData[indexPath.row]
             coordinator?.gotoEditBoatOptionsView(id: cellAt.id)
         }
     }

@@ -275,22 +275,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B509CDF9-3327-4810-A34C-64FCFFBBFFA8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditPropertyNameView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "setUp()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E260353A-8869-4E1B-AC9C-2F3019F58749"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -314,10 +298,10 @@
             filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditPropertyAvailableDatesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "nextTapped(_:)"
-            landmarkType = "7">
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -348,22 +332,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
-            landmarkName = "nextTapped(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D2CBC29A-7A82-40CE-9626-58DD43111BF6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditCheckInAndOutRulesView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
             landmarkName = "nextTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -497,15 +465,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "443E8FFB-95FD-4158-8BE8-7F0D9256DFDF"
+            uuid = "439CF89C-3252-4095-8B49-A82B7D819DE3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "saveAndExit(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -513,125 +481,125 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "65D7508A-5411-4D1F-9887-26898834521A"
+            uuid = "9519CD0B-CD11-461F-8C79-6191B1539C7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditCheckInAndOutRulesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "setup()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7E4F8AC9-7AFD-462A-824E-5012D23E1CFE"
+            uuid = "F450C525-54A8-4743-8C8F-659B8F6E065B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditCheckInAndOutRulesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "setup()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "503C8714-FC7C-485D-BF93-98B4C5558E54"
+            uuid = "0E9DC2F7-48AD-4D4E-B61D-086CC08A5BBE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditCheckInAndOutRulesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "setup()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "40A30758-BB96-41E1-AC02-DDB2E99E7AF7"
+            uuid = "08F7D116-F127-4387-98A7-B362BCCAFC09"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditCheckInAndOutRulesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "setup()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "124D5967-E744-424C-B407-46A66BFA9BCB"
+            uuid = "1586341D-8306-4FC4-8C34-8B53D76B9C75"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBoat/EditBoatFacilitiesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "nextTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EFA7C932-7168-49DF-8728-15E9BB08E6ED"
+            uuid = "C58E2CD1-35C0-48DA-B526-707BD815B6F8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBoat/EditBoatFacilitiesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "checkAndLoadSavedListing()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "EFA7C932-7168-49DF-8728-15E9BB08E6ED - 4caf61b460604f58"
+                  uuid = "C58E2CD1-35C0-48DA-B526-707BD815B6F8 - 93cd54a18c8872ab"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.EditHouseUploadImageView.saveAndExit(Any) -&gt; ()"
+                  symbolName = "BeachesAndBoats.EditBoatFacilitiesView.checkAndLoadSavedListing() -&gt; ()"
                   moduleName = "BeachesAndBoats.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/EditProperties/EditBoat/EditBoatFacilitiesView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131">
+                  startingLineNumber = "49"
+                  endingLineNumber = "49">
                </Location>
                <Location
-                  uuid = "EFA7C932-7168-49DF-8728-15E9BB08E6ED - 4caf61b460604f58"
+                  uuid = "C58E2CD1-35C0-48DA-B526-707BD815B6F8 - 93cd54a18c8872ab"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "BeachesAndBoats.EditHouseUploadImageView.saveAndExit(Any) -&gt; ()"
+                  symbolName = "BeachesAndBoats.EditBoatFacilitiesView.checkAndLoadSavedListing() -&gt; ()"
                   moduleName = "BeachesAndBoats.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+                  urlString = "file:///Applications/New%20Projects/BeachesAndBoats/BeachesAndBoats/Features/EditProperties/EditBoat/EditBoatFacilitiesView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131">
+                  startingLineNumber = "49"
+                  endingLineNumber = "49">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -639,112 +607,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F23E244C-4D8A-4FEE-8E95-10AC8342C327"
+            uuid = "5C8DC9CD-4184-4CF0-8986-7F55AC2CD11D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBoat/EditBoatFacilitiesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "filterSavedFacilities()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CD2DDF19-D671-4351-AB5D-56797B356F88"
+            uuid = "558F1872-FFC5-46EA-A4AF-ABC6BF2EBD34"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
+            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditPropertyAddressView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "saveAndExit(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "29A77CAA-E867-44FA-987B-9339B297DAAF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "saveAndExit(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A24D780C-070E-4C57-A69B-145EF1729D8A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "saveAndExit(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "488FC0D3-1D67-4AFB-BB27-341B7BEB3A60"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "saveAndExit(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "242F675F-6905-47F6-AB05-D20C8036059D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "saveAndExit(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F61DB88F-22BB-430F-9E8A-CE527CC10163"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditHouseUploadImageView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "saveAndExit(_:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "selectSavedBeachLocation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

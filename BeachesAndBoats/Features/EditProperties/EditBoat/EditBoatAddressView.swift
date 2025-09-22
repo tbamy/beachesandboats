@@ -34,7 +34,6 @@ class EditBoatAddressView: BaseViewControllerPlain {
         super.viewDidLoad()
         title = "Boats"
         
-        checkAndLoadSavedListing()
         bindNetwork()
         setup()
         
@@ -43,13 +42,9 @@ class EditBoatAddressView: BaseViewControllerPlain {
     func setup(){
 
         locations = boatData?.property_location
+        selectedBoatLocation = createBoatListing?.locationName
         
-        locationField.textChanged = { [weak self] textField, range, replacementString in
-            guard let self = self else { return }
-            let currentText = textField.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else { return }
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
-        }
+        locationField.text = createBoatListing?.jettyLocation ?? ""
         
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
@@ -63,24 +58,7 @@ class EditBoatAddressView: BaseViewControllerPlain {
         selectSavedBoatLocation()
 
     }
-    
-    private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
-            print("=== LOADING SAVED BOAT LISTING ===: \(savedListing)")
-            
-            // Use the saved listing
-//            createBoatListing = savedListing
-            
-            // Populate fields with saved data
-            locationField.text = savedListing.jettyLocation ?? ""
-            selectedBoatLocation = savedListing.locationName
-            
-            print("Loaded saved boat listing successfully")
-            print("===============================")
-        } else {
-            print("No saved boat listing found, starting fresh")
-        }
-    }
+
     
     private func selectSavedBoatLocation() {
         guard let savedLocationId = selectedBoatLocation,
@@ -88,7 +66,7 @@ class EditBoatAddressView: BaseViewControllerPlain {
         
         // Find the index of the saved location
         for (index, location) in locations.enumerated() {
-            if location.id == savedLocationId {
+            if location.name == savedLocationId {
                 selectedIndex = index
                 boatLocation = location.name
                 

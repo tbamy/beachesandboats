@@ -46,11 +46,11 @@ class ListingDashboard: UIViewController {
     var coordinator: HostingHouseAndBoatHomeCoordinator?
     
     let vm = ListingDashboardVM()
-//    let earningsVM = EarningsVM()
+    let earningsVM = EarningsVM()
     let hostListingsVM = HostListingVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<ListingDashboardVM.Input>()
-//    let earningsInput = PublishSubject<EarningsVM.Input>()
+    let earningsInput = PublishSubject<EarningsVM.Input>()
     let hostListingsInput = PublishSubject<HostListingVM.Input>()
 
     
@@ -72,6 +72,7 @@ class ListingDashboard: UIViewController {
         hostListingsInput.onNext(.beachHouseListing)
         input.onNext(.beachHouseReservation)
         input.onNext(.boatReservation)
+        earningsInput.onNext(.topEarnings(TopEarningRequest(year: "", month: "")))
         
         LoadingModal.show(title: "Loading...")
     }
@@ -226,10 +227,23 @@ class ListingDashboard: UIViewController {
     
     private func handleTopEarningsSuccess(_ response: TopEarningResponse) {
         // Update UI with earnings data
-        if let amount = response.data?.topEarners, let earningAmount = amount.first {
-            amountLbl.text = "\(earningAmount.value.totalEarnings ?? 0.00)"
+//        if let amount = response.data?.topEarners, let earningAmount = amount.first {
+//            amountLbl.text = "\(earningAmount.value.totalEarnings ?? 0.00)"
+//        }
+    
+        var totalEarnings: Decimal = 0
+        
+        if let userEarnings = response.data?.userEarnings, let yearData = userEarnings[response.data?.userEarnings?.keys.first ?? ""], !yearData.isEmpty {
+             totalEarnings = yearData.values.reduce(0, +)
+        } else if let topEarners = response.data?.topEarners {
+            totalEarnings = topEarners.values.compactMap { $0.totalEarnings }.reduce(0, +)
         }
-        if let year = response.data?.userEarnings.keys.first {
+        
+        DispatchQueue.main.async {
+            self.amountLbl.text = "₦\(GeneralFormatter.decimalToString(totalEarnings))"
+        }
+        
+        if let year = response.data?.userEarnings?.keys.first {
             currentEarningYearLbl.text = "Current Earning \(year)"
         } else {
             currentEarningYearLbl.text = "Current Earning"
@@ -377,17 +391,17 @@ extension ListingDashboard {
             }
         }).disposed(by: disposeBag)
         
-//        earningsVM.transform(input: earningsInput)
-//        earningsVM.output.subscribe(onNext: { [weak self] output in
-//            LoadingModal.dismiss()
-//            switch output {
-//            case .topEarningsSuccess(let response):
-//                // Handle earnings success
-//                self?.handleTopEarningsSuccess(response)
-//            case .topEarningsFailure(let error):
-//                MiddleModal.show(title: error.message ?? "", type: .error)
-//            }
-//        }).disposed(by: disposeBag)
+        earningsVM.transform(input: earningsInput)
+        earningsVM.output.subscribe(onNext: { [weak self] output in
+            LoadingModal.dismiss()
+            switch output {
+            case .topEarningsSuccess(let response):
+                // Handle earnings success
+                self?.handleTopEarningsSuccess(response)
+            case .topEarningsFailure(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
         
         hostListingsVM.transform(input: hostListingsInput)
         hostListingsVM.output.subscribe(onNext: { [weak self] output in

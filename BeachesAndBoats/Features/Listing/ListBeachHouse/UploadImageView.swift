@@ -76,6 +76,21 @@ class UploadImageView: BaseViewControllerPlain {
         }
     }
     
+    @IBAction func addImageButtonTapped(_ sender: UIButton) {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        config.selectionLimit = 5 - images.count // Limit to remaining allowed images
+        
+        if config.selectionLimit <= 0 {
+            Toast.show(message: "You can only have a maximum of 5 images")
+            return
+        }
+        
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+
     @IBAction func nextTapped(_ sender: Any) {
         guard let beachData = beachData else { return }
         guard let createBeachListing = createBeachListing else { return }
@@ -84,22 +99,12 @@ class UploadImageView: BaseViewControllerPlain {
             Toast.show(message: "Please upload at least 5 images")
             return
         }
-
-        // Convert images to data (clear roomImages first to avoid duplicates)
-        roomImages.removeAll()
-        for image in images {
-            if let imageData = image.pngData() {
-                roomImages.append(imageData)
-            }
-        }
         
         var updatedBeachListing = createBeachListing
         
         if createBeachListing.bookingType == "FULL" {
             updatedBeachListing.images = roomImages
         } else {
-            
-            // Determine which room index to update
             let roomIndex: Int
             if let editingRoomIndex = room, editingRoomIndex >= 0 {
                 roomIndex = editingRoomIndex
@@ -109,9 +114,7 @@ class UploadImageView: BaseViewControllerPlain {
             
             print("Updating room images at index: \(roomIndex)")
             
-            // Safely update the room images
             if roomIndex >= 0 && roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
-                // PRESERVE existing room data, only update images
                 var existingRoom = updatedBeachListing.rooms![roomIndex]
                 existingRoom.images = roomImages
                 updatedBeachListing.rooms![roomIndex] = existingRoom
@@ -125,22 +128,16 @@ class UploadImageView: BaseViewControllerPlain {
                 return
             }
         }
-
-        // Update the main createBeachListing property
+        
         self.createBeachListing = updatedBeachListing
         
         print("Updated CreateBeachListing with preserved data")
         
-        // check if it's entire apartment
         if createBeachListing.bookingType == "FULL" {
             coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: updatedBeachListing)
-            
-            // Check if we're editing or creating
-        }else if let room = room, room >= 0 {
-            // We're editing, go back to rooms list
+        } else if let room = room, room >= 0 {
             coordinator?.popToRoomsListScreen()
         } else {
-            // We're creating, continue to rooms list
             coordinator?.gotoRoomsListView(beachData: beachData, createBeachListingData: updatedBeachListing)
         }
     }
@@ -148,25 +145,16 @@ class UploadImageView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let createBeachListing = createBeachListing else { return }
         
-        // Convert images to data (clear roomImages first to avoid duplicates)
-        roomImages.removeAll()
-        for image in images {
-            if let imageData = image.pngData() {
-                roomImages.append(imageData)
-            }
-        }
-
+        
         var updatedBeachListing = createBeachListing
         
-        // Determine which room index to update
         let roomIndex: Int
         if let editingRoomIndex = room, editingRoomIndex >= 0 {
             roomIndex = editingRoomIndex
         } else {
             roomIndex = (createBeachListing.rooms?.count ?? 1) - 1
         }
-
-        // Safely update the room images
+        
         if roomIndex >= 0 && roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
             var existingRoom = updatedBeachListing.rooms![roomIndex]
             existingRoom.images = roomImages
@@ -176,7 +164,6 @@ class UploadImageView: BaseViewControllerPlain {
         AppStorage.beachListing = updatedBeachListing
         coordinator?.backToDashboard()
     }
-
     
             
     func deleteImage(image: UIImage) {
@@ -236,34 +223,7 @@ extension UploadImageView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension UploadImageView: UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
-                if let image = object as? UIImage {
-                    DispatchQueue.main.async {
-                        self?.images.append(image)
-                        self?.collectionView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
-
-    @IBAction func addImageButtonTapped(_ sender: UIButton) {
-        var config = PHPickerConfiguration()
-        config.filter = .images  // Only images
-        config.selectionLimit = 0  // 0 means no limit (allows multiple selections)
-        
-        let picker = PHPickerViewController(configuration: config)
-        picker.delegate = self
-        present(picker, animated: true)
-    }
-        
-
+extension UploadImageView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -314,5 +274,39 @@ extension UploadImageView {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
+    }
+}
+
+extension UploadImageView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        var newImages: [UIImage] = []
+        let group = DispatchGroup()
+        
+        for result in results {
+            group.enter()
+            result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
+                if let image = object as? UIImage {
+                    newImages.append(image)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            let (validated, hasInvalid) = ImageValidator.validateImages(newImages, allowCompression: true)
+
+            if hasInvalid {
+                Toast.show(message: "Some images exceed the 2MB limit and were not added")
+            }
+
+            if !validated.isEmpty {
+                self.images.append(contentsOf: validated.map { $0.image })   // for UI
+                self.roomImages.append(contentsOf: validated.map { $0.data }) // for backend
+                self.collectionView.reloadData()
+            }
+        }
+
     }
 }

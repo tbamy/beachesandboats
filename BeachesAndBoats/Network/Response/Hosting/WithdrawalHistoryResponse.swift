@@ -6,11 +6,12 @@
 //
 
 import Foundation
-//
+
+
 //struct WithdrawalResponse: Codable {
-//    let status: Bool
+//    let status: Bool?
 //    let message: String?
-//    let data: [String: [WithdrawalDetail]]? // Optional to handle empty cases
+//    let data: [String: [WithdrawalDetail]]? 
 //    let errors: String?
 //}
 //
@@ -27,53 +28,34 @@ import Foundation
 //        case createdAt = "created_at"
 //    }
 //}
-//
-//extension WithdrawalResponse {
-//    static var mockData: WithdrawalResponse {
-//        return WithdrawalResponse(
-//            status: true,
-//            message: "Success!",
-//            data: [
-//                "2024-01-02": [
-//                    WithdrawalDetail(
-//                        id: "1",
-//                        amount: 55000,
-//                        status: "completed",
-//                        createdAt: "2024-01-02T10:10:00Z"
-//                    ),
-//                    WithdrawalDetail(
-//                        id: "2",
-//                        amount: 55000,
-//                        status: "completed",
-//                        createdAt: "2024-01-02T22:08:00Z"
-//                    )
-//                ],
-//                "2024-01-04": [
-//                    WithdrawalDetail(
-//                        id: "3",
-//                        amount: 55000,
-//                        status: "completed",
-//                        createdAt: "2024-01-04T10:39:00Z"
-//                    ),
-//                    WithdrawalDetail(
-//                        id: "4",
-//                        amount: 55000,
-//                        status: "completed",
-//                        createdAt: "2024-01-04T10:39:00Z"
-//                    )
-//                ]
-//            ],
-//            errors: nil
-//        )
-//    }
-//}
-
 
 struct WithdrawalResponse: Codable {
     let status: Bool?
     let message: String?
-    let data: [String: [WithdrawalDetail]]? 
+    let data: [String: [WithdrawalDetail]]?
     let errors: String?
+
+    enum CodingKeys: String, CodingKey {
+        case status, message, data, errors
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        status = try container.decodeIfPresent(Bool.self, forKey: .status)
+        message = try container.decodeIfPresent(String.self, forKey: .message)
+        errors = try container.decodeIfPresent(String.self, forKey: .errors)
+
+        // Try decoding data as a dictionary first
+        if let dataDict = try? container.decodeIfPresent([String: [WithdrawalDetail]].self, forKey: .data) {
+            data = dataDict
+        }
+        // If dictionary decoding fails, try decoding as an empty array
+        else if let dataArray = try? container.decodeIfPresent([WithdrawalDetail].self, forKey: .data), dataArray.isEmpty {
+            data = [:] // Map empty array to empty dictionary
+        } else {
+            data = nil // Handle any other case
+        }
+    }
 }
 
 struct WithdrawalDetail: Codable {
@@ -89,79 +71,3 @@ struct WithdrawalDetail: Codable {
         case createdAt = "created_at"
     }
 }
-
-extension WithdrawalResponse {
-    static var mockData: WithdrawalResponse {
-        return WithdrawalResponse(
-            status: true,
-            message: "Success!",
-            data: [
-                "January 2, 2024": [
-                    WithdrawalDetail(
-                        id: "1",
-                        amount: 55000,
-                        status: "completed",
-                        createdAt: "2024-01-02T10:10:00Z"
-                    ),
-                    WithdrawalDetail(
-                        id: "2",
-                        amount: 55000,
-                        status: "completed",
-                        createdAt: "2024-01-02T22:08:00Z"
-                    )
-                ],
-                "January 4, 2024": [
-                    WithdrawalDetail(
-                        id: "3",
-                        amount: 55000,
-                        status: "completed",
-                        createdAt: "2024-01-04T10:39:00Z"
-                    ),
-                    WithdrawalDetail(
-                        id: "4",
-                        amount: 55000,
-                        status: "completed",
-                        createdAt: "2024-01-04T10:39:00Z"
-                    )
-                ]
-            ],
-            errors: nil
-        )
-    }
-}
-
-//extension WithdrawalResponse {
-//    static var mockData: WithdrawalResponse {
-//        return WithdrawalResponse(
-//            status: true,
-//            message: "Success!",
-//            data: [
-//                WithdrawalDetail(
-//                    id: "1",
-//                    amount: 55000,
-//                    status: "completed",
-//                    createdAt: "2024-01-02T10:10:00Z"
-//                ),
-//                WithdrawalDetail(
-//                    id: "2",
-//                    amount: 55000,
-//                    status: "completed",
-//                    createdAt: "2024-01-02T22:08:00Z"
-//                ),
-//                WithdrawalDetail(
-//                    id: "3",
-//                    amount: 55000,
-//                    status: "completed",
-//                    createdAt: "2024-01-04T10:39:00Z"
-//                ),
-//                WithdrawalDetail(
-//                    id: "4",
-//                    amount: 55000,
-//                    status: "completed",
-//                    createdAt: "2024-01-04T10:39:00Z"
-//                )
-//            ],
-//            errors: nil
-//        )
-//    }
-//}

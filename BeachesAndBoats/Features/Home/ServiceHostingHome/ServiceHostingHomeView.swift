@@ -29,8 +29,11 @@ class ServiceHostingHomeView: UIViewController {
     let isAccountVerified = UserSession.shared.userDetails?.isAccountVerified
     
     let vm = ServiceHostingHomeViewVM()
+    let earningsVM = EarningsVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<ServiceHostingHomeViewVM.Input>()
+    let earningsInput = PublishSubject<EarningsVM.Input>()
+    
     
     var coordinator: HostingServiceHomeCoordinator?
     
@@ -42,7 +45,9 @@ class ServiceHostingHomeView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         input.onNext(.upcomingBooking)
-        LoadingModal.show(title: "Getting Hosting list...")
+        earningsInput.onNext(.topEarnings(TopEarningRequest(year: "", month: "")))
+        
+        LoadingModal.show(title: "Loading...")
     }
 
     override func viewDidLoad() {
@@ -120,6 +125,39 @@ extension ServiceHostingHomeView {
                 print(error)
             }
         }).disposed(by: disposeBag)
+        
+        earningsVM.transform(input: earningsInput)
+        earningsVM.output.subscribe(onNext: { [weak self] output in
+            LoadingModal.dismiss()
+            switch output {
+            case .topEarningsSuccess(let response):
+                // Handle earnings success
+                self?.handleTopEarningsSuccess(response)
+            case .topEarningsFailure(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+    }
+    
+    private func handleTopEarningsSuccess(_ response: TopEarningResponse) {
+        // Update UI with earnings data
+//        if let amount = response.data?.topEarners, let earningAmount = amount.first {
+//            amountLbl.text = "\(earningAmount.value.totalEarnings ?? 0.00)"
+//        }
+    
+        var totalEarnings: Decimal = 0
+        
+        if let userEarnings = response.data?.userEarnings, let yearData = userEarnings[response.data?.userEarnings?.keys.first ?? ""], !yearData.isEmpty {
+             totalEarnings = yearData.values.reduce(0, +)
+        } else if let topEarners = response.data?.topEarners {
+            totalEarnings = topEarners.values.compactMap { $0.totalEarnings }.reduce(0, +)
+        }
+        
+        DispatchQueue.main.async {
+            self.amountLbl.text = "₦\(GeneralFormatter.decimalToString(totalEarnings))"
+        }
+    
+
     }
 }
 
@@ -127,7 +165,7 @@ extension ServiceHostingHomeView {
 extension ServiceHostingHomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
-            return upcomingBookingData.isEmpty ? 1 :upcomingBookingData.count
+            return upcomingBookingData.isEmpty ? 1 : upcomingBookingData.count
         } else if collectionView.tag == 2 {
             return pastBookingData.isEmpty ? 1 : pastBookingData.count
         }

@@ -123,7 +123,7 @@ class BookingRoomCell: BaseXib {
         amenitiesCollectionView.layoutIfNeeded()
         
         let contentHeight = amenitiesCollectionView.collectionViewLayout.collectionViewContentSize.height
-        collectionViewHeight.constant = max(contentHeight, 50) // Minimum height
+        collectionViewHeight.constant = max(contentHeight, 50) + 20 // Minimum height
         
         // Animate the constraint change
         UIView.animate(withDuration: 0.2) {

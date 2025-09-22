@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditHouseRulesView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="ADU-0U-hig" id="IyY-Tr-HNV"/>
-                <outlet property="nextBtn" destination="lWh-4v-bHX" id="ql3-n9-NAZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

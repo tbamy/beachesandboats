@@ -67,48 +67,34 @@ class BouncerUploadImagesView: BaseViewControllerPlain {
 
     
     @IBAction func nextTapped(_ sender: Any) {
-        bouncerImages.removeAll()
-        
         if images.count < 5 {
             Toast.show(message: "Please upload at least 5 images")
             return
         }
-
         
-        for image in images {
-            if let imageData = image.pngData() {
-                bouncerImages.append(imageData)
-            }
-        }
-        let images = createServiceListing?.images ?? []
-        if var createServiceListing = createServiceListing{
-            createServiceListing.images = images + bouncerImages
+        let existingImages = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing {
+            createServiceListing.images = existingImages + bouncerImages
             
             print(createServiceListing)
             
             LoadingModal.show(title: "Hold on while we list your service")
             vm.createService(createServiceListing)
         }
-
     }
-    
+
     @IBAction func saveAndExit(_ sender: Any) {
-        bouncerImages.removeAll()
-            for image in images {
-                if let imageData = image.pngData() {
-                    bouncerImages.append(imageData)
-                }
-            }
         
-        let images = createServiceListing?.images ?? []
-        if var createServiceListing = createServiceListing{
-            createServiceListing.images = images + bouncerImages
+        let existingImages = createServiceListing?.images ?? []
+        if var createServiceListing = createServiceListing {
+            createServiceListing.images = existingImages + bouncerImages
             
             print(createServiceListing)
             AppStorage.serviceListing = createServiceListing
             coordinator?.backToDashboard()
         }
     }
+
     
     func bindNetwork(){
         vm.output.subscribe(onNext: {[weak self] response in
@@ -183,22 +169,7 @@ extension BouncerUploadImagesView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension BouncerUploadImagesView: UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
-                if let image = object as? UIImage {
-                    DispatchQueue.main.async {
-                        self?.images.append(image)
-                        self?.collectionView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
+extension BouncerUploadImagesView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
         var config = PHPickerConfiguration()
@@ -222,3 +193,35 @@ extension BouncerUploadImagesView: UIImagePickerControllerDelegate, UINavigation
     }
 }
 
+extension BouncerUploadImagesView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        var newImages: [UIImage] = []
+        let group = DispatchGroup()
+        
+        for result in results {
+            group.enter()
+            result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
+                if let image = object as? UIImage {
+                    newImages.append(image)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            let (validated, hasInvalid) = ImageValidator.validateImages(newImages, allowCompression: true)
+
+            if hasInvalid {
+                Toast.show(message: "Some images exceed the 2MB limit and were not added")
+            }
+
+            if !validated.isEmpty {
+                self.images.append(contentsOf: validated.map { $0.image })   // for UI
+                self.bouncerImages.append(contentsOf: validated.map { $0.data }) // for backend
+                self.collectionView.reloadData()
+            }
+        }
+    }
+}

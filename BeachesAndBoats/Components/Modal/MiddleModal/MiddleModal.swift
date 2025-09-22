@@ -6,166 +6,208 @@
 //
 
 import UIKit
-import MessageUI
 
-@IBDesignable public class MiddleModal: BaseXib {
-
-    @IBOutlet weak var cancelButton: PlainOutlineButton!
-    @IBOutlet weak var confirmButton: PrimaryButton!
-    @IBOutlet weak var subtitle: RegularLabel!
-    @IBOutlet weak var title: BoldLabel!
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var contentStack: UIStackView!
-    @IBOutlet weak var backView: UIView!
+public class MiddleModal: UIView {
+    
+    private let backView = UIView()
+    private let contentStack = UIStackView()
+    private let icon = UIImageView()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let confirmButton = PrimaryButton()
+    private let cancelButton = PlainOutlineButton()
     
     var model: MiddleModalModel = MiddleModalModel() {
-        didSet {
-            setup(model)
-        }
+        didSet { setup(model) }
     }
     
-    public override init(frame: CGRect) {
+    // MARK: - Init
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
         setup(model)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupUI()
         setup(model)
     }
     
-    func setup(_ model: MiddleModalModel) {
+    // MARK: - UI Setup
+    
+    private func setupUI() {
+        backgroundColor = .clear
+        
+        // backView
+        backView.backgroundColor = .white
+        backView.layer.cornerRadius = 30
+        backView.clipsToBounds = true
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(backView)
+        
+        // contentStack
+        contentStack.axis = .vertical
+        contentStack.spacing = 12
+        contentStack.alignment = .fill
+        contentStack.distribution = .fill
+        contentStack.translatesAutoresizingMaskIntoConstraints = false
+        backView.addSubview(contentStack)
+        
+        // icon
+        icon.contentMode = .scaleAspectFit
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        contentStack.addArrangedSubview(icon)
+        NSLayoutConstraint.activate([
+            icon.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        // title
+        titleLabel.font = .boldSystemFont(ofSize: 16)
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        contentStack.addArrangedSubview(titleLabel)
+        
+        // subtitle
+        subtitleLabel.font = .systemFont(ofSize: 14)
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.textAlignment = .center
+        contentStack.addArrangedSubview(subtitleLabel)
+        
+        // confirm button
+        confirmButton.setTitleColor(.white, for: .normal)
+        confirmButton.layer.cornerRadius = 8
+        confirmButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        confirmButton.addTarget(self, action: #selector(onConfirmTapped), for: .touchUpInside)
+        contentStack.addArrangedSubview(confirmButton)
+        
+        // cancel button
+        cancelButton.setTitleColor(.systemBlue, for: .normal)
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.systemBlue.cgColor
+        cancelButton.layer.cornerRadius = 8
+        cancelButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        cancelButton.addTarget(self, action: #selector(onCancelTapped), for: .touchUpInside)
+        contentStack.addArrangedSubview(cancelButton)
+        
+        // Layout
+        NSLayoutConstraint.activate([
+            backView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backView.topAnchor.constraint(equalTo: topAnchor),
+            backView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            contentStack.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
+            contentStack.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -20),
+            contentStack.topAnchor.constraint(equalTo: backView.topAnchor, constant: 20),
+            contentStack.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -20),
+        ])
+        
+        // Swipe down to dismiss
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown))
         swipeDown.direction = .down
         addGestureRecognizer(swipeDown)
+    }
+    
+    // MARK: - Config
+    
+    func setup(_ model: MiddleModalModel) {
+        titleLabel.text = model.modalTitle
+        titleLabel.isHidden = model.modalTitle.isEmpty
         
-        // Hide/show elements based on content
-        cancelButton.isHidden = model.secondaryText.isEmpty
-        subtitle.isHidden = model.modalSubtitle.isEmpty
-        title.isHidden = model.modalTitle.isEmpty
+        subtitleLabel.text = model.modalSubtitle
+        subtitleLabel.isHidden = model.modalSubtitle.isEmpty
         
-        // Set content
-        title.text = model.modalTitle
-        
-        // Clean up subtitle text and configure for multiline
-//        let cleanSubtitle = model.modalSubtitle.replacingOccurrences(of: "\u00a0", with: " ")
-        subtitle.text = model.modalSubtitle
-        subtitle.numberOfLines = 0 // Allow multiple lines
-        subtitle.lineBreakMode = .byWordWrapping
-        subtitle.preferredMaxLayoutWidth = Helpers.screenWidth - 40 // Adjust for modal padding
+        confirmButton.setTitle(model.primaryText, for: .normal)
+        confirmButton.isHidden = model.primaryText.isEmpty
         
         cancelButton.setTitle(model.secondaryText, for: .normal)
-        confirmButton.setTitle(model.primaryText, for: .normal)
-        icon.image = model.modalType.getImage()
+        cancelButton.isHidden = model.secondaryText.isEmpty
         
-        // Force layout update after setting text
-        subtitle.setNeedsLayout()
-        subtitle.layoutIfNeeded()
+        icon.image = model.modalType.getImage()
+        icon.isHidden = icon.image == nil
     }
-
+    
+    // MARK: - Height
+    
     func getHeight() -> CGFloat {
-        // Force layout to ensure all subviews have correct sizes
         setNeedsLayout()
         layoutIfNeeded()
         
-        var contentHeight: CGFloat = 60.0 // Base padding
+        // Let Auto Layout compute real height
+        let targetSize = CGSize(width: Helpers.screenWidth, height: .greatestFiniteMagnitude)
+        let fittingSize = backView.systemLayoutSizeFitting(
+            targetSize,
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
         
-        // Add icon height if visible and has content
-        if !icon.isHidden && icon.image != nil {
-            let iconSize = icon.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            contentHeight += iconSize.height + 10.0
-        }
-        
-        // Add title height if visible and has text
-        if !title.isHidden && !(title.text?.isEmpty ?? true) {
-            // Set preferred max width for accurate height calculation
-            title.preferredMaxLayoutWidth = Helpers.screenWidth - 40
-            let titleSize = title.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            contentHeight += titleSize.height + 10.0
-        }
-        
-        // Add subtitle height if visible and has text
-        if !subtitle.isHidden && !(subtitle.text?.isEmpty ?? true) {
-            // Ensure preferred max width is set for multiline calculation
-            subtitle.preferredMaxLayoutWidth = Helpers.screenWidth - 40
-            let subtitleSize = subtitle.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            contentHeight += subtitleSize.height + 10.0
-        }
-        
-        // Add confirm button height if visible
-        if !confirmButton.isHidden {
-            let confirmSize = confirmButton.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            contentHeight += confirmSize.height + 20.0
-        }
-        
-        // Add cancel button height if visible and has text
-        if !cancelButton.isHidden && !(cancelButton.titleLabel?.text?.isEmpty ?? true) {
-            let cancelSize = cancelButton.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-            contentHeight += cancelSize.height + 20.0
-        }
-        
-        return contentHeight
+        let totalHeight = fittingSize.height
+        let maxHeight = Helpers.screenHeight * 0.9
+        return min(totalHeight, maxHeight)
     }
     
-//    func setup(_ model: MiddleModalModel) {
-//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown))
-//        swipeDown.direction = .down
-//        addGestureRecognizer(swipeDown)
-//        cancelButton.isHidden = model.secondaryText.isEmpty
-//        title.text = model.modalTitle
-//        subtitle.text = model.modalSubtitle
-//        cancelButton.setTitle(model.secondaryText, for: .normal)
-//        confirmButton.setTitle(model.primaryText, for: .normal)
-//        icon.image = model.modalType.getImage()
-//    }
+    // MARK: - Actions
     
-    @objc func handleSwipeDown() {
-        if model.dismissable {
-            print(model.dismissable)
-            dismiss()
-        }
+    @objc private func handleSwipeDown() {
+        if model.dismissable { dismiss() }
     }
     
     func dismiss() {
-        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-            self?.frame.origin.y = Helpers.screenHeight
-            self?.layoutIfNeeded()
-        }, completion: { [weak self] _ in
-            self?.superview?.removeFromSuperview()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.frame.origin.y = Helpers.screenHeight
+        }, completion: { _ in
+            self.superview?.removeFromSuperview()
         })
     }
     
-//    func getHeight() -> CGFloat {
-//        var contentHeight = 60.0
-//        contentHeight += !icon.isHidden ? icon.bounds.height + 10.0 : 0
-//        contentHeight += !title.isHidden ? title.bounds.height + 10.0 : 0
-//        contentHeight += !subtitle.isHidden ? subtitle.bounds.height + 10.0 : 0
-////        contentHeight += !extraViewStack.isHidden ? extraViewStack.bounds.height + 10.0 : 0
-//        contentHeight += !confirmButton.isHidden ? confirmButton.bounds.height + 20.0 : 0
-//        contentHeight += !cancelButton.isHidden ? cancelButton.bounds.height + 20.0 : 0
-////        contentHeight += !tetiaryStack.isHidden ? tetiaryStack.bounds.height + 12.0 : 0
-//        
-//        return contentHeight
-//    }
-    
-    
-    @IBAction func onConfirmTapped(_ sender: Any) {
-        model.onConfirm()
-        if model.dismissOnConfirm {
-            dismiss()
+    public static func dismiss(animated: Bool = true) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            // Find the MiddleModalView (backdrop) and remove it with animation
+            for subview in keyWindow.subviews {
+                if let backdrop = subview as? MiddleModalView {
+                    // find the first MiddleModal inside the backdrop
+                    for v in backdrop.subviews {
+                        if let modal = v as? MiddleModal {
+                            let animations = {
+                                modal.frame.origin.y = Helpers.screenHeight
+                                backdrop.alpha = 0.0
+                                backdrop.layoutIfNeeded()
+                            }
+                            let completion: (Bool) -> Void = { _ in
+                                backdrop.removeFromSuperview()
+                            }
+                            if animated {
+                                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: animations, completion: completion)
+                            } else {
+                                animations()
+                                completion(true)
+                            }
+                            return
+                        }
+                    }
+                }
+            }
         }
     }
     
-    @IBAction func onCancelTapped(_ sender: Any) {
+    @objc private func onConfirmTapped() {
+        model.onConfirm()
+        if model.dismissOnConfirm { dismiss() }
+    }
+    
+    @objc private func onCancelTapped() {
         model.onCancel()
         dismiss()
     }
     
+    // MARK: - Static Show
+    
     public static func show(
         title: String = "",
         subtitle: String = "",
-        tetiaryTitle: String = "",
-        extraView: UIView? = nil,
         type: ModalType = .caution,
         icon: UIImage = UIImage(),
         primaryText: String = "Okay",
@@ -173,95 +215,45 @@ import MessageUI
         dismissable: Bool = true,
         dismissOnConfirm: Bool = true,
         onConfirm: @escaping () -> Void = {},
-        onCancel: @escaping () -> Void = {})
-    {
-        _ = handleShow(title: title, subtitle: subtitle, tetiaryTitle: tetiaryTitle, extraView: extraView, type: type, icon: icon, primaryText: primaryText, secondaryText: secondaryText, dismissable: dismissable, dismissOnConfirm: dismissOnConfirm, onConfirm: onConfirm, onCancel: onCancel)
-    }
-    
-    public static func handleShow (
-        title: String = "",
-        subtitle: String = "",
-        tetiaryTitle: String = "",
-        extraView: UIView? = nil,
-        type: ModalType = .caution,
-        icon: UIImage = UIImage(),
-        primaryText: String = "Okay",
-        secondaryText: String = "",
-        dismissable: Bool = true,
-        dismissOnConfirm: Bool = true,
-        onConfirm: @escaping () -> Void = {},
-        onCancel: @escaping () -> Void = {}) -> UIView
-    {
+        onCancel: @escaping () -> Void = {}
+    ) {
         let backDrop = MiddleModalView(frame: Helpers.screen)
-        backDrop.backgroundColor = .clear
+        backDrop.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
-        backDrop.applyDarkEffect()
-        let modal = MiddleModal(frame: CGRect(x: 0, y: 0, width: Helpers.screenWidth, height: 500))
+        let modal = MiddleModal()
         modal.model = MiddleModalModel(
             modalTitle: title,
             modalSubtitle: subtitle,
-            tetiaryTitle: tetiaryTitle,
-            extraView: extraView,
             primaryText: primaryText,
             secondaryText: secondaryText,
             modalType: type,
             dismissable: dismissable,
             dismissOnConfirm: dismissOnConfirm,
             onConfirm: onConfirm,
-            onCancel: onCancel)
+            onCancel: onCancel
+        )
         modal.icon.image = type == .defaultModal ? icon : type.getImage()
-        modal.layer.cornerRadius = 30
-        modal.backgroundColor = .white
-        modal.clipsToBounds = true
         
+        // Layout once to compute height
         modal.setNeedsLayout()
         modal.layoutIfNeeded()
         
+        let modalHeight = modal.getHeight()
+        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: modalHeight)
+        
         backDrop.addSubview(modal)
+        
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             keyWindow.addSubview(backDrop)
         }
         
-        // Calculate the modal's position to center it vertically
-        let modalHeight = modal.getHeight()
+        // Animate up
         let centerY = (Helpers.screenHeight - modalHeight) / 2
-        
-        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: modalHeight)
-        backDrop.layoutIfNeeded()
-        
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.25) {
             modal.frame.origin.y = centerY
-            backDrop.layoutIfNeeded()
-        }, completion: nil)
-        
-        return backDrop
-    }
-    
-    public static func dismiss() {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            
-            let subviews = keyWindow.subviews
-            for view in subviews {
-                if view is MiddleModalView {
-                    for v in view.subviews {
-                        if v is MiddleModal {
-                            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
-                                v.frame.origin.y = Helpers.screenHeight
-                                view.layoutIfNeeded()
-                            }, completion: { _ in
-                                view.removeFromSuperview()
-                            })
-                        }
-                    }
-               }
-            }
         }
-
     }
-    
-
 }
 
 class MiddleModalView: UIView {}

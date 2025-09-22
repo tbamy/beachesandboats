@@ -38,7 +38,7 @@ class EditBoatFacilitiesView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = AppStorage.boatListing {
+        if let savedListing = createBoatListing {
             print("=== LOADING SAVED BOAT LISTING ===")
             print("Amenities count: \(savedListing.amenities?.count ?? 0)")
             
@@ -111,7 +111,7 @@ class EditBoatFacilitiesView: BaseViewControllerPlain {
                 print("Main Amenities: \(selectedFacilities)")
                 print(createBoatListing)
                 
-                coordinator?.gotoEditBoatAdditionalAmenitiesView(boatData: boatData, request: createBoatListing, id: id)
+                coordinator?.gotoEditBoatAdditionalAmenitiesView(boatData: boatData, request: createBoatListing, id: id, boatType: boatType)
             }
         }
     }

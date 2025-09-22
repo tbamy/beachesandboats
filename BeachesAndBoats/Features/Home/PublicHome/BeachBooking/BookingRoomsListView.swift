@@ -180,7 +180,7 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 20, height: 455) // Adjust height as needed based on content
+        return CGSize(width: collectionView.bounds.width - 20, height: 440) // Adjust height as needed based on content
     }
     
 //    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

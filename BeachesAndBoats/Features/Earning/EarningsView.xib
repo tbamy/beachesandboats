@@ -73,7 +73,7 @@
                                             </buttonConfiguration>
                                         </button>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qqJ-uB-czY">
-                                            <rect key="frame" x="0.0" y="153" width="324" height="40"/>
+                                            <rect key="frame" x="10" y="153" width="314" height="40"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="YmA-DU-Nc1"/>
@@ -91,7 +91,7 @@
                                         <constraint firstItem="AFU-IA-4D6" firstAttribute="leading" secondItem="Y9p-5F-7gh" secondAttribute="leading" constant="10" id="5yg-46-1bv"/>
                                         <constraint firstAttribute="trailing" secondItem="KYu-GI-oS5" secondAttribute="trailing" constant="21" id="HHf-L4-kwG"/>
                                         <constraint firstItem="AFU-IA-4D6" firstAttribute="top" secondItem="Y9p-5F-7gh" secondAttribute="top" constant="13" id="PG5-el-KSv"/>
-                                        <constraint firstItem="qqJ-uB-czY" firstAttribute="leading" secondItem="Y9p-5F-7gh" secondAttribute="leading" id="Zz0-YW-hvj"/>
+                                        <constraint firstItem="qqJ-uB-czY" firstAttribute="leading" secondItem="Y9p-5F-7gh" secondAttribute="leading" constant="10" id="Zz0-YW-hvj"/>
                                         <constraint firstItem="KYu-GI-oS5" firstAttribute="top" secondItem="Y9p-5F-7gh" secondAttribute="top" constant="13" id="gMT-Gl-DIQ"/>
                                         <constraint firstItem="FKl-vH-Jv0" firstAttribute="centerY" secondItem="Y9p-5F-7gh" secondAttribute="centerY" id="hMs-h7-7Ya"/>
                                         <constraint firstItem="FKl-vH-Jv0" firstAttribute="leading" secondItem="Y9p-5F-7gh" secondAttribute="leading" constant="20" id="rTg-zy-zEw"/>
@@ -109,8 +109,8 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YW6-U1-xVx">
                                     <rect key="frame" x="20" y="246.00000000000003" width="304" height="20.333333333333343"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z25-GJ-PSc" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z25-GJ-PSc" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.333333333333332"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -121,7 +121,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbu-Vd-1Xc" customClass="BoldLabel" customModule="BeachesAndBoats" customModuleProvider="target">
-                                            <rect key="frame" x="262.66666666666669" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="20.333333333333332"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -171,7 +171,7 @@
                                         </label>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="blC-hP-Qh8">
                                             <rect key="frame" x="0.0" y="85.666666666666686" width="344" height="294.33333333333331"/>
-                                            <color key="backgroundColor" red="0.92941176889999999" green="0.44705885649999999" blue="0.43921568989999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

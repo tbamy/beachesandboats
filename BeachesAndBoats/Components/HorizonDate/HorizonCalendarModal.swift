@@ -70,7 +70,7 @@ class HorizonCalendarModal: BaseXib {
 
 extension HorizonCalendarModal{
     
-    public static func show(start: Date = Date(), end: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date(), callBack: @escaping (Date?, Date?) -> Void) {
+    public static func show(start: Date = Date(), end: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date(), isSingleDate: Bool = false, callBack: @escaping (Date?, Date?) -> Void) {
         let backDrop = UIView(frame: Helpers.screen)
         backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
         
@@ -78,6 +78,7 @@ extension HorizonCalendarModal{
         modal.callback = callBack
         modal.calendarView.model.startDate = start
         modal.calendarView.model.endDate = end
+        modal.calendarView.isSingleDate = isSingleDate
         
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12

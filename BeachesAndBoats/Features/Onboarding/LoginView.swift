@@ -91,6 +91,7 @@ class LoginView: BaseViewControllerPlain, AttributedLabelDelegate {
                     self?.coordinator?.goToDashboard()
                 }
             case .loginError(let error):
+//                MiddleModal.show(title: "The modal’s height should adjust dynamically to accommodate the subtitle’s full height, and the modal should center vertically on the screen. If the issue persists after applying these changes, please provide: The modal’s height should adjust dynamically to accommodate the subtitle’s full height, and the modal should center vertically on the screen. If the issue persists after applying:", type: .success)
                 MiddleModal.show(title: error.message ?? "", type: .error)
                 
                 //MARK: Request Otp

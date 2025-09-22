@@ -74,34 +74,27 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
 
     
     @IBAction func nextTapped(_ sender: Any) {
-        if let imageData = image?.pngData() {
-            profileImage = imageData
-//            images.append(imageData)
-            
-            if var createServiceListing = createServiceListing{
-                createServiceListing.profilePic = profileImage
-                
-                print(createServiceListing)
-                
-                coordinator?.gotoBouncerAvailableDatesView(createServiceListingData: createServiceListing)
-            }
-            
+        guard let profileImage = profileImage else {
+            Toast.show(message: "Please select a profile image")
+            return
         }
-        
 
+        if var createServiceListing = createServiceListing {
+            createServiceListing.profilePic = profileImage
+            coordinator?.gotoBouncerAvailableDatesView(createServiceListingData: createServiceListing)
+        }
     }
-    
+
+
     @IBAction func saveAndExit(_ sender: Any) {
-        if var createServiceListing = createServiceListing{
-//            createServiceListing.images = images
-            
-            
-            print(createServiceListing)
+        if var createServiceListing = createServiceListing {
+            createServiceListing.profilePic = profileImage
             
             AppStorage.serviceListing = createServiceListing
             coordinator?.backToDashboard()
         }
     }
+
             
     func deleteImage() {
         image = nil
@@ -112,21 +105,7 @@ class BouncerUploadProfileImageView: BaseViewControllerPlain {
 
 }
 
-extension BouncerUploadProfileImageView: UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
-                if let image = object as? UIImage {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-    
+extension BouncerUploadProfileImageView: UINavigationControllerDelegate {
 
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
         var config = PHPickerConfiguration()
@@ -138,14 +117,50 @@ extension BouncerUploadProfileImageView: UIImagePickerControllerDelegate, UINavi
         present(picker, animated: true)
     }
         
+}
 
+extension BouncerUploadProfileImageView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        for result in results {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                if let image = object as? UIImage {
+                    let (validated, hasInvalid) = ImageValidator.validateImages([image], allowCompression: true)
+                    
+                    DispatchQueue.main.async {
+                        if hasInvalid {
+                            Toast.show(message: "The selected image exceeds the 2MB size limit")
+                        }
+                        if let valid = validated.first {
+                            self?.image = valid.image       // UI
+                            self?.profileImage = valid.data // Backend
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-    // UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+}
+
+extension BouncerUploadProfileImageView: UIImagePickerControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
         if let selectedImage = info[.originalImage] as? UIImage {
-            image = selectedImage
+            let (validated, hasInvalid) = ImageValidator.validateImages([selectedImage], allowCompression: true)
+            
+            if hasInvalid {
+                Toast.show(message: "The selected image exceeds the 2MB size limit")
+            }
+            if let valid = validated.first {
+                image = valid.image       // UI
+                profileImage = valid.data // Backend
+            }
         }
         picker.dismiss(animated: true, completion: nil)
     }
-}
 
+}

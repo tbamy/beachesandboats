@@ -19,7 +19,7 @@ class MakeWithdrawVM {
     }
     
     enum Output {
-        case makeWithdrawalSuccess(CreateWithdrawalResponse)
+        case makeWithdrawalSuccess(GeneralResponse)
         case makeWithdrawalFailure(ErrorResponse)
         case getBanksSuccess(ListOfBanksResponse)
         case getBanksFailure(ErrorResponse)
@@ -66,7 +66,7 @@ class MakeWithdrawVM {
         output.onNext(.getBanksFailure(error))
     }
     
-    func handleWithdrawalSuccess(_ response: CreateWithdrawalResponse) {
+    func handleWithdrawalSuccess(_ response: GeneralResponse) {
         output.onNext(.makeWithdrawalSuccess(response))
     }
     

@@ -11,7 +11,7 @@ protocol HostingService {
     func getUpcomingBooking(completion: @escaping(Result<ServiceReservations, ErrorResponse>) -> Void)
     func getTopEarnings(request: TopEarningRequest, completion: @escaping(Result<TopEarningResponse, ErrorResponse>) -> Void)
     func getWithdrawalHistory(completion: @escaping(Result<WithdrawalResponse, ErrorResponse>) -> Void)
-    func makeWithdrawal(request: CreateWithdrawalRequest, completion: @escaping(Result<CreateWithdrawalResponse, ErrorResponse>) -> Void)
+    func makeWithdrawal(request: CreateWithdrawalRequest, completion: @escaping(Result<GeneralResponse, ErrorResponse>) -> Void)
     func getBanks(completion: @escaping(Result<ListOfBanksResponse, ErrorResponse>) -> Void)
     func getPhoneSecurity(request: TwoFAPhoneSecurityRequest, completion: @escaping(Result<TwoFASecurityResponse, ErrorResponse>) -> Void)
     func getEmailSecurity(request: TwoFAEmailSecurityRequest, completion: @escaping(Result<TwoFASecurityResponse, ErrorResponse>) -> Void)
