@@ -18,6 +18,11 @@ class UploadImageView: BaseViewControllerPlain {
     @IBOutlet weak var uploadBtn: UploadImageField!
     @IBOutlet weak var nextBtn: PrimaryButton!
     
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var uploadLabel: UILabel!
+    
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var room: Int?
@@ -43,6 +48,12 @@ class UploadImageView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .success
         stepTwoProgress.setProgress(0.55, animated: true)
         stepTwoProgress.tintColor = .B_B
+        
+        if let listing = createBeachListing, listing.bookingType == "FULL" {
+            titleLabel.text = "What does this property look like?"
+            subtitleLabel.text = "Upload pictures of this property"
+            uploadLabel.text = "Upload a minimum of 5 photos for this property"
+        }
         
         if let index = room,
            index >= 0,

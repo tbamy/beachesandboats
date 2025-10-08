@@ -22,6 +22,7 @@ class EditPropertyAddressView: BaseViewControllerPlain {
     var beachData: BeachDatas?
     var locations: [PropertyLocation]?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     private var selectedIndex: Int? = nil
     var beachLocation: String?
     var selectBeachLocation: String?
@@ -42,9 +43,9 @@ class EditPropertyAddressView: BaseViewControllerPlain {
     
     func setup(){
         locations = beachData?.property_location
-        selectBeachLocation = createBeachListing?.locationName
+        selectBeachLocation = details?.locations?.name ?? ""
         
-        locationField.text = createBeachListing?.jettyLocation ?? ""
+        locationField.text = details?.locations?.jettyLocation ?? ""
         
         locationCollectionView.backgroundColor = .clear
         locationCollectionView.delegate = self
@@ -98,19 +99,20 @@ class EditPropertyAddressView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id else { return }
         if validateJettyLocation(){
-            if var createBeachListing = createBeachListing{
-                createBeachListing.locationName = beachLocation
-                createBeachListing.jettyLocation = locationField.text
-                
-                self.createBeachListing = createBeachListing
+            if createBeachListing == nil {
+                createBeachListing = CreateBeachListingRequest()
+            }
+            createBeachListing?.locationName = beachLocation
+            createBeachListing?.jettyLocation = locationField.text
+            
                 print(createBeachListing)
                 
                 LoadingModal.show(title: "Updating Record...")
+            if let createBeachListing = createBeachListing {
                 vm.editBeach(createBeachListing, id: id)
-                
+            }
                 
             }
-        }
 
     }
     

@@ -22,6 +22,7 @@ class EarningsView: BaseViewControllerPlain {
     @IBOutlet weak var bankName: RegularLabel!
     @IBOutlet weak var noInfoLabel: RegularLabel!
     @IBOutlet weak var editBtn: UIButton!
+    @IBOutlet weak var paymentStack: UIView!
     
     var coordinator: HostingServiceEarningCoordinator?
     
@@ -72,9 +73,14 @@ class EarningsView: BaseViewControllerPlain {
         attributedStringForWitdraw.addAttribute(.foregroundColor, value: UIColor.black, range: underlineValueForWithdraw)
         withdrawalsLbl.attributedText = attributedStringForWitdraw
         
-        paymentName.text = AppStorage.accountName ?? ""
-        accountNumber.text = AppStorage.accountNumber ?? ""
-        bankName.text = AppStorage.bankName ?? ""
+        
+        if let accountName = AppStorage.accountName, !accountName.isEmpty{
+            paymentName.text = accountName
+            accountNumber.text = AppStorage.accountNumber
+            bankName.text = AppStorage.bankName
+        }else{
+            paymentStack.isHidden = true
+        }
     }
     
     func makeRequest() {
@@ -235,47 +241,7 @@ extension EarningsView: UITableViewDelegate, UITableViewDataSource {
         return 20 // Adjust this value to control spacing between cells
     }
 
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView()
-//        footerView.backgroundColor = .clear
-//        return footerView
-//    }
 }
-
-
-//extension EarningsView: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        
-//        if topEarningBookingData.isEmpty {
-//            noInfoLabel.isHidden = false
-//            noInfoLabel.text = "No Information"
-//            topEarningTableView.isHidden = true
-//            return 0
-//        } else {
-//            noInfoLabel.isHidden = true
-//            topEarningTableView.isHidden = false
-//            return topEarningBookingData.count
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "EarningDistributionTableCell", for: indexPath) as! EarningDistributionTableCell
-//        let topEarner = topEarningBookingData[indexPath.row]
-//        
-//        // Create a TopEarningResponse to pass to the cell
-//        let response = TopEarningResponse(
-//            status: true,
-//            message: "Success!",
-//            data: EarningsData(
-//                userEarnings: nil,
-//                topEarners: [topEarner.beachHouse?.id ?? "": topEarner]
-//            ),
-//            errors: nil
-//        )
-//        cell.setup(with: response)
-//        return cell
-//    }
-//}
 
 // MARK: - Collection Delegate
 extension EarningsView: UICollectionViewDelegate, UICollectionViewDataSource {

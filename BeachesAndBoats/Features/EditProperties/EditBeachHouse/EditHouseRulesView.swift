@@ -11,11 +11,15 @@ class EditHouseRulesView: BaseViewControllerPlain {
     var coordinator: HostingServiceMenuCoordinator?
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var additionalRulesField: TextViewField!
 //    @IBOutlet weak var nextBtn: PrimaryButton!
     
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     var id: String?
     
     var houseRulesList: [HouseRule]?
@@ -31,6 +35,7 @@ class EditHouseRulesView: BaseViewControllerPlain {
         print(id)
         
         houseRulesList = beachData?.house_rules
+        additionalRulesField.text = details?.additionalHouseRules ?? ""
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -38,10 +43,17 @@ class EditHouseRulesView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
-        selectedItems = createBeachListing?.houseRules ?? []
+        updateCollectionViewHeight(collectionView, collectionViewHeight)
+        selectedItems = details?.houseRules?.compactMap{ $0.id } ?? []
         collectionView.reloadData()
         
 //        nextBtn.isEnabled = !selectedItems.isEmpty
+    }
+    
+    private func updateCollectionViewHeight(_ collectionView: UICollectionView, _ heightConstraint: NSLayoutConstraint) {
+        collectionView.layoutIfNeeded()
+        heightConstraint.constant = collectionView.contentSize.height
+        view.layoutIfNeeded()
     }
 
     @IBAction func nextTapped(_ sender: Any) {
@@ -52,12 +64,15 @@ class EditHouseRulesView: BaseViewControllerPlain {
         }
         
         if let beachData = beachData {
-            if var createBeachListing = createBeachListing{
-                createBeachListing.houseRules = selectedItems
+            if createBeachListing == nil{
+                createBeachListing = CreateBeachListingRequest()
+            }
+            createBeachListing?.houseRules = selectedItems
+            createBeachListing?.additionalHouseRules = additionalRulesField.text
                 print(createBeachListing)
                 print(id)
-                
-                coordinator?.gotoEditCheckInAndOutRulesView(beachData: beachData, request: createBeachListing, id: id)
+            if let createBeachListing = createBeachListing{
+            coordinator?.gotoEditCheckInAndOutRulesView(beachData: beachData, request: createBeachListing, details: details, id: id)
             }
         }
     }

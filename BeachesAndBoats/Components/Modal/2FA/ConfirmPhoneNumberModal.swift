@@ -56,6 +56,8 @@ class ConfirmPhoneNumberModal: BaseXib {
             changePhoneNumber.text = "Change phone number"
         }
         sendBtn.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
+        changePhoneNumber.isUserInteractionEnabled = true
+        resendCode.isUserInteractionEnabled = true
         
         close.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss(_ :))))
         changePhoneNumber.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleChangePhoneNumber(_ :))))
@@ -171,11 +173,17 @@ extension ConfirmPhoneNumberModal: UITextFieldDelegate{
 
 extension ConfirmPhoneNumberModal{
     
-    public static func show(on view: UIView, callBack: @escaping (String?) -> Void, isEmail: Bool) {
+    @discardableResult
+    public static func show(
+        on view: UIView,
+        callBack: @escaping (String?) -> Void,
+        isEmail: Bool,
+        delegate: GestureRecognizer?
+    ) -> ConfirmPhoneNumberModal {
         
         let modal = ConfirmPhoneNumberModal()
         modal.callback = callBack
-        
+        modal.confirmPhoneNumberDelegate = delegate
         modal.backgroundColor = .background.lighter(by: 17)
         modal.layer.cornerRadius = 12
         modal.clipsToBounds = true
@@ -194,7 +202,8 @@ extension ConfirmPhoneNumberModal{
             modal.frame.origin.y = Helpers.screenHeight - height
             backDrop.layoutIfNeeded()
         }, completion: nil)
-
+        
+        return modal
     }
     
     func dismiss() {
@@ -204,5 +213,31 @@ extension ConfirmPhoneNumberModal{
         }, completion: { [weak self] _ in
             self?.superview?.removeFromSuperview()
         })
+    }
+    
+    public static func dismiss() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            
+            let subviews = keyWindow.subviews
+            for view in subviews {
+                // Check if the view is the backdrop (identified by its background color or tag, if set)
+                if view.backgroundColor == .gray.withAlphaComponent(0.5) {
+                    for subview in view.subviews {
+                        if subview is ConfirmPhoneNumberModal {
+                            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                                subview.frame.origin.y = Helpers.screenHeight
+                                view.layoutIfNeeded()
+                            }, completion: { _ in
+                                view.removeFromSuperview() // Remove the backdrop
+                            })
+                            return
+                        }
+                    }
+                    // If no ConfirmAccountModal is found, remove the backdrop anyway
+                    view.removeFromSuperview()
+                }
+            }
+        }
     }
 }

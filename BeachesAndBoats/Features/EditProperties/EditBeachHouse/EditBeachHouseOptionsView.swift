@@ -17,6 +17,7 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
     @IBOutlet weak var propertyNameEditBtn: UILabel!
     @IBOutlet weak var locationEditBtn: UILabel!
     @IBOutlet weak var availabilityEditBtn: UILabel!
+    @IBOutlet weak var blockAvailabilityEditBtn: UILabel!
     @IBOutlet weak var amenitiesEditBtn: UILabel!
     @IBOutlet weak var aboutListerEditBtn: UILabel!
     @IBOutlet weak var houseRulesEditBtn: UILabel!
@@ -35,7 +36,7 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
     
     var beachDataR: BeachDatas?
     var beachDetails: GetBeachData?
-    var request: CreateBeachListingRequest?
+//    var request: CreateBeachListingRequest?
     var id: String?
     
     // Flag to track if beachData has been loaded
@@ -76,12 +77,14 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
         generalPropertyImagesEditBtn.isHidden = !isEntireHouse
         roomsAndPricingEditBtn.isHidden = isEntireHouse
         roomsAndPricingEditBtn.isHidden = beachDetails?.rooms?.count ?? 0 < 1
+        listingPriceEditBtn.isHidden = beachDetails?.bookingType == "SINGLE"
         
         propertyNameLabel.text = beachDetails?.name
         let textsAndLabels: [(String, UILabel)] = [
             ("Property name and description", propertyNameEditBtn),
             ("Location", locationEditBtn),
             ("Availability" , availabilityEditBtn),
+            ("Block Availability" , blockAvailabilityEditBtn),
             ("Amenities and Services" , amenitiesEditBtn),
             ("About lister" , aboutListerEditBtn),
             ("House Rules" , houseRulesEditBtn),
@@ -94,38 +97,6 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
         gestureRecognizers()
 
         textsAndLabels.forEach { underlineText(text: $0.0, titleLabel: $0.1) }
-        
-        
-        request = CreateBeachListingRequest(name: beachDetails?.name,
-                                            description: beachDetails?.description,
-                                            aboutOwner: beachDetails?.aboutOwner,
-                                            overnightCheckIn: beachDetails?.overnightCheckIn?.toBackendTime(),
-                                            overnightCheckOut: beachDetails?.overnightCheckOut?.toBackendTime(),
-                                            dayCheckIn: beachDetails?.dayCheckIn?.toBackendTime(),
-                                            dayCheckOut: beachDetails?.dayCheckOut?.toBackendTime(),
-                                            categoryId: beachDetails?.category?.id,
-                                            subCategoryId: beachDetails?.subCategory?.id,
-                                            bookingType: beachDetails?.bookingType,
-                                            locationName: beachDetails?.locations?.name,
-                                            jettyLocation: beachDetails?.locations?.jettyLocation,
-                                            additionalHouseRules: beachDetails?.additionalHouseRules,
-                                            isPrivateStay: (beachDetails?.isPrivateStay ?? false) ? 1 : 0,
-                                            availableFrom: beachDetails?.availabilities?.availableFrom,
-                                            availableTo: beachDetails?.availabilities?.availableTo,
-                                            amenities: beachDetails?.amenities?.compactMap{ $0.id },
-                                            languages: beachDetails?.languages?.compactMap{ $0.id },
-                                            houseRules: beachDetails?.houseRules?.compactMap{ $0.id },
-                                            rooms: (beachDetails?.rooms?.count ?? 0 < 1) ? nil : beachDetails?.rooms?.map { $0.toRoom() },
-                                            roleType: nil,
-                                            listingPrice: beachDetails?.listingPrice,
-                                            discountPercent: Int(beachDetails?.discountPercent ?? 0),
-                                            pricePerDay: beachDetails?.pricePerDay,
-                                            dayDiscountPercent: Int(beachDetails?.dayDiscountPercent ?? 0),
-                                            noOfRooms : beachDetails?.noOfRooms,
-                                            noOfGuests : beachDetails?.noOfGuests,
-                                            noOfBeds : beachDetails?.noOfBeds,
-                                            noOfBathrooms : beachDetails?.noOfBathrooms
-                                        )
 
     }
     
@@ -133,6 +104,7 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
         propertyNameEditBtn.isUserInteractionEnabled = true
         locationEditBtn.isUserInteractionEnabled = true
         availabilityEditBtn.isUserInteractionEnabled = true
+        blockAvailabilityEditBtn.isUserInteractionEnabled = true
         amenitiesEditBtn.isUserInteractionEnabled = true
         aboutListerEditBtn.isUserInteractionEnabled = true
         houseRulesEditBtn.isUserInteractionEnabled = true
@@ -145,6 +117,7 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
             (propertyNameEditBtn, #selector(propertyNameEditBtnTapped)),
             (locationEditBtn, #selector(locationEditBtnTapped)),
             (availabilityEditBtn, #selector(availabilityEditBtnTapped)),
+            (blockAvailabilityEditBtn, #selector(blockAvailabilityEditBtnTapped)),
             (amenitiesEditBtn, #selector(amenitiesEditBtnTapped)),
             (aboutListerEditBtn, #selector(aboutListerEditBtnTapped)),
             (houseRulesEditBtn, #selector(houseRulesEditBtnTapped)),
@@ -152,7 +125,7 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
             (roomsAndPricingEditBtn, #selector(roomsAndPricingEditBtnTapped)),
             (generalPropertyImagesEditBtn, #selector(generalPropertyImagesBtnTapped)),
             (listingPriceEditBtn, #selector(listingPriceEditBtnTapped)),
-            (deletepropertyBtn, #selector(roomsAndPricingEditBtnTapped))
+            (deletepropertyBtn, #selector(deletePropertyBtnTapped))
         ]
         
         for (label, selector) in gestures {
@@ -203,57 +176,70 @@ class EditBeachHouseOptionsView: BaseViewControllerPlain {
     
     @objc func propertyNameEditBtnTapped(){
         print(beachDataR)
-        print(request)
+//        print(request)
         guard let id = id else { return }
-        coordinator?.gotoEditPropertyNameView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditPropertyNameView(beachData: beachDataR, details: beachDetails, id: id)
     }
     
     @objc func locationEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditPropertyAddressView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditPropertyAddressView(beachData: beachDataR, details: beachDetails, id: id)
     }
+    
     
     @objc func availabilityEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditPropertyAvailableDatesView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditPropertyAvailableDatesView(beachData: beachDataR, details: beachDetails, id: id)
+    }
+    
+    @objc func blockAvailabilityEditBtnTapped(){
+        guard let id = id else { return }
+        let isRoom: Bool = !isEntireHouse && beachDetails?.rooms?.count ?? 0 > 0
+        if isRoom {
+            let id = beachDetails?.rooms?.first?.id
+            coordinator?.gotoBlockBeachHouseAvailabilityView(id: id, isRoom: isRoom)
+        }else {
+            coordinator?.gotoBlockBeachHouseAvailabilityView(id: id, isRoom: isRoom)
+        }
+        
     }
     
     @objc func amenitiesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditPropertyAmenitiesView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditPropertyAmenitiesView(beachData: beachDataR, details: beachDetails, id: id)
     }
     
     @objc func aboutListerEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditAboutYouLanguageView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditAboutYouLanguageView(beachData: beachDataR, details: beachDetails, id: id)
     }
     
     @objc func houseRulesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditHouseRulesView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditHouseRulesView(beachData: beachDataR, details: beachDetails, id: id)
     }
     
     @objc func houseDetailsEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditHouseDetailsView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditHouseDetailsView(beachData: beachDataR, details: beachDetails, id: id)
     }
     
     @objc func generalPropertyImagesBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditUploadImageView(beachData: beachDataR, request: request, currentImages: beachDetails?.images?.compactMap{$0.url } ?? [], id: id)
+        coordinator?.gotoEditUploadImageView(beachData: beachDataR, request: nil, details: beachDetails, currentImages: beachDetails?.images?.compactMap{$0.url } ?? [], id: id)
     }
     
     @objc func roomsAndPricingEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditRoomsListView(beachData: beachDataR, request: request, id: id, details: beachDetails)
+        coordinator?.gotoEditRoomsListView(beachData: beachDataR, id: id, details: beachDetails)
     }
     
     @objc func listingPriceEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditEntireApartmentPriceView(beachData: beachDataR, request: request, id: id)
+        coordinator?.gotoEditEntireApartmentPriceView(beachData: beachDataR, details: beachDetails, id: id)
     }
     
-    @objc func deletePropertyBtn(){
+    @objc func deletePropertyBtnTapped(){
         guard let id = id else { return }
         LoadingModal.show()
         deleteVM.deleteBeach(id: id)
@@ -279,14 +265,14 @@ extension BeachRoom {
             name: name,
             description: description,
             quantity: quantity,
-            roomAmenities: [],
-            pricePerNight: pricePerNight,
+            roomAmenities: amenities?.compactMap{ $0.id },
+            pricePerNight: actual_price_per_night,
             discountPercent: Int(discountPercent ?? 0),
-            pricePerDay: pricePerDay,
+            pricePerDay: actual_price_per_day,
             dayDiscountPercent: Int(dayDiscountPercent ?? 0),
             bedTypes: bedTypes,
-            hasPrivateBathroom: Int(hasPrivateBathroom ?? ""),
-            noOfOccupant: Int(noOfOccupant ?? "")
+            hasPrivateBathroom: Int(hasPrivateBathroom ?? 0),
+            noOfOccupant: Int(noOfOccupant ?? 0)
         )
     }
 }

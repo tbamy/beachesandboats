@@ -17,6 +17,7 @@ class EditAboutYouDescriptionView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     var id: String?
     
     var disposeBag = DisposeBag()
@@ -32,7 +33,7 @@ class EditAboutYouDescriptionView: BaseViewControllerPlain {
     
     func setUp(){
         
-        descriptionLabel.text = createBeachListing?.aboutOwner ?? ""
+        descriptionLabel.text = details?.aboutOwner ?? ""
         
         descriptionLabel.textChanged = { [weak self] textField, range, replacementString in
             guard let self = self else { return }

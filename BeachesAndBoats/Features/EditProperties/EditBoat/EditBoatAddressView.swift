@@ -20,6 +20,7 @@ class EditBoatAddressView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var locations: [PropertyLocation]?
     
     var disposeBag = DisposeBag()
@@ -42,10 +43,10 @@ class EditBoatAddressView: BaseViewControllerPlain {
     func setup(){
 
         locations = boatData?.property_location
-        selectedBoatLocation = createBoatListing?.locationName
+        selectedBoatLocation = details?.locations?.name ?? ""
         
-        locationField.text = createBoatListing?.jettyLocation ?? ""
-        
+        locationField.text = details?.locations?.jettyLocation ?? ""
+    
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -100,13 +101,15 @@ class EditBoatAddressView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id, validateJettyLocation() else { return }
         
-        if var createBoatListing = createBoatListing{
-            createBoatListing.locationName = boatLocation
-            createBoatListing.jettyLocation = locationField.text
+        if createBoatListing == nil{
+            createBoatListing = CreateBoatListingRequest()
+        }
+            createBoatListing?.locationName = boatLocation
+            createBoatListing?.jettyLocation = locationField.text
             
-            self.createBoatListing = createBoatListing
             print(createBoatListing)
             
+        if let createBoatListing = createBoatListing {
             LoadingModal.show(title: "Updating Record...")
             vm.editBoat(createBoatListing, id: id)
             

@@ -634,7 +634,16 @@ class AccountCoordinator: Coordinator{
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
+    
+    func gotoChat(bookingId: String, otherUser: String, conversationId: String, propertyType: String) {
+        let coordinator = MessagesCoordinator(navigationController: self.navigationController)
+        coordinator.gotoChat(bookingId: bookingId, otherUser: otherUser, conversationId: conversationId, propertyType: propertyType)
+    }
        
+    func gotoSafetyView(){
+        let coordinator = HostingServiceMenuCoordinator(navigationController: self.navigationController)
+        coordinator.gotoSafetyView()
+    }
     
     func backToDashboard() {
         navigationController = BaseNavigationController(rootViewController: Dashboard())

@@ -8,6 +8,18 @@
 import Foundation
 
 class ListingServiceMock: Provider<ListingTarget>, ListingService{
+    func getReservedDates(request: GetReservedDatesRequest, completion: @escaping (Result<AddReservedDateResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
+    func addReservedDates(request: AddReservedDateRequest, completion: @escaping (Result<AddReservedDateResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
+    func removeReservedDates(request: AddReservedDateRequest, completion: @escaping (Result<AddReservedDateResponse, ErrorResponse>) -> Void) {
+        
+    }
+    
     func deleteImages(request: DeleteImagesRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         
     }

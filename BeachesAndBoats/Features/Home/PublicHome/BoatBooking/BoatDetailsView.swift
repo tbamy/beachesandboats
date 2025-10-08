@@ -74,7 +74,7 @@ class BoatDetailsView: BaseViewControllerPlain {
         
 //        setup()
         configureAllCollectionViews()
-        setupCustomNavigationButtons()
+//        setupCustomNavigationButtons()
         bind()
         
         LoadingModal.show()
@@ -103,7 +103,7 @@ class BoatDetailsView: BaseViewControllerPlain {
 //        totalAmountLabel.text = "₦ \(boatDetails?.pricePerNight ?? 0)"
         proceedView.isHidden = true
         
-        boatCapacity = (Int(boatDetails?.noOfPassengers ?? "1") ?? 1)
+        boatCapacity = (Int(boatDetails?.noOfPassengers ?? 1))
         
         print("Cap: \(boatCapacity)")
         

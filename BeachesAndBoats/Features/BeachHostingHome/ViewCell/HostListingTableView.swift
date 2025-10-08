@@ -16,7 +16,7 @@ class HostListingTableView: UITableViewCell {
     @IBOutlet weak var ratingLbl: UILabel!
     @IBOutlet weak var pricePerNightLbl: UILabel!
     
-    var isPrivateRoom: Bool = false
+    var isSingle: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,20 +25,22 @@ class HostListingTableView: UITableViewCell {
     
     func beachHouseListingCell(with data: BeachHouseListing) {
         beachName.text = data.name ?? "No name available"
+        isSingle = data.bookingType == "SINGLE"
         
 //        if data.bookingType
         
         if let location = data.locations {
-            locationLbl.text = "\(location.jettyLocation ?? ""), \(location.name ?? "")"
+            locationLbl.text = "\(location.name ?? ""), \(location.jettyLocation ?? "")"
         }
         
         if let availability = data.availabilities {
             availabilitDate.text = "\(availability.availableFrom?.convertToShorterDateFormat() ?? "") - \(availability.availableTo?.convertToShorterDateFormat() ?? "")"
         }
         
-        if let listingPrice = data.listingPrice {
-            pricePerNightLbl.text = "₦\(listingPrice.toAmount() ?? "0")"
-        }
+//        if let listingPrice = data.listingPrice {
+        
+        pricePerNightLbl.text = isSingle ? "₦\(data.minRoomPricePerNight?.toAmount() ?? "0")" : "₦\(data.listingPrice?.toAmount() ?? "0")"
+//        }
         
         if let rating = data.rating {
             ratingLbl.text = "\(rating)"
@@ -54,7 +56,7 @@ class HostListingTableView: UITableViewCell {
         beachName.text = data.name
         
         if let location = data.locations {
-            locationLbl.text = "\(location.jettyLocation ?? ""), \(location.name ?? "")"
+            locationLbl.text = "\(location.name ?? ""), \(location.jettyLocation ?? "")"
         }
         
         if let availability = data.availabilities {

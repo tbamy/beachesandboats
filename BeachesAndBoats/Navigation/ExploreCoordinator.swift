@@ -68,8 +68,6 @@ class ExploreCoordinator: Coordinator {
             return
         }
         
-        print("✅ Creating ConfirmBookingView - NavigationController exists: \(navController)")
-        
         let vc: ConfirmBookingView = .fromNib()
         
         // Set properties before coordinator assignment
@@ -79,11 +77,7 @@ class ExploreCoordinator: Coordinator {
         vc.units = units
         vc.isEntireApartment = isEntireApartment
         vc.hidesBottomBarWhenPushed = true
-        
-        // Assign coordinator last and with safety check
-        print("✅ About to assign coordinator to ConfirmBookingView")
         vc.coordinator = self
-        print("✅ Coordinator assigned successfully")
         
         push(viewController: vc)
     }
@@ -140,29 +134,35 @@ class ExploreCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoFindChef(propertyType: String, bookingId: String) {
+    func gotoFindChef(propertyType: String, bookingId: String, startDate: String, endDate: String) {
         let vc: FindChefView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
         vc.bookingId = bookingId
+        vc.startDate = startDate
+        vc.endDate = endDate
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoFindBouncer(propertyType: String, bookingId: String) {
+    func gotoFindBouncer(propertyType: String, bookingId: String, startDate: String, endDate: String) {
         let vc: FindBouncerView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
         vc.bookingId = bookingId
+        vc.startDate = startDate
+        vc.endDate = endDate
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }
     
-    func gotoFindDj(propertyType: String, bookingId: String) {
+    func gotoFindDj(propertyType: String, bookingId: String, startDate: String, endDate: String) {
         let vc: FindDJView = .fromNib()
         vc.coordinator = self
         vc.propertyType = propertyType
         vc.bookingId = bookingId
+        vc.startDate = startDate
+        vc.endDate = endDate
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }

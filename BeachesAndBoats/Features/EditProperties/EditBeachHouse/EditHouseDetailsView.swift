@@ -19,6 +19,7 @@ class EditHouseDetailsView: BaseViewControllerPlain {
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     
     var id: String?
     
@@ -40,10 +41,10 @@ class EditHouseDetailsView: BaseViewControllerPlain {
     func setup(){
         
         // Set initial counts from saved data or default to 0
-        let roomsCount = createBeachListing?.noOfRooms ?? 1
-        let guestsCount = createBeachListing?.noOfGuests ?? 1
-        let bedsCount = createBeachListing?.noOfBeds ?? 1
-        let bathroomsCount = createBeachListing?.noOfBathrooms ?? 1
+        let roomsCount = details?.noOfRooms ?? 1
+        let guestsCount = details?.noOfGuests ?? 1
+        let bedsCount = details?.noOfBeds ?? 1
+        let bathroomsCount = details?.noOfBathrooms ?? 1
         
         noOfRooms.model = IncreaseDecreaseModel(id: "", type: "Number of rooms", subtitle: "", count: roomsCount)
         noOfGuests.model = IncreaseDecreaseModel(id: "", type: "Number of guest allowed", subtitle: "", count: guestsCount)
@@ -58,11 +59,13 @@ class EditHouseDetailsView: BaseViewControllerPlain {
         guard let id = id else { return }
         
 //        if let beachData = beachData{
-            if var createBeachListing = createBeachListing{
-                createBeachListing.noOfRooms = noOfRooms.count
-                createBeachListing.noOfGuests = noOfGuests.count
-                createBeachListing.noOfBeds = noOfBeds.count
-                createBeachListing.noOfBathrooms = noOfBathrooms.count
+        if createBeachListing == nil{
+            createBeachListing = CreateBeachListingRequest()
+        }
+                createBeachListing?.noOfRooms = noOfRooms.count
+                createBeachListing?.noOfGuests = noOfGuests.count
+                createBeachListing?.noOfBeds = noOfBeds.count
+                createBeachListing?.noOfBathrooms = noOfBathrooms.count
                 print(createBeachListing)
                 
                 guard noOfRooms.count > 0 && noOfGuests.count > 0 && noOfBeds.count > 0 && noOfBathrooms.count > 0 else {
@@ -70,9 +73,9 @@ class EditHouseDetailsView: BaseViewControllerPlain {
                     return
                 }
                 
-                self.createBeachListing = createBeachListing
                 print(createBeachListing)
                 
+            if let createBeachListing = createBeachListing{
                 LoadingModal.show(title: "Updating Record...")
                 vm.editBeach(createBeachListing, id: id)
             }

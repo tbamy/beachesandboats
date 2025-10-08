@@ -10,19 +10,28 @@ import PhotosUI
 import RxSwift
 import SDWebImage
 
+protocol EditHouseUploadImageDelegate: AnyObject {
+    func didFinishRoomEdit(updatedRequest: CreateBeachListingRequest)
+}
+
 class EditHouseUploadImageView: BaseViewControllerPlain {
     
     var coordinator: HostingServiceMenuCoordinator?
+    weak var delegate: EditHouseUploadImageDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var uploadBtn: UploadImageField!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var uploadLabel: UILabel!
+    
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
-    var room: Int?
+    var details: GetBeachData?
+    var room: String?
     var isEntireHouse: Bool = false
     var id: String?
-    var roomId: String?
     var currentImages: [String] = []
     
     var disposeBag = DisposeBag()
@@ -53,6 +62,12 @@ class EditHouseUploadImageView: BaseViewControllerPlain {
         bindNetwork()
         setupDragAndDrop()
         loadExistingImages()
+        
+        if let listing = details, listing.bookingType == "FULL" {
+            titleLabel.text = "What does this property look like?"
+            subtitleLabel.text = "Upload pictures of this property"
+            uploadLabel.text = "Upload a minimum of 5 photos for this property"
+        }
     }
 
     func loadExistingImages() {
@@ -111,7 +126,6 @@ class EditHouseUploadImageView: BaseViewControllerPlain {
 
     @IBAction func saveAndExit(_ sender: Any) {
         guard let beachData = beachData else { return }
-        guard let createBeachListing = createBeachListing else { return }
         guard let id = id else { return }
         
         let totalImagesCount = displayImages.count
@@ -120,31 +134,53 @@ class EditHouseUploadImageView: BaseViewControllerPlain {
             return
         }
 
-        // ✅ Already compressed and validated
-        let roomImages = validatedImages.map { $0.data }
-
-        var updatedBeachListing = createBeachListing
+        // ✅ Get only NEW images that were added (not existing URLs)
+        let newImageData = validatedImages.map { $0.data }
+        
         if isEntireHouse {
-            updatedBeachListing.images = roomImages
-        } else {
-            if let roomIndex = room, roomIndex >= 0,
-               roomIndex < (updatedBeachListing.rooms?.count ?? 0) {
-                var existingRoom = updatedBeachListing.rooms![roomIndex]
-                existingRoom.images = roomImages
-                updatedBeachListing.rooms![roomIndex] = existingRoom
+            // For entire house, only send new images
+            if createBeachListing == nil {
+                createBeachListing = CreateBeachListingRequest()
             }
-        }
-        self.createBeachListing = updatedBeachListing
-
-        
-        print("Updated CreateBeachListing")
-        print("New images to submit: \(roomImages.count)")
-        
-        if isEntireHouse {
-            LoadingModal.show(title: "Updating Record...")
-            vm.editBeach(createBeachListing, id: id)
+            createBeachListing?.images = newImageData
+            
+            if let createBeachListing = createBeachListing {
+                LoadingModal.show(title: "Updating Record...")
+                vm.editBeach(createBeachListing, id: id)
+            }
+            
         } else {
-            coordinator?.popToRoomsListScreen()
+            // For room editing
+            if let createBeachListing = createBeachListing {
+                var updatedBeachListing = createBeachListing
+                
+                if let roomIndex = updatedBeachListing.rooms?.firstIndex(where: { $0.id == room }) {
+                    var existingRoom = updatedBeachListing.rooms![roomIndex]
+                    
+                    // ✅ Only update images if there are NEW images to add
+                    if !newImageData.isEmpty {
+                        existingRoom.images = newImageData
+                    } else {
+                        // If no new images, keep existing images as nil
+                        // (or you might want to keep the current images field unchanged)
+                        existingRoom.images = nil
+                    }
+                    
+                    updatedBeachListing.rooms![roomIndex] = existingRoom
+                }
+                
+                self.createBeachListing = updatedBeachListing
+                print("Updated Room Data: \(updatedBeachListing)")
+                print("Final Room Data: \(createBeachListing)")
+                print("New images count: \(newImageData.count)")
+                print("Validated images count: \(validatedImages.count)")
+                
+                if let updatedRequest = self.createBeachListing {
+                    delegate?.didFinishRoomEdit(updatedRequest: updatedRequest)
+                }
+                
+                coordinator?.popToRoomsListScreen()
+            }
         }
     }
     
@@ -167,14 +203,22 @@ class EditHouseUploadImageView: BaseViewControllerPlain {
     
     func bindNetwork(){
         vm.output.subscribe(onNext: {[weak self] response in
+            guard let self = self else { return }
             LoadingModal.dismiss()
             
             switch response {
             case .editBeachSuccessful(let response):
                 print(response)
-                MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: {
-                    self?.coordinator?.popToRoomsListScreen()
-                })
+                if self.isEntireHouse {
+                    MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: {
+                        self.coordinator?.popToOptionsScreen()
+                    })
+                }else{
+                    MiddleModal.show(title: response.message ?? "", type: .success, onConfirm: {
+                        self.coordinator?.popToRoomsListScreen()
+                    })
+                }
+                
                 
             case .editBeachFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
@@ -247,7 +291,7 @@ extension EditHouseUploadImageView: UICollectionViewDataSource {
                 // Set URL in model for async loading inside ImageView
 //                if let url = urlString {
                     let type = self.isEntireHouse ? "beach" : "room"
-                    let id = self.isEntireHouse ? self.id : self.roomId
+                    let id = self.isEntireHouse ? self.id : self.room
                     let deleteRequest = DeleteImagesRequest(property_type: type, property_id: id ?? "", images: [urlString])
                     // Store the URL being deleted for reference in the response handler
                     self.deleteVM.lastDeletedImageUrl = urlString

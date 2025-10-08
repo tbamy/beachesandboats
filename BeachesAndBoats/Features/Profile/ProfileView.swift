@@ -72,7 +72,7 @@ class ProfileView: UIViewController {
     }
     
     @objc func guideBookAction(){
-        Toast.show(message: "Coming Soon")
+        coordinator?.gotoSafetyView()
     }
     
     @objc func listPropertyAction(){

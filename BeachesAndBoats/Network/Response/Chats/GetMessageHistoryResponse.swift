@@ -96,6 +96,52 @@ struct ProviderBookingDetail: Codable {
     }
 }
 
+//struct ProviderBeachHouseBooking: Codable {
+//    let id: String
+//    let hostId: String
+//    let hostFirstName: String
+//    let hostLastName: String
+//    let hostEmail: String
+//    let phoneNumber: String
+//    let isHostAccountVerified: Bool
+//    let beachHouseRoom: BeachHouseRoom?
+//    let beachHouse: BeachHouse?
+//    let checkingDate: String
+//    let checkoutDate: String
+//    let checkingTime: String
+//    let checkoutTime: String
+//    let noOfPeople: Int
+//    let status: String
+//    let summary: String?
+//    let units: String
+//    let total: Double
+//    let createdAt: String
+//    let adminCharge: Double
+//    let cleaningFee: String
+//    let noOfNights: Int
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case id, status, summary, units, total
+//        case hostId = "host_id"
+//        case hostFirstName = "host_first_name"
+//        case hostLastName = "host_last_name"
+//        case hostEmail = "host_email"
+//        case phoneNumber = "phone_number"
+//        case isHostAccountVerified
+//        case beachHouseRoom = "beach_house_room"
+//        case beachHouse = "beach_house"
+//        case checkingDate = "checking_date"
+//        case checkoutDate = "checkout_date"
+//        case checkingTime = "checking_time"
+//        case checkoutTime = "checkout_time"
+//        case noOfPeople = "no_of_people"
+//        case createdAt = "created_at"
+//        case adminCharge = "admin_charge"
+//        case cleaningFee = "cleaning_fee"
+//        case noOfNights = "no_of_nights"
+//    }
+//}
+
 
 
 // MARK: - Link

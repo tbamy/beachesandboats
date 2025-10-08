@@ -150,8 +150,8 @@ extension BookingTarget: BaseTarget{
             return .requestPlain
         case .getBoat:
             return .requestPlain
-        case .cancelBooking(_):
-            return .requestPlain
+        case .cancelBooking(let request):
+            return .requestJSONEncodable(request)
         }
     }
     

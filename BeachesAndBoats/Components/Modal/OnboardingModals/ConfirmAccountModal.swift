@@ -116,28 +116,6 @@ public class ConfirmAccountModal: BaseXib {
         
         return true
     }
-
-    
-//    public static func dismiss() {        
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-//            
-//            let subviews = keyWindow.subviews
-//            for view in subviews {
-//                for v in view.subviews {
-//                    if v is ConfirmAccountModal {
-//                        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-//                            v.frame.origin.y = Helpers.screenHeight
-//                            view.layoutIfNeeded()
-//                        }, completion: { _ in
-//                            view.removeFromSuperview()
-//                        })
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
     
     public static func dismiss() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

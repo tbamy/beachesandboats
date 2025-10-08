@@ -51,8 +51,8 @@ class LoginView: BaseViewControllerPlain, AttributedLabelDelegate {
     func setupTerms() {
         let text = "By continuing, you have read and agreed to our Terms and Conditions, Privacy Statement and Nondiscrimination Policy."
         terms.configure(text: text, links: [
-            "Terms and Conditions, Privacy Statement": URL(string: "https://google.com")!,
-            "Nondiscrimination Policy": URL(string: "https://google.com")!
+            "Terms and Conditions, Privacy Statement": URL(string: "https://beachesandboats.com/terms-and-conditions")!,
+            "Nondiscrimination Policy": URL(string: "https://beachesandboats.com/terms-and-conditions")!
         ])
         
         terms.delegate = self

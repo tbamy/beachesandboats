@@ -39,7 +39,7 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBOutlet weak var cleaningFeeLabel: UILabel!
     @IBOutlet weak var serviceFeeLabel: UILabel!
     @IBOutlet weak var CostTotalAmountLabel: UILabel!
-    @IBOutlet weak var upcomingStack: UIStackView!
+    @IBOutlet weak var upcomingStack: UIView!
     @IBOutlet weak var reviewBtn: SecondaryButton!
     @IBOutlet weak var tripStack: UIStackView!
     @IBOutlet weak var commentsStack: UIStackView!
@@ -67,18 +67,21 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     var isupcomingBooking: Bool = false
     private var currentModalHeight: CGFloat = UIScreen.main.bounds.height * 0.5
     var isDayBooking: Bool = false
+    var isEntireHouse: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        setupCustomNavigationButtons()
-        checkinDateLabel.isUserInteractionEnabled = false
-        checkoutDateLabel.isUserInteractionEnabled = false
-        itemToShow()
         bindNetwork()
-        configureAllCollectionViews()
         LoadingModal.show()
         beachInput.onNext(.getBeachHouse(id: booking?.beachHouse?.id ?? ""))
+        
+//        setupCustomNavigationButtons()
+        checkinDateLabel.isUserInteractionEnabled = false
+        checkoutDateLabel.isUserInteractionEnabled = false
+        
+        configureAllCollectionViews()
+        itemToShow()
+        setup()
     }
     
     func itemToShow() {
@@ -95,34 +98,53 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     
     func setup() {
         isDayBooking = booking?.bookingType == "DAY"
+        isEntireHouse = booking?.propertyBookingType == "FULL"
+        
         if let url = URL(string: booking?.beachHouse?.image?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             topImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
         }
         let roomDetails = booking?.beachHouseRoom
         selectedRoomView.isHidden = roomDetails == nil
-        let price = isDayBooking ? booking?.beachHouseRoom?.pricePerDay ?? 0 : booking?.beachHouseRoom?.pricePerNight ?? 0
-        let priceAndUnit = price * (Float(booking?.units ?? "1") ?? 1)
+        var price: Float = 0.0
+        if isEntireHouse {
+            price = isDayBooking ? booking?.beachHouse?.pricePerDay ?? 0 : booking?.beachHouse?.listingPrice ?? 0
+        }else {
+            price = isDayBooking ? booking?.beachHouseRoom?.pricePerDay ?? 0 : booking?.beachHouseRoom?.pricePerNight ?? 0
+        }
+        
+        let priceAndUnit = price * (Float(booking?.units ?? 1))
         let totalPrice = priceAndUnit * (Float(booking?.noOfNights ?? 1))
         
-        if let roomImage = URL(string: roomDetails?.images.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
+        if let roomImage = URL(string: roomDetails?.images?.first?.url?.replacingOccurrences(of: "http://", with: "https://") ?? "") {
             selectedRoomImage.sd_setImage(with: roomImage, placeholderImage: UIImage(named: "dummy"))
         }
         
         switch booking?.bookingType {
         case "ANY":
             bookingTypeLabel.text = "Entire house or a private room"
+            roomAndGuestsLabel.text = beachDetails?.rooms?.count ?? 0 > 0
+            ? "\(beachDetails?.rooms?.compactMap { Int($0.noOfOccupant ?? 0) }.reduce(0, +) ?? 0) guest(s), \(beachDetails?.rooms?.count ?? 0) room(s)"
+            : "\(beachDetails?.noOfGuests ?? 0) guest(s), \(beachDetails?.noOfRooms ?? 0) room(s)"
+            
+            
         case "SINGLE":
             bookingTypeLabel.text = "Private room in a beach house"
+            roomAndGuestsLabel.text = "\(beachDetails?.rooms?.compactMap { Int($0.noOfOccupant ?? 0) }.reduce(0, +) ?? 0) guest(s), \(beachDetails?.rooms?.count ?? 0) room(s)"
         case "FULL":
             bookingTypeLabel.text = "Entire beach house"
+            roomAndGuestsLabel.text = "\(beachDetails?.noOfGuests ?? 0) guest(s), \(beachDetails?.noOfRooms ?? 0) room(s)"
         default:
             bookingTypeLabel.text = "Entire house or a private room"
+            roomAndGuestsLabel.text = beachDetails?.rooms?.count ?? 0 > 0
+            ? "\(beachDetails?.rooms?.compactMap { Int($0.noOfOccupant ?? 0) }.reduce(0, +) ?? 0) guest(s), \(beachDetails?.rooms?.count ?? 0) room(s)"
+            : "\(beachDetails?.noOfGuests ?? 0) guest(s), \(beachDetails?.noOfRooms ?? 0) room(s)"
+
         }
         
         selectedRoomTitleLabel.text = roomDetails?.name
-        selectedRoomGuestLabel.text = "\(roomDetails?.noOfOccupant ?? "1") Guest(s)"
+        selectedRoomGuestLabel.text = "\(roomDetails?.noOfOccupant ?? 1) Guest(s)"
         selectedRoomDateLabel.text = formatDateRange(from: booking?.checkingDate, to: booking?.checkoutDate)
-        selectedRoomBedLabel.text = "\(roomDetails?.bedTypes.first?.quantity ?? "") \(roomDetails?.bedTypes.first?.name ?? "")"
+        selectedRoomBedLabel.text = "\(roomDetails?.bedTypes?.first?.quantity ?? 0) \(roomDetails?.bedTypes?.first?.name ?? "")"
         selectedRoomCostLabel.text = isDayBooking ? "₦ \(roomDetails?.pricePerDay ?? 0)" : "₦ \(roomDetails?.pricePerNight ?? 0)"
         
         titleLabel.text = booking?.beachHouse?.name
@@ -131,7 +153,8 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         aboutHostLabel.text = booking?.beachHouse?.aboutOwner
         hostNameLabel.text = "\(booking?.hostFirstName ?? "") \(booking?.hostLastName ?? "")"
         ratingLabel.text = "\(booking?.beachHouse?.rating ?? 0)"
-        roomAndGuestsLabel.text = "\(booking?.noOfPeople ?? "0") guest(s) · \(booking?.beachHouseRoom?.bedTypes.count ?? 0) bedroom(s) · \(booking?.beachHouseRoom?.bedTypes.first?.quantity ?? "") bed(s) · \(booking?.beachHouseRoom?.hasPrivateBathroom ?? "0") private bath(s)"
+        
+        
         checkinDateLabel.text = booking?.checkingDate ?? ""
         checkoutDateLabel.text = booking?.checkoutDate ?? ""
         costLabel.text = isDayBooking ? "₦ \(priceAndUnit) (Day booking)" : "₦ \(priceAndUnit) X \(booking?.noOfNights ?? 1) night(s)"
@@ -143,6 +166,8 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
         amenities = beachDetails?.amenities ?? []
         comments = beachDetails?.reviews ?? []
         commentsStack.isHidden = comments.count < 1
+        categoriesCollectionView.reloadData()
+        guestCommentsCollectionView.reloadData()
         
         topImage.isUserInteractionEnabled = true
         topImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewImages)))
@@ -184,7 +209,7 @@ class BeachBookingDetailsView: BaseViewControllerPlain {
     @IBAction func cancelBookingTapped(_ sender: Any) {
         let cancelBookingView = CancelBookingView()
         cancelBookingView.bookingId = booking?.id ?? ""
-        cancelBookingView.bookingType = "Boat"
+        cancelBookingView.bookingType = "BeachHouse"
         cancelBookingView.modalPresentationStyle = .custom
         cancelBookingView.transitioningDelegate = self
         currentModalHeight = UIScreen.main.bounds.height * 0.75
@@ -260,6 +285,7 @@ extension BeachBookingDetailsView: UICollectionViewDelegate, UICollectionViewDat
         case 0:
             return amenities.count
         case 1:
+            print(comments.count)
             return comments.count
         default:
             return 0

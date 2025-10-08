@@ -46,20 +46,21 @@ class ListingDashboard: UIViewController {
     var coordinator: HostingHouseAndBoatHomeCoordinator?
     
     let vm = ListingDashboardVM()
-    let earningsVM = EarningsVM()
+    let userVM = UpdateProfileVM()
+    let userInput = PublishSubject<UpdateProfileVM.Input>()
     let hostListingsVM = HostListingVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<ListingDashboardVM.Input>()
-    let earningsInput = PublishSubject<EarningsVM.Input>()
     let hostListingsInput = PublishSubject<HostListingVM.Input>()
 
-    
+//    var beachCheckingOutData: [BeachHouseReservationsCurrentReservation] = []
     var currentHostingData: [BeachHouseReservationsCurrentReservation] = []
     var cancelBookingData: [BeachHouseReservationsCurrentReservation] = []
     var upcomingReservationData: [BeachHouseReservationsCurrentReservation] = []
     var beachHouseCount: Int = 0
     var boatHouseCount: Int = 0
     
+    var boatCheckingOutData: [BoatReservationsCurrentReservation] = []
     var boatCancelBookingData: [BoatReservationsCurrentReservation] = []
     var boatUpcomingReservationData: [BoatReservationsCurrentReservation] = []
     var boatHostingData: [BoatReservationsCurrentReservation] = []
@@ -72,7 +73,7 @@ class ListingDashboard: UIViewController {
         hostListingsInput.onNext(.beachHouseListing)
         input.onNext(.beachHouseReservation)
         input.onNext(.boatReservation)
-        earningsInput.onNext(.topEarnings(TopEarningRequest(year: "", month: "")))
+        userInput.onNext(.getDashboardUser)
         
         LoadingModal.show(title: "Loading...")
     }
@@ -127,6 +128,7 @@ class ListingDashboard: UIViewController {
         if isBeachReservation {
             beachReservation.isNotSelected = true
             boatReservation.isNotSelected = false
+            self.checkingOutLbl.text = "Checking out (\(self.currentHostingData.count))"
             self.upcomingLbl.text = "Upcoming (\(self.upcomingReservationData.count))"
             self.currentHostingLbl.text = "Current hosting (\(self.currentHostingData.count))"
             self.cancelLbl.text = "Cancelled booking (\(self.cancelBookingData.count))"
@@ -225,31 +227,6 @@ class ListingDashboard: UIViewController {
     @IBAction func cancelBookingViewAll(_ sender: Any) {
     }
     
-    private func handleTopEarningsSuccess(_ response: TopEarningResponse) {
-        // Update UI with earnings data
-//        if let amount = response.data?.topEarners, let earningAmount = amount.first {
-//            amountLbl.text = "\(earningAmount.value.totalEarnings ?? 0.00)"
-//        }
-    
-        var totalEarnings: Decimal = 0
-        
-        if let userEarnings = response.data?.userEarnings, let yearData = userEarnings[response.data?.userEarnings?.keys.first ?? ""], !yearData.isEmpty {
-             totalEarnings = yearData.values.reduce(0, +)
-        } else if let topEarners = response.data?.topEarners {
-            totalEarnings = topEarners.values.compactMap { $0.totalEarnings }.reduce(0, +)
-        }
-        
-        DispatchQueue.main.async {
-            self.amountLbl.text = "₦\(GeneralFormatter.decimalToString(totalEarnings))"
-        }
-        
-        if let year = response.data?.userEarnings?.keys.first {
-            currentEarningYearLbl.text = "Current Earning \(year)"
-        } else {
-            currentEarningYearLbl.text = "Current Earning"
-        }
-
-    }
     
     func imageDesign() {
         for image in images {
@@ -368,6 +345,7 @@ extension ListingDashboard {
             case .beachHouseReservationSuccess(let response):
                 self?.currentHostingData = response.currentReservations ?? []
                 self?.upcomingReservationData = response.upcomingReservations ?? []
+                self?.cancelBookingData = response.cancelledReservations ?? []
                 self?.updateSegmentSelection()
                 self?.currentHostingCollectionView.reloadData()
                 self?.upcomingCollectionView.reloadData()
@@ -380,6 +358,7 @@ extension ListingDashboard {
             case .boatReservationSuccess(let response):
                 self?.boatHostingData = response.currentReservations ?? []
                 self?.boatUpcomingReservationData = response.upcomingReservations ?? []
+                self?.boatCancelBookingData = response.cancelledReservations ?? []
                 self?.updateSegmentSelection()
                 self?.currentHostingCollectionView.reloadData()
                 self?.upcomingCollectionView.reloadData()
@@ -391,14 +370,14 @@ extension ListingDashboard {
             }
         }).disposed(by: disposeBag)
         
-        earningsVM.transform(input: earningsInput)
-        earningsVM.output.subscribe(onNext: { [weak self] output in
+        userVM.transform(input: userInput)
+        userVM.getUserOutput.subscribe(onNext: { [weak self] output in
             LoadingModal.dismiss()
             switch output {
-            case .topEarningsSuccess(let response):
-                // Handle earnings success
-                self?.handleTopEarningsSuccess(response)
-            case .topEarningsFailure(let error):
+            case .getDashboardUserSuccess(let response):
+                let userBalance = response.data?.wallet.balance ?? 0.00
+                self?.amountLbl.text = "₦\(GeneralFormatter.decimalToString(userBalance))"
+            case .getDashboardUserFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
@@ -428,10 +407,25 @@ extension ListingDashboard: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 1:
-            checkOutNoDataImg.isHidden = false
-            checkOutCollectionView.isHidden = true
-            checkOutNoData()
-            return 0
+            if isBeachReservation {
+                if currentHostingData.isEmpty  {
+                    checkOutNoDataImg.isHidden = false
+                    checkOutCollectionView.isHidden = true
+                    checkOutNoData()
+                    return 0
+                }
+            } else {
+                if boatHostingData.isEmpty  {
+                    checkOutNoDataImg.isHidden = false
+                    checkOutCollectionView.isHidden = true
+                    checkOutNoData()
+                    return 0
+                }
+            }
+            
+            checkOutNoDataImg.isHidden = true
+            checkOutCollectionView.isHidden = false
+            return isBeachReservation ? currentHostingData.count : boatHostingData.count
             
         case 2:
             if isBeachReservation {
@@ -504,6 +498,15 @@ extension ListingDashboard: UICollectionViewDataSource, UICollectionViewDelegate
         }
         
         switch collectionView.tag {
+        case 1: // Checking out Hosting
+            if isBeachReservation {
+                let cellData = currentHostingData[indexPath.item]
+                cell.checkingOutHostingCell(with: cellData)
+            } else {
+                let cellData = boatCheckingOutData[indexPath.item]
+                cell.boatCurrentHostingCell(with: cellData)
+            }
+            
         case 2: // Current Hosting
             if isBeachReservation {
                 let cellData = currentHostingData[indexPath.item]
@@ -538,33 +541,6 @@ extension ListingDashboard: UICollectionViewDataSource, UICollectionViewDelegate
         }
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HostingCollectionViewCell", for: indexPath) as? HostingCollectionViewCell else {
-//            return UICollectionViewCell()
-//        }
-//        
-//        switch collectionView.tag {
-//        case 2:
-//            if isBeachReservation {
-//                let cellData = currentHostingData[indexPath.item]
-//                cell.currentHostingCell(with: cellData)
-//            } else {
-//                let cellData = boatHostingData[indexPath.item]
-//                cell.boatCurrentHostingCell(with: cellData)
-//            }
-//           
-//        case 3:
-//            let cellData = upcomingReservationData[indexPath.item]
-//            cell.upcomingHostingCell(with: cellData)
-//        case 4:
-//            let cellData = cancelBookingData[indexPath.item]
-//            cell.cancelledBookingCell(with: cellData)
-//        default:
-//            break
-//        }
-//        return cell
-//    }
 }
 
 extension ListingDashboard: UICollectionViewDelegateFlowLayout{
@@ -573,7 +549,7 @@ extension ListingDashboard: UICollectionViewDelegateFlowLayout{
         
         let width = collectionView.bounds.width
         let height: CGFloat = 310
-        return CGSize(width: width, height: height)
+        return CGSize(width: width - 15, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

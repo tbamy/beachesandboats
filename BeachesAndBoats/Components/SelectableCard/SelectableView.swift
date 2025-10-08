@@ -237,21 +237,6 @@ public class SelectableView: BaseXib, Sizeable {
          right.constant = 16
      }
     
-//    func setUpForNoCheckBox() {
-//        image.isHidden = true
-//        topImage.isHidden = true
-//        subtitle.isHidden = true
-//        checkButton.isHidden = true
-//        title.size = 13
-////        topPaddingView.isHidden = true
-//        mainStack.alignment = .center
-//        mainStack.spacing = 15
-//        top.constant = 13
-//        left.constant = 16
-//        bottom.constant = 13
-//        right.constant = 16
-//    }
-    
     public func getHeight() -> CGFloat {
         return title.bounds.height + 20
     }

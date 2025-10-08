@@ -19,6 +19,8 @@ class FindDJView: BaseViewControllerPlain {
     var selectedNumber: String?
     var propertyType: String?
     var bookingId: String?
+    var startDate: String?
+    var endDate: String?
     
     let vm = FindServiceProviderVM()
     let disposeBag = DisposeBag()
@@ -49,6 +51,11 @@ class FindDJView: BaseViewControllerPlain {
         
         dateField.placeholder = "Select available date from calendar"
         dateField.placeHolderColor = .B_B
+        
+        dateField.startDate = startDate?.convertFromBackendDateString() ?? Date()
+        dateField.endDate = endDate?.convertFromBackendDateString() ?? Date()
+        dateField.isSingleDate = true
+        
         dateField.onDateSelected = { (date) in
 //            self.day = date
             self.dateField.text = "\(date.toFormattedDate())"

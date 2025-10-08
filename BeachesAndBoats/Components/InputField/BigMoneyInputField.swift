@@ -10,41 +10,54 @@ import UIKit
 
 class BigMoneyInputField: InputField {
 
-public var currency: String = "₦"
-public var amountChanged: () -> Void = {}
-
-@IBInspectable public var currencySymbol: String?{
-    set{
-        currency = newValue ?? "₦"
-    }get{
-        return currency
+    public var currency: String = "₦"
+    public var amountChanged: () -> Void = {}
+    
+    // Default font size
+    private var defaultFontSize: CGFloat = 40.0
+    
+    // Use CGFloat instead of String for font size
+    @IBInspectable public var currencySymbol: String? {
+        set {
+            currency = newValue ?? "₦"
+        }
+        get {
+            return currency
+        }
     }
-}
+    
+    @IBInspectable public var customFontSize: CGFloat {
+        set {
+            textField.font = UIFont.systemFont(ofSize: newValue > 0 ? newValue : defaultFontSize, weight: .medium)
+        }
+        get {
+            return textField.font?.pointSize ?? defaultFontSize
+        }
+    }
 
-override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
-}
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
 
-required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-}
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
 
-override func setup() {
-    super.setup()
-    textField.keyboardType = .decimalPad
-    textField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
-//    textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-    textField.font = UIFont.systemFont(ofSize: 40, weight: .medium)
-    textField.textAlignment = .left
-//    textField.backgroundColor = .white
-}
+    override func setup() {
+        super.setup()
+        textField.keyboardType = .decimalPad
+        textField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        // Apply default font size if not set
+        textField.font = UIFont.systemFont(ofSize: defaultFontSize, weight: .medium)
+        textField.textAlignment = .left
+    }
 
     @objc func editingChanged() {
         if let text = textField.text {
             textField.text = formatNumber(text)
-            if let amount = getIntValue() {
+            if let _ = getIntValue() {
                 amountChanged()
             }
         }

@@ -8,6 +8,18 @@
 import Foundation
 
 class ListingServiceImplementation: Provider<ListingTarget>, ListingService{
+    func getReservedDates(request: GetReservedDatesRequest, completion: @escaping (Result<AddReservedDateResponse, ErrorResponse>) -> Void) {
+        provider.request(.getReservedDates(request: request)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func addReservedDates(request: AddReservedDateRequest, completion: @escaping (Result<AddReservedDateResponse, ErrorResponse>) -> Void) {
+        provider.request(.addReservedDates(request: request)){ completion( self.handleResult(result: $0))}
+    }
+    
+    func removeReservedDates(request: AddReservedDateRequest, completion: @escaping (Result<AddReservedDateResponse, ErrorResponse>) -> Void) {
+        provider.request(.removeReservedDates(request: request)){ completion( self.handleResult(result: $0))}
+    }
+    
     func deleteImages(request: DeleteImagesRequest, completion: @escaping (Result<GeneralResponse, ErrorResponse>) -> Void) {
         provider.request(.deleteImages(request: request)){ completion( self.handleResult(result: $0))}
     }

@@ -105,99 +105,110 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditPropertyNameView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditPropertyNameView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditPropertyNameView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditPropertyAddressView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditPropertyAddressView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditPropertyAddressView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditPropertyAvailableDatesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditPropertyAvailableDatesView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditPropertyAvailableDatesView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditPropertyAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoBlockBeachHouseAvailabilityView(id: String?, isRoom: Bool = false) {
+        let vc: BlockBeachHouseAvailabilityView = .fromNib()
+        vc.id = id
+        vc.isRoom = isRoom
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditPropertyAmenitiesView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditPropertyAmenitiesView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditPropertyAdditionalAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditPropertyAdditionalAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, details: GetBeachData?, id: String?) {
         let vc: EditPropertyAdditionalAmenitiesView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
+        vc.createBeachListing = request
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditAboutYouLanguageView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditAboutYouLanguageView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditAboutYouLanguageView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditAboutYouDescriptionView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditAboutYouDescriptionView(beachData: BeachDatas?, request: CreateBeachListingRequest?, details: GetBeachData?, id: String?) {
         let vc: EditAboutYouDescriptionView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
+        vc.createBeachListing = request
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditHouseRulesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditHouseRulesView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditHouseRulesView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditHouseDetailsView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
-        let vc: EditHouseDetailsView = .fromNib()
-        vc.createBeachListing = request
-        vc.beachData = beachData
-        vc.id = id
-        vc.coordinator = self
-        push(viewController: vc)
-    }
-    
-    func gotoEditCheckInAndOutRulesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditCheckInAndOutRulesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, details: GetBeachData?, id: String?) {
         let vc: EditCheckInAndOutRulesView = .fromNib()
+        vc.details = details
+        vc.beachData = beachData
         vc.createBeachListing = request
+        vc.id = id
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    
+    func gotoEditHouseDetailsView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
+        let vc: EditHouseDetailsView = .fromNib()
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditRoomsListView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?, details: GetBeachData?) {
+    func gotoEditRoomsListView(beachData: BeachDatas?, id: String?, details: GetBeachData?) {
         let vc: EditRoomsListView = .fromNib()
-        vc.createBeachListing = request
         vc.beachData = beachData
         vc.details = details
         vc.id = id
@@ -207,9 +218,9 @@ class HostingServiceMenuCoordinator: Coordinator {
     
     func gotoEditListRoomsView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?, id: String?, details: GetBeachData?) {
         let vc: EditListRoomsView = .fromNib()
-        vc.createBeachListing = request
         vc.beachData = beachData
         vc.details = details
+        vc.createBeachListing = request
         vc.room = room
         vc.id = id
         vc.coordinator = self
@@ -218,8 +229,9 @@ class HostingServiceMenuCoordinator: Coordinator {
     
     func gotoEditRoomAmenitiesView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?, id: String?, details: GetBeachData?) {
         let vc: EditRoomAmenitiesView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
+        vc.createBeachListing = request
         vc.details = details
         vc.room = room
         vc.id = id
@@ -229,6 +241,7 @@ class HostingServiceMenuCoordinator: Coordinator {
     
     func gotoEditRoomPriceView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?, id: String?, details: GetBeachData?) {
         let vc: EditRoomPriceView = .fromNib()
+        vc.details = details
         vc.createBeachListing = request
         vc.beachData = beachData
         vc.details = details
@@ -240,8 +253,9 @@ class HostingServiceMenuCoordinator: Coordinator {
     
     func gotoEditRoomPricePerDayView(beachData: BeachDatas?, request: CreateBeachListingRequest?, room: String?, id: String?, details: GetBeachData?) {
         let vc: EditRoomPricePerDayView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
+        vc.createBeachListing = request
         vc.details = details
         vc.room = room
         vc.id = id
@@ -249,30 +263,36 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditUploadImageView(beachData: BeachDatas?, request: CreateBeachListingRequest?, currentImages: [String], id: String?, roomId: String? = nil) {
+    func gotoEditUploadImageView(beachData: BeachDatas?, request: CreateBeachListingRequest?, details: GetBeachData?, currentImages: [String], id: String?, room: String? = nil) {
         let vc: EditHouseUploadImageView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
+        vc.createBeachListing = request
         vc.currentImages = currentImages
         vc.id = id
-        vc.roomId = roomId
+        vc.room = room
         vc.coordinator = self
+        
+        if let editRoomsListVC = navigationController?.viewControllers.first(where: { $0 is EditRoomsListView }) as? EditRoomsListView {
+            vc.delegate = editRoomsListVC
+        }
         push(viewController: vc)
     }
     
-    func gotoEditEntireApartmentPriceView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditEntireApartmentPriceView(beachData: BeachDatas?, details: GetBeachData?, id: String?) {
         let vc: EditEntireApartmentPriceView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
     }
     
-    func gotoEditEntireApartmentPricePerDayView(beachData: BeachDatas?, request: CreateBeachListingRequest?, id: String?) {
+    func gotoEditEntireApartmentPricePerDayView(beachData: BeachDatas?, request: CreateBeachListingRequest?, details: GetBeachData?, id: String?) {
         let vc: EditEntireApartmentPricePerDayView = .fromNib()
-        vc.createBeachListing = request
+        vc.details = details
         vc.beachData = beachData
+        vc.createBeachListing = request
         vc.id = id
         vc.coordinator = self
         push(viewController: vc)
@@ -311,9 +331,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatTypeView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatTypeView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatTypeView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -321,9 +341,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatNameView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatNameView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatNameView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -331,9 +351,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatAddressView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatAddressView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatAddressView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -341,9 +361,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatAvailableDatesView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatAvailableDatesView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatAvailableDatesView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -351,9 +371,26 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatFacilitiesView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoBlockBoatAvailablilitView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
+        let vc: EditBoatAvailableDatesView = .fromNib()
+        vc.details = details
+        vc.boatData = boatData
+        vc.id = id
+        vc.boatType = boatType
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoBlockBoatAvailabilityView(id: String?) {
+        let vc: BlockBoatAvailabilityView = .fromNib()
+        vc.id = id
+        vc.coordinator = self
+        push(viewController: vc)
+    }
+    
+    func gotoEditBoatFacilitiesView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatFacilitiesView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -361,9 +398,10 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatAdditionalAmenitiesView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatAdditionalAmenitiesView(boatData: BoatDatas?, request: CreateBoatListingRequest?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatAdditionalAmenitiesView = .fromNib()
         vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -371,9 +409,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatAboutYouLanguageView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatAboutYouLanguageView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatAboutYouLanguageView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -381,8 +419,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatAboutYouDescriptionView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatAboutYouDescriptionView(boatData: BoatDatas?, request: CreateBoatListingRequest?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatAboutYouDescriptionView = .fromNib()
+        vc.details = details
         vc.createBoatListing = request
         vc.boatData = boatData
         vc.id = id
@@ -391,9 +430,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatRulesView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatRulesView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatRulesView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType
@@ -401,9 +440,9 @@ class HostingServiceMenuCoordinator: Coordinator {
         push(viewController: vc)
     }
     
-    func gotoEditBoatTravelLocationView(boatData: BoatDatas?, request: CreateBoatListingRequest?, id: String?, boatType: String?) {
+    func gotoEditBoatTravelLocationView(boatData: BoatDatas?, details: GetBoatData?, id: String?, boatType: String?) {
         let vc: EditBoatTravelLocationView = .fromNib()
-        vc.createBoatListing = request
+        vc.details = details
         vc.boatData = boatData
         vc.id = id
         vc.boatType = boatType

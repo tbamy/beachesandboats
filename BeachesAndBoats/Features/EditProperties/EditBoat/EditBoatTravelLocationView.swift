@@ -15,6 +15,7 @@ class EditBoatTravelLocationView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     var disposeBag = DisposeBag()
@@ -36,18 +37,10 @@ class EditBoatTravelLocationView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
-            print("=== LOADING SAVED BOAT LISTING ===")
-            print("Destinations count: \(savedListing.destinations?.count ?? 0)")
+        if let savedListing = details {
             
-            // Use the saved listing
-//            createBoatListing = savedListing
+            selectedItems = details?.destinations?.compactMap { $0.toCreateDestination() } ?? []
             
-            // Load saved destinations
-            selectedItems = savedListing.destinations ?? []
-            
-            print("Loaded saved boat listing successfully")
-            print("===============================")
         } else {
             print("No saved boat listing found, starting fresh")
         }
@@ -67,12 +60,14 @@ class EditBoatTravelLocationView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id else { return }
         
-        if var createBoatListing = createBoatListing{
-            createBoatListing.destinations = selectedItems
+        if createBoatListing == nil{
+            createBoatListing = CreateBoatListingRequest()
+        }
+            createBoatListing?.destinations = selectedItems
 
-            self.createBoatListing = createBoatListing
             print(createBoatListing)
             
+        if let createBoatListing = createBoatListing{
             LoadingModal.show(title: "Updating Record...")
             vm.editBoat(createBoatListing, id: id)
             

@@ -20,7 +20,7 @@ public class HorizonDateField: UIView {
     var isSingleDate: Bool = false
     
     public var startDate: Date = Date()
-    public var endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date()
+    public var endDate: Date = Calendar.current.date(byAdding: .month, value: 36, to: Date()) ?? Date()
 
     // MARK: - Properties
     public var titleText: String = "" {

@@ -151,8 +151,13 @@ class EditBoatUploadImageView: BaseViewControllerPlain {
         // ✅ Already compressed and validated
         let boatImages = validatedImages.map { $0.data }
 
-        if var createBoatListing = createBoatListing {
-            createBoatListing.images = boatImages
+        if createBoatListing == nil {
+            createBoatListing = CreateBoatListingRequest()
+        }
+            createBoatListing?.images = boatImages
+        print(createBoatListing)
+        
+        if let createBoatListing = createBoatListing{
             LoadingModal.show(title: "Updating...")
             vm.editBoat(createBoatListing, id: id)
         }

@@ -36,6 +36,7 @@ class PropertyAvailableDatesView: BaseViewControllerPlain {
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
         
+        calendarView.isListingMode = true
         calendarView.onDatesSelected = { startDate, endDate in
             self.from_when = startDate
             if let endDate = endDate {

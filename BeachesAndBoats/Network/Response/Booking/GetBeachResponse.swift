@@ -38,6 +38,8 @@ struct GetBeachData: Codable {
     let noOfGuests : Int?
     let noOfBeds : Int?
     let noOfBathrooms : Int?
+    let actual_price_per_night: Float?
+    let actual_price_per_day: Float?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -61,6 +63,8 @@ struct GetBeachData: Codable {
         case noOfGuests = "no_of_guests"
         case noOfBeds = "no_of_beds"
         case noOfBathrooms = "no_of_bathrooms"
+        case actual_price_per_night
+        case actual_price_per_day
     }
 }
 
@@ -70,8 +74,12 @@ struct BeachRoom: Codable {
     let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
     let images: [Image]?
     let bedTypes: [BedType]?
-    let noOfOccupant, hasPrivateBathroom: String?
+    let noOfOccupant: Int?
+    let hasPrivateBathroom: Int?
     let quantity: Int?
+    let amenities: [Amenity]?
+    let actual_price_per_night: Float?
+    let actual_price_per_day: Float?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -82,7 +90,9 @@ struct BeachRoom: Codable {
         case images, bedTypes
         case noOfOccupant = "no_of_occupant"
         case hasPrivateBathroom = "has_private_bathroom"
-        case quantity
+        case quantity, amenities
+        case actual_price_per_night
+        case actual_price_per_day
     }
 }
 

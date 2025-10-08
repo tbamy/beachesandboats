@@ -72,7 +72,7 @@ class RoomDetailsView: BaseViewControllerPlain {
         let nights = calculateNights(from: startDateString, to: endDateString)
         dateLabel.text = isDayBooking ? "\(startDateString.convertToShorterDateFormat() ?? "") (Day booking)"  : "\(startDateString.convertToShorterDateFormat() ?? "") - \(endDateString.convertToShorterDateFormat() ?? "") (\(nights ?? 0) Nights)"
         
-        guestsLabel.text = "\(room?.noOfOccupant ?? "") Guests"
+        guestsLabel.text = "\(room?.noOfOccupant ?? 0) Guests"
         descriptionLabel.text = room?.description
         accessibilityContentLabel.text = "Easy accessibility"
 

@@ -75,13 +75,15 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
         super.viewDidLoad()
         
         bind()
-        setup()
         configureAllCollectionViews()
 //        setupCustomNavigationButtons()
-        itemToShow()
         
         LoadingModal.show()
         boatInput.onNext(.getBoat(id: booking?.boat.id ?? ""))
+        
+        setup()
+        
+        itemToShow()
     }
     
     func itemToShow() {
@@ -117,7 +119,7 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
 //        serviceFeeLabel.text = "₦ \(booking?.adminCharge ?? 0)"
         CostTotalAmountLabel.text = "₦ \(booking?.total ?? 0)"
         
-        peopleCapacityLabel.text = "\(booking?.noOfPeople ?? "")"
+        peopleCapacityLabel.text = "\(booking?.noOfPeople ?? 1)"
         
         amenities = boatDetails?.amenities ?? []
         comments = boatDetails?.reviews ?? []
@@ -228,8 +230,9 @@ class BoatBookingDetailsView: BaseViewControllerPlain {
                 self?.boatDetails = response.data
                 self?.setup()
                 self?.categoriesCollectionView.reloadData()
+                self?.guestCommentsCollectionView.reloadData()
             case .getBoatFailed(let error) :
-                MiddleModal.show(title: error.message ?? "", type: .error)
+                MiddleModal.show(title: error.message ?? "", type: .error, dismissable: false, onConfirm: { self?.coordinator?.pop() })
             }
         }).disposed(by: disposeBag)
 
@@ -272,6 +275,7 @@ extension BoatBookingDetailsView: UICollectionViewDelegate, UICollectionViewData
         case 1:
             return amenities.count
         case 2:
+            print(comments.count)
             return comments.count
         default:
             return 0
@@ -317,7 +321,7 @@ extension BoatBookingDetailsView: UICollectionViewDelegate, UICollectionViewData
         case 1:
             return CGSize(width: (collectionView.bounds.width / 6), height: 50)
         case 2:
-            return CGSize(width: (collectionView.bounds.width / 6), height: 50)
+            return CGSize(width: (collectionView.bounds.width) - 20, height: 150)
         default:
             return CGSize()
         }

@@ -20,7 +20,7 @@ struct TwoFACompleteVerificationRequest: Codable {
     
     enum CodingKeys: String, CodingKey {
         case email
-        case phoneNumber
+        case phoneNumber = "phone_number"
         case otpCode = "otp_code"
     }
 }

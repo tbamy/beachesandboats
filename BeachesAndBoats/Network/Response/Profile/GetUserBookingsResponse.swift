@@ -27,16 +27,18 @@ struct BeachHouseBookingsPast: Codable {
     let id, hostID: String
     let hostFirstName, hostLastName: String?
     let beachHouseRoom: BookingsBeachHouseRoom?
-    let beachHouse: FavouriteBeachHouse?
+    let beachHouse: BookingsBeachHouse?
     let checkingDate, checkoutDate, checkingTime, checkoutTime: String?
-    let noOfPeople: String?//Int?
+    let noOfPeople: Int?
     let status: String?
     let summary: String?
-    let units: String?
+    let units: Int?
     let total: Float? //Int?
     let adminCharge: Float?
     let noOfNights: Int?
     let bookingType: String?
+    let propertyBookingType: String?
+    let unitPrice: Float?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -54,22 +56,46 @@ struct BeachHouseBookingsPast: Codable {
         case adminCharge = "admin_charge"
         case noOfNights  = "no_of_nights"
         case bookingType = "booking_type"
+        case propertyBookingType = "property_booking_type"
+        case unitPrice = "unit_price"
     }
 }
 
 // MARK: - BeachHouse
 
+struct BookingsBeachHouse: Codable {
+    let id, name, description, aboutOwner: String?
+    let listingPrice, discountPercent, pricePerDay, actualPricePerDay, actualPricePerNight: Float?
+    let image: String?
+    let locations: Location?
+    let availabilities: Availabilities?
+    let rating: Double?
+    let bookingType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description
+        case aboutOwner = "about_owner"
+        case listingPrice = "listing_price"
+        case discountPercent = "discount_percent"
+        case image, locations, availabilities, rating
+        case bookingType = "booking_type"
+        case pricePerDay = "price_per_day"
+        case actualPricePerDay = "actual_price_per_day"
+        case actualPricePerNight = "actual_price_per_night"
+    }
+}
+
 
 // MARK: - BeachHouseRoom
 struct BookingsBeachHouseRoom: Codable {
-    let id, name, description: String
-    let pricePerNight:  Float
-    let discountPercent: Float
-    let pricePerDay:  Float
-    let dayDiscountPercent: Float
-    let images: [Image]
-    let bedTypes: [BookingBedType]
-    let noOfOccupant, hasPrivateBathroom: String
+    let id, name, description: String?
+    let pricePerNight:  Float?
+    let discountPercent: Float?
+    let pricePerDay:  Float?
+    let dayDiscountPercent: Float?
+    let images: [Image]?
+    let bedTypes: [BookingBedType]?
+    let noOfOccupant, hasPrivateBathroom: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -95,9 +121,9 @@ struct BoatBookingsPast: Codable {
     let total: Float
     let summary: String?
     let status: String
-    let cruiseLength: String
+    let cruiseLength: Int
     let bookingType: String
-    let noOfPeople: String//Int
+    let noOfPeople: Int
     let bookingDate, bookingTime, hostID: String
     let boatDestination: Destinations?
     let subCategory: SubCategory

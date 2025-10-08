@@ -68,8 +68,8 @@ class ChatView: BaseViewControllerPlain {
     
     func setup() {
         
-        generateInvoiceBtn.setTitle("", for: .normal)
-        generateInvoiceBtn.setImage(UIImage(named: "generateInvoice"), for: .normal)
+        generateInvoiceBtn.setTitle("Generate invoice", for: .normal)
+//        generateInvoiceBtn.setImage(UIImage(named: "generateInvoice"), for: .normal)
         bookingView.isHidden = true
         generateInvoiceBtn.isHidden = !validateServiceRole()
         hostNameLabel.text = otherUser

@@ -16,7 +16,7 @@ struct DashboardUserReponse: Codable {
 struct DashboardUserData: Codable {
     let id, firstName, lastName, email: String
     let phoneCode, phoneNumber, dob: String
-    let wallet: Wallet
+    let wallet: Wallet?
     let roles: [String]
     let isAccountVerified: Bool
     let verificationStatus: String?
@@ -43,9 +43,9 @@ struct NotificationSetting: Codable {
 
 // MARK: - Wallet
 struct Wallet: Codable {
-    let id: String
-    let balance: Int
-    let currency: String
+    let id: String?
+    let balance: Decimal?
+    let currency: String?
 }
 
 //struct Reservation: Codable {
@@ -204,7 +204,7 @@ struct BookingBedType: Codable {
     let id: String
     let name: String
     let description: String
-    let quantity: String
+    let quantity: Int
 }
 //
 //struct BeachHouse: Codable {

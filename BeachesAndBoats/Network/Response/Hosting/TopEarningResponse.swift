@@ -51,12 +51,42 @@ struct TopEarner: Codable {
     let totalEarnings: Decimal?
     let propertyType: String?
     let beachHouse: BeachHouseData?
-    let boat: BoatDatas?
+    let boat: BoatEarningData?
     
     enum CodingKeys: String, CodingKey {
         case totalEarnings = "total_earnings"
         case propertyType = "property_type"
         case beachHouse, boat
+    }
+}
+
+struct BoatEarningData: Codable {
+    let id, name, description, aboutOwner: String?
+    let noOfPassengers: Int?
+    let category, subCategory: Category?
+    let locations: Location?
+    let availabilities: Availabilities?
+    let images: [Image]?
+    let destinations: [Destination]?
+    let userReviewed: Bool?
+    let rating: Int?
+    let userFavourite: Bool?
+//    let additionalHouseRules: JSONNull?
+    let owner: Owner?
+    let amenities: [Amenity]?
+    let languages: [Language]?
+    let houseRules: [Category]?
+//    let reviews: [Review]
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description
+        case aboutOwner = "about_owner"
+        case noOfPassengers = "no_of_passengers"
+        case category
+        case subCategory = "sub_category"
+        case locations, availabilities, images, destinations, userReviewed, rating, userFavourite
+//        case additionalHouseRules = "additional_house_rules"
+        case owner, amenities, languages, houseRules
     }
 }
 

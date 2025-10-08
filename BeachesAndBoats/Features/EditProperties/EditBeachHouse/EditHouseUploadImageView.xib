@@ -12,7 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditHouseUploadImageView" customModule="BeachesAndBoats" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="RZy-ZG-5Zg" id="zPb-rF-xmF"/>
+                <outlet property="subtitleLabel" destination="ETC-NQ-bGh" id="Uq7-kD-EHy"/>
+                <outlet property="titleLabel" destination="fvI-4c-MxD" id="FGF-yd-lzx"/>
                 <outlet property="uploadBtn" destination="Qd4-le-WzE" id="6qa-Dt-jN7"/>
+                <outlet property="uploadLabel" destination="jrI-lw-SPn" id="Ys4-Rl-wSi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

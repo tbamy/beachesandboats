@@ -38,6 +38,7 @@ class CancelBookingView: UIViewController {
     func cancelBooking(){
         LoadingModal.show()
         let request = CancelBookingRequest(booking_id: bookingId ?? "", booking_type: bookingType ?? "", reason: complaintField.text ?? "")
+        print(request)
         input.onNext(.cancelBoking(request))
     }
     
@@ -53,10 +54,11 @@ class CancelBookingView: UIViewController {
     
     @IBAction func proceedBtnTapped(_ sender: Any) {
         if complaintField.hasText {
-            MiddleModal.show(title: "Your cancelation request has been initiated", subtitle: "", type: .success, primaryText: "Done", dismissable: false, dismissOnConfirm: true, onConfirm: {
-                self.dismiss(animated: true)
-                self.coordinator?.start()
-            })
+            self.cancelBooking()
+//            MiddleModal.show(title: "Your cancelation request has been initiated", subtitle: "", type: .success, primaryText: "Done", dismissable: false, dismissOnConfirm: true, onConfirm: {
+//                self.dismiss(animated: true)
+//                self.coordinator?.start()
+//            })
         } else {
             MiddleModal.show(title: "Error", subtitle: "Kindly write a reason for cancellation", type: .error, primaryText: "Okay", dismissOnConfirm: true)
         }
@@ -77,7 +79,9 @@ class CancelBookingView: UIViewController {
                 self?.noticeLabel.text = "Please note that cancelling may result in penalties or fees. You will only recieve a refund of 50% of the amount paid."
                 
             case .cancelBookingSuccess(let response):
-                MiddleModal.show(title: "Success", subtitle: response.message ?? "Booking Successfully cancelled", type: .success, primaryText: "Okay", dismissOnConfirm: true)
+                MiddleModal.show(title: "Success", subtitle: response.message ?? "Booking Successfully cancelled", type: .success, primaryText: "Okay", onConfirm: {
+                    self?.dismiss(animated: true, completion: nil)
+                })
             case .cancelBookingFailed(let error):
                 MiddleModal.show(title: "Error", subtitle: error.message ?? "Could not process your request", type: .error, primaryText: "Try Again", dismissOnConfirm: true, onConfirm: { self?.cancelBooking()} )
             }

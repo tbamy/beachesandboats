@@ -231,9 +231,9 @@ struct BookingRoom: Codable {
     let pricePerDay, dayDiscountPercent, pricePerNight, discountPercent: Float?
     let images: [RoomImage]?
     let bedTypes: [BookingCatBedType]?
-    let noOfOccupant: String?
-    let hasPrivateBathroom: String?
-    let quantity: String?
+    let noOfOccupant: FlexibleString?
+    let hasPrivateBathroom: FlexibleString?
+    let quantity: FlexibleString?
     
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -253,7 +253,7 @@ struct BookingCatBedType: Codable {
     let id: String?
     let name: String?
     let description: String?
-    let quantity: String?
+    let quantity: FlexibleString?
 }
 
 struct RoomImage: Codable{
@@ -430,7 +430,7 @@ struct Listing: Codable {
     var dayCheckOut: String?
     let pricePerNight: Float?
     let bookingType: String?
-    let noOfPassengers: String?
+    let noOfPassengers: FlexibleString?
 //    let noOfChildren: String?
 //    let noOfPets: String?
     let category: Category
@@ -586,7 +586,7 @@ struct Language: Codable {
 struct Review: Codable {
     let id: String
     let user: ReviewUser?
-    let rating: String
+    let rating: Double
     let note: String
     let createdAt: String
     
@@ -618,14 +618,14 @@ struct ReviewUser: Codable {
 
 // MARK: - Boat Booking
 struct BoatBooking: Codable {
-    let bookingId: String?
+    let bookingId: String
     let boat: Boat?
     let total: Double?
     let summary: String?
     let status: String?
-    let cruiseLength: String?
+    let cruiseLength: FlexibleString?
     let bookingType: String?
-    let noOfPeople: String?
+    let noOfPeople: FlexibleString?
     let bookingDate: String?
     let bookingTime: String?
     let hostId: String?
@@ -685,15 +685,15 @@ struct BeachHouseBooking: Codable {
     let checkoutDate: String
     let checkingTime: String
     let checkoutTime: String
-    let noOfPeople: String
+    let noOfPeople: FlexibleString
     let status: String
     let summary: String?
-    let units: String
+    let units: FlexibleString
     let total: Double
     let createdAt: String
     let adminCharge: Double
     let cleaningFee: String
-    let noOfNights: Int
+    let noOfNights: FlexibleString
     
     enum CodingKeys: String, CodingKey {
         case id, status, summary, units, total
@@ -728,9 +728,9 @@ struct BeachHouseRoom: Codable {
     let discountPercent: Float?
     let images: [ImageURL]?
     let bedTypes: [BedType]?
-    let noOfOccupant: String?
-    let hasPrivateBathroom: String?
-    let quantity: Int?
+    let noOfOccupant: FlexibleString?
+    let hasPrivateBathroom: FlexibleString?
+    let quantity: FlexibleString?
     
     enum CodingKeys: String, CodingKey {
         case id, name, description, images, quantity
@@ -749,7 +749,7 @@ struct BedType: Codable {
     let id: String
     let name: String?
     let description: String?
-    var quantity: String?
+    var quantity: FlexibleString?
 }
 
 // MARK: - Beach House
@@ -773,5 +773,62 @@ struct BeachHouse: Codable {
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
         case minRoomPricePerDay, minRoomPricePerNight
+    }
+}
+
+
+struct FlexibleString: Codable, Equatable, Hashable {
+    private let rawValue: String
+
+    init(_ value: String) {
+        self.rawValue = value
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let str = try? container.decode(String.self) {
+            self.rawValue = str
+        } else if let int = try? container.decode(Int.self) {
+            self.rawValue = String(int)
+        } else if let double = try? container.decode(Double.self) {
+            // If it's a float, remove trailing ".0" if unnecessary
+            self.rawValue = double.truncatingRemainder(dividingBy: 1) == 0 ?
+                String(Int(double)) : String(double)
+        } else {
+            throw DecodingError.typeMismatch(
+                String.self,
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Expected String or Number for FlexibleString"
+                )
+            )
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        if let intValue = Int(rawValue) {
+            try container.encode(intValue)
+        } else if let doubleValue = Double(rawValue) {
+            try container.encode(doubleValue)
+        } else {
+            try container.encode(rawValue)
+        }
+    }
+
+    // MARK: - Convenient Accessors
+    var stringValue: String { rawValue }
+    var intValue: Int? { Int(rawValue) }
+    var doubleValue: Double? { Double(rawValue) }
+}
+
+// MARK: - Operator Overloads
+extension FlexibleString: ExpressibleByStringLiteral, ExpressibleByIntegerLiteral {
+    init(stringLiteral value: StringLiteralType) {
+        self.rawValue = value
+    }
+
+    init(integerLiteral value: IntegerLiteralType) {
+        self.rawValue = String(value)
     }
 }

@@ -35,13 +35,23 @@ struct FavouriteBeachHouse: Codable {
     let locations: Location?
     let availabilities: Availabilities
     let rating: Double?
+    let bookingType: String?
+    let pricePerDay, pricePerNight, actualPricePerNight, actualPricePerDay: Float?
+    let minRoomPricePerDay, minRoomPricePerNight: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
         case aboutOwner = "about_owner"
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
+        case bookingType = "booking_type"
         case image, locations, availabilities, rating
+        case pricePerDay = "price_per_day"
+        case pricePerNight = "price_per_night"
+        case actualPricePerNight = "actual_price_per_night"
+        case actualPricePerDay = "actual_price_per_day"
+        case minRoomPricePerDay
+        case minRoomPricePerNight
     }
 }
 

@@ -138,7 +138,7 @@ extension String {
             dateFormatter.dateFormat = "h:mm a" // 12-hour format
             return dateFormatter.string(from: date)
         } else {
-            return nil // Invalid time string
+            return self
         }
     }
 

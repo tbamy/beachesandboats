@@ -68,14 +68,13 @@ class ConfirmBookingView: BaseViewControllerPlain {
     }
     
     func setup(){
-        checkoutTimeLabel.isHidden = true
         configureButtons()
         
         room = listing?.rooms?.first { $0.id == roomId }
 
         startDate = booking?.checkingDate ?? ""
         endDate = booking?.checkoutDate ?? ""
-        numberOfGuests = Int(room?.noOfOccupant ?? "1")
+        numberOfGuests = Int(room?.noOfOccupant ?? 1)
         
         isDayBooking = booking?.bookingType == "DAY"
         
@@ -86,7 +85,9 @@ class ConfirmBookingView: BaseViewControllerPlain {
             checkInTime = listing?.overnightCheckIn
             checkOutTime = listing?.overnightCheckOut
         }
-        
+        print("CheckInTime: \(checkInTime ?? "")")
+        print("CheckOutTime: \(checkOutTime ?? "")")
+              
         updatePrice()
         
 
@@ -167,8 +168,10 @@ class ConfirmBookingView: BaseViewControllerPlain {
 
         var thePrice: Float?
         
-        switch listing?.bookingType {
-        case "ANY":
+        if listing?.bookingType == "FULL" {
+            //use entire apartment price
+            thePrice = isDayBooking ? listing?.pricePerDay : listing?.pricePerNight
+        }else{
             if let room = room{
                 //use room price
                 thePrice = isDayBooking ? room.pricePerDay : room.pricePerNight
@@ -176,17 +179,33 @@ class ConfirmBookingView: BaseViewControllerPlain {
                 //use entire apartment price
                 thePrice = isDayBooking ? listing?.pricePerDay : listing?.pricePerNight
             }
-        case "SINGLE":
-            //use room price
-            thePrice = isDayBooking ? room?.pricePerDay : room?.pricePerNight
-            
-        case "FULL":
-            //use entire apartment price
-            thePrice = isDayBooking ? listing?.pricePerDay : listing?.pricePerNight
-            
-        default:
-            break
         }
+        
+//        switch listing?.bookingType {
+//        case "ANY":
+//            if let room = room{
+//                //use room price
+//                thePrice = isDayBooking ? room.pricePerDay : room.pricePerNight
+//            }else{
+//                //use entire apartment price
+//                thePrice = isDayBooking ? listing?.pricePerDay : listing?.pricePerNight
+//            }
+//        case "SINGLE":
+//            //use room price
+//            if let room = room {
+//                thePrice = isDayBooking ? room.pricePerDay : room.pricePerNight
+//            }else{
+//                thePrice = isDayBooking ? listing?.pricePerDay : listing?.pricePerNight
+//            }
+//            
+//            
+//        case "FULL":
+//            //use entire apartment price
+//            thePrice = isDayBooking ? listing?.pricePerDay : listing?.pricePerNight
+//            
+//        default:
+//            break
+//        }
         
         
         
@@ -195,7 +214,10 @@ class ConfirmBookingView: BaseViewControllerPlain {
             //            print("Actual Price: \(actualPrice)")
 //            
 //            checkinTimeLabel.text = "\(checkInTime?.convertTo12HourFormat() ?? "")"
-            checkoutTimeLabel.text = "\(checkInTime?.convertTo12HourFormat() ?? "") - \(checkOutTime?.convertTo12HourFormat() ?? "")"
+            let time = "\(checkInTime?.convertTo12HourFormat() ?? "") - \(checkOutTime?.convertTo12HourFormat() ?? "")"
+            print(time)
+            
+            checkinTimeLabel.text = time
             guestLabel.text = "\(numberOfGuests ?? 0) Guest(s)"
             costLabel.text = isDayBooking ? "₦ \(actualPrice.toAmount() ?? "1") X 1 Day Booking" : "₦\(actualPrice.toAmount() ?? "1") x \(nights) Night(s))"
             let totalCost = (actualPrice) * Float(nights)

@@ -51,7 +51,7 @@ class MenuView: UIViewController {
             verificationStatusLabel.text = "Rejected"
             verificationStatusView.backgroundColor = .systemRed
         case "approved":
-            verificationStatusLabel.text = "Approved"
+            verificationStatusLabel.text = "Verified"
             verifyAccBtn.isUserInteractionEnabled = false
             verificationStatusView.backgroundColor = .systemGreen
         default:

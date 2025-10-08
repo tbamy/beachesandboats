@@ -22,7 +22,7 @@ class SafetyAndGuideView: BaseViewControllerPlain {
     
     func safetyLblClicked() {
         safetyAndGuideLbl.onTextClicked = {
-            
+            UIApplication.shared.open(URL(string: "https://beachesandboats.com/safety-guidelines")!)
         }
     }
 

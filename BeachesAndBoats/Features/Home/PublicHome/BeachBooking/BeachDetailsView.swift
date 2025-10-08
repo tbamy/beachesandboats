@@ -65,6 +65,7 @@ class BeachDetailsView: BaseViewControllerPlain {
     let disposeBag = DisposeBag()
     let input = PublishSubject<StartConversationVM.Input>()
     var isEntireHouse: Bool = false
+    var isAny: Bool = false
     
     var id: String?
 
@@ -73,7 +74,7 @@ class BeachDetailsView: BaseViewControllerPlain {
 
         setup()
         configureAllCollectionViews()
-        setupCustomNavigationButtons()
+//        setupCustomNavigationButtons()
         bind()
         
         LoadingModal.show()
@@ -100,6 +101,7 @@ class BeachDetailsView: BaseViewControllerPlain {
         }
         
         isEntireHouse = beachDetails?.bookingType == "FULL"
+        isAny = beachDetails?.bookingType == "ANY"
         
         let imgUrl = isEntireHouse ? beachDetails?.images?.first?.url : beachDetails?.rooms?.first?.images?.first?.url
         imgUrl?.loadImage(into: topImage, placeholder: "dummy")
@@ -123,19 +125,18 @@ class BeachDetailsView: BaseViewControllerPlain {
         
         
         nightBookingBtn.isChecked = true
-        totalAmountLabel.text = isEntireHouse ? "From ₦ \(beachDetails?.pricePerNight?.toAmount() ?? "0")" : "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
+        totalAmountLabel.text = isEntireHouse || isAny ? "From ₦ \(beachDetails?.pricePerNight?.toAmount() ?? "0")" : "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0")"
         
         
         dayBookingBtn.stateChanged = { [weak self] isSelected in
             guard let self = self else { return }
-            self.dayBookingDateLabel
             self.isDayBooking = true
             self.nightBookingBtn.isChecked = false
             self.nightBookingDateStack.isHidden = true
             self.dayBookingDateStack.isHidden = false
             
 //            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0") /day"
-            totalAmountLabel.text = isEntireHouse ? "From ₦ \(beachDetails?.pricePerDay?.toAmount() ?? "0") /day" : "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0") /day"
+            totalAmountLabel.text = isEntireHouse || isAny ? "From ₦ \(beachDetails?.pricePerDay?.toAmount() ?? "0") /day" : "From ₦ \(beachDetails?.minRoomPricePerDay?.toAmount() ?? "0") /day"
         }
         
         nightBookingBtn.stateChanged = { [weak self] isSelected in
@@ -146,7 +147,7 @@ class BeachDetailsView: BaseViewControllerPlain {
             self.dayBookingDateStack.isHidden = true
             
 //            totalAmountLabel.text = "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0") /night"
-            totalAmountLabel.text = isEntireHouse ? "From ₦ \(beachDetails?.pricePerNight?.toAmount() ?? "0") /night" : "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0") /night"
+            totalAmountLabel.text = isEntireHouse || isAny ? "From ₦ \(beachDetails?.pricePerNight?.toAmount() ?? "0") /night" : "From ₦ \(beachDetails?.minRoomPricePerNight?.toAmount() ?? "0") /night"
         }
         
         dayBookingDateLabel.onDateSelected = { (date) in
@@ -252,7 +253,10 @@ class BeachDetailsView: BaseViewControllerPlain {
         aboutHostLabel.text = beachDetails?.aboutOwner
         hostNameLabel.text = "\(beachDetails?.owner?.firstName ?? "") \(beachDetails?.owner?.lastName ?? "")"
         ratingLabel.text = "\(beachDetails?.rating ?? 0)"
-        roomAndGuestsLabel.text = isEntireHouse ? "\(beachDetails?.noOfGuests ?? 0) guest(s), \(beachDetails?.noOfRooms ?? 0) room(s)" : "\(beachDetails?.rooms?.first?.noOfOccupant ?? "") guest(s), \(beachDetails?.rooms?.count ?? 0) rooms"
+        
+        roomAndGuestsLabel.text = isEntireHouse
+        ? "\(beachDetails?.noOfGuests ?? 0) guest(s), \(beachDetails?.noOfRooms ?? 0) room(s)"
+        : "\(beachDetails?.rooms?.compactMap { Int($0.noOfOccupant ?? 0) }.reduce(0, +) ?? 0) guest(s), \(beachDetails?.rooms?.count ?? 0) room(s)"
 
         
         amenities = beachDetails?.amenities ?? []
@@ -308,9 +312,14 @@ class BeachDetailsView: BaseViewControllerPlain {
             return rule.description?.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
-//        let bulletRules = rules?.map { "• \($0)" }.joined(separator: "\n") ?? ""
-        let bulletRules = (rules?.map { "• \($0)" }.joined(separator: "\n") ?? "")
-        + "\n• \(beachDetails.additionalHouseRules ?? "")"
+        var bulletRules =  ""
+        if let additionalHouseRules = beachDetails.additionalHouseRules{
+            bulletRules = (rules?.map { "• \($0)" }.joined(separator: "\n") ?? "")
+                + "\n• \(additionalHouseRules)"
+        }else{
+        bulletRules = rules?.map { "• \($0)" }.joined(separator: "\n") ?? ""
+        }
+        
 
         
         let bookingType = isDayBooking ? "DAY" : "NIGHT"
@@ -339,7 +348,12 @@ class BeachDetailsView: BaseViewControllerPlain {
             }
         }
         
+        
+            print(beachDetails)
+            print(beachBookingRequest)
+        
         switch beachDetails.bookingType {
+            
         case "ANY":
             BookingActionModal.show(on: self.view, callBack: { [weak self] type in
                 HouseRulesModal.show(on: self?.view ?? UIView(), rules: bulletRules, callBack: { [weak self] in
@@ -356,7 +370,12 @@ class BeachDetailsView: BaseViewControllerPlain {
             })
         case "SINGLE":
             HouseRulesModal.show(on: self.view, rules: bulletRules, callBack: { [weak self] in
-                self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+                if let rooms = beachDetails.rooms, !rooms.isEmpty {
+                    self?.coordinator?.gotoBookingRoomsListView(listing: beachDetails, booking: beachBookingRequest)
+                }else{
+                    self?.coordinator?.gotoConfirmBookingView(listing: beachDetails, booking: beachBookingRequest, isEntireApartment: true)
+                }
+                
             })
             
         case "FULL":

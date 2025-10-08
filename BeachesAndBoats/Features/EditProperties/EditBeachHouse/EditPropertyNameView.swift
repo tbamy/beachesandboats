@@ -18,6 +18,7 @@ class EditPropertyNameView: BaseViewControllerPlain {
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     var id: String?
     
     var disposeBag = DisposeBag()
@@ -33,10 +34,8 @@ class EditPropertyNameView: BaseViewControllerPlain {
     
     func setUp(){
         
-        print(createBeachListing)
-        
-        nameLabel.text = createBeachListing?.name ?? ""
-        descriptionLabel.text = createBeachListing?.description ?? ""
+        nameLabel.text = details?.name ?? ""
+        descriptionLabel.text = details?.description ?? ""
         
         descriptionLabel.textChanged = { [weak self] textField, range, replacementString in
             guard let self = self else { return }
@@ -67,18 +66,21 @@ class EditPropertyNameView: BaseViewControllerPlain {
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
         if validate(){
-            if var createBeachListing = createBeachListing{
-                createBeachListing.name = nameLabel.text
-                createBeachListing.description = descriptionLabel.text
-                
-                self.createBeachListing = createBeachListing
+            if createBeachListing == nil {
+                createBeachListing = CreateBeachListingRequest()
+            }
+            createBeachListing?.name = nameLabel.text
+            createBeachListing?.description = descriptionLabel.text
+    
                 print(createBeachListing)
                 
                 LoadingModal.show(title: "Updating Record...")
+            if let createBeachListing = createBeachListing{
                 vm.editBeach(createBeachListing, id: id)
-                
-                
             }
+                
+                
+//            }
         }
     }
     

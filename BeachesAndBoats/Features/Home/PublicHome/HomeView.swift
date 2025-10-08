@@ -75,8 +75,8 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
     
     // MARK: - Constants
     private struct Constants {
-        static let topRatingThresholdBeach = 5
-        static let topRatingThresholdBoat = 5
+        static let topRatingThresholdBeach = 4
+        static let topRatingThresholdBoat = 4
         static let categoryImageMapping: [String: String] = [
             "Beach Houses": "beachCat",
             "Boats": "boatsCat",
@@ -318,7 +318,7 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
             filterType: filterType,
             callBack: { [weak self] item in
                 LoadingModal.show()
-                print("Request: \(item)")
+//                print("Request: \(item)")
                 
                 // Reset pagination for filtered results
                 self?.currentPage = 1
@@ -453,8 +453,9 @@ class HomeView: BaseViewControllerPlain, UITextFieldDelegate {
                 let beachBookings = allBeachBookings.map{ ServiceBookingItem.beachHouse($0) }
                 bookingsArray.append(contentsOf: beachBookings)
             }
-            
-            services = bookingsArray
+        
+        services = bookingsArray.filter { $0.isValid }
+        
             DispatchQueue.main.async {
                 self.updateUIForServiceSelection()
             }
@@ -579,7 +580,8 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     // Updated cell configuration methods in HomeView
     private func configureBeachHouseCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath, data: [Listing]) {
         let beach = data[indexPath.item]
-        var isEntireHouse: Bool = beach.bookingType == "FULL"
+        let isEntireHouse: Bool = beach.bookingType == "FULL"
+        let isAny: Bool = beach.bookingType == "ANY"
         
         // Create fresh view for each cell
         let view = GeneralViewCell()
@@ -595,7 +597,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         view.model = GeneralViewCellModel(
             ribbonTagLabel: "",
             titleLabel: beach.name,
-            priceLabel: isEntireHouse ? "₦ \(beach.pricePerNight?.toAmount() ?? "0")" : "₦ \(beach.minRoomPricePerNight?.toAmount() ?? "0")",
+            priceLabel: isEntireHouse || isAny ? "₦ \(beach.pricePerNight?.toAmount() ?? "0")" : "₦ \(beach.minRoomPricePerNight?.toAmount() ?? "0")",
             ratingLabel: "\(beach.rating)",
             infoOneLabel: formatLocationString(beach.locations),
             infoTwoLabel: formatDateRange(from: beach.availabilities?.availableFrom,
@@ -647,7 +649,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             titleLabel: boat.name,
             priceLabel: "", // Hidden in boat mode
             ratingLabel: "\(boat.rating)",
-            infoOneLabel: "Capacity: 1 - \(Int(boat.noOfPassengers ?? "1") ?? 1)",
+            infoOneLabel: "Capacity: 1 - \(boat.noOfPassengers ?? 1)",
             infoTwoLabel: formatLocationString(boat.locations),
             bannerImg: boat.images?.first?.url ?? ""
         )
@@ -666,23 +668,20 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     private func configureServiceCell(_ cell: DynamicCollectionViewCell, at indexPath: IndexPath) {
+        print(services)
+        
         let service = services[indexPath.item]
         let view = BookingCell(frame: cell.bounds)
         
         view.identifier = "Services \(indexPath.description)"
-        
-        view.model.date = service.date
-        view.model.image = service.image
-        view.model.location = service.location
-        view.model.title = service.name
-        view.model.id = service.id
-        
-        
-        
-//        view.model.date = formatDateRange(from: service.checkingDate, to: service.checkoutDate)
-//        view.model.image = service.beachHouse?.image ?? ""
-//        view.model.location = formatLocationString(service.beachHouse?.locations)
-//        view.model.title = service.beachHouse?.name ?? ""
+        guard service.isValid else { return }
+        if let serviceName = service.name, let serviceImage =  service.image{
+            view.model.date = service.date
+            view.model.image = serviceImage
+            view.model.location = service.location
+            view.model.title = serviceName
+            view.model.id = service.id
+        }
         
         cell.applyView(view: view)
     }
@@ -705,7 +704,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case .boat:
             coordinator?.gotoBoatDetails(id: boats[indexPath.item].id)
         case .service:
-            selectServiceProvider(propertyType: services[indexPath.item].type, bookingId: services[indexPath.item].id)
+            selectServiceProvider(propertyType: services[indexPath.item].type, bookingId: services[indexPath.item].id, startDate: services[indexPath.item].startDate, endDate: services[indexPath.item].endDate)
         }
     }
     
@@ -762,7 +761,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 private extension HomeView {
     func formatLocationString(_ location: Location?) -> String {
         guard let location = location else { return "" }
-        return "\(location.jettyLocation ?? ""), \(location.name ?? "")"
+        return "\(location.name ?? ""), \(location.jettyLocation ?? "")"
     }
     
     func formatDateRange(from: String?, to: String?) -> String {
@@ -973,15 +972,15 @@ extension HomeView {
         return filteredCategories.sorted { $0.name ?? "" < $1.name ?? "" } // Optional: sort to ensure consistent order
     }
     
-    private func selectServiceProvider(propertyType: String, bookingId: String) {
+    private func selectServiceProvider(propertyType: String, bookingId: String, startDate: String, endDate: String) {
         SelectServiceModal.show { [weak self] selected in
             switch selected {
             case "CHEF":
-                self?.coordinator?.gotoFindChef(propertyType: propertyType, bookingId: bookingId)
+                self?.coordinator?.gotoFindChef(propertyType: propertyType, bookingId: bookingId, startDate: startDate, endDate: endDate)
             case "BOUNCER":
-                self?.coordinator?.gotoFindBouncer(propertyType: propertyType, bookingId: bookingId)
+                self?.coordinator?.gotoFindBouncer(propertyType: propertyType, bookingId: bookingId, startDate: startDate, endDate: endDate)
             case "DJ":
-                self?.coordinator?.gotoFindDj(propertyType: propertyType, bookingId: bookingId)
+                self?.coordinator?.gotoFindDj(propertyType: propertyType, bookingId: bookingId, startDate: startDate, endDate: endDate)
             default:
                 break
             }
@@ -1004,10 +1003,37 @@ enum ServiceBookingItem{
     case boat(BoatBooking)
     case beachHouse(BeachHouseBooking)
     
+    var isValid: Bool {
+        let now = Date()
+
+        switch self {
+        case .boat(let booking):
+            guard let boat = booking.boat,
+                  let bookingDateString = booking.bookingDate,
+                  let bookingDate = bookingDateString.convertFromBackendDateString()
+            else {
+                return false
+            }
+
+            return bookingDate >= now
+
+        case .beachHouse(let booking):
+            guard let beachHouse = booking.beachHouse,
+                  let checkIn = booking.checkingDate.convertFromBackendDateString(),
+                  let checkOut = booking.checkoutDate.convertFromBackendDateString()
+            else {
+                return false
+            }
+
+            return checkOut >= now
+        }
+    }
+
+    
     var id: String{
         switch self {
         case .boat(let booking):
-            return booking.bookingId ?? ""
+            return booking.bookingId
         case .beachHouse(let booking):
             return booking.id
         }
@@ -1022,7 +1048,7 @@ enum ServiceBookingItem{
         }
     }
     
-    var name: String{
+    var name: String?{
         switch self {
         case .boat(let booking):
             return booking.boat?.name ?? ""
@@ -1031,7 +1057,7 @@ enum ServiceBookingItem{
         }
     }
     
-    var image: String{
+    var image: String?{
         switch self {
         case .boat(let booking):
             return booking.boat?.images?.first?.url ?? ""
@@ -1049,12 +1075,30 @@ enum ServiceBookingItem{
         }
     }
     
+    var startDate: String{
+        switch self {
+        case .boat(let booking):
+            return booking.bookingDate ?? ""
+        case .beachHouse(let booking):
+            return "\(booking.checkoutDate)"
+        }
+    }
+    
+    var endDate: String{
+        switch self {
+        case .boat(let booking):
+            return booking.bookingDate ?? ""
+        case .beachHouse(let booking):
+            return "\(booking.checkingDate)"
+        }
+    }
+    
     var location: String{
         switch self {
         case .boat(let booking):
-            return "\(booking.boat?.locations?.jettyLocation ?? ""), \(booking.boat?.locations?.name ?? "")"
+            return "\(booking.boat?.locations?.name ?? ""), \(booking.boat?.locations?.jettyLocation ?? "")"
         case .beachHouse(let booking):
-            return "\(booking.beachHouse?.locations?.jettyLocation ?? ""), \(booking.beachHouse?.locations?.name ?? "")"
+            return "\(booking.beachHouse?.locations?.name ?? ""), \(booking.beachHouse?.locations?.jettyLocation ?? "")"
         }
     }
 }

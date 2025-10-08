@@ -11,6 +11,7 @@ class CommentsViewCell: BaseXib {
     
     let nibName = "CommentsViewCell"
     
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!

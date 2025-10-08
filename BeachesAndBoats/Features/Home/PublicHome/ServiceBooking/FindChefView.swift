@@ -5,6 +5,7 @@
 //  Created by Tolu Akintayo on 30/01/2025.
 //
 
+
 import UIKit
 import RxSwift
 
@@ -22,6 +23,8 @@ class FindChefView: BaseViewControllerPlain {
     var day: Date?
     var propertyType: String?
     var bookingId: String?
+    var startDate: String?
+    var endDate: String?
     
     let vm = FindServiceProviderVM()
     let disposeBag = DisposeBag()
@@ -41,7 +44,15 @@ class FindChefView: BaseViewControllerPlain {
     }
     
     func setup(){
+        // Enable multiple selection mode
+        dishTypesField.allowMultipleSelection = true
         dishTypesField.pickerTitle = "Select Dishes"
+        
+        // Handle multiple selection callback
+        dishTypesField.itemsChanged = { [weak self] selectedItems in
+            print("Selected dishes: \(selectedItems.map { $0.name })")
+        }
+        
         numberOfPeople = ["1 - 3 People",
                           "4 - 6 People",
                           "7 - 10 People",
@@ -54,6 +65,9 @@ class FindChefView: BaseViewControllerPlain {
         
         dateField.placeholder = "Select available date from calendar"
         dateField.placeHolderColor = .B_B
+        dateField.startDate = startDate?.convertFromBackendDateString() ?? Date()
+        dateField.endDate = endDate?.convertFromBackendDateString() ?? Date()
+        dateField.isSingleDate = true
         dateField.onDateSelected = { (date) in
             self.day = date
             self.dateField.text = "\(date.toFormattedDate())"
@@ -66,11 +80,14 @@ class FindChefView: BaseViewControllerPlain {
     }
 
     @IBAction func findChefTapped(_ sender: Any) {
-        let request = dishTypesField.selectedItem?.value ?? ""
-        if request == ""{
-            MiddleModal.show(title: "Select a dish", type: .error)
-        }else{
-            input.onNext(.findChef(request))
+        let selectedDishes = dishTypesField.selectedItems
+        
+        if selectedDishes.isEmpty {
+            MiddleModal.show(title: "Select at least one dish", type: .error)
+        } else {
+            // Join multiple dish IDs with comma (adjust based on your API requirements)
+            let dishIds = selectedDishes.map { $0.value }.joined(separator: ",")
+            input.onNext(.findChef(dishIds))
             LoadingModal.show()
         }
     }
@@ -111,9 +128,6 @@ class FindChefView: BaseViewControllerPlain {
         guard let dishes = response.data else { return [] }
         return dishes.map { PickerItem(name: $0.name, value: $0.id) }
     }
-
-
-
 }
 
 extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -140,24 +154,18 @@ extension FindChefView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedNumber = numberOfPeople?[indexPath.item]
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width / 3) - 5, height: 40)
     }
     
-    
-    
     private func calculateItemWidth(for text: String) -> CGFloat {
-        
         let font = UIFont.systemFont(ofSize: 16, weight: .medium)
         let textSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
         
-        let horizontalPadding: CGFloat = 20 // Adjust this based on your SelectableViewWithBg padding
+        let horizontalPadding: CGFloat = 20
         let minimumWidth: CGFloat = 60
-        
-        // Add some extra buffer to prevent truncation
         let buffer: CGFloat = 8
         let calculatedWidth = textSize.width + horizontalPadding + buffer
         

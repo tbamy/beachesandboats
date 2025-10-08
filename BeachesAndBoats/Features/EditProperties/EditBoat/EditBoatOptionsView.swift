@@ -18,6 +18,7 @@ class EditBoatOptionsView: BaseViewControllerPlain {
     @IBOutlet weak var boatNameEditBtn: UILabel!
     @IBOutlet weak var locationEditBtn: UILabel!
     @IBOutlet weak var availabilityEditBtn: UILabel!
+    @IBOutlet weak var blockAvailabilityEditBtn: UILabel!
     @IBOutlet weak var amenitiesEditBtn: UILabel!
     @IBOutlet weak var aboutListerEditBtn: UILabel!
     @IBOutlet weak var boatRulesEditBtn: UILabel!
@@ -34,7 +35,7 @@ class EditBoatOptionsView: BaseViewControllerPlain {
     
     var boatDataR: BoatDatas?
     var boatDetails: GetBoatData?
-    var request: CreateBoatListingRequest?
+//    var request: CreateBoatListingRequest?
     var id: String?
     
     // Flag to track if boatData has been loaded
@@ -75,6 +76,7 @@ class EditBoatOptionsView: BaseViewControllerPlain {
             ("Name and description of boat", boatNameEditBtn),
             ("Location", locationEditBtn),
             ("Availability" , availabilityEditBtn),
+            ("Block Availability" , blockAvailabilityEditBtn),
             ("Amenities and Features" , amenitiesEditBtn),
             ("About lister" , aboutListerEditBtn),
             ("Boat rules" , boatRulesEditBtn),
@@ -85,22 +87,6 @@ class EditBoatOptionsView: BaseViewControllerPlain {
         gestureRecognizers()
 
         textsAndLabels.forEach { underlineText(text: $0.0, titleLabel: $0.1) }
-        
-        
-        request = CreateBoatListingRequest(name: boatDetails?.name,
-                                           description: boatDetails?.description,
-                                           aboutOwner: boatDetails?.aboutOwner,
-                                           noOfPassengers: Int(boatDetails?.noOfPassengers ?? "0"),
-                                           subCategoryId: boatDetails?.subCategory?.id,
-                                           jettyLocation: boatDetails?.locations?.jettyLocation,
-                                           locationName: boatDetails?.locations?.name,
-                                           availableFrom: boatDetails?.availabilities?.availableFrom,
-                                           availableTo: boatDetails?.availabilities?.availableTo,
-                                           amenities: boatDetails?.amenities?.compactMap{ $0.id },
-                                           languages: boatDetails?.languages?.compactMap{ $0.id },
-                                           houseRules: boatDetails?.houseRules?.compactMap{ $0.id },
-                                           destinations: boatDetails?.destinations?.compactMap { $0.toCreateDestination() }
-                                    )
 
     }
     
@@ -110,6 +96,7 @@ class EditBoatOptionsView: BaseViewControllerPlain {
         boatNameEditBtn.isUserInteractionEnabled = true
         locationEditBtn.isUserInteractionEnabled = true
         availabilityEditBtn.isUserInteractionEnabled = true
+        blockAvailabilityEditBtn.isUserInteractionEnabled = true
         amenitiesEditBtn.isUserInteractionEnabled = true
         aboutListerEditBtn.isUserInteractionEnabled = true
         boatRulesEditBtn.isUserInteractionEnabled = true
@@ -122,6 +109,7 @@ class EditBoatOptionsView: BaseViewControllerPlain {
             (boatNameEditBtn, #selector(boatNameEditBtnTapped)),
             (locationEditBtn, #selector(locationEditBtnTapped)),
             (availabilityEditBtn, #selector(availabilityEditBtnTapped)),
+            (blockAvailabilityEditBtn, #selector(blockAvailabilityEditBtnTapped)),
             (amenitiesEditBtn, #selector(amenitiesEditBtnTapped)),
             (aboutListerEditBtn, #selector(aboutListerEditBtnTapped)),
             (boatRulesEditBtn, #selector(houseRulesEditBtnTapped)),
@@ -177,49 +165,54 @@ class EditBoatOptionsView: BaseViewControllerPlain {
     
     @objc func boatTypeEditBtnTapped(){
         print(boatDataR)
-        print(request)
+//        print(request)
         guard let id = id else { return }
-        coordinator?.gotoEditBoatTypeView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatTypeView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func boatNameEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatNameView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatNameView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func locationEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatAddressView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatAddressView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func availabilityEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatAvailableDatesView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatAvailableDatesView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
+    }
+    
+    @objc func blockAvailabilityEditBtnTapped(){
+        guard let id = id else { return }
+        coordinator?.gotoBlockBoatAvailabilityView(id: id)
     }
     
     @objc func amenitiesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatFacilitiesView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatFacilitiesView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func aboutListerEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatAboutYouLanguageView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func houseRulesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatRulesView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatRulesView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func roomsAndPricingEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatTravelLocationView(boatData: boatDataR, request: request, id: id, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatTravelLocationView(boatData: boatDataR, details: boatDetails, id: id, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func boatImagesEditBtnTapped(){
         guard let id = id else { return }
-        coordinator?.gotoEditBoatUploadImageView(boatData: boatDataR, request: request, id: id, details: boatDetails, boatType: boatDetails?.subCategory?.name)
+        coordinator?.gotoEditBoatUploadImageView(boatData: boatDataR, request: nil, id: id, details: boatDetails, boatType: boatDetails?.subCategory?.name)
     }
     
     @objc func deletePropertyBtnTapped(){

@@ -21,6 +21,9 @@ enum ListingTarget {
     case deleteBoat(id: String)
     case deleteBeach(id: String)
     case deleteImages(request: DeleteImagesRequest)
+    case getReservedDates(request: GetReservedDatesRequest)
+    case addReservedDates(request: AddReservedDateRequest)
+    case removeReservedDates(request: AddReservedDateRequest)
     
 }
 
@@ -49,8 +52,14 @@ extension ListingTarget: BaseTarget {
             return String(format: Urls.deleteBoat.rawValue, id)
         case .deleteBeach(id: let id):
             return String(format: Urls.deleteBeachHouse.rawValue, id)
-        case .deleteImages(request: let request):
+        case .deleteImages:
             return Urls.deleteImages.rawValue
+        case .getReservedDates:
+            return Urls.getReservedDates.rawValue
+        case .addReservedDates:
+            return Urls.addReservedDates.rawValue
+        case .removeReservedDates:
+            return Urls.removeReservedDates.rawValue
         }
     }
     
@@ -67,6 +76,12 @@ extension ListingTarget: BaseTarget {
         case .deleteBeachRoom, .deleteBoat, .deleteBeach:
             return .delete
         case .deleteImages:
+            return .post
+        case .getReservedDates:
+            return .get
+        case .addReservedDates:
+            return .post
+        case .removeReservedDates:
             return .post
         }
     }
@@ -161,13 +176,20 @@ extension ListingTarget: BaseTarget {
         case .EditBoat(data: let data, _):
             let multipartData = boatListingRequest(data: data)
             return .uploadMultipart(multipartData)
-        case .deleteBeachRoom(id: let id):
+        case .deleteBeachRoom:
             return .requestPlain
-        case .deleteBoat(id: let id):
+        case .deleteBoat:
             return .requestPlain
-        case .deleteBeach(id: let id):
+        case .deleteBeach:
             return .requestPlain
         case .deleteImages(request: let request):
+            return .requestJSONEncodable(request)
+        case .getReservedDates(request: let request):
+            let param = NetworkUtility.toParameter(request)
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .addReservedDates(request: let request):
+            return .requestJSONEncodable(request)
+        case .removeReservedDates(request: let request):
             return .requestJSONEncodable(request)
         }
     }
@@ -359,7 +381,7 @@ extension ListingTarget: BaseTarget {
                     if let idData = bedType.id.data(using: .utf8) {
                         multipartData.append(MultipartFormData(provider: .data(idData), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][id]"))
                     }
-                    multipartData.append(MultipartFormData(provider: .data(String(bedType.quantity ?? "").data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][quantity]"))
+                    multipartData.append(MultipartFormData(provider: .data(String(bedType.quantity?.intValue ?? 0).data(using: .utf8)!), name: "rooms[\(roomIndex)][bedTypes][\(bedIndex)][quantity]"))
                 }
 
                 // Room Images
@@ -374,7 +396,7 @@ extension ListingTarget: BaseTarget {
 //                    )
 //                }
                 
-                if !isEdit {
+//                if !isEdit {
                     for (imageIndex, imageData) in room.images?.enumerated() ?? [].enumerated() {
                         multipartData.append(
                             MultipartFormData(
@@ -385,7 +407,7 @@ extension ListingTarget: BaseTarget {
                             )
                         )
                     }
-                }
+//                }
             }
         }
             print("Multipart Data: \(multipartData)")

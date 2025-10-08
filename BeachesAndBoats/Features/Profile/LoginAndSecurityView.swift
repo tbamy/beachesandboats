@@ -23,10 +23,13 @@ class LoginAndSecurityView: BaseViewControllerPlain {
     
     var email: String?
     var phoneNumber: String?
+    var isEmail: Bool = false
     
     let vm = TwoFASecurityVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<TwoFASecurityVM.Input>()
+    
+    var confirmModal: ConfirmPhoneNumberModal?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,23 +57,41 @@ class LoginAndSecurityView: BaseViewControllerPlain {
     }
 
     @IBAction func editForEmail(_ sender: Any) {
-        AddEmailAddressModal.show(on: self.view) { userEmail in
-            print(userEmail ?? "")
-            self.email = userEmail
-            LoadingModal.show(title: "Loading...")
-            let request = TwoFAEmailSecurityRequest(email: userEmail ?? "")
-            self.input.onNext(.emailSecurity(request))
-        }
+        showEmailModal()
     }
     
     @IBAction func editForPhoneNo(_ sender: Any) {
+        showPhoneModal()
+    }
+    
+    func showEmailModal(){
+        AddEmailAddressModal.show(on: view) { userEmail in
+            print(userEmail ?? "")
+            self.email = userEmail
+            self.requestEmailOtp(email: userEmail)
+        }
+    }
+    
+    func showPhoneModal(){
         AddPhoneNumberModal.show(on: view) { userPhoneNumber in
             print(userPhoneNumber ?? "")
             self.phoneNumber = userPhoneNumber
-            LoadingModal.show(title: "Loading...")
-            let request = TwoFAPhoneSecurityRequest(phoneNumber: userPhoneNumber ?? "")
-            self.input.onNext(.phoneSecurity(request))
+            self.requestPhoneOtp(phone: userPhoneNumber)
         }
+    }
+    
+    func requestEmailOtp(email: String?){
+        LoadingModal.show(title: "Loading...")
+        let request = TwoFAEmailSecurityRequest(email: email ?? "")
+        self.input.onNext(.emailSecurity(request))
+        self.isEmail = true
+    }
+    
+    func requestPhoneOtp(phone: String?){
+        LoadingModal.show(title: "Loading...")
+        let request = TwoFAPhoneSecurityRequest(phoneNumber: phone ?? "")
+        self.input.onNext(.phoneSecurity(request))
+        self.isEmail = true
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
@@ -88,6 +109,18 @@ class LoginAndSecurityView: BaseViewControllerPlain {
         let request = TwoFACompleteVerificationRequest(email: email, otpCode: otpCode)
         input.onNext(.completeTwoFA(request))
     }
+    
+    func showConfirmOtpModal(isEmail: Bool){
+        confirmModal =  ConfirmPhoneNumberModal.show(on: self.view ?? UIView(), callBack: { otp in
+            print(otp)
+            if isEmail {
+                self.completeVerificationForEmail(otp ?? "")
+            }else{
+                self.completeVerificationForPhoneNumber(otp ?? "")
+            }
+            
+        }, isEmail: isEmail, delegate: self)
+    }
 }
 
 extension LoginAndSecurityView{
@@ -98,30 +131,28 @@ extension LoginAndSecurityView{
             switch output {
             case .emailSecuritySuccess(let response):
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
-                    ConfirmPhoneNumberModal.show(on: UIView(), callBack: { otp in
-                        
-                        self?.completeVerificationForEmail(otp ?? "")
-                    }, isEmail: true)
+                    self?.showConfirmOtpModal(isEmail: self?.isEmail ?? false)
                 })
                
             case .emailSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
+                
             case .phoneSecuritySuccess(let response):
                 MiddleModal.show(subtitle: response.message ?? "", type: .success,  primaryText: "Continue", onConfirm: {
-                    ConfirmPhoneNumberModal.show(on: UIView(), callBack: { otp in
-                        
-                        self?.completeVerificationForPhoneNumber(otp ?? "")
-                    }, isEmail: false)
+                    self?.showConfirmOtpModal(isEmail: self?.isEmail ?? false)
                 })
             case .phoneSecurityFailure(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
+                
             case .completeTwoFASuccess(let response):
 //                let loginSecurity = LoginAndSecurityView()
                 MiddleModal.show(title: "Double authentication added successful", subtitle: response.message ?? "", type: .success, primaryText: "Done", onConfirm: {
                     self?.coordinator?.pop(animated: true)
                 })
             case .completeTwoFAFailure(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error)
+                MiddleModal.show(title: error.message ?? "", type: .error, onConfirm: {
+                    self?.showConfirmOtpModal(isEmail: self?.isEmail ?? false)
+                })
             }
         }).disposed(by: disposeBag)
         
@@ -172,6 +203,31 @@ extension LoginAndSecurityView{
             LoadingModal.show()
             let request = ChangePasswordRequest(current_password: currentPasswordField.text, new_password: newPasswordField.text)
             input.onNext(.changePassword(request))
+        }
+    }
+}
+
+extension LoginAndSecurityView: GestureRecognizer {
+    func changePhoneNumberTapped() {
+        print("Change phone/email tapped")
+        // Dismiss modal and re-show AddPhoneNumberModal or AddEmailAddressModal
+        confirmModal?.dismiss()
+        
+        if isEmail {
+            showEmailModal()
+        }else{
+            showPhoneModal()
+        }
+        
+    }
+    
+    func resendCodeTapped() {
+        print("Resend code tapped")
+        confirmModal?.dismiss()
+        if isEmail {
+            requestEmailOtp(email: self.email)
+        }else{
+            requestPhoneOtp(phone: self.phoneNumber)
         }
     }
 }

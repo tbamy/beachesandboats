@@ -12,7 +12,7 @@ struct GetBoatResponse: Codable {
 struct GetBoatData: Codable {
     let id, name, description, aboutOwner: String
 //    let noOfAdults, noOfChildren, noOfPets: String?
-    let noOfPassengers: String?
+    let noOfPassengers: Int?
     let category, subCategory: Category?
     let owner: Owner?
     let amenities: [Amenity]?

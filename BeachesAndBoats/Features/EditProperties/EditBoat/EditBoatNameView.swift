@@ -22,6 +22,7 @@ class EditBoatNameView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     override func viewDidLoad() {
@@ -39,17 +40,17 @@ class EditBoatNameView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
+        if let savedListing = details {
             print("=== LOADING SAVED BOAT LISTING ===")
-            print("Boat name: \(savedListing.name ?? "No name")")
-            print("Boat description: \(savedListing.description ?? "No description")")
+            print("Boat name: \(savedListing.name)")
+            print("Boat description: \(savedListing.description)")
             
             // Use the saved listing
 //            createBoatListing = savedListing
             
             // Populate fields with saved data
-            nameLabel.text = savedListing.name ?? ""
-            descriptionLabel.text = savedListing.description ?? ""
+            nameLabel.text = savedListing.name
+            descriptionLabel.text = savedListing.description
             
             print("Loaded saved boat listing successfully")
             print("===============================")
@@ -86,13 +87,15 @@ class EditBoatNameView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id else { return }
         
-        if var createBoatListing = createBoatListing{
-            createBoatListing.name = nameLabel.text
-            createBoatListing.description = descriptionLabel.text
+        if createBoatListing == nil{
+            createBoatListing = CreateBoatListingRequest()
+        }
+            createBoatListing?.name = nameLabel.text
+            createBoatListing?.description = descriptionLabel.text
             
-            self.createBoatListing = createBoatListing
             print(createBoatListing)
             
+        if let createBoatListing = createBoatListing {
             LoadingModal.show(title: "Updating Record...")
             vm.editBoat(createBoatListing, id: id)
             

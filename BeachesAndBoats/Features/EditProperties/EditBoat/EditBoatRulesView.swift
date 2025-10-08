@@ -17,6 +17,7 @@ class EditBoatRulesView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     var disposeBag = DisposeBag()
@@ -36,16 +37,12 @@ class EditBoatRulesView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
+        if let savedListing = details {
             print("=== LOADING SAVED BOAT LISTING ===")
             print("House rules count: \(savedListing.houseRules?.count ?? 0)")
             
-            // Use the saved listing
-//            createBoatListing = savedListing
-            
-            // Load saved rules
-            selectedRules = savedListing.houseRules ?? []
-            numberOfPassengers.model = IncreaseDecreaseModel(id: "", type: "Number of passengers", subtitle: "", count: savedListing.noOfPassengers ?? 1)
+            selectedRules = details?.houseRules?.compactMap{ $0.id } ?? []
+            numberOfPassengers.model = IncreaseDecreaseModel(id: "", type: "Number of passengers", subtitle: "", count: Int(savedListing.noOfPassengers ?? 1))
             
             print("Loaded saved boat listing successfully")
             print("===============================")
@@ -91,18 +88,20 @@ class EditBoatRulesView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id else { return }
         
-        if var createBoatListing = createBoatListing{
-            createBoatListing.houseRules = selectedRules
-            createBoatListing.noOfPassengers = numberOfPassengers.count
+        if createBoatListing == nil{
+            createBoatListing = CreateBoatListingRequest()
+        }
+            createBoatListing?.houseRules = selectedRules
+            createBoatListing?.noOfPassengers = numberOfPassengers.count
             
             guard numberOfPassengers.count > 0  else {
                 Toast.show(message: "Please select at least one passenger.")
                 return
             }
             
-            self.createBoatListing = createBoatListing
             print(createBoatListing)
             
+        if let createBoatListing = createBoatListing{
             LoadingModal.show(title: "Updating Record...")
             vm.editBoat(createBoatListing, id: id)
             

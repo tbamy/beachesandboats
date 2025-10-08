@@ -77,7 +77,7 @@ class ServiceProviderDetailsView: BaseViewControllerPlain {
         
         aboutLabel.text = data?.description
         ratingLabel.text = "\(data?.rating ?? 0)"
-        priceLabel.text = "From \(data?.startingPrice ?? 0)"
+        priceLabel.text = "From \(data?.startingPrice?.toAmount() ?? "0")"
         
         contactBtn.setTitleColor(.B_B, for: .normal)
         images = data?.images

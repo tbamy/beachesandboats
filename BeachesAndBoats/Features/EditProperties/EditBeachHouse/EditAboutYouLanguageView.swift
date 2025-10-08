@@ -16,6 +16,7 @@ class EditAboutYouLanguageView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     
     var languageList: [Languages]?
     var selectedItems: [String] = []
@@ -37,7 +38,7 @@ class EditAboutYouLanguageView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
-        selectedItems = createBeachListing?.languages ?? []
+        selectedItems = details?.languages?.compactMap{ $0.id } ?? []
         collectionView.reloadData()
         
         nextBtn.isEnabled = !selectedItems.isEmpty
@@ -50,11 +51,14 @@ class EditAboutYouLanguageView: BaseViewControllerPlain {
             return
         }
         if let beachData = beachData{
-            if var createBeachListing = createBeachListing{
-                createBeachListing.languages = selectedItems
+            if createBeachListing == nil{
+                createBeachListing = CreateBeachListingRequest()
+            }
+                createBeachListing?.languages = selectedItems
                 print(createBeachListing)
                 
-                coordinator?.gotoEditAboutYouDescriptionView(beachData: beachData, request: createBeachListing, id: id)
+            if let createBeachListing = createBeachListing {
+                coordinator?.gotoEditAboutYouDescriptionView(beachData: beachData, request: createBeachListing, details: details, id: id)
             }
         
         }

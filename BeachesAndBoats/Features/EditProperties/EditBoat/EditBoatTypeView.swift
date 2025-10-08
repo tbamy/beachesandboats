@@ -19,6 +19,7 @@ class EditBoatTypeView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var cat: String = ""
     var selectedBoatType: String?
     var boatType: String?
@@ -38,15 +39,9 @@ class EditBoatTypeView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
-            print("=== LOADING SAVED BOAT LISTING ===")
-            print("Boat name: \(savedListing.name ?? "No name")")
-            print("Subcategory ID: \(savedListing.subCategoryId ?? "No subcategory")")
+        if let savedListing = details {
             
-            // Use the saved listing
-//            createBoatListing = savedListing
-//            cat = savedListing.categoryId ?? ""
-            selectedBoatType = savedListing.subCategoryId
+            selectedBoatType = savedListing.subCategory?.id
             
         }
     }
@@ -103,15 +98,16 @@ class EditBoatTypeView: BaseViewControllerPlain {
     @IBAction func saveAndExit(_ sender: Any) {
         guard let id = id else { return }
         
-        if var createBoatListing = createBoatListing{
-            createBoatListing.subCategoryId = selectedBoatType ?? ""
+        if createBoatListing == nil{
+            createBoatListing = CreateBoatListingRequest()
+        }
+            createBoatListing?.subCategoryId = selectedBoatType ?? ""
             
-            self.createBoatListing = createBoatListing
             print(createBoatListing)
             
+        if let createBoatListing = createBoatListing{
             LoadingModal.show(title: "Updating Record...")
             vm.editBoat(createBoatListing, id: id)
-            
             
         }
     }

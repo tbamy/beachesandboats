@@ -20,6 +20,7 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
     var property: BeachHouseListing?
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
+    var details: GetBeachData?
     var id: String?
     
     var disposeBag = DisposeBag()
@@ -34,7 +35,7 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
     }
 
     func setup() {
-        guard let savedListing = createBeachListing else { return }
+        guard let savedListing = details else { return }
         
         // Populate check-in and check-out times
         if let overnightCheckInTime = savedListing.overnightCheckIn, !overnightCheckInTime.isEmpty {

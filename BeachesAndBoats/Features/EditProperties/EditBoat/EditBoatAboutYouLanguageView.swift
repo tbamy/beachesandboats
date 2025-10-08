@@ -16,6 +16,7 @@ class EditBoatAboutYouLanguageView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     var disposeBag = DisposeBag()
@@ -35,7 +36,7 @@ class EditBoatAboutYouLanguageView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
+        if let savedListing = details {
             print("=== LOADING SAVED BOAT LISTING ===")
             print("Languages count: \(savedListing.languages?.count ?? 0)")
             
@@ -43,7 +44,7 @@ class EditBoatAboutYouLanguageView: BaseViewControllerPlain {
 //            createBoatListing = savedListing
             
             // Load saved languages
-            selectedLanguages = savedListing.languages ?? []
+            selectedLanguages = details?.languages?.compactMap{ $0.id } ?? []
             
             print("Loaded saved boat listing successfully")
             print("===============================")
@@ -68,12 +69,15 @@ class EditBoatAboutYouLanguageView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            if var createBoatListing = createBoatListing{
-                createBoatListing.languages = selectedLanguages
+            if createBoatListing == nil{
+                createBoatListing = CreateBoatListingRequest()
+            }
+                createBoatListing?.languages = selectedLanguages
                 
                 print(createBoatListing)
                 
-                coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatData, request: createBoatListing, id: id, boatType: boatType)
+            if let createBoatListing = createBoatListing{
+                coordinator?.gotoEditBoatAboutYouDescriptionView(boatData: boatData, request: createBoatListing, details: details, id: id, boatType: boatType)
             }
         }
     }

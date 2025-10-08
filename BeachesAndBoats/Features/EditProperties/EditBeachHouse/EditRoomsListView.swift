@@ -37,7 +37,24 @@ class EditRoomsListView: BaseViewControllerPlain {
         
         bindNetwork()
         setup()
+    }
+    
+    // Add this method to refresh data when returning from edit
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        // Update roomsList from createBeachListing if it exists (edited data)
+        if let updatedRooms = createBeachListing?.rooms {
+            roomsList = updatedRooms
+            self.createBeachListing?.rooms = updatedRooms
+            print("Room List is: \(roomsList)")
+            print("Create Listing is: \(createBeachListing)")
+        } else {
+            // Fallback to original data
+            roomsList = details?.rooms?.map { $0.toRoom() } ?? []
+        }
+        
+        collectionView.reloadData()
     }
     
     func setup(){
@@ -48,14 +65,14 @@ class EditRoomsListView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
-        roomsList = createBeachListing?.rooms ?? []
+        // Initial load from backend data
+        roomsList = details?.rooms?.map { $0.toRoom() } ?? []
         collectionView.reloadData()
         
         if roomsList.isEmpty {
             coordinator?.popToBoatOptionsScreen()
             Toast.show(message: "No rooms available")
         }
-
     }
     
     func updateCollectionViewHeight(_ CollectionView: UICollectionView, _ CollectionViewHeightConstraint: NSLayoutConstraint) {
@@ -66,19 +83,16 @@ class EditRoomsListView: BaseViewControllerPlain {
         self.view.layoutIfNeeded()
     }
     
-
     @IBAction func nextTapped(_ sender: Any) {
         guard let id = id else { return }
-        if let createBeachListing = createBeachListing{
+        if let createBeachListing = createBeachListing {
             self.createBeachListing = createBeachListing
             print(createBeachListing)
             
             LoadingModal.show(title: "Updating Record...")
             vm.editBeach(createBeachListing, id: id )
-
         }
     }
-
     
     func bindNetwork(){
         vm.output.subscribe(onNext: {[weak self] response in
@@ -100,7 +114,6 @@ class EditRoomsListView: BaseViewControllerPlain {
         LoadingModal.show()
         vm.deleteBeachRoom(id: id)
 
-        // Listen to deleteOutput (already in bindNetwork)
         vm.deleteRoomOutput.subscribe(onNext: { [weak self] response in
             LoadingModal.dismiss()
             switch response {
@@ -118,18 +131,38 @@ class EditRoomsListView: BaseViewControllerPlain {
             }
         }).disposed(by: disposeBag)
     }
-
     
     func editItem(roomName: String) {
-        if roomsList.firstIndex(where: { $0.name == roomName }) != nil {
-            if let beachData = beachData, var createBeachListing = createBeachListing {
-                createBeachListing.rooms = roomsList
-                coordinator?.gotoEditListRoomsView(beachData: beachData, request: createBeachListing, room: roomName, id: id, details: details)
+        if roomsList.firstIndex(where: { $0.id == roomName }) != nil {
+            if let beachData = beachData {
+                if createBeachListing == nil {
+                    createBeachListing = CreateBeachListingRequest()
+                }
+                createBeachListing?.rooms = roomsList
+                
+                print(createBeachListing)
+                
+                if let createBeachListing = createBeachListing {
+                    coordinator?.gotoEditListRoomsView(beachData: beachData, request: createBeachListing, room: roomName, id: id, details: details)
+                }
             }
         }
     }
+}
 
-
+extension EditRoomsListView: EditHouseUploadImageDelegate {
+    func didFinishRoomEdit(updatedRequest: CreateBeachListingRequest) {
+        print("🔄 Delegate called - Room edit finished!")
+        print("Updated request rooms count: \(updatedRequest.rooms?.count ?? 0)")
+        
+        // Update the local data
+        self.createBeachListing = updatedRequest
+        self.roomsList = updatedRequest.rooms ?? []
+        
+        print("✅ EditRoomsListView data updated successfully")
+        print("New roomsList count: \(self.roomsList.count)")
+        
+    }
 }
 
 extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -148,25 +181,29 @@ extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSourc
         // Find the corresponding BeachRoom in details.rooms to get the image URL
         if let beachRoom = details?.rooms?.first(where: { $0.id == item.id }) {
             if let imageUrlString = beachRoom.images?.first?.url, let url = URL(string: imageUrlString) {
-                // Use the URL from BeachRoom.images
                 view.model.imageURL = url
                 view.model.image = nil
             } else {
-                // No image available
                 view.model.image = nil
                 view.model.imageURL = nil
             }
         } else if let mainImageData = item.images?.first {
-            // Fallback to local image data if available
             view.model.image = UIImage(data: mainImageData)
             view.model.imageURL = nil
         } else {
-            // No image available
             view.model.image = nil
             view.model.imageURL = nil
         }
         
-        view.model.numberOfBeds = item.quantity ?? 0
+        if let bedTypes = item.bedTypes {
+            view.model.numberOfBeds = bedTypes
+                .compactMap { Int($0.quantity?.intValue ?? 0) }
+                .reduce(0, +)
+        } else {
+            view.model.numberOfBeds = 0
+        }
+
+//        view.model.numberOfBeds = item.bedTypes?.firstIndex(where: { $0.}) ?? 0
         view.model.numberOfGuests = item.noOfOccupant ?? 0
         view.model.numberOfRooms = item.quantity ?? 0
         view.model.roomName = item.name ?? ""
@@ -176,7 +213,7 @@ extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSourc
             self.deleteRoom(id: id)
         }
         view.model.editTapped = { [weak self] in
-            self?.editItem(roomName: item.name ?? "")
+            self?.editItem(roomName: item.id ?? "")
         }
         view.isUserInteractionEnabled = true
         cell.applyView(view: view)
@@ -188,60 +225,3 @@ extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSourc
         return CGSize(width: widthOfScreen, height: 170)
     }
 }
-
-//extension EditRoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return roomsList.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-//
-//        cell.isUserInteractionEnabled = true
-//        let view = RoomCard(frame: cell.bounds)
-//        view.identifier = "Rooms Cell " + indexPath.description
-//        let item = roomsList[indexPath.row]
-//        
-//        // Handle both URL and local image data
-//        if let mainImageData = item.images?.first {
-//            // Local image data - convert to UIImage
-//            view.model.image = UIImage(data: mainImageData)
-//            view.model.imageURL = nil // Clear URL if we have local data
-//        } else if let imageUrlString = item.images?.first, !imageUrlString.isEmpty {
-//            // Remote URL string - convert to URL
-//            view.model.imageURL = URL(string: imageUrlString)
-//            view.model.image = nil // Clear local image if we have URL
-//        } else {
-//            // No image available
-//            view.model.image = nil
-//            view.model.imageURL = nil
-//        }
-//        
-//        view.model.numberOfBeds = item.quantity ?? 0
-//        view.model.numberOfGuests = item.noOfOccupant ?? 0
-//        view.model.numberOfRooms = item.quantity ?? 0
-//        view.model.roomName = item.name ?? ""
-//        view.model.roomPrice = "₦ \(item.pricePerNight ?? 0)"
-//        view.model.deleteTapped = { [weak self] in
-//            guard let self = self else { return }
-//            if let id = item.id {
-//                self.deleteRoom(id: id)
-//            }
-//        }
-//        view.model.editTapped = { [weak self] in
-//            self?.editItem(roomName: item.name ?? "")
-//        }
-//        view.isUserInteractionEnabled = true
-//        cell.applyView(view: view)
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        let widthOfScreen: CGFloat = collectionView.bounds.width
-////        let heightOfScreen = collectionView.bounds.height
-//        return CGSize(width: widthOfScreen, height: 170)
-//       
-//    }
-//    
-//}

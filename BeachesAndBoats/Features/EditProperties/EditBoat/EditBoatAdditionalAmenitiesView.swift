@@ -16,6 +16,7 @@ class EditBoatAdditionalAmenitiesView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     var selectedAmenities: [String] = []
@@ -36,20 +37,12 @@ class EditBoatAdditionalAmenitiesView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
+        if let savedListing = details {
             print("=== LOADING SAVED BOAT LISTING ===")
-            print("Total amenities count: \(savedListing.amenities?.count ?? 0)")
+            print("Amenities count: \(savedListing.amenities?.count ?? 0)")
             
-            // Use the saved listing
-//            createBoatListing = savedListing
+            selectedAmenities = savedListing.amenities?.compactMap{ $0.id } ?? []
             
-            // Load saved amenities (will be filtered for Safety type in setup)
-            if let savedAmenities = savedListing.amenities {
-                selectedAmenities = savedAmenities
-            }
-            
-            print("Loaded saved boat listing successfully")
-            print("===============================")
         } else {
             print("No saved boat listing found, starting fresh")
         }
@@ -71,9 +64,7 @@ class EditBoatAdditionalAmenitiesView: BaseViewControllerPlain {
         subtitleLabel.text = "Select the amenities available to guests in your \(boatType ?? "")."
         
         // Filter saved amenities after amenitiesList is populated
-        if createBoatListing != nil {
-            filterSavedAmenities()
-        }
+        filterSavedAmenities()
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self

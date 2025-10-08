@@ -8,7 +8,7 @@
 import UIKit
 
 class CreateInvoiceModal: BaseXib {
-    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var submitBtn: PrimaryButton!
     @IBOutlet weak var summaryField: TextViewField!
     @IBOutlet weak var amountField: BigMoneyInputField!
     @IBOutlet weak var closeIcon: UIImageView!

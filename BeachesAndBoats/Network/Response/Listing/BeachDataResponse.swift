@@ -41,6 +41,7 @@ struct BedTypes: Codable{
     let id: String?
     let name: String?
     let description: String?
+    let quantity: String?
 }
 
 struct BeachSubCategory: Codable {

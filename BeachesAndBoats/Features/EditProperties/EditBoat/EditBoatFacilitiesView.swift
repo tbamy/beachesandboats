@@ -18,6 +18,7 @@ class EditBoatFacilitiesView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     var disposeBag = DisposeBag()
@@ -38,22 +39,12 @@ class EditBoatFacilitiesView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
+        if let savedListing = details {
             print("=== LOADING SAVED BOAT LISTING ===")
             print("Amenities count: \(savedListing.amenities?.count ?? 0)")
             
-            // Use the saved listing
-//            createBoatListing = savedListing
+            selectedFacilities = savedListing.amenities?.compactMap{ $0.id } ?? []
             
-            // Load saved amenities (filter for General type only)
-            if let savedAmenities = savedListing.amenities {
-                // We need to filter these to only include "General" type amenities
-                // This will be done after amenitiesList is populated in setup()
-                selectedFacilities = savedAmenities
-            }
-            
-            print("Loaded saved boat listing successfully")
-            print("===============================")
         } else {
             print("No saved boat listing found, starting fresh")
         }
@@ -80,11 +71,8 @@ class EditBoatFacilitiesView: BaseViewControllerPlain {
         amenitiesList = boatData?.amenities?.filter{ $0.amenityType == "General"}
         
         // Filter saved facilities after amenitiesList is populated
-        if createBoatListing != nil {
             filterSavedFacilities()
-        } else {
-            nextBtn.isEnabled = false
-        }
+        
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -96,22 +84,23 @@ class EditBoatFacilitiesView: BaseViewControllerPlain {
 
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
-            if var createBoatListing = createBoatListing{
+            if createBoatListing == nil{
+                createBoatListing = CreateBoatListingRequest()
+            }
                 // Preserve existing amenities and update with current selection
-                let existingAmenities = createBoatListing.amenities ?? []
-                let nonGeneralAmenities = existingAmenities.filter { amenityId in
-                    // Keep amenities that are not "General" type
-                    guard let amenitiesList = self.amenitiesList else { return true }
-                    return !amenitiesList.contains { $0.id == amenityId }
-                }
-                
-                // Combine non-general amenities with current selection
-                createBoatListing.amenities = nonGeneralAmenities + selectedFacilities
+                let existingAmenities = createBoatListing?.amenities ?? []
+//                let nonGeneralAmenities = existingAmenities.filter { amenityId in
+//                    // Keep amenities that are not "General" type
+//                    guard let amenitiesList = self.amenitiesList else { return true }
+//                    return !amenitiesList.contains { $0.id == amenityId }
+//                }
+//                
                 
                 print("Main Amenities: \(selectedFacilities)")
                 print(createBoatListing)
-                
-                coordinator?.gotoEditBoatAdditionalAmenitiesView(boatData: boatData, request: createBoatListing, id: id, boatType: boatType)
+            
+            if let createBoatListing = createBoatListing{
+                coordinator?.gotoEditBoatAdditionalAmenitiesView(boatData: boatData, request: createBoatListing, details: details, id: id, boatType: boatType)
             }
         }
     }

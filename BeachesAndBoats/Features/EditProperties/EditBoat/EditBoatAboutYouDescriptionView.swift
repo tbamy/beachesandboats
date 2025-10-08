@@ -15,6 +15,7 @@ class EditBoatAboutYouDescriptionView: BaseViewControllerPlain {
     
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
+    var details: GetBoatData?
     var boatType: String?
     
     var disposeBag = DisposeBag()
@@ -30,18 +31,10 @@ class EditBoatAboutYouDescriptionView: BaseViewControllerPlain {
     }
     
     private func checkAndLoadSavedListing() {
-        if let savedListing = createBoatListing {
-            print("=== LOADING SAVED BOAT LISTING ===")
-            print("About owner: \(savedListing.aboutOwner ?? "No description")")
+        if let savedListing = details {
+            print("About owner: \(savedListing.aboutOwner)")
             
-            // Use the saved listing
-//            createBoatListing = savedListing
-            
-            // Populate field with saved data
-            descriptionLabel.text = savedListing.aboutOwner ?? ""
-            
-            print("Loaded saved boat listing successfully")
-            print("===============================")
+            descriptionLabel.text = savedListing.aboutOwner
         } else {
             print("No saved boat listing found, starting fresh")
         }

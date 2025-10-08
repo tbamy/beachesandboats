@@ -16,18 +16,24 @@ class ManageAccountView: BaseViewControllerPlain {
     @IBOutlet weak var phoneNumberField: InputField!
     @IBOutlet weak var saveBtn: PrimaryButton!
     
-    let userData = UserSession.shared.loginRes?.data?.user
+    var userData: DashboardUserData?
     
     let vm = UpdateProfileVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<UpdateProfileVM.Input>()
+    
+    let serviceRoles: [HostType] = [.chef, .dj, .bouncer]
+    let hostRoles: [HostType] = [.primaryHost, .secondaryHost]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Manage Account"
         setupCustomNavigationButton()
+        bind()
         setupDetails()
+        input.onNext(.getDashboardUser)
+        LoadingModal.show()
     }
     
     func setupDetails(){
@@ -35,10 +41,23 @@ class ManageAccountView: BaseViewControllerPlain {
         phoneNumberField.isUserInteractionEnabled = false
         
         if let userInfo = userData{
-            firstNameField.text = userInfo.first_name ?? ""
-            lastNameField.text = userInfo.last_name ?? ""
-            emailAddressField.text = userInfo.email ?? ""
-            phoneNumberField.text = userInfo.phone_number ?? ""
+            firstNameField.text = userInfo.firstName
+            lastNameField.text = userInfo.lastName
+            emailAddressField.text = userInfo.email
+            phoneNumberField.text = userInfo.phoneNumber
+            
+            let userRoles = userInfo.roles
+            let hostRoleStrings = hostRoles.map { $0.rawValue }
+            let hasHostRole = userRoles.contains { hostRoleStrings.contains($0) }
+            
+            let serviceRoleStrings = serviceRoles.map { $0.rawValue }
+            let hasSeviceRole = userRoles.contains { serviceRoleStrings.contains($0)}
+            
+            print(userRoles)
+            print(hasHostRole)
+            print(hasSeviceRole)
+            
+            saveBtn.isHidden = !(hasHostRole || hasSeviceRole)
         }
     }
 
@@ -84,6 +103,17 @@ extension ManageAccountView{
             case .updateProfileSuccess(let response):
                 self?.updateUserDetails(with: response)
             case .updateProfileFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
+        
+        vm.getUserOutput.subscribe(onNext: { [weak self] output in
+            LoadingModal.dismiss()
+            switch output {
+            case .getDashboardUserSuccess(let response):
+                self?.userData = response.data
+                self?.setupDetails()
+            case .getDashboardUserFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)

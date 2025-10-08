@@ -22,7 +22,7 @@ struct CreateBeachListingRequest: Codable {
     var locationName: String?
     var jettyLocation: String?
     var additionalHouseRules: String?
-    var isPrivateStay: Int
+    var isPrivateStay: Int?
     
     var availableFrom: String?
     var availableTo: String?

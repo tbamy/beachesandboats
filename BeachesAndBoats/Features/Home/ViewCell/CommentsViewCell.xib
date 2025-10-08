@@ -14,6 +14,7 @@
                 <outlet property="commentsLabel" destination="Wr6-6F-exS" id="iZT-AE-xAU"/>
                 <outlet property="nameLabel" destination="x3b-w4-Lpa" id="jts-Au-oAR"/>
                 <outlet property="ratingLabel" destination="v7K-VD-ZZk" id="nfp-sA-6re"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="k66-Tf-ozr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,7 +35,7 @@
                                         <constraint firstAttribute="width" constant="34" id="6dk-IW-CyJ"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3b-w4-Lpa">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3b-w4-Lpa">
                                     <rect key="frame" x="36" y="0.0" width="39" height="20"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <nil key="textColor"/>
@@ -81,6 +82,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oV4-Gq-uqb" secondAttribute="trailing" constant="20" id="l2m-4r-uKm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <integer key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="387.02290076335879" y="-72.535211267605632"/>
         </view>
     </objects>

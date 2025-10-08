@@ -185,12 +185,15 @@ struct BeachHouseListingResponseData: Codable {
 struct BeachHouseListing: Codable {
     let id, name: String?
     let description: String?
-    let aboutOwner: String?  // Changed from AboutOwner to String
+    let aboutOwner: String?
     let listingPrice, discountPercent: Float?
+    let minRoomPricePerDay: String?
+    let minRoomPricePerNight: String?
     let image: String?
     let locations: Location?
     let availabilities: Availabilities?
     let rating: Int?
+    let bookingType: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -198,6 +201,8 @@ struct BeachHouseListing: Codable {
         case listingPrice = "listing_price"
         case discountPercent = "discount_percent"
         case image, locations, availabilities, rating
+        case minRoomPricePerDay, minRoomPricePerNight
+        case bookingType = "booking_type"
     }
 }
 

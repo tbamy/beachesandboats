@@ -56,35 +56,6 @@ class YearlySummaryModal: BaseXib {
         })
     }
     
-//    public static func show(grossEarning: String, yearAdjustment: String, serviceFee: String, yearTax: String) {
-//        let backDrop = UIView(frame: Helpers.screen)
-//        backDrop.backgroundColor = .gray.withAlphaComponent(0.5)
-//        
-//        let modal = YearlySummaryModal()
-//        
-//        modal.grossEarningLbl.text = grossEarning
-//        modal.yearAdjustmentLbl.text = yearAdjustment
-//        modal.serviceFeeLbl.text = serviceFee
-//        modal.yearTaxLbl.text = yearTax
-//        
-//        modal.backgroundColor = .background.lighter(by: 17)
-//        modal.layer.cornerRadius = 12
-//        modal.clipsToBounds = true
-//        backDrop.addSubview(modal)
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
-//            keyWindow.addSubview(backDrop)
-//        }
-//        let height = Helpers.screenHeight * 0.7
-//        modal.frame = CGRect(x: 0, y: Helpers.screenHeight, width: Helpers.screenWidth, height: height)
-//        backDrop.layoutIfNeeded()
-//        
-//        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-//            modal.frame.origin.y = Helpers.screenHeight - height
-//            backDrop.layoutIfNeeded()
-//        }, completion: nil)
-//    }
-    
     public static func show(grossEarning: String, yearAdjustment: String, serviceFee: String, yearTax: String, delegate: YearlySummaryModalDelegate?) {
         let backDrop = UIView(frame: Helpers.screen)
         backDrop.backgroundColor = .gray.withAlphaComponent(0.5)

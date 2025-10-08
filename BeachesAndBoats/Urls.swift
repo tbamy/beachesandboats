@@ -18,20 +18,15 @@ enum Urls: String {
     case verifyLoginOtp = "api/v1/verify-login-otp"
     case forgotPassword = "api/v1/forgot-password"
     case resetPassword = "api/v1/reset-password"
-
+    
     case login = "api/v1/login"
     case logout = "api/v1/logout"
     case getPhoneCodes = "api/v1/phonecodes"
     
     //MARK: Profile Management
-//    case resetPassword = "api/v1/reset-password"
     case checkCode = "api/v1/password/code/check"
     case changePassword = "api/v1/user/update-password"
     case updateProfile = "api/v1/user/update-account"
-//    case enable2FAEmail = "api/v1/accounts/settings/2fa/enable/email"
-//    case enable2FAPhone = "api/v1/accounts/settings/2fa/enable/sms"
-//    case verify2FA = "api/v1/accounts/settings/2fa/verify"
-//    case requestCode2FA = "api/v1/accounts/settings/2fa/request/email"
     case getDashboardUser = "api/v1/hosting/dashboard/user"
     case sendKYC = "api/v1/kyc-request"
     case updateNotificationSettings = "api/v1/user/update-notification-settings"
@@ -59,7 +54,7 @@ enum Urls: String {
     case getBeachHouse = "api/v1/beachhouse/%@"
     case getBoat = "api/v1/boat/%@"
     case cancelBooking = "api/v1/booking/cancel"
-//    case createInvoice = "api/v1/booking/book-service"
+    //    case createInvoice = "api/v1/booking/book-service"
     
     
     
@@ -102,5 +97,11 @@ enum Urls: String {
     case sendChat = "api/v1/chat/send-chat"
     case getConservations = "api/v1/chat/get-conversations"
     case getMessageHistory = "api/v1/chat/get-messages/%@"
+    
+    //MARK: - Date Reservation
+    
+    case getReservedDates = "api/v1/reserved-dates"
+    case removeReservedDates = "api/v1/reserved-dates/remove"
+    case addReservedDates = "api/v1/reserved-dates/add-multiple"
     
 }

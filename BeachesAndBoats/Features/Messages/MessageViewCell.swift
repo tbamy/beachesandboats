@@ -23,6 +23,12 @@ class MessageViewCell: UITableViewCell {
     @IBOutlet weak var paymentLinkTitle: UILabel!
     @IBOutlet weak var paymentLinkBtn: UIButton!
     
+    let user = UserSession.shared.userDetails?.first_name
+    let userRoles = UserSession.shared.userDetails?.roles
+    let serviceRoles: [HostType] = [.chef, .dj, .bouncer]
+    
+    var messageName: String?
+    
     // MARK: - Delegate and properties
     weak var delegate: MessageViewCellDelegate?
     var chatMessage: ChatMessage?
@@ -45,7 +51,7 @@ class MessageViewCell: UITableViewCell {
         
         let hasValidBookingDetail = message.bookingDetail?.name.isEmpty == false
         let hasValidPaymentData = message.paymentData != nil
-
+        messageName = message.bookingDetail?.name
         if hasValidBookingDetail && hasValidPaymentData {
             paymentLinkStack.isHidden = false
             paymentLinkTitle.text = "Payment link for \(message.bookingDetail?.name ?? "")"
@@ -59,8 +65,10 @@ class MessageViewCell: UITableViewCell {
         dateLbl.text = date
         messageLbl.text = message.message
     }
+
     
     @IBAction func paymentLinkTapped(_ sender: Any) {
+//        guard messageName !== user?.firstName else { return }
         guard let chatMessage = chatMessage,
               let indexPath = indexPath else { return }
         

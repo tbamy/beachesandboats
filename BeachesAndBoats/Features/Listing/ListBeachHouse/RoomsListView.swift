@@ -260,7 +260,13 @@ extension RoomsListView: UICollectionViewDelegate, UICollectionViewDataSource, U
             view.model.image = UIImage(data: mainImage)
         }
         
-        view.model.numberOfBeds = item.quantity ?? 0
+        if let bedTypes = item.bedTypes {
+            view.model.numberOfBeds = bedTypes
+                .compactMap { Int($0.quantity?.intValue ?? 0) }
+                .reduce(0, +)
+        } else {
+            view.model.numberOfBeds = 0
+        }
         view.model.numberOfGuests = item.noOfOccupant ?? 0
         view.model.numberOfRooms = item.quantity ?? 0
         view.model.roomName = item.name ?? ""

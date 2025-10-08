@@ -15,7 +15,10 @@
                 <outlet property="nextBtn" destination="sKh-zW-Idt" id="uAi-bu-VY7"/>
                 <outlet property="stepOneProgress" destination="g5J-yF-Y7Q" id="pqT-9x-hKd"/>
                 <outlet property="stepTwoProgress" destination="8g0-vC-Aio" id="v0u-hN-zWm"/>
+                <outlet property="subtitleLabel" destination="ETC-NQ-bGh" id="zvj-A9-j1f"/>
+                <outlet property="titleLabel" destination="fvI-4c-MxD" id="X5w-cn-MNN"/>
                 <outlet property="uploadBtn" destination="Qd4-le-WzE" id="6qa-Dt-jN7"/>
+                <outlet property="uploadLabel" destination="jrI-lw-SPn" id="5Fb-vy-Mkf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

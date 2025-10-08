@@ -175,39 +175,6 @@ extension WithdrawHistoryView: UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = UIView()
-//        headerView.backgroundColor = .back
-//        
-//        let dateLabel = UILabel()
-//        let dateKey = sortedDates[section]
-//
-//        dateLabel.font = .systemFont(ofSize: 14, weight: .medium)
-//        dateLabel.textColor = .gray
-//        
-//              
-//        // Format date for header
-////        let dateStr = groupedData[section].date
-//        let inputFormatter = DateFormatter()
-//        inputFormatter.dateFormat = "yyyy-MM-dd"
-//        
-//        if let date = inputFormatter.date(from: dateKey) {
-//            let outputFormatter = DateFormatter()
-//            outputFormatter.dateFormat = "MMMM d"
-//            dateLabel.text = outputFormatter.string(from: date)
-//        }
-//        
-//        headerView.addSubview(dateLabel)
-//        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            dateLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-//            dateLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-//        ])
-//        
-//        return headerView
-//    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
     }

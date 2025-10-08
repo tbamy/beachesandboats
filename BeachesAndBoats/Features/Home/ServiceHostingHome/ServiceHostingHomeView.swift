@@ -29,10 +29,13 @@ class ServiceHostingHomeView: UIViewController {
     let isAccountVerified = UserSession.shared.userDetails?.isAccountVerified
     
     let vm = ServiceHostingHomeViewVM()
-    let earningsVM = EarningsVM()
+    let userVM = UpdateProfileVM()
+    let userInput = PublishSubject<UpdateProfileVM.Input>()
+    
+//    let earningsVM = EarningsVM()
     let disposeBag = DisposeBag()
     let input = PublishSubject<ServiceHostingHomeViewVM.Input>()
-    let earningsInput = PublishSubject<EarningsVM.Input>()
+//    let earningsInput = PublishSubject<EarningsVM.Input>()
     
     
     var coordinator: HostingServiceHomeCoordinator?
@@ -45,7 +48,8 @@ class ServiceHostingHomeView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         input.onNext(.upcomingBooking)
-        earningsInput.onNext(.topEarnings(TopEarningRequest(year: "", month: "")))
+        userInput.onNext(.getDashboardUser)
+//        earningsInput.onNext(.topEarnings(TopEarningRequest(year: "", month: "")))
         
         LoadingModal.show(title: "Loading...")
     }
@@ -126,38 +130,17 @@ extension ServiceHostingHomeView {
             }
         }).disposed(by: disposeBag)
         
-        earningsVM.transform(input: earningsInput)
-        earningsVM.output.subscribe(onNext: { [weak self] output in
+        userVM.transform(input: userInput)
+        userVM.getUserOutput.subscribe(onNext: { [weak self] output in
             LoadingModal.dismiss()
             switch output {
-            case .topEarningsSuccess(let response):
-                // Handle earnings success
-                self?.handleTopEarningsSuccess(response)
-            case .topEarningsFailure(let error):
+            case .getDashboardUserSuccess(let response):
+                let userBalance = response.data?.wallet.balance ?? 0.00
+                self?.amountLbl.text = "₦\(GeneralFormatter.decimalToString(userBalance))"
+            case .getDashboardUserFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
-    }
-    
-    private func handleTopEarningsSuccess(_ response: TopEarningResponse) {
-        // Update UI with earnings data
-//        if let amount = response.data?.topEarners, let earningAmount = amount.first {
-//            amountLbl.text = "\(earningAmount.value.totalEarnings ?? 0.00)"
-//        }
-    
-        var totalEarnings: Decimal = 0
-        
-        if let userEarnings = response.data?.userEarnings, let yearData = userEarnings[response.data?.userEarnings?.keys.first ?? ""], !yearData.isEmpty {
-             totalEarnings = yearData.values.reduce(0, +)
-        } else if let topEarners = response.data?.topEarners {
-            totalEarnings = topEarners.values.compactMap { $0.totalEarnings }.reduce(0, +)
-        }
-        
-        DispatchQueue.main.async {
-            self.amountLbl.text = "₦\(GeneralFormatter.decimalToString(totalEarnings))"
-        }
-    
-
     }
 }
 

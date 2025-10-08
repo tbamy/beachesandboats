@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ContactSupportView: BaseViewController {
+class ContactSupportView: BaseViewControllerPlain {
     
     @IBOutlet weak var callSupportStack: UIStackView!
     @IBOutlet weak var chatSupportStack: UIStackView!
@@ -16,6 +16,8 @@ class ContactSupportView: BaseViewController {
     
     var coordinator: AccountCoordinator?
     
+    let chatVm = StartConversationVM()
+    let chatInput = PublishSubject<StartConversationVM.Input>()
     
     let vm = ContactSupportVM()
     let disposeBag = DisposeBag()
@@ -24,15 +26,16 @@ class ContactSupportView: BaseViewController {
     var supportEmail: String?
     var supportPhone: String?
     var supportPhoneCode: String?
+    var supportId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Contact customer support"
 
-//        bind()
-//        addGestureRecognizers()
-//        LoadingModal.show()
-//        input.onNext(.getCustomerSupportInfo)
+        bind()
+        addGestureRecognizers()
+        LoadingModal.show()
+        input.onNext(.getCustomerSupportInfo)
     }
     
     func addGestureRecognizers(){
@@ -47,7 +50,7 @@ class ContactSupportView: BaseViewController {
             return
         }
         
-        let phoneURLString = "tel://\(phoneCode)\(phoneNumber)"
+        let phoneURLString = "tel://\(phoneNumber)"
         if let phoneURL = URL(string: phoneURLString), UIApplication.shared.canOpenURL(phoneURL) {
             UIApplication.shared.open(phoneURL)
         } else {
@@ -57,7 +60,12 @@ class ContactSupportView: BaseViewController {
 
     
     @objc func chatSupport(){
-        Toast.show(message: "Coming soon")
+//        Toast.show(message: "Coming soon")
+        let personId = supportId ?? ""
+        let conversationRequest = StartConversationRequest(personId: personId, bookingId: nil, propertyType: nil)
+        print(conversationRequest)
+            chatInput.onNext(.startConversation(conversationRequest))
+            LoadingModal.show()
     }
     
     @objc func sendEmail() {
@@ -90,6 +98,19 @@ class ContactSupportView: BaseViewController {
                 MiddleModal.show(title: error.message ?? "", type: .error)
             }
         }).disposed(by: disposeBag)
+        
+        chatVm.transform(input: chatInput)
+        chatVm.output.subscribe(onNext: { [weak self] data in
+            LoadingModal.dismiss()
+            switch data {
+            case .startConversationSuccess(let response):
+                if let res = response.data{
+                    self?.coordinator?.gotoChat(bookingId: "", otherUser: "Customer Support", conversationId: res.id, propertyType: "")
+                }
+            case .startConversationFailed(let error) :
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
 
     }
     
@@ -97,6 +118,7 @@ class ContactSupportView: BaseViewController {
         supportEmail = with.data?.email
         supportPhone = with.data?.phoneNumber
         supportPhoneCode = with.data?.phoneCode
+        supportId = with.data?.id
     }
 
 }

@@ -37,34 +37,70 @@ class HostingCollectionViewCell: UICollectionViewCell {
         daysView.layer.cornerRadius = 20
         daysView.layer.borderWidth = 1
         daysView.layer.borderColor = UIColor.systemOrange.cgColor
+    }
+    
+    // MARK: - Helper method to determine if booking is room-only
+    private func isRoomOnlyBooking(_ data: BeachHouseReservationsCurrentReservation?) -> Bool {
+        return data?.propertyBookingType == "ROOM"
+    }
+    
+    // MARK: - Helper methods to get appropriate details based on booking type
+    private func getPropertyName(from data: BeachHouseReservationsCurrentReservation?) -> String? {
+        let isRoomOnly = isRoomOnlyBooking(data)
+        return isRoomOnly ? data?.beachHouseRoom?.name : data?.beachHouse?.name
+    }
+    
+    private func getPropertyImage(from data: BeachHouseReservationsCurrentReservation?) -> String? {
+        let isRoomOnly = isRoomOnlyBooking(data)
+        if isRoomOnly {
+            // For room bookings, try to get room image first, fallback to house image
+            return data?.beachHouseRoom?.images?.first?.url ?? data?.beachHouse?.image
+        } else {
+            return data?.beachHouse?.image
+        }
+    }
+    
+    private func getPropertyPrice(from data: BeachHouseReservationsCurrentReservation?) -> String {
+        let isRoomOnly = isRoomOnlyBooking(data)
         
+        if isRoomOnly {
+            if let roomPrice = data?.beachHouseRoom?.pricePerNight {
+                return "₦\(roomPrice.toAmount() ?? "0.00") / night"
+            }
+        } else {
+            if let housePrice = data?.beachHouse?.listingPrice {
+                return "₦\(housePrice.toAmount() ?? "0.00") / night"
+            }
+        }
+        
+        // Fallback
+        return "₦\(data?.beachHouseRoom?.pricePerNight?.toAmount() ?? "0.00") / night"
     }
     
     //For beach reservation
     func currentHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
         daysView.isHidden = true
-        beachName.text = data?.beachHouse?.name
-        locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
-        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.beachHouse?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
+        
+        beachName.text = getPropertyName(from: data)
+        locationLbl.text = "\(data?.beachHouse?.locations?.name ?? ""), \(data?.beachHouse?.locations?.jettyLocation ?? "")"
+        availabilityDate.text = "\(data?.checkingDate?.convertToShorterDateFormat() ?? "") - \(data?.checkoutDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
-        amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
-        beachHouseImage.image = UIImage(named: data?.beachHouse?.image ?? "")
+        amountPerNight.text = getPropertyPrice(from: data)
+        
         reservationCalendar.image = UIImage(named: "calendar")
-        loadImage(urlString: data?.beachHouse?.image)
+        loadImage(urlString: getPropertyImage(from: data))
     }
     
     //For boat reservation
     func boatCurrentHostingCell(with data: BoatReservationsCurrentReservation?) {
         daysView.isHidden = true
         beachName.text = data?.boat?.name
-        locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
-        availabilityDate.text = "\(data?.boat?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.boat?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
+        locationLbl.text = "\(data?.boat?.locations?.name ?? ""), \(data?.boat?.locations?.jettyLocation ?? "")"
+        availabilityDate.text = "\(data?.bookingDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.boat?.rating ?? 0)"
-        amountPerNight.isHidden = true
-//        amountPerNight.text = "₦\(data?.boat?.pricePerNight ?? 0.00) / night"
-//        beachHouseImage.image = UIImage(named: data?.boat?.images?.first?.url ?? "")
+        amountPerNight.text = "₦\(data?.total ?? 0.00)"
         reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.boat?.images?.first?.url)
     }
@@ -84,19 +120,17 @@ class HostingCollectionViewCell: UICollectionViewCell {
                     daysLbl.text = "Next \(days) days"
                 }
             }
-
         }
         
-        
-        beachName.text = data?.beachHouse?.name
-        locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
+        beachName.text = getPropertyName(from: data)
+        locationLbl.text = "\(data?.beachHouse?.locations?.name ?? ""), \(data?.beachHouse?.locations?.jettyLocation ?? "")"
         availabilityDate.text = "\(data?.checkingDate?.convertToShorterDateFormat() ?? "") - \(data?.checkoutDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
-        amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
-        beachHouseImage.image = UIImage(named: data?.beachHouse?.image ?? "")
+        amountPerNight.text = getPropertyPrice(from: data)
+        
         reservationCalendar.image = UIImage(named: "calendar")
-        loadImage(urlString: data?.beachHouse?.image)
+        loadImage(urlString: getPropertyImage(from: data))
     }
     
     func boatUpcomingHostingCell(with data: BoatReservationsCurrentReservation?) {
@@ -114,43 +148,70 @@ class HostingCollectionViewCell: UICollectionViewCell {
                     daysLbl.text = "Next \(days) days"
                 }
             }
-
         }
         
-        
         beachName.text = data?.boat?.name
-        locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
+        locationLbl.text = "\(data?.boat?.locations?.name ?? ""), \(data?.boat?.locations?.jettyLocation ?? "")"
         availabilityDate.text = "\(data?.bookingDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.boat?.rating ?? 0)"
         amountPerNight.text = "₦\(data?.total ?? 0.00)"
-//        beachHouseImage.image = UIImage(named: data?.boat?.images?.first?.url ?? "")
         reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.boat?.images?.first?.url )
     }
     
     func cancelledBookingCell(with data: BeachHouseReservationsCurrentReservation?) {
-        beachName.text = data?.beachHouse?.name
-        locationLbl.text = "\(data?.beachHouse?.locations?.jettyLocation ?? ""), \(data?.beachHouse?.locations?.name ?? "")"
-        availabilityDate.text = "\(data?.beachHouse?.availabilities?.availableFrom?.convertToShorterDateFormat() ?? "") - \(data?.beachHouse?.availabilities?.availableTo?.convertToShorterDateFormat() ?? "")"
+        daysView.isHidden = true
+        
+        beachName.text = getPropertyName(from: data)
+        locationLbl.text = "\(data?.beachHouse?.locations?.name ?? ""), \(data?.beachHouse?.locations?.jettyLocation ?? "")"
+        availabilityDate.text = "\(data?.checkingDate?.convertToShorterDateFormat() ?? "") - \(data?.checkoutDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.beachHouse?.rating ?? 0)"
-        amountPerNight.text = "₦\(data?.beachHouseRoom?.pricePerNight ?? 0.00) / night"
+        amountPerNight.text = getPropertyPrice(from: data)
+        
         reservationCalendar.image = UIImage(named: "calendar")
-        loadImage(urlString: data?.beachHouse?.image)
-
+        loadImage(urlString: getPropertyImage(from: data))
     }
     
     func boatCancelledBookingCell(with data: BoatReservationsCurrentReservation?) {
+        daysView.isHidden = true
         beachName.text = data?.boat?.name
-        locationLbl.text = "\(data?.boat?.locations?.jettyLocation ?? ""), \(data?.boat?.locations?.name ?? "")"
+        locationLbl.text = "\(data?.boat?.locations?.name ?? ""), \(data?.boat?.locations?.jettyLocation ?? "")"
         availabilityDate.text = "\(data?.bookingDate?.convertToShorterDateFormat() ?? "")"
         calendarImg.image = UIImage(named: "ratingIcon")
         date.text = "\(data?.boat?.rating ?? 0)"
         amountPerNight.text = "₦\(data?.total ?? 0.00)"
         reservationCalendar.image = UIImage(named: "calendar")
         loadImage(urlString: data?.boat?.images?.first?.url )
+    }
+    
+    func checkingOutHostingCell(with data: BeachHouseReservationsCurrentReservation?) {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyy"
 
+        if let futureDate = formatter.date(from: data?.checkoutDate ?? "") {
+            if let days = daysBetween(from: today, to: futureDate) {
+                if days < 1 {
+                    daysLbl.text = "Less than 1 day"
+                } else if days == 1 {
+                    daysLbl.text = "Next 1 day"
+                } else {
+                    daysLbl.text = "Next \(days) days"
+                }
+            }
+        }
+        
+        beachName.text = getPropertyName(from: data)
+        locationLbl.text = " \(data?.beachHouse?.locations?.name ?? ""), \(data?.beachHouse?.locations?.jettyLocation ?? "")"
+        availabilityDate.text = "\(data?.checkingDate?.convertToShorterDateFormat() ?? "") - \(data?.checkoutDate?.convertToShorterDateFormat() ?? "")"
+        calendarImg.image = UIImage(named: "ratingIcon")
+        date.text = "\(data?.beachHouse?.rating ?? 0)"
+        amountPerNight.text = getPropertyPrice(from: data)
+        
+        reservationCalendar.image = UIImage(named: "calendar")
+        loadImage(urlString: getPropertyImage(from: data))
     }
     
     func setupHostingCell(with data: BeachHouseBookingDetails?) {
@@ -158,30 +219,13 @@ class HostingCollectionViewCell: UICollectionViewCell {
         amountPerNight.isHidden = true
         
         guard let data = data, let beachHouse = data.beachHouse else {
-            //            daysView.isHidden = true
-            //            beachName.isHidden = true
-            //            locationLbl.isHidden = true
-            //            date.isHidden = true
-            //            beachHouseImage.isHidden = true
-            //            locationImg.isHidden = true
-            //            calendarImg.isHidden = true
-            //            emptyLbl.isHidden = false
-            //            emptyLbl.text = "No data available"
             handleEmptyCell(isEmpty: true)
             return
         }
         handleEmptyCell(isEmpty: false)
-        
-        //        emptyLbl.isHidden = true
-        //        daysView.isHidden = false
-        //        beachName.isHidden = false
-        //        locationLbl.isHidden = false
-        //        date.isHidden = false
-        //        beachHouseImage.isHidden = false
-        //
-        daysLbl.text = data.beachHouse?.availabilities?.availableFrom
+        daysLbl.text = data.checkingDate
         beachName.text = data.beachHouse?.name
-        locationLbl.text = "\(data.beachHouse?.locations?.jettyLocation ?? ""), \(data.beachHouse?.locations?.name ?? "")"
+        locationLbl.text = " \(data.beachHouse?.locations?.name ?? ""), \(data.beachHouse?.locations?.jettyLocation ?? "")"
         date.text = data.checkingDate
         loadImage(urlString: data.beachHouse?.image)
     }
@@ -216,6 +260,5 @@ class HostingCollectionViewCell: UICollectionViewCell {
         }
         
         beachHouseImage.sd_setImage(with: url, placeholderImage: UIImage(named: "dummy"))
-
     }
 }

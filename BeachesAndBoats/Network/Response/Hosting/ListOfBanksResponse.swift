@@ -23,7 +23,7 @@ struct ListOfBanks: Codable {
     let payWithBank: Bool?
     let supportsTransfer: Bool?
     let active: Bool?
-    let country: Country?
+    let country: String?
     let currency: Currency?
     let type: TypeEnum?
     let isDeleted: Bool?
