@@ -3023,9 +3023,7 @@
 				A67FA3842E28E6AB00B6F28A /* SDWebImageMapKit */,
 				A67FA3872E28E71800B6F28A /* SDWebImageSVGCoder */,
 				A664BBE22E7F92C7000B02E1 /* RxBlocking */,
-				A664BBE42E7F92C7000B02E1 /* RxBlocking-Dynamic */,
 				A664BBE62E7F92C7000B02E1 /* RxCocoa */,
-				A664BBE82E7F92C7000B02E1 /* RxCocoa-Dynamic */,
 				A664BBEA2E7F92C7000B02E1 /* RxRelay */,
 			);
 			productName = BeachesAndBoats;
@@ -3976,7 +3974,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tbam.BeachesAndBoats;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beachesandboat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -4013,7 +4011,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tbam.BeachesAndBoats;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beachesandboat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -4149,20 +4147,10 @@
 			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxBlocking;
 		};
-		A664BBE42E7F92C7000B02E1 /* RxBlocking-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxBlocking-Dynamic";
-		};
 		A664BBE62E7F92C7000B02E1 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
-		};
-		A664BBE82E7F92C7000B02E1 /* RxCocoa-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A664BBE12E7F92C7000B02E1 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxCocoa-Dynamic";
 		};
 		A664BBEA2E7F92C7000B02E1 /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;

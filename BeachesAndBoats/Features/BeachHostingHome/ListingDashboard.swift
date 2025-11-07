@@ -199,6 +199,15 @@ class ListingDashboard: UIViewController {
             houseListing.isHidden = false
             boatListing.isHidden = false
         }
+        
+        listingLbl.isUserInteractionEnabled = true
+        boatListing.isUserInteractionEnabled = true
+        listingLbl.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(gotoListings)))
+        boatListing.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(gotoListings)))
+    }
+    
+    @objc func gotoListings() {
+        coordinator?.gotoListings()
     }
     
     func collectionViewSetup() {
@@ -375,7 +384,7 @@ extension ListingDashboard {
             LoadingModal.dismiss()
             switch output {
             case .getDashboardUserSuccess(let response):
-                let userBalance = response.data?.wallet.balance ?? 0.00
+                let userBalance = response.data?.wallet?.balance ?? 0.00
                 self?.amountLbl.text = "₦\(GeneralFormatter.decimalToString(userBalance))"
             case .getDashboardUserFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

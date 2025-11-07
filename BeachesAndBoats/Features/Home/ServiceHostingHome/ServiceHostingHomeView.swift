@@ -135,7 +135,7 @@ extension ServiceHostingHomeView {
             LoadingModal.dismiss()
             switch output {
             case .getDashboardUserSuccess(let response):
-                let userBalance = response.data?.wallet.balance ?? 0.00
+                let userBalance = response.data?.wallet?.balance ?? 0.00
                 self?.amountLbl.text = "₦\(GeneralFormatter.decimalToString(userBalance))"
             case .getDashboardUserFailed(let error):
                 MiddleModal.show(title: error.message ?? "", type: .error)

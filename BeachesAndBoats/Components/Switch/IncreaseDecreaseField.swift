@@ -20,7 +20,7 @@ import UIKit
     
     
     public var minValue: Int = 0
-    public var maxValue: Int = 10
+    public var maxValue: Int = 100
 
 //    public var onCountChanged: ((Int) -> Void)?
     public var onValueChange: ((IncreaseDecreaseModel) -> Void)?
@@ -77,9 +77,11 @@ import UIKit
         contentView.isUserInteractionEnabled = true
         
         numberCount.centerTextInTextField()
-        numberCount.isUserInteractionEnabled = false
+//        numberCount.isUserInteractionEnabled = false
         numberCount.layer.borderColor = .none
-        
+        numberCount.textField.keyboardType = .numberPad
+        numberCount.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+            
         minusBtn.addTarget(self, action: #selector(decreaseCount), for: .touchUpInside)
         plusBtn.addTarget(self, action: #selector(increaseCount), for: .touchUpInside)
         
@@ -112,6 +114,31 @@ import UIKit
                 onValueChange?(model) // Trigger the closure
             }
 //            print("IncreaseCount: \(model?.type ?? "") count: \(count)")
+        }
+    }
+    
+    @objc func textFieldDidChange() {
+        guard let newCount = Int(numberCount.text) else {
+            updateCountLabel()
+            return
+        }
+        
+        // Clamp the value within min/max bounds
+        let clampedCount = max(minValue, min(maxValue, newCount))
+        
+        if clampedCount != count {
+            count = clampedCount
+            model?.count = count
+            
+            // Update display if value was clamped
+            if clampedCount != newCount {
+                updateCountLabel()
+            }
+            
+            // Trigger the closure
+            if let model = model {
+                onValueChange?(model)
+            }
         }
     }
 }

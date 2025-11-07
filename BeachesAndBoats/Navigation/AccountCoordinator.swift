@@ -215,12 +215,14 @@ class AccountCoordinator: Coordinator{
         push(viewController: vc)
     }
     
-    func gotoUploadImageView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil){
+    func gotoUploadImageView(beachData: BeachDatas, createBeachListingData: CreateBeachListingRequest, room: Int? = nil, isAny: Bool = false, isSingle: Bool = false){
         let vc: UploadImageView = .fromNib()
         vc.beachData = beachData
         vc.coordinator = self
         vc.createBeachListing = createBeachListingData
         vc.room = room
+        vc.isAny = isAny
+        vc.isSingle = isSingle
         vc.hidesBottomBarWhenPushed = true
         push(viewController: vc)
     }

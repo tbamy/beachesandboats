@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import RxSwift
 
 class UploadImageView: BaseViewControllerPlain {
     
@@ -23,9 +24,14 @@ class UploadImageView: BaseViewControllerPlain {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var uploadLabel: UILabel!
     
+    var disposeBag = DisposeBag()
+    var vm = ListBeachViewModel()
+    
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
     var room: Int?
+    var isAny: Bool = false
+    var isSingle: Bool = false
     
     var images: [UIImage] = []{
         didSet {
@@ -38,6 +44,7 @@ class UploadImageView: BaseViewControllerPlain {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bindNetwork()
         setupCollectionView()
         setupDragAndDrop()
     }
@@ -49,7 +56,7 @@ class UploadImageView: BaseViewControllerPlain {
         stepTwoProgress.setProgress(0.55, animated: true)
         stepTwoProgress.tintColor = .B_B
         
-        if let listing = createBeachListing, listing.bookingType == "FULL" {
+        if let listing = createBeachListing, listing.bookingType == "FULL" || isAny || isSingle{
             titleLabel.text = "What does this property look like?"
             subtitleLabel.text = "Upload pictures of this property"
             uploadLabel.text = "Upload a minimum of 5 photos for this property"
@@ -113,7 +120,7 @@ class UploadImageView: BaseViewControllerPlain {
         
         var updatedBeachListing = createBeachListing
         
-        if createBeachListing.bookingType == "FULL" {
+        if createBeachListing.bookingType == "FULL" || (isAny) || (isSingle){
             updatedBeachListing.images = roomImages
         } else {
             let roomIndex: Int
@@ -146,6 +153,11 @@ class UploadImageView: BaseViewControllerPlain {
         
         if createBeachListing.bookingType == "FULL" {
             coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: updatedBeachListing)
+        }else if isAny{
+            coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: updatedBeachListing)
+        }else if isSingle{
+            LoadingModal.show(title: "Hold on while we list your Property")
+            vm.createBeach(createBeachListing)
         } else if let room = room, room >= 0 {
             coordinator?.popToRoomsListScreen()
         } else {
@@ -181,6 +193,20 @@ class UploadImageView: BaseViewControllerPlain {
         if let index = images.firstIndex(where: { $0 == image }) {
             images.remove(at: index)
         }
+    }
+    
+    func bindNetwork() {
+        vm.output.subscribe(onNext: { [weak self] response in
+            LoadingModal.dismiss()
+            
+            switch response {
+            case .listBeachSuccessful(let response):
+                print(response)
+                MiddleModal.show(title: "Success!", subtitle: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.gotoListingSuccessView(type: 2) })
+            case .listBeachFailed(let error):
+                MiddleModal.show(title: error.message ?? "", type: .error)
+            }
+        }).disposed(by: disposeBag)
     }
 
 }

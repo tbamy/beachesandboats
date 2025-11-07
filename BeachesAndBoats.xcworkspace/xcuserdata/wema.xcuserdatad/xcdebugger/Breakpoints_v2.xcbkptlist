@@ -268,8 +268,8 @@
             filePath = "BeachesAndBoats/Features/Listing/ListBoat/TravelLocationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "nextTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -782,22 +782,6 @@
                   endingLineNumber = "160">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "19416877-9F90-417D-9A54-7F7B4A83C0F6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BeachesAndBoats/Features/EditProperties/EditBeachHouse/EditCheckInAndOutRulesView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "nextTapped(_:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

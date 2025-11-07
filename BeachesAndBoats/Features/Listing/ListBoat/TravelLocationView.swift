@@ -24,28 +24,6 @@ class TravelLocationView: BaseViewControllerPlain {
     
     var destinationList: [BoatDestinations]?
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = "Boats"
-//        setup()
-//    }
-//    
-//    func setup(){
-//        stepOneProgress.setProgress(1, animated: false)
-//        stepOneProgress.tintColor = .success
-//        stepTwoProgress.setProgress(0.55, animated: true)
-//        stepTwoProgress.tintColor = .B_B
-//        
-//        destinationList = boatData?.destinations
-//        nextBtn.isEnabled = true
-//        
-//        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        collectionView.allowsMultipleSelection = true
-//        collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"
@@ -81,7 +59,7 @@ class TravelLocationView: BaseViewControllerPlain {
         destinationList = boatData?.destinations
         
         // Enable next button if we have saved destinations
-        nextBtn.isEnabled = !selectedItems.isEmpty
+        updateNextButtonState()
         
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
@@ -89,9 +67,23 @@ class TravelLocationView: BaseViewControllerPlain {
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
     }
+    
+    private func updateNextButtonState() {
+        nextBtn.isEnabled = validateSelectedItems()
+    }
 
+    private func validateSelectedItems() -> Bool {
+        selectedItems = selectedItems.filter { ($0.pricePerHour ?? 0) > 0 }
+        return !selectedItems.isEmpty
+    }
 
     @IBAction func nextTapped(_ sender: Any) {
+        guard validateSelectedItems() else {
+            Toast.show(message: "Please select at least one destination with a valid price greater than 0.")
+            return
+        }
+               
+        
         if let boatData = boatData{
             if var createBoatListing = createBoatListing{
                 createBoatListing.destinations = selectedItems
@@ -157,7 +149,8 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
                 print("Updated price for \(itemId) to \(moneyEntered)")
             }
 
-            self.nextBtn.isEnabled = !self.selectedItems.isEmpty
+            self.updateNextButtonState()
+//            self.nextBtn.isEnabled = !self.selectedItems.isEmpty
         }
                 
         
@@ -179,7 +172,8 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
         }
 
         collectionView.reloadItems(at: [indexPath])
-        nextBtn.isEnabled = !selectedItems.isEmpty
+        updateNextButtonState()
+//        nextBtn.isEnabled = !selectedItems.isEmpty
         print("Updated selected items: \(selectedItems)")
     }
     

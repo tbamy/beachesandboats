@@ -35,7 +35,8 @@ class BoatNameView: BaseViewControllerPlain {
         stepOneProgress.setProgress(0.40, animated: true)
         stepOneProgress.tintColor = .B_B
         stepTwoProgress.setProgress(0, animated: false)
-        titleLabel.text = "What is the name and description of your \(boatType ?? "")?"
+        titleLabel.text = "What is the name and description of your \(boatType ?? "boat")?"
+        nameLabel.placeHolder = "Type name of your \(boatType ?? "boat")"
         
 //        checkTextFields()
 //

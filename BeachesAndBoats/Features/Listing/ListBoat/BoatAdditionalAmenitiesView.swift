@@ -24,60 +24,8 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
     var selectedAmenities: [String] = []
     
     var amenitiesList: [RoomAmenities]?
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = "Boats"
-//        setup()
-//    }
-//    
-//    func setup(){
-//        stepOneProgress.setProgress(0.60, animated: true)
-//        stepOneProgress.tintColor = .B_B
-//        stepTwoProgress.setProgress(0, animated: false)
-//        
-//        amenitiesList = boatData?.amenities?.filter{ $0.amenityType == "Safety"}
-//        
-////        titleLabel.text = "What are the features in your \(boatType ?? "")?"
-//        subtitleLabel.text = "Select the amenities available to guests in your \(boatType ?? "")."
-//        
-//        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        collectionView.allowsMultipleSelection = true
-//        collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
-//    }
-//
-//    @IBAction func nextTapped(_ sender: Any) {
-//        if let boatData = boatData{
-//            
-//            
-//            if var createBoatListing = createBoatListing{
-//                let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
-//                createBoatListing.amenities = additionalAmenities
-//                
-//                print("current amenities: \(createBoatListing.amenities ?? [])")
-//                print("additional amenities: \(selectedAmenities)")
-//                print(createBoatListing)
-//                
-//                coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
-//            }
-//            
-//        }
-//    }
-//    
-//    @IBAction func saveAndExit(_ sender: Any) {
-//        if var createBoatListing = createBoatListing{
-//            let additionalAmenities = (createBoatListing.amenities ?? []) + selectedAmenities
-//            createBoatListing.amenities = additionalAmenities
-//            
-//            AppStorage.boatListing = createBoatListing
-//            coordinator?.backToDashboard()
-//        }
-//        
-//    }
-//    
-//
-//}
+
+    let hostRoles: [HostType] = [.primaryHost, .secondaryHost]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +107,15 @@ class BoatAdditionalAmenitiesView: BaseViewControllerPlain {
                 print("additional amenities: \(selectedAmenities)")
                 print(createBoatListing)
                 
-                coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+                let userRoles = UserSession.shared.userDetails?.roles
+                let hostRoleStrings = hostRoles.map { $0.rawValue }
+                let hasHostRole = userRoles?.contains { hostRoleStrings.contains($0) }
+                
+//                if let _ = hasHostRole {
+//                    coordinator?.gotoBoatRulesView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+//                }else{
+                    coordinator?.gotoBoatAboutYouLanguageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+//                }
             }
         }
     }

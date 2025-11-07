@@ -24,6 +24,8 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
     var safetyAmenitiesList: [RoomAmenities]?
     var otherAmenitiesList: [RoomAmenities]?
     
+    let hostRoles: [HostType] = [.primaryHost, .secondaryHost]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Beach Houses"
@@ -67,7 +69,15 @@ class PropertyAdditionalAmenitiesView: BaseViewControllerPlain {
                 createBeachListing.amenities = amenities
                 print(createBeachListing)
                 
-                coordinator?.gotoAboutYouLanguageView(beachData: beachData, createBeachListingData: createBeachListing)
+                let userRoles = UserSession.shared.userDetails?.roles
+                let hostRoleStrings = hostRoles.map { $0.rawValue }
+                let hasHostRole = userRoles?.contains { hostRoleStrings.contains($0) }
+                
+//                if let _ = hasHostRole {
+//                    coordinator?.gotoHouseRulesView(beachData: beachData, createBeachListingData: createBeachListing)
+//                }else{
+                    coordinator?.gotoAboutYouLanguageView(beachData: beachData, createBeachListingData: createBeachListing)
+//                }
             }
             
         }

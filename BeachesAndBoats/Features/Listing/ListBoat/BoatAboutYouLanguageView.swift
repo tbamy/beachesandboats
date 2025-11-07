@@ -22,53 +22,7 @@ class BoatAboutYouLanguageView: BaseViewControllerPlain {
     var languageList: [Languages]?
     var selectedLanguages: [String] = []
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = "Boats"
-//        setup()
-//    }
-//    
-//    func setup(){
-//        stepOneProgress.setProgress(0.75, animated: true)
-//        stepOneProgress.tintColor = .B_B
-//        stepTwoProgress.setProgress(0, animated: false)
-//        
-//        languageList = boatData?.languages
-//        
-//        collectionView.backgroundColor = UIColor.background.lighter(by: 17)
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        collectionView.allowsMultipleSelection = true
-//        collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
-//    }
-//
-//    @IBAction func nextTapped(_ sender: Any) {
-// 
-//        if let boatData = boatData{
-//            if var createBoatListing = createBoatListing{
-//                createBoatListing.languages = selectedLanguages
-//                
-//                print(createBoatListing)
-//                
-//                coordinator?.gotoBoatAboutYouDescriptionView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
-//            }
-//            
-//        }
-//    }
-//    
-//    @IBAction func saveAndExit(_ sender: Any) {
-//        if var createBoatListing = createBoatListing{
-//            createBoatListing.languages = selectedLanguages
-//            
-//            AppStorage.boatListing = createBoatListing
-//            coordinator?.backToDashboard()
-//        }
-//        
-//    }
-//
-//
-//}
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Boats"

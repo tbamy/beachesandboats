@@ -82,27 +82,27 @@ class EditCheckInAndOutRulesView: BaseViewControllerPlain {
             return
         }
 
-        if overnightCheckOutTime <= overnightCheckInTime {
-            MiddleModal.show(
-                title: "Overnight Booking Time Mismatch",
-                subtitle: "The check-out time must be after the check-in time.",
-                type: .error,
-                dismissable: true,
-                dismissOnConfirm: true
-            )
-            return
-        }
-
-        if dayCheckOutTime <= dayCheckInTime {
-            MiddleModal.show(
-                title: "Day Booking Time Mismatch",
-                subtitle: "The check-out time must be after the check-in time.",
-                type: .error,
-                dismissable: true,
-                dismissOnConfirm: true
-            )
-            return
-        }
+//        if overnightCheckOutTime <= overnightCheckInTime {
+//            MiddleModal.show(
+//                title: "Overnight Booking Time Mismatch",
+//                subtitle: "The check-out time must be after the check-in time.",
+//                type: .error,
+//                dismissable: true,
+//                dismissOnConfirm: true
+//            )
+//            return
+//        }
+//
+//        if dayCheckOutTime <= dayCheckInTime {
+//            MiddleModal.show(
+//                title: "Day Booking Time Mismatch",
+//                subtitle: "The check-out time must be after the check-in time.",
+//                type: .error,
+//                dismissable: true,
+//                dismissOnConfirm: true
+//            )
+//            return
+//        }
 
         // All checks passed
         if var createBeachListing = createBeachListing {

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>PAYSTACK_PUBLIC_KEY</key>
-	<string>pk_test_f8ec4b3cf27be399640fa068978ae06561567d0d</string>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
 	<key>NSAppTransportSecurity</key>
@@ -21,6 +19,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>PAYSTACK_PUBLIC_KEY</key>
+	<string>pk_live_c2f2b0205ee542c22562ba4ef55731318f9d6d79</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat.ttf</string>

@@ -129,6 +129,10 @@ static func numberWithCommasAndTwoDecimalPlaces(_ number: String,_ currency: Str
         formattedNumber += "." + truncatedDecimalPart
     }
     
+    if !truncatedDecimalPart.isEmpty && truncatedDecimalPart != "0" && truncatedDecimalPart != "00" {
+        formattedNumber += "." + truncatedDecimalPart
+    }
+    
     if formattedNumber.isEmpty{
         return ""
     } else {

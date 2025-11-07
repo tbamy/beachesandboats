@@ -28,4 +28,9 @@ class HostingHouseAndBoatHomeCoordinator: Coordinator {
         coordinator.gotoVerificationFormView()
     }
     
+    func gotoListings() {
+        let coordinator = HostingHouseAndBoatListingCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+    }
+    
 }

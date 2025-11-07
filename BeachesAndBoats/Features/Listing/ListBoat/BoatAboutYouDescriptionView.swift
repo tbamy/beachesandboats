@@ -18,25 +18,7 @@ class BoatAboutYouDescriptionView: BaseViewControllerPlain {
     var boatData: BoatDatas?
     var createBoatListing: CreateBoatListingRequest?
     var boatType: String?
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = "Boats"
-//        setUp()
-//    }
-//    
-//    func setUp(){
-//        stepOneProgress.setProgress(0.80, animated: true)
-//        stepOneProgress.tintColor = .B_B
-//        stepTwoProgress.setProgress(0, animated: false)
-//        
-////        if descriptionLabel.text.isEmpty{
-////            descriptionLabel.error = "Enter a description"
-////            nextBtn.isEnabled = false
-////        }else{
-//            nextBtn.isEnabled = true
-////        }
-//    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

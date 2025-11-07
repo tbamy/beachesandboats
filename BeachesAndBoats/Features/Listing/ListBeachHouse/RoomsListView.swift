@@ -20,8 +20,7 @@ class RoomsListView: BaseViewControllerPlain {
     @IBOutlet weak var duplicateBtn: UIButton!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
-    var disposeBag = DisposeBag()
-    var vm = ListBeachViewModel()
+
     
     var beachData: BeachDatas?
     var createBeachListing: CreateBeachListingRequest?
@@ -32,7 +31,7 @@ class RoomsListView: BaseViewControllerPlain {
         super.viewDidLoad()
         title = "Beaches Houses"
         
-        bindNetwork()
+//        bindNetwork()
         setup()
     }
     
@@ -171,9 +170,14 @@ class RoomsListView: BaseViewControllerPlain {
             self.createBeachListing = createBeachListing
             
             print("Proceeding to next step with \(roomsList.count) rooms")
-            if createBeachListing.bookingType == "SINGLE" {
-                LoadingModal.show(title: "Hold on while we list your Property")
-                vm.createBeach(createBeachListing)
+//            if createBeachListing.bookingType == "SINGLE" {
+//                LoadingModal.show(title: "Hold on while we list your Property")
+//                vm.createBeach(createBeachListing)
+//            }else
+            if createBeachListing.bookingType == "ANY"{
+                coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: createBeachListing, isAny: true)
+            }else if createBeachListing.bookingType == "SINGLE"{
+                coordinator?.gotoUploadImageView(beachData: beachData, createBeachListingData: createBeachListing, isSingle: true)
             }else {
                 coordinator?.gotoEntireApartmentPriceView(beachData: beachData, createBeachListingData: createBeachListing)
             }
@@ -226,19 +230,7 @@ class RoomsListView: BaseViewControllerPlain {
     }
 
     
-    func bindNetwork() {
-        vm.output.subscribe(onNext: { [weak self] response in
-            LoadingModal.dismiss()
-            
-            switch response {
-            case .listBeachSuccessful(let response):
-                print(response)
-                MiddleModal.show(title: "Success!", subtitle: response.message ?? "", type: .success, onConfirm: { self?.coordinator?.gotoListingSuccessView(type: 2) })
-            case .listBeachFailed(let error):
-                MiddleModal.show(title: error.message ?? "", type: .error)
-            }
-        }).disposed(by: disposeBag)
-    }
+
 
 
 }
