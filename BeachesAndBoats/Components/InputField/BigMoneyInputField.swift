@@ -57,9 +57,9 @@ class BigMoneyInputField: InputField {
     @objc func editingChanged() {
         if let text = textField.text {
             textField.text = formatNumber(text)
-            if let _ = getIntValue() {
+//            if let _ = getIntValue() {
                 amountChanged()
-            }
+//            }
         }
     }
 

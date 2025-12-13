@@ -586,8 +586,8 @@ struct Language: Codable {
 struct Review: Codable {
     let id: String
     let user: ReviewUser?
-    let rating: Double
-    let note: String
+    let rating: Double?
+    let note: String?
     let createdAt: String
     
     enum CodingKeys: String, CodingKey {

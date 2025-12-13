@@ -72,11 +72,19 @@ class BoatRulesView: BaseViewControllerPlain {
         
         // Setup count change handlers
         numberOfPassengers.onValueChange = { [weak self] _ in
-            self?.validateCount()
+            self?.validateForm()
         }
         
         updateCollectionViewHeight(collectionView, collectionViewHeight)
         collectionView.reloadData()
+        validateForm()
+    }
+    
+    private func validateForm() {
+        let hasValidCount = numberOfPassengers.count > 0
+        let hasRules = !selectedRules.isEmpty
+        
+        nextBtn.isEnabled = hasValidCount && hasRules
     }
     
     private func updateCollectionViewHeight(_ collectionView: UICollectionView, _ heightConstraint: NSLayoutConstraint) {
@@ -85,10 +93,6 @@ class BoatRulesView: BaseViewControllerPlain {
         view.layoutIfNeeded()
     }
     
-    private func validateCount() {
-        let hasValidCount = numberOfPassengers.count > 0
-        nextBtn.isEnabled = hasValidCount
-    }
     
     @IBAction func nextTapped(_ sender: Any) {
         if let boatData = boatData{
@@ -158,9 +162,7 @@ extension BoatRulesView: UICollectionViewDelegate, UICollectionViewDataSource, U
             selectedRules.removeAll { $0 == itemId }
         }
         
-        let passengersCount = createBoatListing?.noOfPassengers ?? 1
-        let hasValidCount = passengersCount > 0
-        nextBtn.isEnabled = hasValidCount && !selectedRules.isEmpty
+        validateForm()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -98,6 +98,7 @@ class FilterModal: BaseXib {
             self?.selectedMinPrice = min
             self?.selectedMaxPrice = max
         }
+        
     }
     
     func populateData(){
@@ -131,15 +132,27 @@ class FilterModal: BaseXib {
         collectionView.backgroundColor = .clear
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
         
+        let layout = LeftAlignedCollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .vertical
+        
+        // Remove automatic sizing - we'll handle it manually
+        layout.estimatedItemSize = CGSize.zero
+        
+        // Assign the new layout to the collection view
+        collectionView.collectionViewLayout = layout
+                
+        
         // Configure flow layout for automatic sizing
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.minimumInteritemSpacing = 10
-            flowLayout.minimumLineSpacing = 10
-            flowLayout.scrollDirection = .vertical
-            
-            // Remove automatic sizing - we'll handle it manually
-            flowLayout.estimatedItemSize = CGSize.zero
-        }
+//        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.minimumInteritemSpacing = 10
+//            flowLayout.minimumLineSpacing = 10
+//            flowLayout.scrollDirection = .vertical
+//            
+//            // Remove automatic sizing - we'll handle it manually
+//            flowLayout.estimatedItemSize = CGSize.zero
+//        }
     }
     
     // MARK: - Helper Methods for Dynamic Height Calculation
@@ -168,11 +181,11 @@ class FilterModal: BaseXib {
         let font = UIFont.systemFont(ofSize: 16, weight: .medium)
         let textSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
         
-        let horizontalPadding: CGFloat = 32 // Adjust this based on your SelectableViewWithBg padding
-        let minimumWidth: CGFloat = 60
+        let horizontalPadding: CGFloat = 60 // Adjust this based on your SelectableViewWithBg padding
+        let minimumWidth: CGFloat = 65
         
         // Add some extra buffer to prevent truncation
-        let buffer: CGFloat = 8
+        let buffer: CGFloat = 10
         let calculatedWidth = textSize.width + horizontalPadding + buffer
         
         return max(calculatedWidth, minimumWidth)
@@ -525,9 +538,10 @@ extension FilterModal: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         
         let view = SelectableViewWithBg(frame: CGRect(x: 0, y: 0, width: cellWidth, height: 40))
         view.identifier = "amenities \(indexPath.description)"
-        view.titleOnlyMode = true
+//        view.titleOnlyMode = true
         view.selectMultiple = true
         view.model.title = text
+        view.model.image = category.icon ?? ""
         view.model.selectMultiple = true
         view.model.state = selectedAmenities.contains(category.id ?? "")
         view.setState()

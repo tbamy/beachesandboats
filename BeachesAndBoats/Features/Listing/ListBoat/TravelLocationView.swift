@@ -58,43 +58,65 @@ class TravelLocationView: BaseViewControllerPlain {
         
         destinationList = boatData?.destinations
         
-        // Enable next button if we have saved destinations
-        updateNextButtonState()
-        
         collectionView.backgroundColor = UIColor.background.lighter(by: 17)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(DynamicCollectionViewCell.self, forCellWithReuseIdentifier: "dynamicCell")
+        
+        // Enable next button if we have saved destinations
+        updateNextButtonState()
     }
     
     private func updateNextButtonState() {
         nextBtn.isEnabled = validateSelectedItems()
     }
-
+    
     private func validateSelectedItems() -> Bool {
-        selectedItems = selectedItems.filter { ($0.pricePerHour ?? 0) > 0 }
-        return !selectedItems.isEmpty
+        return selectedItems.contains { ($0.pricePerHour ?? 0) > 0 }
     }
+            
 
+//    private func validateSelectedItems() -> Bool {
+//        selectedItems = selectedItems.filter { ($0.pricePerHour ?? 0) > 0 }
+//        return !selectedItems.isEmpty
+//    }
+    
     @IBAction func nextTapped(_ sender: Any) {
         guard validateSelectedItems() else {
-            Toast.show(message: "Please select at least one destination with a valid price greater than 0.")
+            Toast.show(message: "Please select at least one destination with a valid price.")
             return
         }
-               
         
-        if let boatData = boatData{
-            if var createBoatListing = createBoatListing{
-                createBoatListing.destinations = selectedItems
-                print(createBoatListing)
-                
-                
-                coordinator?.gotoBoatUploadImageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
-            }
-            
+        // Filter out invalid items only when moving to the next screen
+        let validItems = selectedItems.filter { ($0.pricePerHour ?? 0) > 0 }
+        print(validItems)
+        
+        if let boatData = boatData, var createBoatListing = createBoatListing {
+            createBoatListing.destinations = validItems
+            coordinator?.gotoBoatUploadImageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
         }
     }
+           
+
+//    @IBAction func nextTapped(_ sender: Any) {
+//        guard validateSelectedItems() else {
+//            Toast.show(message: "Please select at least one destination with a valid price greater than 0.")
+//            return
+//        }
+//               
+//        
+//        if let boatData = boatData{
+//            if var createBoatListing = createBoatListing{
+//                createBoatListing.destinations = selectedItems
+//                print(createBoatListing)
+//                
+//                
+//                coordinator?.gotoBoatUploadImageView(boatData: boatData, createBoatListingData: createBoatListing, boatType: boatType ?? "")
+//            }
+//            
+//        }
+//    }
     
     @IBAction func saveAndExit(_ sender: Any) {
         if var createBoatListing = createBoatListing{
@@ -117,76 +139,80 @@ extension TravelLocationView: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let widthOfScreen: CGFloat = collectionView.bounds.width
-        //        let heightOfScreen = collectionView.bounds.height
-        return CGSize(width: widthOfScreen, height: 70)
         
+        let item = destinationList?[indexPath.row]
+        let itemId = item?.id ?? ""
+        
+        let isSelected = selectedItems.contains(where: { $0.destinationId == itemId })
+        
+        if isSelected {
+            return CGSize(width: widthOfScreen, height: 95)
+        } else {
+            return CGSize(width: widthOfScreen, height: 50)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dynamicCell", for: indexPath) as! DynamicCollectionViewCell
-
+        
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        
         let view = DestinationCheckboxView(frame: cell.bounds)
         view.identifier = "Destination Cell " + indexPath.description
         let item = destinationList?[indexPath.row]
         let itemId = item?.id ?? ""
         
+        view.model.title = item?.name ?? ""
+        
         if let selectedItem = selectedItems.first(where: { $0.destinationId == itemId }) {
             view.model.state = true
-            view.model.title = item?.name ?? ""
-            view.moneyInput.text = "\(selectedItem.pricePerHour ?? 0)"
+//            view.moneyInput.text = "\(selectedItem.pricePerHour ?? 0)"
+            let price = selectedItem.pricePerHour ?? 0
+            view.moneyInput.textField.text = price > 0 ? "\(price)" : ""
+//            view.moneyInput.text = price > 0 ? "\(price)" : ""
         } else {
             view.model.state = false
-            view.model.title = item?.name ?? ""
             view.moneyInput.text = ""
         }
+        view.setup()
         
+        view.checkBox.stateChanged = { [weak self] newState in
+            guard let self = self else { return }
+            
+            if newState {
+                // Select
+                if !self.selectedItems.contains(where: { $0.destinationId == itemId }) {
+                    let defaultAmount: Float = 0
+                    let newItem = CreateDestination(destinationId: itemId, pricePerHour: defaultAmount)
+                    self.selectedItems.append(newItem)
+                }
+            } else {
+                // Deselect
+                self.selectedItems.removeAll(where: { $0.destinationId == itemId })
+            }
+            
+            // Toggle visibility of input without reloading the whole cell (keeps keyboard open if needed)
+            view.model.state = newState
+            view.updateInputFieldVisibility()
+            self.collectionView.performBatchUpdates(nil)
+            self.updateNextButtonState()
+        }
+                    
         view.model.onMoneyEntered = { [weak self] moneyEntered in
             guard let self = self else { return }
 
             if let index = self.selectedItems.firstIndex(where: { $0.destinationId == itemId }) {
-                // Update price if item is already selected
                 self.selectedItems[index].pricePerHour = moneyEntered
                 print("Updated price for \(itemId) to \(moneyEntered)")
             }
-
+            
             self.updateNextButtonState()
-//            self.nextBtn.isEnabled = !self.selectedItems.isEmpty
         }
                 
-        
         cell.applyView(view: view)
         return cell
+
     }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        guard let item = destinationList?[indexPath.row] else { return }
-        let itemId = item.id ?? ""
-
-        if let index = selectedItems.firstIndex(where: { $0.destinationId == itemId }) {
-            selectedItems.remove(at: index)
-        } else {
-            let defaultAmount: Float = 0
-            let newMoneyEntered = CreateDestination(destinationId: itemId, pricePerHour: defaultAmount)
-            selectedItems.append(newMoneyEntered)
-        }
-
-        collectionView.reloadItems(at: [indexPath])
-        updateNextButtonState()
-//        nextBtn.isEnabled = !selectedItems.isEmpty
-        print("Updated selected items: \(selectedItems)")
-    }
-    
-    
-
-    
     
     
 }
-
-
-
-//struct MoneyEnteredModel{
-//    var id: String
-//    var amount: Int
-//}

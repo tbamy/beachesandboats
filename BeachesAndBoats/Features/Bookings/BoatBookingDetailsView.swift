@@ -306,7 +306,7 @@ extension BoatBookingDetailsView: UICollectionViewDelegate, UICollectionViewData
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
             view.model.rating = "\(cellAt.rating)"
-            view.model.comment = cellAt.note
+            view.model.comment = cellAt.note ?? ""
             
             cell.applyView(view: view)
             return cell

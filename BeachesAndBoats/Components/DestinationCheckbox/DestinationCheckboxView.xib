@@ -20,11 +20,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="257"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="285"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="v9p-8w-3zc">
-                    <rect key="frame" x="0.0" y="118" width="393" height="105"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="v9p-8w-3zc">
+                    <rect key="frame" x="0.0" y="118" width="393" height="133"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1vn-oH-yeM">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="18"/>
@@ -45,18 +45,21 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UA4-2h-QWW">
-                            <rect key="frame" x="0.0" y="33" width="393" height="72"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="UA4-2h-QWW">
+                            <rect key="frame" x="0.0" y="23" width="393" height="110"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add price per hour" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad7-Y2-Fb0">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="13.333333333333334"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="54"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBx-NR-L1h" customClass="BigMoneyInputField" customModule="BeachesAndBoats" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="21.333333333333339" width="393" height="50.666666666666657"/>
+                                    <rect key="frame" x="0.0" y="54" width="393" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="56" id="nrQ-Pv-ocY"/>
+                                    </constraints>
                                 </view>
                             </subviews>
                             <constraints>
@@ -69,7 +72,6 @@
                     <constraints>
                         <constraint firstItem="UA4-2h-QWW" firstAttribute="leading" secondItem="v9p-8w-3zc" secondAttribute="leading" id="M7J-Ye-uYe"/>
                         <constraint firstAttribute="trailing" secondItem="UA4-2h-QWW" secondAttribute="trailing" id="WAH-zP-iiC"/>
-                        <constraint firstAttribute="height" constant="105" id="geN-KZ-6tu"/>
                     </constraints>
                 </stackView>
             </subviews>
@@ -82,7 +84,7 @@
                 <constraint firstItem="v9p-8w-3zc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="peP-ph-qHA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-286.25954198473283" y="-162.32394366197184"/>
+            <point key="canvasLocation" x="-286.25954198473283" y="-152.46478873239437"/>
         </view>
     </objects>
     <resources>

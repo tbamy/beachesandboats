@@ -51,7 +51,7 @@ class BoatAddressView: BaseViewControllerPlain {
             guard let stringRange = Range(range, in: currentText) else { return }
             let updatedText = currentText.replacingCharacters(in: stringRange, with: replacementString)
             
-            nextBtn.isEnabled = updatedText.count >= 5
+            nextBtn.isEnabled = updatedText.count >= 1
         }
         
         collectionView.backgroundColor = .clear

@@ -649,7 +649,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             titleLabel: boat.name,
             priceLabel: "", // Hidden in boat mode
             ratingLabel: "\(boat.rating)",
-            infoOneLabel: "Capacity: 1 - \(boat.noOfPassengers ?? 1)",
+            infoOneLabel: "Capacity: 1 - \(boat.noOfPassengers?.intValue ?? 1)",
             infoTwoLabel: formatLocationString(boat.locations),
             bannerImg: boat.images?.first?.url ?? ""
         )

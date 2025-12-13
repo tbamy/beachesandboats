@@ -316,8 +316,8 @@ extension BoatDetailsView: UICollectionViewDelegate, UICollectionViewDataSource,
             let view = CommentsViewCell(frame: cell.bounds)
             view.identifier = "GuestComments " + indexPath.description
             view.model.name = cellAt.user?.firstName ?? ""
-            view.model.rating = "\(cellAt.rating)"
-            view.model.comment = cellAt.note
+            view.model.rating = "\(cellAt.rating ?? 0)"
+            view.model.comment = cellAt.note ?? ""
             
             cell.applyView(view: view)
             return cell

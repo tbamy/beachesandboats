@@ -48,32 +48,33 @@ class DestinationCheckboxView: BaseXib {
     }
 
     func setup() {
-        // Disable interaction on other parts of the cell
         titleLabel.isUserInteractionEnabled = false
-        self.isUserInteractionEnabled = true // enable overall view touch handling
+        self.isUserInteractionEnabled = true
         moneyInput.textField.font = UIFont.systemFont(ofSize: 20, weight: .regular)
 
         titleLabel.text = model.title
         print(model.title)
-        if model.title == "Cruising" {
+        if model.title.lowercased().contains("cruising") {
             priceTitle.text = "Add price per hour"
         }else{
             priceTitle.text = "Add price per trip"
         }
+        priceTitle.isHidden = false
         
         checkBox.isChecked = model.state
-        moneyStack.isHidden = !checkBox.isChecked
+        updateInputFieldVisibility()
+        
 
         // Enable only the checkbox and money input field
-        checkBox.isUserInteractionEnabled = false
+        checkBox.isUserInteractionEnabled = true
         moneyInput.isUserInteractionEnabled = true
 
         // Handle checkbox state changes
-        checkBox.stateChanged = { [weak self] state in
-            guard let self = self else { return }
-            self.model.state = state
-            self.updateInputFieldVisibility()
-        }
+//        checkBox.stateChanged = { [weak self] state in
+//            guard let self = self else { return }
+//            self.model.state = state
+//            self.updateInputFieldVisibility()
+//        }
 
         // Handle money input changes
           moneyInput.amountChanged = { [weak self] in
@@ -85,7 +86,7 @@ class DestinationCheckboxView: BaseXib {
           }
           
           // Initial call to update model with current money input value
-          model.onMoneyEntered(moneyInput.getFloatValue() ?? 0)
+//          model.onMoneyEntered(moneyInput.getFloatValue() ?? 0)
 
         
     }

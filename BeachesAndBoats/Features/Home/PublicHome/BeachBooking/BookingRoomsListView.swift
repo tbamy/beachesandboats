@@ -147,7 +147,7 @@ extension BookingRoomsListView: UICollectionViewDelegate, UICollectionViewDataSo
         view.layer.cornerRadius = 8
         
         let descriptions = room.bedTypes?.compactMap { bedType -> String? in
-            guard let name = bedType.name, let quantity = bedType.quantity, Int(quantity.intValue ?? 0) > 0 else { return nil }
+            guard let name = bedType.name, let quantity = bedType.quantity?.intValue, Int(quantity) > 0 else { return nil }
             return "\(quantity): \(name)"
         }
         view.model.bedType = descriptions?.joined(separator: ", ") ?? ""
