@@ -111,11 +111,11 @@ class BoatDetailsView: BaseViewControllerPlain {
         startingLocationLabel.text = "\(boatDetails?.locations?.jettyLocation ?? ""), \(boatDetails?.locations?.name ?? "")"
         
         destinations = boatDetails?.destinations ?? []
-        if destinations.contains(where: { $0.name == "Cruising"}) && destinations.count == 1{
+        if destinations.contains(where: { $0.name.caseInsensitiveCompare("Cruising") == .orderedSame}) && destinations.count == 1{
             boatOptionsStack.isHidden = true
             myDestinationStack.isHidden = true
             
-        }else if destinations.contains(where: { $0.name == "Cruising"}) && destinations.count > 1{
+        }else if destinations.contains(where: { $0.name.caseInsensitiveCompare("Cruising") == .orderedSame}) && destinations.count > 1{
             boatOptionsStack.isHidden = false
             myDestinationStack.isHidden = false
             cruiseOptionStack.isHidden = false
@@ -123,23 +123,23 @@ class BoatDetailsView: BaseViewControllerPlain {
             cruiseOptionStack.isHidden = true
         }
         
-        pickerItems = destinations.compactMap{ destination in
-            let id = destination.id
-            let name = destination.name
-            let price = destination.price ?? "0"
-            
-            destinationMapping[id] = destination
-            return PickerItem(name: "\(name) - ₦\(price.toAmount() ?? "0") / trip", value: id)
-        }
-        
-        myDestinationDropdown.items = pickerItems
-        myDestinationDropdown.itemChanged = { [weak self] item in
-            guard let self = self, let destination = destinationMapping[item.value] else { return }
-            proceedView.isHidden = false
-            let selectedPrice = destination.price ?? "0"
-            selectedDestination = destination
-            totalAmountLabel.text = "₦\(selectedPrice.toAmount() ?? "0")"
-        }
+//        pickerItems = destinations.compactMap{ destination in
+//            let id = destination.id
+//            let name = destination.name
+//            let price = destination.price ?? "0"
+//            
+//            destinationMapping[id] = destination
+//            return PickerItem(name: "\(name) - ₦\(price.toAmount() ?? "0") / trip", value: id)
+//        }
+//        
+//        myDestinationDropdown.items = pickerItems
+//        myDestinationDropdown.itemChanged = { [weak self] item in
+//            guard let self = self, let destination = destinationMapping[item.value] else { return }
+//            proceedView.isHidden = false
+//            let selectedPrice = destination.price ?? "0"
+//            selectedDestination = destination
+//            totalAmountLabel.text = "₦\(selectedPrice.toAmount() ?? "0")"
+//        }
         print("Cap: \(boatCapacity)")
         
         numberOfPeoplePickerItems = (1...Int(boatCapacity)).map { PickerItem(name: "\($0)", value: "\($0)") }
@@ -178,6 +178,7 @@ class BoatDetailsView: BaseViewControllerPlain {
     }
     
     func updateCruising(){
+        self.destinations = boatDetails?.destinations?.filter({ $0.name.caseInsensitiveCompare("Cruising") == .orderedSame }) ?? []
         self.isCruising = true
         self.travelDestinationOption.isChecked = false
         cruiseLengthStack.isHidden = false
@@ -185,10 +186,29 @@ class BoatDetailsView: BaseViewControllerPlain {
     }
     
     func updateTravel(){
+        self.destinations = boatDetails?.destinations?.filter({ $0.name.caseInsensitiveCompare("Cruising") != .orderedSame }) ?? []
         self.isCruising = false
         self.cruisingOption.isChecked = false
         myDestinationStack.isHidden = false
         cruiseLengthStack.isHidden = true
+        
+        pickerItems = destinations.compactMap{ destination in
+            let id = destination.id
+            let name = destination.name
+            let price = destination.price ?? "0"
+            
+            destinationMapping[id] = destination
+            return PickerItem(name: "\(name) - ₦\(price.toAmount() ?? "0") / trip", value: id)
+        }
+        
+        myDestinationDropdown.items = pickerItems
+        myDestinationDropdown.itemChanged = { [weak self] item in
+            guard let self = self, let destination = destinationMapping[item.value] else { return }
+            proceedView.isHidden = false
+            let selectedPrice = destination.price ?? "0"
+            selectedDestination = destination
+            totalAmountLabel.text = "₦\(selectedPrice.toAmount() ?? "0")"
+        }
     }
     
     func configureAllCollectionViews() {
